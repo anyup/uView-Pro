@@ -45,6 +45,9 @@
  * @property {String} bg-color 整个组件背景颜色，默认为白色
  * @example <u-circle-progress active-color="#2979ff" :percent="80"></u-circle-progress>
  */
+
+import { $u } from '@/uni_modules/colorful-uni-plus';
+
 export default {
 	name: 'u-circle-progress',
 	props: {
@@ -100,8 +103,8 @@ export default {
 			elId: 'uCircleProgressElId',
 			// #endif
 			// #ifndef MP-WEIXIN
-			elBgId: this.$u.guid(), // 非微信端的时候，需用动态的id，否则一个页面多个圆形进度条组件数据会混乱
-			elId: this.$u.guid(),
+			elBgId: $u.guid(), // 非微信端的时候，需用动态的id，否则一个页面多个圆形进度条组件数据会混乱
+			elId: $u.guid(),
 			// #endif
 			widthPx: uni.upx2px(this.width), // 转成px后的整个组件的背景宽度
 			borderWidthPx: uni.upx2px(this.borderWidth), // 转成px后的圆环的宽度
@@ -133,7 +136,7 @@ export default {
 	computed: {
 		// 有type主题时，优先起作用
 		circleColor() {
-			if (['success', 'error', 'info', 'primary', 'warning'].indexOf(this.type) >= 0) return this.$u.color[this.type];
+			if (['success', 'error', 'info', 'primary', 'warning'].indexOf(this.type) >= 0) return $u.color[this.type];
 			else return this.activeColor;
 		}
 	},

@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap" style="background-color: #FFFFFF;">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-calendar v-model="show" ref="calendar" @change="change" :mode="mode"
+				<u-calendar v-model:value="show" ref="calendar" @change="change" :mode="mode"
 					:start-text="startText" :end-text="endText" :range-color="rangeColor"
 					:range-bg-color="rangeBgColor" :active-bg-color="activeBgColor" :btn-type="btnType"
 				>

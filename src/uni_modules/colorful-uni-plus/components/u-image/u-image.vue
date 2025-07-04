@@ -64,6 +64,9 @@
  * @event {Function} load 图片加载成功时触发
  * @example <u-image width="100%" height="300rpx" :src="src"></u-image>
  */
+
+import { $u } from '@/uni_modules/colorful-uni-plus'
+
 export default {
 	name: 'u-image',
 	props: {
@@ -150,6 +153,7 @@ export default {
 	},
 	data() {
 		return {
+			$u,
 			// 图片是否加载错误，如果是，则显示错误占位图
 			isError: false,
 			// 初始化组件时，默认为加载中状态
@@ -181,10 +185,10 @@ export default {
 		wrapStyle() {
 			let style = {};
 			// 通过调用addUnit()方法，如果有单位，如百分比，px单位等，直接返回，如果是纯粹的数值，则加上rpx单位
-			style.width = this.$u.addUnit(this.width);
-			style.height = this.$u.addUnit(this.height);
+			style.width = $u.addUnit(this.width);
+			style.height = $u.addUnit(this.height);
 			// 如果是配置了圆形，设置50%的圆角，否则按照默认的配置值
-			style.borderRadius = this.shape == 'circle' ? '50%' : this.$u.addUnit(this.borderRadius);
+			style.borderRadius = this.shape == 'circle' ? '50%' : $u.addUnit(this.borderRadius);
 			// 如果设置圆角，必须要有hidden，否则可能圆角无效
 			style.overflow = this.borderRadius > 0 ? 'hidden' : 'visible';
 			if (this.fade) {

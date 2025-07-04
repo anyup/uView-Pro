@@ -30,9 +30,12 @@
 		@error="error"
 		@opensetting="opensetting"
 		@launchapp="launchapp"
-		:style="[customStyle, {
-			overflow: ripple ? 'hidden' : 'visible'
-		}]"
+		:style="[
+			customStyle,
+			{
+				overflow: ripple ? 'hidden' : 'visible',
+			},
+		]"
 		@tap.stop="click($event)"
 		:hover-class="getHoverClass"
 		:loading="loading"
@@ -47,7 +50,7 @@
 				left: rippleLeft + 'px',
 				width: fields.targetWidth + 'px',
 				height: fields.targetWidth + 'px',
-				'background-color': rippleBgColor || 'rgba(0, 0, 0, 0.15)'
+				'background-color': rippleBgColor || 'rgba(0, 0, 0, 0.15)',
 			}"
 		></view>
 	</button>
@@ -82,207 +85,218 @@
  * @event {Function} launchapp 打开 APP 成功的回调
  * @example <u-button>月落</u-button>
  */
+
+import { $u } from "@/uni_modules/colorful-uni-plus";
+
 export default {
-	name: 'u-button',
+	name: "u-button",
 	props: {
 		// 是否细边框
 		hairLine: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		// 按钮的预置样式，default，primary，error，warning，success
 		type: {
 			type: String,
-			default: 'default'
+			default: "default",
 		},
 		// 按钮尺寸，default，medium，mini
 		size: {
 			type: String,
-			default: 'default'
+			default: "default",
 		},
 		// 按钮形状，circle（两边为半圆），square（带圆角）
 		shape: {
 			type: String,
-			default: 'square'
+			default: "square",
 		},
 		// 按钮是否镂空
 		plain: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		// 是否禁止状态
 		disabled: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		// 是否加载中
 		loading: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		// 开放能力，具体请看uniapp稳定关于button组件部分说明
 		// https://uniapp.dcloud.io/component/button
 		openType: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件
 		// 取值为submit（提交表单），reset（重置表单）
 		formType: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效
 		// 只微信小程序、QQ小程序有效
 		appParameter: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 指定是否阻止本节点的祖先节点出现点击态，微信小程序有效
 		hoverStopPropagation: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		// 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。只微信小程序有效
 		lang: {
 			type: String,
-			default: 'en'
+			default: "en",
 		},
 		// 会话来源，open-type="contact"时有效。只微信小程序有效
 		sessionFrom: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 会话内消息卡片标题，open-type="contact"时有效
 		// 默认当前标题，只微信小程序有效
 		sendMessageTitle: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效
 		// 默认当前分享路径，只微信小程序有效
 		sendMessagePath: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 会话内消息卡片图片，open-type="contact"时有效
 		// 默认当前页面截图，只微信小程序有效
 		sendMessageImg: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，
 		// 用户点击后可以快速发送小程序消息，open-type="contact"时有效
 		showMessageCard: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		// 手指按（触摸）按钮时按钮时的背景颜色
 		hoverBgColor: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 水波纹的背景颜色
 		rippleBgColor: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 是否开启水波纹效果
 		ripple: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		// 按下的类名
 		hoverClass: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 自定义样式，对象形式
 		customStyle: {
 			type: Object,
 			default() {
 				return {};
-			}
+			},
 		},
 		// 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取
 		dataName: {
 			type: String,
-			default: ''
+			default: "",
 		},
 		// 节流，一定时间内只能触发一次
 		throttleTime: {
 			type: [String, Number],
-			default: 1000
+			default: 1000,
 		},
 		// 按住后多久出现点击态，单位毫秒
 		hoverStartTime: {
 			type: [String, Number],
-			default: 20
+			default: 20,
 		},
 		// 手指松开后点击态保留时间，单位毫秒
 		hoverStayTime: {
 			type: [String, Number],
-			default: 150
+			default: 150,
 		},
 	},
 	computed: {
 		// 当没有传bgColor变量时，按钮按下去的颜色类名
 		getHoverClass() {
 			// 如果开启水波纹效果，则不启用hover-class效果
-			if (this.loading || this.disabled || this.ripple || this.hoverClass) return '';
-			let hoverClass = '';
-			hoverClass = this.plain ? 'u-' + this.type + '-plain-hover' : 'u-' + this.type + '-hover';
+			if (this.loading || this.disabled || this.ripple || this.hoverClass)
+				return "";
+			let hoverClass = "";
+			hoverClass = this.plain
+				? "u-" + this.type + "-plain-hover"
+				: "u-" + this.type + "-hover";
 			return hoverClass;
 		},
 		// 在'primary', 'success', 'error', 'warning'类型下，不显示边框，否则会造成四角有毛刺现象
 		showHairLineBorder() {
-			if (['primary', 'success', 'error', 'warning'].indexOf(this.type) >= 0 && !this.plain) {
-				return '';
+			if (
+				["primary", "success", "error", "warning"].indexOf(this.type) >=
+					0 &&
+				!this.plain
+			) {
+				return "";
 			} else {
-				return 'u-hairline-border';
+				return "u-hairline-border";
 			}
-		}
+		},
 	},
 	data() {
 		return {
 			rippleTop: 0, // 水波纹的起点Y坐标到按钮上边界的距离
 			rippleLeft: 0, // 水波纹起点X坐标到按钮左边界的距离
 			fields: {}, // 波纹按钮节点信息
-			waveActive: false // 激活水波纹
+			waveActive: false, // 激活水波纹
 		};
 	},
 	methods: {
 		// 按钮点击
 		click(e) {
 			// 进行节流控制，每this.throttle毫秒内，只在开始处执行
-			this.$u.throttle(() => {
+			$u.throttle(() => {
 				// 如果按钮时disabled和loading状态，不触发水波纹效果
 				if (this.loading === true || this.disabled === true) return;
 				// 是否开启水波纹效果
 				if (this.ripple) {
 					// 每次点击时，移除上一次的类，再次添加，才能触发动画效果
 					this.waveActive = false;
-					this.$nextTick(function() {
+					this.$nextTick(function () {
 						this.getWaveQuery(e);
 					});
 				}
-				this.$emit('click', e);
+				this.$emit("click", e);
 			}, this.throttleTime);
 		},
 		// 查询按钮的节点信息
 		getWaveQuery(e) {
-			this.getElQuery().then(res => {
+			this.getElQuery().then((res) => {
 				// 查询返回的是一个数组节点
 				let data = res[0];
 				// 查询不到节点信息，不操作
 				if (!data.width || !data.width) return;
 				// 水波纹的最终形态是一个正方形(通过border-radius让其变为一个圆形)，这里要保证正方形的边长等于按钮的最长边
 				// 最终的方形（变换后的圆形）才能覆盖整个按钮
-				data.targetWidth = data.height > data.width ? data.height : data.width;
+				data.targetWidth =
+					data.height > data.width ? data.height : data.width;
 				if (!data.targetWidth) return;
 				this.fields = data;
-				let touchesX = '',
-					touchesY = '';
+				let touchesX = "",
+					touchesY = "";
 				// #ifdef MP-BAIDU
 				touchesX = e.changedTouches[0].clientX;
 				touchesY = e.changedTouches[0].clientY;
@@ -307,42 +321,42 @@ export default {
 		},
 		// 获取节点信息
 		getElQuery() {
-			return new Promise(resolve => {
-				let queryInfo = '';
+			return new Promise((resolve) => {
+				let queryInfo = "";
 				// 获取元素节点信息，请查看uniapp相关文档
 				// https://uniapp.dcloud.io/api/ui/nodes-info?id=nodesrefboundingclientrect
 				queryInfo = uni.createSelectorQuery().in(this);
 				//#ifdef MP-ALIPAY
 				queryInfo = uni.createSelectorQuery();
 				//#endif
-				queryInfo.select('.u-btn').boundingClientRect();
-				queryInfo.exec(data => {
+				queryInfo.select(".u-btn").boundingClientRect();
+				queryInfo.exec((data) => {
 					resolve(data);
 				});
 			});
 		},
 		// 下面为对接uniapp官方按钮开放能力事件回调的对接
 		getphonenumber(res) {
-			this.$emit('getphonenumber', res);
+			this.$emit("getphonenumber", res);
 		},
 		getuserinfo(res) {
-			this.$emit('getuserinfo', res);
+			this.$emit("getuserinfo", res);
 		},
 		error(res) {
-			this.$emit('error', res);
+			this.$emit("error", res);
 		},
 		opensetting(res) {
-			this.$emit('opensetting', res);
+			this.$emit("opensetting", res);
 		},
 		launchapp(res) {
-			this.$emit('launchapp', res);
-		}
-	}
+			this.$emit("launchapp", res);
+		},
+	},
 };
 </script>
 
 <style scoped lang="scss">
-@import '../../libs/css/style.components.scss';
+@import "../../libs/css/style.components.scss";
 .u-btn::after {
 	border: none;
 }
@@ -352,7 +366,7 @@ export default {
 	border: 0;
 	//border-radius: 10rpx;
 	/* #ifndef APP-NVUE */
-	display: inline-flex;		
+	display: inline-flex;
 	/* #endif */
 	// 避免边框某些场景可能被“裁剪”，不能设置为hidden
 	overflow: visible;
@@ -365,98 +379,98 @@ export default {
 	z-index: 1;
 	box-sizing: border-box;
 	transition: all 0.15s;
-	
+
 	&--bold-border {
 		border: 1px solid #ffffff;
 	}
-	
+
 	&--default {
 		color: $u-content-color;
 		border-color: #c0c4cc;
 		background-color: #ffffff;
 	}
-	
+
 	&--primary {
 		color: #ffffff;
 		border-color: $u-type-primary;
 		background-color: $u-type-primary;
 	}
-	
+
 	&--success {
 		color: #ffffff;
 		border-color: $u-type-success;
 		background-color: $u-type-success;
 	}
-	
+
 	&--error {
 		color: #ffffff;
 		border-color: $u-type-error;
 		background-color: $u-type-error;
 	}
-	
+
 	&--warning {
 		color: #ffffff;
 		border-color: $u-type-warning;
 		background-color: $u-type-warning;
 	}
-	
+
 	&--default--disabled {
 		color: #ffffff;
 		border-color: #e4e7ed;
 		background-color: #ffffff;
 	}
-	
+
 	&--primary--disabled {
-		color: #ffffff!important;
-		border-color: $u-type-primary-disabled!important;
-		background-color: $u-type-primary-disabled!important;
+		color: #ffffff !important;
+		border-color: $u-type-primary-disabled !important;
+		background-color: $u-type-primary-disabled !important;
 	}
-	
+
 	&--success--disabled {
-		color: #ffffff!important;
-		border-color: $u-type-success-disabled!important;
-		background-color: $u-type-success-disabled!important;
+		color: #ffffff !important;
+		border-color: $u-type-success-disabled !important;
+		background-color: $u-type-success-disabled !important;
 	}
-	
+
 	&--error--disabled {
-		color: #ffffff!important;
-		border-color: $u-type-error-disabled!important;
-		background-color: $u-type-error-disabled!important;
+		color: #ffffff !important;
+		border-color: $u-type-error-disabled !important;
+		background-color: $u-type-error-disabled !important;
 	}
-	
+
 	&--warning--disabled {
-		color: #ffffff!important;
-		border-color: $u-type-warning-disabled!important;
-		background-color: $u-type-warning-disabled!important;
+		color: #ffffff !important;
+		border-color: $u-type-warning-disabled !important;
+		background-color: $u-type-warning-disabled !important;
 	}
-	
+
 	&--primary--plain {
-		color: $u-type-primary!important;
-		border-color: $u-type-primary-disabled!important;
-		background-color: $u-type-primary-light!important;
+		color: $u-type-primary !important;
+		border-color: $u-type-primary-disabled !important;
+		background-color: $u-type-primary-light !important;
 	}
-	
+
 	&--success--plain {
-		color: $u-type-success!important;
-		border-color: $u-type-success-disabled!important;
-		background-color: $u-type-success-light!important;
+		color: $u-type-success !important;
+		border-color: $u-type-success-disabled !important;
+		background-color: $u-type-success-light !important;
 	}
-	
+
 	&--error--plain {
-		color: $u-type-error!important;
-		border-color: $u-type-error-disabled!important;
-		background-color: $u-type-error-light!important;
+		color: $u-type-error !important;
+		border-color: $u-type-error-disabled !important;
+		background-color: $u-type-error-light !important;
 	}
-	
+
 	&--warning--plain {
-		color: $u-type-warning!important;
-		border-color: $u-type-warning-disabled!important;
-		background-color: $u-type-warning-light!important;
+		color: $u-type-warning !important;
+		border-color: $u-type-warning-disabled !important;
+		background-color: $u-type-warning-light !important;
 	}
 }
 
 .u-hairline-border:after {
-	content: ' ';
+	content: " ";
 	position: absolute;
 	pointer-events: none;
 	// 设置为border-box，意味着下面的scale缩小为0.5，实际上缩小的是伪元素的内容（border-box意味着内容不含border）
@@ -512,7 +526,7 @@ export default {
 
 .u-size-medium {
 	/* #ifndef APP-NVUE */
-	display: inline-flex;		
+	display: inline-flex;
 	/* #endif */
 	width: auto;
 	font-size: 26rpx;
@@ -523,7 +537,7 @@ export default {
 
 .u-size-mini {
 	/* #ifndef APP-NVUE */
-	display: inline-flex;		
+	display: inline-flex;
 	/* #endif */
 	width: auto;
 	font-size: 22rpx;

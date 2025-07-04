@@ -46,7 +46,6 @@ class Router {
 
 	// 对外的方法名称
 	async route(options = {}, params = {}) {
-		console.log(uni.$u)
 		// 合并用户的配置和内部的默认配置
 		let mergeConfig = {}
 
