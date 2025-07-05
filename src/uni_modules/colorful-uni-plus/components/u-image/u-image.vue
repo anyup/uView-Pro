@@ -1,6 +1,6 @@
 <template>
   <view class="u-image" @tap="onClick" :style="[wrapStyle, backgroundStyle]">
-    <image
+	<image
       v-if="!isError"
       :src="src"
       :mode="mode"
@@ -202,8 +202,25 @@ function removeBgColor() {
   }
 }
 
+function changeStatus(status: 'loading' | 'error' | 'normal') {
+  if (status === 'loading') {
+	loading.value = true
+	isError.value = false
+  } else if (status === 'error') {
+	loading.value = false
+	isError.value = true
+  } else {
+	loading.value = false
+	isError.value = false
+  }
+}
+
 // 暴露给模板
 const $slots = useSlots()
+
+defineExpose({
+  changeStatus
+})
 </script>
 
 <style scoped lang="scss">
