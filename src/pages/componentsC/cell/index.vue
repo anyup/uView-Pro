@@ -1,6 +1,6 @@
 <template>
 	<view class="u-demo">
-		<view class="u-demo-wrap" style="padding-left:0;padding-right:0;margin-left: -40rpx;margin-right: -40rpx;">
+		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-cell-group title="读万卷书">
