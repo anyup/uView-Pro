@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-rate v-model="value" :count="count" @change="change"
+				<u-rate v-model:value="value" :count="count" @change="change"
 				:active-color="activeColor" :inaction-color="inactiveColor"
 				:active-icon="activeIcon" :inactive-icon="inactiveIcon"
 				:disabled="disabled" :colors="colors" :icons="icons"></u-rate>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+	import { $u } from '@/uni_modules/colorful-uni-plus'
 	export default {
 		data() {
 			return {
@@ -92,8 +93,8 @@
 			},
 			styleChange(index) {
 				if(index == 0) {
-					this.activeColor = this.$u.color['primary'];
-					this.inactiveColor = this.$u.color['info'];
+					this.activeColor = $u.color['primary'];
+					this.inactiveColor = $u.color['info'];
 				} else {
 					this.activeColor = '#FA3534';
 					this.inactiveColor = '#b2b2b2';
