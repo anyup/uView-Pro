@@ -1,6 +1,6 @@
 <template>
   <view class="u-image" @tap="onClick" :style="[wrapStyle, backgroundStyle]">
-	<image
+    <image
       v-if="!isError"
       :src="src"
       :mode="mode"
@@ -56,7 +56,8 @@
  * @event {Function} load 图片加载成功时触发
  * @example <u-image width="100%" height="300rpx" :src="src"></u-image>
  */
-import { ref, computed, watch, reactive, useSlots } from 'vue'
+import { ref, computed, watch, useSlots } from 'vue'
+import { type ImageExpose, ImageProps } from './types'
 import { $u } from '../../'
 
 const emit = defineEmits<{
@@ -65,40 +66,7 @@ const emit = defineEmits<{
   (e: 'load'): void
 }>()
 
-const props = defineProps({
-  /** 图片地址 */
-  src: { type: String, default: '' },
-  /** 裁剪模式 */
-  mode: { type: String, default: 'aspectFill' },
-  /** 宽度，单位任意，如果为数值，则为rpx单位（默认100%） */
-  width: { type: [String, Number], default: '100%' },
-  /** 高度，单位任意，如果为数值，则为rpx单位（默认 auto） */
-  height: { type: [String, Number], default: 'auto' },
-  /** 图片形状，circle-圆形，square-方形（默认square） */
-  shape: { type: String, default: 'square' },
-  /** 圆角值，单位任意，如果为数值，则为rpx单位（默认 0） */
-  borderRadius: { type: [String, Number], default: 0 },
-  /** 是否懒加载，仅微信小程序、App、百度小程序、字节跳动小程序有效（默认 true） */
-  lazyLoad: { type: Boolean, default: true },
-  /** 是否开启长按图片显示识别小程序码菜单，仅微信小程序有效（默认 true） */
-  showMenuByLongpress: { type: Boolean, default: true },
-  /** 加载中的图标，或者小图片（默认 photo） */
-  loadingIcon: { type: String, default: 'photo' },
-  /** 加载失败的图标，或者小图片（默认 error-circle） */
-  errorIcon: { type: String, default: 'error-circle' },
-  /** 是否显示加载中的图标或者自定义的slot（默认 true） */
-  showLoading: { type: Boolean, default: true },
-  /** 是否显示加载错误的图标或者自定义的slot（默认 true） */
-  showError: { type: Boolean, default: true },
-  /** 是否需要淡入效果（默认 true） */
-  fade: { type: Boolean, default: true },
-  /** 只支持网络资源，只对微信小程序有效（默认 false） */
-  webp: { type: Boolean, default: false },
-  /** 搭配fade参数的过渡时间，单位ms（默认 500） */
-  duration: { type: [String, Number], default: 500 },
-  /** 背景颜色，用于深色页面加载图片时，为了和背景色融合（默认 #f3f4f6） */
-  bgColor: { type: String, default: '#f3f4f6' }
-})
+const props = defineProps(ImageProps)
 
 // 图片是否加载错误，如果是，则显示错误占位图
 const isError = ref(false)
@@ -204,21 +172,21 @@ function removeBgColor() {
 
 function changeStatus(status: 'loading' | 'error' | 'normal') {
   if (status === 'loading') {
-	loading.value = true
-	isError.value = false
+    loading.value = true
+    isError.value = false
   } else if (status === 'error') {
-	loading.value = false
-	isError.value = true
+    loading.value = false
+    isError.value = true
   } else {
-	loading.value = false
-	isError.value = false
+    loading.value = false
+    isError.value = false
   }
 }
 
 // 暴露给模板
 const $slots = useSlots()
 
-defineExpose({
+defineExpose<ImageExpose>({
   changeStatus
 })
 </script>

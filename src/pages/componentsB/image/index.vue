@@ -3,7 +3,7 @@
     <view class="u-demo-wrap">
       <view class="u-demo-title">演示效果</view>
       <view class="u-demo-area u-flex u-row-center">
-        <u-image :shape="shape" ref="uImage" :width="width" :height="height" :src="src" mode="aspectFill">
+        <u-image :shape="shape" ref="uImageRef" :width="width" :height="height" :src="src" mode="aspectFill">
           <u-loading size="44" mode="flower" slot="loading" v-if="loadingSlot"></u-loading>
           <view v-if="errorSlot" slot="error" style="font-size: 24rpx">加载失败</view>
         </u-image>
@@ -39,6 +39,7 @@
 </template>
 
 <script lang="ts" setup>
+import { type ImageInstance } from '@/uni_modules/colorful-uni-plus/components/u-image/types'
 import { ref } from 'vue'
 
 // 定义响应式数据
@@ -49,33 +50,18 @@ const loadingSlot = ref(false)
 const statusCurrent = ref(0)
 const errorSlot = ref(false)
 const shape = ref('square')
+// 获取 uImage 组件实例
+const uImageRef = ref<ImageInstance>()
 
 // 定义方法
 const statusChange = (index: number) => {
-  //   if (index == 0) {
-  //     src.value = 'http://img5.imgtn.bdimg.com/it/u=2438062088,2808868405&fm=26&gp=0.jpg'
-  //     // 确保 uImage 已正确初始化
-  //     if (uImage.value) {
-  //       // @ts-ignore
-  //       uImage.value.loading = false
-  //       // @ts-ignore
-  //       uImage.value.isError = false
-  //     }
-  //   } else if (index == 1) {
-  //     // 确保 uImage 已正确初始化
-  //     if (uImage.value) {
-  //       // @ts-ignore
-  //       uImage.value.loading = true
-  //     }
-  //   } else {
-  //     // 确保 uImage 已正确初始化
-  //     if (uImage.value) {
-  //       // @ts-ignore
-  //       uImage.value.loading = false
-  //       // @ts-ignore
-  //       uImage.value.isError = true
-  //     }
-  //   }
+  if (index == 0) {
+    uImageRef.value?.changeStatus('normal')
+  } else if (index == 1) {
+    uImageRef.value?.changeStatus('loading')
+  } else {
+    uImageRef.value?.changeStatus('error')
+  }
 }
 
 const loadingChange = (index: number) => {
@@ -102,8 +88,6 @@ const shapeChange = (index: number) => {
   shape.value = index == 0 ? 'square' : 'circle'
 }
 
-// 获取 uImage 组件实例
-// const uImage = ref<any>(null)
 </script>
 
 <style scoped lang="scss">
