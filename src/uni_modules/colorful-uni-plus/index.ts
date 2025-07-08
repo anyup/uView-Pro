@@ -22,6 +22,8 @@
 // } catch (e) {
 // 	//TODO handle the exception
 // }
+import { getCurrentInstance } from 'vue';
+const instance = getCurrentInstance();
 
 // post类型对象参数转为get类型url参数
 import queryParams from './libs/function/queryParams.js'
@@ -63,12 +65,11 @@ import $parent from './libs/function/$parent.js'
 // 获取sys()和os()工具方法
 // 获取设备信息，挂载到$u的sys()(system的缩写)属性中，
 // 同时把安卓和ios平台的名称"ios"和"android"挂到$u.os()中，方便取用
-import {sys, os} from './libs/function/sys.js'
+import { sys, os } from './libs/function/sys.js'
 // 防抖方法
 import debounce from './libs/function/debounce.js'
 // 节流方法
 import throttle from './libs/function/throttle.js'
-
 
 // 配置信息
 import config from './libs/config/config.js'
@@ -76,67 +77,84 @@ import config from './libs/config/config.js'
 import zIndex from './libs/config/zIndex.js'
 
 export const $u = {
-	queryParams: queryParams,
-	route: route,
-	timeFormat: timeFormat,
-	date: timeFormat, // 另名date
-	timeFrom,
-	colorGradient: colorGradient.colorGradient,
-	colorToRgba: colorGradient.colorToRgba,
-	guid,
-	color,
-	sys,
-	os,
-	type2icon,
-	randomArray,
-	// wranning,
-	// get: http.get,
-	// post: http.post,
-	// put: http.put,
-	// 'delete': http.delete,
-	hexToRgb: colorGradient.hexToRgb,
-	rgbToHex: colorGradient.rgbToHex,
-	test,
-	random,
-	deepClone,
-	deepMerge,
-	getParent,
-	$parent,
-	addUnit,
-	trim,
-	type: ['primary', 'success', 'error', 'warning', 'info'],
-	// http,
-	toast,
-	config, // uView配置信息相关，比如版本号
-	zIndex,
-	debounce,
-	throttle,
+  queryParams: queryParams,
+  route: route,
+  timeFormat: timeFormat,
+  date: timeFormat, // 另名date
+  timeFrom,
+  colorGradient: colorGradient.colorGradient,
+  colorToRgba: colorGradient.colorToRgba,
+  guid,
+  color,
+  sys,
+  os,
+  type2icon,
+  randomArray,
+  // wranning,
+  // get: http.get,
+  // post: http.post,
+  // put: http.put,
+  // 'delete': http.delete,
+  hexToRgb: colorGradient.hexToRgb,
+  rgbToHex: colorGradient.rgbToHex,
+  test,
+  random,
+  deepClone,
+  deepMerge,
+  getParent,
+  $parent,
+  addUnit,
+  trim,
+  type: ['primary', 'success', 'error', 'warning', 'info'],
+  // http,
+  toast,
+  config, // uView配置信息相关，比如版本号
+  zIndex,
+  debounce,
+  throttle,
+  getRect: function (selector: any, all: boolean = false, component: any = instance?.proxy) {
+    return new Promise(resolve => {
+      uni
+        .createSelectorQuery()
+        .in(component)
+        [all ? 'selectAll' : 'select'](selector)
+        .boundingClientRect(rect => {
+          if (all && Array.isArray(rect) && rect.length) {
+            resolve(rect)
+          }
+          if (!all && rect) {
+            resolve(rect)
+          }
+        })
+        .exec()
+    })
+  }
 }
 
 // $u挂载到uni对象上
 
 const install = Vue => {
-	uni.$u = $u
+  uni.$u = $u
 
-	// Vue.mixin(mixin) 
-	// if (Vue.prototype.openShare) {
-	// 	Vue.mixin(mpShare);
-	// }
-	// Vue.mixin(vuexStore);
-	// 时间格式化，同时两个名称，date和timeFormat
-	// Vue.filter('timeFormat', (timestamp, format) => {
-	// 	return timeFormat(timestamp, format)
-	// })
-	// Vue.filter('date', (timestamp, format) => {
-	// 	return timeFormat(timestamp, format)
-	// })
-	// // 将多久以前的方法，注入到全局过滤器
-	// Vue.filter('timeFrom', (timestamp, format) => {
-	// 	return timeFrom(timestamp, format)
-	// })
-	// Vue.prototype.$u = $u
+  // Vue.mixin(mixin)
+  // if (Vue.prototype.openShare) {
+  // 	Vue.mixin(mpShare);
+  // }
+  // Vue.mixin(vuexStore);
+  // 时间格式化，同时两个名称，date和timeFormat
+  // Vue.filter('timeFormat', (timestamp, format) => {
+  // 	return timeFormat(timestamp, format)
+  // })
+  // Vue.filter('date', (timestamp, format) => {
+  // 	return timeFormat(timestamp, format)
+  // })
+  // // 将多久以前的方法，注入到全局过滤器
+  // Vue.filter('timeFrom', (timestamp, format) => {
+  // 	return timeFrom(timestamp, format)
+  // })
+  // Vue.prototype.$u = $u
 }
 
 export default {
-	install
+  install
 }
