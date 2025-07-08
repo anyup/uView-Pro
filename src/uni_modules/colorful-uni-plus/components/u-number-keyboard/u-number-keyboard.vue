@@ -22,101 +22,108 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		props: {
-			// 键盘的类型，number-数字键盘，card-身份证键盘
-			mode: {
-				type: String,
-				default: 'number'
-			},
-			// 是否显示键盘的"."符号
-			dotEnabled: {
-				type: Boolean,
-				default: true
-			},
-			// 是否打乱键盘按键的顺序
-			random: {
-				type: Boolean,
-				default: false
-			}
-		},
-		data() {
-			return {
-				backspace: 'backspace', // 退格键内容
-				dot: '.', // 点
-				timer: null, // 长按多次删除的事件监听
-				cardX: 'X' // 身份证的X符号
-			};
-		},
-		computed: {
-			// 键盘需要显示的内容
-			numList() {
-				let tmp = [];
-				if (!this.dotEnabled && this.mode == 'number') {
-					if (!this.random) {
-						return [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-					} else {
-						return this.$u.randomArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
-					}
-				} else if (this.dotEnabled && this.mode == 'number') {
-					if (!this.random) {
-						return [1, 2, 3, 4, 5, 6, 7, 8, 9, this.dot, 0];
-					} else {
-						return this.$u.randomArray([1, 2, 3, 4, 5, 6, 7, 8, 9, this.dot, 0]);
-					}
-				} else if (this.mode == 'card') {
-					if (!this.random) {
-						return [1, 2, 3, 4, 5, 6, 7, 8, 9, this.cardX, 0];
-					} else {
-						return this.$u.randomArray([1, 2, 3, 4, 5, 6, 7, 8, 9, this.cardX, 0]);
-					}
-				}
-			},
-			// 按键的样式，在非乱序&&数字键盘&&不显示点按钮时，index为9时，按键占位两个空间
-			itemStyle() {
-				return index => {
-					let style = {};
-					if (this.mode == 'number' && !this.dotEnabled && index == 9) style.flex = '0 0 66.6666666666%';
-					return style;
-				};
-			},
-			// 是否让按键显示灰色，只在非乱序&&数字键盘&&且允许点按键的时候
-			btnBgGray() {
-				return index => {
-					if (!this.random && index == 9 && (this.mode != 'number' || (this.mode == 'number' && this.dotEnabled))) return true;
-					else return false;
-				};
-			},
-			hoverClass() {
-				return index => {
-					if (!this.random && index == 9 && (this.mode == 'number' && this.dotEnabled || this.mode == 'card')) return 'u-hover-class';
-					else return 'u-keyboard-hover';
-				}
-			}
-		},
-		methods: {
-			// 点击退格键
-			backspaceClick() {
-				this.$emit('backspace');
-				clearInterval(this.timer); //再次清空定时器，防止重复注册定时器
-				this.timer = null;
-				this.timer = setInterval(() => {
-					this.$emit('backspace');
-				}, 250);
-			},
-			clearTimer() {
-				clearInterval(this.timer);
-				this.timer = null;
-			},
-			// 获取键盘显示的内容
-			keyboardClick(val) {
-				// 允许键盘显示点模式和触发非点按键时，将内容转为数字类型
-				if (this.dotEnabled && val != this.dot && val != this.cardX) val = Number(val);
-				this.$emit('change', val);
-			}
-		}
-	};
+<script setup lang="ts">
+/**
+ * u-number-keyboard 数字/身份证键盘
+ * @description 支持数字、身份证、带小数点等多种模式，支持乱序，支持长按退格。
+ * @property {String} mode 键盘的类型，number-数字键盘，card-身份证键盘
+ * @property {Boolean} dotEnabled 是否显示"."按键，只在mode=number时有效（默认true）
+ * @property {Boolean} random 是否打乱键盘按键的顺序（默认false）
+ * @event {Function} change 按键被点击
+ * @event {Function} backspace 退格键被点击
+ */
+import { computed, ref, defineProps, defineEmits } from 'vue';
+import { $u } from '../../';
+
+const props = defineProps({
+  /** 键盘的类型，number-数字键盘，card-身份证键盘 */
+  mode: { type: String, default: 'number' },
+  /** 是否显示键盘的"."符号 */
+  dotEnabled: { type: Boolean, default: true },
+  /** 是否打乱键盘按键的顺序 */
+  random: { type: Boolean, default: false },
+});
+const emit = defineEmits(['change', 'backspace']);
+
+const backspace = 'backspace'; // 退格键内容
+const dot = '.'; // 点
+const cardX = 'X'; // 身份证的X符号
+let timer: ReturnType<typeof setInterval> | null = null;
+
+/**
+ * 键盘需要显示的内容
+ */
+const numList = computed(() => {
+  if (!props.dotEnabled && props.mode == 'number') {
+    if (!props.random) {
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    } else {
+      return $u.randomArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
+    }
+  } else if (props.dotEnabled && props.mode == 'number') {
+    if (!props.random) {
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9, dot, 0];
+    } else {
+      return $u.randomArray([1, 2, 3, 4, 5, 6, 7, 8, 9, dot, 0]);
+    }
+  } else if (props.mode == 'card') {
+    if (!props.random) {
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9, cardX, 0];
+    } else {
+      return $u.randomArray([1, 2, 3, 4, 5, 6, 7, 8, 9, cardX, 0]);
+    }
+  }
+});
+
+/**
+ * 按键的样式，在非乱序&&数字键盘&&不显示点按钮时，index为9时，按键占位两个空间
+ */
+const itemStyle = (index: number) => {
+  let style: Record<string, string> = {};
+  if (props.mode == 'number' && !props.dotEnabled && index == 9) style.flex = '0 0 66.6666666666%';
+  return style;
+};
+
+/**
+ * 是否让按键显示灰色，只在非乱序&&数字键盘&&且允许点按键的时候
+ */
+const btnBgGray = (index: number) => {
+  if (!props.random && index == 9 && (props.mode != 'number' || (props.mode == 'number' && props.dotEnabled))) return true;
+  else return false;
+};
+
+/**
+ * 按键 hover class
+ */
+const hoverClass = (index: number) => {
+  if (!props.random && index == 9 && (props.mode == 'number' && props.dotEnabled || props.mode == 'card')) return 'u-hover-class';
+  else return 'u-keyboard-hover';
+};
+
+/**
+ * 点击退格键
+ */
+function backspaceClick() {
+  emit('backspace');
+  if (timer) clearInterval(timer); //再次清空定时器，防止重复注册定时器
+  timer = setInterval(() => {
+    emit('backspace');
+  }, 250);
+}
+
+function clearTimer() {
+  if (timer) clearInterval(timer);
+  timer = null;
+}
+
+/**
+ * 获取键盘显示的内容
+ */
+function keyboardClick(val: string | number) {
+  // 允许键盘显示点模式和触发非点按键时，将内容转为数字类型
+  if (props.dotEnabled && val != dot && val != cardX) val = Number(val);
+  emit('change', val);
+}
 </script>
 
 <style lang="scss" scoped>
