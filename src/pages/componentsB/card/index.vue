@@ -2,7 +2,7 @@
 	<view class="">
 		<view class="u-card-wrap">
 			<u-card @click="click" @head-click="headClick" :title="title" :sub-title="subTitle" :thumb="thumb" :padding="padding" :border="border">
-				<view class="" slot="body"> 
+				<template #body> 
 					<view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
 						<view class="u-body-item-title u-line-2">
 							瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半
@@ -15,10 +15,10 @@
 						</view>
 						<image src="https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg" mode="aspectFill"></image>
 					</view>
-				</view>
-				<view class="" slot="foot">
+				</template>
+				<template #foot>
 					<u-icon v-if="bottomSlot" name="chat-fill" size="34" label="30评论"></u-icon>
-				</view>
+				</template>
 			</u-card>
 		</view>
 		<view class="u-config-wrap u-demo">
@@ -51,7 +51,7 @@
 			return {
 				title: '素胚勾勒出青花，笔锋浓转淡',
 				subTitle: '2020-05-15',
-				thumb: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
+				thumb: 'https://v1.uviewui.com/common/logo.png',
 				padding: 20,
 				bottomSlot: true,
 				border: true
@@ -59,7 +59,7 @@
 		},
 		methods: {
 			thumbChange(index) {
-				this.thumb = index == 0 ? 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg' : '';
+				this.thumb = index == 0 ? 'https://v1.uviewui.com/common/logo.png' : '';
 			},
 			paddingChange(index) {
 				this.padding = [20, 30, 40][index];
