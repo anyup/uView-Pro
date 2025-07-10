@@ -39,6 +39,7 @@
 </template>
 
 <script>
+	import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
@@ -61,7 +62,7 @@
 				if(this.percent < 0) this.percent = 0;
 			},
 			styleChange(index) {
-				this.activeColor = index == 0 ? this.$u.color['error'] : '#19be6b';
+				this.activeColor = index == 0 ? $u.color['error'] : '#19be6b';
 				if(index == 0) {
 					this.mode = 'line';
 					this.current = 0;
