@@ -22,8 +22,6 @@
 // } catch (e) {
 // 	//TODO handle the exception
 // }
-import { getCurrentInstance } from 'vue';
-const instance = getCurrentInstance();
 
 // post类型对象参数转为get类型url参数
 import queryParams from './libs/function/queryParams.js'
@@ -75,6 +73,9 @@ import throttle from './libs/function/throttle.js'
 import config from './libs/config/config.js'
 // 各个需要fixed的地方的z-index配置文件
 import zIndex from './libs/config/zIndex.js'
+import { dispatch, broadcast } from './libs/util/emitter'
+
+import { mitt } from './libs/util/mitt'
 
 export const $u = {
   queryParams: queryParams,
@@ -90,6 +91,8 @@ export const $u = {
   os,
   type2icon,
   randomArray,
+  dispatch,
+  broadcast,
   // wranning,
   // get: http.get,
   // post: http.post,
@@ -112,11 +115,12 @@ export const $u = {
   zIndex,
   debounce,
   throttle,
-  getRect: function (selector: any, all: boolean = false, component: any = instance?.proxy) {
+  mitt: mitt(),
+  getRect: function (instance: any | null | undefined, selector: any, all: boolean = false) {
     return new Promise(resolve => {
       uni
         .createSelectorQuery()
-        .in(component)
+        .in(instance?.proxy)
         [all ? 'selectAll' : 'select'](selector)
         .boundingClientRect(rect => {
           if (all && Array.isArray(rect) && rect.length) {

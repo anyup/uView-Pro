@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<view class="">
-					<u-radio-group :shape="shape" :size="size" :width="width" :wrap="wrap" v-model="value" @change="radioGroupChange" :activeColor="activeColor">
+					<u-radio-group :shape="shape" :size="size" :width="width" :wrap="wrap" v-model:value="value" @change="radioGroupChange" :activeColor="activeColor">
 						<u-radio @change="radioChange" v-for="(item, index) in list" :disabled="item.disabled"
 							:key="index" :name="item.name"
 						>{{item.name}}</u-radio>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
@@ -109,7 +110,7 @@
 				// 如果用户尚未勾选任何radio，切换颜色时，默认选中第一个让用户看到效果，因为勾选了才有效果
 				if(!this.result) this.result = this.value = this.list[0].name;
 				let theme = index == 0 ? 'primary' : index == 1 ? 'error' : index == 2 ? 'warning' : index == 3 ? 'success' : 'info';
-				this.activeColor = this.$u.color[theme];
+				this.activeColor = $u.color[theme];
 			},
 			disabledChange(index) {
 				if(index == 0) {

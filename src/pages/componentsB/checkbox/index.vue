@@ -10,7 +10,7 @@
 						:activeColor="activeColor"
 					>
 						<u-checkbox @change="checkboxChange"
-							v-model="item.checked" v-for="(item, index) in list" 
+							v-model:value="item.checked" v-for="(item, index) in list" 
 							:key="index" :name="item.name"
 							:shape="shape"
 							:disabled="item.disabled"
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
@@ -136,7 +137,7 @@
 				// 如果用户尚未勾选任何checkbox，切换颜色时，默认选中第一个让用户看到效果，因为勾选了才有效果
 				if(!this.result.length) this.list[0].checked = true;
 				let theme = index == 0 ? 'primary' : index == 1 ? 'error' : index == 2 ? 'warning' : index == 3 ? 'success' : 'info';
-				this.activeColor = this.$u.color[theme];
+				this.activeColor = $u.color[theme];
 			},
 			// 选中某个复选框时，由checkbox时触发
 			checkboxChange(e) {
