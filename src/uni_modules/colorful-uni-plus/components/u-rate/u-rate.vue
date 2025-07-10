@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue'
 import { $u } from '../../'
 
 /**
@@ -237,27 +237,23 @@ const elActiveColor = computed(() => {
  * 获取评分组件盒子的布局信息
  */
 function getElRectById() {
-  // #ifdef H5 || MP
   // uView封装的获取节点的方法，详见文档
-  $u.getRect('#' + elId.value).then((res: any) => {
+  $u.getRect(getCurrentInstance(), '#' + elId.value).then((res: any) => {
     starBoxLeft.value = res.left
   })
-  // #endif
 }
 /**
  * 获取单个星星的尺寸
  */
 function getElRectByClass() {
-  // #ifdef H5 || MP
   // uView封装的获取节点的方法，详见文档
-  $u.getRect('.' + elClass.value).then((res: any) => {
+  $u.getRect(getCurrentInstance(), '.' + elClass.value).then((res: any) => {
     starWidth.value = res.width
     // 把每个星星右边到组件盒子左边的距离放入数组中
     for (let i = 0; i < Number(props.count); i++) {
       starWidthArr.value[i] = (i + 1) * starWidth.value
     }
   })
-  // #endif
 }
 /**
  * 手指滑动评分
