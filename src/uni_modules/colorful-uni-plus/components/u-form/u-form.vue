@@ -95,7 +95,7 @@ const uForm = {
   props,
   model: props.model
 }
-provide('uForm', uForm)
+provide('u-form', uForm)
 
 /**
  * 设置校验规则
