@@ -5,7 +5,7 @@
       mode="center"
       :popup="false"
       :z-index="uZIndex"
-      v-model:value="modalValue"
+      v-model:value="popupValue"
       :length="width"
       :mask-close-able="maskCloseAble"
       :border-radius="borderRadius"
@@ -89,7 +89,7 @@ const props = defineProps({
   /**
    * 是否显示模态框
    */
-  value: { type: Boolean, default: false },
+  modelValue: { type: Boolean, default: false },
   /**
    * 层级z-index
    */
@@ -171,7 +171,7 @@ const props = defineProps({
    */
   negativeTop: { type: [String, Number], default: 0 }
 })
-const emit = defineEmits(['update:value', 'confirm', 'cancel'])
+const emit = defineEmits(['update:modelValue', 'confirm', 'cancel'])
 const slots = useSlots()
 
 // 确认按钮是否正在加载中
@@ -185,14 +185,14 @@ const confirmBtnStyle = computed(() => {
 })
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : 10075))
 
-const modalValue = computed({
-  get: () => props.value,
-  set: (val: boolean) => emit('update:value', val)
+const popupValue = computed({
+  get: () => props.modelValue,
+  set: (val: boolean) => emit('update:modelValue', val)
 })
 
 // 如果是异步关闭时，外部修改v-model的值为false时，重置内部的loading状态，避免下次打开的时候，状态混乱
 watch(
-  () => props.value,
+  () => props.modelValue,
   n => {
     if (n === true) loading.value = false
   }
@@ -206,7 +206,7 @@ function confirm() {
   if (props.asyncClose) {
     loading.value = true
   } else {
-    emit('update:value', false)
+    emit('update:modelValue', false)
   }
   emit('confirm')
 }
@@ -216,7 +216,7 @@ function confirm() {
  */
 function cancel() {
   emit('cancel')
-  emit('update:value', false)
+  emit('update:modelValue', false)
   // 目前popup弹窗关闭有一个延时操作，此处做一个延时
   // 避免确认按钮文字变成了"确定"字样，modal还没消失，造成视觉不好的效果
   setTimeout(() => {
@@ -228,7 +228,7 @@ function cancel() {
  * 点击遮罩关闭modal，设置v-model的值为false，否则无法第二次弹起modal
  */
 function popupClose() {
-  emit('update:value', false)
+  emit('update:modelValue', false)
 }
 
 /**
