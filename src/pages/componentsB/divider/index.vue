@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
@@ -65,7 +66,7 @@
 					 this.color = '#909399';
 					 this.fontSize = 26;
 				} else {
-					this.color = this.$u.color['primary'];
+					this.color = $u.color['primary'];
 					this.fontSize = 30;
 				}
 			},
