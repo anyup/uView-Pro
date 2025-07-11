@@ -29,7 +29,7 @@ export interface RequestInterceptor {
 /**
  * 请求参数类型定义
  */
-export interface RequestOptions {
+interface RequestOptions {
     url: string;
     header?: Record<string, any>;
     method?: 'GET' | 'POST' | 'OPTIONS' | 'HEAD' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT';
@@ -39,6 +39,7 @@ export interface RequestOptions {
     params?: Record<string, any>;
     complete?: (response: any) => void;
 }
+export type { RequestOptions };
 
 class Request {
     config: RequestConfig;

@@ -51,7 +51,7 @@ import config from './libs/config/config';
 import zIndex from './libs/config/zIndex';
 import { dispatch, broadcast, parent } from './libs/util/emitter';
 import { mitt } from './libs/util/mitt';
-import { RequestOptions } from './libs/request/index';
+import { type RequestOptions } from './libs/request/index';
 
 declare const uni: {
     [key: string]: any;
