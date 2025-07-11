@@ -8,8 +8,10 @@ const messages = {
     'zh-Hans': zhHans
 };
 
-export default createI18n({
+const i18n = createI18n({
     locale: uni.getLocale(),
     messages,
     allowComposition: true
 });
+
+export default i18n;

@@ -41,8 +41,9 @@ export default {
     },
     methods: {
         switchLang() {
-            uni.setLocale(i18n.global.locale);
-            i18n.global.locale = i18n.global.locale == 'zh-Hans' ? 'en' : 'zh-Hans';
+            const locale = i18n.global.locale == 'zh-Hans' ? 'en' : 'zh-Hans';
+            uni.setLocale(locale);
+            i18n.global.locale = locale;
         }
     }
 };
