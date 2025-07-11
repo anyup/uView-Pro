@@ -8,8 +8,6 @@ import validation from './test';
  */
 export default function addUnit(value: string | number = 'auto', unit: string = 'rpx'): string {
     const strValue = String(value);
-    // 如果已经有单位结尾或为'auto'，直接返回
-    if (/^(auto|\d+(rpx|px|%)?)$/i.test(strValue)) return strValue;
     // 用uView内置验证规则中的number判断是否为数值
     return validation.number(strValue) ? `${strValue}${unit}` : strValue;
 }
