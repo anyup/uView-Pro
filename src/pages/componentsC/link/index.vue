@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
@@ -38,10 +39,10 @@
 			},
 			styleChange(index) {
 				if(index == 0) {
-					this.color = this.$u.color['tipsColor'];
+					this.color = $u.color['tipsColor'];
 					this.fontSize = 34;
 				} else {
-					this.color = this.$u.color['primary'];
+					this.color = $u.color['primary'];
 					this.fontSize = 28;
 				}
 			}
