@@ -1,4 +1,4 @@
-import type { ComponentInternalInstance } from 'vue'
+import { getCurrentInstance, type ComponentInternalInstance } from 'vue'
 
 /**
  * 适用于 uni-app Vue3 的事件派发/广播工具
@@ -19,6 +19,29 @@ function formatToCamelCase(str: string): string {
   return str.replace(/-([a-z])/g, function (g) {
     return g[1].toUpperCase()
   })
+}
+
+/**
+ * 向上查找父组件
+ * @param instance 当前组件实例（setup中可用getCurrentInstance()）
+ * @param componentName 目标组件名
+ * @returns 父组件实例
+ */
+function parent(instance: ComponentInternalInstance | null | undefined = undefined, componentName: string = '') {
+  if (!instance) {
+    instance = getCurrentInstance()
+  }
+  let parent = instance && (instance.parent as ComponentInternalInstance | null | undefined)
+
+  if (!componentName) return parent
+  while (parent) {
+    const name = (parent.type as any)?.name as string | undefined
+    if (name === componentName) {
+      return parent
+    }
+    parent = parent.parent
+  }
+  return null
 }
 
 /** * 向上查找父组件并派发事件
@@ -86,4 +109,4 @@ function broadcast(
   })
 }
 
-export { dispatch, broadcast }
+export { dispatch, broadcast, parent }
