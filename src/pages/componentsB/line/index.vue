@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area u-flex u-row-center">
 				<!-- 头条小程序因为兼容性，必须要给组件写上u-line类 -->
-				<u-line class="u-line" :border-style="borderStyle" color="red" :color="color" :length="length" :direction="direction" :hair-line="hairLine"></u-line>
+				<u-line class="u-line" :border-style="borderStyle" :color="color" :length="length" :direction="direction" :hair-line="hairLine"></u-line>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -32,19 +32,20 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus'; 
 	export default {
 		data() {
 			return {
 				direction: 'row',
 				hairLine: true,
 				length: '100%',
-				color: this.$u.color['primary'],
+				color: $u.color['primary'],
 				borderStyle: 'solid'
 			}
 		},
 		methods: {
 			colorChange(index) {
-				this.color = this.$u.color[['primary', 'success', 'warning', 'error', 'info'][index]];
+				this.color = $u.color[['primary', 'success', 'warning', 'error', 'info'][index]];
 			},
 			hairLineChange(index) {
 				this.hairLine = !index;
