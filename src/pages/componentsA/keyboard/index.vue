@@ -9,7 +9,7 @@
 				</view>
 				<u-keyboard :mask="mask" ref="uKeyboard" safe-area-inset-bottom @confirm="confirm" 
 				:random="random" :dotEnable="false" :mode="mode"
-				:confirmBtn="true" :cancelBtn="true" :tooltip="tooltip" v-model:value="show" 
+				:confirmBtn="true" :cancelBtn="true" :tooltip="tooltip" v-model="show" 
 				@change="change" @backspace="backspace"></u-keyboard>
 			</view>
 		</view>

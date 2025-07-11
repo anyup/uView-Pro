@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-rate v-model:value="value" :count="count" @change="change"
+				<u-rate v-model="value" :count="count" @change="change"
 				:active-color="activeColor" :inaction-color="inactiveColor"
 				:active-icon="activeIcon" :inactive-icon="inactiveIcon"
 				:disabled="disabled" :colors="colors" :icons="icons"></u-rate>

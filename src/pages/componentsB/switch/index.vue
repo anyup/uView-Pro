@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-switch v-model:value="checked" :loading="loading" 
+				<u-switch v-model="checked" :loading="loading" 
 					:size="size" @change="change" 
 					:active-color="activeColor"
 					:disabled="disabled"

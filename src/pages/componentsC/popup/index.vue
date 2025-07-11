@@ -5,7 +5,7 @@
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
 				<u-button @click="btnClick">唤起弹窗</u-button>
-				<u-popup border-radius="10" v-model:value="show" 
+				<u-popup border-radius="10" v-model="show" 
 					@close="close" @open="open" :mode="mode" 
 					length="50%" :mask="mask"
 					:closeable="closeable"

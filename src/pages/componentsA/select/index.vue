@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-select @click="show = true" :default-value="defaultValue" :mode="mode" v-model:value="show" :list="list" @confirm="confirm" @cancel="cancel"></u-select>
+				<u-select @click="show = true" :default-value="defaultValue" :mode="mode" v-model="show" :list="list" @confirm="confirm" @cancel="cancel"></u-select>
 				<view class="u-demo-result-line">select值：{{ result }}</view>
 			</view>
 		</view>

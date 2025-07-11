@@ -7,7 +7,7 @@
 				<u-picker
 					:mode="mode"
 					:defaultTime="defaultTime"
-					v-model:value="show"
+					v-model="show"
 					:defaultRegion="defaultRegion"
 					:params="params"
 					end-year="2030"

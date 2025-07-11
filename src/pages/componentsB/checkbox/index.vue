@@ -10,7 +10,7 @@
 						:activeColor="activeColor"
 					>
 						<u-checkbox @change="checkboxChange"
-							v-model:value="item.checked" v-for="(item, index) in list" 
+							v-model="item.checked" v-for="(item, index) in list" 
 							:key="index" :name="item.name"
 							:shape="shape"
 							:disabled="item.disabled"

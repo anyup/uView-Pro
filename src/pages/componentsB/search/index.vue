@@ -5,7 +5,7 @@
       <view class="u-demo-area">
         <u-toast ref="uToast"></u-toast>
         <u-search
-          v-model:value="value"
+          v-model="value"
           @change="change"
           @custom="custom"
           @search="search"

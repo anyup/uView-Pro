@@ -6,7 +6,7 @@
 				<u-toast ref="uToast"></u-toast>
 				<u-button @click="showAction">唤起ActionSheet</u-button>
 				<u-action-sheet :cancel-btn="cancel" :mask-close-able="maskClick" :tips="tips" 
-				@click="click" :list="list" v-model:value="show" :safe-area-inset-bottom="true"></u-action-sheet>
+				@click="click" :list="list" v-model="show" :safe-area-inset-bottom="true"></u-action-sheet>
 			</view> 
 		</view>
 		<view class="u-config-wrap">
