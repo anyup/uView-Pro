@@ -5,6 +5,7 @@
 			:background="background" 
 			:back-text-style="{color: '#fff'}" :title="title" 
 			:back-icon-name="backIconName" :back-text="backText"
+			:custom-back="customBack"
 		>
 			<view class="slot-wrap" v-if="useSlot">
 				<view class="search-wrap" v-if="search">
@@ -27,16 +28,18 @@
 					<u-icon name="arrow-down-fill" color="#ffffff" size="22"></u-icon>
 				</view>
 			</view>
-			<view class="navbar-right" slot="right" v-if="slotRight">
-				<view class="message-box right-item">
-					<u-icon name="chat" size="38"></u-icon>
-					<u-badge count="18" size="mini" :offset="[-15, -15]"></u-badge>
+			<template #right v-if="slotRight">
+				<view class="navbar-right">
+					<view class="message-box right-item">
+						<u-icon name="chat" size="38"></u-icon>
+						<u-badge count="18" size="mini" :offset="[-15, -15]"></u-badge>
+					</view>
+					<view class="dot-box right-item">
+						<u-icon name="calendar-fill" size="38"></u-icon>
+						<u-badge size="mini" :is-dot="true" :offset="[-6, -6]"></u-badge>
+					</view>
 				</view>
-				<view class="dot-box right-item">
-					<u-icon name="calendar-fill" size="38"></u-icon>
-					<u-badge size="mini" :is-dot="true" :offset="[-6, -6]"></u-badge>
-				</view>
-			</view>
+			</template>
 		</u-navbar>
 		<view class="u-demo">
 			<view class="u-demo-wrap">
@@ -78,6 +81,10 @@
 					<view class="u-item-title">背景色</view>
 					<u-subsection :list="['渐变', '#39CCCC', '#B471CC', '#001f3f']" @change="bgColorChange"></u-subsection>
 				</view>
+				<view class="u-config-item">
+					<view class="u-item-title">自定义返回事件</view>
+					<u-subsection current="1" :list="['是', '否']" @change="customBackChange"></u-subsection>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -106,8 +113,9 @@
 				slotRight: false,
 				// #endif
 				// #ifndef MP
-				slotRight: true
+				slotRight: true,
 				// #endif
+				customBack: null
 			}
 		},
 		computed: {
@@ -116,6 +124,18 @@
 			}
 		},
 		methods: {
+			customBackChange(index) {
+				if(index == 0) {
+					this.customBack = () => {
+						this.$refs.uToast.show({
+							title: '自定义返回逻辑',
+							type: 'success'
+						});
+					};
+				} else {
+					this.customBack = null;
+				}
+			},
 			titleChange(index) {
 				this.useSlot = false;
 				this.title = index == 0 ? '新闻' : index == 1 ? '新闻列表' : '雨打梨花深闭门，忘了青春，误了青春';
