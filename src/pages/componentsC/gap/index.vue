@@ -31,11 +31,12 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 export default {
 	data() {
 		return {
 			height: 30,
-			bgColor: this.$u.color.bgColor,
+			bgColor: $u.color.bgColor,
 			marginTop: 30,
 			marginBottom: 30
 		};
@@ -43,7 +44,7 @@ export default {
 	methods: {
 		bgColorChange(index) {
 			let color = index == 0 ? 'default' : index == 1 ? 'primary' : index == 2 ? 'error' : index == 3 ? 'warning' : 'success';
-			this.bgColor = color == 'default' ? this.$u.color['bgColor'] : this.$u.color[color];
+			this.bgColor = color == 'default' ? $u.color['bgColor'] : $u.color[color];
 		},
 		heightChange(index) {
 			this.height = index == 0 ? 30 : index == 1 ? 50 : 70;

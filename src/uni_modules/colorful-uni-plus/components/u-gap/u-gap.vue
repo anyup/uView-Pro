@@ -1,8 +1,14 @@
 <template>
-	<view class="u-gap" :style="[gapStyle]"></view>
+  <view class="u-gap" :style="gapStyle"></view>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed, defineProps, defineOptions } from 'vue'
+
+defineOptions({
+  name: 'u-gap'
+})
+
 /**
  * gap 间隔槽
  * @description 该组件一般用于内容块之间的用一个灰色块隔开的场景，方便用户风格统一，减少工作量
@@ -13,42 +19,30 @@
  * @property {String Number} margin-bottom 与后一个组件的距离，单位rpx（0）
  * @example <u-gap height="80" bg-color="#bbb"></u-gap>
  */
-export default {
-	name: "u-gap",
-	props: {
-		bgColor: {
-			type: String,
-			default: 'transparent ' // 背景透明
-		},
-		// 高度
-		height: {
-			type: [String, Number],
-			default: 30
-		},
-		// 与上一个组件的距离
-		marginTop: {
-			type: [String, Number],
-			default: 0
-		},
-		// 与下一个组件的距离
-		marginBottom: {
-			type: [String, Number],
-			default: 0
-		},
-	},
-	computed: {
-		gapStyle() {
-			return {
-				backgroundColor: this.bgColor,
-				height: this.height + 'rpx',
-				marginTop: this.marginTop + 'rpx',
-				marginBottom: this.marginBottom + 'rpx'
-			};
-		}
-	}
-};
+const props = defineProps({
+  /** 背景颜色 */
+  bgColor: { type: String, default: 'transparent' },
+  /** 高度 */
+  height: { type: [String, Number], default: 30 },
+  /** 与上一个组件的距离 */
+  marginTop: { type: [String, Number], default: 0 },
+  /** 与下一个组件的距离 */
+  marginBottom: { type: [String, Number], default: 0 }
+})
+
+/**
+ * 间隔槽样式
+ */
+const gapStyle = computed(() => {
+  return {
+    backgroundColor: props.bgColor,
+    height: props.height + 'rpx',
+    marginTop: props.marginTop + 'rpx',
+    marginBottom: props.marginBottom + 'rpx'
+  }
+})
 </script>
 
 <style lang="scss" scoped>
-	@import "../../libs/css/style.components.scss";
+@import '../../libs/css/style.components.scss';
 </style>
