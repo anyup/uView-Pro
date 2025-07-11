@@ -11,69 +11,75 @@
  * Configurable variables. You may need to tweak these to be compatible with
  * the server-side, but the defaults work in most cases.
  */
-var hexcase = 0;   /* hex output format. 0 - lowercase; 1 - uppercase        */
-var b64pad  = "";  /* base-64 pad character. "=" for strict RFC compliance   */
+let hexcase: number = 0;   /* hex output format. 0 - lowercase; 1 - uppercase        */
+let b64pad: string  = "";  /* base-64 pad character. "=" for strict RFC compliance   */
 
-/*
- * These are the functions you'll usually want to call
- * They take string arguments and return either hex or base-64 encoded strings
+/**
+ * 这些是通常需要调用的函数
+ * @param s 输入字符串
+ * @returns 十六进制/BASE64/任意编码的MD5字符串
  */
-function hex_md5(s)    { return rstr2hex(rstr_md5(str2rstr_utf8(s))); }
-function b64_md5(s)    { return rstr2b64(rstr_md5(str2rstr_utf8(s))); }
-function any_md5(s, e) { return rstr2any(rstr_md5(str2rstr_utf8(s)), e); }
-function hex_hmac_md5(k, d)
-  { return rstr2hex(rstr_hmac_md5(str2rstr_utf8(k), str2rstr_utf8(d))); }
-function b64_hmac_md5(k, d)
-  { return rstr2b64(rstr_hmac_md5(str2rstr_utf8(k), str2rstr_utf8(d))); }
-function any_hmac_md5(k, d, e)
-  { return rstr2any(rstr_hmac_md5(str2rstr_utf8(k), str2rstr_utf8(d)), e); }
+function hex_md5(s: string): string { return rstr2hex(rstr_md5(str2rstr_utf8(s))); }
+function b64_md5(s: string): string { return rstr2b64(rstr_md5(str2rstr_utf8(s))); }
+function any_md5(s: string, e: string): string { return rstr2any(rstr_md5(str2rstr_utf8(s)), e); }
+function hex_hmac_md5(k: string, d: string): string {
+  return rstr2hex(rstr_hmac_md5(str2rstr_utf8(k), str2rstr_utf8(d)));
+}
+function b64_hmac_md5(k: string, d: string): string {
+  return rstr2b64(rstr_hmac_md5(str2rstr_utf8(k), str2rstr_utf8(d)));
+}
+function any_hmac_md5(k: string, d: string, e: string): string {
+  return rstr2any(rstr_hmac_md5(str2rstr_utf8(k), str2rstr_utf8(d)), e);
+}
 
-/*
- * Perform a simple self-test to see if the VM is working
+/**
+ * 执行简单自测，判断 VM 是否正常
+ * @returns 是否通过测试
  */
-function md5_vm_test()
-{
+function md5_vm_test(): boolean {
   return hex_md5("abc").toLowerCase() == "900150983cd24fb0d6963f7d28e17f72";
 }
 
-/*
- * Calculate the MD5 of a raw string
+/**
+ * 计算原始字符串的 MD5
+ * @param s 原始字符串
+ * @returns MD5 结果字符串
  */
-function rstr_md5(s)
-{
+function rstr_md5(s: string): string {
   return binl2rstr(binl_md5(rstr2binl(s), s.length * 8));
 }
 
-/*
- * Calculate the HMAC-MD5, of a key and some data (raw strings)
+/**
+ * 计算 HMAC-MD5
+ * @param key 密钥
+ * @param data 数据
+ * @returns HMAC-MD5 结果字符串
  */
-function rstr_hmac_md5(key, data)
-{
-  var bkey = rstr2binl(key);
+function rstr_hmac_md5(key: string, data: string): string {
+  let bkey: number[] = rstr2binl(key);
   if(bkey.length > 16) bkey = binl_md5(bkey, key.length * 8);
 
-  var ipad = Array(16), opad = Array(16);
-  for(var i = 0; i < 16; i++)
-  {
+  const ipad: number[] = Array(16), opad: number[] = Array(16);
+  for(let i = 0; i < 16; i++) {
     ipad[i] = bkey[i] ^ 0x36363636;
     opad[i] = bkey[i] ^ 0x5C5C5C5C;
   }
 
-  var hash = binl_md5(ipad.concat(rstr2binl(data)), 512 + data.length * 8);
+  const hash: number[] = binl_md5(ipad.concat(rstr2binl(data)), 512 + data.length * 8);
   return binl2rstr(binl_md5(opad.concat(hash), 512 + 128));
 }
 
-/*
- * Convert a raw string to a hex string
+/**
+ * 原始字符串转十六进制字符串
+ * @param input 输入字符串
+ * @returns 十六进制字符串
  */
-function rstr2hex(input)
-{
+function rstr2hex(input: string): string {
   try { hexcase } catch(e) { hexcase=0; }
-  var hex_tab = hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
-  var output = "";
-  var x;
-  for(var i = 0; i < input.length; i++)
-  {
+  const hex_tab: string = hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
+  let output = "";
+  let x: number;
+  for(let i = 0; i < input.length; i++) {
     x = input.charCodeAt(i);
     output += hex_tab.charAt((x >>> 4) & 0x0F)
            +  hex_tab.charAt( x        & 0x0F);
@@ -81,22 +87,21 @@ function rstr2hex(input)
   return output;
 }
 
-/*
- * Convert a raw string to a base-64 string
+/**
+ * 原始字符串转 BASE64 字符串
+ * @param input 输入字符串
+ * @returns BASE64 字符串
  */
-function rstr2b64(input)
-{
+function rstr2b64(input: string): string {
   try { b64pad } catch(e) { b64pad=''; }
-  var tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-  var output = "";
-  var len = input.length;
-  for(var i = 0; i < len; i += 3)
-  {
-    var triplet = (input.charCodeAt(i) << 16)
+  const tab: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  let output = "";
+  const len: number = input.length;
+  for(let i = 0; i < len; i += 3) {
+    const triplet: number = (input.charCodeAt(i) << 16)
                 | (i + 1 < len ? input.charCodeAt(i+1) << 8 : 0)
                 | (i + 2 < len ? input.charCodeAt(i+2)      : 0);
-    for(var j = 0; j < 4; j++)
-    {
+    for(let j = 0; j < 4; j++) {
       if(i * 8 + j * 6 > input.length * 8) output += b64pad;
       else output += tab.charAt((triplet >>> 6*(3-j)) & 0x3F);
     }
@@ -104,18 +109,19 @@ function rstr2b64(input)
   return output;
 }
 
-/*
- * Convert a raw string to an arbitrary string encoding
+/**
+ * 原始字符串转任意编码字符串
+ * @param input 输入字符串
+ * @param encoding 编码表
+ * @returns 编码后的字符串
  */
-function rstr2any(input, encoding)
-{
-  var divisor = encoding.length;
-  var i, j, q, x, quotient;
+function rstr2any(input: string, encoding: string): string {
+  const divisor: number = encoding.length;
+  let i: number, j: number, q: number, x: number, quotient: number[];
 
   /* Convert to an array of 16-bit big-endian values, forming the dividend */
-  var dividend = Array(Math.ceil(input.length / 2));
-  for(i = 0; i < dividend.length; i++)
-  {
+  let dividend: number[] = Array(Math.ceil(input.length / 2));
+  for(i = 0; i < dividend.length; i++) {
     dividend[i] = (input.charCodeAt(i * 2) << 8) | input.charCodeAt(i * 2 + 1);
   }
 
@@ -125,15 +131,13 @@ function rstr2any(input, encoding)
    * forms the dividend for the next step. All remainders are stored for later
    * use.
    */
-  var full_length = Math.ceil(input.length * 8 /
+  const full_length: number = Math.ceil(input.length * 8 /
                                     (Math.log(encoding.length) / Math.log(2)));
-  var remainders = Array(full_length);
-  for(j = 0; j < full_length; j++)
-  {
-    quotient = Array();
+  const remainders: number[] = Array(full_length);
+  for(j = 0; j < full_length; j++) {
+    quotient = [];
     x = 0;
-    for(i = 0; i < dividend.length; i++)
-    {
+    for(i = 0; i < dividend.length; i++) {
       x = (x << 16) + dividend[i];
       q = Math.floor(x / divisor);
       x -= q * divisor;
@@ -145,30 +149,28 @@ function rstr2any(input, encoding)
   }
 
   /* Convert the remainders to the output string */
-  var output = "";
+  let output = "";
   for(i = remainders.length - 1; i >= 0; i--)
     output += encoding.charAt(remainders[i]);
 
   return output;
 }
 
-/*
- * Encode a string as utf-8.
- * For efficiency, this assumes the input is valid utf-16.
+/**
+ * 字符串转 UTF-8 编码
+ * @param input 输入字符串
+ * @returns UTF-8 编码字符串
  */
-function str2rstr_utf8(input)
-{
-  var output = "";
-  var i = -1;
-  var x, y;
+function str2rstr_utf8(input: string): string {
+  let output = "";
+  let i = -1;
+  let x: number, y: number;
 
-  while(++i < input.length)
-  {
+  while(++i < input.length) {
     /* Decode utf-16 surrogate pairs */
     x = input.charCodeAt(i);
     y = i + 1 < input.length ? input.charCodeAt(i + 1) : 0;
-    if(0xD800 <= x && x <= 0xDBFF && 0xDC00 <= y && y <= 0xDFFF)
-    {
+    if(0xD800 <= x && x <= 0xDBFF && 0xDC00 <= y && y <= 0xDFFF) {
       x = 0x10000 + ((x & 0x03FF) << 10) + (y & 0x03FF);
       i++;
     }
@@ -192,72 +194,79 @@ function str2rstr_utf8(input)
   return output;
 }
 
-/*
- * Encode a string as utf-16
+/**
+ * 字符串转 UTF-16LE 编码
+ * @param input 输入字符串
+ * @returns UTF-16LE 编码字符串
  */
-function str2rstr_utf16le(input)
-{
-  var output = "";
-  for(var i = 0; i < input.length; i++)
+function str2rstr_utf16le(input: string): string {
+  let output = "";
+  for(let i = 0; i < input.length; i++)
     output += String.fromCharCode( input.charCodeAt(i)        & 0xFF,
                                   (input.charCodeAt(i) >>> 8) & 0xFF);
   return output;
 }
 
-function str2rstr_utf16be(input)
-{
-  var output = "";
-  for(var i = 0; i < input.length; i++)
+/**
+ * 字符串转 UTF-16BE 编码
+ * @param input 输入字符串
+ * @returns UTF-16BE 编码字符串
+ */
+function str2rstr_utf16be(input: string): string {
+  let output = "";
+  for(let i = 0; i < input.length; i++)
     output += String.fromCharCode((input.charCodeAt(i) >>> 8) & 0xFF,
                                    input.charCodeAt(i)        & 0xFF);
   return output;
 }
 
-/*
- * Convert a raw string to an array of little-endian words
- * Characters >255 have their high-byte silently ignored.
+/**
+ * 原始字符串转小端字数组
+ * @param input 输入字符串
+ * @returns 小端字数组
  */
-function rstr2binl(input)
-{
-  var output = Array(input.length >> 2);
-  for(var i = 0; i < output.length; i++)
+function rstr2binl(input: string): number[] {
+  const output: number[] = Array(input.length >> 2);
+  for(let i = 0; i < output.length; i++)
     output[i] = 0;
-  for(var i = 0; i < input.length * 8; i += 8)
+  for(let i = 0; i < input.length * 8; i += 8)
     output[i>>5] |= (input.charCodeAt(i / 8) & 0xFF) << (i%32);
   return output;
 }
 
-/*
- * Convert an array of little-endian words to a string
+/**
+ * 小端字数组转字符串
+ * @param input 小端字数组
+ * @returns 字符串
  */
-function binl2rstr(input)
-{
-  var output = "";
-  for(var i = 0; i < input.length * 32; i += 8)
+function binl2rstr(input: number[]): string {
+  let output = "";
+  for(let i = 0; i < input.length * 32; i += 8)
     output += String.fromCharCode((input[i>>5] >>> (i % 32)) & 0xFF);
   return output;
 }
 
-/*
- * Calculate the MD5 of an array of little-endian words, and a bit length.
+/**
+ * 计算小端字数组的 MD5
+ * @param x 小端字数组
+ * @param len 位长度
+ * @returns MD5 结果数组
  */
-function binl_md5(x, len)
-{
+function binl_md5(x: number[], len: number): number[] {
   /* append padding */
   x[len >> 5] |= 0x80 << ((len) % 32);
   x[(((len + 64) >>> 9) << 4) + 14] = len;
 
-  var a =  1732584193;
-  var b = -271733879;
-  var c = -1732584194;
-  var d =  271733878;
+  let a =  1732584193;
+  let b = -271733879;
+  let c = -1732584194;
+  let d =  271733878;
 
-  for(var i = 0; i < x.length; i += 16)
-  {
-    var olda = a;
-    var oldb = b;
-    var oldc = c;
-    var oldd = d;
+  for(let i = 0; i < x.length; i += 16) {
+    const olda = a;
+    const oldb = b;
+    const oldc = c;
+    const oldd = d;
 
     a = md5_ff(a, b, c, d, x[i+ 0], 7 , -680876936);
     d = md5_ff(d, a, b, c, x[i+ 1], 12, -389564586);
@@ -332,54 +341,57 @@ function binl_md5(x, len)
     c = safe_add(c, oldc);
     d = safe_add(d, oldd);
   }
-  return Array(a, b, c, d);
+  return [a, b, c, d];
 }
 
-/*
- * These functions implement the four basic operations the algorithm uses.
+/**
+ * 四种基本操作
  */
-function md5_cmn(q, a, b, x, s, t)
-{
+function md5_cmn(q: number, a: number, b: number, x: number, s: number, t: number): number {
   return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s),b);
 }
-function md5_ff(a, b, c, d, x, s, t)
-{
+function md5_ff(a: number, b: number, c: number, d: number, x: number, s: number, t: number): number {
   return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
 }
-function md5_gg(a, b, c, d, x, s, t)
-{
+function md5_gg(a: number, b: number, c: number, d: number, x: number, s: number, t: number): number {
   return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
 }
-function md5_hh(a, b, c, d, x, s, t)
-{
+function md5_hh(a: number, b: number, c: number, d: number, x: number, s: number, t: number): number {
   return md5_cmn(b ^ c ^ d, a, b, x, s, t);
 }
-function md5_ii(a, b, c, d, x, s, t)
-{
+function md5_ii(a: number, b: number, c: number, d: number, x: number, s: number, t: number): number {
   return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
 }
 
-/*
- * Add integers, wrapping at 2^32. This uses 16-bit operations internally
- * to work around bugs in some JS interpreters.
+/**
+ * 安全整数加法，防止溢出
+ * @param x 整数
+ * @param y 整数
+ * @returns 加法结果
  */
-function safe_add(x, y)
-{
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+function safe_add(x: number, y: number): number {
+  const lsw: number = (x & 0xFFFF) + (y & 0xFFFF);
+  const msw: number = (x >> 16) + (y >> 16) + (lsw >> 16);
   return (msw << 16) | (lsw & 0xFFFF);
 }
 
-/*
- * Bitwise rotate a 32-bit number to the left.
+/**
+ * 左移位操作
+ * @param num 数字
+ * @param cnt 位数
+ * @returns 结果
  */
-function bit_rol(num, cnt)
-{
+function bit_rol(num: number, cnt: number): number {
   return (num << cnt) | (num >>> (32 - cnt));
 }
 
-module.exports = {
-	md5 : function(str){
-		return hex_md5(str);
-	}
+/**
+ * 计算字符串的 MD5 值
+ * @param str 输入字符串
+ * @returns MD5 十六进制字符串
+ */
+function md5(str: string): string {
+  return hex_md5(str);
 }
+
+export default md5;
