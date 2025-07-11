@@ -42,7 +42,7 @@ const props = defineProps({
     default: ''
   },
   /** 是否为选中状态 */
-  value: {
+  modelValue: {
     type: Boolean,
     default: false
   },
@@ -78,7 +78,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['change', 'update:value']);
+const emit = defineEmits(['change', 'update:modelValue']);
 
 // 父组件 group 注入
 // 支付宝小程序不支持provide/inject？
@@ -123,7 +123,7 @@ const elShape = computed(() => {
 const iconStyle = computed(() => {
   let style: Record<string, string> = {};
   // 既要判断是否手动禁用，还要判断用户v-model绑定的值，如果绑定为false，那么也无法选中
-  if (elActiveColor.value && props.value && !isDisabled.value) {
+  if (elActiveColor.value && props.modelValue && !isDisabled.value) {
     style.borderColor = elActiveColor.value;
     style.backgroundColor = elActiveColor.value;
   }
@@ -133,14 +133,14 @@ const iconStyle = computed(() => {
 });
 // checkbox内部的勾选图标，如果选中状态，为白色，否则为透明色即可
 const iconColor = computed(() => {
-  return props.value ? '#ffffff' : 'transparent';
+  return props.modelValue ? '#ffffff' : 'transparent';
 });
 const iconClass = computed(() => {
   let classes: string[] = [];
   classes.push('u-checkbox__icon-wrap--' + elShape.value);
-  if (props.value == true) classes.push('u-checkbox__icon-wrap--checked');
+  if (props.modelValue == true) classes.push('u-checkbox__icon-wrap--checked');
   if (isDisabled.value) classes.push('u-checkbox__icon-wrap--disabled');
-  if (props.value && isDisabled.value) classes.push('u-checkbox__icon-wrap--disabled--checked');
+  if (props.modelValue && isDisabled.value) classes.push('u-checkbox__icon-wrap--disabled--checked');
   // 支付宝小程序无法动态绑定一个数组类名，否则解析出来的结果会带有","，而导致失效
   return classes.join(' ');
 });
@@ -188,7 +188,7 @@ function toggle() {
  */
 function emitEvent() {
   emit('change', {
-    value: !props.value,
+    value: !props.modelValue,
     name: props.name
   });
   // 执行父组件u-checkbox-group的事件方法
@@ -210,9 +210,9 @@ function setValue() {
     });
   }
   // 如果原来为选中状态，那么可以取消
-  if (props.value == true) {
+  if (props.modelValue == true) {
     emitEvent();
-    emit('update:value', !props.value);
+    emit('update:modelValue', !props.modelValue);
   } else {
     // 如果超出最多可选项，提示
     if (parent && checkedNum >= parent.props.max) {
@@ -220,7 +220,7 @@ function setValue() {
     }
     // 如果原来为未选中状态，需要选中的数量少于父组件中设置的max值，才可以选中
     emitEvent();
-    emit('update:value', !props.value);
+    emit('update:modelValue', !props.modelValue);
   }
 }
 

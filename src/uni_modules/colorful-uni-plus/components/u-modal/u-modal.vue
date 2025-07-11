@@ -5,7 +5,7 @@
       mode="center"
       :popup="false"
       :z-index="uZIndex"
-      v-model:value="popupValue"
+      v-model="popupValue"
       :length="width"
       :mask-close-able="maskCloseAble"
       :border-radius="borderRadius"

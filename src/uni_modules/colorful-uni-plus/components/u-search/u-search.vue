@@ -26,7 +26,7 @@
       <input
         confirm-type="search"
         @blur="blur"
-        :value="value"
+        :value="modelValue"
         @confirm="search"
         @input="inputChange"
         :disabled="disabled"
@@ -123,7 +123,7 @@ const props = defineProps({
   /** 边框颜色，只要配置了颜色，才会有边框 */
   borderColor: { type: String, default: 'none' },
   /** 输入框的初始化内容 */
-  value: { type: String, default: '' },
+  modelValue: { type: String, default: '' },
   /** 搜索框高度，单位rpx */
   height: { type: [Number, String], default: 64 },
   /** input输入框的样式，可以定义文字颜色，大小等，对象形式 */
@@ -142,10 +142,10 @@ const props = defineProps({
   searchIcon: { type: String, default: 'search' }
 })
 
-const emit = defineEmits(['input', 'change', 'search', 'custom', 'clear', 'focus', 'blur', 'click'])
+const emit = defineEmits(['update:modelValue', 'change', 'search', 'custom', 'clear', 'focus', 'blur', 'click'])
 
 // 绑定输入框的值
-const keyword = ref(props.value)
+const keyword = ref(props.modelValue)
 // 是否显示右边的清除图标
 const showClear = ref(false)
 // 控制右侧动画展开
@@ -155,13 +155,13 @@ const focused = ref(props.focus)
 
 // 监听v-model和props.value变化
 watch(
-  () => props.value,
+  () => props.modelValue,
   nVal => {
     keyword.value = nVal
   }
 )
 watch(keyword, nVal => {
-  emit('input', nVal)
+  emit('update:modelValue', nVal)
   emit('change', nVal)
 })
 

@@ -3,7 +3,7 @@
     :maskCloseAble="maskCloseAble"
     mode="bottom"
     :popup="false"
-    v-model:value="popupValue"
+    v-model="popupValue"
     length="auto"
     :safeAreaInsetBottom="safeAreaInsetBottom"
     @close="close"
@@ -146,7 +146,7 @@ const props = defineProps({
     default: true
   },
   // 通过双向绑定控制组件的弹出与收起
-  value: {
+  modelValue: {
     type: Boolean,
     default: false
   },
@@ -270,7 +270,7 @@ const props = defineProps({
     default: '选择日期'
   }
 })
-const emit = defineEmits(['update:value', 'input', 'change'])
+const emit = defineEmits(['update:modelValue', 'input', 'change'])
 const slots = useSlots()
 
 // 组件内部状态
@@ -303,8 +303,8 @@ const dataChange = computed(() => `${props.mode}-${props.minDate}-${props.maxDat
 // 如果用户有传递z-index值，优先使用
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup))
 const popupValue = computed({
-  get: () => props.value,
-  set: (val: boolean) => emit('update:value', val)
+  get: () => props.modelValue,
+  set: (val: boolean) => emit('update:modelValue', val)
 })
 
 watch(dataChange, () => {
@@ -521,7 +521,7 @@ function dateClick(dayIdx: number) {
  */
 function close() {
   emit('input', false)
-  emit('update:value', false)
+  emit('update:modelValue', false)
 }
 
 /**

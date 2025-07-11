@@ -3,7 +3,7 @@
     :maskCloseAble="maskCloseAble"
     mode="bottom"
     :popup="false"
-    v-model:value="popupValue"
+    v-model="popupValue"
     length="auto"
     :safeAreaInsetBottom="safeAreaInsetBottom"
     @close="close"
@@ -302,7 +302,7 @@ const props = defineProps({
    * 通过双向绑定控制组件的弹出与收起
    * @default false
    */
-  value: {
+  modelValue: {
     type: Boolean,
     default: false
   },
@@ -341,11 +341,11 @@ const props = defineProps({
 })
 
 const popupValue = computed({
-  get: () => props.value,
-  set: (val: boolean) => emit('update:value', val)
+  get: () => props.modelValue,
+  set: (val: boolean) => emit('update:modelValue', val)
 })
 
-const emit = defineEmits(['update:value', 'confirm', 'cancel', 'columnchange'])
+const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'columnchange'])
 
 // 主要数据
 const years = ref<number[]>([])
@@ -405,7 +405,7 @@ watch(yearAndMonth, () => {
   if (props.params.year) setDays()
 })
 watch(
-  () => props.value,
+  () => props.modelValue,
   n => {
     if (n) {
       reset.value = true
@@ -669,7 +669,7 @@ function setAreas() {
  * 关闭picker弹窗
  */
 function close() {
-  emit('update:value', false)
+  emit('update:modelValue', false)
 }
 /**
  * 用户更改picker的列选项
@@ -738,8 +738,8 @@ function getResult(event: string | null = null) {
     result = valueArr.value
   }
   // 只允许 emit 已声明的事件类型
-  if (event && ['update:value', 'confirm', 'cancel', 'columnchange'].includes(event))
-    emit(event as 'update:value' | 'confirm' | 'cancel' | 'columnchange', result)
+  if (event && ['update:modelValue', 'confirm', 'cancel', 'columnchange'].includes(event))
+    emit(event as 'update:modelValue' | 'confirm' | 'cancel' | 'columnchange', result)
   close()
 }
 /**

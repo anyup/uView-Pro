@@ -61,7 +61,7 @@
       <view
         class="u-input__right-icon__clear u-input__right-icon__item"
         @tap="onClear"
-        v-if="clearable && value != '' && focused"
+        v-if="clearable && modelValue != '' && focused"
       >
         <u-icon size="32" name="close-circle-fill" color="#c0c4cc" />
       </view>
@@ -122,7 +122,7 @@ const props = defineProps({
   /**
    * 用于双向绑定输入框的值
    */
-  value: {
+  modelValue: {
     type: [String, Number],
     default: ''
   },
@@ -297,9 +297,9 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:value', 'blur', 'focus', 'confirm', 'click'])
+const emit = defineEmits(['update:modelValue', 'blur', 'focus', 'confirm', 'click'])
 
-const defaultValue = ref(props.value)
+const defaultValue = ref(props.modelValue)
 const inputHeight = 70 // input的高度
 const textareaHeight = 100 // textarea的高度
 const validateState = ref(props.validateState) // 当前input的验证状态，用于错误时，边框是否改为红色
@@ -309,7 +309,7 @@ const lastValue = ref('') // 用于头条小程序，判断@input中，前后的
 
 // 监听 value 变化
 watch(
-  () => props.value,
+  () => props.modelValue,
   (nVal, oVal) => {
     defaultValue.value = nVal
     // 当值发生变化，且为select类型时(此时input被设置为disabled，不会触发@input事件)，模拟触发@input事件
@@ -359,10 +359,10 @@ function handleInput(event: any) {
   // 判断是否去除空格
   if (props.trim) value = $u.trim(value)
   // vue 原生的方法 return 出去
-  emit('update:value', value)
+  emit('update:modelValue', value)
   // 当前model 赋值
   defaultValue.value = value
-  // 过一个生命周期再发送事件给u-form-item，否则this.$emit('update:value')更新了父组件的值，但是微信小程序上
+  // 过一个生命周期再发送事件给u-form-item，否则this.$emit('update:modelValue')更新了父组件的值，但是微信小程序上
   // 尚未更新到u-form-item，导致获取的值为空，从而校验混论
   // 这里不能延时时间太短，或者使用this.$nextTick，否则在头条上，会造成混乱
   setTimeout(() => {
@@ -414,7 +414,7 @@ function onConfirm(e: any) {
 }
 
 function onClear(event: any) {
-  emit('update:value', '')
+  emit('update:modelValue', '')
 }
 
 function inputClick() {

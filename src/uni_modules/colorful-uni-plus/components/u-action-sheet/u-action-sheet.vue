@@ -1,5 +1,5 @@
 <template>
-	<u-popup mode="bottom" :border-radius="borderRadius" :popup="false" v-model:value="popupValue" :maskCloseAble="maskCloseAble"
+	<u-popup mode="bottom" :border-radius="borderRadius" :popup="false" v-model="popupValue" :maskCloseAble="maskCloseAble"
 	    length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="popupClose" :z-index="uZIndex">
 		<view class="u-tips u-border-bottom" v-if="tips.text" :style="[tipsStyle]">
 			{{tips.text}}
@@ -73,7 +73,7 @@ const props = defineProps({
     default: false
   },
   /** 通过双向绑定控制组件的弹出与收起 */
-  value: {
+  modelValue: {
     type: Boolean,
     default: false
   },
@@ -94,11 +94,11 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:value', 'click', 'close']);
+const emit = defineEmits(['update:modelValue', 'click', 'close']);
 
 const popupValue = computed({
-  get: () => props.value,
-  set: (val: boolean) => emit('update:value', val)
+  get: () => props.modelValue,
+  set: (val: boolean) => emit('update:modelValue', val)
 })
 
 // 顶部提示的样式
@@ -139,7 +139,7 @@ function close() {
  * 弹窗关闭
  */
 function popupClose() {
-  emit('update:value', false);
+  emit('update:modelValue', false);
 }
 
 /**
@@ -150,7 +150,7 @@ function itemClick(index: number) {
   // disabled的项禁止点击
   if (props.list[index]?.disabled) return;
   emit('click', index);
-  emit('update:value', false);
+  emit('update:modelValue', false);
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <view
     class="u-switch"
-    :class="[value == true ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '']"
+    :class="[modelValue == true ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '']"
     @tap="onClick"
     :style="[switchStyle]"
   >
@@ -47,7 +47,7 @@ const props = defineProps({
   /** 关闭时的背景颜色 */
   inactiveColor: { type: String, default: '#ffffff' },
   /** 通过v-model双向绑定的值 */
-  value: { type: Boolean, default: false },
+  modelValue: { type: Boolean, default: false },
   /** 是否使手机发生短促震动，目前只在iOS的微信小程序有效(2020-05-06) */
   vibrateShort: { type: Boolean, default: false },
   /** 打开选择器时的值 */
@@ -56,7 +56,7 @@ const props = defineProps({
   inactiveValue: { type: [Number, String, Boolean], default: false }
 })
 
-const emit = defineEmits(['update:value', 'change'])
+const emit = defineEmits(['update:modelValue', 'change'])
 
 /**
  * 计算开关样式
@@ -64,14 +64,14 @@ const emit = defineEmits(['update:value', 'change'])
 const switchStyle = computed(() => {
   let style: Record<string, string> = {}
   style.fontSize = props.size + 'rpx'
-  style.backgroundColor = props.value ? props.activeColor : props.inactiveColor
+  style.backgroundColor = props.modelValue ? props.activeColor : props.inactiveColor
   return style
 })
 /**
  * 计算加载动画颜色
  */
 const loadingColor = computed(() => {
-  return props.value ? props.activeColor : null
+  return props.modelValue ? props.activeColor : null
 })
 
 /**
@@ -81,10 +81,10 @@ function onClick() {
   if (!props.disabled && !props.loading) {
     // 使手机产生短促震动，微信小程序有效，APP(HX 2.6.8)和H5无效
     if (props.vibrateShort) uni.vibrateShort()
-    emit('update:value', !props.value)
+    emit('update:modelValue', !props.modelValue)
     // 放到下一个生命周期，因为双向绑定的value修改父组件状态需要时间，且是异步的
     nextTick(() => {
-      emit('change', props.value ? props.activeValue : props.inactiveValue)
+      emit('change', props.modelValue ? props.activeValue : props.inactiveValue)
     })
   }
 }

@@ -4,7 +4,7 @@
     :maskCloseAble="maskCloseAble"
     mode="bottom"
     :popup="false"
-    v-model:value="modalValue"
+    v-model="modalValue"
     length="auto"
     :safeAreaInsetBottom="safeAreaInsetBottom"
     @close="popupClose"
@@ -90,7 +90,7 @@ const props = defineProps({
   /** 是否允许通过点击遮罩关闭键盘 */
   maskCloseAble: { type: Boolean, default: true },
   /** 通过双向绑定控制键盘的弹出与收起 */
-  value: { type: Boolean, default: false },
+  modelValue: { type: Boolean, default: false },
   /** 是否显示遮罩，某些时候数字键盘时，用户希望看到自己的数值，所以可能不想要遮罩 */
   mask: { type: Boolean, default: true },
   /** z-index值 */
@@ -100,13 +100,13 @@ const props = defineProps({
   /** 确认按钮的文字 */
   confirmText: { type: String, default: '确认' }
 })
-const emit = defineEmits(['change', 'update:value', 'confirm', 'cancel', 'backspace'])
+const emit = defineEmits(['change', 'update:modelValue', 'confirm', 'cancel', 'backspace'])
 
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : 1075))
 
 const modalValue = computed({
-  get: () => props.value,
-  set: (val: boolean) => emit('update:value', val)
+  get: () => props.modelValue,
+  set: (val: boolean) => emit('update:modelValue', val)
 })
 
 /**
@@ -120,7 +120,7 @@ function change(e: any) {
  * 键盘关闭
  */
 function popupClose() {
-  emit('update:value', false)
+  emit('update:modelValue', false)
 }
 
 /**

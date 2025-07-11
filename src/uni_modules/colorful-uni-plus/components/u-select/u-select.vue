@@ -13,7 +13,7 @@
       :maskCloseAble="maskCloseAble"
       mode="bottom"
       :popup="false"
-      v-model:value="modalValue"
+      v-model="popupValue"
       length="auto"
       :safeAreaInsetBottom="safeAreaInsetBottom"
       @close="close"
@@ -51,7 +51,7 @@
             :value="defaultSelector"
             @pickstart="pickstart"
             @pickend="pickend"
-            v-if="value"
+            v-if="modelValue"
           >
             <picker-view-column v-for="(item, index) in columnData" :key="index">
               <view class="u-select__body__picker-view__item" v-for="(item1, index1) in item" :key="index1">
@@ -95,7 +95,7 @@ const props = defineProps({
   /** 是否显示边框 */
   border: { type: Boolean, default: true },
   /** 通过双向绑定控制组件的弹出与收起 */
-  value: { type: Boolean, default: false },
+  modelValue: { type: Boolean, default: false },
   /** "取消"按钮的颜色 */
   cancelColor: { type: String, default: '#606266' },
   /** "确定"按钮的颜色 */
@@ -123,7 +123,7 @@ const props = defineProps({
   /** 确认按钮的文字 */
   confirmText: { type: String, default: '确认' }
 })
-const emit = defineEmits(['update:value', 'confirm', 'cancel', 'click'])
+const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'click'])
 // 用于列改变时，保存当前的索引，下一次变化时比较得出是哪一列发生了变化
 
 const defaultSelector = ref<number[]>([0])
@@ -140,13 +140,13 @@ const moving = ref(false)
 // 如果用户有传递z-index值，优先使用
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : 10075))
 
-const modalValue = computed({
-  get: () => props.value,
-  set: (val: boolean) => emit('update:value', val)
+const popupValue = computed({
+  get: () => props.modelValue,
+  set: (val: boolean) => emit('update:modelValue', val)
 })
 
 watch(
-  () => props.value,
+  () => props.modelValue,
   val => {
     if (val) setTimeout(() => init(), 10)
   },
@@ -309,12 +309,12 @@ function columnChange(e: any) {
 }
 
 function close() {
-  emit('update:value', false)
+  emit('update:modelValue', false)
   // 重置default-value默认值
   defaultSelector.value = [0]
 }
 // 点击确定或者取消
-function getResult(event: 'update:value' | 'confirm' | 'cancel' | 'click' | null = null) {
+function getResult(event: 'update:modelValue' | 'confirm' | 'cancel' | 'click' | null = null) {
   // #ifdef MP-WEIXIN
   if (moving.value) return
   // #endif
