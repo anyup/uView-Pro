@@ -31,7 +31,7 @@ export default {
     },
     computed: {
         lang() {
-            return i18n.global.locale == 'zh' ? 'en' : 'zh';
+            return i18n.global.locale == 'zh-Hans' ? 'zh' : 'en';
         }
     },
     data() {
