@@ -2,7 +2,10 @@
 /**
  * 组件库配置项类型定义
  */
-export interface ColorfulUniPlusConfig {
+
+import { version } from '../../package.json';
+
+export interface AppConfig {
     /** 版本号 */
     v: string;
     /** 版本号（冗余字段） */
@@ -11,9 +14,9 @@ export interface ColorfulUniPlusConfig {
     type: string[];
 }
 
-const version: string = '1.8.8';
+// const version: string = '1.8.8';
 
-const config: ColorfulUniPlusConfig = {
+const config: AppConfig = {
     v: version,
     version: version,
     // 主题名称
