@@ -31,12 +31,13 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
 				mode: 'button',
 				current: 0,
-				activeColor: this.$u.color['warning'],
+				activeColor: $u.color['warning'],
 				bold: true,
 				change: true,
 			}
@@ -69,7 +70,7 @@
 					case 3:
 						color = 'warning';break;
 				}
-				this.activeColor = this.$u.color[color];
+				this.activeColor = $u.color[color];
 			},
 			boldChange(e) {
 				switch(e) {
