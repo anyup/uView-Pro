@@ -2,17 +2,19 @@
 // this.$parent在非H5中，可以准确获取到父组件，但是在H5中，需要多次this.$parent.$parent.xxx
 // 这里默认值等于undefined有它的含义，因为最顶层元素(组件)的$parent就是undefined，意味着不传name
 // 值(默认为undefined)，就是查找最顶层的$parent
-export default function $parent(name = undefined) {
-	let parent = this.$parent;
-	// 通过while历遍，这里主要是为了H5需要多层解析的问题
-	while (parent) {
-		// 父组件
-		if (parent.$options && parent.$options.name !== name) {
-			// 如果组件的name不相等，继续上一级寻找
-			parent = parent.$parent;
-		} else {
-			return parent;
-		}
-	}
-	return false;
+import { type ComponentInternalInstance, getCurrentInstance } from 'vue';
+
+const instance: ComponentInternalInstance | null | undefined = getCurrentInstance();
+
+export default function $parent(componentName?: string) {
+    let parent = instance && (instance.parent as ComponentInternalInstance | null | undefined);
+
+    while (parent) {
+        const name = (parent.type as any)?.name as string | undefined;
+        if (name === componentName) {
+            return parent;
+        }
+        parent = parent.parent;
+    }
+    return null;
 }
