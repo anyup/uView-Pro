@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
@@ -37,7 +38,7 @@
 			openModal(index) {
 				// 可以传递参数
 				if(index == 0) {
-					this.$u.route("/uview-ui/components/u-full-screen/u-full-screen?id=1");
+					$u.route("/uni_modules/colorful-uni-plus/components/u-full-screen/u-full-screen?id=1");
 				}
 			}
 		}

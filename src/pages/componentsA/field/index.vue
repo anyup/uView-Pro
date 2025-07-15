@@ -20,7 +20,9 @@
 					:required="required"
 					:icon="icon2"
 				>
-					<u-button v-if="showBtn" slot="right" size="mini" type="success">发送验证码</u-button>
+					<template #right>
+						<u-button v-if="showBtn" size="mini" type="success">发送验证码</u-button>
+					</template>
 				</u-field>
 			</view>
 		</view>
@@ -53,6 +55,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
@@ -60,7 +63,7 @@
 				code: '',
 				errorMessage: '',
 				required: false,
-				placeholderColor: this.$u.color['tipsColor'],
+				placeholderColor: $u.color['tipsColor'],
 				arrow: false,
 				showBtn: false,
 				icon1: '',

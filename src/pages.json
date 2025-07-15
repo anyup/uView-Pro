@@ -6,19 +6,48 @@
     }
   },
   "pages": [
-    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-    {
-      "path": "pages/example/components",
-      "style": {
-        "navigationBarTitleText": "组件"
-      }
-    },
-    {
-      "path": "pages/index/index",
-      "style": {
-        "navigationBarTitleText": "uni-app"
-      }
-    }
+    // 演示-组件
+		{
+			"path": "pages/example/components",
+			"style": {
+				"navigationBarTitleText": "组件"
+			}
+		},
+		// // avatarCropper-头像裁剪
+		// {
+		// 	"path": "/uni_modules/colorful-uni-plus/components/u-avatar-cropper/u-avatar-cropper",
+		// 	"style": {
+		// 		"navigationBarTitleText": "头像裁剪",
+		// 		"navigationBarBackgroundColor": "#000000"
+		// 	}
+		// },
+		// // 演示-工具
+		// {
+		// 	"path": "pages/example/js",
+		// 	"style": {
+		// 		"navigationBarTitleText": "工具"
+		// 	}
+		// },
+		// // 演示-模板
+		// {
+		// 	"path": "pages/example/template",
+		// 	"style": {
+		// 		"navigationBarTitleText": "模板"
+		// 	}
+		// },
+		// fullScreen-压窗屏
+		{
+			"path": "uni_modules/colorful-uni-plus/components/u-full-screen/u-full-screen",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"animationType": "fade-in",
+					"background": "transparent",
+					"backgroundColor": "rgba(0,0,0,0)",
+					"popGesture": "none"
+				}
+			}
+		}
   ],
   "subPackages": [
     {

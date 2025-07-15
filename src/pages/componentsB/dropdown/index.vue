@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() { 
 			return {
@@ -120,7 +121,7 @@
 				this.activeColor = ['#2979ff', '#ff9900', '#19be6b'][index];
 			},
 			change(index) {
-				this.$u.toast(`点击了第${index}项`);
+				$u.toast(`点击了第${index}项`);
 			},
 			closeDropdown() {
 				this.$refs.uDropdown.close();
