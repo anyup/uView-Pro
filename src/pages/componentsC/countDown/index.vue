@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 export default {
 	data() {
 		return {
@@ -61,9 +62,9 @@ export default {
 		styleChange(index) {
 			if(index == 0) {
 				this.showBorder = true;
-				this.borderColor = this.$u.color['primary'];
-				this.color = this.$u.color['primary'];
-				this.separatorColor = this.$u.color['primary'];
+				this.borderColor = $u.color['primary'];
+				this.color = $u.color['primary'];
+				this.separatorColor = $u.color['primary'];
 			} else {
 				this.showBorder = false;
 				this.borderColor = '#303133';
