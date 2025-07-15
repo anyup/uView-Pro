@@ -44,6 +44,8 @@ import { sys, os } from './libs/function/sys';
 import debounce from './libs/function/debounce';
 // 节流方法
 import throttle from './libs/function/throttle';
+// 获取元素的位置信息
+import getRect from './libs/function/getRect';
 
 // 配置信息
 import config from './libs/config/config';
@@ -104,7 +106,7 @@ export interface UViewUtils {
     debounce: typeof debounce;
     throttle: typeof throttle;
     mitt: ReturnType<typeof mitt>;
-    getRect: (instance: any | null | undefined, selector: any, all?: boolean) => Promise<any>;
+    getRect: typeof getRect;
 }
 
 export const $u: UViewUtils = {
@@ -146,22 +148,7 @@ export const $u: UViewUtils = {
     debounce,
     throttle,
     mitt: mitt(),
-    getRect: function (instance: any | null | undefined, selector: any, all: boolean = false): Promise<any> {
-        return new Promise(resolve => {
-            uni.createSelectorQuery()
-                .in(instance?.proxy)
-                [all ? 'selectAll' : 'select'](selector)
-                .boundingClientRect((rect: any) => {
-                    if (all && Array.isArray(rect) && rect.length) {
-                        resolve(rect);
-                    }
-                    if (!all && rect) {
-                        resolve(rect);
-                    }
-                })
-                .exec();
-        });
-    }
+    getRect
 };
 
 // $u挂载到uni对象上

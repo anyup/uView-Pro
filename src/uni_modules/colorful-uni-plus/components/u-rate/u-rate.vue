@@ -238,7 +238,7 @@ const elActiveColor = computed(() => {
  */
 function getElRectById() {
     // uView封装的获取节点的方法，详见文档
-    $u.getRect(getCurrentInstance(), '#' + elId.value).then((res: any) => {
+    $u.getRect('#' + elId.value).then((res: any) => {
         starBoxLeft.value = res.left;
     });
 }
@@ -247,7 +247,7 @@ function getElRectById() {
  */
 function getElRectByClass() {
     // uView封装的获取节点的方法，详见文档
-    $u.getRect(getCurrentInstance(), '.' + elClass.value).then((res: any) => {
+    $u.getRect('.' + elClass.value).then((res: any) => {
         starWidth.value = res.width;
         // 把每个星星右边到组件盒子左边的距离放入数组中
         for (let i = 0; i < Number(props.count); i++) {
