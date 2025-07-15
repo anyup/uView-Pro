@@ -61,7 +61,7 @@
 
 <style lang="scss" scoped>
 	// 通过/deep/样式穿透去控制组件的内容
-	.wrap /deep/ .u-content {
+	.wrap ::v-deep .u-content {
 		color: #666!important;
 	}
 </style>

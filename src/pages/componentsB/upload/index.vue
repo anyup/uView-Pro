@@ -164,7 +164,7 @@
 		font-size: 28rpx;
 	}
 	
-	/deep/ .slot-btn {
+	::v-deep .slot-btn {
 		width: 329rpx;
 		height: 140rpx;
 		display: flex;
