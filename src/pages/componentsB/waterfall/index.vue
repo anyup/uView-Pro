@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
+
 export default {
 	data() {
 		return {
@@ -127,10 +129,10 @@ export default {
 	methods: {
 		addRandomData() {
 			for (let i = 0; i < 10; i++) {
-				let index = this.$u.random(0, this.list.length - 1);
+				let index = $u.random(0, this.list.length - 1);
 				// 先转成字符串再转成对象，避免数组对象引用导致数据混乱
 				let item = JSON.parse(JSON.stringify(this.list[index]));
-				item.id = this.$u.guid();
+				item.id = $u.guid();
 				this.flowList.push(item);
 			}
 		},
