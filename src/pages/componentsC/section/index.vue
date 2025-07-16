@@ -35,13 +35,14 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
 				title: '红豆生南国',
 				bold: true,
 				right: true,
-				color: this.$u.color['mainColor'],
+				color: $u.color['mainColor'],
 				showLine: true
 			}
 		},
@@ -57,7 +58,7 @@
 				this.bold = index == 0 ? true : false;
 			},
 			colorChange(index) {
-				this.color = index == 0 ? this.$u.color['mainColor'] : this.$u.color['primary'];
+				this.color = index == 0 ? $u.color['mainColor'] : $u.color['primary'];
 			},
 			showLineChange(index) {
 				this.showLine = !index;
