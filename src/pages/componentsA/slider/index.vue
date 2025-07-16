@@ -12,11 +12,13 @@
 					@moving="moving"
 				>
 					<!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
-					<view class="" v-if="useSlot">
-						<view class="badge-button">
-							{{value}}
-						</view>
-					</view>
+					 <template v-if="useSlot" #default>
+                        <view class="" >
+                            <view class="badge-button">
+                                {{ value }}
+                            </view>
+                        </view>
+                    </template>
 					<!-- #endif -->
 				</u-slider>
 				<view class="u-demo-result-line">
@@ -53,6 +55,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
@@ -78,7 +81,7 @@
 		methods: {
 			typeChange(index) {
 				let type = ['primary', 'warning', 'error', 'success'];
-				this.activeColor = this.$u.color[type[index]];
+				this.activeColor = $u.color[type[index]];
 			},
 			sizeChange(index) {
 				if(index == 0) {
