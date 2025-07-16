@@ -9,7 +9,7 @@
 			striped ? 'u-striped' : '',
 			striped && stripedActive ? 'u-striped-active' : ''
 		]" class="u-active" :style="progressStyle">
-			<slot v-if="slots.default || slots.$default" />
+			<slot v-if="slots.default" />
 			<template v-else-if="showPercent">
 				{{ percent + '%' }}
 			</template>

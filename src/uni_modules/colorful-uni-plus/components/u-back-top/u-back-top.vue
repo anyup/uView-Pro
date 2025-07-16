@@ -14,7 +14,7 @@
       customStyle
     ]"
   >
-    <view class="u-back-top__content" v-if="!slots.default && !slots.$default">
+    <view class="u-back-top__content" v-if="!slots.default">
       <u-icon @click="backToTop" :name="icon" :custom-style="iconStyle"></u-icon>
       <view class="u-back-top__content__tips">
         {{ tips }}
