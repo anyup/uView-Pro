@@ -138,21 +138,6 @@ function timeEnd() {
   }
 }
 
-// defineExpose 公开方法供父组件调用
-// @ts-ignore
-// eslint-disable-next-line
-// #ifdef VUE3
-// 兼容uni-app ref 方式调用
-// #endif
-// 公开 show/hide 方法
-// @ts-ignore
-// eslint-disable-next-line
-// #ifdef VUE3
-// 兼容uni-app ref 方式调用
-// #endif
-// 兼容性暴露
-// @ts-ignore
-// eslint-disable-next-line
 defineExpose<ToastExpose>({
   show,
   hide
