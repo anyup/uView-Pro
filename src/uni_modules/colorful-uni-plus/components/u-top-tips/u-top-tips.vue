@@ -1,121 +1,118 @@
 <template>
-	<view class="u-tips" :class="['u-' + type, isShow ? 'u-tip-show' : '']" :style="{
-		top: navbarHeight + 'px',
-		zIndex: uZIndex
-	}">{{ title }}</view>
+    <view class="u-tips" :class="['u-' + type, isShow ? 'u-tip-show' : '']" :style="tipStyle">{{ title }}</view>
 </template>
 
-<script>
-	/**
-	 * topTips 顶部提示
-	 * @description 该组件一般用于页面顶部向下滑出一个提示，尔后自动收起的场景。
-	 * @tutorial https://www.uviewui.com/components/topTips.html
-	 * @property {String Number} navbar-height 导航栏高度(包含状态栏高度在内)，单位PX
-	 * @property {String Number} z-index z-index值（默认975）
-	 * @example <u-top-tips ref="uTips"></u-top-tips>
-	 */
-	export default {
-		name: "u-top-tips",
-		props: {
-			// 导航栏高度，用于提示的初始化
-			navbarHeight: {
-				type: [Number, String],
-				// #ifndef H5
-				default: 0,
-				// #endif
-				// #ifdef H5
-				default: 44,
-				// #endif
-			},
-			// z-index值
-			zIndex: {
-				type: [Number, String],
-				default: ''
-			}
-		},
-		data() {
-			return {
-				timer: null, // 定时器
-				isShow: false, // 是否显示消息组件
-				title: '', // 组件中显示的消息内容
-				type: 'primary', // 消息的类型（颜色不同），primary，success，error，warning，info
-				duration: 2000, // 组件显示的时间，单位为毫秒
-			};
-		},
-		computed: {
-			uZIndex() {
-				return this.zIndex ? this.zIndex : this.$u.zIndex.topTips;
-			}
-		},
-		methods: {
-			show(config = {}) {
-				// 先清除定时器（可能是上一次定义的，需要清除了再开始新的）
-				clearTimeout(this.timer);
-				// 时间，内容，类型主题(type)等参数
-				if (config.duration) this.duration = config.duration;
-				if (config.type) this.type = config.type;
-				this.title = config.title;
-				this.isShow = true;
-				// 倒计时
-				this.timer = setTimeout(() => {
-					this.isShow = false;
-					clearTimeout(this.timer);
-					this.timer = null;
-				}, this.duration);
-			}
-		}
-	};
+<script setup lang="ts">
+/**
+ * topTips 顶部提示
+ * @description 该组件一般用于页面顶部向下滑出一个提示，尔后自动收起的场景。
+ * @tutorial https://www.uviewui.com/components/topTips.html
+ * @property {String|Number} navbarHeight 导航栏高度(包含状态栏高度在内)，单位PX
+ * @property {String|Number} zIndex z-index值（默认975）
+ * @example <u-top-tips ref="uTips"></u-top-tips>
+ */
+
+import { ref, computed } from 'vue';
+import { $u } from '../../';
+
+defineOptions({ name: 'u-top-tips' });
+
+const props = defineProps({
+    /** 导航栏高度，用于提示的初始化 */
+    navbarHeight: {
+        type: [Number, String],
+        default() {
+            let result = 0;
+            // #ifndef H5
+            result = 0;
+            // #endif
+            // #ifdef H5
+            result = 44;
+            // #endif
+            return result;
+        }
+    },
+    /** z-index值 */
+    zIndex: {
+        type: [Number, String],
+        default: ''
+    }
+});
+
+let timer: number | null = null; // 定时器
+const isShow = ref(false); // 是否显示消息组件
+const title = ref(''); // 组件中显示的消息内容
+const type = ref<'primary' | 'success' | 'error' | 'warning' | 'info'>('primary'); // 消息的类型（颜色不同），primary，success，error，warning，info
+const duration = ref(2000); // 组件显示的时间，单位为毫秒
+
+const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.topTips));
+
+const tipStyle = computed(() => ({
+    top: Number(props.navbarHeight) + 'px',
+    zIndex: uZIndex.value
+}));
+
+/**
+ * 显示顶部提示
+ * @param config 配置项 { title, type, duration }
+ */
+function show(config: { title: string; type?: string; duration?: number } = { title: '' }) {
+    // 先清除定时器（可能是上一次定义的，需要清除了再开始新的）
+    if (timer) clearTimeout(timer);
+    // 时间，内容，类型主题(type)等参数
+    if (config.duration) duration.value = config.duration;
+    if (config.type) type.value = config.type as any;
+    title.value = config.title;
+    isShow.value = true;
+    // 倒计时
+    timer = setTimeout(() => {
+        isShow.value = false;
+        if (timer) clearTimeout(timer);
+        timer = null;
+    }, duration.value);
+}
+defineExpose({ show });
 </script>
 
 <style lang="scss" scoped>
-	@import "../../libs/css/style.components.scss";
-	
-	view {
-		box-sizing: border-box;
-	}
-
-	// 顶部弹出类型样式
-	.u-tips {
-		width: 100%;
-		position: fixed;
-		z-index: 1;
-		padding: 20rpx 30rpx;
-		color: #FFFFFF;
-		font-size: 28rpx;
-		left: 0;
-		right: 0;
-		@include vue-flex;
-		align-items: center;
-		justify-content: center;
-		opacity: 0;
-		// 此处为最核心点，translateY(-100%)意味着将其从Y轴隐藏（隐藏到顶部(h5)或者说导航栏(app)下面）
-		transform: translateY(-100%);
-		transition: all 0.35s linear;
-	}
-
-	.u-tip-show {
-		transform: translateY(0);
-		opacity: 1;
-		z-index: 99;
-	}
-
-	.u-primary {
-		background: $u-type-primary;
-	}
-
-	.u-success {
-		background: $u-type-success;
-	}
-
-	.u-warning {
-		background: $u-type-warning;
-	}
-
-	.u-error {
-		background: $u-type-error;
-	}
-
-	.u-info {
-		background: $u-type-info;
-	}
+@import '../../libs/css/style.components.scss';
+view {
+    box-sizing: border-box;
+}
+.u-tips {
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    padding: 20rpx 30rpx;
+    color: #ffffff;
+    font-size: 28rpx;
+    left: 0;
+    right: 0;
+    @include vue-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all 0.35s linear;
+}
+.u-tip-show {
+    transform: translateY(0);
+    opacity: 1;
+    z-index: 99;
+}
+.u-primary {
+    background: $u-type-primary;
+}
+.u-success {
+    background: $u-type-success;
+}
+.u-warning {
+    background: $u-type-warning;
+}
+.u-error {
+    background: $u-type-error;
+}
+.u-info {
+    background: $u-type-info;
+}
 </style>
