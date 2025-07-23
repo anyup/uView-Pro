@@ -4,9 +4,9 @@
 // 值(默认为undefined)，就是查找最顶层的$parent
 import { type ComponentInternalInstance, getCurrentInstance } from 'vue';
 
-const instance: ComponentInternalInstance | null | undefined = getCurrentInstance();
-
 export default function $parent(componentName?: string) {
+
+    const instance: ComponentInternalInstance | null | undefined = getCurrentInstance();
     let parent = instance && (instance.parent as ComponentInternalInstance | null | undefined);
 
     while (parent) {
