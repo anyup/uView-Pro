@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import { type ImageInstance } from '@/uni_modules/colorful-uni-plus/components/u-image/types'
+import { type ImageInstance } from '@/uni_modules/uview-next/components/u-image/types'
 import { ref } from 'vue'
 
 // 定义响应式数据

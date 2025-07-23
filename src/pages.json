@@ -2,7 +2,7 @@
   "easycom": {
     // 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
     "custom": {
-      "^u-(.*)": "@/uni_modules/colorful-uni-plus/components/u-$1/u-$1.vue"
+      "^u-(.*)": "@/uni_modules/uview-next/components/u-$1/u-$1.vue"
     }
   },
   "pages": [
@@ -15,7 +15,7 @@
 		},
 		// avatarCropper-头像裁剪
 		{
-			"path": "uni_modules/colorful-uni-plus/components/u-avatar-cropper/u-avatar-cropper",
+			"path": "uni_modules/uview-next/components/u-avatar-cropper/u-avatar-cropper",
 			"style": {
 				"navigationBarTitleText": "头像裁剪",
 				"navigationBarBackgroundColor": "#000000"
@@ -37,7 +37,7 @@
 		// },
 		// fullScreen-压窗屏
 		{
-			"path": "uni_modules/colorful-uni-plus/components/u-full-screen/u-full-screen",
+			"path": "uni_modules/uview-next/components/u-full-screen/u-full-screen",
 			"style": {
 				"navigationStyle": "custom",
 				"app-plus": {

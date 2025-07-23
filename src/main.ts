@@ -1,7 +1,7 @@
 import { createSSRApp } from 'vue';
 import App from './App.vue';
 
-import colorfulUniPlus from '@/uni_modules/colorful-uni-plus';
+import colorfulUniPlus from '@/uni_modules/uview-next';
 
 import i18n from '@/locales';
 

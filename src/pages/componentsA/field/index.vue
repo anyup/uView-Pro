@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { $u } from '@/uni_modules/colorful-uni-plus';
+import { $u } from '@/uni_modules/uview-next';
 	export default {
 		data() {
 			return {

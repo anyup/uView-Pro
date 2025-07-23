@@ -11,6 +11,6 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
-	@import "@/uni_modules/colorful-uni-plus/index.scss";
+	@import "@/uni_modules/uview-next/index.scss";
 	@import "@/common/demo.scss";
 </style>
