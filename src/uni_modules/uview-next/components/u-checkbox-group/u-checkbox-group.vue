@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, getCurrentInstance, provide } from 'vue';
+import { ref, getCurrentInstance, provide } from 'vue';
 import { $u } from '../..';
 
 /**

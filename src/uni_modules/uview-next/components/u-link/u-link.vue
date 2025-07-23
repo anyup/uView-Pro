@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineOptions } from 'vue'
 import { $u } from '../..'
 
 defineOptions({

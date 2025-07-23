@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineProps, defineEmits } from 'vue'
+import { ref, computed } from 'vue'
 import { $u } from '../..'
 
 defineOptions({ name: 'u-loadmore' })

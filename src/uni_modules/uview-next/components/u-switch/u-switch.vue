@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, defineProps, defineEmits } from 'vue'
+import { computed, nextTick } from 'vue'
 import { $u } from '../..'
 
 /**

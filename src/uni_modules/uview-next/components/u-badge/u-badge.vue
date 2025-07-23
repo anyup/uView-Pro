@@ -37,7 +37,7 @@
  * @property {Boolean} is-center 组件中心点是否和父组件右上角重合，优先级比offset高，如设置，offset参数会失效（默认false）
  * @example <u-badge type="error" count="7"></u-badge>
  */
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   /** 使用预设的背景颜色 primary,warning,success,error,info */

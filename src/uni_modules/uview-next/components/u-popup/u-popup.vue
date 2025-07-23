@@ -62,7 +62,7 @@
  * @event {Function} close 弹出层收起
  * @example <u-popup v-model="show"><view>出淤泥而不染，濯清涟而不妖</view></u-popup>
  */
-import { ref, computed, watch, onMounted, defineProps, defineEmits, nextTick } from 'vue';
+import { ref, computed, watch, onMounted, nextTick } from 'vue';
 import { $u } from '../..';
 
 const props = defineProps({

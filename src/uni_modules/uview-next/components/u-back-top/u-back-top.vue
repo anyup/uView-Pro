@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, defineProps, useSlots } from 'vue'
+import { ref, computed, watch, useSlots } from 'vue'
 
 defineOptions({
   name: 'u-back-top'

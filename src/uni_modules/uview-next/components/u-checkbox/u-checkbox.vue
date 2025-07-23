@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, defineProps, defineEmits, getCurrentInstance, onMounted } from 'vue';
+import { computed, inject, getCurrentInstance, onMounted } from 'vue';
 import { $u } from '../..';
 
 /**

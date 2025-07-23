@@ -83,7 +83,7 @@
  * @event {Function} cancel 取消按钮被点击
  * @example <u-modal :src="title" :content="content"></u-modal>
  */
-import { ref, computed, watch, useSlots, defineProps, defineEmits } from 'vue'
+import { ref, computed, watch, useSlots } from 'vue'
 
 const props = defineProps({
   /**

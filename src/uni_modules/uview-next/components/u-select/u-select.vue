@@ -87,7 +87,7 @@
  * @event {Function} confirm 点击确定按钮，返回当前选择的值
  * @example <u-select v-model="show" :list="list"></u-select>
  */
-import { ref, computed, watch, defineProps, defineEmits } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 const props = defineProps({
   /** 列数据 */

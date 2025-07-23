@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide, defineProps } from 'vue'
+import { ref, provide } from 'vue'
 import { $u } from '../..'
 
 /**

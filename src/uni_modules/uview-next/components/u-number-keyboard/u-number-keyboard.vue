@@ -32,7 +32,7 @@
  * @event {Function} change 按键被点击
  * @event {Function} backspace 退格键被点击
  */
-import { computed, ref, defineProps, defineEmits } from 'vue';
+import { computed } from 'vue';
 import { $u } from '../..';
 
 const props = defineProps({

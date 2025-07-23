@@ -66,7 +66,7 @@
  * @event {Function} backspace 键盘退格键被点击
  * @example <u-keyboard mode="number" v-model="show"></u-keyboard>
  */
-import { computed, defineProps, defineEmits } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   /** 键盘的类型，number-数字键盘，card-身份证键盘，car-车牌号键盘 */

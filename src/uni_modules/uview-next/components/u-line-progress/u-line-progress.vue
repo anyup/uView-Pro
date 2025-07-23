@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, useSlots } from 'vue'
+import { computed, useSlots } from 'vue'
 
 defineOptions({
   name: 'u-line-progress'

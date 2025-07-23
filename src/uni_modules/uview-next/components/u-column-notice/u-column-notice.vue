@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits, defineOptions } from 'vue';
+import { computed, defineOptions } from 'vue';
 
 defineOptions({ name: 'u-column-notice' });
 

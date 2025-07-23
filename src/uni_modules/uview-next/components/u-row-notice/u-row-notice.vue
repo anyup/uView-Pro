@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, nextTick, defineOptions, defineProps, defineEmits, getCurrentInstance } from 'vue';
+import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 
 defineOptions({ name: 'u-row-notice' });
 

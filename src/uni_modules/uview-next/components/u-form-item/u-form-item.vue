@@ -74,8 +74,7 @@ import {
   onBeforeUnmount,
   watch,
   getCurrentInstance,
-  nextTick,
-  defineProps
+  nextTick
 } from 'vue'
 import { $u } from '../..'
 import { broadcast } from '../../libs/util/emitter'

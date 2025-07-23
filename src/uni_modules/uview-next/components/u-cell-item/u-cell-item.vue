@@ -61,7 +61,7 @@
  * @property {String|Number} title-width 标题的宽度，单位rpx
  * @example <u-cell-item icon="integral-fill" title="会员等级" value="新版本"></u-cell-item>
  */
-import { computed, useSlots, defineProps, defineEmits } from 'vue'
+import { computed, useSlots } from 'vue'
 
 const emit = defineEmits<{ (e: 'click', index: string | number): void }>()
 

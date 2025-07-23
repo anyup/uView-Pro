@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineOptions } from 'vue'
 
 defineOptions({
   name: 'u-empty'

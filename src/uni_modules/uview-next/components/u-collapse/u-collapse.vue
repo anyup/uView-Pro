@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, ref, provide } from 'vue'
+import { ref, provide } from 'vue'
 
 defineOptions({
   name: 'u-collapse'

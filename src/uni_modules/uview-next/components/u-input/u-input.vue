@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, defineProps, defineEmits, getCurrentInstance } from 'vue'
+import { ref, computed, watch, getCurrentInstance } from 'vue'
 import { $u } from '../..'
 import { dispatch } from '../../libs/util/emitter'
 

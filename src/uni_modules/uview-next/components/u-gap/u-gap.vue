@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineOptions } from 'vue'
+import { computed } from 'vue'
 
 defineOptions({
   name: 'u-gap'

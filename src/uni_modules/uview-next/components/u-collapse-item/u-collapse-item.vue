@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, defineProps, defineEmits, useSlots, getCurrentInstance, nextTick, inject } from 'vue'
+import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, inject } from 'vue'
 import { $u } from '../..'
 
 defineOptions({

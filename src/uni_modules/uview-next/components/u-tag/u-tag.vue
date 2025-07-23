@@ -41,7 +41,7 @@
  * @event {Function} close closeable为true时，点击标签关闭按钮触发
  * @example <u-tag text="雪月夜" type="success" />
  */
-import { computed, defineProps, defineEmits } from 'vue'
+import { computed } from 'vue'
 
 const emit = defineEmits<{
   (e: 'click', index: string | number): void

@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineProps, getCurrentInstance } from 'vue'
+import { ref, computed, getCurrentInstance } from 'vue'
 import { $u } from '../..'
 
 defineOptions({ name: 'u-navbar' })

@@ -132,7 +132,7 @@
  * @property {Boolean} closeable 是否显示右上角的关闭图标(默认true)
  * @example <u-calendar v-model="show" :mode="mode"></u-calendar>
  */
-import { ref, computed, watch, onMounted, useSlots, defineProps, defineEmits } from 'vue'
+import { ref, computed, watch, onMounted, useSlots } from 'vue'
 import { $u } from '../..'
 
 const props = defineProps({

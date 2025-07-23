@@ -73,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, useSlots } from 'vue'
+import { useSlots } from 'vue'
 
 defineOptions({
   name: 'u-card'

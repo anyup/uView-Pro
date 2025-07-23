@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits, defineOptions } from 'vue';
+import { computed } from 'vue';
 
 // 组件名称声明
 defineOptions({ name: 'u-notice-bar' });

@@ -19,7 +19,6 @@
  * @property {Object} title-style 分组标题的的样式，对象形式，如{'font-size': '24rpx'} 或 {'fontSize': '24rpx'}
  * @example <u-cell-group title="设置喜好">
  */
-import { defineProps } from 'vue'
 
 defineProps({
   /** 分组标题 */
