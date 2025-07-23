@@ -13,14 +13,14 @@
 				"navigationBarTitleText": "组件"
 			}
 		},
-		// // avatarCropper-头像裁剪
-		// {
-		// 	"path": "/uni_modules/colorful-uni-plus/components/u-avatar-cropper/u-avatar-cropper",
-		// 	"style": {
-		// 		"navigationBarTitleText": "头像裁剪",
-		// 		"navigationBarBackgroundColor": "#000000"
-		// 	}
-		// },
+		// avatarCropper-头像裁剪
+		{
+			"path": "uni_modules/colorful-uni-plus/components/u-avatar-cropper/u-avatar-cropper",
+			"style": {
+				"navigationBarTitleText": "头像裁剪",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		},
 		// // 演示-工具
 		// {
 		// 	"path": "pages/example/js",
