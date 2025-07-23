@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/colorful-uni-plus';
 	export default {
 		data() {
 			return {
@@ -49,8 +50,8 @@
 		},
 		methods: {
 			chooseAvatar() {
-				this.$u.route({
-					url: '/uview-ui/components/u-avatar-cropper/u-avatar-cropper',
+				$u.route({
+					url: '/uni_modules/colorful-uni-plus/components/u-avatar-cropper/u-avatar-cropper',
 					params: {
 						// 输出图片宽度，高等于宽，单位px
 						destWidth: 300,

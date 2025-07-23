@@ -1263,3 +1263,5 @@
 	return WeCropper;
 
 })));
+
+exports.default = WeCropper;
