@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/uview-next';
 	export default {
 		data() {
 			return {
@@ -61,7 +62,7 @@
 		methods: {
 			modeChange(index) {
 				// #ifdef MP-WEIXIN
-				return this.$u.toast('微信小程序暂不支持单元格合并')
+				return $u.toast('微信小程序暂不支持单元格合并')
 				// #endif
 				this.mode = index == 0 ? true : false;
 				this.key ++;
