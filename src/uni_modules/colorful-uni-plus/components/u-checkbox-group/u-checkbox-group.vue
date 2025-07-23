@@ -1,12 +1,12 @@
 <template>
-  <view class="u-checkbox-group u-clearfix">
-    <slot></slot>
-  </view>
+    <view class="u-checkbox-group u-clearfix">
+        <slot></slot>
+    </view>
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, getCurrentInstance, provide } from 'vue'
-import { dispatch } from '../../libs/util/emitter'
+import { ref, defineProps, defineEmits, getCurrentInstance, provide } from 'vue';
+import { $u } from '../..';
 
 /**
  * checkboxGroup 开关选择器父组件Group
@@ -26,109 +26,109 @@ import { dispatch } from '../../libs/util/emitter'
  */
 
 defineOptions({
-  name: 'u-checkbox-group'
-})
+    name: 'u-checkbox-group'
+});
 
 const props = defineProps({
-  /** 最多能选中多少个checkbox */
-  max: {
-    type: [Number, String],
-    default: 999
-  },
-  // /** 所有选中项的 name */
-  // value: {
-  //   default: Array,
-  //   default: () => []
-  // },
-  /** 是否禁用所有复选框 */
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  /** 在表单内提交时的标识符 */
-  name: {
-    type: [Boolean, String],
-    default: ''
-  },
-  /** 是否禁止点击提示语选中复选框 */
-  labelDisabled: {
-    type: Boolean,
-    default: false
-  },
-  /** 形状，square为方形，circle为原型 */
-  shape: {
-    type: String,
-    default: 'square'
-  },
-  /** 选中状态下的颜色 */
-  activeColor: {
-    type: String,
-    default: '#2979ff'
-  },
-  /** 组件的整体大小 */
-  size: {
-    type: [String, Number],
-    default: 34
-  },
-  /** 每个checkbox占u-checkbox-group的宽度 */
-  width: {
-    type: String,
-    default: 'auto'
-  },
-  /** 是否每个checkbox都换行 */
-  wrap: {
-    type: Boolean,
-    default: false
-  },
-  /** 图标的大小，单位rpx */
-  iconSize: {
-    type: [String, Number],
-    default: 20
-  }
-})
+    /** 最多能选中多少个checkbox */
+    max: {
+        type: [Number, String],
+        default: 999
+    },
+    // /** 所有选中项的 name */
+    // value: {
+    //   default: Array,
+    //   default: () => []
+    // },
+    /** 是否禁用所有复选框 */
+    disabled: {
+        type: Boolean,
+        default: false
+    },
+    /** 在表单内提交时的标识符 */
+    name: {
+        type: [Boolean, String],
+        default: ''
+    },
+    /** 是否禁止点击提示语选中复选框 */
+    labelDisabled: {
+        type: Boolean,
+        default: false
+    },
+    /** 形状，square为方形，circle为原型 */
+    shape: {
+        type: String,
+        default: 'square'
+    },
+    /** 选中状态下的颜色 */
+    activeColor: {
+        type: String,
+        default: '#2979ff'
+    },
+    /** 组件的整体大小 */
+    size: {
+        type: [String, Number],
+        default: 34
+    },
+    /** 每个checkbox占u-checkbox-group的宽度 */
+    width: {
+        type: String,
+        default: 'auto'
+    },
+    /** 是否每个checkbox都换行 */
+    wrap: {
+        type: Boolean,
+        default: false
+    },
+    /** 图标的大小，单位rpx */
+    iconSize: {
+        type: [String, Number],
+        default: 20
+    }
+});
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change']);
 
 // 复选框子项集合
-const children = ref<any[]>([]) // 用于存储所有子checkbox实例
+const children = ref<any[]>([]); // 用于存储所有子checkbox实例
 
 // 向子组件 provide 本 group 实例
 provide('u-checkbox-group', {
-  props,
-  emitEvent,
-  children
-})
+    props,
+    emitEvent,
+    children
+});
 
-const instance = getCurrentInstance()
+const instance = getCurrentInstance();
 
 /**
  * 派发 change 事件和表单校验
  */
 function emitEvent() {
-  // 收集所有选中的 name
-  let values: any[] = []
-  children.value.forEach(val => {
-    if (val.value) values.push(val.name)
-  })
-  emit('change', values)
-  // 发出事件，用于在表单组件中嵌入checkbox的情况，进行验证
-  // 由于头条小程序执行迟钝，故需要用几十毫秒的延时
-  setTimeout(() => {
-    // 将当前的值发送到 u-form-item 进行校验
-    dispatch(instance, 'u-form-item', 'on-form-change', values)
-  }, 60)
+    // 收集所有选中的 name
+    let values: any[] = [];
+    children.value.forEach(val => {
+        if (val.modelValue) values.push(val.name);
+    });
+    emit('change', values);
+    // 发出事件，用于在表单组件中嵌入checkbox的情况，进行验证
+    // 由于头条小程序执行迟钝，故需要用几十毫秒的延时
+    setTimeout(() => {
+        // 将当前的值发送到 u-form-item 进行校验
+        $u.dispatch(instance, 'u-form-item', 'on-form-change', values);
+    }, 60);
 }
 
-defineExpose({ emitEvent, children })
+defineExpose({ emitEvent, children, props });
 </script>
 
 <style lang="scss" scoped>
 @import '../../libs/css/style.components.scss';
 
 .u-checkbox-group {
-  /* #ifndef MP || APP-NVUE */
-  display: inline-flex;
-  flex-wrap: wrap;
-  /* #endif */
+    /* #ifndef MP || APP-NVUE */
+    display: inline-flex;
+    flex-wrap: wrap;
+    /* #endif */
 }
 </style>
