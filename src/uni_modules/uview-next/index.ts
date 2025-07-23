@@ -51,7 +51,8 @@ import getRect from './libs/function/getRect';
 import config from './libs/config/config';
 // 各个需要fixed的地方的z-index配置文件
 import zIndex from './libs/config/zIndex';
-import { dispatch, broadcast, parent } from './libs/util/emitter';
+import { dispatch, broadcast } from './libs/util/emitter';
+import { parentData, parent } from './libs/util/parent';
 import { mitt } from './libs/util/mitt';
 import { type RequestOptions } from './libs/request/index';
 
@@ -96,6 +97,7 @@ export interface UViewUtils {
     getParent: typeof getParent;
     $parent: typeof $parent;
     parent: typeof parent;
+    parentData: typeof parentData;
     addUnit: typeof addUnit;
     trim: typeof trim;
     type: string[];
@@ -138,6 +140,7 @@ export const $u: UViewUtils = {
     getParent,
     $parent,
     parent,
+    parentData,
     addUnit,
     trim,
     type: ['primary', 'success', 'error', 'warning', 'info'],
