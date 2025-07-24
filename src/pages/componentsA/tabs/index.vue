@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/uview-next';
 	export default {
 		data() {
 			return {
@@ -62,7 +63,7 @@
 				sectionCurrent: 0,
 				isScroll: true,
 				tabCountIndex: 0,
-				activeColor: this.$u.color['primary'],
+				activeColor: $u.color['primary'],
 				bold: true,
 				control: true,
 				offset: [5, -5]
@@ -126,7 +127,7 @@
 					case 3:
 						color = 'warning';break;
 				}
-				this.activeColor = this.$u.color[color];
+				this.activeColor = $u.color[color];
 			},
 			boldChange(e) {
 				switch(e) {
