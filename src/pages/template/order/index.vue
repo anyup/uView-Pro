@@ -162,6 +162,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/uview-next'; 
 export default {
 	data() {
 		return {
@@ -323,9 +324,9 @@ export default {
 		// 页面数据
 		getOrderList(idx) {
 			for(let i = 0; i < 5; i++) {
-				let index = this.$u.random(0, this.dataList.length - 1);
+				let index = $u.random(0, this.dataList.length - 1);
 				let data = JSON.parse(JSON.stringify(this.dataList[index]));
-				data.id = this.$u.guid();
+				data.id = $u.guid();
 				this.orderList[idx].push(data);
 			}
 			this.loadStatus.splice(this.current,1,"loadmore")
