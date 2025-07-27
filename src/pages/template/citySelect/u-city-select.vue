@@ -1,7 +1,7 @@
 <template>
-	<u-popup v-model="value" mode="bottom" :popup="false" :mask="true" :closeable="true" :safe-area-inset-bottom="true"
+	<u-popup v-model="popupValue" mode="bottom" :popup="false" :mask="true" :closeable="true" :safe-area-inset-bottom="true"
 	 close-icon-color="#ffffff" :z-index="uZIndex" :maskCloseAble="maskCloseAble" @close="close">
-		<u-tabs v-if="value" :list="genTabsList" :is-scroll="true" :current="tabsIndex" @change="tabsChange" ref="tabs"></u-tabs>
+		<u-tabs v-if="popupValue" :list="genTabsList" :is-scroll="true" :current="tabsIndex" @change="tabsChange" ref="tabs"></u-tabs>
 		<view class="area-box">
 			<view class="u-flex" :class="{ 'change':isChange }">
 				<view class="area-item">
@@ -47,9 +47,9 @@
 </template>
 
 <script>
-	import provinces from "uview-ui/libs/util/province.ts";
-	import citys from "uview-ui/libs/util/city.ts";
-	import areas from "uview-ui/libs/util/area.ts";
+	import provinces from "@/uni_modules/uview-next/libs/util/province.ts";
+	import citys from "@/uni_modules/uview-next/libs/util/city.ts";
+	import areas from "@/uni_modules/uview-next/libs/util/area.ts";
 	/**
 	 * city-select 省市区级联选择器
 	 * @property {String Number} z-index 弹出时的z-index值（默认1075）
@@ -109,6 +109,12 @@
 			this.init();
 		},
 		computed: {
+			popupValue() {
+				get:() => this.value;
+				set: val => {
+					this.$emit('input', val);
+				}
+			},
 			isChange() {
 				return this.tabsIndex > 1;
 			},
