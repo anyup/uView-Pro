@@ -11,7 +11,6 @@
  * @tutorial https://www.uviewui.com/components/table.html
  * @example <u-tr></u-tr>
  */
-import { defineOptions } from 'vue'
 defineOptions({ name: 'u-tr' })
 </script>
 

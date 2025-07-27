@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, defineOptions, getCurrentInstance } from 'vue';
+import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 
 defineOptions({ name: 'u-subsection' });

@@ -14,7 +14,6 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted, getCurrentInstance } from 'vue';
-import { defineOptions } from 'vue';
 import colorGradient from '../../libs/function/colorGradient';
 
 const color = colorGradient;

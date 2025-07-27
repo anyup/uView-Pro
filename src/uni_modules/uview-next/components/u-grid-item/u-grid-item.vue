@@ -17,7 +17,6 @@
 
 <script setup lang="ts">
 import { ref, computed, getCurrentInstance, onMounted } from 'vue';
-import { defineOptions } from 'vue';
 import { useParent } from '../../libs/hooks/useParent';
 
 defineOptions({ name: 'u-grid-item' });

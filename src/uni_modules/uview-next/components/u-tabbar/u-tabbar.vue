@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, defineOptions, getCurrentInstance } from 'vue';
+import { ref, computed, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 
 defineOptions({ name: 'u-tabbar' });

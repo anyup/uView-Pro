@@ -57,7 +57,6 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-import { defineOptions } from 'vue';
 
 defineOptions({ name: 'u-swiper' });
 /**

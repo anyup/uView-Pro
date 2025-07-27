@@ -6,8 +6,7 @@
 
 <script setup lang="ts">
 
-import { ref, computed, watch, defineProps, defineEmits } from 'vue'
-import { defineOptions } from 'vue'
+import { ref, computed, watch } from 'vue'
 defineOptions({ name: 'u-grid' })
 
 /**

@@ -17,7 +17,6 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
-import { defineOptions } from 'vue';
 import { $u } from '../../';
 
 defineOptions({ name: 'u-tabs' });
