@@ -489,13 +489,13 @@
     {
       "root": "pages/componentsA",
       "pages": [
-        // parse-富文本解析器
-        {
-          "path": "parse/index",
-          "style": {
-            "navigationBarTitleText": "parse-富文本解析器"
-          }
-        },
+        // // parse-富文本解析器
+        // {
+        //   "path": "parse/index",
+        //   "style": {
+        //     "navigationBarTitleText": "parse-富文本解析器"
+        //   }
+        // },
         // backTop-返回顶部
         {
           "path": "backTop/index",
@@ -838,31 +838,31 @@
 		"navigationBarTitleText": "uView",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FFFFFF"
-  },
-  "tabBar": {
-    "color": "#909399",
-    "selectedColor": "#303133",
-    "backgroundColor": "#FFFFFF",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/example/components",
-        "iconPath": "static/uview/example/component.png",
-        "selectedIconPath": "static/uview/example/component_select.png",
-        "text": "组件"
-      },
-      {
-        "pagePath": "pages/example/js",
-        "iconPath": "static/uview/example/js.png",
-        "selectedIconPath": "static/uview/example/js_select.png",
-        "text": "工具"
-      },
-      {
-        "pagePath": "pages/example/template",
-        "iconPath": "static/uview/example/template.png",
-        "selectedIconPath": "static/uview/example/template_select.png",
-        "text": "模板"
-      }
-    ]
   }
+  // "tabBar": {
+  //   "color": "#909399",
+  //   "selectedColor": "#303133",
+  //   "backgroundColor": "#FFFFFF",
+  //   "borderStyle": "black",
+  //   "list": [
+  //     {
+  //       "pagePath": "pages/example/components",
+  //       "iconPath": "static/uview/example/component.png",
+  //       "selectedIconPath": "static/uview/example/component_select.png",
+  //       "text": "组件"
+  //     },
+  //     {
+  //       "pagePath": "pages/example/js",
+  //       "iconPath": "static/uview/example/js.png",
+  //       "selectedIconPath": "static/uview/example/js_select.png",
+  //       "text": "工具"
+  //     },
+  //     {
+  //       "pagePath": "pages/example/template",
+  //       "iconPath": "static/uview/example/template.png",
+  //       "selectedIconPath": "static/uview/example/template_select.png",
+  //       "text": "模板"
+  //     }
+  //   ]
+  // }
 }
