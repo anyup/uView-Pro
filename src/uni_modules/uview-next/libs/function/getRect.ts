@@ -1,7 +1,3 @@
-import { getCurrentInstance } from 'vue';
-
-const instance = getCurrentInstance();
-
 /**
  * 获取元素的位置信息
  * @param {any} selector 选择器
@@ -9,7 +5,10 @@ const instance = getCurrentInstance();
  * @returns {Promise<any>} 返回一个 Promise，解析为元素的位置信息
  */
 
+import { getCurrentInstance } from "vue";
+
 export default function (selector: any, all: boolean = false): Promise<any> {
+    const instance = getCurrentInstance();
     return new Promise(resolve => {
         uni.createSelectorQuery()
             .in(instance?.proxy)
