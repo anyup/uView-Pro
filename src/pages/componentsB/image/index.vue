@@ -43,7 +43,7 @@ import { type ImageInstance } from '@/uni_modules/uview-next/components/u-image/
 import { ref } from 'vue'
 
 // 定义响应式数据
-const src = ref('https://cdn.uviewui.com/uview/example/fade.jpg')
+const src = ref('https://v1.uviewui.com/common/logo.png')
 const width = ref('200')
 const height = ref('200')
 const loadingSlot = ref(false)
