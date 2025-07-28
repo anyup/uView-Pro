@@ -12,7 +12,7 @@ function formatToCamelCase(str: string): string {
     });
 }
 
-export function useParent(name: string) {
+export function useEmitter(name: string) {
     const instance: ComponentInternalInstance | null | undefined = getCurrentInstance();
 
     /** * 向上查找父组件并派发事件
