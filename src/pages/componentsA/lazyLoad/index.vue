@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { $u } from '@/uni_modules/uview-next';
 	export default {
 		data() {
 			return {
@@ -218,7 +219,7 @@
 				this.status = 'loading';
 				setTimeout(() => {
 					for(let i = 0; i < 10; i++) {
-						index = this.$u.random(0, this.data.length - 1);
+						index = $u.random(0, this.data.length - 1);
 						this.list.push({
 							src: this.data[index].src
 						})

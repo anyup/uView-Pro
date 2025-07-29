@@ -70,7 +70,7 @@ import { $u } from '@/uni_modules/uview-next';
 					this.rectHeight = this.rectWidth = this.destHeight = this.destWidth = 200;
 					this.boundStyle = {
 						lineWidth: 8,
-						borderColor: this.$u.color['error'],
+						borderColor: $u.color['error'],
 						mask: 'rgba(0, 0, 0, 0.8)'
 					}
 				} else {
