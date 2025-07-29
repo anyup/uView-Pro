@@ -46,13 +46,14 @@ import debounce from './libs/function/debounce';
 import throttle from './libs/function/throttle';
 // 获取元素的位置信息
 import getRect from './libs/function/getRect';
+// 获取父组件
+import { parentData, parent } from './libs/function/parent';
 
 // 配置信息
 import config from './libs/config/config';
 // 各个需要fixed的地方的z-index配置文件
 import zIndex from './libs/config/zIndex';
 import { dispatch, broadcast } from './libs/util/emitter';
-import { parentData, parent } from './libs/util/parent';
 import { mitt } from './libs/util/mitt';
 import { type RequestOptions } from './libs/request/index';
 

@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref, computed, getCurrentInstance, onMounted } from 'vue';
-import { useParent } from '../../libs/hooks/useParent';
+import { $u } from '../..';
 
 defineOptions({ name: 'u-grid-item' });
 
@@ -45,8 +45,6 @@ const props = defineProps({
 // emits 定义
 const emit = defineEmits(['click']);
 
-const { getParentData } = useParent('u-grid');
-
 const instance = getCurrentInstance();
 
 // 父组件参数
@@ -62,7 +60,7 @@ const width = computed(() => 100 / Number(parentData.value.col) + '%');
 // 获取父组件参数
 function updateParentData() {
     if (!instance) return;
-    const parent = getParentData('u-grid');
+    const parent = $u.parentData('u-grid', instance);
     if (parent) {
         parentData.value.hoverClass = parent.props.hoverClass;
         parentData.value.col = parent.props.col;
@@ -80,7 +78,7 @@ function updateParentData() {
  */
 function click() {
     emit('click', props.index);
-    const parent = getParentData('u-grid');
+    const parent = $u.parentData('u-grid', instance);
     if (parent && typeof parent.click === 'function') parent.click(props.index);
 }
 

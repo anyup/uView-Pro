@@ -48,7 +48,7 @@
 
 defineOptions({ name: 'u-read-more' });
 
-import { ref, computed, watch, onMounted, nextTick } from 'vue';
+import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 
 const props = defineProps({
@@ -111,6 +111,7 @@ const isLongContent = ref(false);
 const showMore = ref(false);
 // 生成唯一class
 const elId = ref('');
+const instance = getCurrentInstance();
 
 // 展开后无需阴影，收起时才需要阴影样式
 const innerShadowStyle = computed(() => {
@@ -137,7 +138,7 @@ onMounted(() => {
  * @description 判断内容是否超出指定高度，决定是否显示展开/收起按钮
  */
 function init() {
-    $u.getRect('.' + elId.value).then((res: { height: number }) => {
+    $u.getRect('.' + elId.value, false, instance).then((res: { height: number }) => {
         // 判断高度，如果真实内容高度大于占位高度，则显示收起与展开的控制按钮
         if (res.height > uni.upx2px(Number(props.showHeight))) {
             isLongContent.value = true;

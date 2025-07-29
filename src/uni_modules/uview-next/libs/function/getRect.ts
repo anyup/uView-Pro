@@ -5,10 +5,10 @@
  * @returns {Promise<any>} 返回一个 Promise，解析为元素的位置信息
  */
 
-import { getCurrentInstance } from "vue";
+import { getCurrentInstance } from 'vue';
 
-export default function (selector: any, all: boolean = false): Promise<any> {
-    const instance = getCurrentInstance();
+export default function (selector: any, all: boolean = false, _instance: any = null): Promise<any> {
+    const instance = _instance || getCurrentInstance();
     return new Promise(resolve => {
         uni.createSelectorQuery()
             .in(instance?.proxy)

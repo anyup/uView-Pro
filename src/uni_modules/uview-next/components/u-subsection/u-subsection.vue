@@ -125,6 +125,7 @@ const buttonPadding = 3; // mode = button 时，组件的内边距
 const borderRadius = 5; // 圆角值
 const firstTimeVibrateShort = ref(true); // 组件初始化时，会触发current变化，此时不应震动
 const instanceId = $u.guid(); // 组件唯一 id
+const instance = getCurrentInstance();
 
 // 监听 current 变化
 watch(
@@ -286,8 +287,7 @@ function click(index: number) {
  * 获取各个tab的节点信息
  */
 function getTabsInfo() {
-    const proxy = getCurrentInstance()?.proxy;
-    const view = uni.createSelectorQuery().in(proxy);
+    const view = uni.createSelectorQuery().in(instance?.proxy);
     for (let i = 0; i < props.list.length; i++) {
         view.select(`#${instanceId} .u-item-${i}`).boundingClientRect();
     }
