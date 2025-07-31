@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { $u } from '@/uni_modules/uview-next';
+import { $u } from '@/uni_modules/uview-pro';
 	export default {
 		data() {
 			return {
@@ -51,7 +51,7 @@ import { $u } from '@/uni_modules/uview-next';
 		methods: {
 			chooseAvatar() {
 				$u.route({
-					url: '/uni_modules/uview-next/components/u-avatar-cropper/u-avatar-cropper',
+					url: '/uni_modules/uview-pro/components/u-avatar-cropper/u-avatar-cropper',
 					params: {
 						// 输出图片宽度，高等于宽，单位px
 						destWidth: 300,

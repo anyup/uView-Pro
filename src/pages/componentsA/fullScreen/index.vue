@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { $u } from '@/uni_modules/uview-next';
+import { $u } from '@/uni_modules/uview-pro';
 	export default {
 		data() {
 			return {
@@ -38,7 +38,7 @@ import { $u } from '@/uni_modules/uview-next';
 			openModal(index) {
 				// 可以传递参数
 				if(index == 0) {
-					$u.route("/uni_modules/uview-next/components/u-full-screen/u-full-screen?id=1");
+					$u.route("/uni_modules/uview-pro/components/u-full-screen/u-full-screen?id=1");
 				}
 			}
 		}

@@ -46,7 +46,7 @@
 </template>
 
 <script>
-	import { $u } from '@/uni_modules/uview-next'
+	import { $u } from '@/uni_modules/uview-pro'
 	export default {
 		data() {
 			return {

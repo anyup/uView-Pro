@@ -44,7 +44,7 @@
 <script lang="ts" setup>
 import { onLoad } from '@dcloudio/uni-app';
 import { ref, nextTick } from 'vue';
-import { $u } from '@/uni_modules/uview-next';
+import { $u } from '@/uni_modules/uview-pro';
 defineOptions({ name: 'SwipeActionDemo' });
 
 /**

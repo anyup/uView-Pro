@@ -47,9 +47,9 @@
 </template>
 
 <script>
-	import provinces from "@/uni_modules/uview-next/libs/util/province.ts";
-	import citys from "@/uni_modules/uview-next/libs/util/city.ts";
-	import areas from "@/uni_modules/uview-next/libs/util/area.ts";
+	import provinces from "@/uni_modules/uview-pro/libs/util/province";
+	import citys from "@/uni_modules/uview-pro/libs/util/city";
+	import areas from "@/uni_modules/uview-pro/libs/util/area";
 	/**
 	 * city-select 省市区级联选择器
 	 * @property {String Number} z-index 弹出时的z-index值（默认1075）
