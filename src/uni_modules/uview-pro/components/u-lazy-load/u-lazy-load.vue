@@ -34,6 +34,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-lazy-load' });
+
 /**
  * lazyLoad 懒加载
  * @description 懒加载使用的场景为：页面有很多图片时，APP会同时加载所有的图片，导致页面卡顿，各个位置的图片出现前后不一致等.
@@ -54,11 +59,6 @@
  * @event {Function} error 图片加载失败时触发
  * @example <u-lazy-load :image="image" :loading-img="loadingImg" :error-img="errorImg"></u-lazy-load>
  */
-
-import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
-import { $u } from '../..';
-
-defineOptions({ name: 'u-lazy-load' });
 
 const emit = defineEmits(['click', 'load', 'error']);
 

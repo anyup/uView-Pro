@@ -1,27 +1,26 @@
 <template>
-  <view class="u-empty" v-if="show" :style="{ marginTop: marginTop + 'rpx' }">
-    <u-icon
-      :name="src ? src : 'empty-' + mode"
-      :custom-style="iconStyle"
-      :label="text ? text : icons[mode]"
-      label-pos="bottom"
-      :label-color="color"
-      :label-size="fontSize"
-      :size="iconSize"
-      :color="iconColor"
-      margin-top="14"
-    ></u-icon>
-    <view class="u-slot-wrap">
-      <slot name="bottom"></slot>
+    <view class="u-empty" v-if="show" :style="{ marginTop: marginTop + 'rpx' }">
+        <u-icon
+            :name="src ? src : 'empty-' + mode"
+            :custom-style="iconStyle"
+            :label="text ? text : icons[mode]"
+            label-pos="bottom"
+            :label-color="color"
+            :label-size="fontSize"
+            :size="iconSize"
+            :color="iconColor"
+            margin-top="14"
+        ></u-icon>
+        <view class="u-slot-wrap">
+            <slot name="bottom"></slot>
+        </view>
     </view>
-  </view>
 </template>
 
 <script setup lang="ts">
-
 defineOptions({
-  name: 'u-empty'
-})
+    name: 'u-empty'
+});
 
 /**
  * empty 内容为空
@@ -41,72 +40,72 @@ defineOptions({
  * @example <u-empty text="所谓伊人，在水一方" mode="list"></u-empty>
  */
 const props = defineProps({
-  /** 图标路径 */
-  src: { type: String, default: '' },
-  /** 提示文字 */
-  text: { type: String, default: '' },
-  /** 文字颜色 */
-  color: { type: String, default: '#c0c4cc' },
-  /** 图标的颜色 */
-  iconColor: { type: String, default: '#c0c4cc' },
-  /** 图标的大小 */
-  iconSize: { type: [String, Number], default: 120 },
-  /** 文字大小，单位rpx */
-  fontSize: { type: [String, Number], default: 26 },
-  /** 选择预置的图标类型 */
-  mode: { type: String, default: 'data' },
-  /** 图标宽度，单位rpx */
-  imgWidth: { type: [String, Number], default: 120 },
-  /** 图标高度，单位rpx */
-  imgHeight: { type: [String, Number], default: 'auto' },
-  /** 是否显示组件 */
-  show: { type: Boolean, default: true },
-  /** 组件距离上一个元素之间的距离 */
-  marginTop: { type: [String, Number], default: 0 },
-  /** 图标自定义样式 */
-  iconStyle: { type: Object, default: () => ({}) }
-})
+    /** 图标路径 */
+    src: { type: String, default: '' },
+    /** 提示文字 */
+    text: { type: String, default: '' },
+    /** 文字颜色 */
+    color: { type: String, default: '#c0c4cc' },
+    /** 图标的颜色 */
+    iconColor: { type: String, default: '#c0c4cc' },
+    /** 图标的大小 */
+    iconSize: { type: [String, Number], default: 120 },
+    /** 文字大小，单位rpx */
+    fontSize: { type: [String, Number], default: 26 },
+    /** 选择预置的图标类型 */
+    mode: { type: String, default: 'data' },
+    /** 图标宽度，单位rpx */
+    imgWidth: { type: [String, Number], default: 120 },
+    /** 图标高度，单位rpx */
+    imgHeight: { type: [String, Number], default: 'auto' },
+    /** 是否显示组件 */
+    show: { type: Boolean, default: true },
+    /** 组件距离上一个元素之间的距离 */
+    marginTop: { type: [String, Number], default: 0 },
+    /** 图标自定义样式 */
+    iconStyle: { type: Object, default: () => ({}) }
+});
 
 /**
  * 预置图标对应的提示文字
  */
 const icons: Record<string, string> = {
-  car: '购物车为空',
-  page: '页面不存在',
-  search: '没有搜索结果',
-  address: '没有收货地址',
-  wifi: '没有WiFi',
-  order: '订单为空',
-  coupon: '没有优惠券',
-  favor: '暂无收藏',
-  permission: '无权限',
-  history: '无历史记录',
-  news: '无新闻列表',
-  message: '消息列表为空',
-  list: '列表为空',
-  data: '数据为空'
-}
+    car: '购物车为空',
+    page: '页面不存在',
+    search: '没有搜索结果',
+    address: '没有收货地址',
+    wifi: '没有WiFi',
+    order: '订单为空',
+    coupon: '没有优惠券',
+    favor: '暂无收藏',
+    permission: '无权限',
+    history: '无历史记录',
+    news: '无新闻列表',
+    message: '消息列表为空',
+    list: '列表为空',
+    data: '数据为空'
+};
 </script>
 
 <style scoped lang="scss">
 @import '../../libs/css/style.components.scss';
 
 .u-empty {
-  @include vue-flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+    @include vue-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .u-image {
-  margin-bottom: 20rpx;
+    margin-bottom: 20rpx;
 }
 
 .u-slot-wrap {
-  @include vue-flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20rpx;
+    @include vue-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20rpx;
 }
 </style>

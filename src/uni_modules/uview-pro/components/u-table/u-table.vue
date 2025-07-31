@@ -5,6 +5,10 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
+defineOptions({ name: 'u-table' });
+
 /**
  * table 表格
  * @description 表格组件一般用于展示大量结构化数据的场景
@@ -20,9 +24,6 @@
  * @event {Function} close 点击关闭按钮时触发
  * @example <u-table></u-table>
  */
-defineOptions({ name: 'u-table' });
-
-import { computed } from 'vue';
 
 const props = defineProps({
     /**

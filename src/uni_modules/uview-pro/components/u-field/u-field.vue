@@ -79,6 +79,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-field' });
+
 /**
  * field 输入框
  * @description 借助此组件，可以实现表单的输入， 有"text"和"textarea"类型的，此外，借助uView的picker和actionSheet组件可以快速实现上拉菜单，时间，地区选择等， 为表单解决方案的利器。
@@ -116,11 +121,6 @@
  * @event {Function} click 输入框被点击或者通过right-icon生成的图标被点击时触发，这样设计是考虑到传递右边的图标，一般都为需要弹出"picker"等操作时的场景，点击倒三角图标，理应发出此事件，见上方说明
  * @example <u-field v-model="mobile" label="手机号" required :error-message="errorMessage"></u-field>
  */
-
-import { ref, computed } from 'vue';
-import { $u } from '../..';
-
-defineOptions({ name: 'u-field' });
 
 const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'confirm', 'right-icon-click', 'click']);
 
@@ -161,7 +161,7 @@ const props = defineProps({
     icon: String,
     /** 输入框右边的图标名称，限uView的图标名称（默认false） */
     rightIcon: String,
-	/** 方向属性 */
+    /** 方向属性 */
     arrowDirection: {
         type: String,
         default: 'right'

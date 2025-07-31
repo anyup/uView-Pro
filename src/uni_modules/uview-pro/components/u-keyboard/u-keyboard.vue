@@ -32,6 +32,12 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
+defineOptions({
+    name: 'u-keyboard'
+});
+
 /**
  * keyboard 键盘
  * @description 此为uViw自定义的键盘面板，内含了数字键盘，车牌号键，身份证号键盘3中模式，都有可以打乱按键顺序的选项。
@@ -55,11 +61,6 @@
  * @event {Function} backspace 键盘退格键被点击
  * @example <u-keyboard mode="number" v-model="show"></u-keyboard>
  */
-import { computed } from 'vue';
-
-defineOptions({
-    name: 'u-keyboard'
-});
 
 const props = defineProps({
     /** 键盘的类型，number-数字键盘，card-身份证键盘，car-车牌号键盘 */

@@ -12,6 +12,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
+
+defineOptions({ name: 'u-count-to' });
+
 /**
  * countTo 数字滚动
  * @description 该组件一般用于需要滚动数字到某一个值的场景，目标要求是一个递增的值。
@@ -29,10 +33,6 @@
  * @event {Function} end 数值滚动到目标值时触发
  * @example <u-count-to ref="uCountTo" :end-val="endVal" :autoplay="autoplay"></u-count-to>
  */
-
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
-
-defineOptions({ name: 'u-count-to' });
 
 const emit = defineEmits(['end']);
 
@@ -140,7 +140,7 @@ function easingFn(t: number, b: number, c: number, d: number): number {
  */
 function requestAnimationFrame(callback: (ts: number) => void): number {
     const currTime = new Date().getTime();
-	// 为了使setTimteout的尽可能的接近每秒60帧的效果
+    // 为了使setTimteout的尽可能的接近每秒60帧的效果
     const timeToCall = Math.max(0, 16 - (currTime - lastTime.value));
     const id = setTimeout(() => {
         callback(currTime + timeToCall);
@@ -254,7 +254,7 @@ function isNumber(val: unknown): boolean {
  * 格式化数字
  */
 function formatNumber(num: unknown): string {
-	// 将num转为Number类型，因为其值可能为字符串数值，调用toFixed会报错
+    // 将num转为Number类型，因为其值可能为字符串数值，调用toFixed会报错
     let n = Number(num);
     n = Number(n.toFixed(Number(props.decimals)));
     let str = n + '';
@@ -277,11 +277,11 @@ onUnmounted(() => {
 
 // 暴露给父组件的函数
 defineExpose({
-	start,
-	stop,
-	reStart,
-	resume,
-	reset
+    start,
+    stop,
+    reStart,
+    resume,
+    reset
 });
 </script>
 

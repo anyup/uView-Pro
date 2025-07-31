@@ -37,6 +37,11 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-section' });
+
 /**
  * section 查看更多
  * @description 该组件一般用于分类信息有很多，但是限于篇幅只能列出一部分，让用户通过"查看更多"获得更多信息的场景，实际效果见演示。
@@ -54,10 +59,6 @@
  * @event click 组件右侧的内容被点击时触发，用于跳转"更多"
  * @example <u-section title="今日热门" :right="false"></u-section>
  */
-import { computed } from 'vue';
-import { $u } from '../..';
-
-defineOptions({ name: 'u-section' });
 
 const props = defineProps({
     /** 标题信息 */

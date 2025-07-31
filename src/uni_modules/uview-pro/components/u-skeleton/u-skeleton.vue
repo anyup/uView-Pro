@@ -7,6 +7,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, onMounted, getCurrentInstance } from 'vue';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-skeleton' });
+
 /**
  * skeleton 骨架屏
  * @description 骨架屏一般用于页面在请求远程数据尚未完成时，页面用灰色块预显示本来的页面结构，给用户更好的体验。
@@ -18,10 +23,6 @@
  * @property {Boolean} loading 是否显示骨架组件，请求完成后，将此值设置为false（默认true）
  * @example <u-skeleton :loading="true" :animation="true"></u-skeleton>
  */
-import { ref, computed, onMounted, getCurrentInstance } from 'vue';
-import { $u } from '../..';
-
-defineOptions({ name: 'u-skeleton' });
 
 const props = defineProps({
     /** 骨架块状元素的背景颜色 */

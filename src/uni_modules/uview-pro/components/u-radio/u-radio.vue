@@ -16,8 +16,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, watch } from 'vue';
+import { computed, inject } from 'vue';
 import { $u } from '../..';
+
+defineOptions({
+    name: 'u-radio'
+});
 
 /**
  * radio 单选框
@@ -33,10 +37,6 @@ import { $u } from '../..';
  * @event {Function} change 某个radio状态发生变化时触发(选中状态)
  * @example <u-radio :label-disabled="false">门掩黄昏，无计留春住</u-radio>
  */
-
-defineOptions({
-    name: 'u-radio'
-});
 
 const props = defineProps({
     /** radio的名称 */

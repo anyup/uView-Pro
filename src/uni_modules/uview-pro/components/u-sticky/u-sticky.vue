@@ -25,6 +25,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-sticky' });
+
 /**
  * sticky 吸顶
  * @description 该组件与CSS中position: sticky属性实现的效果一致，当组件达到预设的到顶部距离时， 就会固定在指定位置，组件位置大于预设的顶部距离时，会重新按照正常的布局排列。
@@ -39,10 +44,6 @@
  * @event unfixed 组件取消吸顶时触发
  * @example <u-sticky offset-top="200"><view>塞下秋来风景异，衡阳雁去无留意</view></u-sticky>
  */
-import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
-import { $u } from '../..';
-
-defineOptions({ name: 'u-sticky' });
 
 const emit = defineEmits(['fixed', 'unfixed']);
 

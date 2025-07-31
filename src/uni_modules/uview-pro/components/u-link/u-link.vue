@@ -1,24 +1,24 @@
 <template>
-  <text
-    class="u-link"
-    @tap.stop="openLink"
-    :style="{
-      color: color,
-      fontSize: fontSize + 'rpx',
-      borderBottom: underLine ? `1px solid ${lineColor ? lineColor : color}` : 'none',
-      paddingBottom: underLine ? '0rpx' : '0'
-    }"
-  >
-    <slot></slot>
-  </text>
+    <text
+        class="u-link"
+        @tap.stop="openLink"
+        :style="{
+            color: color,
+            fontSize: fontSize + 'rpx',
+            borderBottom: underLine ? `1px solid ${lineColor ? lineColor : color}` : 'none',
+            paddingBottom: underLine ? '0rpx' : '0'
+        }"
+    >
+        <slot></slot>
+    </text>
 </template>
 
 <script setup lang="ts">
-import { $u } from '../..'
+import { $u } from '../..';
 
 defineOptions({
-  name: 'u-link'
-})
+    name: 'u-link'
+});
 
 /**
  * link 超链接
@@ -33,48 +33,48 @@ defineOptions({
  * @example <u-link href="http://www.uviewui.com">蜀道难，难于上青天</u-link>
  */
 const props = defineProps({
-  /** 文字颜色 */
-  color: { type: String, default: '#2979ff' },
-  /** 字体大小，单位rpx */
-  fontSize: { type: [String, Number], default: 28 },
-  /** 是否显示下划线 */
-  underLine: { type: Boolean, default: false },
-  /** 要跳转的链接 */
-  href: { type: String, default: '' },
-  /** 小程序中复制到粘贴板的提示语 */
-  mpTips: { type: String, default: '链接已复制，请在浏览器打开' },
-  /** 下划线颜色 */
-  lineColor: { type: String, default: '' }
-})
+    /** 文字颜色 */
+    color: { type: String, default: '#2979ff' },
+    /** 字体大小，单位rpx */
+    fontSize: { type: [String, Number], default: 28 },
+    /** 是否显示下划线 */
+    underLine: { type: Boolean, default: false },
+    /** 要跳转的链接 */
+    href: { type: String, default: '' },
+    /** 小程序中复制到粘贴板的提示语 */
+    mpTips: { type: String, default: '链接已复制，请在浏览器打开' },
+    /** 下划线颜色 */
+    lineColor: { type: String, default: '' }
+});
 
 /**
  * 打开链接方法
  * 不同平台有不同表现形式
  */
 function openLink() {
-  // #ifdef APP-PLUS
-  if (typeof plus !== 'undefined' && plus.runtime) {
-    plus.runtime.openURL(props.href)
-  }
-  // #endif
-  // #ifdef H5
-  if (typeof window !== 'undefined') {
-    window.open(props.href)
-  }
-  // #endif
-  // #ifdef MP
-  if (typeof uni !== 'undefined' && uni.setClipboardData) {
-    uni.setClipboardData({
-      data: props.href,
-      success: () => {
-        uni.hideToast()
-        if (typeof $u !== 'undefined' && $u.toast && props.mpTips) {
-          $u.toast(props.mpTips)
-        }
-      }
-    })
-  }
-  // #endif
+    // #ifdef APP-PLUS
+    if (typeof plus !== 'undefined' && plus.runtime) {
+        plus.runtime.openURL(props.href);
+    }
+    // #endif
+    // #ifdef H5
+    if (typeof window !== 'undefined') {
+        window.open(props.href);
+    }
+    // #endif
+    // #ifdef MP
+    if (typeof uni !== 'undefined' && uni.setClipboardData) {
+        uni.setClipboardData({
+            data: props.href,
+            success: () => {
+                uni.hideToast();
+                if (typeof $u !== 'undefined' && $u.toast && props.mpTips) {
+                    $u.toast(props.mpTips);
+                }
+            }
+        });
+    }
+    // #endif
 }
 </script>
 
@@ -82,6 +82,6 @@ function openLink() {
 @import '../../libs/css/style.components.scss';
 
 .u-link {
-  line-height: 1;
+    line-height: 1;
 }
 </style>

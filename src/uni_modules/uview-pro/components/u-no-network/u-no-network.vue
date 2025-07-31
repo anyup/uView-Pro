@@ -15,6 +15,12 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
+import { imageSrc } from './image';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-no-network' });
+
 /**
  * noNetwork 无网络提示
  * @description 该组件无需任何配置，引入即可，内部自动处理所有功能和事件。
@@ -25,12 +31,6 @@
  * @event {Function} retry 用户点击页面的"重试"按钮时触发
  * @example <u-no-network></u-no-network>
  */
-
-import { ref, computed, onMounted } from 'vue';
-import { imageSrc } from './image';
-import { $u } from '../..';
-
-defineOptions({ name: 'u-no-network' });
 
 const props = defineProps({
     /**

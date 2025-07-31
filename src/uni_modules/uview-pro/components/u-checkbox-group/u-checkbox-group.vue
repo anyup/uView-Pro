@@ -8,6 +8,10 @@
 import { ref, getCurrentInstance, provide } from 'vue';
 import { $u } from '../..';
 
+defineOptions({
+    name: 'u-checkbox-group'
+});
+
 /**
  * checkboxGroup 开关选择器父组件Group
  * @description 复选框组件一般用于需要多个选择的场景，该组件功能完整，使用方便
@@ -24,10 +28,6 @@ import { $u } from '../..';
  * @event {Function} change 任一个checkbox状态发生变化时触发，回调为一个对象
  * @example <u-checkbox-group></u-checkbox-group>
  */
-
-defineOptions({
-    name: 'u-checkbox-group'
-});
 
 const props = defineProps({
     /** 最多能选中多少个checkbox */

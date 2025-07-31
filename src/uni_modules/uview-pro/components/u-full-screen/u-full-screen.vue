@@ -7,16 +7,16 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+
+defineOptions({ name: 'u-full-screen' });
+
 /**
  * 压窗屏升级弹窗组件
  * @description 用于APP弹窗遮盖导航栏和底部tabbar，提示新版本升级内容
  * @property {boolean} show 是否显示弹窗
  * @property {string} content 升级内容，支持富文本
  */
-
-defineOptions({ name: 'u-full-screen' });
-
-import { ref, onMounted } from 'vue';
 
 /**
  * 是否显示弹窗

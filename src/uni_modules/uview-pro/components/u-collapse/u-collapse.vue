@@ -1,15 +1,15 @@
 <template>
-  <view class="u-collapse">
-    <slot />
-  </view>
+    <view class="u-collapse">
+        <slot />
+    </view>
 </template>
 
 <script setup lang="ts">
-import { ref, provide } from 'vue'
+import { ref, provide } from 'vue';
 
 defineOptions({
-  name: 'u-collapse'
-})
+    name: 'u-collapse'
+});
 
 /**
  * collapse 手风琴
@@ -25,56 +25,56 @@ defineOptions({
  * @example <u-collapse></u-collapse>
  */
 const props = defineProps({
-  /** 是否手风琴模式 */
-  accordion: { type: Boolean, default: true },
-  /** 头部的样式 */
-  headStyle: { type: Object, default: () => ({}) },
-  /** 主体的样式 */
-  bodyStyle: { type: Object, default: () => ({}) },
-  /** 每一个item的样式 */
-  itemStyle: { type: Object, default: () => ({}) },
-  /** 是否显示右侧的箭头 */
-  arrow: { type: Boolean, default: true },
-  /** 箭头的颜色 */
-  arrowColor: { type: String, default: '#909399' },
-  /** 标题部分按压时的样式类，"none"为无效果 */
-  hoverClass: { type: String, default: 'u-hover-class' }
-})
+    /** 是否手风琴模式 */
+    accordion: { type: Boolean, default: true },
+    /** 头部的样式 */
+    headStyle: { type: Object, default: () => ({}) },
+    /** 主体的样式 */
+    bodyStyle: { type: Object, default: () => ({}) },
+    /** 每一个item的样式 */
+    itemStyle: { type: Object, default: () => ({}) },
+    /** 是否显示右侧的箭头 */
+    arrow: { type: Boolean, default: true },
+    /** 箭头的颜色 */
+    arrowColor: { type: String, default: '#909399' },
+    /** 标题部分按压时的样式类，"none"为无效果 */
+    hoverClass: { type: String, default: 'u-hover-class' }
+});
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change']);
 
 // 子元素集合
-const childrens = ref<any[]>([])
+const childrens = ref<any[]>([]);
 
 /**
  * 重新初始化一次内部的所有子元素的高度计算，用于异步获取数据渲染的情况
  */
 function init() {
-  childrens.value.forEach((vm, index) => {
-    vm.init && vm.init()
-  })
+    childrens.value.forEach((vm, index) => {
+        vm.init && vm.init();
+    });
 }
 
 /**
  * collapse item被点击，由collapse item调用父组件方法
  */
 function onChange(index: string | number) {
-  emit('change', index)
+    emit('change', index);
 }
 
 provide('u-collapse', {
-  childrens,
-  props,
-  init,
-  onChange
-})
+    childrens,
+    props,
+    init,
+    onChange
+});
 
 defineExpose({
-  props,
-  childrens,
-  init,
-  onChange
-})
+    props,
+    childrens,
+    init,
+    onChange
+});
 </script>
 
 <style lang="scss" scoped>

@@ -21,6 +21,10 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
+defineOptions({ name: 'u-steps' });
+
 /**
  * steps 步骤条
  * @description 该组件一般用于完成一个任务要分几个步骤，标识目前处于第几步的场景。
@@ -35,10 +39,6 @@
  * @property {String} icon 自定义图标
  * @example <u-steps :list="numList" active-color="#fa3534"></u-steps>
  */
-
-defineOptions({ name: 'u-steps' });
-
-import { computed } from 'vue';
 
 const props = defineProps({
     /** 步骤条的类型，dot|number */

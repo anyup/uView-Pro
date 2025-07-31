@@ -24,6 +24,11 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, computed, watch, nextTick, onMounted } from 'vue';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-swipe-action' });
+
 /**
  * swipeAction 左滑单元格
  * @description 该组件一般用于左滑唤出操作菜单的场景，用的最多的是左滑删除操作。
@@ -40,10 +45,6 @@
  * @event {Function} open 组件触发打开状态时
  * @example <u-swipe-action btn-text="收藏">...</u-swipe-action>
  */
-import { ref, computed, watch, nextTick, onMounted } from 'vue';
-import { $u } from '../..';
-
-defineOptions({ name: 'u-swipe-action' });
 
 const props = defineProps({
     /** index值，用于得知点击删除的是哪个按钮 */

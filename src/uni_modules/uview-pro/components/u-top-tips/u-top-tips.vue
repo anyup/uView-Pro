@@ -3,6 +3,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-top-tips' });
+
 /**
  * topTips 顶部提示
  * @description 该组件一般用于页面顶部向下滑出一个提示，尔后自动收起的场景。
@@ -11,11 +16,6 @@
  * @property {String|Number} zIndex z-index值（默认975）
  * @example <u-top-tips ref="uTips"></u-top-tips>
  */
-
-import { ref, computed } from 'vue';
-import { $u } from '../..';
-
-defineOptions({ name: 'u-top-tips' });
 
 const props = defineProps({
     /** 导航栏高度，用于提示的初始化 */

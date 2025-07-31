@@ -38,15 +38,14 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'u-avatar-cropper' });
-
-import { ref, reactive, computed, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { $u } from '../..';
 // 兼容 UMD/ESM 导入 weCropper.js
 // @ts-ignore
 import WeCropper from './weCropper';
 
-// #region props
+defineOptions({ name: 'u-avatar-cropper' });
+
 /**
  * 裁剪矩形框的样式，其中可包含的属性为lineWidth-边框宽度(单位rpx)，color: 边框颜色，
  * mask-遮罩颜色，一般设置为一个rgba的透明度，如"rgba(0, 0, 0, 0.35)"
@@ -96,9 +95,7 @@ const props = defineProps({
     //   default: 1
     // }
 });
-// #endregion
 
-// #region data
 /**
  * 组合式API变量声明
  * 保留所有说明注释
@@ -135,9 +132,7 @@ const cropperOpt = reactive({
 });
 
 let cropper: any = null; // WeCropper 实例，类型 any，建议后续补充类型声明
-// #endregion
 
-// #region 生命周期
 /**
  * 组件挂载时初始化 cropper
  * 保留所有说明注释
@@ -197,9 +192,7 @@ onMounted(() => {
         }
     });
 });
-// #endregion
 
-// #region 方法
 /**
  * 触摸开始事件
  * @param e 事件对象
@@ -273,7 +266,6 @@ function uploadTap() {
         }
     });
 }
-// #endregion
 </script>
 
 <style scoped lang="scss">

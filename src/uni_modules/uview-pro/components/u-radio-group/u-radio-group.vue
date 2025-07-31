@@ -8,6 +8,10 @@
 import { ref, provide, watch, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 
+defineOptions({
+    name: 'u-radio-group'
+});
+
 /**
  * radioGroup 单选框父组件
  * @description 单选框用于有一个选择，用户只能选择其中一个的场景。搭配u-radio使用
@@ -23,10 +27,6 @@ import { $u } from '../..';
  * @event {Function} change 任一个radio状态发生变化时触发
  * @example <u-radio-group v-model="value"></u-radio-group>
  */
-
-defineOptions({
-    name: 'u-radio-group'
-});
 
 const props = defineProps({
     /** 是否禁用所有单选框 */

@@ -51,6 +51,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, watch, nextTick } from 'vue';
+
+defineOptions({ name: 'u-search' });
+
 /**
  * search 搜索框
  * @description 搜索组件，集成了常见搜索框所需功能，用户可以一键引入，开箱即用。
@@ -83,10 +87,6 @@
  * @event {Function} clear 用户点击清除按钮时触发
  * @example <u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search>
  */
-
-import { ref, computed, watch, nextTick } from 'vue';
-
-defineOptions({ name: 'u-search' });
 
 const props = defineProps({
     /** 搜索框形状，round-圆形，square-方形 */

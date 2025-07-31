@@ -1,6 +1,13 @@
 <template>
     <view v-if="visibleSync" :style="[customStyle, { zIndex: Number(uZindex) - 1 }]" class="u-drawer" hover-stop-propagation>
-        <u-mask :duration="duration" :custom-style="maskCustomStyle" :maskClickAble="maskCloseAble" :z-index="Number(uZindex) - 2" :show="showDrawer && mask" @click="maskClick"></u-mask>
+        <u-mask
+            :duration="duration"
+            :custom-style="maskCustomStyle"
+            :maskClickAble="maskCloseAble"
+            :z-index="Number(uZindex) - 2"
+            :show="showDrawer && mask"
+            @click="maskClick"
+        ></u-mask>
         <view
             class="u-drawer-content"
             @tap="modeCenterClose(mode)"
@@ -39,6 +46,13 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, watch, onMounted, nextTick } from 'vue';
+import { $u } from '../..';
+
+defineOptions({
+    name: 'u-popup'
+});
+
 /**
  * popup 弹窗
  * @description 弹出层容器，用于展示弹窗、信息提示等内容，支持上、下、左、右和中部弹出。组件只提供容器，内部内容由用户自定义
@@ -62,8 +76,6 @@
  * @event {Function} close 弹出层收起
  * @example <u-popup v-model="show"><view>出淤泥而不染，濯清涟而不妖</view></u-popup>
  */
-import { ref, computed, watch, onMounted, nextTick } from 'vue';
-import { $u } from '../..';
 
 const props = defineProps({
     // 显示状态

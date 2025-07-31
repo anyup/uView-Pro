@@ -52,6 +52,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, watch, onMounted } from 'vue';
+
+defineOptions({ name: 'u-count-down' });
+
 /**
  * countDown 倒计时
  * @description 该组件一般使用于某个活动的截止时间上，通过数字的变化，给用户明确的时间感受，提示用户进行某一个行为操作。
@@ -76,10 +80,6 @@
  * @event {Function} change 每秒触发一次，回调为当前剩余的倒计秒数
  * @example <u-count-down ref="uCountDown" :timestamp="86400" :autoplay="false"></u-count-down>
  */
-
-import { ref, computed, watch, onMounted } from 'vue';
-
-defineOptions({ name: 'u-count-down' });
 
 const emit = defineEmits(['end', 'change']);
 

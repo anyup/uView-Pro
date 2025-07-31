@@ -1,41 +1,47 @@
 <template>
-  <view
-    @tap="onClick"
-    class="u-cell"
-    :class="{
-      'u-border-bottom': borderBottom,
-      'u-border-top': borderTop,
-      'u-col-center': center,
-      'u-cell--required': required
-    }"
-    hover-stay-time="150"
-    :hover-class="hoverClass"
-    :style="{ backgroundColor: bgColor }"
-  >
-    <u-icon :size="iconSize" :name="icon" v-if="icon" :custom-style="iconStyle" class="u-cell__left-icon-wrap"></u-icon>
-    <view class="u-flex" v-else>
-      <slot name="icon"></slot>
+    <view
+        @tap="onClick"
+        class="u-cell"
+        :class="{
+            'u-border-bottom': borderBottom,
+            'u-border-top': borderTop,
+            'u-col-center': center,
+            'u-cell--required': required
+        }"
+        hover-stay-time="150"
+        :hover-class="hoverClass"
+        :style="{ backgroundColor: bgColor }"
+    >
+        <u-icon :size="iconSize" :name="icon" v-if="icon" :custom-style="iconStyle" class="u-cell__left-icon-wrap"></u-icon>
+        <view class="u-flex" v-else>
+            <slot name="icon"></slot>
+        </view>
+        <view class="u-cell_title" :style="[{ width: titleWidth ? titleWidth + 'rpx' : 'auto' }, titleStyle]">
+            <template v-if="title !== ''">{{ title }}</template>
+            <slot name="title" v-else></slot>
+            <view class="u-cell__label" v-if="label || $slots.label" :style="[labelStyle]">
+                <template v-if="label !== ''">{{ label }}</template>
+                <slot name="label" v-else></slot>
+            </view>
+        </view>
+        <view class="u-cell__value" :style="[valueStyle]">
+            <template v-if="value !== ''">{{ value }}</template>
+            <slot v-else></slot>
+        </view>
+        <view class="u-flex u-cell_right" v-if="$slots['right-icon']">
+            <slot name="right-icon"></slot>
+        </view>
+        <u-icon v-if="arrow" name="arrow-right" :style="[arrowStyle]" class="u-icon-wrap u-cell__right-icon-wrap"></u-icon>
     </view>
-    <view class="u-cell_title" :style="[{ width: titleWidth ? titleWidth + 'rpx' : 'auto' }, titleStyle]">
-      <template v-if="title !== ''">{{ title }}</template>
-      <slot name="title" v-else></slot>
-      <view class="u-cell__label" v-if="label || $slots.label" :style="[labelStyle]">
-        <template v-if="label !== ''">{{ label }}</template>
-        <slot name="label" v-else></slot>
-      </view>
-    </view>
-    <view class="u-cell__value" :style="[valueStyle]">
-      <template v-if="value !== ''">{{ value }}</template>
-      <slot v-else></slot>
-    </view>
-    <view class="u-flex u-cell_right" v-if="$slots['right-icon']">
-      <slot name="right-icon"></slot>
-    </view>
-    <u-icon v-if="arrow" name="arrow-right" :style="[arrowStyle]" class="u-icon-wrap u-cell__right-icon-wrap"></u-icon>
-  </view>
 </template>
 
 <script setup lang="ts">
+import { computed, useSlots } from 'vue';
+
+defineOptions({
+    name: 'u-cell-item'
+});
+
 /**
  * cellItem 单元格Item
  * @description cell单元格一般用于一组列表的情况，比如个人中心页，设置页等。搭配u-cell-group使用
@@ -61,180 +67,179 @@
  * @property {String|Number} title-width 标题的宽度，单位rpx
  * @example <u-cell-item icon="integral-fill" title="会员等级" value="新版本"></u-cell-item>
  */
-import { computed, useSlots } from 'vue'
 
-const emit = defineEmits<{ (e: 'click', index: string | number): void }>()
+const emit = defineEmits<{ (e: 'click', index: string | number): void }>();
 
 const props = defineProps({
-  /** 左侧图标名称(只能uView内置图标)，或者图标src */
-  icon: { type: String, default: '' },
-  /** 左侧标题 */
-  title: { type: [String, Number], default: '' },
-  /** 右侧内容 */
-  value: { type: [String, Number], default: '' },
-  /** 标题下方的描述信息 */
-  label: { type: [String, Number], default: '' },
-  /** 是否显示下边框 */
-  borderBottom: { type: Boolean, default: true },
-  /** 是否显示上边框 */
-  borderTop: { type: Boolean, default: false },
-  /**多个cell中，中间的cell显示下划线时，下划线是否给一个到左边的距离 */
-  /* 1.4.0版本废除此参数，默认边框由border-top和border-bottom提供，此参数会造成干扰 */
-  //  borderGap: { type: Boolean, default: true },
-  /** 是否开启点击反馈，即点击时cell背景为灰色，none为无效果 */
-  hoverClass: { type: String, default: 'u-cell-hover' },
-  /** 是否显示右侧箭头 */
-  arrow: { type: Boolean, default: true },
-  /** 内容是否垂直居中 */
-  center: { type: Boolean, default: false },
-  /** 是否显示左边表示必填的星号 */
-  required: { type: Boolean, default: false },
-  /** 标题的宽度，单位rpx */
-  titleWidth: { type: [Number, String], default: '' },
-  /** 右侧箭头方向，可选值：right|up|down，默认为right */
-  arrowDirection: { type: String, default: 'right' },
-  /** 控制标题的样式 */
-  titleStyle: { type: Object as () => Record<string, any>, default: () => ({}) },
-  /** 右侧显示内容的样式 */
-  valueStyle: { type: Object as () => Record<string, any>, default: () => ({}) },
-  /** 描述信息的样式 */
-  labelStyle: { type: Object as () => Record<string, any>, default: () => ({}) },
-  /** 背景颜色 */
-  bgColor: { type: String, default: 'transparent' },
-  /** 用于识别被点击的是第几个cell */
-  index: { type: [String, Number], default: '' },
-  /** 是否使用label插槽 */
-  useLabelSlot: { type: Boolean, default: false },
-  /** 左边图标的大小，单位rpx，只对传入icon字段时有效 */
-  iconSize: { type: [Number, String], default: 34 },
-  /** 左边图标的样式，对象形式 */
-  iconStyle: { type: Object as () => Record<string, any>, default: () => ({}) }
-})
+    /** 左侧图标名称(只能uView内置图标)，或者图标src */
+    icon: { type: String, default: '' },
+    /** 左侧标题 */
+    title: { type: [String, Number], default: '' },
+    /** 右侧内容 */
+    value: { type: [String, Number], default: '' },
+    /** 标题下方的描述信息 */
+    label: { type: [String, Number], default: '' },
+    /** 是否显示下边框 */
+    borderBottom: { type: Boolean, default: true },
+    /** 是否显示上边框 */
+    borderTop: { type: Boolean, default: false },
+    /**多个cell中，中间的cell显示下划线时，下划线是否给一个到左边的距离 */
+    /* 1.4.0版本废除此参数，默认边框由border-top和border-bottom提供，此参数会造成干扰 */
+    //  borderGap: { type: Boolean, default: true },
+    /** 是否开启点击反馈，即点击时cell背景为灰色，none为无效果 */
+    hoverClass: { type: String, default: 'u-cell-hover' },
+    /** 是否显示右侧箭头 */
+    arrow: { type: Boolean, default: true },
+    /** 内容是否垂直居中 */
+    center: { type: Boolean, default: false },
+    /** 是否显示左边表示必填的星号 */
+    required: { type: Boolean, default: false },
+    /** 标题的宽度，单位rpx */
+    titleWidth: { type: [Number, String], default: '' },
+    /** 右侧箭头方向，可选值：right|up|down，默认为right */
+    arrowDirection: { type: String, default: 'right' },
+    /** 控制标题的样式 */
+    titleStyle: { type: Object as () => Record<string, any>, default: () => ({}) },
+    /** 右侧显示内容的样式 */
+    valueStyle: { type: Object as () => Record<string, any>, default: () => ({}) },
+    /** 描述信息的样式 */
+    labelStyle: { type: Object as () => Record<string, any>, default: () => ({}) },
+    /** 背景颜色 */
+    bgColor: { type: String, default: 'transparent' },
+    /** 用于识别被点击的是第几个cell */
+    index: { type: [String, Number], default: '' },
+    /** 是否使用label插槽 */
+    useLabelSlot: { type: Boolean, default: false },
+    /** 左边图标的大小，单位rpx，只对传入icon字段时有效 */
+    iconSize: { type: [Number, String], default: 34 },
+    /** 左边图标的样式，对象形式 */
+    iconStyle: { type: Object as () => Record<string, any>, default: () => ({}) }
+});
 
-const $slots = useSlots()
+const $slots = useSlots();
 
 /**
  * 箭头样式
  */
 const arrowStyle = computed(() => {
-  let style: Record<string, any> = {}
-  if (props.arrowDirection === 'up') style.transform = 'rotate(-90deg)'
-  else if (props.arrowDirection === 'down') style.transform = 'rotate(90deg)'
-  else style.transform = 'rotate(0deg)'
-  return style
-})
+    let style: Record<string, any> = {};
+    if (props.arrowDirection === 'up') style.transform = 'rotate(-90deg)';
+    else if (props.arrowDirection === 'down') style.transform = 'rotate(90deg)';
+    else style.transform = 'rotate(0deg)';
+    return style;
+});
 
 /**
  * 点击事件
  */
 function onClick() {
-  emit('click', props.index)
+    emit('click', props.index);
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../../libs/css/style.components.scss';
 .u-cell {
-  @include vue-flex;
-  align-items: center;
-  position: relative;
-  /* #ifndef APP-NVUE */
-  box-sizing: border-box;
-  /* #endif */
-  width: 100%;
-  padding: 26rpx 32rpx;
-  font-size: 28rpx;
-  line-height: 54rpx;
-  color: $u-content-color;
-  background-color: #fff;
-  text-align: left;
+    @include vue-flex;
+    align-items: center;
+    position: relative;
+    /* #ifndef APP-NVUE */
+    box-sizing: border-box;
+    /* #endif */
+    width: 100%;
+    padding: 26rpx 32rpx;
+    font-size: 28rpx;
+    line-height: 54rpx;
+    color: $u-content-color;
+    background-color: #fff;
+    text-align: left;
 }
 
 .u-cell_title {
-  font-size: 28rpx;
+    font-size: 28rpx;
 }
 
 .u-cell__left-icon-wrap {
-  margin-right: 10rpx;
-  font-size: 32rpx;
+    margin-right: 10rpx;
+    font-size: 32rpx;
 }
 
 .u-cell__right-icon-wrap {
-  margin-left: 10rpx;
-  color: #969799;
-  font-size: 28rpx;
+    margin-left: 10rpx;
+    color: #969799;
+    font-size: 28rpx;
 }
 
 .u-cell__left-icon-wrap,
 .u-cell__right-icon-wrap {
-  @include vue-flex;
-  align-items: center;
-  height: 48rpx;
+    @include vue-flex;
+    align-items: center;
+    height: 48rpx;
 }
 
 .u-cell-border:after {
-  position: absolute;
-  /* #ifndef APP-NVUE */
-  box-sizing: border-box;
-  content: ' ';
-  pointer-events: none;
-  border-bottom: 1px solid $u-border-color;
-  /* #endif */
-  right: 0;
-  left: 0;
-  top: 0;
-  transform: scaleY(0.5);
+    position: absolute;
+    /* #ifndef APP-NVUE */
+    box-sizing: border-box;
+    content: ' ';
+    pointer-events: none;
+    border-bottom: 1px solid $u-border-color;
+    /* #endif */
+    right: 0;
+    left: 0;
+    top: 0;
+    transform: scaleY(0.5);
 }
 
 .u-cell-border {
-  position: relative;
+    position: relative;
 }
 
 .u-cell__label {
-  margin-top: 6rpx;
-  font-size: 26rpx;
-  line-height: 36rpx;
-  color: $u-tips-color;
-  /* #ifndef APP-NVUE */
-  word-wrap: break-word;
-  /* #endif */
+    margin-top: 6rpx;
+    font-size: 26rpx;
+    line-height: 36rpx;
+    color: $u-tips-color;
+    /* #ifndef APP-NVUE */
+    word-wrap: break-word;
+    /* #endif */
 }
 
 .u-cell__value {
-  overflow: hidden;
-  text-align: right;
-  /* #ifndef APP-NVUE */
-  vertical-align: middle;
-  /* #endif */
-  color: $u-tips-color;
-  font-size: 26rpx;
+    overflow: hidden;
+    text-align: right;
+    /* #ifndef APP-NVUE */
+    vertical-align: middle;
+    /* #endif */
+    color: $u-tips-color;
+    font-size: 26rpx;
 }
 
 .u-cell__title,
 .u-cell__value {
-  flex: 1;
+    flex: 1;
 }
 
 .u-cell--required {
-  /* #ifndef APP-NVUE */
-  overflow: visible;
-  /* #endif */
-  @include vue-flex;
-  align-items: center;
+    /* #ifndef APP-NVUE */
+    overflow: visible;
+    /* #endif */
+    @include vue-flex;
+    align-items: center;
 }
 
 .u-cell--required:before {
-  position: absolute;
-  /* #ifndef APP-NVUE */
-  content: '*';
-  /* #endif */
-  left: 8px;
-  margin-top: 4rpx;
-  font-size: 14px;
-  color: $u-type-error;
+    position: absolute;
+    /* #ifndef APP-NVUE */
+    content: '*';
+    /* #endif */
+    left: 8px;
+    margin-top: 4rpx;
+    font-size: 14px;
+    color: $u-type-error;
 }
 
 .u-cell_right {
-  line-height: 1;
+    line-height: 1;
 }
 </style>

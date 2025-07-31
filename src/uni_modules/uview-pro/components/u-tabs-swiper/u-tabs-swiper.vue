@@ -16,10 +16,6 @@
 import { ref, computed, watch, nextTick, onMounted, getCurrentInstance } from 'vue';
 import colorGradient from '../../libs/function/colorGradient';
 
-const color = colorGradient;
-const { windowWidth } = uni.getSystemInfoSync();
-const preId = 'UEl_';
-
 defineOptions({ name: 'u-tabs-swiper' });
 
 /**
@@ -100,6 +96,10 @@ const props = defineProps({
     barStyle: { type: Object, default: () => ({}) }
 });
 
+const color = colorGradient;
+const { windowWidth } = uni.getSystemInfoSync();
+const preId = 'UEl_';
+
 // emits 定义
 const emit = defineEmits(['change']);
 
@@ -122,7 +122,7 @@ const sW = ref(uni.upx2px(Number(props.swiperWidth)));
 // 计算当前活跃tab索引
 const getCurrent = computed(() => {
     const current = Number(props.current);
-	// 判断是否超出边界
+    // 判断是否超出边界
     if (current > getTabs.value.length - 1) return getTabs.value.length - 1;
     if (current < 0) return 0;
     return current;
@@ -149,7 +149,7 @@ function tabItemStyle(index: number) {
         fontWeight: index == getCurrent.value && props.bold ? 'bold' : 'normal'
     };
     if (index == getCurrent.value) {
-		// 给选中的tab item添加外部自定义的样式
+        // 给选中的tab item添加外部自定义的样式
         style = Object.assign(style, props.activeItemStyle);
     }
     return style;
@@ -182,9 +182,9 @@ async function getTabsInfo() {
         view.exec((res: any[]) => {
             const arr: any[] = [];
             for (let i = 0; i < res.length; i++) {
-				// 给每个tab添加其文字颜色属性
+                // 给每个tab添加其文字颜色属性
                 res[i].color = props.inactiveColor;
-				// 当前tab直接赋予activeColor
+                // 当前tab直接赋予activeColor
                 if (i == getCurrent.value) res[i].color = props.activeColor;
                 arr.push(res[i]);
             }
@@ -197,13 +197,13 @@ async function getTabsInfo() {
 // 当swiper滑动结束，计算滑块最终要停留的位置
 function countLine3Dx() {
     const tab = tabsInfo.value[animationFinishCurrent.value];
-	// 让滑块中心点和当前tab中心重合
+    // 让滑块中心点和当前tab中心重合
     if (tab) line3Dx.value = tab.left + tab.width / 2 - barWidthPx.value / 2 - tabsInfo.value[0].left;
 }
 
 // swiper宽度由rpx转为px单位
 function countPx() {
-	// swiper宽度由rpx转为px单位，因为dx等，都是px单位
+    // swiper宽度由rpx转为px单位，因为dx等，都是px单位
     sW.value = uni.upx2px(Number(props.swiperWidth));
 }
 
@@ -244,16 +244,16 @@ function getQuery(cb?: (data: any) => void) {
 // 颜色渐变tab滑动
 function setDx(dx: number) {
     let nextTabIndex = dx > 0 ? animationFinishCurrent.value + 1 : animationFinishCurrent.value - 1;
-	// 判断索引是否超出边界
+    // 判断索引是否超出边界
     nextTabIndex = nextTabIndex <= 0 ? 0 : nextTabIndex;
     nextTabIndex = nextTabIndex >= props.list.length ? props.list.length - 1 : nextTabIndex;
     const tab = tabsInfo.value[nextTabIndex];
-	// 当前tab中心点x轴坐标
+    // 当前tab中心点x轴坐标
     const nowTab = tabsInfo.value[animationFinishCurrent.value];
     const nowTabX = nowTab.left + nowTab.width / 2;
-	// 下一个tab
+    // 下一个tab
     const nextTabX = tab.left + tab.width / 2;
-	// 两个tab之间的距离，因为下一个tab可能在当前tab的左边或者右边，取绝对值即可
+    // 两个tab之间的距离，因为下一个tab可能在当前tab的左边或者右边，取绝对值即可
     const distanceX = Math.abs(nextTabX - nowTabX);
     line3AddDx.value = (dx / sW.value) * distanceX;
     setTabColor(animationFinishCurrent.value, nextTabIndex, dx);
@@ -263,17 +263,17 @@ function setDx(dx: number) {
 function setTabColor(nowTabIndex: number, nextTabIndex: number, dx: number) {
     let colorIndex = Math.abs(Math.ceil((dx / sW.value) * 100));
     const colorLength = colorGradientArr.value.length;
-	// 处理超出索引边界的情况
+    // 处理超出索引边界的情况
     colorIndex = colorIndex >= colorLength ? colorLength - 1 : colorIndex <= 0 ? 0 : colorIndex;
-	// 设置下一个tab的颜色
+    // 设置下一个tab的颜色
     tabsInfo.value[nextTabIndex].color = colorGradientArr.value[colorIndex];
-	// 设置当前tab的颜色
+    // 设置当前tab的颜色
     tabsInfo.value[nowTabIndex].color = colorGradientArr.value[colorLength - 1 - colorIndex];
 }
 
 // swiper结束滑动
 function setFinishCurrent(current: number) {
-	// 如果滑动的索引不一致，修改tab颜色变化，因为可能会有直接点击tab的情况
+    // 如果滑动的索引不一致，修改tab颜色变化，因为可能会有直接点击tab的情况
     tabsInfo.value = tabsInfo.value.map((val, index) => {
         val.color = current == index ? props.activeColor : props.inactiveColor;
         return val;

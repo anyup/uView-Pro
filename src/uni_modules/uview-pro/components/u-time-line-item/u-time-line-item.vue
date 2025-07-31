@@ -10,6 +10,10 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
+defineOptions({ name: 'u-time-line-item' });
+
 /**
  * timeLineItem 时间轴Item
  * @description 时间轴组件一般用于物流信息展示，各种跟时间相关的记录等场景。(搭配u-time-line使用)
@@ -18,10 +22,6 @@
  * @property {String | Number} node-top 节点左边图标绝对定位的top值，单位rpx
  * @example <u-time-line-item node-top="2">...</u-time-line-item>
  */
-
-defineOptions({ name: 'u-time-line-item' });
-
-import { computed } from 'vue';
 
 /**
  * 节点的背景颜色

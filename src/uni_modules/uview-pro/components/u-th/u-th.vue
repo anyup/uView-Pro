@@ -5,6 +5,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, getCurrentInstance } from 'vue';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-th' });
+
 /**
  * th th单元格
  * @description 表格组件一般用于展示大量结构化数据的场景（搭配u-table使用）
@@ -12,10 +17,6 @@
  * @property {String | Number} width 标题单元格宽度百分比或者具体带单位的值，如30%，200rpx等，一般使用百分比，单元格宽度默认为均分tr的长度
  * @example 暂无示例
  */
-defineOptions({ name: 'u-th' });
-
-import { ref, onMounted, getCurrentInstance } from 'vue';
-import { $u } from '../..';
 
 const props = defineProps({
     /**

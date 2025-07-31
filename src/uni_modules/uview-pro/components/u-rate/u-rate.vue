@@ -19,8 +19,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { $u } from '../..';
+
+defineOptions({
+    name: 'u-rate'
+});
 
 /**
  * rate 评分

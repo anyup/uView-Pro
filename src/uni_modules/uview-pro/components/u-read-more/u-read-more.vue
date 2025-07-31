@@ -28,6 +28,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
+import { $u } from '../..';
+
+defineOptions({ name: 'u-read-more' });
+
 /**
  * readMore 阅读更多
  * @description 该组件一般用于内容较长，预先收起一部分，点击展开全部内容的场景。
@@ -45,11 +50,6 @@
  * @event close 收起时触发
  * @example <u-read-more><rich-text :nodes="content"></rich-text></u-read-more>
  */
-
-defineOptions({ name: 'u-read-more' });
-
-import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
-import { $u } from '../..';
 
 const props = defineProps({
     /** 默认的显示占位高度，单位为rpx */
