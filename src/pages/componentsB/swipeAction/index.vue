@@ -63,19 +63,19 @@ const list1 = ref<ListItem[]>([
     {
         id: 1,
         title: '长安回望绣成堆，山顶千门次第开，一骑红尘妃子笑，无人知是荔枝来',
-        images: 'https://cdn.uviewui.com/uview/common/logo.png',
+        images: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
         show: false
     },
     {
         id: 2,
         title: '新丰绿树起黄埃，数骑渔阳探使回，霓裳一曲千峰上，舞破中原始下来',
-        images: 'https://cdn.uviewui.com/uview/common/logo.png',
+        images: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
         show: false
     },
     {
         id: 3,
         title: '登临送目，正故国晚秋，天气初肃。千里澄江似练，翠峰如簇',
-        images: 'https://cdn.uviewui.com/uview/common/logo.png',
+        images: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
         show: false
     }
 ]);

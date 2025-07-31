@@ -50,7 +50,7 @@
 	export default {
 		data() {
 			return {
-				pic:'https://uviewui.com/common/logo.png',
+				pic:'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
 				show:true
 			}
 		},

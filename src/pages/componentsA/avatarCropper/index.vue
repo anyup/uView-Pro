@@ -31,7 +31,7 @@ import { $u } from '@/uni_modules/uview-pro';
 	export default {
 		data() {
 			return {
-				avatar: 'https://cdn.uviewui.com/uview/common/logo.png',
+				avatar: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
 			}
 		},
 		created() {

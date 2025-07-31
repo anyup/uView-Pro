@@ -37,7 +37,7 @@
 				this.tips = index == 0 ? '人生得意须尽欢' : '哎呀，网络信号丢失';
 			},
 			imageChange(index) {
-				this.image = index == 0 ? 'https://cdn.uviewui.com/uview/no-network/no_network.png' : image;
+				this.image = index == 0 ? 'https://ik.imagekit.io/anyup/uview-pro/no-network/no_network.png' : image;
 			}
 		}
 	}

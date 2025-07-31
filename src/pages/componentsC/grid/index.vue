@@ -15,7 +15,7 @@
 						<view class="grid-text">锁头</view>
 					</u-grid-item>
 					<u-grid-item :index="2">
-						<image src="https://cdn.uviewui.com/uview/grid/hot5.png" :style="{
+						<image src="https://ik.imagekit.io/anyup/uview-pro/grid/hot5.png" :style="{
 							top: col == 3 ? '14rpx' : '8rpx',
 							right: col == 3 ? '40rpx' : '28rpx'
 						}" style="width: 34rpx;height: 34rpx;" class="badge-icon" mode="widthFix"></image>
@@ -35,7 +35,7 @@
 						<view class="grid-text">音量</view>
 					</u-grid-item>
 					<u-grid-item :index="6">
-						<image src="https://cdn.uviewui.com/uview/grid/hot6.png" style="width: 44rpx;height: 44rpx;top:0;right:0;" class="badge-icon"></image>
+						<image src="https://ik.imagekit.io/anyup/uview-pro/grid/hot6.png" style="width: 44rpx;height: 44rpx;top:0;right:0;" class="badge-icon"></image>
 						<u-icon name="trash" :size="46"></u-icon>
 						<view class="grid-text">回收站</view>
 					</u-grid-item>

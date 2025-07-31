@@ -29,7 +29,7 @@ export default {
     computed: {
         getIcon() {
             return path => {
-                return 'https://cdn.uviewui.com/uview/example/' + path + '.png';
+                return 'https://ik.imagekit.io/anyup/uview-pro/example/' + path + '.png';
             };
         },
         desc() {

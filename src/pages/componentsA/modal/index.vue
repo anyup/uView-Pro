@@ -9,7 +9,7 @@
                     <!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
                     <template #default v-if="contentSlot">
                         <view class="warp" style="margin: 30rpx">
-                            <image class="logo" src="https://uviewui.com/common/logo.png" style="width: 220rpx" mode="widthFix"></image>
+                            <image class="logo" src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png" style="width: 220rpx" mode="widthFix"></image>
                         </view>
                     </template>
                     <!-- #endif -->

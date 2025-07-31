@@ -1,10 +1,10 @@
 <template>
     <view class="nav-wrap">
         <view class="nav-title">
-            <image class="logo" src="https://cdn.uviewui.com/uview/common/logo.png" mode="widthFix"></image>
+            <image class="logo" src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png" mode="widthFix"></image>
             <view class="nav-info">
                 <view class="nav-title__text">
-                    <text class="nav-info__title__text">uView {{ version }}</text>
+                    <text class="nav-info__title__text">uView Pro {{ version }}</text>
                 </view>
                 <view class="nav-slogan">
                     {{ $t('common.intro') }}
