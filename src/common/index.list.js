@@ -576,7 +576,7 @@ export default {
 		{
 			"letter": "#",
 			"data": [{
-				"name": "其他.",
+				"name": "其他",
 				"mobile": "16666666666",
 				"keyword": "echo16666666666"
 			}]
