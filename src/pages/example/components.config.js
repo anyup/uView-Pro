@@ -335,11 +335,6 @@ export default [{
 		groupName: '其他组件',
 		groupName_en: 'Other components',
 		list: [{
-			path: '/pages/componentsA/parse/index',
-			icon: 'parse',
-			title: 'Parse 富文本解析器',
-			title_en: 'Parse',
-		},{
 			path: '/pages/componentsC/messageInput/index',
 			icon: 'messageInput',
 			title: 'MessageInput 验证码输入',

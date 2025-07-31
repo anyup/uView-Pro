@@ -65,6 +65,18 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
+    "h5" : {
+        "title" : "uView Pro",
+        "router" : {
+            "mode" : "hash",
+            "base" : "/h5/"
+        },
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
+        }
+    },
     "uniStatistics": {  
         "enable": false
     },
