@@ -102,7 +102,7 @@ const preId = 'UEl_';
 
 // emits 定义
 const emit = defineEmits(['change']);
-
+const instance = getCurrentInstance();
 // 滚动scroll-view的左边滚动距离
 const scrollLeft = ref(0);
 // 存放对tab菜单查询后的节点信息
@@ -175,7 +175,7 @@ function updateColorGradientArr() {
 // tabsInfo 计算
 async function getTabsInfo() {
     return new Promise<void>(resolve => {
-        const view = uni.createSelectorQuery().in(getCurrentInstance()?.proxy);
+        const view = uni.createSelectorQuery().in(instance?.proxy);
         for (let i = 0; i < props.list.length; i++) {
             view.select('.' + preId + i).boundingClientRect();
         }
@@ -227,7 +227,7 @@ function setScrollViewToCenter() {
 // 查询tab组件宽度
 function getQuery(cb?: (data: any) => void) {
     try {
-        const view = uni.createSelectorQuery().in(getCurrentInstance()?.proxy).select('.u-tabs');
+        const view = uni.createSelectorQuery().in(instance?.proxy).select('.u-tabs');
         view.fields({ size: true }, (data: any) => {
             if (data) {
                 componentsWidth.value = data.width;

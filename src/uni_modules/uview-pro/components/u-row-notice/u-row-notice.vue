@@ -114,7 +114,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits<{ (e: 'click'): void; (e: 'close'): void; (e: 'getMore'): void }>();
-
+const instance = getCurrentInstance();
 const textWidth = ref(0); // 滚动的文字宽度
 const animationDuration = ref('10s'); // 动画执行时间
 const animationPlayState = ref('paused'); // 动画的开始和结束执行
@@ -155,7 +155,7 @@ const computeBgColor = computed(() => {
 function initSize() {
     nextTick(() => {
         uni.createSelectorQuery()
-            .in(getCurrentInstance()?.proxy)
+            .in(instance?.proxy)
             .select('#u-notice-content')
             .boundingClientRect()
             .exec(ret => {
