@@ -3,7 +3,7 @@
         <page-nav :desc="desc" title="nav.components"></page-nav>
         <view class="list-wrap">
             <u-collapse :item-style="itemStyle" event-type="close" :arrow="true" :accordion="true">
-                <u-collapse-item :index="index" :title="getGroupTitle(item)" v-for="(item, index) in list" :key="index">
+                <u-collapse-item :index="index" v-for="(item, index) in list" :key="index">
                     <template #title>
                         <view class="group-title">
                             <image style="width: 30rpx" :src="getIcon(item.icon)" mode="widthFix"></image>
@@ -30,79 +30,81 @@
                 </u-collapse-item>
             </u-collapse>
         </view>
-
-        <!-- <view class="list-wrap">
-            <u-cell-group title-bg-color="rgb(243, 244, 246)" :title="getGroupTitle(item)" v-for="(item, index) in list" :key="index">
-                <u-cell-item :titleStyle="{ fontWeight: 500 }" @click="openPage(item1.path)" :title="getFieldTitle(item1)" v-for="(item1, index1) in item.list" :key="item1.path">
-                    <template #icon>
-                        <image class="u-cell-icon" :src="getIcon(item1.icon)" mode="widthFix"></image>
-                    </template>
-                </u-cell-item>
-            </u-cell-group>
-        </view> -->
-
         <u-gap height="70"></u-gap>
         <!-- <u-tabbar :list="vuex_tabbar" :mid-button="true"></u-tabbar> -->
     </view>
 </template>
 
-<script>
-import list from './components.config.js';
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import rawList from './components.config';
+
+/**
+ * 生成随机浅色背景
+ */
 function getRandomColor() {
-    // 生成随机浅色背景
     const colors = ['#39b54a', '#f39c12', '#3498db', '#e74c3c', '#9b59b6', '#16a085', '#e67e22', '#2ecc71', '#1abc9c', '#34495e'];
     return colors[Math.floor(Math.random() * colors.length)];
 }
-export default {
-    data() {
-        return {
-            list: list,
-            itemStyle: {
-                border: '1px solid rgb(230, 230, 230)',
-                marginTop: '20px',
-                padding: '15rpx 20rpx',
-                borderRadius: '8px'
-            },
-            navColors: {} // 存储每个item的随机背景色
-        };
-    },
-    computed: {
-        getIcon() {
-            return path => {
-                return 'https://ik.imagekit.io/anyup/uview-pro/example/' + path + '.png';
-            };
-        },
-        desc() {
-            return this.$t('components.desc');
-        }
-    },
-    onShow() {
-        uni.setNavigationBarTitle({
-            title: this.$t('nav.components')
-        });
-    },
-    created() {
-        // 为每个item分配随机背景色
-        this.list.forEach(group => {
-            group.list.forEach(item => {
-                this.$set(this.navColors, item.path, getRandomColor());
-            });
-        });
-    },
-    methods: {
-        openPage(path) {
-            uni.$u.route({
-                url: path
-            });
-        },
-        getGroupTitle(item) {
-            return this.$i18n.locale == 'zh-Hans' ? item.groupName : item.groupName_en;
-        },
-        getFieldTitle(item) {
-            return this.$i18n.locale == 'zh-Hans' ? item.title : item.title_en;
-        }
-    }
+
+// 组件数据
+const itemStyle = {
+    border: '1px solid rgb(230, 230, 230)',
+    marginTop: '20px',
+    padding: '15rpx 20rpx',
+    borderRadius: '8px'
 };
+const navColors = ref<Record<string, string>>({}); // 存储每个item的随机背景色
+const list = ref<any[]>(Array.isArray(rawList) ? rawList : []); // 明确类型 any[]
+
+// 国际化
+const { t, locale } = useI18n();
+
+// 获取图标地址
+const getIcon = (path: string) => {
+    return 'https://ik.imagekit.io/anyup/uview-pro/example/' + path + '.png';
+};
+
+// 组件描述
+const desc = computed(() => t('components.desc'));
+
+// 设置导航栏标题
+onMounted(() => {
+    uni.setNavigationBarTitle({
+        title: t('nav.components')
+    });
+    // 为每个item分配随机背景色
+    list.value.forEach((group: any) => {
+        group.list.forEach((item: any) => {
+            navColors.value[item.path] = getRandomColor();
+        });
+    });
+});
+
+/**
+ * 路由跳转
+ */
+function openPage(path: string) {
+    // 兼容所有平台的跳转
+    uni.navigateTo({ url: path });
+}
+
+/**
+ * 获取分组标题（中英文）
+ */
+function getGroupTitle(item: any) {
+    return locale.value === 'zh-Hans' ? item.groupName : item.groupName_en;
+}
+
+/**
+ * 获取字段标题（中英文）
+ */
+function getFieldTitle(item: any) {
+    return locale.value === 'zh-Hans' ? item.title : item.title_en;
+}
+
+// 导出给模板使用
 </script>
 
 <style lang="scss" scoped>
@@ -122,6 +124,7 @@ export default {
     font-size: 28rpx;
     font-weight: 500;
     color: #333;
+    height: 50rpx;
     image {
         margin-right: 20rpx;
     }
