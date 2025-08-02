@@ -4,7 +4,7 @@
             <image class="logo" src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png" mode="widthFix"></image>
             <view class="nav-info">
                 <view class="nav-title__text">
-                    <text class="nav-info__title__text">uView Pro {{ version }}</text>
+                    <text class="nav-info__title__text">uView Pro</text>
                 </view>
                 <view class="nav-slogan">
                     {{ $t('common.intro') }}
