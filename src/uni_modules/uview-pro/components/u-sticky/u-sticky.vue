@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 
 defineOptions({ name: 'u-sticky' });
@@ -79,7 +79,7 @@ const props = defineProps({
         default: ''
     }
 });
-
+const instance = getCurrentInstance();
 const fixed = ref(false);
 const height = ref<'auto' | number>('auto');
 const stickyTop = ref(0);
@@ -132,7 +132,7 @@ function initObserver() {
     // #endif
     console.log('stickyTop.value', stickyTop.value);
     disconnectObserver('contentObserver');
-    $u.getRect('.' + elClass.value).then((res: any) => {
+    $u.getRect('.' + elClass.value, instance).then((res: any) => {
         height.value = res.height;
         left.value = res.left;
         width.value = res.width;

@@ -123,7 +123,7 @@ function headClick() {
 function queryRect() {
     // getRect为uView自带的节点查询简化方法，详见文档介绍：https://www.uviewui.com/js/getRect.html
     // 组件内部一般用this.$uGetRect，对外的为this.$u.getRect，二者功能一致，名称不同
-    $u.getRect('#' + elId.value, false, instance).then((res: any) => {
+    $u.getRect('#' + elId.value, instance).then((res: any) => {
         height.value = res.height;
     });
 }

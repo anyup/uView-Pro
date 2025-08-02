@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 
 defineOptions({
@@ -170,7 +170,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue', 'change']);
-
+const instance = getCurrentInstance();
 // 生成唯一id，防止页面多个评分组件冲突
 const elId = ref($u.guid());
 const elClass = ref($u.guid());
@@ -242,7 +242,7 @@ const elActiveColor = computed(() => {
  */
 function getElRectById() {
     // uView封装的获取节点的方法，详见文档
-    $u.getRect('#' + elId.value).then((res: any) => {
+    $u.getRect('#' + elId.value, instance).then((res: any) => {
         starBoxLeft.value = res.left;
     });
 }
@@ -251,7 +251,7 @@ function getElRectById() {
  */
 function getElRectByClass() {
     // uView封装的获取节点的方法，详见文档
-    $u.getRect('.' + elClass.value).then((res: any) => {
+    $u.getRect('.' + elClass.value, instance).then((res: any) => {
         starWidth.value = res.width;
         // 把每个星星右边到组件盒子左边的距离放入数组中
         for (let i = 0; i < Number(props.count); i++) {

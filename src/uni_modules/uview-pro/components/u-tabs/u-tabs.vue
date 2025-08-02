@@ -95,7 +95,7 @@ const props = defineProps({
 
 // emits 定义
 const emit = defineEmits(['change']);
-
+const instance = getCurrentInstance();
 // 滚动scroll-view的左边滚动距离
 const scrollLeft = ref(0);
 // 存放对tab菜单查询后的节点信息
@@ -186,7 +186,7 @@ function tabItemStyle(index: number) {
  */
 async function init() {
     // 获取tabs组件的尺寸信息
-    const tabRect = await $u.getRect('#' + id.value);
+    const tabRect = await $u.getRect('#' + id.value, instance);
     // tabs组件距离屏幕左边的宽度
     parentLeft.value = tabRect.left;
     // tabs组件的宽度
@@ -209,7 +209,7 @@ function clickTab(index: number) {
  */
 function getTabRect() {
     // 创建节点查询
-    const query = uni.createSelectorQuery().in(getCurrentInstance()?.proxy);
+    const query = uni.createSelectorQuery().in(instance?.proxy);
     // 历遍所有tab，这里是执行了查询，最终使用exec()会一次性返回查询的数组结果
     for (let i = 0; i < props.list.length; i++) {
         // 只要size和rect两个参数

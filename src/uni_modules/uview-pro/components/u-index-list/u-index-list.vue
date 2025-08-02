@@ -170,7 +170,7 @@ function setRect() {
 function setAnchorsRect() {
     return Promise.all(
         children.map((anchor, index) => {
-            $u.getRect('.u-index-anchor-wrapper', false, anchor).then((rect: any) => {
+            $u.getRect('.u-index-anchor-wrapper', anchor).then((rect: any) => {
                 Object.assign(anchor, {
                     height: rect.height,
                     top: rect.top
@@ -184,7 +184,7 @@ function setAnchorsRect() {
  * 获取列表尺寸
  */
 function setListRect() {
-    return $u.getRect('.u-index-bar', false, instance).then((rect: any) => {
+    return $u.getRect('.u-index-bar', instance).then((rect: any) => {
         height.value = rect.height;
         top.value = rect.top + Number(props.scrollTop);
     });
@@ -194,7 +194,7 @@ function setListRect() {
  * 获取侧边栏尺寸
  */
 function setSiderbarRect() {
-    return $u.getRect('.u-index-bar__sidebar', false, instance).then((rect: any) => {
+    return $u.getRect('.u-index-bar__sidebar', instance).then((rect: any) => {
         sidebar.height = rect.height;
         sidebar.top = rect.top;
     });

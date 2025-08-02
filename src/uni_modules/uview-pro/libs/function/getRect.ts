@@ -7,7 +7,7 @@
 
 import { getCurrentInstance } from 'vue';
 
-export default function (selector: any, all: boolean = false, _instance: any = null): Promise<any> {
+export default function (selector: any, _instance: any = null, all: boolean = false): Promise<any> {
     const instance = _instance || getCurrentInstance();
     return new Promise(resolve => {
         uni.createSelectorQuery()

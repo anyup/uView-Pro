@@ -56,7 +56,7 @@
  * @event end 滑动结束
  * @example <u-slider v-model="value" />
  */
-import { ref, watch, onMounted, useSlots } from 'vue';
+import { ref, watch, onMounted, useSlots, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 
 defineOptions({ name: 'u-slider' });
@@ -122,6 +122,7 @@ const props = defineProps({
 });
 
 const slots = useSlots();
+const instance = getCurrentInstance();
 
 // 滑块条的尺寸信息
 const sliderRect = ref<{ left: number; width: number }>({ left: 0, width: 0 });
@@ -143,7 +144,7 @@ watch(
 
 onMounted(() => {
     // 获取滑块条的尺寸信息
-    $u.getRect('.u-slider').then((rect: { left: number; width: number }) => {
+    $u.getRect('.u-slider', instance).then((rect: { left: number; width: number }) => {
         sliderRect.value = rect;
     });
     updateValue(props.modelValue, false);
