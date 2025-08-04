@@ -148,7 +148,7 @@ function initObserver() {
 function observeContent() {
     disconnectObserver('contentObserver');
 
-    contentObserver = uni.createIntersectionObserver(null, {
+    contentObserver = uni.createIntersectionObserver(instance?.proxy, {
         thresholds: [0.95, 0.98, 1]
     });
     contentObserver.relativeToViewport({
