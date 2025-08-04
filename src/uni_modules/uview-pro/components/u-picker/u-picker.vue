@@ -34,13 +34,13 @@
                         </view>
                     </picker-view-column>
                     <picker-view-column v-if="!reset && params.city">
-                        <view class="u-column-item" v-for="(item, index) in citys" :key="index">
-                            <view class="u-line-1">{{ item[0].label }}</view>
+                        <view class="u-column-item" v-for="(item, index) in citysRef" :key="index">
+                            <view class="u-line-1">{{ item.label }}</view>
                         </view>
                     </picker-view-column>
                     <picker-view-column v-if="!reset && params.area">
-                        <view class="u-column-item" v-for="(item, index) in areas" :key="index">
-                            <view class="u-line-1">{{ item[0][0].label }}</view>
+                        <view class="u-column-item" v-for="(item, index) in areasRef" :key="index">
+                            <view class="u-line-1">{{ item.label }}</view>
                         </view>
                     </picker-view-column>
                 </picker-view>
