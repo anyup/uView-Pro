@@ -77,12 +77,20 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 
 ## 快速上手
 
-1. `main.js`引入 uView 库
+1. `main.ts`引入 uView 库
 
 ```js
-// main.js
-import uView from 'uview-ui';
-Vue.use(uView);
+// main.ts
+import uViewPro from 'uview-pro';
+
+export function createApp() {
+    const app = createSSRApp(App);
+    app.use(uViewPro);
+    // 其他配置
+    return {
+        app
+    };
+}
 ```
 
 2. `App.vue`引入基础样式(注意 style 标签需声明 scss 属性支持)
@@ -90,7 +98,7 @@ Vue.use(uView);
 ```css
 /* App.vue */
 <style lang="scss">
-@import "uview-ui/index.scss";
+@import "uview-pro/index.scss";
 </style>
 ```
 
@@ -98,7 +106,7 @@ Vue.use(uView);
 
 ```css
 /* uni.scss */
-@import 'uview-ui/theme.scss';
+@import 'uview-pro/theme.scss';
 ```
 
 4. `pages.json`配置 easycom 规则(按需引入)
@@ -107,11 +115,11 @@ Vue.use(uView);
 // pages.json
 {
 	"easycom": {
-		// 下载安装的方式需要前面的"@/"，npm安装的方式无需"@/"
-		// 下载安装方式
-		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+		// uni_modules安装的方式需要前面的"@/"，npm安装的方式无需"@/"
 		// npm安装方式
-		// "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+		"^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
+		// uni_modules安装方式
+		// "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
 	},
 	// 此为本身已有的内容
 	"pages": [
