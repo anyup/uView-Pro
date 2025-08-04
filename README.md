@@ -73,7 +73,7 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 
 ## 安装
 
-#### **下载地址** —— [https://ext.dcloud.net.cn/plugin?id=1593](https://ext.dcloud.net.cn/plugin?id=1593)
+#### **插件市场** — [https://p.dcloud.net.cn/plugin?name=uview-pro](https://p.dcloud.net.cn/plugin?name=uview-pro)
 
 ## 快速上手
 
