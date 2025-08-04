@@ -9,7 +9,7 @@
         }"
     >
         <view class="u-icon-wrap">
-            <u-icon v-if="showIcon" :name="uIcon" :size="description ? 40 : 32" class="u-icon" :color="uIconType" :custom-style="iconStyle"></u-icon>
+            <u-icon v-if="showIcon" :name="uIconName" :size="description ? 40 : 32" class="u-icon" :color="uIconType" :custom-style="iconStyle"></u-icon>
         </view>
         <view class="u-alert-content" @tap.stop="onClick">
             <view class="u-alert-title" :style="uTitleStyle">
@@ -45,8 +45,8 @@
 </template>
 
 <script setup lang="ts">
+import uIcon from '../u-icon/u-icon.vue';
 import { computed } from 'vue';
-
 import { $u } from '../..';
 
 defineOptions({
@@ -70,11 +70,13 @@ defineOptions({
  * @event {Function} click 点击组件时触发
  * @event {Function} close 点击关闭按钮时触发
  */
+type Types = 'primary' | 'info' | 'error' | 'warning' | 'success';
+
 const props = defineProps({
     /** 显示文字 */
     title: { type: String, default: '' },
     /** 主题，success/warning/info/error */
-    type: { type: String, default: 'warning' },
+    type: { type: String as () => Types, default: 'warning' },
     /** 辅助性文字 */
     description: { type: String, default: '' },
     /** 是否可关闭 */
@@ -117,7 +119,7 @@ const uTitleStyle = computed(() => {
 /**
  * 图标名称，优先使用用户传入，否则根据type主题推定默认图标
  */
-const uIcon = computed(() => {
+const uIconName = computed(() => {
     // 如果有设置icon名称就使用，否则根据type主题，推定一个默认的图标
     return props.icon ? props.icon : $u.type2icon(props.type);
 });
