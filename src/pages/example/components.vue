@@ -150,6 +150,9 @@ function getFieldTitle(item: any) {
     z-index: 1;
     background-image: url(https://ik.imagekit.io/anyup/uview-pro/common/bg-item.png);
     transition: background 0.3s;
+    /* #ifdef APP-PLUS */
+    margin-bottom: 40rpx;
+    /* #endif */
 }
 
 .nav-li::after {

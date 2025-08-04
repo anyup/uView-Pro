@@ -14,9 +14,11 @@
         <view class="nav-desc">
             {{ desc }}
         </view>
+        <!-- #ifndef APP-PLUS -->
         <view class="lang" @tap="switchLang">
             <u-icon size="46" color="warning" :name="lang"></u-icon>
         </view>
+        <!-- #endif -->
     </view>
 </template>
 
