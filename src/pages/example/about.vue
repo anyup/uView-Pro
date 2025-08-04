@@ -1,5 +1,5 @@
 <template>
-    <view>
+    <view class="about-page">
         <view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30" @click="preview('https://ik.imagekit.io/anyup/images/social/weixin-person.png')">
             <view class="u-m-r-10">
                 <u-avatar :src="pic" size="140"></u-avatar>
@@ -13,16 +13,16 @@
             </view>
         </view>
 
-        <view class="u-m-t-20">
+        <view class="">
             <u-cell-group title="关于我">
                 <u-cell-item
-                    title="我是前端梦工厂，一名前端开发工程师，致力于分享各种前端技术最佳解决方案，崇尚大道至简的前端知识体系。关注我，让我们一起逐梦前端！"
+                    title="我是“前端梦工厂”，一名前端开发工程师，致力于分享各种前端技术最佳解决方案，崇尚大道至简的前端知识体系。关注我，让我们一起逐梦前端！"
                     :arrow="false"
                 ></u-cell-item>
             </u-cell-group>
         </view>
 
-        <view class="u-m-t-20">
+        <view class="">
             <u-cell-group title="交流群">
                 <u-cell-item v-for="(item, index) in chatList" :key="index" :title="item.title" :label="item.label" @click="itemClick(item)">
                     <template #icon>
@@ -32,7 +32,7 @@
             </u-cell-group>
         </view>
 
-        <view class="u-m-t-20 u-m-b-40">
+        <view class="">
             <u-cell-group title="其他信息">
                 <u-cell-item v-for="(item, index) in infoList" :key="index" :title="item.title" :label="item.label" @click="itemClick(item)">
                     <template #icon>
@@ -161,7 +161,7 @@ function copyLink(data: string) {
 </script>
 
 <style lang="scss" scoped>
-page {
+.about-page {
     background-color: #ededed;
 }
 
