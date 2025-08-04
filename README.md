@@ -1,23 +1,25 @@
 <p align="center">
     <img alt="logo" src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png" width="120" height="120" style="margin-bottom: 10px;">
 </p>
-<h3 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">uView</h3>
-<h3 align="center">多平台快速开发的UI框架</h3>
+<h3 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">uView Pro</h3>
+<h3 align="center">uni-app Vue3 多平台快速开发的 UI 框架</h3>
 
-[![star](https://gitee.com/umicro/uView/badge/star.svg?theme=gvp)](https://gitee.com/umicro/uView/stargazers)
-[![fork](https://gitee.com/umicro/uView/badge/fork.svg?theme=gvp)](https://gitee.com/umicro/uView/members)
-[![stars](https://img.shields.io/github/stars/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
-[![forks](https://img.shields.io/github/forks/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
-[![issues](https://img.shields.io/github/issues/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/umicro/uView/issues)
-[![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uviewui.com)
-[![release](https://img.shields.io/github/v/release/YanxinNet/uView?style=flat-square)](https://gitee.com/umicro/uView/releases)
-[![license](https://img.shields.io/github/license/YanxinNet/uView?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
+[![star](https://gitee.com/anyup/uView-Pro/badge/star.svg)](https://gitee.com/anyup/uView-Pro/stargazers)
+[![fork](https://gitee.com/anyup/uView-Pro/badge/fork.svg)](https://gitee.com/anyup/uView-Pro/members)
+[![stars](https://img.shields.io/github/stars/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
+[![forks](https://img.shields.io/github/forks/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
+[![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView/issues)
+[![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uview-pro.anyup.cn/docs/)
+[![release](https://img.shields.io/github/v/release/anyup/uView-Pro?style=flat-square)](https://gitee.com/anyup/uView-Pro/releases)
+[![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 
 ## 说明
 
-uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水
+uView UI，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。
 
-## [官方文档：https://v1.uviewui.com](https://v1.uviewui.com)
+uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
+
+## [官方文档：https://uview-pro.anyup.cn/docs/](https://uview-pro.anyup.cn/docs/)
 
 ## 特性
 
@@ -29,31 +31,32 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 - 按需引入，精简打包体积
 
 
-## 预览
 
-您可以通过**微信**扫码，查看最佳的演示效果。
-<br>
-<br>
-<img src="https://uviewui.com/common/weixin_mini_qrcode.png" width="220" height="220" >
+## 手机预览
+
+您可以通过**微信**或**手机浏览器**扫描以下二维码，查看最佳的演示效果。
+
+<table class="table">
+    <tr>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_h5.png" width="150" height="150" ></td>
+	    <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_wx.jpg" width="150" height="150" ></td>
+	    <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="150" height="150" ></td>
+    </tr>
+    <tr>
+        <td align="center"><strong>微信小程序</strong><br>（微信扫码）</td>
+	    <td align="center"><strong>H5</strong><br>（浏览器扫码）</td>
+	    <td align="center"><strong>Android</strong><br>（浏览器扫码）</td>
+    </tr>
+</table>
 
 
-## 友情链接
-
-#### **vue-admin-beautiful** —— [企业级、通用型中后台前端解决方案（基于vue/cli 4 最新版，同时支持电脑，手机，平板）](https://github.com/chuzhixin/vue-admin-beautiful)
-
-#### **vue-admin-beautiful** —— [在线演示](http://beautiful.panm.cn/vue-admin-beautiful/#/index)
-
-#### **pl-table** —— [ 完美解决 element 万级表格数据渲染卡顿问题](https://github.com/livelyPeng/pl-table)
-
-#### **luch-request** —— [基于 Promise 开发的 uni-app 跨平台、项目级别的请求库，它有更小的体积，易用的 api，方便简单的自定义能力](https://www.quanzhan.co/luch-request/)
-<br>
 
 ## 链接
 
-- [官方文档](https://v1.uviewui.com/)
-- [更新日志](https://v1.uviewui.com/components/changelog.html)
-- [升级指南](https://v1.uviewui.com/components/changelog.html)
-- [关于我们](https://v1.uviewui.com/cooperation/about.html)
+- [官方文档](https://uview-pro.anyup.cn/docs/)
+- [更新日志](https://uview-pro.anyup.cn/docs/components/changelog.html)
+- [升级指南](https://uview-pro.anyup.cn/docs/components/changelog.html)
+- [关于我们](https://uview-pro.anyup.cn/docs/cooperation/about.html)
 
 ## 交流反馈
 
@@ -61,7 +64,7 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 
 ## 关于PR
 
-> 我们非常乐意接受各位的优质PR，但在此之前我希望您了解uView2.0是一个需要兼容多个平台的（小程序、h5、ios app、android app）包括nvue页面、vue页面。
+> 我们非常乐意接受各位的优质PR，但在此之前我希望您了解uView Pro是一个需要兼容多个平台的（小程序、h5、ios app、android app）包括nvue页面、vue页面。
 > 所以希望在您修复bug并提交之前尽可能的去这些平台测试一下兼容性。最好能携带测试截图以方便审核。非常感谢！
 
 ## 安装
@@ -127,6 +130,18 @@ Vue.use(uView);
 ## 捐赠uView的研发
 
 uView文档内容和框架源码全部开源免费，如果您认为uView帮到了您的开发工作，您可以捐赠uView的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
+
+<table class="table" style="width: 500px;">
+    <tr>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-pay.png" width="250" height="345" ></td>
+	    <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png" width="250" height="345" ></td>
+    </tr>
+    <tr>
+        <td align="center"><strong>微信</strong><br></td>
+	    <td align="center"><strong>支付宝</strong><br></td>
+    </tr>
+</table>
+
 
 ## 版权信息
 uView遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，意味着您无需支付任何费用，也无需授权，即可将uView应用到您的产品中。
