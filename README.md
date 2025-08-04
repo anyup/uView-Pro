@@ -36,9 +36,9 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_h5.png" width="150" height="150" ></td>
-	    <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_wx.jpg" width="150" height="150" ></td>
-	    <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="150" height="150" ></td>
+	    <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_wx.jpg" width="200" height="200" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_h5.png" width="200" height="200" ></td>
+	    <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="200" height="200" ></td>
     </tr>
     <tr>
         <td align="center"><strong>微信小程序</strong><br>（微信扫码）</td>
@@ -138,7 +138,7 @@ Vue.use(uView);
 
 uView Pro 文档内容和框架源码基于 uView UI 二次开发，因此全部开源免费，如果您认为 uView Pro 帮到了您的开发工作，您可以捐赠 uView Pro 的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
 
-<table class="table" style="width: 500px;">
+<table class="table">
     <tr>
         <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-pay.png" width="250" height="345" ></td>
 	    <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png" width="250" height="345" ></td>
