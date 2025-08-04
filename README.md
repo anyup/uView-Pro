@@ -9,9 +9,9 @@
 [![stars](https://img.shields.io/github/stars/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
 [![forks](https://img.shields.io/github/forks/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
 [![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView/issues)
+[![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 <!-- [![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uview-pro.anyup.cn/docs/) -->
 <!-- [![release](https://img.shields.io/github/v/release/anyup/uView-Pro?style=flat-square)](https://gitee.com/anyup/uView-Pro/releases) -->
-[![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 
 ## 说明
 
