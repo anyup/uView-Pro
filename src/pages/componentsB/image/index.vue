@@ -43,7 +43,7 @@ import { type ImageInstance } from '@/uni_modules/uview-pro/components/u-image/t
 import { ref } from 'vue'
 
 // 定义响应式数据
-const src = ref('https://v1.uviewui.com/common/logo.png')
+const src = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo.png')
 const width = ref('200')
 const height = ref('200')
 const loadingSlot = ref(false)

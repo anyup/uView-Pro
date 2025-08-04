@@ -51,7 +51,7 @@
 			return {
 				title: '素胚勾勒出青花，笔锋浓转淡',
 				subTitle: '2020-05-15',
-				thumb: 'https://v1.uviewui.com/common/logo.png',
+				thumb: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
 				padding: 20,
 				bottomSlot: true,
 				border: true
@@ -59,7 +59,7 @@
 		},
 		methods: {
 			thumbChange(index) {
-				this.thumb = index == 0 ? 'https://v1.uviewui.com/common/logo.png' : '';
+				this.thumb = index == 0 ? 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png' : '';
 			},
 			paddingChange(index) {
 				this.padding = [20, 30, 40][index];

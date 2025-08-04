@@ -69,7 +69,7 @@
 							<u-button :hair-line="false" size="mini" @click="modeChange('data')">数据为空</u-button>
 						</u-td>
 						<u-td class="u-td">
-							待扩展
+							<u-button :hair-line="false" size="mini">待扩展</u-button>
 						</u-td>
 					</u-tr>
 				</u-table>
