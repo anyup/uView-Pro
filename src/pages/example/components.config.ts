@@ -412,12 +412,12 @@ export default [
                 title: 'MessageInput 验证码输入',
                 title_en: 'MessageInput'
             },
-            {
-                path: '/pages/componentsA/avatarCropper/index',
-                icon: 'avatarCropper',
-                title: 'AvatarCropper 头像裁剪',
-                title_en: 'AvatarCropper'
-            },
+            // {
+            //     path: '/pages/componentsA/avatarCropper/index',
+            //     icon: 'avatarCropper',
+            //     title: 'AvatarCropper 头像裁剪',
+            //     title_en: 'AvatarCropper'
+            // },
             {
                 path: '/pages/componentsC/loadmore/index',
                 icon: 'loadmore',
