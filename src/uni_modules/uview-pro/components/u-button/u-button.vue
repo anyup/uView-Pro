@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import { ref, computed, nextTick } from 'vue';
-import { $u } from '@/uni_modules/uview-pro';
+import { $u } from '../../';
 
 defineOptions({
     name: 'u-button'
@@ -206,7 +206,7 @@ function click(e: any) {
             });
         }
         emit('click', e);
-    }, props.throttleTime);
+    }, Number(props.throttleTime));
 }
 
 /**
