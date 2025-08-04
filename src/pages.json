@@ -13,6 +13,14 @@
                 "navigationBarTitleText": "组件"
             }
         },
+        // 关于
+        {
+            "path": "pages/example/about",
+            "style": {
+                "navigationBarTitleText": "关于"
+                // "navigationStyle": "custom"
+            }
+        },
         // // avatarCropper-头像裁剪
         // {
         // 	"path": "uni_modules/uview-pro/components/u-avatar-cropper/u-avatar-cropper",
@@ -839,31 +847,25 @@
         "navigationBarTitleText": "uView Pro",
         "navigationBarBackgroundColor": "#FFFFFF",
         "backgroundColor": "#FFFFFF"
+    },
+    "tabBar": {
+      "color": "#909399",
+      "selectedColor": "#303133",
+      "backgroundColor": "#FFFFFF",
+      "borderStyle": "black",
+      "list": [
+        {
+          "pagePath": "pages/example/components",
+          "iconPath": "static/uview/example/component.png",
+          "selectedIconPath": "static/uview/example/component_select.png",
+          "text": "组件"
+        },
+        {
+          "pagePath": "pages/example/about",
+          "iconPath": "static/uview/example/about.png",
+          "selectedIconPath": "static/uview/example/about_select.png",
+          "text": "关于"
+        }
+      ]
     }
-    // "tabBar": {
-    //   "color": "#909399",
-    //   "selectedColor": "#303133",
-    //   "backgroundColor": "#FFFFFF",
-    //   "borderStyle": "black",
-    //   "list": [
-    //     {
-    //       "pagePath": "pages/example/components",
-    //       "iconPath": "static/uview/example/component.png",
-    //       "selectedIconPath": "static/uview/example/component_select.png",
-    //       "text": "组件"
-    //     },
-    //     {
-    //       "pagePath": "pages/example/js",
-    //       "iconPath": "static/uview/example/js.png",
-    //       "selectedIconPath": "static/uview/example/js_select.png",
-    //       "text": "工具"
-    //     },
-    //     {
-    //       "pagePath": "pages/example/template",
-    //       "iconPath": "static/uview/example/template.png",
-    //       "selectedIconPath": "static/uview/example/template_select.png",
-    //       "text": "模板"
-    //     }
-    //   ]
-    // }
 }

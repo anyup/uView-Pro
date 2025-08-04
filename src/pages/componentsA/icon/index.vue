@@ -607,7 +607,6 @@ const iconList = ref([
 
 const selectIcon = (name: string) => {
   // #ifdef H5
-
   if (typeof navigator !== 'undefined' && navigator.clipboard) {
     navigator.clipboard
       .writeText(name)
