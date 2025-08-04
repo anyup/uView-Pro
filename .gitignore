@@ -12,6 +12,7 @@ node_modules
 dist
 /build
 *.local
+*.zip
 
 # Editor directories and files
 .idea
