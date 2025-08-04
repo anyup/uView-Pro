@@ -14,7 +14,7 @@ defineOptions({
 /**
  * collapse 手风琴
  * @description 通过折叠面板收纳内容区域
- * @tutorial https://www.uviewui.com/components/collapse.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/collapse.html
  * @property {Boolean} accordion 是否手风琴模式（默认true）
  * @property {Boolean} arrow 是否显示标题右侧的箭头（默认true）
  * @property {String} arrow-color 标题右侧箭头的颜色（默认#909399）

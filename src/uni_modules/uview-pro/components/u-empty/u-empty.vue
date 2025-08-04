@@ -25,7 +25,7 @@ defineOptions({
 /**
  * empty 内容为空
  * @description 该组件用于需要加载内容，但是加载的第一页数据就为空，提示一个"没有内容"的场景， 我们精心挑选了十几个场景的图标，方便您使用。
- * @tutorial https://www.uviewui.com/components/empty.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/empty.html
  * @property {String} color 文字颜色（默认#c0c4cc）
  * @property {String} text 文字提示（默认“无内容”）
  * @property {String} src 自定义图标路径，如定义，mode参数会失效

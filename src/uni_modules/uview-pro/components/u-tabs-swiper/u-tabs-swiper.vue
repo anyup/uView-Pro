@@ -21,7 +21,7 @@ defineOptions({ name: 'u-tabs-swiper' });
 /**
  * tabsSwiper 全屏选项卡
  * @description 该组件内部实现主要依托于uniapp的scroll-view和swiper组件，主要特色是切换过程中，tabsSwiper文字的颜色可以渐变，底部滑块可以 跟随式滑动，活动tab滚动居中等。应用场景可以用于需要左右切换页面，比如商城的订单中心(待收货-待付款-待评价-已退货)等应用场景。
- * @tutorial https://www.uviewui.com/components/tabsSwiper.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/tabsSwiper.html
  * @property {Boolean} is-scroll tabs是否可以左右拖动（默认true）
  * @property {Array} list 标签数组，元素为对象，如[{name: '推荐'}]
  * @property {String|Number} current 指定哪个tab为激活状态（默认0）

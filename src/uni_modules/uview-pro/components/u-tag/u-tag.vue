@@ -23,7 +23,7 @@ defineOptions({
 /**
  * tag 提示
  * @description 该组件一般用于标记和选择
- * @tutorial https://www.uviewui.com/components/tag.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/tag.html
  * @property {String} type 主题类型（默认primary）
  * @property {String} size 标签大小（默认default）
  * @property {String} shape 标签形状（默认square）

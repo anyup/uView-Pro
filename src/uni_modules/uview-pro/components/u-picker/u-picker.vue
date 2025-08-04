@@ -114,7 +114,7 @@ defineOptions({
 /**
  * picker picker弹出选择器
  * @description 此选择器有两种弹出模式：一是时间模式，可以配置年，日，月，时，分，秒参数 二是地区模式，可以配置省，市，区参数
- * @tutorial https://www.uviewui.com/components/picker.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/picker.html
  * @property {Object} params 需要显示的参数，见官网说明
  * @property {String} mode 模式选择，region-地区类型，time-时间类型（默认time）
  * @property {String Number} start-year 可选的开始年份，mode=time时有效（默认1950）

@@ -47,7 +47,7 @@ defineOptions({ name: 'u-navbar' });
 /**
  * navbar 自定义导航栏
  * @description 此组件一般用于在特殊情况下，需要自定义导航栏的时候用到，一般建议使用uniapp自带的导航栏。
- * @tutorial https://www.uviewui.com/components/navbar.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/navbar.html
  * @property {String|Number} height 导航栏高度(不包括状态栏高度在内，内部自动加上)，注意这里的单位是px（默认44）
  * @property {String} back-icon-color 左边返回图标的颜色（默认#606266）
  * @property {String} back-icon-name 左边返回图标的名称，只能为uView自带的图标（默认arrow-left）

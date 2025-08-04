@@ -63,7 +63,7 @@ defineOptions({ name: 'u-message-input' });
 /**
  * messageInput 验证码输入框
  * @description 该组件一般用于验证用户短信验证码的场景，也可以结合uView的键盘组件使用
- * @tutorial https://www.uviewui.com/components/messageInput.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/messageInput.html
  * @property {String|Number} maxlength 输入字符个数（默认4）
  * @property {Boolean} dot-fill 是否用圆点填充（默认false）
  * @property {String} mode 模式选择，见上方"基本使用"说明（默认box）

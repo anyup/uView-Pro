@@ -37,7 +37,7 @@ defineOptions({ name: 'u-loadmore' });
 /**
  * loadmore 加载更多
  * @description 此组件一般用于标识页面底部加载数据时的状态。
- * @tutorial https://www.uviewui.com/components/loadMore.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/loadMore.html
  * @property {String} status 组件状态（默认loadmore）
  * @property {String} bg-color 组件背景颜色，在页面是非白色时会用到（默认#ffffff）
  * @property {Boolean} icon 加载中时是否显示图标（默认true）

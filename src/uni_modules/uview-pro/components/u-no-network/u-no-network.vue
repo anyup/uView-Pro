@@ -24,7 +24,7 @@ defineOptions({ name: 'u-no-network' });
 /**
  * noNetwork 无网络提示
  * @description 该组件无需任何配置，引入即可，内部自动处理所有功能和事件。
- * @tutorial https://www.uviewui.com/components/noNetwork.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/noNetwork.html
  * @property {String} tips 没有网络时的提示语（默认哎呀，网络信号丢失）
  * @property {String | Number} zIndex 组件的z-index值（默认1080）
  * @property {String} image 无网络的图片提示，可用的src地址或base64图片

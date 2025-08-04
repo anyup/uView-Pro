@@ -26,7 +26,7 @@ defineOptions({
 /**
  * checkbox 复选框
  * @description 该组件需要搭配checkboxGroup组件使用，以便用户进行操作时，获得当前复选框组的选中情况。
- * @tutorial https://www.uviewui.com/components/checkbox.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/checkbox.html
  * @property {String Number} icon-size 图标大小，单位rpx（默认20）
  * @property {String Number} label-size label字体大小，单位rpx（默认28）
  * @property {String Number} name checkbox组件的标示符

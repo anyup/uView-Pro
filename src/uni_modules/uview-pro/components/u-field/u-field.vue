@@ -87,7 +87,7 @@ defineOptions({ name: 'u-field' });
 /**
  * field 输入框
  * @description 借助此组件，可以实现表单的输入， 有"text"和"textarea"类型的，此外，借助uView的picker和actionSheet组件可以快速实现上拉菜单，时间，地区选择等， 为表单解决方案的利器。
- * @tutorial https://www.uviewui.com/components/field.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/field.html
  * @property {String} type 输入框的类型（默认text）
  * @property {String} icon label左边的图标，限uView的图标名称
  * @property {Object} icon-style 左边图标的样式，对象形式

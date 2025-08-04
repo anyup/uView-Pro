@@ -56,7 +56,7 @@ defineOptions({
 /**
  * popup 弹窗
  * @description 弹出层容器，用于展示弹窗、信息提示等内容，支持上、下、左、右和中部弹出。组件只提供容器，内部内容由用户自定义
- * @tutorial https://www.uviewui.com/components/popup.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/popup.html
  * @property {String} mode 弹出方向（默认left）
  * @property {Boolean} mask 是否显示遮罩（默认true）
  * @property {Stringr | Number} length mode=left | 见官网说明（默认auto）

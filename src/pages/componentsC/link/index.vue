@@ -27,7 +27,7 @@ import { $u } from '@/uni_modules/uview-pro';
 	export default {
 		data() {
 			return {
-				href: 'https://www.uviewui.com',
+				href: 'https://uview-pro.anyup.cn/docs',
 				underLine: true,
 				fontSize: 28,
 				color: '#2979ff'

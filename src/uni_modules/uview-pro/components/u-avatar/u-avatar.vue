@@ -25,7 +25,7 @@ let base64Avatar =
 /**
  * avatar 头像
  * @description 本组件一般用于展示头像的地方，如个人中心，或者评论列表页的用户头像展示等场所。
- * @tutorial https://www.uviewui.com/components/avatar.html
+ * @tutorial https://uview-pro.anyup.cn/docs/components/avatar.html
  * @property {String} bg-color 背景颜色，一般显示文字时用（默认#ffffff）
  * @property {String} src 头像路径，如加载失败，将会显示默认头像
  * @property {String Number} size 头像尺寸，可以为指定字符串(large, default, mini)，或者数值，单位rpx（默认default）
