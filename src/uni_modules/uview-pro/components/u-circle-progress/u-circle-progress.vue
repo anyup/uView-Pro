@@ -10,6 +10,7 @@
         <!-- 支付宝小程序不支持canvas-id属性，必须用id属性 -->
         <canvas
             class="u-canvas-bg"
+            type="2d"
             :canvas-id="elBgId"
             :id="elBgId"
             :style="{
@@ -19,6 +20,7 @@
         ></canvas>
         <canvas
             class="u-canvas"
+            type="2d"
             :canvas-id="elId"
             :id="elId"
             :style="{
