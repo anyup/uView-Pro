@@ -15,7 +15,7 @@
 
 ## 说明
 
-uView UI，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。
+uView UI，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的 UI 框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。
 
 uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
 
@@ -23,14 +23,12 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 
 ## 特性
 
-- 兼容安卓，iOS，微信小程序，H5，QQ小程序，百度小程序，支付宝小程序，头条小程序
-- 60+精选组件，功能丰富，多端兼容，让您快速集成，开箱即用
-- 众多贴心的JS利器，让您飞镖在手，召之即来，百步穿杨
-- 众多的常用页面和布局，让您专注逻辑，事半功倍
-- 详尽的文档支持，现代化的演示效果
-- 按需引入，精简打包体积
-
-
+-   兼容安卓，iOS，微信小程序，H5，QQ 小程序，百度小程序，支付宝小程序，头条小程序
+-   60+精选组件，功能丰富，多端兼容，让您快速集成，开箱即用
+-   众多贴心的 JS 利器，让您飞镖在手，召之即来，百步穿杨
+-   众多的常用页面和布局，让您专注逻辑，事半功倍
+-   详尽的文档支持，现代化的演示效果
+-   按需引入，精简打包体积
 
 ## 手机预览
 
@@ -49,23 +47,29 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
     </tr>
 </table>
 
-
-
 ## 链接
 
-- [官方文档](https://uview-pro.anyup.cn/docs/)
-- [更新日志](https://uview-pro.anyup.cn/docs/components/changelog.html)
-- [升级指南](https://uview-pro.anyup.cn/docs/components/changelog.html)
-- [关于我们](https://uview-pro.anyup.cn/docs/cooperation/about.html)
+-   [官方文档](https://uview-pro.anyup.cn/docs/)
+-   [更新日志](https://uview-pro.anyup.cn/docs/components/changelog.html)
+-   [升级指南](https://uview-pro.anyup.cn/docs/components/changelog.html)
+-   [关于我们](https://uview-pro.anyup.cn/docs/cooperation/about.html)
 
 ## 交流反馈
 
-欢迎加入我们的QQ群交流反馈：[点此跳转](https://www.uviewui.com/components/addQQGroup.html)
+<table class="table">
+    <tr>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png" width="250" height="345" ></td>
+    </tr>
+    <tr>
+        <td align="center"><strong>微信群</strong><br></td>
+    </tr>
+</table>
 
-## 关于PR
+## 关于 PR
 
-> 我们非常乐意接受各位的优质PR，但在此之前我希望您了解uView Pro是一个需要兼容多个平台的（小程序、h5、ios app、android app）包括nvue页面、vue页面。
-> 所以希望在您修复bug并提交之前尽可能的去这些平台测试一下兼容性。最好能携带测试截图以方便审核。非常感谢！
+我们非常乐意接受各位的优质 PR，但在此之前我希望您了解 uView Pro 是一个需要兼容多个平台的（小程序、h5、iOS App、Android App）包括 nvue 页面、vue 页面。
+
+所以希望在您修复 bug 并提交之前尽可能的去这些平台测试一下兼容性。最好能携带测试截图以方便审核。非常感谢！
 
 ## 安装
 
@@ -73,14 +77,16 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 
 ## 快速上手
 
-1. `main.js`引入uView库
+1. `main.js`引入 uView 库
+
 ```js
 // main.js
 import uView from 'uview-ui';
 Vue.use(uView);
 ```
 
-2. `App.vue`引入基础样式(注意style标签需声明scss属性支持)
+2. `App.vue`引入基础样式(注意 style 标签需声明 scss 属性支持)
+
 ```css
 /* App.vue */
 <style lang="scss">
@@ -88,13 +94,14 @@ Vue.use(uView);
 </style>
 ```
 
-3. `uni.scss`引入全局scss变量文件
+3. `uni.scss`引入全局 scss 变量文件
+
 ```css
 /* uni.scss */
-@import "uview-ui/theme.scss";
+@import 'uview-ui/theme.scss';
 ```
 
-4. `pages.json`配置easycom规则(按需引入)
+4. `pages.json`配置 easycom 规则(按需引入)
 
 ```js
 // pages.json
@@ -113,23 +120,23 @@ Vue.use(uView);
 }
 ```
 
-请通过[快速上手](https://uviewui.com/components/quickstart.html)了解更详细的内容
+请通过[快速上手](https://uview-pro.anyup.cn/docs/components/quickstart.html)了解更详细的内容
 
 ## 使用方法
-配置easycom规则后，自动按需引入，无需`import`组件，直接引用即可。
+
+配置 easycom 规则后，自动按需引入，无需`import`组件，直接引用即可。
 
 ```html
 <template>
-	<u-button>按钮</u-button>
+    <u-button>按钮</u-button>
 </template>
 ```
 
-请通过[快速上手](https://uviewui.com/components/quickstart.html)了解更详细的内容
+请通过[快速上手](https://uview-pro.anyup.cn/docs/components/quickstart.html)了解更详细的内容
 
+## 捐赠 uView Pro
 
-## 捐赠uView的研发
-
-uView文档内容和框架源码全部开源免费，如果您认为uView帮到了您的开发工作，您可以捐赠uView的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
+uView Pro 文档内容和框架源码基于 uView UI 二次开发，因此全部开源免费，如果您认为 uView Pro 帮到了您的开发工作，您可以捐赠 uView Pro 的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
 
 <table class="table" style="width: 500px;">
     <tr>
@@ -142,6 +149,13 @@ uView文档内容和框架源码全部开源免费，如果您认为uView帮到�
     </tr>
 </table>
 
-
 ## 版权信息
-uView遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，意味着您无需支付任何费用，也无需授权，即可将uView应用到您的产品中。
+
+uView Pro 遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，意味着您无需支付任何费用，也无需授权，即可将 uView Pro 应用到您的产品中。
+
+## 鸣谢
+
+再次感谢 uView UI 开发团队，以及所有为 uView UI 的贡献者，以及所有为 uView Pro 的贡献者。
+
+-   [uView 1.0](https://github.com/umicro/uView)
+-   [uView 2.0](https://github.com/umicro/uView2.0)
