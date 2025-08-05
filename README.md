@@ -13,7 +13,7 @@
 [![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView/issues)
 [![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 
-<!-- [![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uview-pro.anyup.cn/docs/) -->
+<!-- [![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uview-pro.anyup.cn/) -->
 <!-- [![release](https://img.shields.io/github/v/release/anyup/uView-Pro?style=flat-square)](https://gitee.com/anyup/uView-Pro/releases) -->
 
 </div>
@@ -24,7 +24,7 @@ uView UI，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的 UI 框架，
 
 uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
 
-## [官方文档：https://uview-pro.anyup.cn/docs/](https://uview-pro.anyup.cn/docs/)
+## [官方文档：https://uview-pro.anyup.cn/](https://uview-pro.anyup.cn/)
 
 ## 特性
 
@@ -54,7 +54,7 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 
 ## 链接
 
--   [官方文档](https://uview-pro.anyup.cn/docs/)
+-   [官方文档](https://uview-pro.anyup.cn/)
 -   [更新日志](https://uview-pro.anyup.cn/docs/components/changelog.html)
 -   [升级指南](https://uview-pro.anyup.cn/docs/components/changelog.html)
 -   [关于我们](https://uview-pro.anyup.cn/docs/cooperation/about.html)
