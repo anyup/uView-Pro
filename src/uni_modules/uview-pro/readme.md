@@ -4,20 +4,26 @@
 <h3 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">uView Pro</h3>
 <h3 align="center">uni-app Vue3 多平台快速开发的 UI 框架</h3>
 
+<div align="center">
+
 [![star](https://gitee.com/anyup/uView-Pro/badge/star.svg)](https://gitee.com/anyup/uView-Pro/stargazers)
 [![fork](https://gitee.com/anyup/uView-Pro/badge/fork.svg)](https://gitee.com/anyup/uView-Pro/members)
 [![stars](https://img.shields.io/github/stars/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
 [![forks](https://img.shields.io/github/forks/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
 [![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView/issues)
-[![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uview-pro.anyup.cn/docs/)
-[![release](https://img.shields.io/github/v/release/anyup/uView-Pro?style=flat-square)](https://gitee.com/anyup/uView-Pro/releases)
 [![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
+<!-- [![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uview-pro.anyup.cn/docs/) -->
+<!-- [![release](https://img.shields.io/github/v/release/anyup/uView-Pro?style=flat-square)](https://gitee.com/anyup/uView-Pro/releases) -->
+
+</div>
+
+
 
 ## 说明
 
 uView UI，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的 UI 框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。
 
-uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView `1.8.8` 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
+uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
 
 ## [官方文档：https://uview-pro.anyup.cn/docs/](https://uview-pro.anyup.cn/docs/)
 
@@ -56,12 +62,16 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 
 ## 交流反馈
 
+uView Pro QQ 交流群： [点击进入](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98nSVDldWEbDdq4lxiP4aL7uATfMSlI6&authKey=G2yQJ5MQiKzMldaxBsIfKt17NuJuUw8Fr6zdKLggc6NZXgw4BVbqkU2U3EE994yd&noverify=0&group_code=811732166)
+
 <table class="table">
     <tr>
         <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>
         <td align="center"><strong>微信群</strong><br></td>
+        <td align="center"><strong>QQ群</strong><br></td>
     </tr>
 </table>
 
@@ -71,12 +81,17 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 
 所以希望在您修复 bug 并提交之前尽可能的去这些平台测试一下兼容性。最好能携带测试截图以方便审核。非常感谢！
 
+## 安装
+
+#### **插件市场** — [https://p.dcloud.net.cn/plugin?name=uview-pro](https://p.dcloud.net.cn/plugin?name=uview-pro)
+
 ## 快速上手
 
 1. `main.ts`引入 uView 库
 
 ```js
 // main.ts
+import { createSSRApp } from 'vue';
 import uViewPro from 'uview-pro';
 
 export function createApp() {
@@ -161,5 +176,7 @@ uView Pro 遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，�
 
 再次感谢 uView UI 开发团队，以及所有为 uView UI 的贡献者，以及所有为 uView Pro 的贡献者。
 
--   [uView 1.0](https://github.com/umicro/uView)
--   [uView 2.0](https://github.com/umicro/uView2.0)
+-   [uView Pro github](https://github.com/anyup/uview-pro)
+-   [uView Pro gitee](https://gitee.com/anyup/uview-pro)
+-   [uView UI 1.0](https://github.com/umicro/uView)
+-   [uView UI 2.0](https://github.com/umicro/uView2.0)
