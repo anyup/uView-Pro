@@ -55,9 +55,9 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 ## 链接
 
 -   [官方文档](https://uview-pro.anyup.cn/)
--   [更新日志](https://uview-pro.anyup.cn/docs/components/changelog.html)
--   [升级指南](https://uview-pro.anyup.cn/docs/components/changelog.html)
--   [关于我们](https://uview-pro.anyup.cn/docs/cooperation/about.html)
+-   [更新日志](https://www.anyup.cn/docs/components/changelog.html)
+-   [升级指南](https://www.anyup.cn/docs/components/changelog.html)
+-   [关于我们](https://www.anyup.cn/docs/cooperation/about.html)
 
 ## 交流反馈
 
@@ -151,7 +151,7 @@ export function createApp() {
 }
 ```
 
-请通过[快速上手](https://uview-pro.anyup.cn/docs/components/quickstart.html)了解更详细的内容
+请通过[快速上手](https://www.anyup.cn/docs/components/quickstart.html)了解更详细的内容
 
 ## 使用方法
 
@@ -163,7 +163,7 @@ export function createApp() {
 </template>
 ```
 
-请通过[快速上手](https://uview-pro.anyup.cn/docs/components/quickstart.html)了解更详细的内容
+请通过[快速上手](https://www.anyup.cn/docs/components/quickstart.html)了解更详细的内容
 
 ## 捐赠 uView Pro
 
