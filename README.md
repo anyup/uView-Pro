@@ -173,5 +173,7 @@ uView Pro 遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，�
 
 再次感谢 uView UI 开发团队，以及所有为 uView UI 的贡献者，以及所有为 uView Pro 的贡献者。
 
--   [uView 1.0](https://github.com/umicro/uView)
--   [uView 2.0](https://github.com/umicro/uView2.0)
+-   [uView Pro github](https://github.com/anyup/uview-pro)
+-   [uView Pro gitee](https://gitee.com/anyup/uview-pro)
+-   [uView UI 1.0](https://github.com/umicro/uView)
+-   [uView UI 2.0](https://github.com/umicro/uView2.0)
