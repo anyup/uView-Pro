@@ -12,12 +12,11 @@
 [![forks](https://img.shields.io/github/forks/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
 [![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView/issues)
 [![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
+
 <!-- [![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uview-pro.anyup.cn/docs/) -->
 <!-- [![release](https://img.shields.io/github/v/release/anyup/uView-Pro?style=flat-square)](https://gitee.com/anyup/uView-Pro/releases) -->
 
 </div>
-
-
 
 ## 说明
 
@@ -83,7 +82,20 @@ uView Pro QQ 交流群： [点击进入](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027
 
 ## 安装
 
-#### **插件市场** — [https://p.dcloud.net.cn/plugin?name=uview-pro](https://p.dcloud.net.cn/plugin?name=uview-pro)
+#### **npm 安装**
+
+```bash
+# npm 安装
+npm install uview-pro
+
+# yarn 安装
+yarn add uview-pro
+
+# pnpm 安装
+pnpm add uview-pro
+```
+
+#### **插件市场下载** — [https://p.dcloud.net.cn/plugin?name=uview-pro](https://p.dcloud.net.cn/plugin?name=uview-pro)
 
 ## 快速上手
 
