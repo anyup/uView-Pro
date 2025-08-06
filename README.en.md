@@ -28,7 +28,7 @@ uView Pro is a uni-app ecological framework that fully supports Vue3.0 and TypeS
 ## Features
 
 -   Compatible with Android, iOS, WeChat Mini Programs, H5, QQ Mini Programs, Baidu Mini Programs, Alipay Mini Programs, and Toutiao Mini Programs
--   60+ selected components, rich in functionality, multi-end compatibility, allowing for quick integration and ready-to-use out of the box
+-   70+ selected components, rich in functionality, multi-end compatibility, allowing for quick integration and ready-to-use out of the box
 -   Numerous handy JS tools at your disposal, enabling precise and efficient development
 -   A variety of commonly used pages and layouts, allowing you to focus on logic and achieve more with less effort
 -   Detailed documentation support and modern demonstration effects
