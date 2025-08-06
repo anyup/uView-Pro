@@ -4,19 +4,12 @@
 <h3 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">uView Pro</h3>
 <h3 align="center">uni-app Vue3 多平台快速开发的 UI 框架</h3>
 
-<div align="center">
-
 [![star](https://gitee.com/anyup/uView-Pro/badge/star.svg)](https://gitee.com/anyup/uView-Pro/stargazers)
 [![fork](https://gitee.com/anyup/uView-Pro/badge/fork.svg)](https://gitee.com/anyup/uView-Pro/members)
 [![stars](https://img.shields.io/github/stars/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
 [![forks](https://img.shields.io/github/forks/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
 [![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/umicro/uView/issues)
 [![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
-
-<!-- [![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uview-pro.anyup.cn/) -->
-<!-- [![release](https://img.shields.io/github/v/release/anyup/uView-Pro?style=flat-square)](https://gitee.com/anyup/uView-Pro/releases) -->
-
-</div>
 
 ## 说明
 
@@ -41,19 +34,30 @@ uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView
 
 <table class="table">
     <tr>
-	    <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_wx.jpg" width="200" height="200" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_wx.jpg" width="200" height="200" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_h5.png" width="200" height="200" ></td>
-	    <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="200" height="200" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="200" height="200" ></td>
     </tr>
     <tr>
         <td align="center"><strong>微信小程序</strong><br>（微信扫码）</td>
-	    <td align="center"><strong>H5</strong><br>（浏览器扫码）</td>
-	    <td align="center"><strong>Android</strong><br>（浏览器扫码）</td>
+        <td align="center"><strong>H5</strong><br>（浏览器扫码）</td>
+        <td align="center"><strong>Android</strong><br>（浏览器扫码）</td>
     </tr>
 </table>
 
+运行示例工程，请[下载源码](https://github.com/anyup/uview-pro)后，在项目根目录执行以下命令：
+
+```bash
+pnpm install
+pnpm dev
+```
+
+更多运行和构建命令参考：[pnpm 运行指南](readme-pnpm.md)
+
 ## 链接
 
+-   [Github](https://github.com/anyup/uview-pro)
+-   [Gitee](https://gitee.com/anyup/uview-pro)
 -   [官方文档](https://uview-pro.anyup.cn/)
 -   [更新日志](https://www.anyup.cn/docs/components/changelog.html)
 -   [升级指南](https://www.anyup.cn/docs/components/changelog.html)
@@ -95,7 +99,9 @@ yarn add uview-pro
 pnpm add uview-pro
 ```
 
-#### **插件市场下载** — [https://p.dcloud.net.cn/plugin?name=uview-pro](https://p.dcloud.net.cn/plugin?name=uview-pro)
+#### **插件市场下载**
+
+[https://p.dcloud.net.cn/plugin?name=uview-pro](https://p.dcloud.net.cn/plugin?name=uview-pro)
 
 ## 快速上手
 
@@ -103,6 +109,7 @@ pnpm add uview-pro
 
 ```js
 // main.ts
+import { createSSRApp } from 'vue';
 import uViewPro from 'uview-pro';
 
 export function createApp() {
@@ -136,17 +143,17 @@ export function createApp() {
 ```js
 // pages.json
 {
-	"easycom": {
-		// uni_modules安装的方式需要前面的"@/"，npm安装的方式无需"@/"
-		// npm安装方式
-		"^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
-		// uni_modules安装方式
-		// "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
-	},
-	// 此为本身已有的内容
-	"pages": [
-		// ......
-	]
+    "easycom": {
+        // uni_modules安装的方式需要前面的"@/"，npm安装的方式无需"@/"
+        // npm安装方式
+        "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
+        // uni_modules安装方式
+        // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+    },
+    // 此为本身已有的内容
+    "pages": [
+        // ......
+    ]
 }
 ```
 
@@ -171,11 +178,11 @@ uView Pro 文档内容和框架源码基于 uView UI 二次开发，因此全部
 <table class="table">
     <tr>
         <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-pay.png" width="250" height="345" ></td>
-	    <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png" width="250" height="345" ></td>
     </tr>
     <tr>
         <td align="center"><strong>微信</strong><br></td>
-	    <td align="center"><strong>支付宝</strong><br></td>
+        <td align="center"><strong>支付宝</strong><br></td>
     </tr>
 </table>
 
@@ -187,7 +194,7 @@ uView Pro 遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，�
 
 再次感谢 uView UI 开发团队，以及所有为 uView UI 的贡献者，以及所有为 uView Pro 的贡献者。
 
--   [uView Pro github](https://github.com/anyup/uview-pro)
--   [uView Pro gitee](https://gitee.com/anyup/uview-pro)
+-   [Github](https://github.com/anyup/uview-pro)
+-   [Gitee](https://gitee.com/anyup/uview-pro)
 -   [uView UI 1.0](https://github.com/umicro/uView)
 -   [uView UI 2.0](https://github.com/umicro/uView2.0)
