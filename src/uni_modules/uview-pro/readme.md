@@ -52,7 +52,7 @@ pnpm install
 pnpm dev
 ```
 
-<!-- 更多运行和构建命令参考：[pnpm 运行指南](readme-pnpm.md) -->
+
 
 ## 链接
 
