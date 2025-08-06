@@ -60,7 +60,6 @@ pnpm dev
 -   [Gitee](https://gitee.com/anyup/uview-pro)
 -   [官方文档](https://uview-pro.anyup.cn/)
 -   [更新日志](https://www.anyup.cn/docs/components/changelog.html)
--   [升级指南](https://www.anyup.cn/docs/components/changelog.html)
 -   [关于我们](https://www.anyup.cn/docs/cooperation/about.html)
 
 ## 交流反馈
