@@ -1,3 +1,9 @@
+<!-- 语言切换按钮 -->
+<p align="right" style="margin-top: 10px;">
+    <a href="README.en.md" style="padding: 6px 16px; background: #2979ff; color: #fff; border-radius: 6px; text-decoration: none; font-weight: bold;">English</a>
+    <span style="padding: 6px 16px; background: #ededed; color: #333; border-radius: 6px; margin-left: 8px; font-weight: bold;">中文</span>
+</p>
+
 <p align="center">
     <img alt="logo" src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png" width="120" height="120" style="margin-bottom: 10px;">
 </p>
@@ -52,7 +58,7 @@ pnpm install
 pnpm dev
 ```
 
-更多运行和构建命令参考：[pnpm 运行指南](readme-pnpm.md)
+更多运行和构建命令参考：[pnpm 运行指南](README-pnpm.md)
 
 ## 链接
 
