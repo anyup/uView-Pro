@@ -19,7 +19,7 @@ defineOptions({ name: 'u-count-to' });
 /**
  * countTo 数字滚动
  * @description 该组件一般用于需要滚动数字到某一个值的场景，目标要求是一个递增的值。
- * @tutorial https://uview-pro.anyup.cn/docs/components/countTo.html
+ * @tutorial https://uview-pro.netlify.app/components/countTo.html
  * @property {String | Number} start-val 开始值
  * @property {String | Number} end-val 结束值
  * @property {String | Number} duration 滚动过程所需的时间，单位ms（默认2000）

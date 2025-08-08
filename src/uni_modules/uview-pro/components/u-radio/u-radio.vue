@@ -26,7 +26,7 @@ defineOptions({
 /**
  * radio 单选框
  * @description 单选框用于有一个选择，用户只能选择其中一个的场景。搭配u-radio-group使用
- * @tutorial https://uview-pro.anyup.cn/docs/components/radio.html
+ * @tutorial https://uview-pro.netlify.app/components/radio.html
  * @property {String|Number} icon-size 图标大小，单位rpx（默认24）
  * @property {String|Number} label-size label字体大小，单位rpx（默认28）
  * @property {String|Number} name radio组件的标示符

@@ -17,7 +17,7 @@ defineOptions({ name: 'u-waterfall' });
 /**
  * waterfall 瀑布流
  * @description 这是一个瀑布流形式的组件，内容分为左右两列，结合uView的懒加载组件效果更佳。相较于某些只是奇偶数左右分别，或者没有利用vue作用域插槽的做法，uView的瀑布流实现了真正的 组件化，搭配LazyLoad 懒加载和loadMore 加载更多组件，让您开箱即用，眼前一亮。
- * @tutorial https://uview-pro.anyup.cn/docs/components/waterfall.html
+ * @tutorial https://uview-pro.netlify.app/components/waterfall.html
  * @property {Array} flow-list 用于渲染的数据
  * @property {String | Number} add-time 单条数据添加到队列的时间间隔，单位ms，见上方注意事项说明（默认200）
  * @example <u-waterfall :flowList="flowList"></u-waterfall>

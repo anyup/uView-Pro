@@ -17,7 +17,7 @@ defineOptions({
 /**
  * cellGroup 单元格父组件Group
  * @description cell单元格一般用于一组列表的情况，比如个人中心页，设置页等。搭配u-cell-item
- * @tutorial https://uview-pro.anyup.cn/docs/components/cell.html
+ * @tutorial https://uview-pro.netlify.app/components/cell.html
  * @property {String} title 分组标题
  * @property {Boolean} border 是否显示外边框（默认true）
  * @property {Object} title-style 分组标题的的样式，对象形式，如{'font-size': '24rpx'} 或 {'fontSize': '24rpx'}

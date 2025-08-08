@@ -11,7 +11,7 @@ defineOptions({ name: 'u-top-tips' });
 /**
  * topTips 顶部提示
  * @description 该组件一般用于页面顶部向下滑出一个提示，尔后自动收起的场景。
- * @tutorial https://uview-pro.anyup.cn/docs/components/topTips.html
+ * @tutorial https://uview-pro.netlify.app/components/topTips.html
  * @property {String|Number} navbarHeight 导航栏高度(包含状态栏高度在内)，单位PX
  * @property {String|Number} zIndex z-index值（默认975）
  * @example <u-top-tips ref="uTips"></u-top-tips>

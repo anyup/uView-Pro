@@ -56,7 +56,7 @@ defineOptions({
 /**
  * modal 模态框
  * @description 弹出模态框，常用于消息提示、消息确认、在当前页面内完成特定的交互操作
- * @tutorial https://uview-pro.anyup.cn/docs/components/modal.html
+ * @tutorial https://uview-pro.netlify.app/components/modal.html
  * @property {Boolean} value 是否显示模态框
  * @property {String | Number} z-index 层级
  * @property {String} title 模态框标题（默认"提示"）

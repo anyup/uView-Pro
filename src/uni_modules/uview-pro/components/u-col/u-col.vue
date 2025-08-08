@@ -14,7 +14,7 @@ defineOptions({
 /**
  * col 布局单元格
  * @description 通过基础的 12 分栏，迅速简便地创建布局（搭配<u-row>使用）
- * @tutorial https://uview-pro.anyup.cn/docs/components/layout.html
+ * @tutorial https://uview-pro.netlify.app/components/layout.html
  * @property {String|Number} span 栅格占据的列数，总12等分（默认0）
  * @property {String} text-align 文字水平对齐方式（默认left）
  * @property {String|Number} offset 分栏左边偏移，计算方式与span相同（默认0）

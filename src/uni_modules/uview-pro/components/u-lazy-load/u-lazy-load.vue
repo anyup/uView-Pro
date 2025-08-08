@@ -42,7 +42,7 @@ defineOptions({ name: 'u-lazy-load' });
 /**
  * lazyLoad 懒加载
  * @description 懒加载使用的场景为：页面有很多图片时，APP会同时加载所有的图片，导致页面卡顿，各个位置的图片出现前后不一致等.
- * @tutorial https://uview-pro.anyup.cn/docs/components/lazyLoad.html
+ * @tutorial https://uview-pro.netlify.app/components/lazyLoad.html
  * @property {String | Number} index 用户自定义值，在事件触发时回调，用以区分是哪个图片
  * @property {String} image 图片路径
  * @property {String} loading-img 预加载时的占位图

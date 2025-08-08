@@ -31,7 +31,7 @@ defineOptions({
 /**
  * collapseItem 手风琴Item
  * @description 通过折叠面板收纳内容区域（搭配u-collapse使用）
- * @tutorial https://uview-pro.anyup.cn/docs/components/collapse.html
+ * @tutorial https://uview-pro.netlify.app/components/collapse.html
  * @property {String} title 面板标题
  * @property {String Number} index 主要用于事件的回调，标识那个Item被点击
  * @property {Boolean} disabled 面板是否可以打开或收起（默认false）
@@ -121,7 +121,7 @@ function headClick() {
  * 查询内容高度
  */
 function queryRect() {
-    // getRect为uView自带的节点查询简化方法，详见文档介绍：https://uview-pro.anyup.cn/docs/js/getRect.html
+    // getRect为uView自带的节点查询简化方法，详见文档介绍：https://uview-pro.netlify.app/js/getRect.html
     // 组件内部一般用this.$uGetRect，对外的为this.$u.getRect，二者功能一致，名称不同
     $u.getRect('#' + elId.value, instance).then((res: any) => {
         height.value = res.height;

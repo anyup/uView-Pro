@@ -17,7 +17,7 @@ defineOptions({ name: 'u-time-line-item' });
 /**
  * timeLineItem 时间轴Item
  * @description 时间轴组件一般用于物流信息展示，各种跟时间相关的记录等场景。(搭配u-time-line使用)
- * @tutorial https://uview-pro.anyup.cn/docs/components/timeLine.html
+ * @tutorial https://uview-pro.netlify.app/components/timeLine.html
  * @property {String} bg-color 左边节点的背景颜色，一般通过slot内容自定义背景颜色即可（默认#ffffff）
  * @property {String | Number} node-top 节点左边图标绝对定位的top值，单位rpx
  * @example <u-time-line-item node-top="2">...</u-time-line-item>

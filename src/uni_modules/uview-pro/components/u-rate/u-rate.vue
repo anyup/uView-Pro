@@ -29,7 +29,7 @@ defineOptions({
 /**
  * rate 评分
  * @description 该组件一般用于满意度调查，星型评分的场景
- * @tutorial https://uview-pro.anyup.cn/docs/components/rate.html
+ * @tutorial https://uview-pro.netlify.app/components/rate.html
  * @property {String|Number} count 最多可选的星星数量（默认5）
  * @property {String|Number} current 默认选中的星星数量（默认0）
  * @property {Boolean} disabled 是否禁止用户操作（默认false）

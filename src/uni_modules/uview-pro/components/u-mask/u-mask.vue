@@ -23,7 +23,7 @@ defineOptions({ name: 'u-mask' });
 /**
  * mask 遮罩
  * @description 创建一个遮罩层，用于强调特定的页面元素，并阻止用户对遮罩下层的内容进行操作，一般用于弹窗场景
- * @tutorial https://uview-pro.anyup.cn/docs/components/mask.html
+ * @tutorial https://uview-pro.netlify.app/components/mask.html
  * @property {Boolean} show 是否显示遮罩（默认false）
  * @property {String|Number} z-index z-index 层级（默认1070）
  * @property {Object} custom-style 自定义样式对象，见上方说明

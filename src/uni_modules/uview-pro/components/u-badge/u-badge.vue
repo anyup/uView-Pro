@@ -29,7 +29,7 @@ defineOptions({
 /**
  * badge 角标
  * @description 本组件一般用于展示头像的地方，如个人中心，或者评论列表页的用户头像展示等场所。
- * @tutorial https://uview-pro.anyup.cn/docs/components/badge.html
+ * @tutorial https://uview-pro.netlify.app/components/badge.html
  * @property {String|Number} count 展示的数字，大于 overflowCount 时显示为 ${overflowCount}+，为0且show-zero为false时隐藏
  * @property {Boolean} is-dot 不展示数字，只有一个小点（默认false）
  * @property {Boolean} absolute 组件是否绝对定位，为true时，offset参数才有效（默认true）

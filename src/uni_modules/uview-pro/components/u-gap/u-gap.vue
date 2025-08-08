@@ -12,7 +12,7 @@ defineOptions({
 /**
  * gap 间隔槽
  * @description 该组件一般用于内容块之间的用一个灰色块隔开的场景，方便用户风格统一，减少工作量
- * @tutorial https://uview-pro.anyup.cn/docs/components/gap.html
+ * @tutorial https://uview-pro.netlify.app/components/gap.html
  * @property {String} bg-color 背景颜色（默认#f3f4f6）
  * @property {String Number} height 分割槽高度，单位rpx（默认30）
  * @property {String Number} margin-top 与前一个组件的距离，单位rpx（默认0）

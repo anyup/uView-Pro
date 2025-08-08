@@ -59,7 +59,7 @@ defineOptions({ name: 'u-count-down' });
 /**
  * countDown 倒计时
  * @description 该组件一般使用于某个活动的截止时间上，通过数字的变化，给用户明确的时间感受，提示用户进行某一个行为操作。
- * @tutorial https://uview-pro.anyup.cn/docs/components/countDown.html
+ * @tutorial https://uview-pro.netlify.app/components/countDown.html
  * @property {String | Number} timestamp 倒计时，单位为秒
  * @property {Boolean} autoplay 是否自动开始倒计时，如果为false，需手动调用开始方法。见官网说明（默认true）
  * @property {String} separator 分隔符，colon为英文冒号，zh为中文（默认colon）

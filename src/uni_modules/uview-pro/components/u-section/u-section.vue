@@ -45,7 +45,7 @@ defineOptions({ name: 'u-section' });
 /**
  * section 查看更多
  * @description 该组件一般用于分类信息有很多，但是限于篇幅只能列出一部分，让用户通过"查看更多"获得更多信息的场景，实际效果见演示。
- * @tutorial https://uview-pro.anyup.cn/docs/components/section.html
+ * @tutorial https://uview-pro.netlify.app/components/section.html
  * @property {String} title 左边主标题
  * @property {String} subTitle 右边副标题（默认更多）
  * @property {Boolean} right 是否显示右边的内容（默认true）

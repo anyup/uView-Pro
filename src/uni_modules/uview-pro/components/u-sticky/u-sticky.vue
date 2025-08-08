@@ -33,7 +33,7 @@ defineOptions({ name: 'u-sticky' });
 /**
  * sticky 吸顶
  * @description 该组件与CSS中position: sticky属性实现的效果一致，当组件达到预设的到顶部距离时， 就会固定在指定位置，组件位置大于预设的顶部距离时，会重新按照正常的布局排列。
- * @tutorial https://uview-pro.anyup.cn/docs/components/sticky.html
+ * @tutorial https://uview-pro.netlify.app/components/sticky.html
  * @property {String|Number} offsetTop 吸顶时与顶部的距离，单位rpx（默认0）
  * @property {String|Number} index 自定义标识，用于区分是哪一个组件
  * @property {Boolean} enable 是否开启吸顶功能（默认true）

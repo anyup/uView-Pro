@@ -33,7 +33,7 @@ defineOptions({
 /**
  * divider 分割线
  * @description 区隔内容的分割线，一般用于页面底部"没有更多"的提示。
- * @tutorial https://uview-pro.anyup.cn/docs/components/divider.html
+ * @tutorial https://uview-pro.netlify.app/components/divider.html
  * @property {String Number} half-width 文字左或右边线条宽度，数值或百分比，数值时单位为rpx
  * @property {String} border-color 线条颜色，优先级高于type（默认#dcdfe6）
  * @property {String} color 文字颜色（默认#909399）

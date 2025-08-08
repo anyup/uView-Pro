@@ -45,7 +45,7 @@ defineOptions({
 /**
  * cellItem 单元格Item
  * @description cell单元格一般用于一组列表的情况，比如个人中心页，设置页等。搭配u-cell-group使用
- * @tutorial https://uview-pro.anyup.cn/docs/components/cell.html
+ * @tutorial https://uview-pro.netlify.app/components/cell.html
  * @property {String} title 左侧标题
  * @property {String} icon 左侧图标名，只支持uView内置图标，见Icon 图标
  * @property {Object} icon-style 左边图标的样式，对象形式

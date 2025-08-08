@@ -36,7 +36,7 @@ defineOptions({ name: 'u-read-more' });
 /**
  * readMore 阅读更多
  * @description 该组件一般用于内容较长，预先收起一部分，点击展开全部内容的场景。
- * @tutorial https://uview-pro.anyup.cn/docs/components/readMore.html
+ * @tutorial https://uview-pro.netlify.app/components/readMore.html
  * @property {String|Number} showHeight 内容超出此高度才会显示展开全文按钮，单位rpx（默认400）
  * @property {Boolean} toggle 展开后是否显示收起按钮（默认false）
  * @property {String} closeText 关闭时的提示文字（默认“展开阅读全文”）

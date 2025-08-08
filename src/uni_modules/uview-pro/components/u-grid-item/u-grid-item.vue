@@ -24,7 +24,7 @@ defineOptions({ name: 'u-grid-item' });
 /**
  * gridItem 宫格项
  * @description 宫格组件一般用于同时展示多个同类项目的场景，可以给宫格的项目设置徽标组件(badge)，或者图标等，也可以扩展为左右滑动的轮播形式。搭配u-grid使用
- * @tutorial https://uview-pro.anyup.cn/docs/components/grid.html
+ * @tutorial https://uview-pro.netlify.app/components/grid.html
  * @property {String} bg-color 宫格的背景颜色（默认#ffffff）
  * @property {String|Number} index 点击宫格时，返回的值
  * @property {Object} custom-style 自定义样式，对象形式
