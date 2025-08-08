@@ -23,7 +23,7 @@ uView UI is an excellent UI framework in the [uni-app](https://uniapp.dcloud.io/
 
 uView Pro is a uni-app ecological framework that fully supports Vue3.0 and TypeScript. The baseline version of uView Pro is modified based on uView 1.8.8, completely reconstructed using TypeScript, and now fully supports uni-app Vue3.0.
 
-## [Official Documentation: https://uview-pro.anyup.cn/](https://uview-pro.anyup.cn/)
+## [Official Documentation: https://uview-pro.netlify.app/](https://uview-pro.netlify.app/)
 
 ## Features
 
@@ -64,10 +64,10 @@ For more running and building commands, please refer to the [pnpm Running Guide]
 
 -   [Github](https://github.com/anyup/uview-pro)
 -   [Gitee](https://gitee.com/anyup/uview-pro)
--   [Official Documentation](https://uview-pro.anyup.cn/)
--   [Change Log](https://www.anyup.cn/docs/components/changelog.html)
--   [Upgrade Guide](https://www.anyup.cn/docs/components/changelog.html)
--   [About Us](https://www.anyup.cn/docs/cooperation/about.html)
+-   [Official Documentation](https://uview-pro.netlify.app/)
+-   [Change Log](https://uview-pro.netlify.app/components/changelog.html)
+-   [Upgrade Guide](https://uview-pro.netlify.app/components/changelog.html)
+-   [About Us](https://uview-pro.netlify.app/cooperation/about.html)
 
 ## Communication and Feedback
 
@@ -163,7 +163,7 @@ export function createApp() {
 }
 ```
 
-For more detailed content, please refer to [Quick Start](https://www.anyup.cn/docs/components/quickstart.html)
+For more detailed content, please refer to [Quick Start](https://uview-pro.netlify.app/components/quickstart.html)
 
 ## Usage
 
@@ -175,7 +175,7 @@ After configuring the easycom rules, components are automatically introduced as 
 </template>
 ```
 
-For more detailed content, please refer to [Quick Start](https://www.anyup.cn/docs/components/quickstart.html)
+For more detailed content, please refer to [Quick Start](https://uview-pro.netlify.app/components/quickstart.html)
 
 ## Donate to uView Pro
 

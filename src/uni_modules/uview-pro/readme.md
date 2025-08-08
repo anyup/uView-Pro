@@ -17,7 +17,7 @@ uView UI，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的 UI 框架，
 
 uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
 
-## [官方文档：https://uview-pro.anyup.cn/](https://uview-pro.anyup.cn/)
+## [官方文档：https://uview-pro.netlify.app/](https://uview-pro.netlify.app/)
 
 ## 特性
 
@@ -58,7 +58,7 @@ pnpm dev
 
 -   [Github](https://github.com/anyup/uview-pro)
 -   [Gitee](https://gitee.com/anyup/uview-pro)
--   [官方文档](https://uview-pro.anyup.cn/)
+-   [官方文档](https://uview-pro.netlify.app/)
 -   [更新日志](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
 
 ## 交流反馈
@@ -155,7 +155,7 @@ export function createApp() {
 }
 ```
 
-请通过[快速上手](https://www.anyup.cn/docs/components/quickstart.html)了解更详细的内容
+请通过[快速上手](https://uview-pro.netlify.app/components/quickstart.html)了解更详细的内容
 
 ## 使用方法
 
@@ -167,7 +167,7 @@ export function createApp() {
 </template>
 ```
 
-请通过[快速上手](https://www.anyup.cn/docs/components/quickstart.html)了解更详细的内容
+请通过[快速上手](https://uview-pro.netlify.app/components/quickstart.html)了解更详细的内容
 
 ## 捐赠 uView Pro
 
