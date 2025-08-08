@@ -113,7 +113,7 @@
         "title" : "uView Pro",
         "router" : {
             "mode" : "hash",
-            "base" : "/h5/"
+            "base" : "/"
         },
         "optimization" : {
             "treeShaking" : {
