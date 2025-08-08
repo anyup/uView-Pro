@@ -31,10 +31,7 @@ defineOptions({
  * @property {String} label-color label字体颜色（默认#606266）
  * @property {Object} custom-style icon的样式，对象形式
  * @property {String} custom-prefix 自定义字体图标库时，需要写上此值
- * @property {String | Number} margin-left label在右侧时与图标的距离，单位rpx（默认6）
- * @property {String | Number} margin-top label在下方时与图标的距离，单位rpx（默认6）
- * @property {String | Number} margin-bottom label在上方时与图标的距离，单位rpx（默认6）
- * @property {String | Number} margin-right label在左侧时与图标的距离，单位rpx（默认6）
+ * @property {String | Number} space label与图标的距离，单位rpx（默认6）
  * @property {String} index 一个用于区分多个图标的值，点击图标时通过click事件传出
  * @property {String} hover-class 图标按下去的样式类，用法同uni的view组件的hover-class参数，详情见官网
  * @property {String} width 显示图片小图标时的宽度
@@ -111,25 +108,10 @@ const props = defineProps({
      */
     labelColor: { type: String, default: '#606266' },
     /**
-     * label与图标的距离(横向排列)，单位rpx（默认6）
+     * label与图标的距离，单位rpx（默认6）
      * @default '6'
      */
-    marginLeft: { type: [String, Number], default: '6' },
-    /**
-     * label与图标的距离(竖向排列)，单位rpx（默认6）
-     * @default '6'
-     */
-    marginTop: { type: [String, Number], default: '6' },
-    /**
-     * label与图标的距离(竖向排列)，单位rpx（默认6）
-     * @default '6'
-     */
-    marginRight: { type: [String, Number], default: '6' },
-    /**
-     * label与图标的距离(竖向排列)，单位rpx（默认6）
-     * @default '6'
-     */
-    marginBottom: { type: [String, Number], default: '6' },
+	space: { type: [String, Number], default: '6' },
     /**
      * 图片的mode，参考uni-app image组件
      * @default 'widthFix'
@@ -293,10 +275,10 @@ const labelStyle = computed(() => {
     return {
         color: props.labelColor,
         fontSize: $u.addUnit(props.labelSize),
-        marginLeft: props.labelPos === 'right' ? $u.addUnit(props.marginLeft) : 0,
-        marginTop: props.labelPos === 'bottom' ? $u.addUnit(props.marginTop) : 0,
-        marginRight: props.labelPos === 'left' ? $u.addUnit(props.marginRight) : 0,
-        marginBottom: props.labelPos === 'top' ? $u.addUnit(props.marginBottom) : 0
+        marginLeft: props.labelPos === 'right' ? $u.addUnit(props.space) : 0,
+        marginTop: props.labelPos === 'bottom' ? $u.addUnit(props.space) : 0,
+        marginRight: props.labelPos === 'left' ? $u.addUnit(props.space) : 0,
+        marginBottom: props.labelPos === 'top' ? $u.addUnit(props.space) : 0
     };
 });
 
