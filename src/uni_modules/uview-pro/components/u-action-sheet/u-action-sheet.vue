@@ -45,8 +45,8 @@ defineOptions({
  * actionSheet 操作菜单
  * @description 本组件用于从底部弹出一个操作菜单，供用户选择并返回结果。本组件功能类似于uni的uni.showActionSheetAPI，配置更加灵活，所有平台都表现一致。
  * @tutorial https://uview-pro.netlify.app/components/actionSheet.html
- * @property {Array<Object>} list 按钮的文字数组，见官方文档示例
- * @property {Object} tips 顶部的提示文字，见官方文档示例
+ * @property {Array<{ text: string; subText?: string; color?: string; fontSize?: string; disabled?: boolean }>} list 按钮的文字数组，见官方文档示例
+ * @property {{text: string; color?: string; fontSize?: string}} tips 顶部的提示文字，见官方文档示例
  * @property {String} cancel-text 取消按钮的提示文字
  * @property {Boolean} cancel-btn 是否显示底部的取消按钮（默认true）
  * @property {Number String} border-radius 弹出部分顶部左右的圆角值，单位rpx（默认0）
@@ -67,7 +67,7 @@ const props = defineProps({
     },
     /** 按钮的文字数组，可以自定义颜色和字体大小，字体单位为rpx */
     list: {
-        type: Array as () => Array<any>,
+        type: Array as () => Array<{ text: string; subText?: string; color?: string; fontSize?: string; disabled?: boolean }>,
         default: () => []
     },
     /** 顶部的提示文字 */
