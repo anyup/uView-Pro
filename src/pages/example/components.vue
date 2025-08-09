@@ -39,6 +39,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import rawList from './components.config';
+import { onShareAppMessage } from '@dcloudio/uni-app';
 
 /**
  * 生成随机浅色背景
@@ -104,7 +105,15 @@ function getFieldTitle(item: any) {
     return locale.value === 'zh-Hans' ? item.title : item.title_en;
 }
 
-// 导出给模板使用
+/**
+ * 分享
+ */
+onShareAppMessage(res => {
+    return {
+        title: 'uView Pro - 组件示例',
+        path: '/pages/example/components'
+    };
+});
 </script>
 
 <style lang="scss" scoped>

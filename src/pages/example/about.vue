@@ -45,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+import { onShareAppMessage } from '@dcloudio/uni-app';
 import { ref } from 'vue';
 
 // 头像图片
@@ -158,6 +159,16 @@ function copyLink(data: string) {
     });
     // #endif
 }
+
+/**
+ * 分享
+ */
+onShareAppMessage(res => {
+    return {
+        title: 'uView Pro - 组件示例',
+        path: '/pages/example/components'
+    };
+});
 </script>
 
 <style lang="scss" scoped>
