@@ -7,7 +7,7 @@
                     <text class="nav-info__title__text">uView Pro</text>
                 </view>
                 <view class="nav-slogan">
-                    {{ $t('common.intro') }}
+                    {{ t('common.intro') }}
                 </view>
             </view>
         </view>
@@ -22,33 +22,43 @@
     </view>
 </template>
 
-<script>
-import { version } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import i18n from '@/locales';
 
-export default {
-    props: {
-        desc: String,
-        title: String
-    },
-    computed: {
-        lang() {
-            return i18n.global.locale == 'zh-Hans' ? 'zh' : 'en';
-        }
-    },
-    data() {
-        return {
-            version: uni.$u.config.v
-        };
-    },
-    methods: {
-        switchLang() {
-            const locale = i18n.global.locale == 'zh-Hans' ? 'en' : 'zh-Hans';
-            uni.setLocale(locale);
-            i18n.global.locale = locale;
-        }
-    }
-};
+/**
+ * 页面导航栏组件
+ * @description 顶部logo、标题、描述、语言切换
+ */
+
+defineProps<{
+    desc?: string;
+    title?: string;
+}>();
+
+// 国际化钩子
+const { t } = useI18n();
+
+// 版本号（如需展示可用）
+// const version = uni.$u.config.v;
+
+/**
+ * 当前语言标识
+ */
+const lang = computed(() => {
+    return i18n.global.locale == 'zh-Hans' ? 'zh' : 'en';
+});
+
+/**
+ * 语言切换
+ */
+function switchLang() {
+    const locale = i18n.global.locale == 'zh-Hans' ? 'en' : 'zh-Hans';
+    uni.setLocale(locale);
+    i18n.global.locale = locale;
+}
+
 </script>
 
 <style lang="scss" scoped>
