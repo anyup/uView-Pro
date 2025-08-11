@@ -1,10 +1,4 @@
----
-name: 'PR 提交 Pull Request'
-about: '提交优质 PR，使 uView Pro 更强大！'
-title: '【PR提交】'
-labels: ['pr', 'contribution']
-assignees: []
----
+# 该模板用于 Gitee Pull Request 自动加载，无需 YAML 头部
 
 ## 🔀 PR 提交 | Pull Request
 
