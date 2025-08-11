@@ -107,7 +107,7 @@ pnpm add uview-pro
 
 #### **Download from Plugin Market**
 
-[https://p.dcloud.net.cn/plugin?name=uview-pro](https://p.dcloud.net.cn/plugin?name=uview-pro)
+[https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
 
 ## Quick Start
 

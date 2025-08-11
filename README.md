@@ -105,7 +105,7 @@ pnpm add uview-pro
 
 #### **插件市场下载**
 
-[https://p.dcloud.net.cn/plugin?name=uview-pro](https://p.dcloud.net.cn/plugin?name=uview-pro)
+[https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
 
 ## 快速上手
 
