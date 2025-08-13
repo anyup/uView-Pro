@@ -394,4 +394,6 @@ function md5(str: string): string {
   return hex_md5(str);
 }
 
-export default md5;
+export default {
+  md5,
+};
