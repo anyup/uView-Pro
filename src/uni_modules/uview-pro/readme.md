@@ -56,8 +56,6 @@ pnpm install
 pnpm dev
 ```
 
-
-
 ## 链接
 
 -   [Github](https://github.com/anyup/uview-pro)
@@ -129,15 +127,22 @@ export function createApp() {
 ```css
 /* App.vue */
 <style lang="scss">
+/* npm安装方式 */
 @import "uview-pro/index.scss";
+
+/* uni_modules安装方式 */
+@import "@/uni_modules/uview-pro/index.scss";
 </style>
 ```
 
 3. `uni.scss`引入全局 scss 变量文件
 
 ```css
-/* uni.scss */
+/* npm安装方式 */
 @import 'uview-pro/theme.scss';
+
+/* uni_modules安装方式 */
+@import '@/uni_modules/uview-pro/theme.scss';
 ```
 
 4. `pages.json`配置 easycom 规则(按需引入)
@@ -146,11 +151,11 @@ export function createApp() {
 // pages.json
 {
     "easycom": {
-        // uni_modules安装的方式需要前面的"@/"，npm安装的方式无需"@/"
+        // uni_modules安装的方式需要前面的"@/uni_modules/"，npm安装的方式无需"@/"，以下方式任选其一
         // npm安装方式
         "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
         // uni_modules安装方式
-        // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+        "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
     },
     // 此为本身已有的内容
     "pages": [
@@ -164,6 +169,8 @@ export function createApp() {
 ## 使用方法
 
 配置 easycom 规则后，自动按需引入，无需`import`组件，直接引用即可。
+
+> 注意：配置完以上规则后，一定要重新运行 uni-app 项目，否则不会生效
 
 ```html
 <template>
