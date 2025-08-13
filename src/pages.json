@@ -21,28 +21,13 @@
                 // "navigationStyle": "custom"
             }
         },
-        // // avatarCropper-头像裁剪
-        // {
-        // 	"path": "uni_modules/uview-pro/components/u-avatar-cropper/u-avatar-cropper",
-        // 	"style": {
-        // 		"navigationBarTitleText": "头像裁剪",
-        // 		"navigationBarBackgroundColor": "#000000"
-        // 	}
-        // },
-        // // 演示-工具
-        // {
-        // 	"path": "pages/example/js",
-        // 	"style": {
-        // 		"navigationBarTitleText": "工具"
-        // 	}
-        // },
-        // // 演示-模板
-        // {
-        // 	"path": "pages/example/template",
-        // 	"style": {
-        // 		"navigationBarTitleText": "模板"
-        // 	}
-        // },
+        // 演示-工具
+        {
+            "path": "pages/example/js",
+            "style": {
+                "navigationBarTitleText": "工具"
+            }
+        },
         // fullScreen-压窗屏
         {
             "path": "uni_modules/uview-pro/components/u-full-screen/u-full-screen",
@@ -589,35 +574,35 @@
                 //     "style": {
                 //         "navigationBarTitleText": "avatarCropper-头像裁剪"
                 //     }
-                // }, 
+                // },
                 // noNetwork没有网络
                 {
                     "path": "noNetwork/index",
                     "style": {
                         "navigationBarTitleText": "noNetwork-没有网络"
                     }
-                }, 
+                },
                 // icon字体图标
                 {
                     "path": "icon/index",
                     "style": {
                         "navigationBarTitleText": "icon-字体图标"
                     }
-                }, 
+                },
                 // avatar-用户头像展示
                 {
                     "path": "avatar/index",
                     "style": {
                         "navigationBarTitleText": "avatar-用户头像展示"
                     }
-                }, 
+                },
                 // keyboard键盘
                 {
                     "path": "keyboard/index",
                     "style": {
                         "navigationBarTitleText": "keyboard-键盘"
                     }
-                }, 
+                },
                 // 图片懒加载
                 {
                     "path": "lazyLoad/index",
@@ -849,23 +834,29 @@
         "backgroundColor": "#FFFFFF"
     },
     "tabBar": {
-      "color": "#909399",
-      "selectedColor": "#303133",
-      "backgroundColor": "#FFFFFF",
-      "borderStyle": "black",
-      "list": [
-        {
-          "pagePath": "pages/example/components",
-          "iconPath": "static/uview/example/component.png",
-          "selectedIconPath": "static/uview/example/component_select.png",
-          "text": "组件"
-        },
-        {
-          "pagePath": "pages/example/about",
-          "iconPath": "static/uview/example/about.png",
-          "selectedIconPath": "static/uview/example/about_select.png",
-          "text": "关于"
-        }
-      ]
+        "color": "#909399",
+        "selectedColor": "#303133",
+        "backgroundColor": "#FFFFFF",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/example/components",
+                "iconPath": "static/uview/example/component.png",
+                "selectedIconPath": "static/uview/example/component_select.png",
+                "text": "组件"
+            },
+            {
+                "pagePath": "pages/example/js",
+                "iconPath": "static/uview/example/js.png",
+                "selectedIconPath": "static/uview/example/js_select.png",
+                "text": "工具"
+            },
+            {
+                "pagePath": "pages/example/about",
+                "iconPath": "static/uview/example/about.png",
+                "selectedIconPath": "static/uview/example/about_select.png",
+                "text": "关于"
+            }
+        ]
     }
 }
