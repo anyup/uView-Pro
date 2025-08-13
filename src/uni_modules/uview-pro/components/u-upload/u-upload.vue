@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, useSlots, computed } from "vue";
 import { $u } from '../..';
 
 defineOptions({
@@ -136,8 +136,6 @@ const props = defineProps({
     autoUpload: { type: Boolean, default: true },
     // 是否显示toast消息提示
     showTips: { type: Boolean, default: true },
-    // 是否通过slot自定义传入选择图标的按钮
-    customBtn: { type: Boolean, default: false },
     // 内部预览图片区域和选择图片按钮的区域宽度
     width: { type: [String, Number], default: 200 },
     // 内部预览图片区域和选择图片按钮的区域高度
@@ -161,7 +159,10 @@ const props = defineProps({
     // 在各个回调事件中的最后一个参数返回，用于区别是哪一个组件的事件
     index: { type: [Number, String], default: '' }
 });
+const slots = useSlots();
 
+// 是否通过slot自定义传入选择图标的按钮
+const customBtn= computed(() => slots.addBtn);
 const emit = defineEmits([
     'on-list-change',
     'on-oversize',
