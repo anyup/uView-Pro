@@ -16,9 +16,11 @@
 				</view>
 				<u-upload @on-choose-fail="onChooseFail" :before-remove="beforeRemove" ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload" :file-list="fileList"
 				 :show-progress="showProgress" :deletable="deletable" :max-count="maxCount" @on-list-change="onListChange">
-					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
-						<u-icon name="photo" size="60" :color="$u.color['lightColor']"></u-icon>
-					</view>
+                    <template v-if="customBtn" #addBtn>
+                        <view class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
+                            <u-icon name="photo" size="60" color="#2979ff"></u-icon>
+                        </view>
+                    </template>
 				</u-upload>
 				<u-button :custom-style="{marginTop: '20rpx'}" @click="upload">上传</u-button>
 				<u-button :custom-style="{marginTop: '40rpx'}" @click="clear">清空列表</u-button>
