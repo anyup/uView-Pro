@@ -110,7 +110,10 @@ pnpm add uview-pro
 ```js
 // main.ts
 import { createSSRApp } from 'vue';
+// npm安装方式
 import uViewPro from 'uview-pro';
+// uni_modules安装方式
+// import uViewPro from '@/uni_modules/uview-pro';
 
 export function createApp() {
     const app = createSSRApp(App);
@@ -131,7 +134,7 @@ export function createApp() {
 @import "uview-pro/index.scss";
 
 /* uni_modules安装方式 */
-@import "@/uni_modules/uview-pro/index.scss";
+/* @import "@/uni_modules/uview-pro/index.scss"; */
 </style>
 ```
 
@@ -142,7 +145,7 @@ export function createApp() {
 @import 'uview-pro/theme.scss';
 
 /* uni_modules安装方式 */
-@import '@/uni_modules/uview-pro/theme.scss';
+/* @import '@/uni_modules/uview-pro/theme.scss'; */
 ```
 
 4. `pages.json`配置 easycom 规则(按需引入)
@@ -155,7 +158,7 @@ export function createApp() {
         // npm安装方式
         "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
         // uni_modules安装方式
-        "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+        // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
     },
     // 此为本身已有的内容
     "pages": [

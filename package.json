@@ -1,6 +1,6 @@
 {
-  "name": "uni-preset-vue",
-  "version": "0.0.3",
+  "name": "uview-pro-demo",
+  "version": "0.0.4",
   "scripts": {
     "dev": "uni",
     "dev:custom": "uni -p",

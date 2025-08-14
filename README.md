@@ -118,7 +118,10 @@ pnpm add uview-pro
 ```js
 // main.ts
 import { createSSRApp } from 'vue';
+// npm安装方式
 import uViewPro from 'uview-pro';
+// uni_modules安装方式
+// import uViewPro from '@/uni_modules/uview-pro';
 
 export function createApp() {
     const app = createSSRApp(App);
@@ -135,15 +138,22 @@ export function createApp() {
 ```css
 /* App.vue */
 <style lang="scss">
+/* npm安装方式 */
 @import "uview-pro/index.scss";
+
+/* uni_modules安装方式 */
+/* @import "@/uni_modules/uview-pro/index.scss"; */
 </style>
 ```
 
 3. `uni.scss`引入全局 scss 变量文件
 
 ```css
-/* uni.scss */
+/* npm安装方式 */
 @import 'uview-pro/theme.scss';
+
+/* uni_modules安装方式 */
+/* @import '@/uni_modules/uview-pro/theme.scss'; */
 ```
 
 4. `pages.json`配置 easycom 规则(按需引入)
@@ -152,7 +162,7 @@ export function createApp() {
 // pages.json
 {
     "easycom": {
-        // uni_modules安装的方式需要前面的"@/"，npm安装的方式无需"@/"
+        // uni_modules安装的方式需要前面的"@/uni_modules/"，npm安装的方式无需"@/"，以下方式任选其一
         // npm安装方式
         "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
         // uni_modules安装方式
@@ -185,8 +195,8 @@ uView Pro 文档内容和框架源码基于 uView UI 二次开发，因此全部
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-pay.png?upateAt=<%= new Date().getTime() %>" width="250" height="345" ></td>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png?upateAt=<%= new Date().getTime() %>" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-pay.png" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png" width="250" height="345" ></td>
     </tr>
     <tr>
         <td align="center"><strong>微信</strong><br></td>
