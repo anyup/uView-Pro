@@ -37,11 +37,15 @@
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="验证码" prop="code" label-width="150">
 				<u-input :border="border" placeholder="请输入验证码" v-model="model.code" type="text"></u-input>
-				<u-button slot="right" type="success" size="mini" @click="getCode">{{codeTips}}</u-button>
+				<template #right>
+					<u-button type="success" size="mini" @click="getCode">{{codeTips}}</u-button>
+				</template>
 			</u-form-item>
 			<!-- 此处switch的slot为right，如果不填写slot名，也即<u-switch v-model="model.remember"></u-switch>，将会左对齐 -->
 			<u-form-item :label-position="labelPosition" label="记住密码" prop="remember" label-width="150">
-				<u-switch v-model="model.remember" slot="right"></u-switch>
+				<template #right>
+					<u-switch v-model="model.remember"></u-switch>
+				</template>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
 				<u-upload width="160" height="160"></u-upload>

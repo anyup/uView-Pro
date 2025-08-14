@@ -4,8 +4,12 @@
       <view class="u-demo-title">演示效果</view>
       <view class="u-demo-area u-flex u-row-center">
         <u-image :shape="shape" ref="uImageRef" :width="width" :height="height" :src="src" mode="aspectFill">
-          <u-loading size="44" mode="flower" slot="loading" v-if="loadingSlot"></u-loading>
-          <view v-if="errorSlot" slot="error" style="font-size: 24rpx">加载失败</view>
+          <template v-if="loadingSlot" #loading>
+            <u-loading size="44" mode="flower"></u-loading>
+          </template>
+          <template v-if="errorSlot" #error>
+            <view style="font-size: 24rpx">加载失败</view>
+          </template>
         </u-image>
       </view>
     </view>

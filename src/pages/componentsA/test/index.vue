@@ -40,10 +40,9 @@
             </u-radio-group>
         </u-form-item>
         <u-form-item label="开关">
-            <u-switch
-                slot="right"
-                v-model="switchVal"
-            ></u-switch>
+            <template #right>
+                <u-switch v-model="switchVal"></u-switch>
+            </template>
         </u-form-item>
     </u-form>
 </template>

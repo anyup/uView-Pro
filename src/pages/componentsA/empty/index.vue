@@ -4,9 +4,11 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-empty :mode="mode">
-					<u-button v-if="slot" slot="bottom" size="medium">
-						slot按钮
-					</u-button>
+					<template v-if="slot" #bottom>
+						<u-button size="medium">
+							slot按钮
+						</u-button>
+					</template>
 				</u-empty>
 			</view>
 		</view>
