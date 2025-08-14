@@ -185,8 +185,8 @@ uView Pro 文档内容和框架源码基于 uView UI 二次开发，因此全部
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-pay.png" width="250" height="345" ></td>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-pay.png?upateAt=<%= new Date().getTime() %>" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png?upateAt=<%= new Date().getTime() %>" width="250" height="345" ></td>
     </tr>
     <tr>
         <td align="center"><strong>微信</strong><br></td>
