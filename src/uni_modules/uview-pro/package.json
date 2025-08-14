@@ -1,9 +1,9 @@
 {
     "id": "uview-pro",
     "name": "uview-pro",
-    "displayName": "uView Pro是uni-app全面兼容Vue3+TS的uni-app生态框架，70+精选组件",
+    "displayName": "uView Pro是uni-app全面支持Vue3+TS的uni-app生态框架，70+精选组件",
     "version": "0.0.4",
-    "description": "uView Pro，是uni-app全面兼容Vue3的uni-app生态框架，70+精选组件已使用TypeScript重构，已全面支持uni-app Vue3.0",
+    "description": "uView Pro，是uni-app全面支持Vue3的uni-app生态框架，70+精选组件已使用TypeScript重构，已全面支持uni-app Vue3.0",
     "main": "index.ts",
     "module": "index.ts",
     "browser": "index.ts",
@@ -58,6 +58,8 @@
                     "app-vue": "y",
                     "app-nvue": "n",
                     "app-uvue": "n",
+                    "app-android": "y",
+                    "app-ios": "y",
                     "app-harmony": "u"
                 },
                 "H5-mobile": {
