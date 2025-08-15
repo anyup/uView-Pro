@@ -28,6 +28,13 @@
                 "navigationBarTitleText": "工具"
             }
         },
+        // 演示-模板
+        {
+            "path": "pages/example/template",
+            "style": {
+                "navigationBarTitleText": "模板"
+            }
+        },
         // fullScreen-压窗屏
         {
             "path": "uni_modules/uview-pro/components/u-full-screen/u-full-screen",
@@ -850,6 +857,12 @@
                 "iconPath": "static/uview/example/js.png",
                 "selectedIconPath": "static/uview/example/js_select.png",
                 "text": "工具"
+            },
+            {
+                "pagePath": "pages/example/template",
+                "iconPath": "static/uview/example/template.png",
+                "selectedIconPath": "static/uview/example/template_select.png",
+                "text": "模板"
             },
             {
                 "pagePath": "pages/example/about",
