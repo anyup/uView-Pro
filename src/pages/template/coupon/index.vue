@@ -112,6 +112,7 @@ page {
 }
 .u-wrap {
     padding: 24rpx;
+    background-color: rgb(244, 244, 244);
 }
 
 .meituan {
