@@ -9,7 +9,7 @@
                     源对象2为："{info: {age: '22'}}"
                 </view>
                 <view class="u-demo-result-line">
-                    {{ result }}
+                    {{ reslutValue }}
                 </view>
             </view>
         </view>
@@ -46,6 +46,11 @@ export default {
             },
             result: ''
         };
+    },
+    computed: {
+        reslutValue() {
+            return this.result ? JSON.stringify(this.result) : '';
+        }
     },
     onLoad() {
         this.result = Object.assign(this.obj1, this.obj2);

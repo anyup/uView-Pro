@@ -5,7 +5,7 @@
             <view class="u-demo-area">
                 <view class="u-no-demo-here"> 源对象为："{info: {name: 'mary'}}" </view>
                 <view class="u-demo-result-line">
-                    {{ result }}
+                    {{ reslutValue }}
                 </view>
             </view>
         </view>
@@ -24,6 +24,11 @@ export default {
             },
             result: ''
         };
+    },
+    computed: {
+        reslutValue() {
+            return this.result ? JSON.stringify(this.result) : '';
+        }
     },
     onLoad() {
         this.result = $u.deepClone(this.obj);
