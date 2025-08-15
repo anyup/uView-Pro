@@ -32,7 +32,7 @@
 </template>
 <script setup lang="ts">
 import { ref, nextTick, onMounted, getCurrentInstance } from 'vue';
-import classifyDataRaw from './classify.data';
+import classifyDataRaw from '@/common/classify.data';
 
 // 分类数据类型声明
 interface FoodItem {
