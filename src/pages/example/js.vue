@@ -1,6 +1,6 @@
 <template>
     <view>
-        <page-nav :desc="desc" title="nav.components"></page-nav>
+        <page-nav :desc="desc" title="nav.js"></page-nav>
         <view class="u-p-30">
             <view :index="index" v-for="(item, index) in list" :key="index">
                 <view class="u-m-b-20">
@@ -45,7 +45,7 @@ function getGroupTitle(item: any) {
  */
 onShareAppMessage(res => {
     return {
-        title: 'uView Pro - 组件示例',
+        title: 'uView Pro - 工具库示例',
         path: '/pages/example/js'
     };
 });

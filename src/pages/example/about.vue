@@ -13,16 +13,13 @@
             </view>
         </view>
 
-        <view class="">
+        <view>
             <u-cell-group title="关于我">
-                <u-cell-item
-                    title="我是“前端梦工厂”，一名前端开发工程师，致力于分享各种前端技术最佳解决方案，崇尚大道至简的前端知识体系。关注我，让我们一起逐梦前端！"
-                    :arrow="false"
-                ></u-cell-item>
+                <u-cell-item title="我是“前端梦工厂”，一名前端开发工程师，致力于分享各种前端技术最佳解决方案。关注我，让我们一起逐梦前端！" :arrow="false"></u-cell-item>
             </u-cell-group>
         </view>
 
-        <view class="">
+        <view>
             <u-cell-group title="交流群">
                 <u-cell-item v-for="(item, index) in chatList" :key="index" :title="item.title" :label="item.label" @click="itemClick(item)">
                     <template #icon>
@@ -32,7 +29,7 @@
             </u-cell-group>
         </view>
 
-        <view class="">
+        <view>
             <u-cell-group title="其他信息">
                 <u-cell-item v-for="(item, index) in infoList" :key="index" :title="item.title" :label="item.label" @click="itemClick(item)">
                     <template #icon>
@@ -41,6 +38,7 @@
                 </u-cell-item>
             </u-cell-group>
         </view>
+        <u-gap height="70"></u-gap>
     </view>
 </template>
 
@@ -62,7 +60,7 @@ const infoList = ref([
         }
     },
     {
-        icon: 'https://ik.imagekit.io/anyup/images/social/wxpublic.png',
+        icon: 'https://ik.imagekit.io/anyup/images/social/weixin_public.png',
         title: '关注公众号',
         label: '致力于分享各种前端技术最佳解决方案',
         click: () => {
@@ -100,7 +98,7 @@ const chatList = ref([
     {
         icon: 'https://ik.imagekit.io/anyup/images/social/wxpublic.png',
         title: '微信交流群',
-        label: '点击后长按二维码图片加入群聊，共同交流 uView 相关问题',
+        label: '点击后长按二维码图片加入群聊，共同交流 uView Pro 相关问题',
         click: () => {
             preview('https://ik.imagekit.io/anyup/images/social/weixin-chat.png');
         }
