@@ -162,11 +162,14 @@ export function createApp() {
 // pages.json
 {
     "easycom": {
-        // uni_modules安装的方式需要前面的"@/uni_modules/"，npm安装的方式无需"@/"，以下方式任选其一
-        // npm安装方式
-        "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
-        // uni_modules安装方式
-        // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+        // 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
+        "custom": {
+            // uni_modules安装的方式需要前面的"@/uni_modules/"，npm安装的方式无需"@/"，以下方式任选其一
+            // npm安装方式
+            "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
+            // uni_modules安装方式
+            // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+        }
     },
     // 此为本身已有的内容
     "pages": [

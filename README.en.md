@@ -122,6 +122,9 @@ pnpm add uview-pro
 import { createSSRApp } from 'vue';
 import uViewPro from 'uview-pro';
 
+// uni_modules installation method
+// import uViewPro from '@/uni_modules/uview-pro';
+
 export function createApp() {
     const app = createSSRApp(App);
     app.use(uViewPro);
@@ -137,15 +140,22 @@ export function createApp() {
 ```css
 /* App.vue */
 <style lang="scss">
+/* npm installation method */
 @import "uview-pro/index.scss";
+
+/* uni_modules installation method */
+/* @import "@/uni_modules/uview-pro/index.scss"; */
 </style>
 ```
 
 3. Introduce global scss variable file in `uni.scss`
 
 ```css
-/* uni.scss */
+/* npm installation method */
 @import 'uview-pro/theme.scss';
+
+/* uni_modules installation method */
+/* @import '@/uni_modules/uview-pro/theme.scss'; */
 ```
 
 4. Configure easycom rules in `pages.json` (on-demand introduction)
@@ -154,11 +164,13 @@ export function createApp() {
 // pages.json
 {
     "easycom": {
-        // For uni_modules installation, the "@" in front is required, no "@" is needed for npm installation
-        // npm installation method
-        "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
-        // uni_modules installation method
-        // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+        "custom": {
+            // For uni_modules installation, the "@/uni_modules/" in front is required, no "@" is needed for npm installation
+            // npm installation method
+            "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+             // uni_modules installation method
+             // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+        }
     },
     // Existing content
     "pages": [
