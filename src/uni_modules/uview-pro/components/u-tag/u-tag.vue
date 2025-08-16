@@ -35,6 +35,7 @@ defineOptions({
  * @property {String} mode 模式选择，见官网说明（默认light）
  * @property {Boolean} closeable 是否可关闭，设置为true，文字右边会出现一个关闭图标（默认false）
  * @property {Boolean} show 标签显示与否（默认true）
+ * @property {Boolean} disabled 是否禁用标签（默认false）
  * @event {Function} click 点击标签触发
  * @event {Function} close closeable为true时，点击标签关闭按钮触发
  * @example <u-tag text="雪月夜" type="success" />
