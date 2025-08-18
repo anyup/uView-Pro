@@ -95,6 +95,8 @@ defineOptions({
  * @event {Function} on-progress 图片上传过程中的进度变化过程触发
  * @event {Function} on-uploaded 所有图片上传完毕触发
  * @event {Function} on-choose-complete 每次选择图片后触发，只是让外部可以得知每次选择后，内部的文件列表
+ * @event {Function} on-choose-fail 文件选择失败时触发
+ * @event {Function} on-list-change 文件列表发生变化时触发
  * @example <u-upload :action="action" :file-list="fileList" ></u-upload>
  */
 
@@ -193,13 +195,17 @@ watch(
             !tmp && lists.value.push({ url: value.url, error: false, progress: 100 });
         });
     },
-    { immediate: true }
+    { immediate: true, deep: true }
 );
 
 // 监听 lists 变化，发出事件
-watch(lists, n => {
-    emit('on-list-change', n, props.index);
-});
+watch(
+    lists,
+    n => {
+        emit('on-list-change', n, props.index);
+    },
+    { deep: true }
+);
 
 /**
  * 清除列表
