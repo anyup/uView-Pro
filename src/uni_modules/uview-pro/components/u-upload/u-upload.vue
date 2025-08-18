@@ -502,7 +502,7 @@ function checkFileExt(file: any) {
     return noArrowExt;
 }
 
-defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImage });
+defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImage, lists });
 </script>
 
 <style lang="scss" scoped>
