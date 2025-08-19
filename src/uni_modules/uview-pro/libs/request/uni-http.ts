@@ -3,6 +3,7 @@
  * 基于 Promise 对象实现更简单的 request 使用方式，支持请求和响应拦截
  * @author anyup
  */
+import deepMerge from '../function/deepMerge';
 
 // 请求内容类型枚举
 export enum ContentType {
@@ -20,28 +21,28 @@ export type HttpHeaderType = Record<string, string>;
 // 请求配置类型
 export interface HttpRequestConfig {
     baseURL?: string;
-    url?: string;
+    url?: string | Function;
     header?: HttpHeaderType;
-    data?: any;
+    data?: unknown;
     method?: HttpMethod;
     dataType?: string;
     responseType?: string;
-    success?: (res: any) => void;
-    fail?: (err: any) => void;
-    complete?: (res: any) => void;
-    [key: string]: any;
+    success?: (res: unknown) => void;
+    fail?: (err: unknown) => void;
+    complete?: (res: unknown) => void;
+    [key: string]: unknown;
 }
 
 // 拦截器类型
-export interface Interceptor<T = any> {
-    handler?: (arg: T, P: typeof Promise) => any;
-    onerror?: (arg: T, P: typeof Promise) => any;
-    complete?: (arg: T, P: typeof Promise) => any;
+export interface Interceptor<T = unknown> {
+    handler?: (arg: T, P: typeof Promise) => unknown;
+    onerror?: (arg: T, P: typeof Promise) => unknown;
+    complete?: (arg: T, P: typeof Promise) => unknown;
     use: (...args: any[]) => void;
     lock?: () => void;
     unlock?: () => void;
     clear?: () => void;
-    p?: Promise<any> | null;
+    p?: Promise<unknown> | null;
 }
 
 /**
@@ -81,15 +82,17 @@ export class Builder {
     /**
      * 发送请求
      */
-    use(urlConfig: Record<string, any>, data?: any, config: HttpRequestConfig = {}) {
-        let url: string = config.url || urlConfig.url;
-        const append: string = config.append || '';
-        url = url + append;
-        const defaultFn = (res: any) => res;
-        const successFn: (res: any) => any = config.success || defaultFn;
-        // 只传递一个参数，避免类型不符
-        const callbackFn = (res: any) => successFn(res);
-        return this.http.request({ url, data, ...urlConfig, ...config }).then(callbackFn);
+    use<T = unknown>(urlConfig: Record<string, any>, data?: unknown, config: HttpRequestConfig = {}): Promise<T> {
+        // 请求地址
+        let url = config?.url ?? urlConfig.url;
+        // 兼容 restful url，如果是使用url为function，则为restful格式
+        if (config.url && typeof config.url === 'function') {
+            url = `${urlConfig.url}${config.url()}`;
+        }
+        // 请求类型，get,post,put,delete
+        const method = config?.method ?? urlConfig?.method ?? 'GET';
+        const options = { ...deepMerge(urlConfig, config), url, method };
+        return this.http.request<T>(options);
     }
 }
 
@@ -154,11 +157,13 @@ export class Http {
     /**
      * 设置 data
      */
-    setData(data: any) {
+    setData(data: unknown) {
         if (isArray(data)) {
             this.config.data = data;
+        } else if (isObject(data) && isObject(this.config.data)) {
+            this.config.data = { ...(this.config.data as object), ...(data as object) };
         } else {
-            this.config.data = { ...this.config.data, ...data };
+            this.config.data = data;
         }
         return this;
     }
@@ -176,7 +181,7 @@ export class Http {
      * @returns Promise
      * 说明：配置优先级 实时传递的 options > 公共配置的 config
      */
-    request<T = any>(options: HttpRequestConfig = {}): Promise<T> {
+    request<T = unknown>(options: HttpRequestConfig = {}): Promise<T> {
         if (!options) options = {};
         // 请求体
         const data = options.data || {};
@@ -191,8 +196,10 @@ export class Http {
         // 请求体：优先级为：实时传递的 > 公共配置的
         if (isArray(data)) {
             options.data = data;
+        } else if (isObject(data) && isObject(this.config.data)) {
+            options.data = { ...(this.config.data as object), ...(data as object) };
         } else {
-            options.data = { ...this.config.data, ...data };
+            options.data = data;
         }
 
         // 拦截器处理
@@ -201,11 +208,11 @@ export class Http {
         const responseInterceptor = interceptors.response;
         const requestInterceptorHandler = requestInterceptor.handler;
 
-        return new Promise((resolve: (value: T) => void, reject: (reason?: any) => void) => {
-            function isPromise(p: any): p is Promise<any> {
-                return p && typeof p.then === 'function' && typeof p.catch === 'function';
+        return new Promise((resolve: (value: T) => void, reject: (reason?: unknown) => void) => {
+            function isPromise(p: unknown): p is Promise<unknown> {
+                return !!p && typeof (p as any).then === 'function' && typeof (p as any).catch === 'function';
             }
-            function enqueueIfLocked(promise: Promise<any> | null | undefined, callback: () => void) {
+            function enqueueIfLocked(promise: Promise<unknown> | null | undefined, callback: () => void) {
                 if (promise) {
                     promise.then(() => {
                         callback();
@@ -214,31 +221,27 @@ export class Http {
                     callback();
                 }
             }
-            function onresult(
-                handler: ((arg: any, P: typeof Promise) => any) | undefined,
-                response: any,
-                type: number
-            ) {
+            function onresult(handler: ((arg: unknown, P: typeof Promise) => unknown) | undefined, response: unknown, type: number) {
                 enqueueIfLocked(responseInterceptor.p, function () {
                     if (handler) {
-                        response.request = options;
+                        (response as any).request = options;
                         const ret = handler.call(responseInterceptor, response, Promise);
                         response = ret === undefined ? response : ret;
                     }
                     if (!isPromise(response)) {
                         response = Promise[type === 0 ? 'resolve' : 'reject'](response);
                     }
-                    response
-                        .then((d: any) => {
-                            resolve(d.data);
+                    (response as Promise<unknown>)
+                        .then((d: unknown) => {
+                            resolve((d as any).data as T);
                         })
-                        .catch((e: any) => {
+                        .catch((e: unknown) => {
                             reject(e);
                         });
                 });
             }
-            options.complete = (response: any) => {
-                const statusCode: number = response.statusCode;
+            (options as any).complete = (response: unknown) => {
+                const statusCode: number = (response as any).statusCode;
                 let type = 0;
                 if ((statusCode >= 200 && statusCode < 300) || statusCode === 304) {
                     type = 0;
@@ -251,26 +254,32 @@ export class Http {
             };
             enqueueIfLocked(requestInterceptor.p, () => {
                 options = Object.assign({}, this.config, options);
-                options.requestId = new Date().getTime();
-                let ret: any = options;
+                (options as any).requestId = new Date().getTime();
+                let ret: unknown = options;
                 if (requestInterceptorHandler) {
                     ret = requestInterceptorHandler.call(requestInterceptor, options, Promise) || options;
                 }
                 if (!isPromise(ret)) {
                     ret = Promise.resolve(ret);
                 }
-                ret.then(
-                    (d: any) => {
+                (ret as Promise<unknown>).then(
+                    (d: unknown) => {
                         if (d === options) {
-                            d.url = d.url && d.url.indexOf('http') !== 0 ? d.baseURL + d.url : d.url;
-                            d.url = d.restURL ? d.url + d.restURL : d.url;
-                            d.method = d.method.toUpperCase();
-                            d.method === 'UPLOAD' ? uni.uploadFile(d) : uni.request(d);
+                            // 这里断言为 any，兼容 baseURL、restURL、url、method 等属性
+                            const req = d as any;
+                            req.url = req.url && req.url.indexOf('http') !== 0 ? req.baseURL + req.url : req.url;
+                            req.url = req.restURL ? req.url + req.restURL : req.url;
+                            req.method = req.method.toUpperCase();
+                            if (req.method === 'UPLOAD') {
+                                uni.uploadFile(req);
+                            } else {
+                                uni.request(req);
+                            }
                         } else {
-                            resolve(d);
+                            resolve(d as T);
                         }
                     },
-                    (err: any) => {
+                    (err: unknown) => {
                         reject(err);
                     }
                 );
@@ -281,29 +290,81 @@ export class Http {
     /**
      * 并发请求
      */
-    all<T = any>(promises: Promise<T>[]): Promise<T[]> {
+    all<T = unknown>(promises: Promise<T>[]): Promise<T[]> {
         return Promise.all(promises);
     }
 
-    // 动态方法扩展：get/post/put/patch/head/delete/upload
-    [key: string]: any;
-}
+    /**
+     * GET 请求
+     */
+    get<T = unknown>(url: string, data?: unknown, option?: HttpRequestConfig): Promise<T> {
+        return this.request<T>(merge({ url, data, method: 'GET' }, option));
+    }
+    /**
+     * POST 请求
+     */
+    post<T = unknown>(url: string, data?: unknown, option?: HttpRequestConfig): Promise<T> {
+        return this.request<T>(merge({ url, data, method: 'POST' }, option));
+    }
+    /**
+     * PUT 请求
+     */
+    put<T = unknown>(url: string, data?: unknown, option?: HttpRequestConfig): Promise<T> {
+        return this.request<T>(merge({ url, data, method: 'PUT' }, option));
+    }
+    /**
+     * PATCH 请求
+     */
+    patch<T = unknown>(url: string, data?: unknown, option?: HttpRequestConfig): Promise<T> {
+        return this.request<T>(merge({ url, data, method: 'PATCH' }, option));
+    }
+    /**
+     * HEAD 请求
+     */
+    head<T = unknown>(url: string, data?: unknown, option?: HttpRequestConfig): Promise<T> {
+        return this.request<T>(merge({ url, data, method: 'HEAD' }, option));
+    }
+    /**
+     * DELETE 请求
+     */
+    delete<T = unknown>(url: string, data?: unknown, option?: HttpRequestConfig): Promise<T> {
+        return this.request<T>(merge({ url, data, method: 'DELETE' }, option));
+    }
+    /**
+     * UPLOAD 文件上传
+     */
+    upload<T = unknown>(url: string, data?: unknown, option?: HttpRequestConfig): Promise<T> {
+        return this.request<T>(merge({ url, data, method: 'UPLOAD' }, option));
+    }
 
-['get', 'post', 'put', 'patch', 'head', 'delete', 'upload'].forEach(e => {
-    Http.prototype[e] = function (url: string, data?: any, option?: HttpRequestConfig) {
-        return this.request(merge({ url, data, method: e.toUpperCase() }, option));
-    };
-});
-
-['lock', 'unlock', 'clear'].forEach(e => {
-    Http.prototype[e] = function () {
-        const fn = this.interceptors.request[e as keyof Interceptor];
+    /**
+     * 拦截器锁定
+     */
+    lock(): void {
+        const fn = this.interceptors.request.lock;
         if (typeof fn === 'function') {
-            // 只传递 this 作为上下文，不传参数，适配所有类型
-            (fn as () => void).call(this.interceptors.request);
+            fn.call(this.interceptors.request);
         }
-    };
-});
+    }
+    /**
+     * 拦截器解锁
+     */
+    unlock(): void {
+        const fn = this.interceptors.request.unlock;
+        if (typeof fn === 'function') {
+            fn.call(this.interceptors.request);
+        }
+    }
+    /**
+     * 拦截器清空
+     */
+    clear(): void {
+        const fn = this.interceptors.request.clear;
+        if (typeof fn === 'function') {
+            fn.call(this.interceptors.request);
+        }
+    }
+}
 
 // 数据合并
 function merge(a: any, b: any): any {
