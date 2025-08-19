@@ -86,7 +86,14 @@ interface UploadFileItem {
 }
 const uUploadRef = ref();
 // u-upload 组件 fileList 类型
-const fileList = ref<UploadFileItem[]>([]);
+// const fileList = ref<UploadFileItem[]>([]);
+const fileList = ref<UploadFileItem[]>([
+    {
+        url: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
+        error: false,
+        progress: 100
+    }
+]);
 // 组件内部的文件列表
 const lists = ref<UploadFileItem[]>([]);
 // 上传接口地址
