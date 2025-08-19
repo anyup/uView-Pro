@@ -15,7 +15,7 @@
         :hover-stay-time="Number(hoverStayTime)"
         :disabled="disabled"
         :form-type="formType"
-        :open-type="openType"
+        :open-type="disabled || loading ? undefined : openType"
         :app-parameter="appParameter"
         :hover-stop-propagation="hoverStopPropagation"
         :send-message-title="sendMessageTitle"
@@ -25,11 +25,15 @@
         :session-from="sessionFrom"
         :send-message-img="sendMessageImg"
         :show-message-card="showMessageCard"
-        @getphonenumber="getphonenumber"
+        @getAuthorize="getAuthorize"
         @getuserinfo="getuserinfo"
+        @contact="contact"
+        @getphonenumber="getphonenumber"
         @error="error"
-        @opensetting="opensetting"
         @launchapp="launchapp"
+        @opensetting="opensetting"
+        @chooseavatar="chooseavatar"
+        @agreeprivacyauthorization="agreeprivacyauthorization"
         :style="[
             customStyle,
             {
@@ -57,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick } from 'vue';
+import { ref, computed, nextTick, type PropType } from 'vue';
 import { $u } from '../../';
 
 defineOptions({
@@ -74,7 +78,7 @@ defineOptions({
  * @property {Boolean} plain 按钮是否镂空，背景色透明
  * @property {Boolean} disabled 是否禁用
  * @property {Boolean} hair-line 是否显示按钮的细边框(默认true)
- * @property {Boolean} shape 按钮外观形状，见文档说明
+ * @property {String} shape 按钮外观形状，见文档说明
  * @property {Boolean} loading 按钮名称前是否带 loading 图标(App-nvue 平台，在 ios 上为雪花，Android上为圆圈)
  * @property {String} form-type 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件
  * @property {String} open-type 开放能力
@@ -83,23 +87,60 @@ defineOptions({
  * @property {Number} hover-start-time 按住后多久出现点击态，单位毫秒
  * @property {Number} hover-stay-time 手指松开后点击态保留时间，单位毫秒
  * @property {Object} custom-style 对按钮的自定义样式，对象形式，见文档说明
+ * @property {String} app-parameter 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效
+ * @property {Boolean} hover-stop-propagation 指定是否阻止本节点的祖先节点出现点击态，微信小程序有效
+ * @property {String} lang 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。只微信小程序有效
+ * @property {String} session-from 会话来源，open-type="contact"时有效。只微信小程序有效
+ * @property {String} send-message-title 会话内消息卡片标题，open-type="contact"时有效
+ * @property {String} send-message-path 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效
+ * @property {String} send-message-img 会话内消息卡片图片，open-type="contact"时有效
+ * @property {Boolean} show-message-card 是否显示会话内消息卡片，open-type="contact"时有效
+ * @property {Number|String} throttle-time 节流，一定时间内只能触发一次，单位毫秒
+ * @property {String} scope 支付宝小程序，当 open-type 为 getAuthorize 时有效。可选值：'phoneNumber' | 'userInfo'
  * @event {Function} click 按钮点击
  * @event {Function} getphonenumber open-type="getPhoneNumber"时有效
  * @event {Function} getuserinfo 用户点击该按钮时，会返回获取到的用户信息，从返回参数的detail中获取到的值同uni.getUserInfo
  * @event {Function} error 当使用开放能力时，发生错误的回调
  * @event {Function} opensetting 在打开授权设置页并关闭后回调
  * @event {Function} launchapp 打开 APP 成功的回调
+ * @event {Function} contact 客服消息回调
+ * @event {Function} chooseavatar 头像选择回调
+ * @event {Function} agreeprivacyauthorization 用户点击允许授权回调
  * @example <u-button>月落</u-button>
  */
 
-const emit = defineEmits<{
-    (e: 'click', event: any): void;
-    (e: 'getphonenumber', res: any): void;
-    (e: 'getuserinfo', res: any): void;
-    (e: 'error', res: any): void;
-    (e: 'opensetting', res: any): void;
-    (e: 'launchapp', res: any): void;
-}>();
+const emit = defineEmits(['click', 'getuserinfo', 'contact', 'getphonenumber', 'error', 'launchapp', 'opensetting', 'chooseavatar', 'agreeprivacyauthorization']);
+
+type ButtonScope = 'phoneNumber' | 'userInfo';
+
+type ButtonOpenType =
+    | 'feedback'
+    | 'share'
+    | 'getUserInfo'
+    | 'contact'
+    | 'getPhoneNumber'
+    | 'launchApp'
+    | 'openSetting'
+    | 'chooseAvatar'
+    | 'getAuthorize'
+    | 'lifestyle'
+    | 'contactShare'
+    | 'openGroupProfile'
+    | 'openGuildProfile'
+    | 'openPublicProfile'
+    | 'shareMessageToFriend'
+    | 'addFriend'
+    | 'addColorSign'
+    | 'addGroupApp'
+    | 'addToFavorites'
+    | 'chooseAddress'
+    | 'chooseInvoiceTitle'
+    | 'login'
+    | 'subscribe'
+    | 'favorite'
+    | 'watchLater'
+    | 'openProfile'
+    | 'agreePrivacyAuthorization';
 
 const props = defineProps({
     /** 是否细边框 */
@@ -116,8 +157,10 @@ const props = defineProps({
     disabled: { type: Boolean, default: false },
     /** 是否加载中 */
     loading: { type: Boolean, default: false },
+    /** 支付宝小程序，当 open-type 为 getAuthorize 时有效 */
+    scope: { type: String as PropType<ButtonScope>, default: '' },
     /** 开放能力，具体请看uniapp稳定关于button组件部分说明 */
-    openType: { type: String, default: '' },
+    openType: { type: String as PropType<ButtonOpenType>, default: '' },
     /** 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件 */
     formType: { type: String, default: '' },
     /** 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 */
@@ -278,32 +321,66 @@ function getElQuery(): Promise<any[]> {
 /**
  * open-type="getPhoneNumber"时有效
  */
-function getphonenumber(res: any) {
-    emit('getphonenumber', res);
+function getphonenumber(event: any) {
+    emit('getphonenumber', event);
 }
 /**
  * 用户点击该按钮时，会返回获取到的用户信息，从返回参数的detail中获取到的值同uni.getUserInfo
  */
-function getuserinfo(res: any) {
-    emit('getuserinfo', res);
+function getuserinfo(event: any) {
+    emit('getuserinfo', event);
 }
 /**
  * 当使用开放能力时，发生错误的回调
  */
-function error(res: any) {
-    emit('error', res);
+function error(event: any) {
+    emit('error', event);
 }
 /**
  * 在打开授权设置页并关闭后回调
  */
-function opensetting(res: any) {
-    emit('opensetting', res);
+function opensetting(event: any) {
+    emit('opensetting', event);
 }
 /**
  * 打开 APP 成功的回调
  */
-function launchapp(res: any) {
-    emit('launchapp', res);
+function launchapp(event: any) {
+    emit('launchapp', event);
+}
+
+/**
+ * 支付宝小程序授权
+ * @param event
+ */
+function getAuthorize(event: any) {
+    if (props.scope === 'phoneNumber') {
+        getphonenumber(event);
+    } else if (props.scope === 'userInfo') {
+        getuserinfo(event);
+    }
+}
+
+/**
+ * 客服消息回调
+ * @param event
+ */
+function contact(event: any) {
+    emit('contact', event);
+}
+/**
+ * 头像选择回调
+ * @param event
+ */
+function chooseavatar(event: any) {
+    emit('chooseavatar', event);
+}
+/**
+ * 用户点击允许授权回调
+ * @param event
+ */
+function agreeprivacyauthorization(event: any) {
+    emit('agreeprivacyauthorization', event);
 }
 </script>
 
