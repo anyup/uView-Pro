@@ -1,6 +1,6 @@
 {
     "name": "uview-pro-demo",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "scripts": {
         "dev": "uni",
         "dev:custom": "uni -p",

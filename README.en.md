@@ -79,7 +79,7 @@ uView Pro QQ Group: [Click to Enter](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=9
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?v=0819" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1755597368053" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>

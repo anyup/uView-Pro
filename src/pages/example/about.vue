@@ -100,7 +100,7 @@ const chatList = ref([
         title: '微信交流群',
         label: '点击后长按二维码图片加入群聊，共同交流 uView Pro 相关问题',
         click: () => {
-            preview('https://ik.imagekit.io/anyup/images/social/weixin-chat.png?v=0819');
+            preview('https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1755597368053');
         }
     }
 ]);

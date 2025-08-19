@@ -1,3 +1,32 @@
+## 0.0.5（2025-08-19）
+
+### ✨ Features | 新功能
+
+-   新增 u-city-select 城市选择器组件 ([0eb4806](https://gitee.com/anyup/uView-Pro/commit/0eb4806db3be39e1a6c6f33c9ea511d8445da884))
+-   完善 u-button 的 open-type 支持类型 ([37c0db5](https://gitee.com/anyup/uView-Pro/commit/37c0db527258bca57dbd55d7013b633230489853))
+
+### 🐛 Bug Fixes | Bug 修复
+
+-   u-upload 暴露 lists 属性 ([09f8424](https://gitee.com/anyup/uView-Pro/commit/09f8424774baaee3b6fc7a42458949f8d5903951))
+-   u-upload 深度监听文件列表变化并优化事件触发 ([a41a571](https://gitee.com/anyup/uView-Pro/commit/a41a5719ddf9d6793b78c55a13025bbdc88fdfe3))
+
+### 🚀 Demos | 示例页面优化
+
+-   优化关于页面布局和内容 ([ad5f6a4](https://gitee.com/anyup/uView-Pro/commit/ad5f6a47847999268b43b8c5dbf1a34cb8f70802))
+-   删除分类数据文件 ([5ed7a11](https://gitee.com/anyup/uView-Pro/commit/5ed7a1113db58ff493ad606296a210358348affe))
+-   重构 index list 页面 ([13d780e](https://gitee.com/anyup/uView-Pro/commit/13d780ea5acc4c8eed72062482735df826d4b37a))
+-   更新商场菜单组件引用 ([a5f1bf3](https://gitee.com/anyup/uView-Pro/commit/a5f1bf3f256705d6cad028d60701b4b0544332de))
+-   修改图片地址 ([c459893](https://gitee.com/anyup/uView-Pro/commit/c459893848936aa9a44e7bda3277ab1428109869))
+-   重构 upload 上传组件示例页面 ([686831d](https://gitee.com/anyup/uView-Pro/commit/686831de357aca67bbf7015e2f0696cf6bf48164))
+-   优化多个组件的代码结构和样式 ([f2af44c](https://gitee.com/anyup/uView-Pro/commit/f2af44ca1710334495e4c4fad99d04027b3788f8))
+-   添加提交规范相关配置文件 git-cz/husky/changelog ([d93b816](https://gitee.com/anyup/uView-Pro/commit/d93b816a5a3e468c4bc45e3161d7c006cba5fbf6))
+-   优化 deepClone 和 deepMerge 页面的结果展示 ([b0daa70](https://gitee.com/anyup/uView-Pro/commit/b0daa700b6a385e037d38dc1f10b3612596e2403))
+-   新增优惠券模板 ([1b77762](https://gitee.com/anyup/uView-Pro/commit/1b777621615f7ebe9d83606d53650987c8b2c4e0))
+-   更新 easycom 配置说明，一定要放在 custom 里，否则不生效 ([fc14bf9](https://gitee.com/anyup/uView-Pro/commit/fc14bf90cb77088d258e20e79e3d25820f37e97e))
+-   添加模板示例页面 ([3336af4](https://gitee.com/anyup/uView-Pro/commit/3336af406161648d18578c988d9b3ad79b86059a))
+-   新增模版相关页面 ([8925a02](https://gitee.com/anyup/uView-Pro/commit/8925a02f9fa88f4742d984f2ff02909afc6ad0d7))
+-   重构 request 类，优化泛型支持 ([d7b2e6a](https://gitee.com/anyup/uView-Pro/commit/d7b2e6a224d96f717e5bdbaf09edb19b712ced47))
+
 ## 0.0.4（2025-08-14）
 
 ### 新增

@@ -148,6 +148,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **example:** 重构 components 页面 ([a03c62d](https://gitee.com/anyup/uView-Pro/commit/a03c62ddd5bb0809f869cb847179549ae2b9cbd2))
 - **library:** 重构工具库示例页面 ([49b438e](https://gitee.com/anyup/uView-Pro/commit/49b438ef141327af01b61d4ef2d1e14387dcd340))
 - **components:** 更新多个组件插槽使用方式 ([c38ea5b](https://gitee.com/anyup/uView-Pro/commit/c38ea5b75e2a63f0bc54e489eaa09449122d6911))
+- 优化关于页面布局和内容 ([ad5f6a4](https://gitee.com/anyup/uView-Pro/commit/ad5f6a47847999268b43b8c5dbf1a34cb8f70802))
+- 删除分类数据文件 ([5ed7a11](https://gitee.com/anyup/uView-Pro/commit/5ed7a1113db58ff493ad606296a210358348affe))
+- 重构index list页面 ([13d780e](https://gitee.com/anyup/uView-Pro/commit/13d780ea5acc4c8eed72062482735df826d4b37a))
+- 更新商场菜单组件引用 ([a5f1bf3](https://gitee.com/anyup/uView-Pro/commit/a5f1bf3f256705d6cad028d60701b4b0544332de))
+- 修改图片地址 ([c459893](https://gitee.com/anyup/uView-Pro/commit/c459893848936aa9a44e7bda3277ab1428109869))
+- 重构upload上传组件示例页面 ([686831d](https://gitee.com/anyup/uView-Pro/commit/686831de357aca67bbf7015e2f0696cf6bf48164))
+- 优化多个组件的代码结构和样式 ([f2af44c](https://gitee.com/anyup/uView-Pro/commit/f2af44ca1710334495e4c4fad99d04027b3788f8))
 
 ### 📦‍ Build System | 打包构建
 
@@ -187,6 +194,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **example:** 添加 JS 工具库示例页面 ([685ab38](https://gitee.com/anyup/uView-Pro/commit/685ab38bae80161b9db795069eb9497944fcb746))
 - **tabBar:** 添加工具页面并调整 tabBar 列表 ([1f4ba43](https://gitee.com/anyup/uView-Pro/commit/1f4ba43f9d29a4c8fd6bf12de577ff59933ea312))
 - **uview-pro:** 发布 0.0.4 版本 ([5d595d2](https://gitee.com/anyup/uView-Pro/commit/5d595d281ed957184d3925c5d059224f6cafb9e6))
+- 添加提交规范相关配置文件git-cz/husky/changelog ([d93b816](https://gitee.com/anyup/uView-Pro/commit/d93b816a5a3e468c4bc45e3161d7c006cba5fbf6))
+- 优化 deepClone 和 deepMerge 页面的结果展示 ([b0daa70](https://gitee.com/anyup/uView-Pro/commit/b0daa700b6a385e037d38dc1f10b3612596e2403))
+- 新增优惠券模板 ([1b77762](https://gitee.com/anyup/uView-Pro/commit/1b777621615f7ebe9d83606d53650987c8b2c4e0))
+- 更新easycom配置说明，一定要放在custom里，否则不生效 ([fc14bf9](https://gitee.com/anyup/uView-Pro/commit/fc14bf90cb77088d258e20e79e3d25820f37e97e))
+- 添加 u-city-select 城市选择器组件 ([0eb4806](https://gitee.com/anyup/uView-Pro/commit/0eb4806db3be39e1a6c6f33c9ea511d8445da884))
+- 添加模板示例页面 ([3336af4](https://gitee.com/anyup/uView-Pro/commit/3336af406161648d18578c988d9b3ad79b86059a))
+- 新增模版相关页面 ([8925a02](https://gitee.com/anyup/uView-Pro/commit/8925a02f9fa88f4742d984f2ff02909afc6ad0d7))
+- 重构request类，优化泛型支持 ([d7b2e6a](https://gitee.com/anyup/uView-Pro/commit/d7b2e6a224d96f717e5bdbaf09edb19b712ced47))
+- 完善u-button的open-type支持类型 ([37c0db5](https://gitee.com/anyup/uView-Pro/commit/37c0db527258bca57dbd55d7013b633230489853))
 
 ### 💄 Styles | 风格
 
@@ -194,6 +210,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **components:** 更新组件样式穿透写法 - 将 /deep/ 样式穿透写法替换为 ::v-deep ([a63c896](https://gitee.com/anyup/uView-Pro/commit/a63c896868fb14ef71dd4f9e268b7fd3496a16b9))
 - **components:** 优化代码格式和引用 ([9099838](https://gitee.com/anyup/uView-Pro/commit/909983831a75a809f16814b3fee866a499608a6b))
 - **components:** 优化多语言切换显示和组件样式 ([16e5e3f](https://gitee.com/anyup/uView-Pro/commit/16e5e3fc455736246394dddd3b8a74c211937f08))
+- 添加 referrer 策略 meta 标签 ([5f8961a](https://gitee.com/anyup/uView-Pro/commit/5f8961ab19cd166b06f7d42af204c84ed61f42b9))
 
 ### 🐛 Bug Fixes | Bug 修复
 
@@ -205,6 +222,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **u-button:** 优化$u库的导入方式 ([2db0a0d](https://gitee.com/anyup/uView-Pro/commit/2db0a0d59d7c0f81dd95c4a2d9ef7f4942c10ee4))
 - **components:** update ([b0f7b17](https://gitee.com/anyup/uView-Pro/commit/b0f7b171916b0c65ed452d04354a5b80f3745e87))
 - **upload:** 解决上传组件并添加自定义按钮不生效的问题 ([ae35c0e](https://gitee.com/anyup/uView-Pro/commit/ae35c0e5517add4ec703ffd6a9a3d0133d17ddb5))
+- u-upload 暴露 lists 属性 ([09f8424](https://gitee.com/anyup/uView-Pro/commit/09f8424774baaee3b6fc7a42458949f8d5903951))
+- u-upload深度监听文件列表变化并优化事件触发 ([a41a571](https://gitee.com/anyup/uView-Pro/commit/a41a5719ddf9d6793b78c55a13025bbdc88fdfe3))
 
 ### 📝 Documentation | 文档
 
@@ -243,12 +262,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 更新 README ([81243c6](https://gitee.com/anyup/uView-Pro/commit/81243c6d70006202420f0e831d650db458fe043d))
 - **uview-pro:** 更新组件功能和优化描述 ([a840a46](https://gitee.com/anyup/uView-Pro/commit/a840a46cd3d35b8d2a4d287f2a9ca192ff596969))
 - **uview-pro:** 更新组件列表和 changelog ([aee4275](https://gitee.com/anyup/uView-Pro/commit/aee4275641f3e5f97192349587b1b53acc5321e2))
+- 更新 SSR 安装指南和 pages.json 配置 ([dcb8b91](https://gitee.com/anyup/uView-Pro/commit/dcb8b91b45b2fedb02fbfd59f24d8627b38cb600))
+- 更新图片链接 ([24484aa](https://gitee.com/anyup/uView-Pro/commit/24484aae02f4bcc0880b80c2910b264486e9b592))
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - remove yarn.lock file ([83c2a35](https://gitee.com/anyup/uView-Pro/commit/83c2a358305c1c76f4d35b7f65c33ed8267211ea))
 - **package:** 添加 App 平台开发和构建脚本 ([42220ed](https://gitee.com/anyup/uView-Pro/commit/42220edc95a9b6686cddf235e094a398bd2d1f78))
 - 更新 .gitignore 文件 ([b38550b](https://gitee.com/anyup/uView-Pro/commit/b38550bb0861b04afedfa2e50ffd1fa8435b43b2))
+- 更新 .gitignore 文件 ([8ff834e](https://gitee.com/anyup/uView-Pro/commit/8ff834ed6d0bceaf9c2c467a1d4a5f63bc06ad19))
 
 ### ⚡ Performance Improvements | 性能优化
 
