@@ -2,9 +2,9 @@
     <view class="u-rate" :id="elId" @touchmove.stop.prevent="touchMove">
         <view class="u-star-wrap" v-for="(item, index) in count" :key="index" :class="[elClass]">
             <u-icon
-                :name="activeIndex > index ? elActiveIcon : inactiveIcon"
+                :name="String(activeIndex > index ? elActiveIcon : inactiveIcon)"
                 @click="click(index + 1, $event)"
-                :color="activeIndex > index ? elActiveColor : inactiveColor"
+                :color="String(activeIndex > index ? elActiveColor : inactiveColor)"
                 :custom-style="{
                     fontSize: size + 'rpx',
                     padding: `0 ${Number(gutter) / 2 + 'rpx'}`
@@ -197,10 +197,17 @@ watch(
 /**
  * 计算当前星星的显示小数部分（半星）
  */
-const decimal = computed(() => {
+const decimal = computed((): number => {
     if (props.disabled) {
-        return (Number(activeIndex.value) * 100) % 100;
+        // 只在允许半星时才返回小数部分，否则始终为0
+        if (props.allowHalf) {
+            // 计算当前激活星星的小数部分（如3.5星，返回50）
+            const val = Number(activeIndex.value);
+            return (val - Math.floor(val)) * 100;
+        }
+        return 0;
     } else if (props.allowHalf) {
+        // 允许半星时，返回50，否则0
         return 50;
     }
     return 0;

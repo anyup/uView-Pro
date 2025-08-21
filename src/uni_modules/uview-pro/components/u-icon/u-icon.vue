@@ -111,31 +111,31 @@ const props = defineProps({
      * @default '#606266'
      */
     labelColor: { type: String, default: '#606266' },
-	/**
-	 * label与图标的距离(横向排列)，单位rpx（默认6）
-	 * @default '6'
-	 */
-	marginLeft: { type: [String, Number], default: '6' },
-	/**
-	 * label与图标的距离(竖向排列)，单位rpx（默认6）
-	 * @default '6'
-	 */
-	marginTop: { type: [String, Number], default: '6' },
-	/**
-	 * label与图标的距离(竖向排列)，单位rpx（默认6）
-	 * @default '6'
-	 */
-	marginRight: { type: [String, Number], default: '6' },
-	/**
-	 * label与图标的距离(竖向排列)，单位rpx（默认6）
-	 * @default '6'
-	 */
-	marginBottom: { type: [String, Number], default: '6' },
+    /**
+     * label与图标的距离(横向排列)，单位rpx（默认6）
+     * @default '6'
+     */
+    marginLeft: { type: [String, Number], default: '6' },
+    /**
+     * label与图标的距离(竖向排列)，单位rpx（默认6）
+     * @default '6'
+     */
+    marginTop: { type: [String, Number], default: '6' },
+    /**
+     * label与图标的距离(竖向排列)，单位rpx（默认6）
+     * @default '6'
+     */
+    marginRight: { type: [String, Number], default: '6' },
+    /**
+     * label与图标的距离(竖向排列)，单位rpx（默认6）
+     * @default '6'
+     */
+    marginBottom: { type: [String, Number], default: '6' },
     /**
      * label与图标的距离，单位rpx，权重高于 margin
      * @default ''
      */
-	space: { type: [String, Number], default: '' },
+    space: { type: [String, Number], default: '' },
     /**
      * 图片的mode，参考uni-app image组件
      * @default 'widthFix'

@@ -38,10 +38,10 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
 import { ref, reactive, onMounted } from 'vue';
 import { $u } from '../..';
 // 兼容 UMD/ESM 导入 weCropper.js
-// @ts-ignore
 import WeCropper from './weCropper';
 
 defineOptions({ name: 'u-avatar-cropper' });
