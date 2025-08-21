@@ -176,6 +176,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - version 0.0.5 ([2f97a50](https://gitee.com/anyup/uView-Pro/commit/2f97a50c9954375257e430d971dd80b2d7234fa6))
 - 更新版本号 ([1280508](https://gitee.com/anyup/uView-Pro/commit/1280508612cfefa8fbf12df0c089886581d24ed5))
 - 更新组件库显示名称 ([89f06df](https://gitee.com/anyup/uView-Pro/commit/89f06df683e76104eab4ba7cf09094cd2930d63f))
+- 更新项目依赖并优化打包构建 ([c172d36](https://gitee.com/anyup/uView-Pro/commit/c172d368d82404564650756a872cd7c7e29ebfa2))
 
 ### ✨ Features | 新功能
 
@@ -234,6 +235,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - u-upload 暴露 lists 属性 ([09f8424](https://gitee.com/anyup/uView-Pro/commit/09f8424774baaee3b6fc7a42458949f8d5903951))
 - u-upload深度监听文件列表变化并优化事件触发 ([a41a571](https://gitee.com/anyup/uView-Pro/commit/a41a5719ddf9d6793b78c55a13025bbdc88fdfe3))
 - 修复 notice 组件背景色和键盘组件默认值问题 ([4ef252a](https://gitee.com/anyup/uView-Pro/commit/4ef252a4f4a093d0899fc3de4ad1b3bfc74277b4))
+- 修复中tabbar布局高度计算错误的问题 ([5c1342c](https://gitee.com/anyup/uView-Pro/commit/5c1342cb3fb6dd2c7c84fe785953fcaed13e809f))
 
 ### 📝 Documentation | 文档
 

@@ -1,3 +1,13 @@
+## 0.0.6（2025-08-21）
+
+### 🐛 Bug Fixes | Bug 修复
+
+-   修复中 tabbar 布局高度计算错误的问题 ([5c1342c](https://gitee.com/anyup/uView-Pro/commit/5c1342cb3fb6dd2c7c84fe785953fcaed13e809f))
+
+### 📦‍ Build System | 打包构建
+
+-   更新项目依赖并优化打包构建 ([c172d36](https://gitee.com/anyup/uView-Pro/commit/c172d368d82404564650756a872cd7c7e29ebfa2))
+
 ## 0.0.5（2025-08-19）
 
 ### ✨ Features | 新功能
