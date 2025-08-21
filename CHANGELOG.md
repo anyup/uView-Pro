@@ -155,6 +155,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 修改图片地址 ([c459893](https://gitee.com/anyup/uView-Pro/commit/c459893848936aa9a44e7bda3277ab1428109869))
 - 重构upload上传组件示例页面 ([686831d](https://gitee.com/anyup/uView-Pro/commit/686831de357aca67bbf7015e2f0696cf6bf48164))
 - 优化多个组件的代码结构和样式 ([f2af44c](https://gitee.com/anyup/uView-Pro/commit/f2af44ca1710334495e4c4fad99d04027b3788f8))
+- 删除不再使用的u-parse组件及相关文件 ([a09bc6d](https://gitee.com/anyup/uView-Pro/commit/a09bc6d595d5ee8757c97778433488a9c08431ab))
+- 优化多个组件的代码结构 ([df66344](https://gitee.com/anyup/uView-Pro/commit/df663445ae7082e2e6c88ac5d8cead1b757e8fc8))
+- 重构 u-avatar-cropper 组件的类型声明文件 ([dc951c9](https://gitee.com/anyup/uView-Pro/commit/dc951c96346946e651c889dcaa3a7cb198e67116))
+- 添加 async-validator 类型声明文件 ([752116b](https://gitee.com/anyup/uView-Pro/commit/752116b2b723160764579f5c63a13a638dd14240))
 
 ### 📦‍ Build System | 打包构建
 
@@ -169,6 +173,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 修改路由基础路径，去除h5 ([24dbff7](https://gitee.com/anyup/uView-Pro/commit/24dbff796e577157ac2ec8764d48b476cb6eb2ea))
 - 更新版本号versionCode ([3877b67](https://gitee.com/anyup/uView-Pro/commit/3877b67dd8b9a2a6acb142c9ee7cdfe0bbf31912))
 - 更新 android sdk 版本号 ([8885a1d](https://gitee.com/anyup/uView-Pro/commit/8885a1d2c2d1b165a1930452bb741d3e895c3957))
+- version 0.0.5 ([2f97a50](https://gitee.com/anyup/uView-Pro/commit/2f97a50c9954375257e430d971dd80b2d7234fa6))
+- 更新版本号 ([1280508](https://gitee.com/anyup/uView-Pro/commit/1280508612cfefa8fbf12df0c089886581d24ed5))
+- 更新组件库显示名称 ([89f06df](https://gitee.com/anyup/uView-Pro/commit/89f06df683e76104eab4ba7cf09094cd2930d63f))
 
 ### ✨ Features | 新功能
 
@@ -203,6 +210,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 新增模版相关页面 ([8925a02](https://gitee.com/anyup/uView-Pro/commit/8925a02f9fa88f4742d984f2ff02909afc6ad0d7))
 - 重构request类，优化泛型支持 ([d7b2e6a](https://gitee.com/anyup/uView-Pro/commit/d7b2e6a224d96f717e5bdbaf09edb19b712ced47))
 - 完善u-button的open-type支持类型 ([37c0db5](https://gitee.com/anyup/uView-Pro/commit/37c0db527258bca57dbd55d7013b633230489853))
+- 添加 uview-pro 组件库的 TypeScript 类型声明 ([e6b2cbf](https://gitee.com/anyup/uView-Pro/commit/e6b2cbfc8417b0877c8cd1d374e2cd8731ec6bec))
+- changelog增加生成指定范围变更日志的功能 ([79c6fd0](https://gitee.com/anyup/uView-Pro/commit/79c6fd01426ff3b4a83db2b98a8b595805fc9d22))
 
 ### 💄 Styles | 风格
 
@@ -224,6 +233,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **upload:** 解决上传组件并添加自定义按钮不生效的问题 ([ae35c0e](https://gitee.com/anyup/uView-Pro/commit/ae35c0e5517add4ec703ffd6a9a3d0133d17ddb5))
 - u-upload 暴露 lists 属性 ([09f8424](https://gitee.com/anyup/uView-Pro/commit/09f8424774baaee3b6fc7a42458949f8d5903951))
 - u-upload深度监听文件列表变化并优化事件触发 ([a41a571](https://gitee.com/anyup/uView-Pro/commit/a41a5719ddf9d6793b78c55a13025bbdc88fdfe3))
+- 修复 notice 组件背景色和键盘组件默认值问题 ([4ef252a](https://gitee.com/anyup/uView-Pro/commit/4ef252a4f4a093d0899fc3de4ad1b3bfc74277b4))
 
 ### 📝 Documentation | 文档
 

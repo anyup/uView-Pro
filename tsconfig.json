@@ -1,13 +1,33 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.json",
-  "compilerOptions": {
-    "sourceMap": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
+    "extends": "@vue/tsconfig/tsconfig.json",
+    "compilerOptions": {
+        "verbatimModuleSyntax": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"],
+            "uview-pro": ["./src/uni_modules/uview-pro"]
+        },
+        "lib": ["esnext", "dom"],
+        "types": ["@dcloudio/types"],
+        "typeRoots": ["./types", "./src/uni_modules/uview-pro/types", "./node_modules/@types"],
+        "skipLibCheck": true,
+        "allowJs": true,
+        "jsx": "preserve",
+        "strict": false,
+        "noImplicitAny": false,
+        "strictNullChecks": false,
+        "noImplicitReturns": false,
+        "noFallthroughCasesInSwitch": false,
+        "exactOptionalPropertyTypes": false,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noUncheckedIndexedAccess": false
     },
-    "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types"]
-  },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+    "vueCompilerOptions": {
+        "strictTemplates": false,
+        "target": 3
+    },
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts", "*.d.ts"],
+    "exclude": ["src/**/*.js", "src/uni_modules/**/*.js", "node_modules"]
 }
