@@ -187,6 +187,7 @@ const vertical = computed(() => {
 const computeBgColor = computed(() => {
     if (props.bgColor) return props.bgColor;
     else if (props.type === 'none') return 'transparent';
+    else return '';
 });
 
 /**
@@ -223,6 +224,7 @@ function change(e: { detail: { current: number } }) {
 
 <style lang="scss" scoped>
 @import '../../libs/css/style.components.scss';
+
 .u-notice-bar {
     width: 100%;
     @include vue-flex;
@@ -232,6 +234,7 @@ function change(e: { detail: { current: number } }) {
     padding: 18rpx 24rpx;
     overflow: hidden;
 }
+
 .u-swiper {
     font-size: 26rpx;
     height: 32rpx;
@@ -240,14 +243,17 @@ function change(e: { detail: { current: number } }) {
     flex: 1;
     margin-left: 12rpx;
 }
+
 .u-swiper-item {
     @include vue-flex;
     align-items: center;
     overflow: hidden;
 }
+
 .u-news-item {
     overflow: hidden;
 }
+
 .u-right-icon {
     margin-left: 12rpx;
     /* #ifndef APP-NVUE */
@@ -255,6 +261,7 @@ function change(e: { detail: { current: number } }) {
     /* #endif */
     align-items: center;
 }
+
 .u-left-icon {
     /* #ifndef APP-NVUE */
     display: inline-flex;

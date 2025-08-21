@@ -56,7 +56,7 @@ function hexToRgb(sColor: string, str: boolean = true): [number, number, number]
 }
 
 /**
- * 将rgb表示方式转换为hex表示方式
+ * rgb转hex
  * @param rgb rgb字符串或hex字符串
  * @returns hex字符串
  */
@@ -88,6 +88,8 @@ function rgbToHex(rgb: string): string | undefined {
     } else {
         return rgb;
     }
+    // 默认返回原始值
+    return rgb;
 }
 
 /**

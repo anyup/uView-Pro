@@ -147,6 +147,7 @@ const textStyle = computed(() => {
 const computeBgColor = computed(() => {
     if (props.bgColor) return props.bgColor;
     else if (props.type === 'none') return 'transparent';
+    else return '';
 });
 
 /**
@@ -223,32 +224,38 @@ function getMore() {
 
 <style lang="scss" scoped>
 @import '../../libs/css/style.components.scss';
+
 .u-notice-bar {
     padding: 18rpx 24rpx;
     overflow: hidden;
 }
+
 .u-direction-row {
     @include vue-flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .u-left-icon {
     /* #ifndef APP-NVUE */
     display: inline-flex;
     /* #endif */
     align-items: center;
 }
+
 .u-notice-box {
     flex: 1;
     @include vue-flex;
     overflow: hidden;
     margin-left: 12rpx;
 }
+
 .u-right-icon {
     margin-left: 12rpx;
     display: inline-flex;
     align-items: center;
 }
+
 .u-notice-content {
     animation: u-loop-animation 10s linear infinite both;
     text-align: right;
@@ -257,15 +264,18 @@ function getMore() {
     @include vue-flex;
     flex-wrap: nowrap;
 }
+
 .u-notice-text {
     font-size: 26rpx;
     word-break: keep-all;
     white-space: nowrap;
 }
+
 @keyframes u-loop-animation {
     0% {
         transform: translate3d(0, 0, 0);
     }
+
     100% {
         transform: translate3d(-100%, 0, 0);
     }

@@ -78,6 +78,8 @@ const numList = computed(() => {
             return $u.randomArray([1, 2, 3, 4, 5, 6, 7, 8, 9, cardX, 0]);
         }
     }
+    // 默认返回数字键盘
+    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 });
 
 /**
