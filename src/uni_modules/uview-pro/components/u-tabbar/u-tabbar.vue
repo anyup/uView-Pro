@@ -35,7 +35,8 @@
             ></view>
         </view>
         <!-- 这里加上一个48rpx的高度,是为了增高有凸起按钮时的防塌陷高度(也即按钮凸出来部分的高度) -->
-        <view class="u-fixed-placeholder safe-area-inset-bottom" :style="{ height: `calc(${$u.addUnit(props.height)} + ${props.midButton ? 48 : 0}rpx)` }"></view>
+        <!-- calc 计算0时单位不一致会计算失败，这里+1px -->
+        <view class="u-fixed-placeholder safe-area-inset-bottom" :style="{ height: `calc(${$u.addUnit(props.height)} + ${props.midButton ? '48rpx' : '1px'})` }"></view>
     </view>
 </template>
 
@@ -261,6 +262,7 @@ function getMidButtonLeft() {
     /* #ifndef APP-NVUE */
     box-sizing: content-box;
     /* #endif */
+    height: 50px;
 }
 .u-tabbar {
     &__content {
