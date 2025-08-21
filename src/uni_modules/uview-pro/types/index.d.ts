@@ -1,4 +1,7 @@
-import http from './libs/request/index';
+/// <reference path="./components.d.ts" />
+/// <reference path="./uni-app.d.ts" />
+
+import http from '../libs/request/index';
 import queryParams from '../libs/function/queryParams';
 import route from '../libs/function/route';
 import timeFormat from '../libs/function/timeFormat';
@@ -29,10 +32,8 @@ import { mitt } from '../libs/util/mitt';
 
 // uview-pro 模块类型声明
 declare module 'uview-pro' {
-    import { App } from 'vue';
-
     // 导出安装函数
-    export function install(app: App): void;
+    export function install(): void;
 
     // 导出 $u 工具类型
     export interface $Utils {
@@ -42,7 +43,7 @@ declare module 'uview-pro' {
         date: typeof timeFormat;
         timeFrom: typeof timeFrom;
         colorGradient: typeof colorGradient.colorGradient;
-        colorToRgb: typeof colorGradient.colorToRgb;
+        colorToRgba: typeof colorGradient.colorToRgba;
         guid: typeof guid;
         color: typeof color;
         sys: typeof sys;
@@ -77,49 +78,11 @@ declare module 'uview-pro' {
         mitt: ReturnType<typeof mitt>;
         getRect: typeof getRect;
     }
-
-    // 导出组件类型
-    export * from './components';
-
-    // 导出工具函数类型
-    export * from './libs/request/index';
-    export * from './libs/function/queryParams';
-    export * from './libs/function/route';
-    export * from './libs/function/timeFormat';
-    export * from './libs/function/timeFrom';
-    export * from './libs/function/colorGradient';
-    export * from './libs/function/guid';
-    export * from './libs/function/color';
-    export * from './libs/function/type2icon';
-    export * from './libs/function/randomArray';
-    export * from './libs/function/deepClone';
-    export * from './libs/function/deepMerge';
-    export * from './libs/function/addUnit';
-    export * from './libs/function/test';
-    export * from './libs/function/random';
-    export * from './libs/function/trim';
-    export * from './libs/function/toast';
-    export * from './libs/function/getParent';
-    export * from './libs/function/$parent';
-    export * from './libs/function/debounce';
-    export * from './libs/function/throttle';
-    export * from './libs/function/getRect';
-    export * from './libs/function/sys';
-    export * from './libs/config/config';
-    export * from './libs/config/zIndex';
-    export * from './libs/util/emitter';
-    export * from './libs/util/mitt';
-    // 导出 uni-app 全局属性类型声明
-    export * from './uni-app.d';
 }
 
 // 全局类型扩展
 declare global {
     interface Uni {
-        $u: import('uview-pro').$Utils;
-    }
-
-    interface Window {
         $u: import('uview-pro').$Utils;
     }
 }

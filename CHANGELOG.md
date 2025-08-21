@@ -284,6 +284,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **package:** 添加 App 平台开发和构建脚本 ([42220ed](https://gitee.com/anyup/uView-Pro/commit/42220edc95a9b6686cddf235e094a398bd2d1f78))
 - 更新 .gitignore 文件 ([b38550b](https://gitee.com/anyup/uView-Pro/commit/b38550bb0861b04afedfa2e50ffd1fa8435b43b2))
 - 更新 .gitignore 文件 ([8ff834e](https://gitee.com/anyup/uView-Pro/commit/8ff834ed6d0bceaf9c2c467a1d4a5f63bc06ad19))
+- **release:** bump version to 0.0.7 ([6830df1](https://gitee.com/anyup/uView-Pro/commit/6830df1cde517c063c26c2d5f16f22259b3b2f5d))
 
 ### ⚡ Performance Improvements | 性能优化
 
