@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * we-cropper v1.3.9
  * (c) 2020 dlhandsome
