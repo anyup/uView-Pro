@@ -7,6 +7,7 @@
 </template>
 
 <script setup lang="ts">
+import { FullScreenProps } from './types';
 import { ref, onMounted } from 'vue';
 
 defineOptions({ name: 'u-full-screen' });
@@ -17,6 +18,7 @@ defineOptions({ name: 'u-full-screen' });
  * @property {boolean} show 是否显示弹窗
  * @property {string} content 升级内容，支持富文本
  */
+defineProps(FullScreenProps);
 
 /**
  * 是否显示弹窗

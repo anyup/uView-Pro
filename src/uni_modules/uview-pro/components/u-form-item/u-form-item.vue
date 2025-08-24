@@ -70,6 +70,7 @@ import { $u } from '../..';
 import { broadcast } from '../../libs/util/emitter';
 // @ts-ignore
 import schema from '../../libs/util/async-validator';
+import { FormItemProps } from './types';
 // 去除警告信息
 schema.warning = function () {};
 
@@ -96,68 +97,7 @@ defineOptions({
  * @example <u-form-item label="姓名"><u-input v-model="form.name" /></u-form-item>
  */
 
-const props = defineProps({
-    /** input的label提示语 */
-    label: {
-        type: String,
-        default: ''
-    },
-    /** 绑定的值 */
-    prop: {
-        type: String,
-        default: ''
-    },
-    /** 是否显示表单域的下划线边框 */
-    borderBottom: {
-        type: [String, Boolean],
-        default: ''
-    },
-    /** label的位置，left-左边，top-上边 */
-    labelPosition: {
-        type: String,
-        default: ''
-    },
-    /** label的宽度，单位rpx */
-    labelWidth: {
-        type: [String, Number],
-        default: ''
-    },
-    /** lable的样式，对象形式 */
-    labelStyle: {
-        type: Object,
-        default: () => ({})
-    },
-    /** lable字体的对齐方式 */
-    labelAlign: {
-        type: String,
-        default: ''
-    },
-    /** 右侧图标 */
-    rightIcon: {
-        type: String,
-        default: ''
-    },
-    /** 左侧图标 */
-    leftIcon: {
-        type: String,
-        default: ''
-    },
-    /** 左侧图标的样式 */
-    leftIconStyle: {
-        type: Object,
-        default: () => ({})
-    },
-    /** 右侧图标的样式 */
-    rightIconStyle: {
-        type: Object,
-        default: () => ({})
-    },
-    /** 是否显示左边的必填星号，只作显示用，具体校验必填的逻辑，请在rules中配置 */
-    required: {
-        type: Boolean,
-        default: false
-    }
-});
+const props = defineProps(FormItemProps);
 
 // inject 父表单实例
 const parent = inject<any>('u-form', null);

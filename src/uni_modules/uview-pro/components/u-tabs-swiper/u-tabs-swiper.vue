@@ -15,6 +15,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted, getCurrentInstance } from 'vue';
 import colorGradient from '../../libs/function/colorGradient';
+import { TabsSwiperProps } from './types';
 
 defineOptions({ name: 'u-tabs-swiper' });
 
@@ -45,56 +46,8 @@ defineOptions({ name: 'u-tabs-swiper' });
  * @example <u-tabs-swiper ref="tabs" :list="list" :is-scroll="false"></u-tabs-swiper>
  */
 
-// props 定义，保留参数注释
-const props = defineProps({
-    /** tabs是否可以左右拖动 */
-    isScroll: { type: Boolean, default: true },
-    /** 标签数组 */
-    list: { type: Array as () => Array<Record<string, any>>, default: () => [] },
-    /** 当前活动tab的索引 */
-    current: { type: [Number, String], default: 0 },
-    /** 导航栏的高度和行高，单位rpx */
-    height: { type: [Number, String], default: 80 },
-    /** 字体大小，单位rpx */
-    fontSize: { type: [Number, String], default: 30 },
-    // 过渡动画时长, 单位s
-    // duration: {
-    // 	type: [Number, String],
-    // 	default: 0.5
-    // },
-    /** 外部swiper的宽度, 单位rpx */
-    swiperWidth: { type: [String, Number], default: 750 },
-    /** 选中项的主题颜色 */
-    activeColor: { type: String, default: '#2979ff' },
-    /** 未选中项的颜色 */
-    inactiveColor: { type: String, default: '#303133' },
-    /** 菜单底部移动的bar的宽度，单位rpx */
-    barWidth: { type: [Number, String], default: 40 },
-    /** 移动bar的高度 */
-    barHeight: { type: [Number, String], default: 6 },
-    /** 单个tab的左或右内边距（各占一半），单位rpx */
-    gutter: { type: [Number, String], default: 40 },
-    /** 如果是绝对定位，添加z-index值 */
-    zIndex: { type: [Number, String], default: 1 },
-    /** 导航栏的背景颜色 */
-    bgColor: { type: String, default: '#ffffff' },
-    /** 滚动至中心目标类型 */
-    autoCenterMode: { type: String, default: 'window' },
-    /** 读取传入的数组对象的属性(tab名称) */
-    name: { type: String, default: 'name' },
-    /** 读取传入的数组对象的属性(徽标数) */
-    count: { type: String, default: 'count' },
-    /** 徽标数位置偏移 */
-    offset: { type: Array, default: () => [5, 20] },
-    /** 活动tab字体是否加粗 */
-    bold: { type: Boolean, default: true },
-    /** 当前活动tab item的样式 */
-    activeItemStyle: { type: Object, default: () => ({}) },
-    /** 是否显示底部的滑块 */
-    showBar: { type: Boolean, default: true },
-    /** 底部滑块的自定义样式 */
-    barStyle: { type: Object, default: () => ({}) }
-});
+// props 定义
+const props = defineProps(TabsSwiperProps);
 
 const color = colorGradient;
 const { windowWidth } = uni.getSystemInfoSync();

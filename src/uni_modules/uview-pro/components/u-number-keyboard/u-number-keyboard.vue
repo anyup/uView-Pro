@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { $u } from '../..';
+import { NumberKeyboardProps } from './types';
 
 defineOptions({
     name: 'u-number-keyboard'
@@ -39,15 +40,8 @@ defineOptions({
  * @event {Function} change 按键被点击
  * @event {Function} backspace 退格键被点击
  */
+const props = defineProps(NumberKeyboardProps);
 
-const props = defineProps({
-    /** 键盘的类型，number-数字键盘，card-身份证键盘 */
-    mode: { type: String, default: 'number' },
-    /** 是否显示键盘的"."符号 */
-    dotEnabled: { type: Boolean, default: true },
-    /** 是否打乱键盘按键的顺序 */
-    random: { type: Boolean, default: false }
-});
 const emit = defineEmits(['change', 'backspace']);
 
 const backspace = 'backspace'; // 退格键内容

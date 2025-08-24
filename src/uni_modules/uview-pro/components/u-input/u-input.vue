@@ -81,217 +81,13 @@
 import { ref, computed, watch, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { dispatch } from '../../libs/util/emitter';
+import { InputProps } from './types';
 
 defineOptions({
     name: 'u-input'
 });
 
-/**
- * input 输入框
- * @description 此组件为一个输入框，默认没有边框和样式，是专门为配合表单组件u-form而设计的，利用它可以快速实现表单验证，输入内容，下拉选择等功能。
- * @tutorial http://uviewui.com/components/input.html
- * @property {String} type 模式选择，见官网说明
- * @property {Boolean} clearable 是否显示右侧的清除图标(默认true)
- * @property {} v-model 用于双向绑定输入框的值
- * @property {String} input-align 输入框文字的对齐方式(默认left)
- * @property {String} placeholder placeholder显示值(默认 '请输入内容')
- * @property {Boolean} disabled 是否禁用输入框(默认false)
- * @property {String Number} maxlength 输入框的最大可输入长度(默认140)
- * @property {String Number} selection-start 光标起始位置，自动聚焦时有效，需与selection-end搭配使用（默认-1）
- * @property {String Number} maxlength 光标结束位置，自动聚焦时有效，需与selection-start搭配使用（默认-1）
- * @property {String Number} cursor-spacing 指定光标与键盘的距离，单位px(默认0)
- * @property {String} placeholderStyle placeholder的样式，字符串形式，如"color: red;"(默认 "color: #c0c4cc;")
- * @property {String} confirm-type 设置键盘右下角按钮的文字，仅在type为text时生效(默认done)
- * @property {Object} custom-style 自定义输入框的样式，对象形式
- * @property {Boolean} focus 是否自动获得焦点(默认false)
- * @property {Boolean} fixed 如果type为textarea，且在一个"position:fixed"的区域，需要指明为true(默认false)
- * @property {Boolean} password-icon type为password时，是否显示右侧的密码查看图标(默认true)
- * @property {Boolean} border 是否显示边框(默认false)
- * @property {String} border-color 输入框的边框颜色(默认#dcdfe6)
- * @property {Boolean} auto-height 是否自动增高输入区域，type为textarea时有效(默认true)
- * @property {String Number} height 高度，单位rpx(text类型时为70，textarea时为100)
- * @example <u-input v-model="value" :type="type" :border="border" />
- */
-
-const props = defineProps({
-    /**
-     * 用于双向绑定输入框的值
-     */
-    modelValue: {
-        type: [String, Number],
-        default: ''
-    },
-    /**
-     * 输入框的类型，textarea，text，number
-     */
-    type: {
-        type: String,
-        default: 'text'
-    },
-    /**
-     * 输入框文字的对齐方式(默认left)
-     */
-    inputAlign: {
-        type: String,
-        default: 'left'
-    },
-    /**
-     * placeholder显示值(默认 '请输入内容')
-     */
-    placeholder: {
-        type: String,
-        default: '请输入内容'
-    },
-    /**
-     * 是否禁用输入框(默认false)
-     */
-    disabled: {
-        type: Boolean,
-        default: false
-    },
-    /**
-     * 输入框的最大可输入长度(默认140)
-     */
-    maxlength: {
-        type: [Number, String],
-        default: 140
-    },
-    /**
-     * placeholder的样式，字符串形式，如"color: red;"(默认 "color: #c0c4cc;")
-     */
-    placeholderStyle: {
-        type: String,
-        default: 'color: #c0c4cc;'
-    },
-    /**
-     * 设置键盘右下角按钮的文字，仅在type为text时生效(默认done)
-     */
-    confirmType: {
-        type: String,
-        default: 'done'
-    },
-    /**
-     * 自定义输入框的样式，对象形式
-     */
-    customStyle: {
-        type: Object,
-        default: () => ({})
-    },
-    /**
-     * 如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true
-     */
-    fixed: {
-        type: Boolean,
-        default: false
-    },
-    /**
-     * 是否自动获得焦点(默认false)
-     */
-    focus: {
-        type: Boolean,
-        default: false
-    },
-    /**
-     * 密码类型时，是否显示右侧的密码图标(默认true)
-     */
-    passwordIcon: {
-        type: Boolean,
-        default: true
-    },
-    /**
-     * input|textarea是否显示边框(默认false)
-     */
-    border: {
-        type: Boolean,
-        default: false
-    },
-    /**
-     * 输入框的边框颜色(默认#dcdfe6)
-     */
-    borderColor: {
-        type: String,
-        default: '#dcdfe6'
-    },
-    /**
-     * 是否自动增高输入区域，type为textarea时有效(默认true)
-     */
-    autoHeight: {
-        type: Boolean,
-        default: true
-    },
-    /**
-     * type=select时，旋转右侧的图标，标识当前处于打开还是关闭select的状态
-     * open-打开，close-关闭
-     */
-    selectOpen: {
-        type: Boolean,
-        default: false
-    },
-    /**
-     * 高度，单位rpx
-     */
-    height: {
-        type: [Number, String],
-        default: ''
-    },
-    /**
-     * 是否可清空(默认true)
-     */
-    clearable: {
-        type: Boolean,
-        default: true
-    },
-    /**
-     * 指定光标与键盘的距离，单位 px(默认0)
-     */
-    cursorSpacing: {
-        type: [Number, String],
-        default: 0
-    },
-    /**
-     * 光标起始位置，自动聚焦时有效，需与selection-end搭配使用（默认-1）
-     */
-    selectionStart: {
-        type: [Number, String],
-        default: -1
-    },
-    /**
-     * 光标结束位置，自动聚焦时有效，需与selection-start搭配使用（默认-1）
-     */
-    selectionEnd: {
-        type: [Number, String],
-        default: -1
-    },
-    /**
-     * 是否自动去除两端的空格(默认true)
-     */
-    trim: {
-        type: Boolean,
-        default: true
-    },
-    /**
-     * 是否显示键盘上方带有”完成“按钮那一栏(默认true)
-     */
-    showConfirmbar: {
-        type: Boolean,
-        default: true
-    },
-    /**
-     * 弹出键盘时是否自动调节高度，uni-app默认值是true
-     */
-    adjustPosition: {
-        type: Boolean,
-        default: true
-    },
-    /**
-     * 输入框的验证状态，用于错误时，边框是否改为红色
-     */
-    validateState: {
-        type: Boolean,
-        default: false
-    }
-});
-
+const props = defineProps(InputProps);
 const emit = defineEmits(['update:modelValue', 'blur', 'focus', 'confirm', 'click']);
 
 const defaultValue = ref(props.modelValue);
@@ -336,7 +132,6 @@ const uSelectionStart = computed(() => String(props.selectionStart));
 // 光标结束位置
 const uSelectionEnd = computed(() => String(props.selectionEnd));
 
-// 事件派发工具
 const instance = getCurrentInstance();
 
 // 监听u-form-item发出的错误事件，将输入框边框变红色，失效了
@@ -349,7 +144,6 @@ function handleInput(event: any) {
     let value = event.detail.value;
     // 判断是否去除空格
     if (props.trim) value = $u.trim(value);
-    // vue 原生的方法 return 出去
     emit('update:modelValue', value);
     // 当前model 赋值
     defaultValue.value = value;
@@ -378,7 +172,6 @@ function handleBlur(event: any) {
     setTimeout(() => {
         focused.value = false;
     }, 100);
-    // vue 原生的方法 return 出去
     emit('blur', value);
     setTimeout(() => {
         // 头条小程序由于自身bug，导致中文下，每按下一个键(尚未完成输入)，都会触发一次@input，导致错误，这里进行判断处理

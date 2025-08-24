@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 import { computed, useSlots } from 'vue';
+import { LineProgressProps } from './types';
 
 defineOptions({
     name: 'u-line-progress'
@@ -38,27 +39,7 @@ defineOptions({
  * @property {Boolean} striped-active 条纹是否具有动态效果（默认false）
  * @example <u-line-progress :percent="70" :show-percent="true"></u-line-progress>
  */
-const props = defineProps({
-    /** 两端是否显示半圆形 */
-    round: { type: Boolean, default: true },
-    /** 主题颜色 */
-    type: { type: String, default: '' },
-    /** 激活部分的颜色 */
-    activeColor: { type: String, default: '#19be6b' },
-    /** 进度条的底色 */
-    inactiveColor: { type: String, default: '#ececec' },
-    /** 进度百分比，数值 */
-    percent: { type: Number, default: 0 },
-    /** 是否在进度条内部显示百分比的值 */
-    showPercent: { type: Boolean, default: true },
-    /** 进度条的高度，单位rpx */
-    height: { type: [Number, String], default: 28 },
-    /** 是否显示条纹 */
-    striped: { type: Boolean, default: false },
-    /** 条纹是否显示活动状态 */
-    stripedActive: { type: Boolean, default: false }
-});
-
+const props = defineProps(LineProgressProps);
 const slots = useSlots();
 
 /**

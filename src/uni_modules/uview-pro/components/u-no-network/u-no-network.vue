@@ -18,6 +18,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { imageSrc } from './image';
 import { $u } from '../..';
+import { NoNetworkProps } from './types';
 
 defineOptions({ name: 'u-no-network' });
 
@@ -32,29 +33,7 @@ defineOptions({ name: 'u-no-network' });
  * @example <u-no-network></u-no-network>
  */
 
-const props = defineProps({
-    /**
-     * 页面文字提示
-     */
-    tips: {
-        type: String,
-        default: '哎呀，网络信号丢失'
-    },
-    /**
-     * 一个z-index值，用于设置没有网络这个组件的层次，因为页面可能会有其他定位的元素层级过高，导致此组件被覆盖
-     */
-    zIndex: {
-        type: [Number, String],
-        default: ''
-    },
-    /**
-     * image 没有网络的图片提示
-     */
-    image: {
-        type: String,
-        default: imageSrc
-    }
-});
+const props = defineProps(NoNetworkProps);
 
 const isConnected = ref(true); // 是否有网络连接
 const networkType = ref<string>('none'); // 网络类型

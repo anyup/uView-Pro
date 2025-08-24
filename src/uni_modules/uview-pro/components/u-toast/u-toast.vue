@@ -17,6 +17,7 @@
 import { ref, computed } from 'vue';
 import { $u } from '../..';
 import type { ToastExpose } from './types';
+import { ToastProps } from './types';
 
 defineOptions({
     name: 'u-toast'
@@ -30,13 +31,7 @@ defineOptions({
  * @event {Function} show 显示toast，如需一进入页面就显示toast，请在onReady生命周期调用
  * @example <u-toast ref="uToast" />
  */
-const props = defineProps({
-    /** z-index值 */
-    zIndex: {
-        type: [Number, String],
-        default: ''
-    }
-});
+const props = defineProps(ToastProps);
 
 // 是否显示toast
 const isShow = ref(false);

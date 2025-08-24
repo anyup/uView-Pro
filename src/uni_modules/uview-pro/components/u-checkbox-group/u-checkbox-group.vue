@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance, provide } from 'vue';
 import { $u } from '../..';
+import { CheckboxGroupProps } from './types';
 
 defineOptions({
     name: 'u-checkbox-group'
@@ -29,63 +30,7 @@ defineOptions({
  * @example <u-checkbox-group></u-checkbox-group>
  */
 
-const props = defineProps({
-    /** 最多能选中多少个checkbox */
-    max: {
-        type: [Number, String],
-        default: 999
-    },
-    // /** 所有选中项的 name */
-    // value: {
-    //   default: Array,
-    //   default: () => []
-    // },
-    /** 是否禁用所有复选框 */
-    disabled: {
-        type: Boolean,
-        default: false
-    },
-    /** 在表单内提交时的标识符 */
-    name: {
-        type: [Boolean, String],
-        default: ''
-    },
-    /** 是否禁止点击提示语选中复选框 */
-    labelDisabled: {
-        type: Boolean,
-        default: false
-    },
-    /** 形状，square为方形，circle为原型 */
-    shape: {
-        type: String,
-        default: 'square'
-    },
-    /** 选中状态下的颜色 */
-    activeColor: {
-        type: String,
-        default: '#2979ff'
-    },
-    /** 组件的整体大小 */
-    size: {
-        type: [String, Number],
-        default: 34
-    },
-    /** 每个checkbox占u-checkbox-group的宽度 */
-    width: {
-        type: String,
-        default: 'auto'
-    },
-    /** 是否每个checkbox都换行 */
-    wrap: {
-        type: Boolean,
-        default: false
-    },
-    /** 图标的大小，单位rpx */
-    iconSize: {
-        type: [String, Number],
-        default: 20
-    }
-});
+const props = defineProps(CheckboxGroupProps);
 
 const emit = defineEmits(['change']);
 

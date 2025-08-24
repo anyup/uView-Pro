@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { computed, inject, getCurrentInstance, onMounted } from 'vue';
 import { $u } from '../..';
+import { CheckboxProps } from './types';
 
 defineOptions({
     name: 'u-checkbox'
@@ -38,53 +39,7 @@ defineOptions({
  * @example <u-checkbox v-model="checked" :disabled="false">天涯</u-checkbox>
  */
 
-const props = defineProps({
-    /** checkbox的名称 */
-    name: {
-        type: [String, Number],
-        default: ''
-    },
-    /** 形状，square为方形，circle为原型 */
-    shape: {
-        type: String,
-        default: ''
-    },
-    /** 是否为选中状态 */
-    modelValue: {
-        type: Boolean,
-        default: false
-    },
-    /** 是否禁用 */
-    disabled: {
-        type: [String, Boolean],
-        default: ''
-    },
-    /** 是否禁止点击提示语选中复选框 */
-    labelDisabled: {
-        type: [String, Boolean],
-        default: ''
-    },
-    /** 选中状态下的颜色，如设置此值，将会覆盖checkboxGroup的activeColor值 */
-    activeColor: {
-        type: String,
-        default: ''
-    },
-    /** 图标的大小，单位rpx */
-    iconSize: {
-        type: [String, Number],
-        default: ''
-    },
-    /** label的字体大小，rpx单位 */
-    labelSize: {
-        type: [String, Number],
-        default: ''
-    },
-    /** 组件的整体大小 */
-    size: {
-        type: [String, Number],
-        default: ''
-    }
-});
+const props = defineProps(CheckboxProps);
 
 const emit = defineEmits(['change', 'update:modelValue']);
 

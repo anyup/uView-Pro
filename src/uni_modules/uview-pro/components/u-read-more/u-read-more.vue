@@ -30,6 +30,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { ReadMoreProps } from './types';
 
 defineOptions({ name: 'u-read-more' });
 
@@ -51,57 +52,7 @@ defineOptions({ name: 'u-read-more' });
  * @example <u-read-more><rich-text :nodes="content"></rich-text></u-read-more>
  */
 
-const props = defineProps({
-    /** 默认的显示占位高度，单位为rpx */
-    showHeight: {
-        type: [Number, String],
-        default: 400
-    },
-    /** 展开后是否显示"收起"按钮 */
-    toggle: {
-        type: Boolean,
-        default: false
-    },
-    /** 关闭时的提示文字 */
-    closeText: {
-        type: String,
-        default: '展开阅读全文'
-    },
-    /** 展开时的提示文字 */
-    openText: {
-        type: String,
-        default: '收起'
-    },
-    /** 提示的文字颜色 */
-    color: {
-        type: String,
-        default: '#2979ff'
-    },
-    /** 提示文字的大小 */
-    fontSize: {
-        type: [String, Number],
-        default: 28
-    },
-    /** 是否显示阴影 */
-    shadowStyle: {
-        type: Object as () => Record<string, any>,
-        default: () => ({
-            backgroundImage: 'linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, #fff 80%)',
-            paddingTop: '300rpx',
-            marginTop: '-300rpx'
-        })
-    },
-    /** 段落首行缩进的字符个数 */
-    textIndent: {
-        type: String,
-        default: '2em'
-    },
-    /** open和close事件时，将此参数返回在回调参数中 */
-    index: {
-        type: [Number, String],
-        default: ''
-    }
-});
+const props = defineProps(ReadMoreProps);
 
 const emit = defineEmits(['open', 'close']);
 

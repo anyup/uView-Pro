@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import { $u } from '../..';
+import { LinkProps } from './types';
 
 defineOptions({
     name: 'u-link'
@@ -32,20 +33,7 @@ defineOptions({
  * @property {String} mp-tips 各个小程序平台把链接复制到粘贴板后的提示语（默认“链接已复制，请在浏览器打开”）
  * @example <u-link href="http://www.uviewui.com">蜀道难，难于上青天</u-link>
  */
-const props = defineProps({
-    /** 文字颜色 */
-    color: { type: String, default: '#2979ff' },
-    /** 字体大小，单位rpx */
-    fontSize: { type: [String, Number], default: 28 },
-    /** 是否显示下划线 */
-    underLine: { type: Boolean, default: false },
-    /** 要跳转的链接 */
-    href: { type: String, default: '' },
-    /** 小程序中复制到粘贴板的提示语 */
-    mpTips: { type: String, default: '链接已复制，请在浏览器打开' },
-    /** 下划线颜色 */
-    lineColor: { type: String, default: '' }
-});
+const props = defineProps(LinkProps);
 
 /**
  * 打开链接方法

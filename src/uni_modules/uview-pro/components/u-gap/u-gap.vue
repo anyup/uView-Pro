@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang="ts">
+import { GapProps } from './types';
 import { computed } from 'vue';
 
 defineOptions({
@@ -19,16 +20,7 @@ defineOptions({
  * @property {String Number} margin-bottom 与后一个组件的距离，单位rpx（0）
  * @example <u-gap height="80" bg-color="#bbb"></u-gap>
  */
-const props = defineProps({
-    /** 背景颜色 */
-    bgColor: { type: String, default: 'transparent' },
-    /** 高度 */
-    height: { type: [String, Number], default: 30 },
-    /** 与上一个组件的距离 */
-    marginTop: { type: [String, Number], default: 0 },
-    /** 与下一个组件的距离 */
-    marginBottom: { type: [String, Number], default: 0 }
-});
+const props = defineProps(GapProps);
 
 /**
  * 间隔槽样式

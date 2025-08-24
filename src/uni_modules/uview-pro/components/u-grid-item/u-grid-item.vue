@@ -16,6 +16,7 @@
 </template>
 
 <script setup lang="ts">
+import { GridItemProps } from './types';
 import { ref, computed, getCurrentInstance, onMounted } from 'vue';
 import { $u } from '../..';
 
@@ -33,14 +34,7 @@ defineOptions({ name: 'u-grid-item' });
  */
 
 // props 定义，保留参数注释
-const props = defineProps({
-    /** 背景颜色 */
-    bgColor: { type: String, default: '#ffffff' },
-    /** 点击时返回的index */
-    index: { type: [Number, String], default: '' },
-    /** 自定义样式，对象形式 */
-    customStyle: { type: Object, default: () => ({ padding: '30rpx 0' }) }
-});
+const props = defineProps(GridItemProps);
 
 // emits 定义
 const emit = defineEmits(['click']);

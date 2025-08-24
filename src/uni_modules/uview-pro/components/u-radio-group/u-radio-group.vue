@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { ref, provide, watch, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { RadioGroupProps } from './types';
 
 defineOptions({
     name: 'u-radio-group'
@@ -28,26 +29,7 @@ defineOptions({
  * @example <u-radio-group v-model="value"></u-radio-group>
  */
 
-const props = defineProps({
-    /** 是否禁用所有单选框 */
-    disabled: { type: Boolean, default: false },
-    /** 匹配某一个radio组件，如果某个radio的name值等于此值，那么这个radio就被会选中 */
-    modelValue: { type: [String, Number], default: '' },
-    /** 选中状态下的颜色 */
-    activeColor: { type: String, default: '#2979ff' },
-    /** 组件的整体大小 */
-    size: { type: [String, Number], default: 34 },
-    /** 是否禁止点击提示语选中复选框 */
-    labelDisabled: { type: Boolean, default: false },
-    /** 形状，square为方形，circle为原型 */
-    shape: { type: String, default: 'circle' },
-    /** 图标的大小，单位rpx */
-    iconSize: { type: [String, Number], default: 20 },
-    /** 每个checkbox占u-checkbox-group的宽度 */
-    width: { type: [String, Number], default: 'auto' },
-    /** 是否每个checkbox都换行 */
-    wrap: { type: Boolean, default: false }
-});
+const props = defineProps(RadioGroupProps);
 
 const emit = defineEmits(['update:modelValue', 'change']);
 

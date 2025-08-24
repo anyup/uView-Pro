@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { BadgeProps } from './types';
 
 defineOptions({
     name: 'u-badge'
@@ -44,32 +45,7 @@ defineOptions({
  * @example <u-badge type="error" count="7"></u-badge>
  */
 
-const props = defineProps({
-    /** 使用预设的背景颜色 primary,warning,success,error,info */
-    type: { type: String, default: 'error' },
-    /** Badge的尺寸，default, mini */
-    size: { type: String, default: 'default' },
-    /** 是否是圆点 */
-    isDot: { type: Boolean, default: false },
-    /** 显示的数值内容 */
-    count: { type: [Number, String], default: undefined },
-    /** 展示封顶的数字值 */
-    overflowCount: { type: Number, default: 99 },
-    /** 当数值为 0 时，是否展示 Badge */
-    showZero: { type: Boolean, default: false },
-    /** 位置偏移 [number, number] */
-    offset: { type: [Array, Object], default: () => [20, 20] },
-    /** 是否开启绝对定位，开启了offset才会起作用 */
-    absolute: { type: Boolean, default: true },
-    /** 字体大小 */
-    fontSize: { type: [String, Number], default: '24' },
-    /** 字体颜色 */
-    color: { type: String, default: '#ffffff' },
-    /** badge的背景颜色 */
-    bgColor: { type: String, default: '' },
-    /** 是否让badge组件的中心点和父组件右上角重合，配置的话，offset将会失效 */
-    isCenter: { type: Boolean, default: false }
-});
+const props = defineProps(BadgeProps);
 
 /**
  * 计算 badge 的定位和变换样式

@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang="ts">
+import { FormProps } from './types';
 import { ref, provide } from 'vue';
 import { $u } from '../..';
 
@@ -25,52 +26,7 @@ defineOptions({
  * @example <u-form :model="form" ref="uForm"></u-form>
  */
 
-const props = defineProps({
-    /** 当前form的需要验证字段的集合 */
-    model: {
-        type: Object,
-        default: () => ({})
-    },
-    // 验证规则
-    // rules: {
-    // 	type: [Object, Function, Array],
-    // 	default() {
-    // 		return {};
-    // 	}
-    // },
-    /**
-     * 有错误时的提示方式，message-提示信息，border-如果input设置了边框，变成呈红色，border-bottom-下边框呈现红色，none-无提示
-     */
-    errorType: {
-        type: Array,
-        default: () => ['message', 'toast']
-    },
-    /** 是否显示表单域的下划线边框 */
-    borderBottom: {
-        type: Boolean,
-        default: true
-    },
-    /** label的位置，left-左边，top-上边 */
-    labelPosition: {
-        type: String,
-        default: 'left'
-    },
-    /** label的宽度，单位rpx */
-    labelWidth: {
-        type: [String, Number],
-        default: 90
-    },
-    /** lable字体的对齐方式 */
-    labelAlign: {
-        type: String,
-        default: 'left'
-    },
-    /** lable的样式，对象形式 */
-    labelStyle: {
-        type: Object,
-        default: () => ({})
-    }
-});
+const props = defineProps(FormProps);
 
 // 存储当前form下的所有u-form-item的实例
 const fields = ref<any[]>([]);

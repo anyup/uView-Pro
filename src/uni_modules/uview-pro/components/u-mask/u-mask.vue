@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { $u } from '../..';
+import { MaskProps } from './types';
 
 defineOptions({ name: 'u-mask' });
 
@@ -33,39 +34,7 @@ defineOptions({ name: 'u-mask' });
  * @event {Function} click mask-click-able为true时，点击遮罩发送此事件
  * @example <u-mask :show="show" @click="show = false"></u-mask>
  */
-const props = defineProps({
-    // 是否显示遮罩
-    show: {
-        type: Boolean,
-        default: false
-    },
-    // 层级z-index
-    zIndex: {
-        type: [Number, String],
-        default: ''
-    },
-    // 用户自定义样式
-    customStyle: {
-        type: Object,
-        default: () => ({})
-    },
-    // 遮罩的动画样式， 是否使用zoom进行scale进行缩放
-    zoom: {
-        type: Boolean,
-        default: true
-    },
-    // 遮罩的过渡时间，单位为ms
-    duration: {
-        type: [Number, String],
-        default: 300
-    },
-    // 是否可以通过点击遮罩进行关闭
-    maskClickAble: {
-        type: Boolean,
-        default: true
-    }
-});
-
+const props = defineProps(MaskProps);
 const emit = defineEmits(['click']);
 
 // 缩放动画样式

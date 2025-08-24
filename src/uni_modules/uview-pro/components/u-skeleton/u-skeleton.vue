@@ -9,6 +9,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { SkeletonProps } from './types';
 
 defineOptions({ name: 'u-skeleton' });
 
@@ -24,33 +25,7 @@ defineOptions({ name: 'u-skeleton' });
  * @example <u-skeleton :loading="true" :animation="true"></u-skeleton>
  */
 
-const props = defineProps({
-    /** 骨架块状元素的背景颜色 */
-    elColor: {
-        type: String,
-        default: '#e5e5e5'
-    },
-    /** 整个骨架屏页面的背景颜色 */
-    bgColor: {
-        type: String,
-        default: '#ffffff'
-    },
-    /** 是否显示加载动画 */
-    animation: {
-        type: Boolean,
-        default: false
-    },
-    /** 圆角值，只对类名为u-skeleton-fillet的元素生效，为数值，不带单位 */
-    borderRadius: {
-        type: [String, Number],
-        default: 10
-    },
-    /** 是否显示骨架，true-显示，false-隐藏 */
-    loading: {
-        type: Boolean,
-        default: true
-    }
-});
+const props = defineProps(SkeletonProps);
 
 const instance = getCurrentInstance();
 const windowWinth = ref(750); // 骨架屏宽度

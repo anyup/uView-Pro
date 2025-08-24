@@ -21,6 +21,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { RateProps } from './types';
 
 defineOptions({
     name: 'u-rate'
@@ -44,130 +45,7 @@ defineOptions({
  * @event {Function} change 选中的星星发生变化时触发
  * @example <u-rate :count="count" :current="2"></u-rate>
  */
-const props = defineProps({
-    /**
-     * 用于v-model双向绑定选中的星星数量
-     * 1.4.5版新增
-     * @default -1
-     */
-    modelValue: {
-        type: [Number, String],
-        default: -1
-    },
-    /**
-     * 要显示的星星数量
-     * @default 5
-     */
-    count: {
-        type: [Number, String],
-        default: 5
-    },
-    /**
-     * 当前需要默认选中的星星(选中的个数)
-     * 1.4.5后通过value双向绑定，不再建议使用此参数
-     * @default 0
-     */
-    current: {
-        type: [Number, String],
-        default: 0
-    },
-    /**
-     * 是否不可选中
-     * @default false
-     */
-    disabled: {
-        type: Boolean,
-        default: false
-    },
-    /**
-     * 星星的大小，单位rpx
-     * @default 32
-     */
-    size: {
-        type: [Number, String],
-        default: 32
-    },
-    /**
-     * 未选中时的颜色
-     * @default '#b2b2b2'
-     */
-    inactiveColor: {
-        type: String,
-        default: '#b2b2b2'
-    },
-    /**
-     * 选中的颜色
-     * @default '#FA3534'
-     */
-    activeColor: {
-        type: String,
-        default: '#FA3534'
-    },
-    /**
-     * 星星之间的间距，单位rpx
-     * @default 10
-     */
-    gutter: {
-        type: [Number, String],
-        default: 10
-    },
-    /**
-     * 最少能选择的星星个数
-     * @default 0
-     */
-    minCount: {
-        type: [Number, String],
-        default: 0
-    },
-    /**
-     * 是否允许半星(功能尚未实现)
-     * @default false
-     */
-    allowHalf: {
-        type: Boolean,
-        default: false
-    },
-    /**
-     * 选中时的图标(星星)
-     * @default 'star-fill'
-     */
-    activeIcon: {
-        type: String,
-        default: 'star-fill'
-    },
-    /**
-     * 未选中时的图标(星星)
-     * @default 'star'
-     */
-    inactiveIcon: {
-        type: String,
-        default: 'star'
-    },
-    /**
-     * 自定义扩展前缀，方便用户扩展自己的图标库
-     * @default 'uicon'
-     */
-    customPrefix: {
-        type: String,
-        default: 'uicon'
-    },
-    /**
-     * 分段颜色
-     * @default []
-     */
-    colors: {
-        type: Array,
-        default: () => []
-    },
-    /**
-     * 分段图标
-     * @default []
-     */
-    icons: {
-        type: Array,
-        default: () => []
-    }
-});
+const props = defineProps(RateProps);
 
 const emit = defineEmits(['update:modelValue', 'change']);
 const instance = getCurrentInstance();

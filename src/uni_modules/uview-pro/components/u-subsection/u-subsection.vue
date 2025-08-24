@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { SubsectionProps } from './types';
 
 defineOptions({ name: 'u-subsection' });
 
@@ -46,68 +47,7 @@ interface ListItem {
     [key: string]: any;
 }
 
-const props = defineProps({
-    /** tab的数据 */
-    list: {
-        type: Array as () => Array<string | ListItem>,
-        default: () => []
-    },
-    /** 当前活动的tab的index */
-    current: {
-        type: [Number, String],
-        default: 0
-    },
-    /** 激活的颜色 */
-    activeColor: {
-        type: String,
-        default: '#303133'
-    },
-    /** 未激活的颜色 */
-    inactiveColor: {
-        type: String,
-        default: '#606266'
-    },
-    /** 模式选择，mode=button为按钮形式，mode=subsection时为分段模式 */
-    mode: {
-        type: String,
-        default: 'button'
-    },
-    /** 字体大小，单位rpx */
-    fontSize: {
-        type: [Number, String],
-        default: 28
-    },
-    /** 是否开启动画效果 */
-    animation: {
-        type: Boolean,
-        default: true
-    },
-    /** 组件的高度，单位rpx */
-    height: {
-        type: [Number, String],
-        default: 70
-    },
-    /** 激活tab的字体是否加粗 */
-    bold: {
-        type: Boolean,
-        default: true
-    },
-    /** mode=button时，组件背景颜色 */
-    bgColor: {
-        type: String,
-        default: '#eeeeef'
-    },
-    /** mode = button时，滑块背景颜色 */
-    buttonColor: {
-        type: String,
-        default: '#ffffff'
-    },
-    /** 在切换分段器的时候，是否让设备震一下 */
-    vibrateShort: {
-        type: Boolean,
-        default: false
-    }
-});
+const props = defineProps(SubsectionProps);
 
 const emit = defineEmits<{ (e: 'change', index: number): void }>();
 

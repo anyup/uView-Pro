@@ -10,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+import { CellGroupProps } from './types';
+
 defineOptions({
     name: 'u-cell-group'
 });
@@ -24,15 +26,7 @@ defineOptions({
  * @example <u-cell-group title="设置喜好">
  */
 
-defineProps({
-    /** 分组标题 */
-    title: { type: String, default: '' },
-    /** 是否显示分组list上下边框 */
-    border: { type: Boolean, default: true },
-    /** 分组标题的样式，对象形式，注意驼峰属性写法 */
-    /** 类似 {'font-size': '24rpx'} 和 {'fontSize': '24rpx'} */
-    titleStyle: { type: Object as () => Record<string, any>, default: () => ({}) }
-});
+defineProps(CellGroupProps);
 </script>
 
 <style lang="scss" scoped>

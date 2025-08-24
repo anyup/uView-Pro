@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { $u } from '../..';
+import { TopTipsProps } from './types';
 
 defineOptions({ name: 'u-top-tips' });
 
@@ -17,27 +18,7 @@ defineOptions({ name: 'u-top-tips' });
  * @example <u-top-tips ref="uTips"></u-top-tips>
  */
 
-const props = defineProps({
-    /** 导航栏高度，用于提示的初始化 */
-    navbarHeight: {
-        type: [Number, String],
-        default() {
-            let result = 0;
-            // #ifndef H5
-            result = 0;
-            // #endif
-            // #ifdef H5
-            result = 44;
-            // #endif
-            return result;
-        }
-    },
-    /** z-index值 */
-    zIndex: {
-        type: [Number, String],
-        default: ''
-    }
-});
+const props = defineProps(TopTipsProps);
 
 let timer: number | null = null; // 定时器
 const isShow = ref(false); // 是否显示消息组件
@@ -47,8 +28,22 @@ const duration = ref(2000); // 组件显示的时间，单位为毫秒
 
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.topTips));
 
+const uNavbarHeight = computed(() => {
+    if (props.navbarHeight) {
+        return props.navbarHeight;
+    }
+    let height = 0;
+    // #ifndef H5
+    height = 0;
+    // #endif
+    // #ifdef H5
+    height = 44;
+    // #endif
+    return height;
+});
+
 const tipStyle = computed(() => ({
-    top: Number(props.navbarHeight) + 'px',
+    top: Number(uNavbarHeight.value) + 'px',
     zIndex: uZIndex.value
 }));
 

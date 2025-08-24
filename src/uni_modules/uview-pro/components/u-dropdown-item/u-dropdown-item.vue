@@ -24,7 +24,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, getCurrentInstance, useSlots, watch } from 'vue';
-import { $u } from '../..'; // 工具函数路径
+import { $u } from '../..';
+import { DropdownItemProps } from './types';
 
 defineOptions({ name: 'u-dropdown-item' });
 
@@ -41,21 +42,8 @@ defineOptions({ name: 'u-dropdown-item' });
  * @example <u-dropdown-item title="标题"></u-dropdown-item>
  */
 
-type OptionType = { label: string; value: any };
-
-// props 定义，保留参数注释
-const props = defineProps({
-    /** 当前选中项的value值 */
-    modelValue: { type: [Number, String, Array], default: '' },
-    /** 菜单项标题 */
-    title: { type: [String, Number], default: '' },
-    /** 选项数据，如果传入了默认slot，此参数无效 */
-    options: { type: Array as () => OptionType[], default: () => [] },
-    /** 是否禁用此菜单项 */
-    disabled: { type: Boolean, default: false },
-    /** 下拉弹窗的高度 */
-    height: { type: [Number, String], default: 'auto' }
-});
+// props 定义
+const props = defineProps(DropdownItemProps);
 
 // emits 定义
 const emit = defineEmits(['update:modelValue', 'change']);

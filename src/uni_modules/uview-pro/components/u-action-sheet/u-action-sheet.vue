@@ -36,6 +36,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { $u } from '../..';
+import { ActionSheetProps } from './types';
 
 defineOptions({
     name: 'u-action-sheet'
@@ -59,53 +60,7 @@ defineOptions({
  * @example <u-action-sheet :list="list" @click="click" v-model="show"></u-action-sheet>
  */
 
-const props = defineProps({
-    /** 点击遮罩是否可以关闭actionsheet */
-    maskCloseAble: {
-        type: Boolean,
-        default: true
-    },
-    /** 按钮的文字数组，可以自定义颜色和字体大小，字体单位为rpx */
-    list: {
-        type: Array as () => Array<{ text: string; subText?: string; color?: string; fontSize?: string; disabled?: boolean }>,
-        default: () => []
-    },
-    /** 顶部的提示文字 */
-    tips: {
-        type: Object as () => { text: string; color?: string; fontSize?: string },
-        default: () => ({ text: '', color: '', fontSize: '26' })
-    },
-    /** 底部的取消按钮 */
-    cancelBtn: {
-        type: Boolean,
-        default: true
-    },
-    /** 是否开启底部安全区适配，开启的话，会在iPhoneX机型底部添加一定的内边距 */
-    safeAreaInsetBottom: {
-        type: Boolean,
-        default: false
-    },
-    /** 通过双向绑定控制组件的弹出与收起 */
-    modelValue: {
-        type: Boolean,
-        default: false
-    },
-    /** 弹出的顶部圆角值 */
-    borderRadius: {
-        type: [String, Number],
-        default: 0
-    },
-    /** 弹出的z-index值 */
-    zIndex: {
-        type: [String, Number],
-        default: 0
-    },
-    /** 取消按钮的文字提示 */
-    cancelText: {
-        type: String,
-        default: '取消'
-    }
-});
+const props = defineProps(ActionSheetProps);
 
 const emit = defineEmits(['update:modelValue', 'click', 'close']);
 

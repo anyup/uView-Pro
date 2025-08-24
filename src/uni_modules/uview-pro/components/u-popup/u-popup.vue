@@ -48,6 +48,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick } from 'vue';
 import { $u } from '../..';
+import { PopupProps } from './types';
 
 defineOptions({
     name: 'u-popup'
@@ -77,53 +78,7 @@ defineOptions({
  * @example <u-popup v-model="show"><view>出淤泥而不染，濯清涟而不妖</view></u-popup>
  */
 
-const props = defineProps({
-    // 显示状态
-    show: { type: Boolean, default: false },
-    // 弹出方向，left|right|top|bottom|center
-    mode: { type: String, default: 'left' },
-    // 是否显示遮罩
-    mask: { type: Boolean, default: true },
-    // 抽屉的宽度(mode=left|right)，或者高度(mode=top|bottom)，单位rpx，或者"auto"
-    // 或者百分比"50%"，表示由内容撑开高度或者宽度
-    length: { type: [Number, String], default: 'auto' },
-    // 是否开启缩放动画，只在mode=center时有效
-    zoom: { type: Boolean, default: true },
-    // 是否开启底部安全区适配，开启的话，会在iPhoneX机型底部添加一定的内边距
-    safeAreaInsetBottom: { type: Boolean, default: false },
-    // 是否可以通过点击遮罩进行关闭
-    maskCloseAble: { type: Boolean, default: true },
-    // 用户自定义样式
-    customStyle: { type: Object, default: () => ({}) },
-    modelValue: { type: Boolean, default: false },
-    // 此为内部参数，不在文档对外使用，为了解决Picker和keyboard等融合了弹窗的组件
-    // 对v-model双向绑定多层调用造成报错不能修改props值的问题
-    popup: { type: Boolean, default: true },
-    borderRadius: { type: [Number, String], default: 0 },
-    zIndex: { type: [Number, String], default: '' },
-    // 是否显示关闭图标
-    closeable: { type: Boolean, default: false },
-    // 关闭图标的名称，只能uView的内置图标
-    closeIcon: { type: String, default: 'close' },
-    // 自定义关闭图标位置，top-left为左上角，top-right为右上角，bottom-left为左下角，bottom-right为右下角
-    closeIconPos: { type: String, default: 'top-right' },
-    // 关闭图标的颜色
-    closeIconColor: { type: String, default: '#909399' },
-    // 关闭图标的大小，单位rpx
-    closeIconSize: { type: [String, Number], default: '30' },
-    // 宽度，只对左，右，中部弹出时起作用，单位rpx，或者"auto"
-    // 或者百分比"50%"，表示由内容撑开高度或者宽度，优先级高于length参数
-    width: { type: String, default: '' },
-    // 高度，只对上，下，中部弹出时起作用，单位rpx，或者"auto"
-    // 或者百分比"50%"，表示由内容撑开高度或者宽度，优先级高于length参数
-    height: { type: String, default: '' },
-    // 给一个负的margin-top，往上偏移，避免和键盘重合的情况，仅在mode=center时有效
-    negativeTop: { type: [String, Number], default: 0 },
-    // 遮罩的样式，一般用于修改遮罩的透明度
-    maskCustomStyle: { type: Object, default: () => ({}) },
-    // 遮罩打开或收起的动画过渡时间，单位ms
-    duration: { type: [String, Number], default: 250 }
-});
+const props = defineProps(PopupProps);
 const emit = defineEmits(['update:modelValue', 'open', 'close']);
 
 // 组件内部状态

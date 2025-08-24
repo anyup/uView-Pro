@@ -57,6 +57,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
+import { SwiperProps } from './types';
 
 defineOptions({ name: 'u-swiper' });
 /**
@@ -81,47 +82,7 @@ defineOptions({ name: 'u-swiper' });
  * @example <u-swiper :list="list" mode="dot" indicator-pos="bottomRight"></u-swiper>
  */
 
-// props 定义，保留参数注释
-const props = defineProps({
-    /** 轮播图的数据,格式如：[{image: 'xxxx', title: 'xxxx'}，{image: 'yyyy', title: 'yyyy'}]，其中title字段可选 */
-    list: { type: Array as () => Array<Record<string, any>>, default: () => [] },
-    /** 是否显示title标题 */
-    title: { type: Boolean, default: false },
-    /** 用户自定义的指示器的样式 */
-    indicator: { type: Object, default: () => ({}) },
-    /** 圆角值 */
-    borderRadius: { type: [Number, String], default: 8 },
-    /** 隔多久自动切换 */
-    interval: { type: [String, Number], default: 3000 },
-    /** 指示器的模式，rect|dot|number|round */
-    mode: { type: String, default: 'round' },
-    /** list的高度，单位rpx */
-    height: { type: [Number, String], default: 250 },
-    /** 指示器的位置，topLeft|topCenter|topRight|bottomLeft|bottomCenter|bottomRight */
-    indicatorPos: { type: String, default: 'bottomCenter' },
-    /** 是否开启缩放效果 */
-    effect3d: { type: Boolean, default: false },
-    /** 3D模式的情况下，激活item与前后item之间的距离，单位rpx */
-    effect3dPreviousMargin: { type: [Number, String], default: 50 },
-    /** 是否自动播放 */
-    autoplay: { type: Boolean, default: true },
-    /** 自动轮播时间间隔，单位ms */
-    duration: { type: [Number, String], default: 500 },
-    /** 是否衔接滑动，即到最后一张时接着滑动，是否自动切换到第一张 */
-    circular: { type: Boolean, default: true },
-    /** 图片的裁剪模式 */
-    imgMode: { type: String, default: 'aspectFill' },
-    /** 从list数组中读取的图片的属性名 */
-    name: { type: String, default: 'image' },
-    /** 背景颜色 */
-    bgColor: { type: String, default: '#f3f4f6' },
-    /** 初始化时，默认显示第几项 */
-    current: { type: [Number, String], default: 0 },
-    /** 标题的样式，对象形式 */
-    titleStyle: { type: Object, default: () => ({}) }
-});
-
-// emits 定义
+const props = defineProps(SwiperProps);
 const emit = defineEmits(['click', 'change']);
 
 // 当前活跃的swiper-item的index

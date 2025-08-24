@@ -23,6 +23,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, inject } from 'vue';
 import { $u } from '../..';
+import { CollapseItemProps } from './types';
 
 defineOptions({
     name: 'u-collapse-item'
@@ -42,22 +43,7 @@ defineOptions({
  * @event {Function} change 某个item被打开或者收起时触发
  * @example <u-collapse-item :title="item.head" v-for="(item, index) in itemList" :key="index">{{item.body}}</u-collapse-item>
  */
-const props = defineProps({
-    /** 标题 */
-    title: { type: String, default: '' },
-    /** 标题的对齐方式 */
-    align: { type: String, default: 'left' },
-    /** 是否可以点击收起 */
-    disabled: { type: Boolean, default: false },
-    /** collapse显示与否 */
-    open: { type: Boolean, default: false },
-    /** 唯一标识符 */
-    name: { type: [Number, String], default: '' },
-    /** 活动样式 */
-    activeStyle: { type: Object, default: () => ({}) },
-    /** 标识当前为第几个 */
-    index: { type: [String, Number], default: '' }
-});
+const props = defineProps(CollapseItemProps);
 
 const emit = defineEmits(['change']);
 const slots = useSlots();

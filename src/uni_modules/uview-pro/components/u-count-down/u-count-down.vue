@@ -53,6 +53,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
+import { CountDownProps } from './types';
 
 defineOptions({ name: 'u-count-down' });
 
@@ -83,88 +84,7 @@ defineOptions({ name: 'u-count-down' });
 
 const emit = defineEmits(['end', 'change']);
 
-const props = defineProps({
-    /** 倒计时的时间，秒为单位 */
-    timestamp: {
-        type: [Number, String],
-        default: 0
-    },
-    /** 是否自动开始倒计时 */
-    autoplay: {
-        type: Boolean,
-        default: true
-    },
-    /** 分隔符 */
-    separator: {
-        type: String,
-        default: 'colon'
-    },
-    /** 分隔符的大小，单位rpx */
-    separatorSize: {
-        type: [Number, String],
-        default: 30
-    },
-    /** 分隔符颜色 */
-    separatorColor: {
-        type: String,
-        default: '#303133'
-    },
-    /** 字体颜色 */
-    color: {
-        type: String,
-        default: '#303133'
-    },
-    /** 字体大小，单位rpx */
-    fontSize: {
-        type: [Number, String],
-        default: 30
-    },
-    /** 背景颜色 */
-    bgColor: {
-        type: String,
-        default: '#fff'
-    },
-    /** 数字框高度，单位rpx */
-    height: {
-        type: [Number, String],
-        default: 'auto'
-    },
-    /** 是否显示数字框 */
-    showBorder: {
-        type: Boolean,
-        default: false
-    },
-    /** 边框颜色 */
-    borderColor: {
-        type: String,
-        default: '#303133'
-    },
-    /** 是否显示秒 */
-    showSeconds: {
-        type: Boolean,
-        default: true
-    },
-    /** 是否显示分钟 */
-    showMinutes: {
-        type: Boolean,
-        default: true
-    },
-    /** 是否显示小时 */
-    showHours: {
-        type: Boolean,
-        default: true
-    },
-    /** 是否显示“天” */
-    showDays: {
-        type: Boolean,
-        default: true
-    },
-    /** 当"天"的部分为0时，不显示 */
-    hideZeroDay: {
-        type: Boolean,
-        default: false
-    }
-});
+const props = defineProps(CountDownProps);
 
 const d = ref('00'); // 天
 const h = ref('00'); // 小时

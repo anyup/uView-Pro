@@ -43,6 +43,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { TabbarProps } from './types';
 
 defineOptions({ name: 'u-tabbar' });
 
@@ -63,73 +64,7 @@ defineOptions({ name: 'u-tabbar' });
  * @property {Boolean} hideTabBar 是否隐藏原生tabbar
  */
 
-const props = defineProps({
-    /** 显示与否 */
-    show: {
-        type: Boolean,
-        default: true
-    },
-    /** 通过v-model绑定current值 */
-    modelValue: {
-        type: [String, Number],
-        default: 0
-    },
-    /** 整个tabbar的背景颜色 */
-    bgColor: {
-        type: String,
-        default: '#ffffff'
-    },
-    /** tabbar的高度，默认50px，单位任意，如果为数值，则为rpx单位 */
-    height: {
-        type: [String, Number],
-        default: '50px'
-    },
-    /** 非凸起图标的大小，单位任意，数值默认rpx */
-    iconSize: {
-        type: [String, Number],
-        default: 40
-    },
-    /** 凸起的图标的大小，单位任意，数值默认rpx */
-    midButtonSize: {
-        type: [String, Number],
-        default: 90
-    },
-    /** 激活时的演示，包括字体图标，提示文字等的演示 */
-    activeColor: {
-        type: String,
-        default: '#303133'
-    },
-    /** 未激活时的颜色 */
-    inactiveColor: {
-        type: String,
-        default: '#606266'
-    },
-    /** 是否显示中部的凸起按钮 */
-    midButton: {
-        type: Boolean,
-        default: false
-    },
-    /** 配置参数 */
-    list: {
-        type: Array as () => any[],
-        default: () => []
-    },
-    /** 切换前的回调 */
-    beforeSwitch: {
-        type: Function,
-        default: null
-    },
-    /** 是否显示顶部的横线 */
-    borderTop: {
-        type: Boolean,
-        default: true
-    },
-    /** 是否隐藏原生tabbar */
-    hideTabBar: {
-        type: Boolean,
-        default: true
-    }
-});
+const props = defineProps(TabbarProps);
 
 const emit = defineEmits<{ (e: 'change', index: number): void; (e: 'update:modelValue', index: number): void }>();
 
@@ -194,20 +129,16 @@ const elColor = computed<(index: number) => string>(() => {
 async function clickHandler(index: number) {
     if (props.beforeSwitch && typeof props.beforeSwitch === 'function') {
         // 执行回调，同时传入索引当作参数
-        // 在微信，支付宝等环境(H5正常)，会导致父组件定义的customBack()函数体中的this变成子组件的this
-        // 通过bind()方法，绑定父组件的this，让this.customBack()的this为父组件的上下文
-        // let beforeSwitch = props.beforeSwitch.bind($u.$parent.call(getCurrentInstance()?.proxy))(index);
-        // 或许有问题
-        let beforeSwitch = props.beforeSwitch(index);
+        let beforeSwitchResult = props.beforeSwitch(index);
         // 判断是否返回了promise
-        if (!!beforeSwitch && typeof beforeSwitch.then === 'function') {
-            await beforeSwitch
+        if (typeof beforeSwitchResult === 'object' && beforeSwitchResult !== null && typeof beforeSwitchResult.then === 'function') {
+            await beforeSwitchResult
                 .then(() => {
                     // promise返回成功，
                     switchTab(index);
                 })
                 .catch(() => {});
-        } else if (beforeSwitch === true) {
+        } else if (beforeSwitchResult === true) {
             // 如果返回true
             switchTab(index);
         }

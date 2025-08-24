@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { LoadingProps } from './types';
 
 defineOptions({
     name: 'u-loading'
@@ -19,29 +20,7 @@ defineOptions({
  * @property {Boolean} show 是否显示动画（默认true）
  * @example <u-loading mode="circle"></u-loading>
  */
-
-const props = defineProps({
-    /**
-     * 动画的类型
-     * @default 'circle'
-     */
-    mode: { type: String, default: 'circle' },
-    /**
-     * 动画的颜色
-     * @default '#c7c7c7'
-     */
-    color: { type: String, default: '#c7c7c7' },
-    /**
-     * 加载图标的大小，单位rpx
-     * @default '34'
-     */
-    size: { type: [String, Number], default: '34' },
-    /**
-     * 是否显示动画
-     * @default true
-     */
-    show: { type: Boolean, default: true }
-});
+const props = defineProps(LoadingProps);
 
 /**
  * 加载中圆圈动画的样式

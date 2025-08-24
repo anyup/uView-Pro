@@ -22,6 +22,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { StepsProps } from './types';
 
 defineOptions({ name: 'u-steps' });
 
@@ -40,48 +41,7 @@ defineOptions({ name: 'u-steps' });
  * @example <u-steps :list="numList" active-color="#fa3534"></u-steps>
  */
 
-const props = defineProps({
-    /** 步骤条的类型，dot|number */
-    mode: {
-        type: String,
-        default: 'dot'
-    },
-    /** 步骤条的数据 */
-    list: {
-        type: Array as () => { name: string }[],
-        default: (): { name: string }[] => []
-    },
-    /** 主题类型, primary|success|info|warning|error */
-    type: {
-        type: String,
-        default: 'primary'
-    },
-    /** 当前哪一步是激活的 */
-    current: {
-        type: [Number, String],
-        default: 0
-    },
-    /** 激活步骤的颜色 */
-    activeColor: {
-        type: String,
-        default: '#2979ff'
-    },
-    /** 未激活的颜色 */
-    unActiveColor: {
-        type: String,
-        default: '#909399'
-    },
-    /** 自定义图标 */
-    icon: {
-        type: String,
-        default: 'checkmark'
-    },
-    /** step的排列方向，row-横向，column-竖向 */
-    direction: {
-        type: String,
-        default: 'row'
-    }
-});
+const props = defineProps(StepsProps);
 
 // 计算属性，计算当前步骤的索引值
 // 如果 current 是字符串，则转换为数字，否则直接使用数字

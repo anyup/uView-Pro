@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { ref, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { TdProps } from './types';
 
 defineOptions({ name: 'u-td' });
 
@@ -18,15 +19,7 @@ defineOptions({ name: 'u-td' });
  * @example <u-td>二年级</u-td>
  */
 
-const props = defineProps({
-    /**
-     * 宽度，百分比或者具体带单位的值，如30%， 200rpx等，一般使用百分比
-     */
-    width: {
-        type: [Number, String],
-        default: 'auto'
-    }
-});
+const props = defineProps(TdProps);
 
 /**
  * 组合式API变量声明

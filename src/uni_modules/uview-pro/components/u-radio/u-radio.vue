@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue';
 import { $u } from '../..';
+import { RadioProps } from './types';
 
 defineOptions({
     name: 'u-radio'
@@ -38,22 +39,7 @@ defineOptions({
  * @example <u-radio :label-disabled="false">门掩黄昏，无计留春住</u-radio>
  */
 
-const props = defineProps({
-    /** radio的名称 */
-    name: { type: [String, Number], default: '' },
-    /** 形状，square为方形，circle为原型 */
-    shape: { type: String, default: '' },
-    /** 是否禁用 */
-    disabled: { type: [String, Boolean], default: '' },
-    /** 是否禁止点击提示语选中复选框 */
-    labelDisabled: { type: [String, Boolean], default: '' },
-    /** 选中状态下的颜色，如设置此值，将会覆盖parent的activeColor值 */
-    activeColor: { type: String, default: '' },
-    /** 图标的大小，单位rpx */
-    iconSize: { type: [String, Number], default: '' },
-    /** label的字体大小，rpx单位 */
-    labelSize: { type: [String, Number], default: '' }
-});
+const props = defineProps(RadioProps);
 
 const emit = defineEmits(['change']);
 

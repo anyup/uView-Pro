@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { ref, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { ThProps } from './types';
 
 defineOptions({ name: 'u-th' });
 
@@ -18,15 +19,7 @@ defineOptions({ name: 'u-th' });
  * @example 暂无示例
  */
 
-const props = defineProps({
-    /**
-     * 宽度，百分比或者具体带单位的值，如30%， 200rpx等，一般使用百分比
-     */
-    width: {
-        type: [Number, String],
-        default: ''
-    }
-});
+const props = defineProps(ThProps);
 
 const thStyle = ref<Record<string, any>>({}); // 标题单元格样式
 let parent: any = null; // 父组件实例

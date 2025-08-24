@@ -106,6 +106,7 @@ import { ref, computed, watch, onMounted, nextTick } from 'vue';
 import provinces from '../../libs/util/province';
 import citys from '../../libs/util/city';
 import areas from '../../libs/util/area';
+import { PickerProps } from './types';
 
 defineOptions({
     name: 'u-picker'
@@ -137,179 +138,7 @@ defineOptions({
  * @event {Function} cancel 点击取消按钮，返回当前选择的值
  * @example <u-picker v-model="show" mode="time"></u-picker>
  */
-const props = defineProps({
-    /**
-     * picker中需要显示的参数
-     * @default { year: true, month: true, day: true, hour: false, minute: false, second: false, province: true, city: true, area: true, timestamp: true }
-     */
-    params: {
-        type: Object,
-        default: () => ({
-            year: true,
-            month: true,
-            day: true,
-            hour: false,
-            minute: false,
-            second: false,
-            province: true,
-            city: true,
-            area: true,
-            timestamp: true
-        })
-    },
-    /**
-     * 当mode=selector或者mode=multiSelector时，提供的数组
-     * @default []
-     */
-    range: {
-        type: Array,
-        default: () => []
-    },
-    /**
-     * 当mode=selector或者mode=multiSelector时，提供的默认选中的下标
-     * @default [0]
-     */
-    defaultSelector: {
-        type: Array,
-        default: () => [0]
-    },
-    /**
-     * 当 range 是一个 Array<Object> 时，通过 range-key 来指定 Object 中 key 的值作为选择器显示内容
-     * @default ''
-     */
-    rangeKey: {
-        type: String,
-        default: ''
-    },
-    /**
-     * 模式选择，region-地区类型，time-时间类型，selector-单列模式，multiSelector-多列模式
-     * @default 'time'
-     */
-    mode: {
-        type: String,
-        default: 'time'
-    },
-    /**
-     * 年份开始时间
-     * @default 1950
-     */
-    startYear: {
-        type: [String, Number],
-        default: 1950
-    },
-    /**
-     * 年份结束时间
-     * @default 2050
-     */
-    endYear: {
-        type: [String, Number],
-        default: 2050
-    },
-    /**
-     * "取消"按钮的颜色
-     * @default '#606266'
-     */
-    cancelColor: {
-        type: String,
-        default: '#606266'
-    },
-    /**
-     * "确定"按钮的颜色
-     * @default '#2979ff'
-     */
-    confirmColor: {
-        type: String,
-        default: '#2979ff'
-    },
-    /**
-     * 默认显示的时间，2025-07-02 || 2025-07-02 13:01:00 || 2025/07/02
-     * @default ''
-     */
-    defaultTime: {
-        type: String,
-        default: ''
-    },
-    /**
-     * 默认显示的地区，可传类似["河北省", "秦皇岛市", "北戴河区"]
-     * @default []
-     */
-    defaultRegion: {
-        type: Array,
-        default: () => []
-    },
-    /**
-     * 时间模式时，是否显示后面的年月日中文提示
-     * @default true
-     */
-    showTimeTag: {
-        type: Boolean,
-        default: true
-    },
-    /**
-     * 默认显示地区的编码，defaultRegion和areaCode同时存在，areaCode优先，可传类似["13", "1303", "130304"]
-     * @default []
-     */
-    areaCode: {
-        type: Array,
-        default: () => []
-    },
-    /**
-     * 是否开启底部安全区适配
-     * @default false
-     */
-    safeAreaInsetBottom: {
-        type: Boolean,
-        default: false
-    },
-    /**
-     * 是否允许通过点击遮罩关闭Picker
-     * @default true
-     */
-    maskCloseAble: {
-        type: Boolean,
-        default: true
-    },
-    /**
-     * 通过双向绑定控制组件的弹出与收起
-     * @default false
-     */
-    modelValue: {
-        type: Boolean,
-        default: false
-    },
-    /**
-     * 弹出的z-index值
-     * @default 0
-     */
-    zIndex: {
-        type: [String, Number],
-        default: 0
-    },
-    /**
-     * 顶部标题
-     * @default ''
-     */
-    title: {
-        type: String,
-        default: ''
-    },
-    /**
-     * 取消按钮的文字
-     * @default '取消'
-     */
-    cancelText: {
-        type: String,
-        default: '取消'
-    },
-    /**
-     * 确认按钮的文字
-     * @default '确认'
-     */
-    confirmText: {
-        type: String,
-        default: '确认'
-    }
-});
+const props = defineProps(PickerProps);
 
 const popupValue = computed({
     get: () => props.modelValue,
@@ -530,7 +359,7 @@ function setDays() {
     let totalDays = new Date(year.value, month.value, 0).getDate();
     days.value = generateArray(1, totalDays);
     let index = 0;
-    // 这里不能使用类似setMonths()中的this.valueArr.splice(this.valueArr.length - 1, xxx)做法
+    // 这里不能使用类似setMonths()中的this.valueArr.splice(this.valueArr.length - 1, 1, xxx)做法
     // 因为this.month和this.year变化时，会触发watch中的this.setDays()，导致this.valueArr.length计算有误
     if (props.params.year && props.params.month) index = 2;
     else if (props.params.month) index = 1;

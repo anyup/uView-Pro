@@ -25,6 +25,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { DividerProps } from './types';
 
 defineOptions({
     name: 'u-divider'
@@ -47,28 +48,7 @@ defineOptions({
  * @event {Function} click divider组件被点击时触发
  * @example <u-divider color="#fa3534">长河落日圆</u-divider>
  */
-const props = defineProps({
-    /** 单一边divider横线的宽度(数值)，单位rpx。或者百分比 */
-    halfWidth: { type: [Number, String], default: 150 },
-    /** divider横线的颜色，如设置 */
-    borderColor: { type: String, default: '#dcdfe6' },
-    /** 主题色，可以是primary|info|success|warning|error之一值 */
-    type: { type: String, default: 'primary' },
-    /** 文字颜色 */
-    color: { type: String, default: '#909399' },
-    /** 文字大小，单位rpx */
-    fontSize: { type: [Number, String], default: 26 },
-    /** 整个divider的背景颜色 */
-    bgColor: { type: String, default: '#ffffff' },
-    /** 整个divider的高度单位rpx */
-    height: { type: [Number, String], default: 'auto' },
-    /** 上边距 */
-    marginTop: { type: [String, Number], default: 0 },
-    /** 下边距 */
-    marginBottom: { type: [String, Number], default: 0 },
-    /** 是否使用slot传入内容，如果不用slot传入内容，先的中间就不会有空隙 */
-    useSlot: { type: Boolean, default: true }
-});
+const props = defineProps(DividerProps);
 
 const emit = defineEmits(['click']);
 

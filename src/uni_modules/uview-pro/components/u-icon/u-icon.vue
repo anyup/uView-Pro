@@ -13,6 +13,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { $u } from '../..';
+import { IconProps } from './types';
 
 defineOptions({
     name: 'u-icon'
@@ -54,129 +55,7 @@ const emit = defineEmits<{
     (e: 'touchstart', index: string | number): void;
 }>();
 
-const props = defineProps({
-    /**
-     * 图标名称，见示例图标集
-     * @default ''
-     */
-    name: { type: String, default: '' },
-    /**
-     * 图标颜色，可接受主题色
-     * @default ''
-     */
-    color: { type: String, default: '' },
-    /**
-     * 字体大小，单位rpx（默认32）
-     * @default 'inherit'
-     */
-    size: { type: [Number, String], default: 'inherit' },
-    /**
-     * 是否显示粗体
-     * @default false
-     */
-    bold: { type: Boolean, default: false },
-    /**
-     * 点击图标的时候传递事件出去的index（用于区分点击了哪一个）
-     * @default ''
-     */
-    index: { type: [Number, String], default: '' },
-    /**
-     * 触摸图标时的类名
-     * @default ''
-     */
-    hoverClass: { type: String, default: '' },
-    /**
-     * 自定义扩展前缀，方便用户扩展自己的图标库
-     * @default 'uicon'
-     */
-    customPrefix: { type: String, default: 'uicon' },
-    /**
-     * 图标右边或者下面的文字
-     * @default ''
-     */
-    label: { type: [String, Number], default: '' },
-    /**
-     * label的位置，只能右边或者下边
-     * @default 'right'
-     * @values 'right' | 'bottom'
-     */
-    labelPos: { type: String, default: 'right' },
-    /**
-     * label的大小，单位rpx（默认28）
-     * @default '28'
-     */
-    labelSize: { type: [String, Number], default: '28' },
-    /**
-     * label的颜色
-     * @default '#606266'
-     */
-    labelColor: { type: String, default: '#606266' },
-    /**
-     * label与图标的距离(横向排列)，单位rpx（默认6）
-     * @default '6'
-     */
-    marginLeft: { type: [String, Number], default: '6' },
-    /**
-     * label与图标的距离(竖向排列)，单位rpx（默认6）
-     * @default '6'
-     */
-    marginTop: { type: [String, Number], default: '6' },
-    /**
-     * label与图标的距离(竖向排列)，单位rpx（默认6）
-     * @default '6'
-     */
-    marginRight: { type: [String, Number], default: '6' },
-    /**
-     * label与图标的距离(竖向排列)，单位rpx（默认6）
-     * @default '6'
-     */
-    marginBottom: { type: [String, Number], default: '6' },
-    /**
-     * label与图标的距离，单位rpx，权重高于 margin
-     * @default ''
-     */
-    space: { type: [String, Number], default: '' },
-    /**
-     * 图片的mode，参考uni-app image组件
-     * @default 'widthFix'
-     */
-    imgMode: { type: String, default: 'widthFix' },
-    /**
-     * 自定义样式，对象形式
-     * @default {}
-     */
-    customStyle: { type: Object as () => Record<string, any>, default: () => ({}) },
-    /**
-     * 用于显示图片小图标时，图片的宽度，单位rpx
-     * @default ''
-     */
-    width: { type: [String, Number], default: '' },
-    /**
-     * 用于显示图片小图标时，图片的高度，单位rpx
-     * @default ''
-     */
-    height: { type: [String, Number], default: '' },
-    /**
-     * 用于解决某些情况下，让图标垂直居中的用途，单位rpx
-     * @default 0
-     */
-    top: { type: [String, Number], default: 0 },
-    /**
-     * 是否为DecimalIcon
-     * @default false
-     */
-    showDecimalIcon: { type: Boolean, default: false },
-    /**
-     * 背景颜色，可接受主题色，仅Decimal时有效
-     * @default '#ececec'
-     */
-    inactiveColor: { type: String, default: '#ececec' },
-    /**
-     * 显示的百分比，仅Decimal时有效
-     * @default '50'
-     */
-    percent: { type: [Number, String], default: '50' }
-});
+const props = defineProps(IconProps);
 
 /**
  * 计算图标的类名集合

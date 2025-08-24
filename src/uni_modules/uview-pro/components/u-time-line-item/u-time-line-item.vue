@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { TimeLineItemProps } from './types';
 
 defineOptions({ name: 'u-time-line-item' });
 
@@ -27,18 +28,7 @@ defineOptions({ name: 'u-time-line-item' });
  * 节点的背景颜色
  * @default "#ffffff"
  */
-const props = defineProps({
-    /** 节点的背景颜色 */
-    bgColor: {
-        type: String,
-        default: '#ffffff'
-    },
-    /** 节点左边图标绝对定位的top值，单位rpx */
-    nodeTop: {
-        type: [String, Number],
-        default: ''
-    }
-});
+const props = defineProps(TimeLineItemProps);
 
 /**
  * 计算节点样式

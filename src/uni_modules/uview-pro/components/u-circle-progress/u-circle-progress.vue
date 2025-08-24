@@ -35,6 +35,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
 import { $u } from '../..';
+import { CircleProgressProps } from './types';
 
 defineOptions({
     name: 'u-circle-progress'
@@ -54,29 +55,7 @@ defineOptions({
  * @property {String} bg-color 整个组件背景颜色，默认为白色
  * @example <u-circle-progress active-color="#2979ff" :percent="80"></u-circle-progress>
  */
-const props = defineProps({
-    /** 圆环进度百分比值 */
-    percent: {
-        type: Number,
-        default: 0,
-        // 限制值在0到100之间
-        validator: (val: number) => val >= 0 && val <= 100
-    },
-    /** 底部圆环的颜色（灰色的圆环） */
-    inactiveColor: { type: String, default: '#ececec' },
-    /** 圆环激活部分的颜色 */
-    activeColor: { type: String, default: '#19be6b' },
-    /** 圆环线条的宽度，单位rpx */
-    borderWidth: { type: [Number, String], default: 14 },
-    /** 整个圆形的宽度，单位rpx */
-    width: { type: [Number, String], default: 200 },
-    /** 整个圆环执行一圈的时间，单位ms */
-    duration: { type: [Number, String], default: 1500 },
-    /** 主题类型 */
-    type: { type: String, default: '' },
-    /** 整个圆环进度区域的背景色 */
-    bgColor: { type: String, default: '#ffffff' }
-});
+const props = defineProps(CircleProgressProps);
 
 let elBgId = $u.guid(); // 非微信端的时候，需用动态的id，否则一个页面多个圆形进度条组件数据会混乱
 let elId = $u.guid();

@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { $u } from '../..';
+import { LineProps } from './types';
 
 defineOptions({
     name: 'u-line'
@@ -22,20 +23,7 @@ defineOptions({
  * @property {String} margin 线条与上下左右元素的间距，字符串形式，如"30rpx"
  * @example <u-line color="red"></u-line>
  */
-const props = defineProps({
-    /** 线条的颜色 */
-    color: { type: String, default: '#e4e7ed' },
-    /** 长度，竖向时表现为高度，横向时表现为长度，可以为百分比，带rpx单位的值等 */
-    length: { type: String, default: '100%' },
-    /** 线条方向，col-竖向，row-横向 */
-    direction: { type: String, default: 'row' },
-    /** 是否显示细边框 */
-    hairLine: { type: Boolean, default: true },
-    /** 线条与上下左右元素的间距，字符串形式，如"30rpx"、"20rpx 30rpx" */
-    margin: { type: String, default: '0' },
-    /** 线条的类型，solid-实线，dashed-方形虚线，dotted-圆点虚线 */
-    borderStyle: { type: String, default: 'solid' }
-});
+const props = defineProps(LineProps);
 
 /**
  * 线条样式

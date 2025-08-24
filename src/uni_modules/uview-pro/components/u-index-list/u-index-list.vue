@@ -49,6 +49,7 @@ function getIndexList() {
 <script setup lang="ts">
 import { ref, reactive, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { IndexListProps } from './types';
 
 defineOptions({
     name: 'u-index-list'
@@ -67,41 +68,19 @@ defineOptions({
  * @event {Function} select 选中右边索引字符时触发
  * @example <u-index-list :scrollTop="scrollTop"></u-index-list>
  */
-const props = defineProps({
-    /** 是否开启锚点自动吸顶 */
-    sticky: {
-        type: Boolean,
-        default: true
-    },
-    /** 锚点吸顶时的层级 */
-    zIndex: {
-        type: [Number, String],
-        default: ''
-    },
-    /** 当前滚动高度 */
-    scrollTop: {
-        type: [Number, String],
-        default: 0
-    },
-    /** 锚点自动吸顶时与顶部的距离 */
-    offsetTop: {
-        type: [Number, String],
-        default: 0
-    },
-    /** 索引字符列表 */
-    indexList: {
-        type: Array,
-        default: () => getIndexList()
-    },
-    /** 锚点和右边索引字符高亮颜色 */
-    activeColor: {
-        type: String,
-        default: '#2979ff'
-    }
-});
-
+const props = defineProps(IndexListProps);
 const emit = defineEmits(['select']);
 const instance = getCurrentInstance();
+
+// 索引列表生成函数
+function getIndexList() {
+    const indexList: string[] = [];
+    const charCodeOfA = 'A'.charCodeAt(0);
+    for (let i = 0; i < 26; i++) {
+        indexList.push(String.fromCharCode(charCodeOfA + i));
+    }
+    return indexList;
+}
 
 // 变量定义
 const activeAnchorIndex = ref(0);
@@ -121,7 +100,7 @@ const stickyOffsetTop = ref(0);
 // 弹出toast的z-index值
 const alertZIndex = computed(() => $u.zIndex.toast).value;
 // indexList 响应式
-const indexList = computed(() => props.indexList).value;
+const indexList = computed(() => props.indexList ?? getIndexList()).value;
 const zIndex = computed(() => props.zIndex).value;
 const activeColor = computed(() => props.activeColor).value;
 

@@ -31,6 +31,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { $u } from '../..';
+import { LoadmoreProps } from './types';
 
 defineOptions({ name: 'u-loadmore' });
 
@@ -51,73 +52,7 @@ defineOptions({ name: 'u-loadmore' });
  * @event {Function} loadmore status为loadmore时，点击组件会发出此事件
  * @example <u-loadmore :status="status" icon-type="iconType" load-text="loadText" />
  */
-const props = defineProps({
-    // 组件背景色
-    bgColor: {
-        type: String,
-        default: 'transparent'
-    },
-    // 是否显示加载中的图标
-    icon: {
-        type: Boolean,
-        default: true
-    },
-    // 字体大小
-    fontSize: {
-        type: String,
-        default: '28'
-    },
-    // 字体颜色
-    color: {
-        type: String,
-        default: '#606266'
-    },
-    // 组件状态，loadmore-加载前的状态，loading-加载中的状态，nomore-没有更多的状态
-    status: {
-        type: String,
-        default: 'loadmore'
-    },
-    // 加载中状态的图标，flower-花朵状图标，circle-圆圈状图标
-    iconType: {
-        type: String,
-        default: 'circle'
-    },
-    // 显示的文字
-    loadText: {
-        type: Object as () => { loadmore: string; loading: string; nomore: string },
-        default: () => ({
-            loadmore: '加载更多',
-            loading: '正在加载...',
-            nomore: '没有更多了'
-        })
-    },
-    // 在“没有更多”状态下，是否显示粗点
-    isDot: {
-        type: Boolean,
-        default: false
-    },
-    // 加载中显示圆圈动画时，动画的颜色
-    iconColor: {
-        type: String,
-        default: '#b7b7b7'
-    },
-    // 上边距
-    marginTop: {
-        type: [String, Number],
-        default: 0
-    },
-    // 下边距
-    marginBottom: {
-        type: [String, Number],
-        default: 0
-    },
-    // 高度，单位rpx
-    height: {
-        type: [String, Number],
-        default: 'auto'
-    }
-});
-
+const props = defineProps(LoadmoreProps);
 const emits = defineEmits(['loadmore']);
 
 // 粗点

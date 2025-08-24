@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import { IndexAnchorProps } from './types';
 import { ref, computed, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 
@@ -31,23 +32,7 @@ defineOptions({
  * @example <u-index-anchor :index="item" />
  */
 
-const props = defineProps({
-    /** 是否使用自定义内容的插槽 */
-    useSlot: {
-        type: Boolean,
-        default: false
-    },
-    /** 索引字符，如果定义了use-slot，此参数自动失效 */
-    index: {
-        type: String,
-        default: ''
-    },
-    /** 自定义样式，对象形式 */
-    customStyle: {
-        type: Object as () => Record<string, any>,
-        default: () => ({})
-    }
-});
+const props = defineProps(IndexAnchorProps);
 
 // 响应式变量
 const active = ref(false);

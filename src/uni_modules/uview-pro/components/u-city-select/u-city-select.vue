@@ -66,7 +66,7 @@ import { ref, computed, onMounted } from 'vue';
 import provinces from '../../libs/util/province';
 import citysData from '../../libs/util/city';
 import areasData from '../../libs/util/area';
-import type { PropType } from 'vue';
+import { CitySelectProps } from './types';
 
 defineOptions({
     name: 'u-city-select'
@@ -84,15 +84,7 @@ defineOptions({
  * @event city-change 选择省市区后触发，返回选中的省市区对象
  * @example <u-city-select v-model="show" :defaultRegion="['广东省','广州市','天河区']" @city-change="onChange"></u-city-select>
  */
-
-// props 定义
-const props = defineProps({
-    modelValue: { type: Boolean, default: false },
-    defaultRegion: { type: Array as PropType<string[]>, default: () => [] },
-    areaCode: { type: Array as PropType<string[]>, default: () => [] },
-    maskCloseAble: { type: Boolean, default: true },
-    zIndex: { type: [String, Number], default: 0 }
-});
+const props = defineProps(CitySelectProps);
 
 // emits 定义
 const emit = defineEmits(['update:modelValue', 'city-change']);

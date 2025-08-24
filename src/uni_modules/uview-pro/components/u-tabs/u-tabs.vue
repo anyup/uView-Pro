@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { TabsProps } from './types';
 
 defineOptions({ name: 'u-tabs' });
 
@@ -49,51 +50,12 @@ defineOptions({ name: 'u-tabs' });
  * @example <u-tabs ref="tabs" :list="list" :is-scroll="false"></u-tabs>
  */
 
-// props 定义，保留参数注释
-const props = defineProps({
-    /** tabs是否可以左右拖动 */
-    isScroll: { type: Boolean, default: true },
-    /** 标签数组 */
-    list: { type: Array as () => Array<Record<string, any>>, default: () => [] },
-    /** 当前活动tab的索引 */
-    current: { type: [Number, String], default: 0 },
-    /** 导航栏的高度和行高 */
-    height: { type: [String, Number], default: 80 },
-    /** 字体大小 */
-    fontSize: { type: [String, Number], default: 30 },
-    /** 过渡动画时长, 单位s */
-    duration: { type: [String, Number], default: 0.5 },
-    /** 选中项的主题颜色 */
-    activeColor: { type: String, default: '#2979ff' },
-    /** 未选中项的颜色 */
-    inactiveColor: { type: String, default: '#303133' },
-    /** 菜单底部移动的bar的宽度，单位rpx */
-    barWidth: { type: [String, Number], default: 40 },
-    /** 移动bar的高度 */
-    barHeight: { type: [String, Number], default: 6 },
-    /** 单个tab的左右内边距之和，单位rpx */
-    gutter: { type: [String, Number], default: 30 },
-    /** 导航栏的背景颜色 */
-    bgColor: { type: String, default: '#ffffff' },
-    /** 读取传入的数组对象的属性(tab名称) */
-    name: { type: String, default: 'name' },
-    /** 读取传入的数组对象的属性(徽标数) */
-    count: { type: String, default: 'count' },
-    /** 徽标数位置偏移 */
-    offset: { type: Array, default: () => [5, 20] },
-    /** 活动tab字体是否加粗 */
-    bold: { type: Boolean, default: true },
-    /** 当前活动tab item的样式 */
-    activeItemStyle: { type: Object, default: () => ({}) },
-    /** 是否显示底部的滑块 */
-    showBar: { type: Boolean, default: true },
-    /** 底部滑块的自定义样式 */
-    barStyle: { type: Object, default: () => ({}) },
-    /** 标签的宽度 */
-    itemWidth: { type: [Number, String], default: 'auto' }
-});
+// props 定义
+const props = defineProps(TabsProps);
 
-// emits 定义
+/**
+ * emits 定义
+ */
 const emit = defineEmits(['change']);
 const instance = getCurrentInstance();
 // 滚动scroll-view的左边滚动距离

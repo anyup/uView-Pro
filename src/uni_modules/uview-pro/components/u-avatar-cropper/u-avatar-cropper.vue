@@ -43,6 +43,7 @@ import { ref, reactive, onMounted } from 'vue';
 import { $u } from '../..';
 // 兼容 UMD/ESM 导入 weCropper.js
 import WeCropper from './weCropper';
+import { AvatarCropperProps } from './types';
 
 defineOptions({ name: 'u-avatar-cropper' });
 
@@ -50,51 +51,7 @@ defineOptions({ name: 'u-avatar-cropper' });
  * 裁剪矩形框的样式，其中可包含的属性为lineWidth-边框宽度(单位rpx)，color: 边框颜色，
  * mask-遮罩颜色，一般设置为一个rgba的透明度，如"rgba(0, 0, 0, 0.35)"
  */
-const props = defineProps({
-    boundStyle: {
-        type: Object as () => {
-            lineWidth: number;
-            borderColor: string;
-            mask: string;
-        },
-        default: () => ({
-            lineWidth: 4,
-            borderColor: 'rgb(245, 245, 245)',
-            mask: 'rgba(0, 0, 0, 0.35)'
-        })
-    }
-    // // 裁剪框宽度，单位rpx
-    // rectWidth: {
-    //   type: [String, Number],
-    //   default: 400
-    // },
-    // // 裁剪框高度，单位rpx
-    // rectHeight: {
-    //   type: [String, Number],
-    //   default: 400
-    // },
-    // // 输出图片宽度，单位rpx
-    // destWidth: {
-    //   type: [String, Number],
-    //   default: 400
-    // },
-    // // 输出图片高度，单位rpx
-    // destHeight: {
-    //   type: [String, Number],
-    //   default: 400
-    // },
-    // // 输出的图片类型，如果发现裁剪的图片很大，可能是因为设置为了"png"，改成"jpg"即可
-    // fileType: {
-    //   type: String,
-    //   default: 'jpg',
-    // },
-    // // 生成的图片质量
-    // // H5上无效，目前不考虑使用此参数
-    // quality: {
-    //   type: [Number, String],
-    //   default: 1
-    // }
-});
+const props = defineProps(AvatarCropperProps);
 
 /**
  * 组合式API变量声明

@@ -23,6 +23,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { $u } from '../..';
+import { CarKeyboardProps } from './types';
 
 defineOptions({
     name: 'u-car-keyboard'
@@ -36,10 +37,7 @@ defineOptions({
  * @event {Function} backspace 退格键被点击
  */
 
-const props = defineProps({
-    /** 是否打乱键盘按键的顺序 */
-    random: { type: Boolean, default: false }
-});
+const props = defineProps(CarKeyboardProps);
 const emit = defineEmits(['change', 'backspace']);
 
 // 车牌输入时，abc=true为输入车牌号码，abc=false为输入省份中文简称

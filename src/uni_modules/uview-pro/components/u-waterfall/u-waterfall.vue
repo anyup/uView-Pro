@@ -11,6 +11,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { WaterfallProps } from './types';
 
 defineOptions({ name: 'u-waterfall' });
 
@@ -25,24 +26,7 @@ defineOptions({ name: 'u-waterfall' });
 
 const emit = defineEmits(['update:modelValue']);
 
-const props = defineProps({
-    /** 瀑布流数据 */
-    modelValue: {
-        type: Array as () => any[],
-        required: true,
-        default: () => []
-    },
-    /** 每次向结构插入数据的时间间隔，单位ms */
-    addTime: {
-        type: [Number, String],
-        default: 200
-    },
-    /** id值，用于清除某一条数据时，根据此idKey名称找到并移除 */
-    idKey: {
-        type: String,
-        default: 'id'
-    }
-});
+const props = defineProps(WaterfallProps);
 
 const leftList = ref<any[]>([]);
 const rightList = ref<any[]>([]);

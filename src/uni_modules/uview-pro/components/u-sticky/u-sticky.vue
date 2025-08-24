@@ -27,6 +27,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount, getCurrentInstance } from 'vue';
 import { $u } from '../..';
+import { StickyProps } from './types';
 
 defineOptions({ name: 'u-sticky' });
 
@@ -44,41 +45,10 @@ defineOptions({ name: 'u-sticky' });
  * @event unfixed 组件取消吸顶时触发
  * @example <u-sticky offset-top="200"><view>塞下秋来风景异，衡阳雁去无留意</view></u-sticky>
  */
+const props = defineProps(StickyProps);
 
 const emit = defineEmits(['fixed', 'unfixed']);
 
-const props = defineProps({
-    /** 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px */
-    offsetTop: {
-        type: [Number, String],
-        default: 0
-    },
-    /** 列表中的索引值 */
-    index: {
-        type: [Number, String],
-        default: ''
-    },
-    /** 是否开启吸顶功能 */
-    enable: {
-        type: Boolean,
-        default: true
-    },
-    /** h5顶部导航栏的高度 */
-    h5NavHeight: {
-        type: [Number, String],
-        default: 44
-    },
-    /** 吸顶区域的背景颜色 */
-    bgColor: {
-        type: String,
-        default: '#ffffff'
-    },
-    /** z-index值 */
-    zIndex: {
-        type: [Number, String],
-        default: ''
-    }
-});
 const instance = getCurrentInstance();
 const fixed = ref(false);
 const height = ref<'auto' | number>('auto');

@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { ref, provide } from 'vue';
+import { CollapseProps } from './types';
 
 defineOptions({
     name: 'u-collapse'
@@ -24,22 +25,7 @@ defineOptions({
  * @event {Function} change 当前激活面板展开时触发(如果是手风琴模式，参数activeNames类型为String，否则为Array)
  * @example <u-collapse></u-collapse>
  */
-const props = defineProps({
-    /** 是否手风琴模式 */
-    accordion: { type: Boolean, default: true },
-    /** 头部的样式 */
-    headStyle: { type: Object, default: () => ({}) },
-    /** 主体的样式 */
-    bodyStyle: { type: Object, default: () => ({}) },
-    /** 每一个item的样式 */
-    itemStyle: { type: Object, default: () => ({}) },
-    /** 是否显示右侧的箭头 */
-    arrow: { type: Boolean, default: true },
-    /** 箭头的颜色 */
-    arrowColor: { type: String, default: '#909399' },
-    /** 标题部分按压时的样式类，"none"为无效果 */
-    hoverClass: { type: String, default: 'u-hover-class' }
-});
+const props = defineProps(CollapseProps);
 
 const emit = defineEmits(['change']);
 

@@ -5,6 +5,8 @@
 </template>
 
 <script setup lang="ts">
+import { TrProps } from './types';
+
 defineOptions({ name: 'u-tr' });
 
 /**
@@ -13,6 +15,7 @@ defineOptions({ name: 'u-tr' });
  * @tutorial https://uview-pro.netlify.app/components/table.html
  * @example <u-tr></u-tr>
  */
+const props = defineProps(TrProps);
 </script>
 
 <style lang="scss" scoped>

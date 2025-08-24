@@ -15,6 +15,7 @@
 <script setup lang="ts">
 import { computed, nextTick } from 'vue';
 import { $u } from '../..';
+import { SwitchProps } from './types';
 
 defineOptions({
     name: 'u-switch'
@@ -34,26 +35,7 @@ defineOptions({
  * @event {Function} change 在switch打开或关闭时触发
  * @example <u-switch v-model="checked" active-color="red" inactive-color="#eee"></u-switch>
  */
-const props = defineProps({
-    /** 是否为加载中状态 */
-    loading: { type: Boolean, default: false },
-    /** 是否为禁用状态 */
-    disabled: { type: Boolean, default: false },
-    /** 开关尺寸，单位rpx */
-    size: { type: [Number, String], default: 50 },
-    /** 打开时的背景颜色 */
-    activeColor: { type: String, default: '#2979ff' },
-    /** 关闭时的背景颜色 */
-    inactiveColor: { type: String, default: '#ffffff' },
-    /** 通过v-model双向绑定的值 */
-    modelValue: { type: Boolean, default: false },
-    /** 是否使手机发生短促震动，目前只在iOS的微信小程序有效(2020-05-06) */
-    vibrateShort: { type: Boolean, default: false },
-    /** 打开选择器时的值 */
-    activeValue: { type: [Number, String, Boolean], default: true },
-    /** 关闭选择器时的值 */
-    inactiveValue: { type: [Number, String, Boolean], default: false }
-});
+const props = defineProps(SwitchProps);
 
 const emit = defineEmits(['update:modelValue', 'change']);
 
