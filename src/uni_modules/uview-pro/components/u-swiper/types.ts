@@ -1,8 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { ImgMode } from '../../types/global';
+import type { ImgMode, SwiperIndicatorPosition, SwiperMode } from '../../types/global';
 
-export type SwiperMode = 'round' | 'dot' | 'rect' | 'number' | 'none';
-export type IndicatorPos = 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomCenter' | 'bottomRight';
 /**
  * SwiperProps 轮播图 props 类型定义
  * @description 轮播图，支持多种指示器、3D、自动播放等
@@ -23,7 +21,7 @@ export const SwiperProps = {
     /** 轮播高度，单位rpx */
     height: { type: [Number, String] as PropType<number | string>, default: 250 },
     /** 指示器位置 */
-    indicatorPos: { type: String as PropType<IndicatorPos>, default: 'bottomCenter' },
+    indicatorPos: { type: String as PropType<SwiperIndicatorPosition>, default: 'bottomCenter' },
     /** 是否开启3D效果 */
     effect3d: { type: Boolean, default: false },
     /** 3D模式下前一项的边距，单位rpx */

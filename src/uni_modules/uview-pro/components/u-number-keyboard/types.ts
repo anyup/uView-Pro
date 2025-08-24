@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { NumberKeyboardMode } from '../../types/global';
 
-export type NumberKeyboardMode = 'number' | 'card';
 /**
  * NumberKeyboardProps 数字/身份证键盘 props 类型定义
  * @description 支持数字、身份证、带小数点等多种模式，支持乱序，支持长按退格。

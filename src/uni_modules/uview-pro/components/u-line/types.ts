@@ -1,8 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-
-export type LineDirection = 'row' | 'column';
-
-export type BorderStyle = 'solid' | 'dashed' | 'dotted';
+import type { LineBorderStyle, LineDirection } from '../../types/global';
 
 /**
  * u-line 组件 props 类型定义
@@ -36,7 +33,7 @@ export const LineProps = {
     },
     /** 线条的类型，solid-实线，dashed-方形虚线，dotted-圆点虚线 */
     borderStyle: {
-        type: String as PropType<BorderStyle>,
+        type: String as PropType<LineBorderStyle>,
         default: 'solid'
     }
 };

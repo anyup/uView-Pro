@@ -1,16 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { SubsectionListItem, SubsectionMode } from '../../types/global';
 
 /**
  * SubsectionProps 分段器 props 类型定义
  * @description 分段器，支持按钮/分段模式、动画、颜色等
  */
-export interface SubsectionListItem {
-    name: string;
-    width?: number;
-    [key: string]: any;
-}
-
-export type SubsectionMode = 'button' | 'subsection';
 
 export const SubsectionProps = {
     /** tab的数据 */

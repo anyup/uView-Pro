@@ -1,20 +1,5 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
-
-// 操作项类型
-type ActionSheetItem = {
-    text: string;
-    subText?: string;
-    color?: string;
-    fontSize?: string;
-    disabled?: boolean;
-};
-
-// 顶部提示类型
-type ActionSheetTips = {
-    text: string;
-    color?: string;
-    fontSize?: string;
-};
+import type { ActionSheetItem, ActionSheetTips } from '../../types/global';
 
 /**
  * actionSheet 操作菜单
@@ -48,4 +33,3 @@ export const ActionSheetProps = {
 };
 
 export type ActionSheetProps = ExtractPropTypes<typeof ActionSheetProps>;
-export type { ActionSheetItem, ActionSheetTips };

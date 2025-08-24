@@ -1,8 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { ImgMode } from '../../types/global';
-
-export type SizeType = 'original' | 'compressed';
-export type SourceType = 'album' | 'camera';
+import type { ImgMode, UploadSizeType, UploadSourceType } from '../../types/global';
 
 /**
  * UploadProps upload props 类型定义
@@ -46,9 +43,9 @@ export const UploadProps = {
     /** 文件字段名 */
     name: { type: String, default: 'file' },
     /** 压缩/原图，微信小程序有效 */
-    sizeType: { type: Array as PropType<SizeType[]>, default: () => ['original', 'compressed'] },
+    sizeType: { type: Array as PropType<UploadSizeType[]>, default: () => ['original', 'compressed'] },
     /** 来源，相册/相机 */
-    sourceType: { type: Array as PropType<SourceType[]>, default: () => ['album', 'camera'] },
+    sourceType: { type: Array as PropType<UploadSourceType[]>, default: () => ['album', 'camera'] },
     /** 是否可预览大图 */
     previewFullImage: { type: Boolean, default: true },
     /** 是否支持多选 */

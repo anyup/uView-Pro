@@ -1,7 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { ThemeType } from '../../types/global';
-
-export type PlayState = 'play' | 'paused';
+import type { PlayState, ThemeType } from '../../types/global';
 
 /**
  * RowNoticeProps 水平滚动通告栏 props 类型定义

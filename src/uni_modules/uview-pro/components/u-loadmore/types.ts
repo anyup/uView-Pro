@@ -1,18 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { LoadmoreIconType, LoadmoreStatus, LoadmoreText } from '../../types/global';
 
 /**
  * u-loadmore 组件 props 类型定义
  * @description 加载更多，支持多种状态和自定义文字
  */
-export type LoadText = {
-    loadmore: string;
-    loading: string;
-    nomore: string;
-};
-
-export type LoadStatus = 'loadmore' | 'loading' | 'nomore';
-
-export type IconType = 'circle' | 'flower';
 
 export const LoadmoreProps = {
     /** 组件背景色 */
@@ -37,17 +29,17 @@ export const LoadmoreProps = {
     },
     /** 组件状态，loadmore-加载前，loading-加载中，nomore-没有更多 */
     status: {
-        type: String as PropType<LoadStatus>,
+        type: String as PropType<LoadmoreStatus>,
         default: 'loadmore'
     },
     /** 加载中状态的图标，flower-花朵状，circle-圆圈状 */
     iconType: {
-        type: String as PropType<IconType>,
+        type: String as PropType<LoadmoreIconType>,
         default: 'circle'
     },
     /** 显示的文字 */
     loadText: {
-        type: Object as PropType<LoadText>,
+        type: Object as PropType<LoadmoreText>,
         default: () => ({
             loadmore: '加载更多',
             loading: '正在加载...',

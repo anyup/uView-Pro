@@ -1,14 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-
-export type InputType = 'text' | 'number' | 'idcard' | 'digit' | 'password' | 'textarea' | 'phone' | 'url' | 'email' | 'safe-password' | 'name' | 'bank-card' | 'tel' | 'select';
-
-export type LabelAlign = 'left' | 'center' | 'right';
-
-export type InputAlign = 'left' | 'center' | 'right';
-
-export type ConfirmType = 'send' | 'search' | 'next' | 'go' | 'done';
-
-export type LabelPosition = 'left' | 'top';
+import type { InputAlign, InputConfirmType, InputLabelPosition, InputType } from '../../types/global';
 
 /**
  * u-field 组件 Props 类型定义
@@ -32,7 +23,7 @@ export const FieldProps = {
     /** label的宽度，单位rpx（默认130） */
     labelWidth: { type: [Number, String] as PropType<string | number>, default: 130 },
     /** label的文字对齐方式（默认left） */
-    labelAlign: { type: String as PropType<LabelAlign>, default: 'left' },
+    labelAlign: { type: String as PropType<InputAlign>, default: 'left' },
     /** 输入框内容对齐方式（默认left） */
     inputAlign: { type: String as PropType<InputAlign>, default: 'left' },
     /** 左边通过icon配置的图标的颜色（默认#606266） */
@@ -58,9 +49,9 @@ export const FieldProps = {
     /** 最大输入长度，设置为 -1 的时候不限制最大长度（默认140） */
     maxlength: { type: [Number, String] as PropType<string | number>, default: 140 },
     /** 设置键盘右下角按钮的文字，仅在type="text"时生效（默认done） */
-    confirmType: { type: String as PropType<ConfirmType>, default: 'done' },
+    confirmType: { type: String as PropType<InputConfirmType>, default: 'done' },
     /** label位置（默认left）left-左边，top-上边 */
-    labelPosition: { type: String as PropType<LabelPosition>, default: 'left' },
+    labelPosition: { type: String as PropType<InputLabelPosition>, default: 'left' },
     /** 自定义输入框的样式，对象形式 */
     fieldStyle: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
     /** 清除图标的大小，单位rpx（默认30） */

@@ -1,4 +1,5 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
+import type { CellItemArrowDirection } from '../../types/global';
 
 /**
  * cell-item 组件 props 类型定义
@@ -6,7 +7,6 @@ import { type ExtractPropTypes, type PropType } from 'vue';
  */
 export type CellItemIndex = string | number;
 export type CellItemStyle = Record<string, any>;
-export type CellItemArrowDirection = 'right' | 'up' | 'down';
 
 export const CellItemProps = {
     /** 左侧图标名称(只能uView内置图标)，或者图标src */

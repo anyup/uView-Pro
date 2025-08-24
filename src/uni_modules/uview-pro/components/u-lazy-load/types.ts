@@ -1,7 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { ImgMode } from '../../types/global';
-
-export type Effect = 'linear' | 'ease' | 'ease-in' | 'ease-in-out' | 'ease-out' | 'step-start' | 'step-end';
+import type { Effect, ImgMode } from '../../types/global';
 
 /**
  * u-lazy-load 组件 Props 类型定义

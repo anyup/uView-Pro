@@ -1,7 +1,5 @@
 import type { PropType, ExtractPropTypes } from 'vue';
-
-export type LabelPosition = 'left' | 'top';
-export type LabelAlign = 'left' | 'center' | 'right';
+import type { InputAlign, InputLabelPosition } from '../../types/global';
 
 /**
  * form-item 表单item Props
@@ -24,7 +22,7 @@ export const FormItemProps = {
     },
     /** label的位置，left-左边，top-上边 */
     labelPosition: {
-        type: String as PropType<LabelPosition>,
+        type: String as PropType<InputLabelPosition>,
         default: ''
     },
     /** label的宽度，单位rpx */
@@ -39,7 +37,7 @@ export const FormItemProps = {
     },
     /** lable字体的对齐方式 */
     labelAlign: {
-        type: String as PropType<LabelAlign>,
+        type: String as PropType<InputAlign>,
         default: ''
     },
     /** 右侧图标 */

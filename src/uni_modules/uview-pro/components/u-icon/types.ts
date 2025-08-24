@@ -1,7 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { ImgMode } from '../../types/global';
-
-export type LabelPosition = 'left' | 'top' | 'right' | 'bottom';
+import type { IconLabelPosition, ImgMode } from '../../types/global';
 
 /**
  * u-icon 组件 Props 类型定义
@@ -25,7 +23,7 @@ export const IconProps = {
     /** 图标右边或者下面的文字 */
     label: { type: [String, Number] as PropType<string | number>, default: '' },
     /** label的位置，只能右边或者下边 */
-    labelPos: { type: String as PropType<LabelPosition>, default: 'right' },
+    labelPos: { type: String as PropType<IconLabelPosition>, default: 'right' },
     /** label的大小，单位rpx（默认28） */
     labelSize: { type: [String, Number] as PropType<string | number>, default: '28' },
     /** label的颜色 */

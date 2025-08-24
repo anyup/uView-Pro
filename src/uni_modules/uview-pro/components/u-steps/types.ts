@@ -1,17 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { ThemeType } from '../../types/global';
+import type { StepDirection, StepMode, StepsListItem, ThemeType } from '../../types/global';
 
 /**
  * StepsProps 步骤条 props 类型定义
  * @description 步骤条，支持横向/竖向、主题色、激活色等
  */
-export interface StepsListItem {
-    name: string;
-    [key: string]: any;
-}
-
-export type StepMode = 'dot' | 'number';
-export type StepDirection = 'row' | 'column';
 
 export const StepsProps = {
     /** 步骤条的类型，dot|number */

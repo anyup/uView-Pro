@@ -1,7 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-
-export type SearchShape = 'round' | 'square';
-export type InputAlign = 'left' | 'center' | 'right';
+import type { InputAlign, SearchShape } from '../../types/global';
 
 /**
  * SearchProps 搜索框 props 类型定义

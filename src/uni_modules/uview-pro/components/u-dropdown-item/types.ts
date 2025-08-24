@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { OptionType } from '../../types/global';
 
 /**
  * u-dropdown-item 下拉菜单项 Props
@@ -9,7 +10,6 @@ import type { ExtractPropTypes, PropType } from 'vue';
  * @property {Boolean} disabled 是否禁用此选项卡（默认false）
  * @property {String|Number} height 弹窗下拉内容的高度(内容超出将会滚动)（默认auto）
  */
-export type OptionType = { label: string; value: any };
 
 export const DropdownItemProps = {
     /** 当前选中项的value值 */

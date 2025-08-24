@@ -1,43 +1,10 @@
-import { type ExtractPropTypes, type PropType } from 'vue';
-import type { Shape } from '../../types/global';
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { ButtonFormType, ButtonOpenType, ButtonScope, ButtonSize, ButtonType, Shape } from '../../types/global';
 
 /**
  * button 按钮类型定义
  * @description 供 u-button 组件 props 使用
  */
-export type ButtonType = 'primary' | 'info' | 'error' | 'warning' | 'success' | 'default';
-export type ButtonFormType = '' | 'submit' | 'reset';
-export type ButtonScope = 'phoneNumber' | 'userInfo';
-export type ButtonSize = 'default' | 'medium' | 'mini';
-
-export type ButtonOpenType =
-    | 'feedback'
-    | 'share'
-    | 'getUserInfo'
-    | 'contact'
-    | 'getPhoneNumber'
-    | 'launchApp'
-    | 'openSetting'
-    | 'chooseAvatar'
-    | 'getAuthorize'
-    | 'lifestyle'
-    | 'contactShare'
-    | 'openGroupProfile'
-    | 'openGuildProfile'
-    | 'openPublicProfile'
-    | 'shareMessageToFriend'
-    | 'addFriend'
-    | 'addColorSign'
-    | 'addGroupApp'
-    | 'addToFavorites'
-    | 'chooseAddress'
-    | 'chooseInvoiceTitle'
-    | 'login'
-    | 'subscribe'
-    | 'favorite'
-    | 'watchLater'
-    | 'openProfile'
-    | 'agreePrivacyAuthorization';
 
 export const ButtonProps = {
     /** 是否细边框 */

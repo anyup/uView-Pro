@@ -1,7 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { ThemeType } from '../../types/global';
-
-export type ToastPosition = 'top' | 'center' | 'bottom';
+import type { ThemeType, ToastPosition } from '../../types/global';
 
 /**
  * ToastProps toast props 类型定义

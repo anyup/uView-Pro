@@ -1,10 +1,9 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { PopupCloseIconPos, PopupMode } from '../../types/global';
 
 /**
  * PopupMode 弹窗弹出方向类型
  */
-export type PopupMode = 'left' | 'right' | 'top' | 'bottom' | 'center';
-export type CloseIconPos = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
 /**
  * PopupProps 弹窗 props 类型定义
@@ -40,7 +39,7 @@ export const PopupProps = {
     /** 关闭图标的名称，只能uView的内置图标 */
     closeIcon: { type: String, default: 'close' },
     /** 自定义关闭图标位置，top-left为左上角，top-right为右上角，bottom-left为左下角，bottom-right为右下角 */
-    closeIconPos: { type: String as PropType<CloseIconPos>, default: 'top-right' },
+    closeIconPos: { type: String as PropType<PopupCloseIconPos>, default: 'top-right' },
     /** 关闭图标的颜色 */
     closeIconColor: { type: String, default: '#909399' },
     /** 关闭图标的大小，单位rpx */

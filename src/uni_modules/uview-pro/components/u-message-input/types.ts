@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-
-export type MessageInputMode = 'box' | 'bottomLine' | 'middleLine';
+import type { MessageInputMode } from '../../types/global';
 
 /**
  * u-message-input 组件 props 类型定义

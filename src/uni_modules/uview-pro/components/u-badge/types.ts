@@ -1,12 +1,10 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
-import type { ThemeType } from '../../types/global';
+import type { BadgeSize, ThemeType } from '../../types/global';
 
 /**
  * badge 角标类型定义
  * @description 供 u-badge 组件 props 使用
  */
-export type BadgeSize = 'default' | 'mini';
-export type BadgeOffset = [number, number];
 
 export const BadgeProps = {
     /** 使用预设的背景颜色 primary,warning,success,error,info */
@@ -22,7 +20,7 @@ export const BadgeProps = {
     /** 当数值为 0 时，是否展示 Badge */
     showZero: { type: Boolean, default: false },
     /** 位置偏移 [number, number] */
-    offset: { type: Array as unknown as PropType<BadgeOffset>, default: () => [20, 20] },
+    offset: { type: Array as unknown as PropType<[number, number]>, default: () => [20, 20] },
     /** 是否开启绝对定位，开启了offset才会起作用 */
     absolute: { type: Boolean, default: true },
     /** 字体大小 */

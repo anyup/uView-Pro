@@ -1,11 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { RowAlign, RowJustify } from '../../types/global';
 
 /**
  * RowProps 行布局 props 类型定义
  * @description 12分栏布局，快速创建布局
  */
-export type RowJustify = 'start' | 'flex-start' | 'end' | 'flex-end' | 'center' | 'around' | 'space-around' | 'between' | 'space-between';
-export type RowAlign = 'top' | 'center' | 'bottom';
 
 export const RowProps = {
     /** 给col添加间距，左右边距各占一半 */

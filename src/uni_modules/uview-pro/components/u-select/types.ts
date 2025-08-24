@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { SelectMode } from '../../types/global';
 
-export type SelectMode = 'single-column' | 'mutil-column' | 'mutil-column-auto';
 /**
  * SelectProps 列选择器 props 类型定义
  * @description 用于单列、多列、多列联动的选择场景

@@ -1,15 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { SwipeActionOption } from '../../types/global';
 
 /**
  * swipeAction 左滑单元格 props 类型定义
  * @description 该组件一般用于左滑唤出操作菜单的场景，用的最多的是左滑删除操作。
  */
-export type SwipeActionOption = {
-    /** 按钮显示的文字 */
-    text: string;
-    /** 按钮自定义样式 */
-    style?: Record<string, any>;
-};
 
 export const SwipeActionProps = {
     /** index值，用于得知点击删除的是哪个按钮 */

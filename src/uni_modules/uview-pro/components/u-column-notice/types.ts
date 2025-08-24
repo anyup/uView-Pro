@@ -1,9 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { Direction, ThemeType } from '../../types/global';
-
-export type ScrollDirection = 'row' | 'column';
-
-export type PlayState = 'play' | 'paused';
+import type { Direction, PlayState, ScrollDirection, ThemeType } from '../../types/global';
 
 /**
  * u-column-notice 通告栏 Props

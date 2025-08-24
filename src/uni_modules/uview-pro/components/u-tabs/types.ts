@@ -1,11 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { BadgeOffset } from '../u-badge/types';
-
-export type TabsItem = {
-    [key: string]: any;
-    name?: string | number;
-    count?: string | number;
-};
+import type { TabsItem } from '../../types/global';
 
 /**
  * TabsProps tabs标签 props 类型定义
@@ -41,7 +35,7 @@ export const TabsProps = {
     /** 读取传入的数组对象的属性(徽标数) */
     count: { type: String, default: 'count' },
     /** 徽标数位置偏移 */
-    offset: { type: Array as unknown as PropType<BadgeOffset>, default: () => [5, 20] },
+    offset: { type: Array as unknown as PropType<[number, number]>, default: () => [5, 20] },
     /** 活动tab字体是否加粗 */
     bold: { type: Boolean, default: true },
     /** 当前活动tab item的样式 */

@@ -1,16 +1,11 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
-
-export type BoundStyle = {
-    lineWidth: number;
-    borderColor: string;
-    mask: string;
-};
+import type { AvatarCropperBoundStyle } from '../../types/global';
 
 export const AvatarCropperProps = {
     /** 裁剪矩形框的样式 */
     boundStyle: {
-        type: Object as PropType<BoundStyle>,
-        default: (): BoundStyle => ({
+        type: Object as PropType<AvatarCropperBoundStyle>,
+        default: (): AvatarCropperBoundStyle => ({
             lineWidth: 4,
             borderColor: 'rgb(245, 245, 245)',
             mask: 'rgba(0, 0, 0, 0.35)'

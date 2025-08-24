@@ -1,9 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { Shape, ThemeType } from '../../types/global';
-
-export type TagMode = 'light' | 'dark' | 'plain';
-
-export type TagSize = 'default' | 'mini' | 'medium';
+import type { Shape, TagMode, TagSize, ThemeType } from '../../types/global';
 
 /**
  * TagProps tag props 类型定义

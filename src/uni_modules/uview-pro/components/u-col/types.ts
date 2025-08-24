@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { AlignType, JustifyType } from '../../types/global';
 
 /**
  * u-col 布局单元格 Props
@@ -10,8 +11,6 @@ import type { ExtractPropTypes, PropType } from 'vue';
  * @property {String} textAlign 文字对齐方式（默认left）
  * @property {Boolean} stop 是否阻止事件传播（默认true）
  */
-export type JustifyType = 'start' | 'end' | 'center' | 'around' | 'between';
-export type AlignType = 'top' | 'center' | 'bottom';
 
 export const ColProps = {
     /** 占父容器宽度的多少等分，总分为12份 */

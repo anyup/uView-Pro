@@ -1,25 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-
-/**
- * PickerMode 选择器模式类型
- */
-export type PickerMode = 'region' | 'time' | 'selector' | 'multiSelector';
-
-/**
- * PickerParams 选择器参数类型
- */
-export type PickerParams = {
-    year?: boolean;
-    month?: boolean;
-    day?: boolean;
-    hour?: boolean;
-    minute?: boolean;
-    second?: boolean;
-    province?: boolean;
-    city?: boolean;
-    area?: boolean;
-    timestamp?: boolean;
-};
+import type { PickerMode, PickerParams } from '../../types/global';
 
 /**
  * PickerProps 选择器 props 类型定义

@@ -1,12 +1,10 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
-import type { ThemeType } from '../../types/global';
+import type { CalendarMode, ThemeType } from '../../types/global';
 
 /**
  * calendar 日历类型定义
  * @description 供 u-calendar 组件 props 使用
  */
-export type CalendarMode = 'date' | 'range';
-
 export const CalendarProps = {
     /** 是否开启底部安全区适配 */
     safeAreaInsetBottom: { type: Boolean, default: false },

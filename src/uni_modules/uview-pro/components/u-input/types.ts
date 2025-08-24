@@ -1,15 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { InputAlign, InputConfirmType, InputType } from '../../types/global';
 
 /**
  * u-input 组件 props 类型定义
  * @description 此组件为一个输入框，默认没有边框和样式，是专门为配合表单组件u-form而设计的，利用它可以快速实现表单验证，输入内容，下拉选择等功能。
  */
-
-export type InputType = 'text' | 'number' | 'idcard' | 'digit' | 'password' | 'textarea' | 'phone' | 'url' | 'email' | 'safe-password' | 'name' | 'bank-card' | 'tel' | 'select';
-
-export type ConfirmType = 'send' | 'search' | 'next' | 'go' | 'done';
-
-export type InputAlign = 'left' | 'center' | 'right';
 
 export const InputProps = {
     /** 用于双向绑定输入框的值 */
@@ -49,7 +44,7 @@ export const InputProps = {
     },
     /** 设置键盘右下角按钮的文字，仅在type为text时生效(默认done) */
     confirmType: {
-        type: String as PropType<ConfirmType>,
+        type: String as PropType<InputConfirmType>,
         default: 'done'
     },
     /** 自定义输入框的样式，对象形式 */

@@ -1,7 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { Direction, ThemeType } from '../../types/global';
-
-export type PlayState = 'play' | 'paused';
+import type { Direction, PlayState, ThemeType } from '../../types/global';
 
 /**
  * NoticeBarProps 滚动通知 props 类型定义
