@@ -1,3 +1,10 @@
+## 0.0.8（2025-08-25）
+
+### ♻️ Code Refactoring | 代码重构
+
+-   重构组件 Props 属性定义，每个组件具有完善的 ts 类型定义 ([8cc0de7](https://gitee.com/anyup/uView-Pro/commit/8cc0de7c1527b48dd223d89207135eea01766294))
+-   重构类型定义并统一到全局类型文件 global types ([b0fd010](https://gitee.com/anyup/uView-Pro/commit/b0fd0107289eb1c6df2f58d91b63d9b25902caee))
+
 ## 0.0.7（2025-08-21）
 
 ### 🐛 Bug Fixes | Bug 修复

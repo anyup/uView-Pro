@@ -159,6 +159,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 优化多个组件的代码结构 ([df66344](https://gitee.com/anyup/uView-Pro/commit/df663445ae7082e2e6c88ac5d8cead1b757e8fc8))
 - 重构 u-avatar-cropper 组件的类型声明文件 ([dc951c9](https://gitee.com/anyup/uView-Pro/commit/dc951c96346946e651c889dcaa3a7cb198e67116))
 - 添加 async-validator 类型声明文件 ([752116b](https://gitee.com/anyup/uView-Pro/commit/752116b2b723160764579f5c63a13a638dd14240))
+- 重构类型定义types ([466463e](https://gitee.com/anyup/uView-Pro/commit/466463ea51909210c698d52577b0fccf35091558))
+- 重构组件Props属性定义，每个组件具有完善的ts类型定义 ([8cc0de7](https://gitee.com/anyup/uView-Pro/commit/8cc0de7c1527b48dd223d89207135eea01766294))
+- 重构类型定义并统一到全局类型文件global types ([b0fd010](https://gitee.com/anyup/uView-Pro/commit/b0fd0107289eb1c6df2f58d91b63d9b25902caee))
 
 ### 📦‍ Build System | 打包构建
 
