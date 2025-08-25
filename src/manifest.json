@@ -2,7 +2,7 @@
     "name": "uView Pro",
     "appid": "__UNI__9E7D9A9",
     "description": "基于 uView 1.8.8 修改，使用 TypeScript 重构，是全面支持 uni-app Vue3.0 TypeScript 版本",
-    "versionName": "0.0.8",
+    "versionName": "0.0.9",
     "versionCode": "3",
     "transformPx": false,
     /* 5+App特有相关 */
