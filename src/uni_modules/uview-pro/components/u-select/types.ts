@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { SelectMode } from '../../types/global';
+import type { SelectListItem, SelectMode } from '../../types/global';
 
 /**
  * SelectProps 列选择器 props 类型定义
@@ -7,7 +7,7 @@ import type { SelectMode } from '../../types/global';
  */
 export const SelectProps = {
     /** 列数据 */
-    list: { type: Array as PropType<any[]>, default: () => [] },
+    list: { type: Array as PropType<SelectListItem[]>, default: () => [] },
     /** 是否显示边框 */
     border: { type: Boolean, default: true },
     /** 通过双向绑定控制组件的弹出与收起 */

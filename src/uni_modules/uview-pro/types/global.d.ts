@@ -148,6 +148,12 @@ export type RowAlign = 'top' | 'center' | 'bottom';
 export type SearchShape = 'round' | 'square';
 // select 组件 mode single-column-单列，mutil-column-多列，mutil-column-auto-多列联动
 export type SelectMode = 'single-column' | 'mutil-column' | 'mutil-column-auto';
+// select 组件 list item
+export type SelectListItem = {
+    label: string;
+    value: string | number;
+    children?: SelectListItem[];
+};
 // Step 组件 mode
 export type StepsListItem = {
     name: string;
