@@ -9,7 +9,7 @@ import timeFormat from './libs/function/timeFormat';
 // 时间戳格式化,返回多久之前
 import timeFrom from './libs/function/timeFrom';
 // 颜色渐变相关,colorGradient-颜色渐变,hexToRgb-十六进制颜色转rgb颜色,rgbToHex-rgb转十六进制
-import colorGradient from './libs/function/colorGradient';
+import colorGradients from './libs/function/colorGradient';
 // 生成全局唯一guid字符串
 import guid from './libs/function/guid';
 // 主题相关颜色,info|success|warning|primary|default|error,此颜色已在uview.scss中定义,但是为js中也能使用,故也定义一份
@@ -75,8 +75,8 @@ export interface UViewUtils {
     timeFormat: typeof timeFormat;
     date: typeof timeFormat;
     timeFrom: typeof timeFrom;
-    colorGradient: typeof colorGradient.colorGradient;
-    colorToRgba: typeof colorGradient.colorToRgba;
+    colorGradient: typeof colorGradients.colorGradient;
+    colorToRgba: typeof colorGradients.colorToRgba;
     guid: typeof guid;
     color: typeof color;
     sys: typeof sys;
@@ -89,8 +89,8 @@ export interface UViewUtils {
     post: typeof http.post;
     put: typeof http.put;
     delete: typeof http.delete;
-    hexToRgb: typeof colorGradient.hexToRgb;
-    rgbToHex: typeof colorGradient.rgbToHex;
+    hexToRgb: typeof colorGradients.hexToRgb;
+    rgbToHex: typeof colorGradients.rgbToHex;
     test: typeof test;
     random: typeof random;
     deepClone: typeof deepClone;
@@ -118,8 +118,8 @@ export const $u: UViewUtils = {
     timeFormat: timeFormat,
     date: timeFormat, // 另名date
     timeFrom,
-    colorGradient: colorGradient.colorGradient,
-    colorToRgba: colorGradient.colorToRgba,
+    colorGradient: colorGradients.colorGradient,
+    colorToRgba: colorGradients.colorToRgba,
     guid,
     color,
     sys,
@@ -132,8 +132,8 @@ export const $u: UViewUtils = {
     post: http.post,
     put: http.put,
     delete: http.delete,
-    hexToRgb: colorGradient.hexToRgb,
-    rgbToHex: colorGradient.rgbToHex,
+    hexToRgb: colorGradients.hexToRgb,
+    rgbToHex: colorGradients.rgbToHex,
     test,
     random,
     deepClone,
@@ -164,3 +164,39 @@ const install = (): void => {
 export default {
     install
 };
+
+// 工具方法单独导出，支持 import { deepClone } from 'uview-pro'
+export {
+    queryParams,
+    route,
+    timeFormat,
+    timeFrom,
+    guid,
+    color,
+    sys,
+    os,
+    type2icon,
+    randomArray,
+    deepClone,
+    deepMerge,
+    addUnit,
+    test,
+    random,
+    trim,
+    toast,
+    debounce,
+    throttle,
+    getRect,
+    getParent,
+    $parent,
+    parent,
+    parentData,
+    dispatch,
+    broadcast,
+    http,
+    config,
+    zIndex
+};
+
+// 颜色相关方法单独导出
+export const { colorGradient, colorToRgba, hexToRgb, rgbToHex } = colorGradients;
