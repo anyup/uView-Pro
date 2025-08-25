@@ -55,6 +55,7 @@
         "release:patch": "./scripts/release.sh patch",
         "release:minor": "./scripts/release.sh minor",
         "release:major": "./scripts/release.sh major",
+        "publish": "cd src/uni_modules/uview-pro && npm publish --access public && cd ../../..",
         "prepare": "husky"
     },
     "config": {

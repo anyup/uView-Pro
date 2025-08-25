@@ -162,6 +162,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 重构类型定义types ([466463e](https://gitee.com/anyup/uView-Pro/commit/466463ea51909210c698d52577b0fccf35091558))
 - 重构组件Props属性定义，每个组件具有完善的ts类型定义 ([8cc0de7](https://gitee.com/anyup/uView-Pro/commit/8cc0de7c1527b48dd223d89207135eea01766294))
 - 重构类型定义并统一到全局类型文件global types ([b0fd010](https://gitee.com/anyup/uView-Pro/commit/b0fd0107289eb1c6df2f58d91b63d9b25902caee))
+- 优化全局工具导出方式 ([7a80b6f](https://gitee.com/anyup/uView-Pro/commit/7a80b6f99ad3022ca995f99f8ec6803af7941eb9))
 
 ### 📦‍ Build System | 打包构建
 
@@ -182,6 +183,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 更新项目依赖并优化打包构建 ([c172d36](https://gitee.com/anyup/uView-Pro/commit/c172d368d82404564650756a872cd7c7e29ebfa2))
 - 更新版本号至 0.0.6 ([04c8bac](https://gitee.com/anyup/uView-Pro/commit/04c8bace794fd1fe16c53565df2236c96e80a835))
 - release v0.0.8 ([6f8c240](https://gitee.com/anyup/uView-Pro/commit/6f8c24044f966fbdc8323e3a29718c45b31005c2))
+- update version to 0.0.9 ([1bb904a](https://gitee.com/anyup/uView-Pro/commit/1bb904ab28017afb0e7fcad19db422ddfeeb4c3f))
 
 ### ✨ Features | 新功能
 
@@ -289,6 +291,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 更新 .gitignore 文件 ([b38550b](https://gitee.com/anyup/uView-Pro/commit/b38550bb0861b04afedfa2e50ffd1fa8435b43b2))
 - 更新 .gitignore 文件 ([8ff834e](https://gitee.com/anyup/uView-Pro/commit/8ff834ed6d0bceaf9c2c467a1d4a5f63bc06ad19))
 - **release:** bump version to 0.0.7 ([6830df1](https://gitee.com/anyup/uView-Pro/commit/6830df1cde517c063c26c2d5f16f22259b3b2f5d))
+- **release:** bump version to 0.0.8 ([168fd72](https://gitee.com/anyup/uView-Pro/commit/168fd7298f89e886e44d418250297b487b573c93))
 
 ### ⚡ Performance Improvements | 性能优化
 

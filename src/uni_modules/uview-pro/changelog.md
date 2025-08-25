@@ -1,3 +1,7 @@
+## 0.0.9（2025-08-25）
+### ♻️ Code Refactoring | 代码重构
+
+-   优化全局工具导出方式 ([7a80b6f](https://gitee.com/anyup/uView-Pro/commit/7a80b6f99ad3022ca995f99f8ec6803af7941eb9))
 ## 0.0.8（2025-08-25）
 
 ### ♻️ Code Refactoring | 代码重构
