@@ -10,6 +10,7 @@
 <h3 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">uView Pro</h3>
 <h3 align="center">uni-app Vue3 Multi-platform Rapid Development UI Framework</h3>
 
+<p align="center">
 [![star](https://gitee.com/anyup/uView-Pro/badge/star.svg)](https://gitee.com/anyup/uView-Pro)
 [![fork](https://gitee.com/anyup/uView-Pro/badge/fork.svg)](https://gitee.com/anyup/uView-Pro)
 [![stars](https://img.shields.io/github/stars/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro)
@@ -20,6 +21,7 @@
 [![node version](https://img.shields.io/badge/node-%3E%3D18-green)](https://nodejs.org/)
 [![pnpm version](https://img.shields.io/badge/pnpm-%3E%3D7.30-green)](https://pnpm.io/)
 [![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
+</p>
 
 ## Description
 
@@ -92,26 +94,7 @@ We are very happy to accept high-quality PRs from everyone. However, please note
 
 Therefore, before you fix bugs and submit PRs, please try your best to test compatibility on these platforms. It would be best to include test screenshots to facilitate review. Thank you very much!
 
-## Installation
-
-#### **npm Installation**
-
-```bash
-# npm installation
-npm install uview-pro
-
-# yarn installation
-yarn add uview-pro
-
-# pnpm installation
-pnpm add uview-pro
-```
-
-#### **Download from Plugin Market**
-
-[https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
-
-## Configuration
+## Installation And Configuration
 
 uView Pro supports both `npm` and `uni_modules` installation methods, and the configuration is highly consistent. No matter which method you use, you can use easycom for automatic component import, greatly improving development efficiency. The following is a unified configuration guide:
 

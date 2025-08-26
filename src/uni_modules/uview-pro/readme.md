@@ -84,26 +84,7 @@ uView Pro QQ 交流群： [点击进入](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027
 
 所以希望在您修复 bug 并提交之前尽可能的去这些平台测试一下兼容性。最好能携带测试截图以方便审核。非常感谢！
 
-## 安装
-
-#### **npm 安装**
-
-```bash
-# npm 安装
-npm install uview-pro
-
-# yarn 安装
-yarn add uview-pro
-
-# pnpm 安装
-pnpm add uview-pro
-```
-
-#### **插件市场下载**
-
-[https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
-
-## 配置
+## 安装配置
 
 uView Pro 支持 `npm` 和 `uni_modules` 两种主流安装方式，配置方式高度一致。无论采用哪种方式，均可通过 easycom 实现组件自动引入，极大提升开发效率。以下为统一的配置说明：
 
