@@ -10,7 +10,7 @@
             :style="{ fontSize: props.separatorSize + 'rpx', color: props.separatorColor, paddingBottom: props.separator == 'colon' ? '4rpx' : 0 }"
             v-if="props.showDays && (props.hideZeroDay || (!props.hideZeroDay && d != '00'))"
         >
-            {{ props.separator == 'colon' ? ':' : '天' }}
+            {{ props.separator == 'colon' && props.showHours ? ':' : '天' }}
         </view>
         <view class="u-countdown-item" :style="[itemStyle]" v-if="props.showHours">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
@@ -22,7 +22,7 @@
             :style="{ fontSize: props.separatorSize + 'rpx', color: props.separatorColor, paddingBottom: props.separator == 'colon' ? '4rpx' : 0 }"
             v-if="props.showHours"
         >
-            {{ props.separator == 'colon' ? ':' : '时' }}
+            {{ props.separator == 'colon' && props.showMinutes ? ':' : '时' }}
         </view>
         <view class="u-countdown-item" :style="[itemStyle]" v-if="props.showMinutes">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
@@ -34,7 +34,7 @@
             :style="{ fontSize: props.separatorSize + 'rpx', color: props.separatorColor, paddingBottom: props.separator == 'colon' ? '4rpx' : 0 }"
             v-if="props.showMinutes"
         >
-            {{ props.separator == 'colon' ? ':' : '分' }}
+            {{ props.separator == 'colon' && props.showSeconds ? ':' : '分' }}
         </view>
         <view class="u-countdown-item" :style="[itemStyle]" v-if="props.showSeconds">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
