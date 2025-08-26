@@ -153,6 +153,8 @@ export type SelectListItem = {
     label: string;
     value: string | number;
     children?: SelectListItem[];
+    extra?: any;
+    [key: string]: any;
 };
 // Step 组件 mode
 export type StepsListItem = {

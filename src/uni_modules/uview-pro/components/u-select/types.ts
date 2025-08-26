@@ -7,7 +7,7 @@ import type { SelectListItem, SelectMode } from '../../types/global';
  */
 export const SelectProps = {
     /** 列数据 */
-    list: { type: Array as PropType<SelectListItem[]>, default: () => [] },
+    list: { type: Array as PropType<SelectListItem[] | SelectListItem[][]>, default: () => [] },
     /** 是否显示边框 */
     border: { type: Boolean, default: true },
     /** 通过双向绑定控制组件的弹出与收起 */

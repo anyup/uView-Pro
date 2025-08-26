@@ -9,45 +9,29 @@
 			<u-icon name="arrow-down-fill" size="26" color="#c0c4cc"></u-icon>
 		</view>
 	</view> -->
-        <u-popup
-            :maskCloseAble="maskCloseAble"
-            mode="bottom"
-            :popup="false"
-            v-model="popupValue"
-            length="auto"
-            :safeAreaInsetBottom="safeAreaInsetBottom"
-            @close="close"
-            :z-index="uZIndex"
-        >
+        <u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="popupValue" length="auto"
+            :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex">
             <view class="u-select">
                 <view class="u-select__header" @touchmove.stop.prevent="">
-                    <view
-                        class="u-select__header__cancel u-select__header__btn"
-                        :style="{ color: cancelColor }"
-                        hover-class="u-hover-class"
-                        :hover-stay-time="150"
-                        @tap="getResult('cancel')"
-                    >
+                    <view class="u-select__header__cancel u-select__header__btn" :style="{ color: cancelColor }"
+                        hover-class="u-hover-class" :hover-stay-time="150" @tap="getResult('cancel')">
                         {{ cancelText }}
                     </view>
                     <view class="u-select__header__title">
                         {{ title }}
                     </view>
-                    <view
-                        class="u-select__header__confirm u-select__header__btn"
-                        :style="{ color: moving ? cancelColor : confirmColor }"
-                        hover-class="u-hover-class"
-                        :hover-stay-time="150"
-                        @touchmove.stop=""
-                        @tap.stop="getResult('confirm')"
-                    >
+                    <view class="u-select__header__confirm u-select__header__btn"
+                        :style="{ color: moving ? cancelColor : confirmColor }" hover-class="u-hover-class"
+                        :hover-stay-time="150" @touchmove.stop="" @tap.stop="getResult('confirm')">
                         {{ confirmText }}
                     </view>
                 </view>
                 <view class="u-select__body">
-                    <picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector" @pickstart="pickstart" @pickend="pickend" v-if="modelValue">
+                    <picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector"
+                        @pickstart="pickstart" @pickend="pickend" v-if="modelValue">
                         <picker-view-column v-for="(item, index) in columnData" :key="index">
-                            <view class="u-select__body__picker-view__item" v-for="(item1, index1) in item" :key="index1">
+                            <view class="u-select__body__picker-view__item" v-for="(item1, index1) in item"
+                                :key="index1">
                                 <view class="u-line-1">{{ item1[labelName] }}</view>
                             </view>
                         </picker-view-column>
@@ -61,6 +45,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { SelectProps } from './types';
+import type { SelectListItem } from '../../types/global';
 
 defineOptions({
     name: 'u-select'
@@ -94,9 +79,9 @@ const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'click']);
 
 const defaultSelector = ref<number[]>([0]);
 // picker-view的数据
-const columnData = ref<any[][]>([]);
+const columnData = ref<SelectListItem[][]>([]);
 // 每次队列发生变化时，保存选择的结果
-const selectValue = ref<any[]>([]);
+const selectValue = ref<SelectListItem[]>([]);
 // 上一次列变化时的index
 const lastSelectIndex = ref<number[]>([]);
 // 列数
@@ -164,7 +149,7 @@ function setColumnNum() {
 
 // 获取需要展示在picker中的列数据
 function setColumnData() {
-    let data: any[][] = [];
+    let data: SelectListItem[][] = [];
     selectValue.value = [];
     if (props.mode == 'mutil-column-auto') {
         // 获得所有数据中的第一个元素
@@ -173,7 +158,7 @@ function setColumnData() {
         for (let i = 0; i < columnNum.value; i++) {
             // 第一列默认为整个list数组
             if (i == 0) {
-                data[i] = props.list;
+                data[i] = is2DList(props.list) ? props.list[i] || [] : props.list as SelectListItem[];
                 column = column && typeof column === 'object' ? column[props.childName] : [];
             } else {
                 // 大于第一列时，判断是否有默认选中的，如果没有就用该列的第一项
@@ -185,9 +170,9 @@ function setColumnData() {
             }
         }
     } else if (props.mode == 'single-column') {
-        data[0] = props.list;
+        data[0] = Array.isArray(props.list) && !is2DList(props.list) ? props.list as SelectListItem[] : [];
     } else if (props.mode == 'mutil-column') {
-        data = props.list as any[][];
+        data = is2DList(props.list) ? props.list : [props.list as SelectListItem[]];
     }
     columnData.value = data;
 }
@@ -285,6 +270,11 @@ function getResult(event: 'update:modelValue' | 'confirm' | 'cancel' | 'click' |
 
 function selectHandler() {
     emit('click');
+}
+
+// 类型守卫提前声明
+function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectListItem[][] {
+    return Array.isArray(list) && list.length > 0 && Array.isArray(list[0]);
 }
 </script>
 
