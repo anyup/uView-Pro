@@ -10,7 +10,7 @@
 <h3 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">uView Pro</h3>
 <h3 align="center">uni-app Vue3 Multi-platform Rapid Development UI Framework</h3>
 
-<p align="center">
+<div align="center">
 
 [![star](https://gitee.com/anyup/uView-Pro/badge/star.svg)](https://gitee.com/anyup/uView-Pro)
 [![fork](https://gitee.com/anyup/uView-Pro/badge/fork.svg)](https://gitee.com/anyup/uView-Pro)
@@ -23,7 +23,7 @@
 [![pnpm version](https://img.shields.io/badge/pnpm-%3E%3D7.30-green)](https://pnpm.io/)
 [![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 
-</p>
+</div>
 
 ## Description
 
