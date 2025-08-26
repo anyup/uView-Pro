@@ -1,4 +1,4 @@
-<!-- 语言切换按钮 -->
+<!-- Language Switch Button -->
 <p align="right" style="margin-top: 10px;">
     <span style="padding: 6px 16px; background: #ededed; color: #333; border-radius: 6px; margin-left: 8px; font-weight: bold;">English</span>
     <a href="README.md" style="padding: 6px 16px; background: #2979ff; color: #fff; border-radius: 6px; text-decoration: none; font-weight: bold;">中文</a>
@@ -21,26 +21,26 @@
 [![pnpm version](https://img.shields.io/badge/pnpm-%3E%3D7.30-green)](https://pnpm.io/)
 [![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 
-## Introduction
+## Description
 
-uView UI is an excellent UI framework in the [uni-app](https://uniapp.dcloud.io/) ecosystem. Its comprehensive components and convenient tools will make you feel at ease and in control.
+uView UI is an excellent UI framework in the [uni-app](https://uniapp.dcloud.io/) ecosystem, providing comprehensive components and handy tools for efficient development.
 
-uView Pro is a uni-app ecological framework that fully supports Vue3.0 and TypeScript. The baseline version of uView Pro is modified based on uView 1.8.8, completely reconstructed using TypeScript, and now fully supports uni-app Vue3.0.
+uView Pro is a uni-app ecosystem framework that fully supports Vue3.0 and TypeScript. The baseline version of uView Pro is modified based on uView 1.8.8, completely reconstructed using TypeScript, and now fully supports uni-app Vue3.0.
 
 ## [Official Documentation: https://uview-pro.netlify.app/](https://uview-pro.netlify.app/)
 
 ## Features
 
 -   Compatible with Android, iOS, WeChat Mini Programs, H5, QQ Mini Programs, Baidu Mini Programs, Alipay Mini Programs, and Toutiao Mini Programs
--   70+ selected components, rich in functionality, multi-end compatibility, allowing for quick integration and ready-to-use out of the box
--   Numerous handy JS tools at your disposal, enabling precise and efficient development
+-   70+ selected components, rich in functionality, multi-end compatibility, quick integration, and ready to use out of the box
+-   Numerous handy JS tools for efficient development
 -   A variety of commonly used pages and layouts, allowing you to focus on logic and achieve more with less effort
--   Detailed documentation support and modern demonstration effects
--   On-demand introduction, streamlined packaging size
+-   Detailed documentation and modern demo effects
+-   On-demand import, streamlined bundle size
 
 ## Mobile Preview
 
-You can scan the following QR codes with **WeChat** or **mobile browser** to view the best demonstration effect.
+You can scan the following QR codes with **WeChat** or **mobile browser** to view the best demo effect.
 
 <table class="table">
     <tr>
@@ -49,13 +49,13 @@ You can scan the following QR codes with **WeChat** or **mobile browser** to vie
         <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="200" height="200" ></td>
     </tr>
     <tr>
-        <td align="center"><strong>WeChat Mini Program</strong><br>（Scan with WeChat）</td>
-        <td align="center"><strong>H5</strong><br>（Scan with browser）</td>
-        <td align="center"><strong>Android</strong><br>（Scan with browser）</td>
+        <td align="center"><strong>WeChat Mini Program</strong><br>(Scan with WeChat)</td>
+        <td align="center"><strong>H5</strong><br>(Scan with browser)</td>
+        <td align="center"><strong>Android</strong><br>(Scan with browser)</td>
     </tr>
 </table>
 
-To run the sample project, please [download the source code](https://github.com/anyup/uview-pro), and execute the following commands in the project root directory:
+To run the sample project, please [download the source code](https://github.com/anyup/uview-pro) and execute the following commands in the project root directory:
 
 ```bash
 pnpm install
@@ -69,17 +69,15 @@ For more running and building commands, please refer to the [pnpm Running Guide]
 -   [Github](https://github.com/anyup/uview-pro)
 -   [Gitee](https://gitee.com/anyup/uview-pro)
 -   [Official Documentation](https://uview-pro.netlify.app/)
--   [Change Log](https://uview-pro.netlify.app/components/changelog.html)
--   [Upgrade Guide](https://uview-pro.netlify.app/components/changelog.html)
--   [About Us](https://uview-pro.netlify.app/cooperation/about.html)
+-   [Changelog](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
 
-## Communication and Feedback
+## Communication & Feedback
 
-uView Pro QQ Group: [Click to Enter](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98nSVDldWEbDdq4lxiP4aL7uATfMSlI6&authKey=G2yQJ5MQiKzMldaxBsIfKt17NuJuUw8Fr6zdKLggc6NZXgw4BVbqkU2U3EE994yd&noverify=0&group_code=811732166)
+uView Pro QQ Group: [Click to Join](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98nSVDldWEbDdq4lxiP4aL7uATfMSlI6&authKey=G2yQJ5MQiKzMldaxBsIfKt17NuJuUw8Fr6zdKLggc6NZXgw4BVbqkU2U3EE994yd&noverify=0&group_code=811732166)
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1755597368053" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1756174917808" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>
@@ -90,22 +88,22 @@ uView Pro QQ Group: [Click to Enter](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=9
 
 ## About PR
 
-We are very happy to accept high-quality PRs from everyone. However, before that, I hope you understand that uView Pro needs to be compatible with multiple platforms (Mini Programs, h5, iOS App, Android App), including nvue pages and vue pages.
+We are very happy to accept high-quality PRs from everyone. However, please note that uView Pro needs to be compatible with multiple platforms (Mini Programs, H5, iOS App, Android App), including nvue and vue pages.
 
-Therefore, before you fix bugs and submit PRs, please try your best to test the compatibility on these platforms. It would be best to include test screenshots to facilitate review. Thank you very much!
+Therefore, before you fix bugs and submit PRs, please try your best to test compatibility on these platforms. It would be best to include test screenshots to facilitate review. Thank you very much!
 
 ## Installation
 
 #### **npm Installation**
 
 ```bash
-# npm Installation
+# npm installation
 npm install uview-pro
 
-# yarn Installation
+# yarn installation
 yarn add uview-pro
 
-# pnpm Installation
+# pnpm installation
 pnpm add uview-pro
 ```
 
@@ -113,89 +111,132 @@ pnpm add uview-pro
 
 [https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
 
-## Quick Start
+## Configuration
 
-1. Introduce the uView library in `main.ts`
+uView Pro supports both `npm` and `uni_modules` installation methods, and the configuration is highly consistent. No matter which method you use, you can use easycom for automatic component import, greatly improving development efficiency. The following is a unified configuration guide:
+
+### 1. Install uView Pro
+
+-   npm installation:
+
+```bash
+npm install uview-pro
+# or
+yarn add uview-pro
+# or
+pnpm add uview-pro
+```
+
+-   uni_modules installation:
+
+Download from HBuilderX plugin market or manually, and place uView Pro in the `uni_modules` directory.
+
+[Plugin Market: https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
+
+### 2. Import uView Pro main library
+
+Import and register uView Pro in `main.ts`:
 
 ```js
 // main.ts
 import { createSSRApp } from 'vue';
+// npm method
 import uViewPro from 'uview-pro';
-
-// uni_modules installation method
-// import uViewPro from '@/uni_modules/uview-pro';
+// uni_modules method
+// import uViewPro from "@/uni_modules/uview-pro";
 
 export function createApp() {
     const app = createSSRApp(App);
     app.use(uViewPro);
-    // Other configurations
     return {
         app
     };
 }
 ```
 
-2. Introduce basic styles in `App.vue` (note that the style tag needs to declare scss attribute support)
+### 3. Import global styles
 
-```css
-/* App.vue */
+Import theme styles in `uni.scss`:
+
+```scss
+/* uni.scss */
+// npm method
+@import 'uview-pro/theme.scss';
+// uni_modules method
+// @import "@/uni_modules/uview-pro/theme.scss";
+```
+
+Import base styles at the top of `App.vue`:
+
+```scss
 <style lang="scss">
-/* npm installation method */
-@import "uview-pro/index.scss";
-
-/* uni_modules installation method */
-/* @import "@/uni_modules/uview-pro/index.scss"; */
+  // npm method
+  @import "uview-pro/index.scss";
+  // uni_modules method
+  // @import "@/uni_modules/uview-pro/index.scss";
 </style>
 ```
 
-3. Introduce global scss variable file in `uni.scss`
+### 4. Configure easycom for automatic component import
 
-```css
-/* npm installation method */
-@import 'uview-pro/theme.scss';
+Configure easycom rules in `pages.json` for automatic component import:
 
-/* uni_modules installation method */
-/* @import '@/uni_modules/uview-pro/theme.scss'; */
-```
-
-4. Configure easycom rules in `pages.json` (on-demand introduction)
-
-```js
+```json
 // pages.json
 {
     "easycom": {
+        "autoscan": true,
         "custom": {
-            // For uni_modules installation, the "@/uni_modules/" in front is required, no "@" is needed for npm installation
-            // npm installation method
-            "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
-             // uni_modules installation method
-             // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+            // npm method
+            "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
+            // uni_modules method
+            // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
         }
     },
-    // Existing content
     "pages": [
-        // ......
+        // ...
     ]
 }
 ```
 
-For more detailed content, please refer to [Quick Start](https://uview-pro.netlify.app/components/quickstart.html)
+**Tips**
 
-## Usage
+-   1. After modifying the `easycom` rules, you need to restart HX or recompile the project.
+-   2. Please ensure there is only one easycom field in `pages.json`, otherwise please merge multiple rules yourself.
+-   3. It must be placed inside `custom`, otherwise it will not take effect.
 
-After configuring the easycom rules, components are automatically introduced as needed. There is no need to `import` components, you can use them directly.
+### 5. Volar Type Support
 
-```html
+For global Volar type support in CLI projects, add the following to `tsconfig.json`:
+
+```json
+{
+    "compilerOptions": {
+        // npm method
+        "types": ["uview-pro/types"]
+        // uni_modules method
+        // "types": ["@/uni_modules/uview-pro/types"]
+    }
+}
+```
+
+> HBuilderX projects do not support the types configuration in tsconfig.json. CLI projects are recommended to configure for the best TS experience.
+
+### 6. Component Usage
+
+After configuration, you can use uView Pro components directly in SFC without import or components registration:
+
+```vue
 <template>
-    <u-button>Button</u-button>
+    <u-button type="primary">Button</u-button>
 </template>
 ```
 
-For more detailed content, please refer to [Quick Start](https://uview-pro.netlify.app/components/quickstart.html)
+See [Quick Start](https://uview-pro.netlify.app/components/quickstart.html) for more details.
 
 ## Donate to uView Pro
 
-The documentation content and framework source code of uView Pro are developed based on uView UI, and are therefore open source and free. If you think uView Pro has helped your development work, you can donate to the development of uView Pro. There is no threshold for donation, even a cup of cola is appreciated (believe me, this is more meaningful than tipping a streamer).
+The documentation and framework source code of uView Pro are developed based on uView UI and are therefore open source and free. If you think uView Pro has helped your development work, you can donate to support uView Pro. There is no threshold for donation, even a cup of cola is appreciated (believe me, this is more meaningful than tipping a streamer).
 
 <table class="table">
     <tr>
@@ -208,7 +249,7 @@ The documentation content and framework source code of uView Pro are developed b
     </tr>
 </table>
 
-## License Information
+## License
 
 uView Pro follows the [MIT](https://en.wikipedia.org/wiki/MIT_License) open source license, which means you do not need to pay any fees or obtain authorization to use uView Pro in your products.
 

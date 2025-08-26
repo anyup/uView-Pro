@@ -1,6 +1,7 @@
 <template>
     <view class="about-page">
-        <view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30" @click="preview('https://ik.imagekit.io/anyup/images/social/weixin-person.png')">
+        <view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30"
+            @click="preview('https://ik.imagekit.io/anyup/images/social/weixin-person.png')">
             <view class="u-m-r-10">
                 <u-avatar :src="pic" size="140"></u-avatar>
             </view>
@@ -21,9 +22,11 @@
 
         <view>
             <u-cell-group title="交流群">
-                <u-cell-item v-for="(item, index) in chatList" :key="index" :title="item.title" :label="item.label" @click="itemClick(item)">
+                <u-cell-item v-for="(item, index) in chatList" :key="index" :title="item.title" :label="item.label"
+                    @click="itemClick(item)">
                     <template #icon>
-                        <u-image style="margin-right: 10rpx" :src="item.icon" :width="50" :height="50" mode="aspectFill"></u-image>
+                        <u-image style="margin-right: 10rpx" :src="item.icon" :width="50" :height="50"
+                            mode="aspectFill"></u-image>
                     </template>
                 </u-cell-item>
             </u-cell-group>
@@ -31,9 +34,11 @@
 
         <view>
             <u-cell-group title="其他信息">
-                <u-cell-item v-for="(item, index) in infoList" :key="index" :title="item.title" :label="item.label" @click="itemClick(item)">
+                <u-cell-item v-for="(item, index) in infoList" :key="index" :title="item.title" :label="item.label"
+                    @click="itemClick(item)">
                     <template #icon>
-                        <u-image style="margin-right: 10rpx" :src="item.icon" :width="50" :height="50" mode="aspectFill"></u-image>
+                        <u-image style="margin-right: 10rpx" :src="item.icon" :width="50" :height="50"
+                            mode="aspectFill"></u-image>
                     </template>
                 </u-cell-item>
             </u-cell-group>
@@ -100,7 +105,7 @@ const chatList = ref([
         title: '微信交流群',
         label: '点击后长按二维码图片加入群聊，共同交流 uView Pro 相关问题',
         click: () => {
-            preview('https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1755597368053');
+            preview(`https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=${new Date().getTime()}`);
         }
     }
 ]);

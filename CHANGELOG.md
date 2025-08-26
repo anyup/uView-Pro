@@ -163,6 +163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 重构组件Props属性定义，每个组件具有完善的ts类型定义 ([8cc0de7](https://gitee.com/anyup/uView-Pro/commit/8cc0de7c1527b48dd223d89207135eea01766294))
 - 重构类型定义并统一到全局类型文件global types ([b0fd010](https://gitee.com/anyup/uView-Pro/commit/b0fd0107289eb1c6df2f58d91b63d9b25902caee))
 - 优化全局工具导出方式 ([7a80b6f](https://gitee.com/anyup/uView-Pro/commit/7a80b6f99ad3022ca995f99f8ec6803af7941eb9))
+- 完善 select 组件类型定义 ([26af2da](https://gitee.com/anyup/uView-Pro/commit/26af2da5be7801e35ffbbdd4aebcbfd13e5a44fe))
 
 ### 📦‍ Build System | 打包构建
 
@@ -220,6 +221,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 完善u-button的open-type支持类型 ([37c0db5](https://gitee.com/anyup/uView-Pro/commit/37c0db527258bca57dbd55d7013b633230489853))
 - 添加 uview-pro 组件库的 TypeScript 类型声明 ([e6b2cbf](https://gitee.com/anyup/uView-Pro/commit/e6b2cbfc8417b0877c8cd1d374e2cd8731ec6bec))
 - changelog增加生成指定范围变更日志的功能 ([79c6fd0](https://gitee.com/anyup/uView-Pro/commit/79c6fd01426ff3b4a83db2b98a8b595805fc9d22))
+- 添加 easycom 组件自动扫描 ([b125039](https://gitee.com/anyup/uView-Pro/commit/b1250390a4f594f5deaa133d7a92bd6e72707890))
+- 增强 u-select 组件的类型安全和功能 ([38635e9](https://gitee.com/anyup/uView-Pro/commit/38635e963f9eff6e4c730692e8c97f10b3a092c5))
 
 ### 💄 Styles | 风格
 
@@ -293,6 +296,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 更新 .gitignore 文件 ([8ff834e](https://gitee.com/anyup/uView-Pro/commit/8ff834ed6d0bceaf9c2c467a1d4a5f63bc06ad19))
 - **release:** bump version to 0.0.7 ([6830df1](https://gitee.com/anyup/uView-Pro/commit/6830df1cde517c063c26c2d5f16f22259b3b2f5d))
 - **release:** bump version to 0.0.8 ([168fd72](https://gitee.com/anyup/uView-Pro/commit/168fd7298f89e886e44d418250297b487b573c93))
+- **release:** bump version to 0.0.9 ([e7cedb3](https://gitee.com/anyup/uView-Pro/commit/e7cedb37e2b1917f1bb66c43012e4d33662b5ec2))
 
 ### ⚡ Performance Improvements | 性能优化
 

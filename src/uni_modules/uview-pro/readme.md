@@ -69,7 +69,7 @@ uView Pro QQ 交流群： [点击进入](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1755597368053" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1756174917808" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>
@@ -103,85 +103,124 @@ pnpm add uview-pro
 
 [https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
 
-## 快速上手
+## 配置
 
-1. `main.ts`引入 uView 库
+uView Pro 支持 `npm` 和 `uni_modules` 两种主流安装方式，配置方式高度一致。无论采用哪种方式，均可通过 easycom 实现组件自动引入，极大提升开发效率。以下为统一的配置说明：
+
+### 1. 安装 uView Pro
+
+-   npm 安装：
+
+```bash
+npm install uview-pro
+# 或
+yarn add uview-pro
+# 或
+pnpm add uview-pro
+```
+
+-   uni_modules 安装：
+
+通过 HBuilderX 插件市场或手动下载，将 uView Pro 放入 `uni_modules` 目录。
+
+[插件市场：https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
+
+### 2. 引入 uView Pro 主库
+
+在 `main.ts` 中引入并注册 uView Pro：
 
 ```js
 // main.ts
 import { createSSRApp } from 'vue';
-// npm安装方式
+// npm 方式
 import uViewPro from 'uview-pro';
-
-// uni_modules安装方式
-// import uViewPro from '@/uni_modules/uview-pro';
+// uni_modules 方式
+// import uViewPro from "@/uni_modules/uview-pro";
 
 export function createApp() {
     const app = createSSRApp(App);
     app.use(uViewPro);
-    // 其他配置
     return {
         app
     };
 }
 ```
 
-2. `App.vue`引入基础样式(注意 style 标签需声明 scss 属性支持)
+### 3. 引入全局样式
 
-```css
-/* App.vue */
+在 `uni.scss` 中引入主题样式：
+
+```scss
+/* uni.scss */
+// npm 方式
+@import 'uview-pro/theme.scss';
+// uni_modules 方式
+// @import "@/uni_modules/uview-pro/theme.scss";
+```
+
+在 `App.vue` 首行引入基础样式：
+
+```scss
 <style lang="scss">
-/* npm安装方式 */
-@import "uview-pro/index.scss";
-
-/* uni_modules安装方式 */
-/* @import "@/uni_modules/uview-pro/index.scss"; */
+  // npm 方式
+  @import "uview-pro/index.scss";
+  // uni_modules 方式
+  // @import "@/uni_modules/uview-pro/index.scss";
 </style>
 ```
 
-3. `uni.scss`引入全局 scss 变量文件
+### 4. 配置 easycom 自动引入组件
 
-```css
-/* npm安装方式 */
-@import 'uview-pro/theme.scss';
+在 `pages.json` 中配置 easycom 规则，实现组件自动引入：
 
-/* uni_modules安装方式 */
-/* @import '@/uni_modules/uview-pro/theme.scss'; */
-```
-
-4. `pages.json`配置 easycom 规则(按需引入)
-
-```js
+```json
 // pages.json
 {
     "easycom": {
-        // 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
+        "autoscan": true,
         "custom": {
-            // uni_modules安装的方式需要前面的"@/uni_modules/"，npm安装的方式无需"@/"，以下方式任选其一
-            // npm安装方式
+            // npm 方式
             "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
-            // uni_modules安装方式
+            // uni_modules 方式
             // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
         }
     },
-    // 此为本身已有的内容
     "pages": [
-        // ......
+        // ...
     ]
 }
 ```
 
-请通过[快速上手](https://uview-pro.netlify.app/components/quickstart.html)了解更详细的内容
+**温馨提示**
 
-## 使用方法
+-   1.修改 `easycom` 规则后需重启 HX 或重新编译项目。
+-   2.请确保 `pages.json` 中只有一个 easycom 字段，否则请自行合并多个规则。
+-   3.一定要放在 `custom` 内，否则无效。
 
-配置 easycom 规则后，自动按需引入，无需`import`组件，直接引用即可。
+### 5. Volar 类型提示支持
 
-> 注意：配置完以上规则后，一定要重新运行 uni-app 项目，否则不会生效
+如需在 CLI 项目中获得 Volar 的全局类型提示，请在 `tsconfig.json` 中添加：
 
-```html
+```json
+{
+    "compilerOptions": {
+        // npm 方式
+        "types": ["uview-pro/types"]
+        // uni_modules 方式
+        // "types": ["@/uni_modules/uview-pro/types"]
+    }
+}
+```
+
+> HBuilderX 项目暂不支持 tsconfig.json 的 types 配置，CLI 项目推荐配置以获得最佳 TS 体验。
+
+### 6. 组件使用
+
+配置完成后，无需 import 和 components 注册，可直接在 SFC 中使用 uView Pro 组件：
+
+```vue
 <template>
-    <u-button>按钮</u-button>
+    <u-button type="primary">按钮</u-button>
 </template>
 ```
 

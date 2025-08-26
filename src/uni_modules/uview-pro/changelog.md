@@ -1,7 +1,16 @@
+## 0.0.10（2025-08-26）
+
+### ✨ Features | 新功能
+
+-   添加 easycom 组件自动扫描 ([b125039](https://gitee.com/anyup/uView-Pro/commit/b1250390a4f594f5deaa133d7a92bd6e72707890))
+-   增强 u-select 组件的类型安全和功能 ([38635e9](https://gitee.com/anyup/uView-Pro/commit/38635e963f9eff6e4c730692e8c97f10b3a092c5))
+
 ## 0.0.9（2025-08-25）
+
 ### ♻️ Code Refactoring | 代码重构
 
 -   优化全局工具导出方式 ([7a80b6f](https://gitee.com/anyup/uView-Pro/commit/7a80b6f99ad3022ca995f99f8ec6803af7941eb9))
+
 ## 0.0.8（2025-08-25）
 
 ### ♻️ Code Refactoring | 代码重构
