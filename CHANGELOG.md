@@ -287,6 +287,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 更新 SSR 安装指南和 pages.json 配置 ([dcb8b91](https://gitee.com/anyup/uView-Pro/commit/dcb8b91b45b2fedb02fbfd59f24d8627b38cb600))
 - 更新图片链接 ([24484aa](https://gitee.com/anyup/uView-Pro/commit/24484aae02f4bcc0880b80c2910b264486e9b592))
 - update changelog ([48d8e88](https://gitee.com/anyup/uView-Pro/commit/48d8e88f9e9918542777a77c1098d9c183b7be4d))
+- 更新快速上手指南 ([a863a7a](https://gitee.com/anyup/uView-Pro/commit/a863a7a1b25a28dbb8318c35986f8e86117475be))
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
