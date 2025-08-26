@@ -291,6 +291,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 更新图片链接 ([24484aa](https://gitee.com/anyup/uView-Pro/commit/24484aae02f4bcc0880b80c2910b264486e9b592))
 - update changelog ([48d8e88](https://gitee.com/anyup/uView-Pro/commit/48d8e88f9e9918542777a77c1098d9c183b7be4d))
 - 更新快速上手指南 ([a863a7a](https://gitee.com/anyup/uView-Pro/commit/a863a7a1b25a28dbb8318c35986f8e86117475be))
+- update docs ([541f7bb](https://gitee.com/anyup/uView-Pro/commit/541f7bbc31a40cc7ce286c2a20b49545b1e823f5))
+- 更新 package.json 描述文件 ([e1ced9c](https://gitee.com/anyup/uView-Pro/commit/e1ced9c412f2cd85d485054946df436b014b726e))
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
