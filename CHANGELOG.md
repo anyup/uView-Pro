@@ -164,6 +164,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 重构类型定义并统一到全局类型文件global types ([b0fd010](https://gitee.com/anyup/uView-Pro/commit/b0fd0107289eb1c6df2f58d91b63d9b25902caee))
 - 优化全局工具导出方式 ([7a80b6f](https://gitee.com/anyup/uView-Pro/commit/7a80b6f99ad3022ca995f99f8ec6803af7941eb9))
 - 完善 select 组件类型定义 ([26af2da](https://gitee.com/anyup/uView-Pro/commit/26af2da5be7801e35ffbbdd4aebcbfd13e5a44fe))
+- 取消 async-validator ts 检查 ([772a729](https://gitee.com/anyup/uView-Pro/commit/772a729164f2cb268a886b6749e4a58846ebb3dc))
+- 移除u-tr未使用的类型导入和属性定义 ([46ce459](https://gitee.com/anyup/uView-Pro/commit/46ce4590166a30a0eb048110efc046095a87f6e8))
 
 ### 📦‍ Build System | 打包构建
 
@@ -246,6 +248,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - u-upload深度监听文件列表变化并优化事件触发 ([a41a571](https://gitee.com/anyup/uView-Pro/commit/a41a5719ddf9d6793b78c55a13025bbdc88fdfe3))
 - 修复 notice 组件背景色和键盘组件默认值问题 ([4ef252a](https://gitee.com/anyup/uView-Pro/commit/4ef252a4f4a093d0899fc3de4ad1b3bfc74277b4))
 - 修复中tabbar布局高度计算错误的问题 ([5c1342c](https://gitee.com/anyup/uView-Pro/commit/5c1342cb3fb6dd2c7c84fe785953fcaed13e809f))
+- 修复u-count-down倒计时符号显示逻辑 ([a4c9498](https://gitee.com/anyup/uView-Pro/commit/a4c94986b020c5ac0fdf92bde3c7b79cdfbedbe8))
 
 ### 📝 Documentation | 文档
 
@@ -298,6 +301,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **release:** bump version to 0.0.7 ([6830df1](https://gitee.com/anyup/uView-Pro/commit/6830df1cde517c063c26c2d5f16f22259b3b2f5d))
 - **release:** bump version to 0.0.8 ([168fd72](https://gitee.com/anyup/uView-Pro/commit/168fd7298f89e886e44d418250297b487b573c93))
 - **release:** bump version to 0.0.9 ([e7cedb3](https://gitee.com/anyup/uView-Pro/commit/e7cedb37e2b1917f1bb66c43012e4d33662b5ec2))
+- **release:** bump version to 0.0.10 ([7914ffb](https://gitee.com/anyup/uView-Pro/commit/7914ffb5d13ddf192c8d489b85ce7c38804deda4))
 
 ### ⚡ Performance Improvements | 性能优化
 

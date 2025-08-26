@@ -1,3 +1,14 @@
+## 0.0.11（2025-08-26）
+
+### ♻️ Code Refactoring | 代码重构
+
+-   取消 async-validator ts 检查 ([772a729](https://gitee.com/anyup/uView-Pro/commit/772a729164f2cb268a886b6749e4a58846ebb3dc))
+-   移除 u-tr 未使用的类型导入和属性定义 ([46ce459](https://gitee.com/anyup/uView-Pro/commit/46ce4590166a30a0eb048110efc046095a87f6e8))
+
+### 🐛 Bug Fixes | Bug 修复
+
+-   修复 u-count-down 倒计时符号显示逻辑 ([a4c9498](https://gitee.com/anyup/uView-Pro/commit/a4c94986b020c5ac0fdf92bde3c7b79cdfbedbe8))
+
 ## 0.0.10（2025-08-26）
 
 ### ✨ Features | 新功能
