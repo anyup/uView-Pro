@@ -187,6 +187,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 更新版本号至 0.0.6 ([04c8bac](https://gitee.com/anyup/uView-Pro/commit/04c8bace794fd1fe16c53565df2236c96e80a835))
 - release v0.0.8 ([6f8c240](https://gitee.com/anyup/uView-Pro/commit/6f8c24044f966fbdc8323e3a29718c45b31005c2))
 - update version to 0.0.9 ([1bb904a](https://gitee.com/anyup/uView-Pro/commit/1bb904ab28017afb0e7fcad19db422ddfeeb4c3f))
+- 编译文件 ([212ec8d](https://gitee.com/anyup/uView-Pro/commit/212ec8d306725cb5e7a7680b399553ddbaff07b4))
 
 ### ✨ Features | 新功能
 
