@@ -249,6 +249,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 修复 notice 组件背景色和键盘组件默认值问题 ([4ef252a](https://gitee.com/anyup/uView-Pro/commit/4ef252a4f4a093d0899fc3de4ad1b3bfc74277b4))
 - 修复中tabbar布局高度计算错误的问题 ([5c1342c](https://gitee.com/anyup/uView-Pro/commit/5c1342cb3fb6dd2c7c84fe785953fcaed13e809f))
 - 修复u-count-down倒计时符号显示逻辑 ([a4c9498](https://gitee.com/anyup/uView-Pro/commit/a4c94986b020c5ac0fdf92bde3c7b79cdfbedbe8))
+- 优化 async-validator 文件多余注释导致的问题 ([f06c80d](https://gitee.com/anyup/uView-Pro/commit/f06c80d57e61e7b75f1384fe89f309b8a0e379fa))
 
 ### 📝 Documentation | 文档
 
@@ -293,6 +294,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 更新快速上手指南 ([a863a7a](https://gitee.com/anyup/uView-Pro/commit/a863a7a1b25a28dbb8318c35986f8e86117475be))
 - update docs ([541f7bb](https://gitee.com/anyup/uView-Pro/commit/541f7bbc31a40cc7ce286c2a20b49545b1e823f5))
 - 更新 package.json 描述文件 ([e1ced9c](https://gitee.com/anyup/uView-Pro/commit/e1ced9c412f2cd85d485054946df436b014b726e))
+- update readme docs ([103114b](https://gitee.com/anyup/uView-Pro/commit/103114b364add458d7d986fc2bfea2960b71231a))
+- update readme docs ([06fd2ac](https://gitee.com/anyup/uView-Pro/commit/06fd2acbcbd2693bb77cf541f99bbcda41c4547d))
+- update readme docs ([db35ab7](https://gitee.com/anyup/uView-Pro/commit/db35ab7e11daafd28097bae9eb4afeb92556cc83))
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
@@ -304,6 +308,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **release:** bump version to 0.0.8 ([168fd72](https://gitee.com/anyup/uView-Pro/commit/168fd7298f89e886e44d418250297b487b573c93))
 - **release:** bump version to 0.0.9 ([e7cedb3](https://gitee.com/anyup/uView-Pro/commit/e7cedb37e2b1917f1bb66c43012e4d33662b5ec2))
 - **release:** bump version to 0.0.10 ([7914ffb](https://gitee.com/anyup/uView-Pro/commit/7914ffb5d13ddf192c8d489b85ce7c38804deda4))
+- **release:** bump version to 0.0.11 ([86f972a](https://gitee.com/anyup/uView-Pro/commit/86f972ab537120e86acac35441466ca710370b0b))
 
 ### ⚡ Performance Improvements | 性能优化
 

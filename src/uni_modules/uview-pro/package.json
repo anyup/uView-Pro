@@ -2,7 +2,7 @@
     "id": "uview-pro",
     "name": "uview-pro",
     "displayName": "【Vue3重构版】uView Pro｜基于Vue3+TS全面重构的70+精选UI组件库",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "uView Pro，是全面支持Vue3的uni-app生态框架，70+精选组件已使用TypeScript重构，已全面支持uni-app Vue3.0",
     "main": "index.ts",
     "module": "index.ts",
@@ -58,10 +58,7 @@
                 "uni-app": {
                     "vue": {
                         "vue2": "x",
-                        "vue3": {
-                            "extVersion": "0.0.11",
-                            "minVersion": ""
-                        }
+                        "vue3": "√"
                     },
                     "web": {
                         "safari": "√",
@@ -70,21 +67,12 @@
                     "app": {
                         "vue": "√",
                         "nvue": "-",
-                        "android": {
-                            "extVersion": "0.0.11",
-                            "minVersion": "23"
-                        },
-                        "ios": {
-                            "extVersion": "0.0.11",
-                            "minVersion": "12"
-                        },
+                        "android": "√",
+                        "ios": "√",
                         "harmony": "-"
                     },
                     "mp": {
-                        "weixin": {
-                            "extVersion": "0.0.11",
-                            "minVersion": ""
-                        },
+                        "weixin": "√",
                         "alipay": "-",
                         "toutiao": "-",
                         "baidu": "-",

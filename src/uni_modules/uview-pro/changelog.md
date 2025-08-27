@@ -1,3 +1,9 @@
+## 0.0.12（2025-08-27）
+
+### 🐛 Bug Fixes | Bug 修复
+
+-   优化 async-validator 文件多余注释导致的问题 ([f06c80d](https://gitee.com/anyup/uView-Pro/commit/f06c80d57e61e7b75f1384fe89f309b8a0e379fa))
+
 ## 0.0.11（2025-08-26）
 
 ### ♻️ Code Refactoring | 代码重构
