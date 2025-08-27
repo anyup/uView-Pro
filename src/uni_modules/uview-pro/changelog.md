@@ -1,3 +1,9 @@
+## 0.0.13（2025-08-27）
+
+### 🐛 Bug Fixes | Bug 修复
+
+-   修复 count-down 组件暴露 start 和 end 方法 ([0f42a01](https://gitee.com/anyup/uView-Pro/commit/0f42a01f55aa6799f57eb93dc5d029b06115b154))
+
 ## 0.0.12（2025-08-27）
 
 ### 🐛 Bug Fixes | Bug 修复

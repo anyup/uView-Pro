@@ -251,6 +251,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 修复中tabbar布局高度计算错误的问题 ([5c1342c](https://gitee.com/anyup/uView-Pro/commit/5c1342cb3fb6dd2c7c84fe785953fcaed13e809f))
 - 修复u-count-down倒计时符号显示逻辑 ([a4c9498](https://gitee.com/anyup/uView-Pro/commit/a4c94986b020c5ac0fdf92bde3c7b79cdfbedbe8))
 - 优化 async-validator 文件多余注释导致的问题 ([f06c80d](https://gitee.com/anyup/uView-Pro/commit/f06c80d57e61e7b75f1384fe89f309b8a0e379fa))
+- 修复count-down组件暴露start和end方法 ([0f42a01](https://gitee.com/anyup/uView-Pro/commit/0f42a01f55aa6799f57eb93dc5d029b06115b154))
 
 ### 📝 Documentation | 文档
 
@@ -310,6 +311,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **release:** bump version to 0.0.9 ([e7cedb3](https://gitee.com/anyup/uView-Pro/commit/e7cedb37e2b1917f1bb66c43012e4d33662b5ec2))
 - **release:** bump version to 0.0.10 ([7914ffb](https://gitee.com/anyup/uView-Pro/commit/7914ffb5d13ddf192c8d489b85ce7c38804deda4))
 - **release:** bump version to 0.0.11 ([86f972a](https://gitee.com/anyup/uView-Pro/commit/86f972ab537120e86acac35441466ca710370b0b))
+- **release:** bump version to 0.0.12 ([f791252](https://gitee.com/anyup/uView-Pro/commit/f7912525316f493d925eef34fed01594eb6d7d61))
 
 ### ⚡ Performance Improvements | 性能优化
 
