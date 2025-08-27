@@ -209,6 +209,11 @@ function clearTimer() {
         timer.value = null;
     }
 }
+
+defineExpose({
+    start,
+    end,
+});
 </script>
 
 <style scoped lang="scss">
