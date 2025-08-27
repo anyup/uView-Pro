@@ -1354,4 +1354,3 @@ Schema.warning = warning;
 Schema.messages = messages;
 
 export default Schema;
-//# sourceMappingURL=index.js.map
