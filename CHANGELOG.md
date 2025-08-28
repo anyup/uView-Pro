@@ -252,6 +252,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 修复u-count-down倒计时符号显示逻辑 ([a4c9498](https://gitee.com/anyup/uView-Pro/commit/a4c94986b020c5ac0fdf92bde3c7b79cdfbedbe8))
 - 优化 async-validator 文件多余注释导致的问题 ([f06c80d](https://gitee.com/anyup/uView-Pro/commit/f06c80d57e61e7b75f1384fe89f309b8a0e379fa))
 - 修复count-down组件暴露start和end方法 ([0f42a01](https://gitee.com/anyup/uView-Pro/commit/0f42a01f55aa6799f57eb93dc5d029b06115b154))
+- 解决使用u-swipe-action右边会出现一条背景线的bug ([a5b60c6](https://gitee.com/anyup/uView-Pro/commit/a5b60c6485120e164c0e0c29eea3b765c10f9aac))
 
 ### 📝 Documentation | 文档
 
@@ -300,6 +301,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update readme docs ([06fd2ac](https://gitee.com/anyup/uView-Pro/commit/06fd2acbcbd2693bb77cf541f99bbcda41c4547d))
 - update readme docs ([db35ab7](https://gitee.com/anyup/uView-Pro/commit/db35ab7e11daafd28097bae9eb4afeb92556cc83))
 - 更新文档 ([ec8d987](https://gitee.com/anyup/uView-Pro/commit/ec8d987c840d32729b9d227f6cdcb1005aec4028))
+- update readme docs ([2633c45](https://gitee.com/anyup/uView-Pro/commit/2633c4504a678802a997e6065292204f3b3fda2a))
+- update readme docs ([2fd99d8](https://gitee.com/anyup/uView-Pro/commit/2fd99d8f6f9531e172e6eeabff513bdb3efcee41))
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
@@ -313,6 +316,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **release:** bump version to 0.0.10 ([7914ffb](https://gitee.com/anyup/uView-Pro/commit/7914ffb5d13ddf192c8d489b85ce7c38804deda4))
 - **release:** bump version to 0.0.11 ([86f972a](https://gitee.com/anyup/uView-Pro/commit/86f972ab537120e86acac35441466ca710370b0b))
 - **release:** bump version to 0.0.12 ([f791252](https://gitee.com/anyup/uView-Pro/commit/f7912525316f493d925eef34fed01594eb6d7d61))
+- **release:** bump version to 0.0.13 ([ea5c4df](https://gitee.com/anyup/uView-Pro/commit/ea5c4df6b77c4a7004fb0e4a9d538917e1ed4003))
 
 ### ⚡ Performance Improvements | 性能优化
 

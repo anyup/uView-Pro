@@ -144,21 +144,20 @@ export function createApp() {
 在 `uni.scss` 中引入主题样式：
 
 ```scss
-/* uni.scss */
-// npm 方式
+/* npm 方式 */
 @import 'uview-pro/theme.scss';
-// uni_modules 方式
-// @import "@/uni_modules/uview-pro/theme.scss";
+/* uni_modules 方式 */
+/* @import "@/uni_modules/uview-pro/theme.scss"; */
 ```
 
 在 `App.vue` 首行引入基础样式：
 
 ```scss
 <style lang="scss">
-  // npm 方式
+  /* npm 方式 */
   @import "uview-pro/index.scss";
-  // uni_modules 方式
-  // @import "@/uni_modules/uview-pro/index.scss";
+  /* uni_modules 方式 */
+  /* @import "@/uni_modules/uview-pro/index.scss"; */
 </style>
 ```
 
@@ -167,20 +166,18 @@ export function createApp() {
 在 `pages.json` 中配置 easycom 规则，实现组件自动引入：
 
 ```json
-// pages.json
+/* pages.json */
 {
     "easycom": {
         "autoscan": true,
         "custom": {
-            // npm 方式
+            /* npm 方式 */
             "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
-            // uni_modules 方式
-            // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
+            /*  uni_modules 方式 */
+            /*  "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue" */
         }
     },
-    "pages": [
-        // ...
-    ]
+    "pages": []
 }
 ```
 
@@ -197,10 +194,10 @@ export function createApp() {
 ```json
 {
     "compilerOptions": {
-        // npm 方式
+        /* npm 方式 */
         "types": ["uview-pro/types"]
-        // uni_modules 方式
-        // "types": ["@/uni_modules/uview-pro/types"]
+        /* uni_modules 方式 */
+        /* "types": ["@/uni_modules/uview-pro/types"] */
     }
 }
 ```

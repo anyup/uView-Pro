@@ -1,3 +1,9 @@
+## 0.0.14（2025-08-28）
+
+### 🐛 Bug Fixes | Bug 修复
+
+-   修复使用 u-swipe-action 右边会出现一条背景线的 bug ([a5b60c6](https://gitee.com/anyup/uView-Pro/commit/a5b60c6485120e164c0e0c29eea3b765c10f9aac))
+
 ## 0.0.13（2025-08-27）
 
 ### 🐛 Bug Fixes | Bug 修复
