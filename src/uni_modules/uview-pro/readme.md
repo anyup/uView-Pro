@@ -17,9 +17,9 @@
 
 ## 说明
 
-uView UI，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的 UI 框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。
+`uView UI`，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的 UI 框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。
 
-uView Pro，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
+`uView Pro`，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
 
 ## [官方文档：https://uview-pro.netlify.app/](https://uview-pro.netlify.app/)
 
@@ -65,7 +65,7 @@ pnpm dev
 
 ## 交流反馈
 
-uView Pro QQ 交流群： [点击进入](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98nSVDldWEbDdq4lxiP4aL7uATfMSlI6&authKey=G2yQJ5MQiKzMldaxBsIfKt17NuJuUw8Fr6zdKLggc6NZXgw4BVbqkU2U3EE994yd&noverify=0&group_code=811732166)
+`uView Pro` QQ 交流群： [点击进入](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98nSVDldWEbDdq4lxiP4aL7uATfMSlI6&authKey=G2yQJ5MQiKzMldaxBsIfKt17NuJuUw8Fr6zdKLggc6NZXgw4BVbqkU2U3EE994yd&noverify=0&group_code=811732166)
 
 <table class="table">
     <tr>
@@ -80,13 +80,13 @@ uView Pro QQ 交流群： [点击进入](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027
 
 ## 关于 PR
 
-我们非常乐意接受各位的优质 PR，但在此之前我希望您了解 uView Pro 是一个需要兼容多个平台的（小程序、h5、iOS App、Android App）包括 nvue 页面、vue 页面。
+我们非常乐意接受各位的优质 PR，但在此之前我希望您了解 `uView Pro` 是一个需要兼容多个平台的（小程序、h5、iOS App、Android App）包括 nvue 页面、vue 页面。
 
 所以希望在您修复 bug 并提交之前尽可能的去这些平台测试一下兼容性。最好能携带测试截图以方便审核。非常感谢！
 
 ## 安装配置
 
-uView Pro 支持 `npm` 和 `uni_modules` 两种主流安装方式，配置方式高度一致。无论采用哪种方式，均可通过 easycom 实现组件自动引入，极大提升开发效率。以下为统一的配置说明：
+`uView Pro` 支持 `npm` 和 `uni_modules` 两种主流安装方式，配置方式高度一致。无论采用哪种方式，均可通过 `easycom` 实现组件自动引入，极大提升开发效率。以下为统一的配置说明：
 
 ### 1. 安装 uView Pro
 
@@ -111,7 +111,6 @@ pnpm add uview-pro
 在 `main.ts` 中引入并注册 uView Pro：
 
 ```js
-// main.ts
 import { createSSRApp } from 'vue';
 // npm 方式
 import uViewPro from 'uview-pro';
@@ -151,18 +150,17 @@ export function createApp() {
 
 ### 4. 配置 easycom 自动引入组件
 
-在 `pages.json` 中配置 easycom 规则，实现组件自动引入：
+在 `pages.json` 中配置 `easycom` 规则，实现组件自动引入：
 
 ```json
-/* pages.json */
 {
     "easycom": {
         "autoscan": true,
         "custom": {
-            /* npm 方式 */
+            // npm 方式
             "^u-(.*)": "uview-pro/components/u-$1/u-$1.vue"
-            /*  uni_modules 方式 */
-            /*  "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue" */
+            // uni_modules 方式
+            // "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
         }
     },
     "pages": []
@@ -177,24 +175,24 @@ export function createApp() {
 
 ### 5. Volar 类型提示支持
 
-如需在 CLI 项目中获得 Volar 的全局类型提示，请在 `tsconfig.json` 中添加：
+如需在 `CLI` 项目中获得 `Volar` 的全局类型提示，请在 `tsconfig.json` 中添加：
 
 ```json
 {
     "compilerOptions": {
-        /* npm 方式 */
+        // npm 方式
         "types": ["uview-pro/types"]
-        /* uni_modules 方式 */
-        /* "types": ["@/uni_modules/uview-pro/types"] */
+        // uni_modules 方式
+        // "types": ["@/uni_modules/uview-pro/types"]
     }
 }
 ```
 
-> HBuilderX 项目暂不支持 tsconfig.json 的 types 配置，CLI 项目推荐配置以获得最佳 TS 体验。
+> HBuilderX 项目暂不支持 `tsconfig.json` 的 `types` 配置，`CLI` 项目推荐配置以获得最佳 `TS` 体验。
 
 ### 6. 组件使用
 
-配置完成后，无需 import 和 components 注册，可直接在 SFC 中使用 uView Pro 组件：
+配置完成后，无需 `import` 和 `components` 注册，可直接在 `SFC` 中使用 `uView Pro` 组件：
 
 ```vue
 <template>
@@ -206,7 +204,7 @@ export function createApp() {
 
 ## 捐赠 uView Pro
 
-uView Pro 文档内容和框架源码基于 uView UI 二次开发，因此全部开源免费，如果您认为 uView Pro 帮到了您的开发工作，您可以捐赠 uView Pro 的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
+`uView Pro` 文档内容和框架源码基于 `uView UI` 二次开发，因此全部开源免费，如果您认为 `uView Pro` 帮到了您的开发工作，您可以捐赠 `uView Pro` 的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
 
 <table class="table">
     <tr>
@@ -221,11 +219,11 @@ uView Pro 文档内容和框架源码基于 uView UI 二次开发，因此全部
 
 ## 版权信息
 
-uView Pro 遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，意味着您无需支付任何费用，也无需授权，即可将 uView Pro 应用到您的产品中。
+`uView Pro` 遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，意味着您无需支付任何费用，也无需授权，即可将 `uView Pro` 应用到您的产品中。
 
 ## 鸣谢
 
-再次感谢 uView UI 开发团队，以及所有为 uView UI 的贡献者，以及所有为 uView Pro 的贡献者。
+再次感谢 `uView UI` 开发团队，以及所有为 `uView UI` 的贡献者，以及所有为 `uView Pro` 的贡献者。
 
 -   [Github](https://github.com/anyup/uview-pro)
 -   [Gitee](https://gitee.com/anyup/uview-pro)
