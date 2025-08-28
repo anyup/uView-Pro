@@ -195,7 +195,8 @@ function touchstart() {
  */
 function getActionRect() {
     $u.getRect('.u-swipe-action').then((res: { width: number }) => {
-        movableAreaWidth.value = res.width;
+        // 解决使用u-swipe-action右边会出现一条背景线的bug，增加 1 像素
+        movableAreaWidth.value = res.width + 1;
         // 等视图更新完后，再显示右边的可滑动按钮，防止这些按钮会"闪一下"
         nextTick(() => {
             showBtn.value = true;
