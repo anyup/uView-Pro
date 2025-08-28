@@ -303,6 +303,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 更新文档 ([ec8d987](https://gitee.com/anyup/uView-Pro/commit/ec8d987c840d32729b9d227f6cdcb1005aec4028))
 - update readme docs ([2633c45](https://gitee.com/anyup/uView-Pro/commit/2633c4504a678802a997e6065292204f3b3fda2a))
 - update readme docs ([2fd99d8](https://gitee.com/anyup/uView-Pro/commit/2fd99d8f6f9531e172e6eeabff513bdb3efcee41))
+- update readme ([179c9d3](https://gitee.com/anyup/uView-Pro/commit/179c9d36f9872b4d69d4792f65cf0e01cca96f85))
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
