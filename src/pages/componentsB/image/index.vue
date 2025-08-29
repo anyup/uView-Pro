@@ -3,11 +3,11 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area u-flex u-row-center">
-                <u-image :shape="shape" ref="uImageRef" :width="width" :height="height" :src="src" mode="aspectFill">
-                    <template v-if="loadingSlot" #loading>
+                <u-image :shape="shape" ref="uImageRef" :width="width" :height="height" :src="src" mode="aspectFill" :use-slots="{ loading: loadingSlot, error: errorSlot }">
+                    <template #loading>
                         <u-loading size="44" mode="flower"></u-loading>
                     </template>
-                    <template v-if="errorSlot" #error>
+                    <template #error>
                         <view style="font-size: 24rpx">加载失败</view>
                     </template>
                 </u-image>
@@ -19,13 +19,10 @@
                 <view class="u-item-title">状态</view>
                 <u-subsection :current="statusCurrent" :list="['加载成功', '加载中', '加载失败']" @change="statusChange"></u-subsection>
             </view>
-            <!-- 微信小程序中，无法动态切换slot，所以隐藏此部分的演示 -->
-            <!-- #ifndef MP-WEIXIN -->
             <view class="u-config-item">
                 <view class="u-item-title">加载中状态</view>
                 <u-subsection :list="['默认', '自定义']" @change="loadingChange"></u-subsection>
             </view>
-            <!-- #endif -->
             <view class="u-config-item">
                 <view class="u-item-title">加载失败状态</view>
                 <u-subsection :list="['默认', '自定义']" @change="errorChange"></u-subsection>
@@ -33,6 +30,10 @@
             <view class="u-config-item">
                 <view class="u-item-title">形状</view>
                 <u-subsection :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
+            </view>
+            <view class="u-config-item">
+                <view class="u-item-title">图片地址</view>
+                <u-subsection :list="['网络', '本地']" @change="srcChange"></u-subsection>
             </view>
         </view>
     </view>
@@ -87,6 +88,14 @@ const errorChange = (index: number) => {
 
 const shapeChange = (index: number) => {
     shape.value = index === 0 ? 'square' : 'circle';
+};
+
+const srcChange = (index: number) => {
+    if (index == 0) {
+        src.value = 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png';
+    } else {
+        src.value = '/static/logo.png';
+    }
 };
 </script>
 

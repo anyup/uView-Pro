@@ -12,11 +12,11 @@
             :style="{ borderRadius: shape === 'circle' ? '50%' : $u.addUnit(borderRadius) }"
         ></image>
         <view v-if="showLoading && loading" class="u-image__loading" :style="{ borderRadius: shape === 'circle' ? '50%' : $u.addUnit(borderRadius), backgroundColor: bgColor }">
-            <slot v-if="$slots.loading" name="loading" />
+            <slot v-if="hasSlot('loading')" name="loading" />
             <u-icon v-else :name="loadingIcon" :width="width" :height="height"></u-icon>
         </view>
         <view v-if="showError && isError && !loading" class="u-image__error" :style="{ borderRadius: shape === 'circle' ? '50%' : $u.addUnit(borderRadius) }">
-            <slot v-if="$slots.error" name="error" />
+            <slot v-if="hasSlot('error')" name="error" />
             <u-icon v-else :name="errorIcon" :width="width" :height="height"></u-icon>
         </view>
     </view>
@@ -182,6 +182,10 @@ function changeStatus(status: 'loading' | 'error' | 'normal') {
 
 // 暴露给模板
 const $slots = useSlots();
+
+function hasSlot(name: string) {
+    return props.useSlots ? !!$slots[name] && props.useSlots[name] : !!$slots[name];
+}
 
 defineExpose<ImageExpose>({
     changeStatus
