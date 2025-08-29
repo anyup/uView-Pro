@@ -31,7 +31,7 @@ defineOptions({
  * @property {String} href 跳转的链接，要带上http(s)
  * @property {String} line-color 下划线颜色，默认同color参数颜色
  * @property {String} mp-tips 各个小程序平台把链接复制到粘贴板后的提示语（默认“链接已复制，请在浏览器打开”）
- * @example <u-link href="http://www.uviewui.com">蜀道难，难于上青天</u-link>
+ * @example <u-link href="https://uview-pro.netlify.app">蜀道难，难于上青天</u-link>
  */
 const props = defineProps(LinkProps);
 

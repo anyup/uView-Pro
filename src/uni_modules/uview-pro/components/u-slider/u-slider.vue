@@ -39,7 +39,7 @@
 <script setup lang="ts">
 /**
  * slider 滑块选择器
- * @tutorial https://uviewui.com/components/slider.html
+ * @tutorial https://uview-pro.netlify.app/components/slider.html
  * @property {Number | String} value 滑块默认值（默认0）
  * @property {Number | String} min 最小值（默认0）
  * @property {Number | String} max 最大值（默认100）

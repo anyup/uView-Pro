@@ -34,7 +34,7 @@ defineOptions({
 /**
  * Image 图片
  * @description 此组件为uni-app的image组件的加强版，在继承了原有功能外，还支持淡入动画、加载中、加载失败提示、圆角值和形状等。
- * @tutorial https://uviewui.com/components/image.html
+ * @tutorial https://uview-pro.netlify.app/components/image.html
  * @property {String} src 图片地址
  * @property {String} mode 裁剪模式，见官网说明
  * @property {String | Number} width 宽度，单位任意，如果为数值，则为rpx单位（默认100%）

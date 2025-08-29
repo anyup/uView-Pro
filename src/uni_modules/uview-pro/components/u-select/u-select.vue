@@ -9,29 +9,45 @@
 			<u-icon name="arrow-down-fill" size="26" color="#c0c4cc"></u-icon>
 		</view>
 	</view> -->
-        <u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="popupValue" length="auto"
-            :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex">
+        <u-popup
+            :maskCloseAble="maskCloseAble"
+            mode="bottom"
+            :popup="false"
+            v-model="popupValue"
+            length="auto"
+            :safeAreaInsetBottom="safeAreaInsetBottom"
+            @close="close"
+            :z-index="uZIndex"
+        >
             <view class="u-select">
                 <view class="u-select__header" @touchmove.stop.prevent="">
-                    <view class="u-select__header__cancel u-select__header__btn" :style="{ color: cancelColor }"
-                        hover-class="u-hover-class" :hover-stay-time="150" @tap="getResult('cancel')">
+                    <view
+                        class="u-select__header__cancel u-select__header__btn"
+                        :style="{ color: cancelColor }"
+                        hover-class="u-hover-class"
+                        :hover-stay-time="150"
+                        @tap="getResult('cancel')"
+                    >
                         {{ cancelText }}
                     </view>
                     <view class="u-select__header__title">
                         {{ title }}
                     </view>
-                    <view class="u-select__header__confirm u-select__header__btn"
-                        :style="{ color: moving ? cancelColor : confirmColor }" hover-class="u-hover-class"
-                        :hover-stay-time="150" @touchmove.stop="" @tap.stop="getResult('confirm')">
+                    <view
+                        class="u-select__header__confirm u-select__header__btn"
+                        :style="{ color: moving ? cancelColor : confirmColor }"
+                        hover-class="u-hover-class"
+                        :hover-stay-time="150"
+                        @touchmove.stop=""
+                        @tap.stop="getResult('confirm')"
+                    >
                         {{ confirmText }}
                     </view>
                 </view>
                 <view class="u-select__body">
-                    <picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector"
-                        @pickstart="pickstart" @pickend="pickend" v-if="modelValue">
+                    <picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector" @pickstart="pickstart" @pickend="pickend" v-if="modelValue">
                         <picker-view-column v-for="(item, index) in columnData" :key="index">
-                            <view class="u-select__body__picker-view__item" v-for="(item1, index1) in item"
-                                :key="index1">
+                            <view class="u-select__body__picker-view__item" v-for="(item1, index1) in item" :key="index1">
                                 <view class="u-line-1">{{ item1[labelName] }}</view>
                             </view>
                         </picker-view-column>
@@ -54,7 +70,7 @@ defineOptions({
 /**
  * select 列选择器
  * @description 此选择器用于单列，多列，多列联动的选择场景。(从1.3.0版本起，不建议使用Picker组件的单列和多列模式，Select组件是专门为列选择而构造的组件，更简单易用。)
- * @tutorial http://uviewui.com/components/select.html
+ * @tutorial https://uview-pro.netlify.app/components/select.html
  * @property {String} mode 模式选择，"single-column"-单列模式，"mutil-column"-多列模式，"mutil-column-auto"-多列联动模式
  * @property {Array} list 列数据，数组形式，见官网说明
  * @property {Boolean} v-model 布尔值变量，用于控制选择器的弹出与收起
@@ -158,7 +174,7 @@ function setColumnData() {
         for (let i = 0; i < columnNum.value; i++) {
             // 第一列默认为整个list数组
             if (i == 0) {
-                data[i] = is2DList(props.list) ? props.list[i] || [] : props.list as SelectListItem[];
+                data[i] = is2DList(props.list) ? props.list[i] || [] : (props.list as SelectListItem[]);
                 column = column && typeof column === 'object' ? column[props.childName] : [];
             } else {
                 // 大于第一列时，判断是否有默认选中的，如果没有就用该列的第一项
@@ -170,7 +186,7 @@ function setColumnData() {
             }
         }
     } else if (props.mode == 'single-column') {
-        data[0] = Array.isArray(props.list) && !is2DList(props.list) ? props.list as SelectListItem[] : [];
+        data[0] = Array.isArray(props.list) && !is2DList(props.list) ? (props.list as SelectListItem[]) : [];
     } else if (props.mode == 'mutil-column') {
         data = is2DList(props.list) ? props.list : [props.list as SelectListItem[]];
     }
