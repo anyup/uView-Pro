@@ -310,6 +310,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update readme ([179c9d3](https://github.com/anyup/uView-Pro/commit/179c9d36f9872b4d69d4792f65cf0e01cca96f85))
 - update readme docs ([ed211d7](https://github.com/anyup/uView-Pro/commit/ed211d7cf5cee823e94294506f786d8ce1877d14))
 - 更新文档链接 ([58e34d5](https://github.com/anyup/uView-Pro/commit/58e34d50b1bff89ad76132b2b72fe7abe45918ed))
+- types/v3-directive not published ([fc93b34](https://github.com/anyup/uView-Pro/commit/fc93b349c326aa29f872d3e337954fc91c9221c9))
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
@@ -334,4 +335,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 👷 Continuous Integration | CI 配置
 
 - **uview-pro:** 更新 Vue 版本兼容性并调整文档 ([82c3725](https://github.com/anyup/uView-Pro/commit/82c37255f42a0b7a26bf829552fb0d27f8a38a15))
+- update changelog script with correct github url ([7761721](https://github.com/anyup/uView-Pro/commit/7761721dbd580de37fa94ac48514aeb4d570bc77))
 
