@@ -14,13 +14,13 @@ defineOptions({
 /**
  * form 表单
  * @description 此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。
- * @tutorial http://uviewui.com/components/form.html
+ * @tutorial https://uview-pro.netlify.app/components/form.html
  * @property {Object} model 表单数据对象
  * @property {Boolean} border-bottom 是否显示表单域的下划线边框
  * @property {String} label-position 表单域提示文字的位置，left-左侧，top-上方
  * @property {String Number} label-width 提示文字的宽度，单位rpx（默认90）
- * @property {Object} label-style lable的样式，对象形式
- * @property {String} label-align lable的对齐方式
+ * @property {Object} label-style label的样式，对象形式
+ * @property {String} label-align label的对齐方式
  * @property {Object} rules 通过ref设置，见官网说明
  * @property {Array} error-type 错误的提示方式，数组形式，见上方说明(默认['message'])
  * @example <u-form :model="form" ref="uForm"></u-form>
@@ -32,7 +32,7 @@ const props = defineProps(FormProps);
 const fields = ref<any[]>([]);
 
 // 校验规则
-const rules = ref<Record<string, any>>({});
+const rules = ref<Record<string, any>>(props.rules);
 
 // 提供 uForm 实例给子组件（注册方法供 u-form-item 调用）
 const uForm = {
@@ -110,7 +110,21 @@ function validate(callback?: (valid: boolean) => void): Promise<boolean> {
     });
 }
 
-defineExpose({ setRules, resetFields, validate });
+defineExpose({
+    setRules,
+    resetFields,
+    validate,
+    addField(field: any) {
+        if (!fields.value.includes(field)) fields.value.push(field);
+    },
+    removeField(field: any) {
+        fields.value = fields.value.filter(f => f !== field);
+    },
+    fields,
+    rules,
+    props,
+    model: props.model
+});
 </script>
 
 <style scoped lang="scss">

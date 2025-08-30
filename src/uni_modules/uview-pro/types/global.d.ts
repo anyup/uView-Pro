@@ -85,6 +85,19 @@ export type CalendarMode = 'date' | 'range';
 // CellItem 右侧箭头方向，可选值：right|up|down，默认为right
 export type CellItemArrowDirection = 'right' | 'up' | 'down';
 
+export type FormRuleItem = {
+    required?: boolean;
+    message?: string;
+    trigger?: string | string[];
+    min?: number;
+    max?: number;
+    pattern?: RegExp;
+    type?: string;
+    validator?: (rule: any, value: any, callback: any) => boolean;
+    asyncValidator?: (rule: any, value: any, callback: any) => void;
+}
+export type FormRules = Record<string, FormRuleItem | FormRuleItem[]>;
+
 export type InputType = 'text' | 'number' | 'idcard' | 'digit' | 'password' | 'textarea' | 'phone' | 'url' | 'email' | 'safe-password' | 'name' | 'bank-card' | 'tel' | 'select';
 
 export type InputAlign = 'left' | 'center' | 'right';
@@ -93,7 +106,7 @@ export type InputConfirmType = 'send' | 'search' | 'next' | 'go' | 'done';
 
 export type InputLabelPosition = 'left' | 'top';
 
-export type InputErrorType = 'message' | 'border' | 'border-bottom' | 'none' | 'toast';
+export type FormErrorType = 'message' | 'border' | 'border-bottom' | 'none' | 'toast';
 
 export type IconLabelPosition = 'left' | 'top' | 'right' | 'bottom';
 

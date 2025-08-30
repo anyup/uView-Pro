@@ -30,12 +30,12 @@ export const FormItemProps = {
         type: [String, Number] as PropType<string | number>,
         default: ''
     },
-    /** lable的样式，对象形式 */
+    /** label的样式，对象形式 */
     labelStyle: {
         type: Object as PropType<Record<string, any>>,
         default: () => ({})
     },
-    /** lable字体的对齐方式 */
+    /** label字体的对齐方式 */
     labelAlign: {
         type: String as PropType<InputAlign>,
         default: ''

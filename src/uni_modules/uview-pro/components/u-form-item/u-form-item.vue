@@ -81,14 +81,14 @@ defineOptions({
 /**
  * form-item 表单item
  * @description 此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。
- * @tutorial http://uviewui.com/components/form.html
+ * @tutorial https://uview-pro.netlify.app/components/form.html
  * @property {String} label 左侧提示文字
  * @property {Object} prop 表单域model对象的属性名，在使用 validate、resetFields 方法的情况下，该属性是必填的
  * @property {Boolean} border-bottom 是否显示表单域的下划线边框
  * @property {String} label-position 表单域提示文字的位置，left-左侧，top-上方
  * @property {String Number} label-width 提示文字的宽度，单位rpx（默认90）
- * @property {Object} label-style lable的样式，对象形式
- * @property {String} label-align lable的对齐方式
+ * @property {Object} label-style label的样式，对象形式
+ * @property {String} label-align label的对齐方式
  * @property {String} right-icon 右侧自定义字体图标(限uView内置图标)或图片地址
  * @property {String} left-icon 左侧自定义字体图标(限uView内置图标)或图片地址
  * @property {Object} left-icon-style 左侧图标的样式，对象形式
@@ -100,7 +100,7 @@ defineOptions({
 const props = defineProps(FormItemProps);
 
 // inject 父表单实例
-const parent = inject<any>('u-form', null);
+let parent = inject<any>('u-form', null);
 const instance = getCurrentInstance();
 
 // 组件状态
@@ -289,13 +289,14 @@ function resetField() {
 
 // 组件挂载时注册到父表单
 onMounted(() => {
+    // 支付宝、头条小程序不支持provide/inject，所以使用这个方法获取整个父组件，在created定义，避免循环应用
     // 兼容 provide/inject 及 $u.$parent
+    parent = $u.parentData('u-form', instance);
     if (parent) {
         // 继承父表单配置
         // 历遍parentData中的属性，将parent中的同名属性赋值给parentData
         Object.keys(parentData.value).forEach(key => {
-            // @ts-ignore
-            if (parent.props[key] !== undefined) parentData.value[key] = parent.props[key];
+            parentData.value[key] = parent.props[key];
         });
         // 如果没有传入prop，或者uForm为空(如果u-form-input单独使用，就不会有uForm注入)，就不进行校验
         if (props.prop) {
