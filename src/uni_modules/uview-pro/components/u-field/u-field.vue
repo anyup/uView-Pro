@@ -165,11 +165,11 @@ const itemIndex = ref(0);
 const inputWrapStyle = computed(() => {
     const style: Record<string, string> = {};
     style.textAlign = props.inputAlign;
-    // 判断lable的位置，如果是left的话，让input左边两边有间隙
+    // 判断label的位置，如果是left的话，让input左边两边有间隙
     if (props.labelPosition === 'left') {
         style.margin = '0 8rpx';
     } else {
-        // 如果lable是top的，input的左边就没必要有间隙了
+        // 如果label是top的，input的左边就没必要有间隙了
         style.marginRight = '8rpx';
     }
     return style;

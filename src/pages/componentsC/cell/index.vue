@@ -52,7 +52,7 @@
             <!-- #endif -->
             <view class="u-config-item">
                 <view class="u-item-title">描述信息</view>
-                <u-subsection current="1" :list="['是', '否']" @change="lableChange"></u-subsection>
+                <u-subsection current="1" :list="['是', '否']" @change="labelChange"></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">更换标题</view>
@@ -91,7 +91,7 @@ export default {
         arrowChange(index) {
             this.arrow = index == 0 ? true : false;
         },
-        lableChange(index) {
+        labelChange(index) {
             this.label = index == 0 ? '岂曰无衣，与子同裳' : '';
         },
         titleChange(index) {
