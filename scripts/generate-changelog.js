@@ -142,7 +142,7 @@ function generateChangelog() {
                 commitsByType[type].forEach(commit => {
                     const scope = commit.scope ? `**${commit.scope}:** ` : '';
                     const shortHash = commit.hash.substring(0, 7);
-                    changelog += `- ${scope}${commit.description} ([${shortHash}](https://gitee.com/anyup/uView-Pro/commit/${commit.hash}))\n`;
+                    changelog += `- ${scope}${commit.description} ([${shortHash}](https://github.com/anyup/uView-Pro/commit/${commit.hash}))\n`;
                 });
 
                 changelog += '\n';
