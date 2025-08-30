@@ -46,6 +46,7 @@ declare module 'vue' {
         uLink: typeof import('../components/u-link/u-link.vue')['default'];
         uLoadMore: typeof import('../components/u-loadmore/u-loadmore.vue')['default'];
         uLoading: typeof import('../components/u-loading/u-loading.vue')['default'];
+        uLoadingPopup: typeof import('../components/u-loading-popup/u-loading-popup.vue')['default'];
         uMask: typeof import('../components/u-mask/u-mask.vue')['default'];
         uMessageInput: typeof import('../components/u-message-input/u-message-input.vue')['default'];
         uModal: typeof import('../components/u-modal/u-modal.vue')['default'];
