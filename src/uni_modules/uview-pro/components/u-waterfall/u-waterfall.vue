@@ -146,6 +146,11 @@ function modify(id: string | number, key: string, value: any) {
         emit('update:modelValue', data);
     }
 }
+defineExpose({
+    clear,
+    remove,
+    modify
+});
 </script>
 
 <style lang="scss" scoped>
