@@ -741,6 +741,13 @@
                         "navigationBarTitleText": "loading-加载动画"
                     }
                 },
+                // loadingPopup-加载弹窗
+                {
+                    "path": "loadingPopup/index",
+                    "style": {
+                        "navigationBarTitleText": "loadingPopup-加载弹窗"
+                    }
+                },
                 // switch-开关选择器
                 {
                     "path": "switch/index",
