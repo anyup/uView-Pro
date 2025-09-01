@@ -459,6 +459,12 @@ export default [
                 icon: 'loading',
                 title: 'Loading 加载动画',
                 title_en: 'Loading'
+            },
+            {
+                path: '/pages/componentsB/loadingPopup/index',
+                icon: 'loading',
+                title: 'Loading 加载弹窗',
+                title_en: 'Loading Popup'
             }
         ]
     }
