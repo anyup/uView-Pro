@@ -1,23 +1,26 @@
 <template>
     <view @touchmove.stop.prevent>
         <view v-if="popupValue" class="u-loading-init" :class="[direction]">
-            <view class="u-loading-center"></view>
-            <view v-if="currentText" class="u-loading-tips">{{ currentText }}</view>
+            <u-loading :mode="mode" :color="color" :size="size" />
+            <view v-if="currentText" class="u-loading-tips">
+                {{ currentText }}
+            </view>
         </view>
-        <view class="u-loading-mask" :class="[popupValue ? 'u-mask-show' : '']" @click="onMaskClick"></view>
+        <view class="u-loading-mask" :class="[popupValue ? 'u-mask-show' : '']" @click="onMaskClick" />
     </view>
 </template>
-
 <script lang="ts" setup>
-import { ref, watch, onUnmounted, computed } from 'vue';
+import { computed, onUnmounted, ref, watch } from 'vue';
 import { LoadingPopupProps } from './types';
 
 // 组件props类型
 const props = defineProps(LoadingPopupProps);
 const emit = defineEmits(['update:modelValue', 'cancel']);
 
-// 定时器
-let timer: ReturnType<typeof setTimeout> | null = null;
+// 自动关闭的持续时间定时器
+let durationTimer: ReturnType<typeof setTimeout> | null = null;
+// 关闭按钮倒计时定时器
+let cancelTimer: ReturnType<typeof setTimeout> | null = null;
 // 记录弹窗显示的时间戳
 const now = ref(0);
 // 是否显示关闭按钮（超时后）
@@ -30,75 +33,138 @@ const popupValue = computed({
     set: (val: boolean) => emit('update:modelValue', val)
 });
 
-// 监听props.text变化，自动同步到currentText（仅在未手动传入text时）
+watch(
+    () => popupValue.value,
+    val => {
+        if (val) {
+            doOpen(currentText.value);
+        } else {
+            doClose();
+        }
+    }
+);
+
+// 响应 props 变更，自动刷新当前 text
 watch(
     () => props.text,
     val => {
-        if (!currentText.value || currentText.value === '' || currentText.value === undefined) {
+        if (popupValue.value) {
             currentText.value = val;
         }
     }
 );
 
-// 启动超时关闭按钮计时
-function startTime() {
-    setTimeout(() => {
-        closeShow.value = true;
-    }, props.cancelTime);
+// 响应 cancelTime/duration 变化，重启定时器
+watch(
+    () => [props.cancelTime, props.duration],
+    () => {
+        if (popupValue.value) {
+            clearDurationTimer();
+            startCancelTime();
+            startDurationTime();
+        }
+    }
+);
+
+/**
+ * 启动超时关闭按钮计时
+ */
+function startCancelTime() {
+    clearCancelTimer();
+    closeShow.value = false;
+    if (props.cancelTime > 0) {
+        cancelTimer = setTimeout(() => {
+            closeShow.value = true;
+        }, props.cancelTime);
+    }
 }
 
-// loading主逻辑，支持传入text，优先显示传入的text
-function show(text?: string) {
-    console.log('show');
+/**
+ * 启动持续时间计时
+ */
+function startDurationTime() {
+    clearDurationTimer();
+    if (props.duration) {
+        durationTimer = setTimeout(() => {
+            close();
+        }, props.duration);
+    }
+}
+
+/**
+ * 内部显示逻辑，初始化所有状态
+ */
+function doOpen(text?: string) {
+    closeShow.value = false;
+    clearDurationTimer();
+    clearCancelTimer();
+    now.value = Date.now();
     if (typeof text === 'string' && text !== '') {
         currentText.value = text;
     } else {
         currentText.value = props.text;
     }
-    startTime();
-    clearTimer();
-    now.value = Date.now();
-    if (props.duration) {
-        timer = setTimeout(() => {
-            hide();
-        }, props.duration);
-    }
-    emit('update:modelValue', true);
+    startCancelTime();
+    startDurationTime();
+}
+
+/**
+ * 内部关闭逻辑，重置所有状态
+ */
+function doClose() {
+    closeShow.value = false;
+    currentText.value = props.text;
+    clearDurationTimer();
+    clearCancelTimer();
+}
+
+/**
+ * 显示弹窗
+ * @param text 可选，优先显示的文案
+ */
+function open(text?: string) {
+    currentText.value = text || props.text;
+    popupValue.value = true;
+}
+
+/**
+ * 隐藏弹窗
+ */
+function close() {
+    popupValue.value = false;
 }
 
 // 清理定时器
-function clearTimer() {
-    if (timer) {
-        clearTimeout(timer);
-        timer = null;
+function clearDurationTimer() {
+    if (durationTimer) {
+        clearTimeout(durationTimer);
+        durationTimer = null;
     }
 }
-
-// 完成加载，关闭弹窗
-function hide() {
-    console.log('hide');
-    closeShow.value = false;
-    clearTimer();
-    // 关闭时重置currentText为props.text，避免下次未传text时显示旧内容
-    currentText.value = props.text;
-    emit('update:modelValue', false);
+function clearCancelTimer() {
+    if (cancelTimer) {
+        clearTimeout(cancelTimer);
+        cancelTimer = null;
+    }
 }
 
 // 遮罩点击事件
 function onMaskClick() {
-    if (Date.now() - now.value > props.cancelTime) {
+    // 只有显示关闭按钮时才允许关闭
+    if (closeShow.value) {
         emit('cancel');
-        hide();
+        close();
     }
 }
 
 onUnmounted(() => {
-    clearTimer();
+    clearDurationTimer();
+    clearCancelTimer();
 });
 
 defineExpose({
-    show,
-    hide
+    open,
+    close
 });
 </script>
 
@@ -126,6 +192,7 @@ defineExpose({
     min-width: 200rpx;
     min-height: 200rpx;
     max-width: 500rpx;
+    padding: 15rpx 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,6 +206,7 @@ defineExpose({
     color: #fff;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 7px;
+
     .u-icon-close {
         position: absolute;
         top: 4rpx;
@@ -146,6 +214,7 @@ defineExpose({
         color: #ffffff;
         opacity: 0.8;
     }
+
     &.horizontal {
         flex-direction: row;
         align-items: center;
@@ -154,10 +223,7 @@ defineExpose({
         max-width: 600rpx;
         min-height: 150rpx;
         padding-left: 40rpx;
-        .u-loading-center {
-            width: 70rpx;
-            height: 70rpx;
-        }
+
         .u-loading-tips {
             margin-top: 0;
             margin-left: 20rpx;
@@ -166,43 +232,10 @@ defineExpose({
     }
 }
 
-.u-loading-center {
-    width: 60rpx;
-    height: 60rpx;
-    border: 3px solid #fff;
-    border-color: #8f8d8e #8f8d8e #8f8d8e #ffffff;
-    border-radius: 50%;
-    margin: 0 6px;
-    display: inline-block;
-    vertical-align: middle;
-    /* clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 0% 60%); */
-    animation: rotate 1s linear infinite;
-}
-
 .u-loading-tips {
     text-align: center;
     padding: 0 20rpx;
     box-sizing: border-box;
     margin-top: 36rpx;
-}
-
-@-webkit-keyframes rotate {
-    from {
-        transform: rotatez(0deg);
-    }
-
-    to {
-        transform: rotatez(360deg);
-    }
-}
-
-@keyframes rotate {
-    from {
-        transform: rotatez(0deg);
-    }
-
-    to {
-        transform: rotatez(360deg);
-    }
 }
 </style>
