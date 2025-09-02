@@ -233,6 +233,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **components:** add u-loading-popup component ([6245df9](https://github.com/anyup/uView-Pro/commit/6245df951034b06225ab36d3f18cae8e7ab4b329))
 - loading popup component enhance functionality and customization ([82f2aba](https://github.com/anyup/uView-Pro/commit/82f2aba81ead557e6c827cee13c2354fb8c3e16a))
 - 添加 Loading 加载弹窗组件的示例页面 ([1bce868](https://github.com/anyup/uView-Pro/commit/1bce86810863012c5a73104ca0a85ebacb4aa92a))
+- 更新发布脚本，支持同时更新两个package.json文件的版本号 ([b251b31](https://github.com/anyup/uView-Pro/commit/b251b314d0ef6f64653299460bcf321ec0872e0b))
 
 ### 💄 Styles | 风格
 
@@ -317,6 +318,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update readme docs ([ed211d7](https://github.com/anyup/uView-Pro/commit/ed211d7cf5cee823e94294506f786d8ce1877d14))
 - 更新文档链接 ([58e34d5](https://github.com/anyup/uView-Pro/commit/58e34d50b1bff89ad76132b2b72fe7abe45918ed))
 - types/v3-directive not published ([fc93b34](https://github.com/anyup/uView-Pro/commit/fc93b349c326aa29f872d3e337954fc91c9221c9))
+- update docs ([8604485](https://github.com/anyup/uView-Pro/commit/860448594a35814f0f0891ac12b586b7e2b533a4))
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
