@@ -167,6 +167,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 取消 async-validator ts 检查 ([772a729](https://github.com/anyup/uView-Pro/commit/772a729164f2cb268a886b6749e4a58846ebb3dc))
 - 移除u-tr未使用的类型导入和属性定义 ([46ce459](https://github.com/anyup/uView-Pro/commit/46ce4590166a30a0eb048110efc046095a87f6e8))
 - **form:** migrate form demo to vue 3 composition api ([9d7c7d3](https://github.com/anyup/uView-Pro/commit/9d7c7d3f1bbfeda145bd3de57c65e0eccbcfdde9))
+- migrate waterfall demo to vue 3 composition api ([93949ad](https://github.com/anyup/uView-Pro/commit/93949ad8ae2a36c6130f87340c222ab9ec69d21f))
+- 优化 loading popup 弹窗组件 ([eb0c981](https://github.com/anyup/uView-Pro/commit/eb0c981184a28952004c137f2db4fbc460e72a0f))
 
 ### 📦‍ Build System | 打包构建
 
@@ -228,6 +230,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 添加 easycom 组件自动扫描 ([b125039](https://github.com/anyup/uView-Pro/commit/b1250390a4f594f5deaa133d7a92bd6e72707890))
 - 增强 u-select 组件的类型安全和功能 ([38635e9](https://github.com/anyup/uView-Pro/commit/38635e963f9eff6e4c730692e8c97f10b3a092c5))
 - 优化 u-image 组件 slot 使用体验，兼容头条小程序 ([a6ca54f](https://github.com/anyup/uView-Pro/commit/a6ca54fce06b20b7a6938d0bef9342954b787641))
+- **components:** add u-loading-popup component ([6245df9](https://github.com/anyup/uView-Pro/commit/6245df951034b06225ab36d3f18cae8e7ab4b329))
+- loading popup component enhance functionality and customization ([82f2aba](https://github.com/anyup/uView-Pro/commit/82f2aba81ead557e6c827cee13c2354fb8c3e16a))
+- 添加 Loading 加载弹窗组件的示例页面 ([1bce868](https://github.com/anyup/uView-Pro/commit/1bce86810863012c5a73104ca0a85ebacb4aa92a))
 
 ### 💄 Styles | 风格
 
@@ -257,6 +262,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 解决使用u-swipe-action右边会出现一条背景线的bug ([a5b60c6](https://github.com/anyup/uView-Pro/commit/a5b60c6485120e164c0e0c29eea3b765c10f9aac))
 - update error text descriptions ([314c394](https://github.com/anyup/uView-Pro/commit/314c3940145c657b12f16d005af7d271f4ae74e3))
 - **u-form:** update form validation rules and improve form component ([3912fd6](https://github.com/anyup/uView-Pro/commit/3912fd6ade3a1d612f6f5e86ddc0336376ee5618))
+- 修复瀑布流组件u-waterfll，暴露celar/remove/modify方法 ([240e023](https://github.com/anyup/uView-Pro/commit/240e0238af092d4c6bde86d0db9e49636b806d6f))
 
 ### 📝 Documentation | 文档
 
@@ -326,6 +332,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **release:** bump version to 0.0.12 ([f791252](https://github.com/anyup/uView-Pro/commit/f7912525316f493d925eef34fed01594eb6d7d61))
 - **release:** bump version to 0.0.13 ([ea5c4df](https://github.com/anyup/uView-Pro/commit/ea5c4df6b77c4a7004fb0e4a9d538917e1ed4003))
 - **release:** bump version to 0.0.14 ([d1afdf7](https://github.com/anyup/uView-Pro/commit/d1afdf735853eae65cc8676f2182379868ed9c4a))
+- **release:** bump version to 0.0.15 ([d5bc854](https://github.com/anyup/uView-Pro/commit/d5bc854a4410104ca1864e35f9a932c7452a196f))
 
 ### ⚡ Performance Improvements | 性能优化
 

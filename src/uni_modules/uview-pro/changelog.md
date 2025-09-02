@@ -1,12 +1,29 @@
+## 0.0.17（2025-09-02）
+
+### ♻️ Code Refactoring | 代码重构
+
+-   瀑布流组件示例代码重构为 Vue3 ([93949ad](https://github.com/anyup/uView-Pro/commit/93949ad8ae2a36c6130f87340c222ab9ec69d21f))
+
+### ✨ Features | 新功能
+
+-   新增组件 u-loading-popup，一个可以配置的加载提示弹窗 ([6245df9](https://github.com/anyup/uView-Pro/commit/6245df951034b06225ab36d3f18cae8e7ab4b329))
+-   新增 Loading 加载弹窗组件的示例页面 ([1bce868](https://github.com/anyup/uView-Pro/commit/1bce86810863012c5a73104ca0a85ebacb4aa92a))
+
+### 🐛 Bug Fixes | Bug 修复
+
+-   修复瀑布流组件 u-waterfll，暴露 celar/remove/modify 方法 ([240e023](https://github.com/anyup/uView-Pro/commit/240e0238af092d4c6bde86d0db9e49636b806d6f))
+
 ## 0.0.15（2025-08-30）
-###  Features | 新功能
+
+### ✨ Features | 新功能
 
 -   优化 u-image 组件 slot 使用体验，兼容头条小程序 ([a6ca54f](https://github.com/anyup/uView-Pro/commit/a6ca54fce06b20b7a6938d0bef9342954b787641))
 
-### Bug Fixes | Bug 修复
+### ♻️ Bug Fixes | Bug 修复
 
 -   优化 label 的声明错误问题 ([314c394](https://github.com/anyup/uView-Pro/commit/314c3940145c657b12f16d005af7d271f4ae74e3))
 -   优化头条小程序 form 表单校验的兼容性问题 ([3912fd6](https://github.com/anyup/uView-Pro/commit/3912fd6ade3a1d612f6f5e86ddc0336376ee5618))
+
 ## 0.0.14（2025-08-28）
 
 ### 🐛 Bug Fixes | Bug 修复
