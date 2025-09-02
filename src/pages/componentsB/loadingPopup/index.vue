@@ -5,8 +5,17 @@
             <view class="u-demo-area">
                 <button type="primary" @click="openLoading">显示 Loading Popup</button>
                 <!-- v-model:modelValue 控制弹窗显示，支持所有原生 props -->
-                <u-loading-popup ref="uLoadingPopupRef" v-model="show" :text="text" :cancelTime="cancelTime"
-                    :duration="duration" :direction="direction" :color="color" :size="size" @cancel="onCancel" />
+                <u-loading-popup
+                    ref="uLoadingPopupRef"
+                    v-model="show"
+                    :text="text"
+                    :cancelTime="cancelTime"
+                    :duration="duration"
+                    :direction="direction"
+                    :color="color"
+                    :size="size"
+                    @cancel="onCancel"
+                />
             </view>
         </view>
         <view class="u-config-wrap">
@@ -92,7 +101,6 @@ function colorChange(index: number) {
 
 /** 切换尺寸 */
 function sizeChange(index: number) {
-    console.log(index);
     const sizeMap: Record<number, number> = {
         0: 40,
         1: 50,

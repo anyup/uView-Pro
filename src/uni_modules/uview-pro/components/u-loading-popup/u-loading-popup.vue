@@ -23,8 +23,8 @@ let durationTimer: ReturnType<typeof setTimeout> | null = null;
 let cancelTimer: ReturnType<typeof setTimeout> | null = null;
 // 记录弹窗显示的时间戳
 const now = ref(0);
-// 是否显示关闭按钮（超时后）
-const closeShow = ref(false);
+// 点击遮罩层是否可关闭（超时后）
+const canClose = ref(false);
 // 当前显示的text，优先级：loading参数 > props.text
 const currentText = ref(props.text);
 
@@ -48,9 +48,7 @@ watch(
 watch(
     () => props.text,
     val => {
-        if (popupValue.value) {
-            currentText.value = val;
-        }
+        currentText.value = val;
     }
 );
 
@@ -71,10 +69,10 @@ watch(
  */
 function startCancelTime() {
     clearCancelTimer();
-    closeShow.value = false;
+    canClose.value = false;
     if (props.cancelTime > 0) {
         cancelTimer = setTimeout(() => {
-            closeShow.value = true;
+            canClose.value = true;
         }, props.cancelTime);
     }
 }
@@ -95,7 +93,7 @@ function startDurationTime() {
  * 内部显示逻辑，初始化所有状态
  */
 function doOpen(text?: string) {
-    closeShow.value = false;
+    canClose.value = false;
     clearDurationTimer();
     clearCancelTimer();
     now.value = Date.now();
@@ -112,7 +110,7 @@ function doOpen(text?: string) {
  * 内部关闭逻辑，重置所有状态
  */
 function doClose() {
-    closeShow.value = false;
+    canClose.value = false;
     currentText.value = props.text;
     clearDurationTimer();
     clearCancelTimer();
@@ -151,7 +149,7 @@ function clearCancelTimer() {
 // 遮罩点击事件
 function onMaskClick() {
     // 只有显示关闭按钮时才允许关闭
-    if (closeShow.value) {
+    if (canClose.value) {
         emit('cancel');
         close();
     }
