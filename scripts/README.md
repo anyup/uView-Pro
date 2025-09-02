@@ -143,3 +143,74 @@ chmod +x scripts/release.sh
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
+
+## 发布平台令牌（GitHub / Gitee）
+
+发布脚本支持在推送标签后自动创建 Release，并将当前版本的 changelog 作为 Release 描述。需要为对应平台配置令牌（Token）：
+
+### GitHub Token
+
+1. 创建 Token：
+    - GitHub → Settings → Developer settings → Personal access tokens
+    - 任选其一：
+        - classic：勾选 `repo`（至少包含 repo:status、repo_deployment、public_repo）
+        - fine-grained：选择当前仓库，权限建议：`Contents: Read and write`、`Metadata: Read-only`
+2. 设置环境变量（Windows PowerShell）：
+
+    - 仅当前会话：
+
+    ```powershell
+    $env:GITHUB_TOKEN = "你的token"
+    ```
+
+    - 永久生效（新开终端生效）：
+
+    ```powershell
+    setx GITHUB_TOKEN "你的token"
+    ```
+
+    - 亦可使用 `GH_TOKEN`：
+
+    ```powershell
+    $env:GH_TOKEN = "你的token"; setx GH_TOKEN "你的token"
+    ```
+
+### Gitee Token
+
+1. 创建 Token：
+    - Gitee → 头像 → 设置 → 私人令牌（或 安全设置 → 私人令牌）
+    - 新建令牌，授予仓库相关权限（至少包含发布 Release 所需权限）
+2. 设置环境变量（Windows PowerShell）：
+
+    - 仅当前会话：
+
+    ```powershell
+    $env:GITEE_TOKEN = "你的token"
+    ```
+
+    - 永久生效（新开终端生效）：
+
+    ```powershell
+    setx GITEE_TOKEN "你的token"
+    ```
+
+### 验证
+
+重新打开 PowerShell，执行：
+
+```powershell
+echo $env:GITHUB_TOKEN
+echo $env:GH_TOKEN
+echo $env:GITEE_TOKEN
+```
+
+能看到值即已生效。随后正常执行：
+
+```bash
+pnpm release:patch | pnpm release:minor | pnpm release:major
+```
+
+脚本会自动识别远程仓库：
+
+-   GitHub 仓库使用 `GITHUB_TOKEN`/`GH_TOKEN` 创建 Release
+-   Gitee 仓库使用 `GITEE_TOKEN` 创建 Release

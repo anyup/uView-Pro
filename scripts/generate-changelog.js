@@ -9,6 +9,8 @@ const useEmoji = args.includes('--emoji');
 const usePlain = args.includes('--plain');
 const onlyCurrent = args.includes('--current');
 const sinceLastTag = args.includes('--last') || args.includes('--since-last-tag');
+const generateAll = args.includes('--all') || args.includes('--by-tags');
+const noUnreleased = args.includes('--no-unreleased');
 
 // 如果没有指定参数，默认使用 emoji
 const shouldUseEmoji = useEmoji || (!usePlain && !useEmoji);
@@ -92,74 +94,148 @@ function resolveRange() {
     return '';
 }
 
+function buildSectionHeader({ version, date }) {
+    return `## [${version}] - ${date}`;
+}
+
+function collectCommits(range) {
+    const rangeArg = range ? ` ${range}` : '';
+    const lines = execSync(`git log${rangeArg} --pretty=format:"%H|%s" --reverse`, { encoding: 'utf8' })
+        .split('\n')
+        .filter(line => line.trim());
+    return lines.map(line => {
+        const [hash, subject] = line.split('|');
+        return { hash, subject };
+    });
+}
+
+function groupCommitsByType(commits) {
+    const commitsByType = {};
+    commits.forEach(commit => {
+        if (!commit.subject) return;
+        const match = commit.subject.match(/^(\w+)(?:\(([^)]+)\))?:\s*(.+)/);
+        if (match) {
+            const [, type, scope, description] = match;
+            if (!emojiMap[type]) return;
+            if (!commitsByType[type]) commitsByType[type] = [];
+            commitsByType[type].push({
+                ...commit,
+                scope: scope || '',
+                description: description.trim()
+            });
+        }
+    });
+    return commitsByType;
+}
+
+function renderBodyFromGroups(commitsByType) {
+    let body = '';
+    Object.keys(commitsByType).forEach(type => {
+        if (commitsByType[type].length === 0) return;
+        const typeName = typeNames[type];
+        body += `### ${typeName}\n\n`;
+        commitsByType[type].forEach(commit => {
+            const scope = commit.scope ? `**${commit.scope}:** ` : '';
+            const shortHash = commit.hash.substring(0, 7);
+            body += `- ${scope}${commit.description} ([${shortHash}](https://github.com/anyup/uView-Pro/commit/${commit.hash}))\n`;
+        });
+        body += '\n';
+    });
+    return body;
+}
+
+function renderFallbackBody() {
+    if (shouldUseEmoji) {
+        return `### ✨ Features | 新功能\n\n- Initial project setup with commitizen, cz-git, and conventional changelog\n\n### 🐛 Bug Fixes | Bug 修复\n\n### 📝 Documentation | 文档\n\n### 💄 Styles | 风格\n\n### ♻️ Code Refactoring | 代码重构\n\n### ⚡ Performance Improvements | 性能优化\n\n### ✅ Tests | 测试\n\n### 📦‍ Build System | 打包构建\n\n### 👷 Continuous Integration | CI 配置\n\n### 🚀 Chore | 构建/工程依赖/工具\n\n### ⏪ Revert | 回退\n\n`;
+    }
+    return `### Features | 新功能\n\n- Initial project setup with commitizen, cz-git, and conventional changelog\n\n### Bug Fixes | Bug 修复\n\n### Documentation | 文档\n\n### Styles | 风格\n\n### Code Refactoring | 代码重构\n\n### Performance Improvements | 性能优化\n\n### Tests | 测试\n\n### Build System | 打包构建\n\n### Continuous Integration | CI 配置\n\n### Chore | 构建/工程依赖/工具\n\n### Revert | 回退\n\n`;
+}
+
 function generateChangelog() {
     try {
         const range = resolveRange();
         console.log(`🔄 Generating changelog... ${shouldUseEmoji ? 'with emoji' : 'without emoji'}${range ? ` (range: ${range})` : ''}`);
 
-        const rangeArg = range ? ` ${range}` : '';
-        // 获取提交
-        const commits = execSync(`git log${rangeArg} --pretty=format:"%H|%s" --reverse`, { encoding: 'utf8' })
-            .split('\n')
-            .filter(line => line.trim())
-            .map(line => {
-                const [hash, subject] = line.split('|');
-                return { hash, subject };
-            });
+        // 解析提交
+        const commits = collectCommits(range);
+        const commitsByType = groupCommitsByType(commits);
 
-        // 解析提交类型
-        const commitsByType = {};
+        const hasExisting = fs.existsSync('CHANGELOG.md');
+        const existingContent = hasExisting ? fs.readFileSync('CHANGELOG.md', 'utf8') : '';
 
-        commits.forEach(commit => {
-            if (commit.subject) {
-                // 匹配 conventional commits 格式
-                const match = commit.subject.match(/^(\w+)(?:\(([^)]+)\))?:\s*(.+)/);
-                if (match) {
-                    const [, type, scope, description] = match;
-                    if (emojiMap[type]) {
-                        if (!commitsByType[type]) {
-                            commitsByType[type] = [];
-                        }
-                        commitsByType[type].push({
-                            ...commit,
-                            scope: scope || '',
-                            description: description.trim()
-                        });
-                    }
-                }
-            }
-        });
+        // 标准化头部（可选移除 Unreleased）
+        const baseHeader = `# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n\n`;
+        const standardHeader = noUnreleased ? baseHeader : baseHeader + '## [Unreleased]\n\n';
 
-        // 生成 changelog 内容
-        let changelog = `# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n\n## [Unreleased]\n\n`;
-
-        // 按类型分组输出
-        Object.keys(commitsByType).forEach(type => {
-            if (commitsByType[type].length > 0) {
-                const typeName = typeNames[type];
-                changelog += `### ${typeName}\n\n`;
-
-                commitsByType[type].forEach(commit => {
-                    const scope = commit.scope ? `**${commit.scope}:** ` : '';
-                    const shortHash = commit.hash.substring(0, 7);
-                    changelog += `- ${scope}${commit.description} ([${shortHash}](https://github.com/anyup/uView-Pro/commit/${commit.hash}))\n`;
-                });
-
-                changelog += '\n';
-            }
-        });
+        let changelogBody = renderBodyFromGroups(commitsByType);
 
         // 如果没有找到任何符合规范的提交，添加默认内容
         if (Object.keys(commitsByType).length === 0) {
-            if (shouldUseEmoji) {
-                changelog += `### ✨ Features | 新功能\n\n- Initial project setup with commitizen, cz-git, and conventional changelog\n\n### 🐛 Bug Fixes | Bug 修复\n\n### 📝 Documentation | 文档\n\n### 💄 Styles | 风格\n\n### ♻️ Code Refactoring | 代码重构\n\n### ⚡ Performance Improvements | 性能优化\n\n### ✅ Tests | 测试\n\n### 📦‍ Build System | 打包构建\n\n### 👷 Continuous Integration | CI 配置\n\n### 🚀 Chore | 构建/工程依赖/工具\n\n### ⏪ Revert | 回退\n\n`;
-            } else {
-                changelog += `### Features | 新功能\n\n- Initial project setup with commitizen, cz-git, and conventional changelog\n\n### Bug Fixes | Bug 修复\n\n### Documentation | 文档\n\n### Styles | 风格\n\n### Code Refactoring | 代码重构\n\n### Performance Improvements | 性能优化\n\n### Tests | 测试\n\n### Build System | 打包构建\n\n### Continuous Integration | CI 配置\n\n### Chore | 构建/工程依赖/工具\n\n### Revert | 回退\n\n`;
+            changelogBody += renderFallbackBody();
+        }
+
+        let finalContent = '';
+        if (generateAll) {
+            // 基于标签重建所有版本区块
+            const tagsOutput = safeExec('git tag --list --sort=-v:refname');
+            const tags = tagsOutput ? tagsOutput.split('\n').filter(Boolean) : [];
+
+            let sections = '';
+            for (let i = 0; i < tags.length; i++) {
+                const tag = tags[i];
+                const prev = tags[i + 1];
+                const tagDate = safeExec(`git show -s --format=%ad --date=format:%Y-%m-%d ${tag}`) || '';
+                const rangeExp = prev ? `${prev}..${tag}` : `${tag}`;
+                const tagCommits = collectCommits(rangeExp);
+                const groups = groupCommitsByType(tagCommits);
+                let body = renderBodyFromGroups(groups);
+                if (!body) body = renderFallbackBody();
+                const header = buildSectionHeader({ version: tag.replace(/^v/, ''), date: tagDate });
+                sections += `${header}\n\n${body}`;
             }
+
+            const headerIdx = existingContent.indexOf('## [Unreleased]');
+            const base = headerIdx !== -1 ? existingContent.slice(0, existingContent.indexOf('\n', headerIdx) + 1) : standardHeader;
+            finalContent = base + '\n' + sections.trim() + '\n';
+        } else if (onlyCurrent) {
+            // 将当前范围内容生成到版本段落，并插入到 Unreleased 之后
+            const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            const version = pkg.version;
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${yyyy}-${mm}-${dd}`;
+
+            const sectionHeader = buildSectionHeader({ version, date: dateStr });
+            const newSection = `${sectionHeader}\n\n${changelogBody}`;
+
+            if (hasExisting) {
+                // 如果已有 CHANGELOG，保持头部到 Unreleased，插入新版本段落在其后
+                const unreleasedIndex = noUnreleased ? -1 : existingContent.indexOf('## [Unreleased]');
+                if (unreleasedIndex !== -1) {
+                    // 找到 Unreleased 段落的结束位置（下一个 "## " 标题或文件末尾）
+                    const afterUnreleased = existingContent.indexOf('\n## ', unreleasedIndex + '## [Unreleased]'.length);
+                    if (afterUnreleased !== -1) {
+                        finalContent = existingContent.slice(0, afterUnreleased) + '\n' + newSection + '\n' + existingContent.slice(afterUnreleased);
+                    } else {
+                        finalContent = existingContent + '\n' + newSection + '\n';
+                    }
+                } else {
+                    // 不存在 Unreleased，则在头部后插入
+                    finalContent = standardHeader + newSection + '\n' + existingContent;
+                }
+            } else {
+                // 初次生成，包含标准头和新版本段
+                finalContent = standardHeader + newSection + '\n';
+            }
+        } else {
+            // 默认行为：写入标准头和将本次统计结果放在 Unreleased 下
+            finalContent = standardHeader + changelogBody;
         }
 
         // 写入文件
-        fs.writeFileSync('CHANGELOG.md', changelog);
+        fs.writeFileSync('CHANGELOG.md', finalContent);
         console.log(`✅ Changelog generated successfully ${shouldUseEmoji ? 'with emoji icons' : 'without emoji'}!`);
 
         // 显示统计信息
@@ -176,6 +252,8 @@ function generateChangelog() {
         console.log('  pnpm changelog:current:plain      - Generate current version changelog (plain)');
         console.log('  pnpm changelog:last               - Generate since last tag changelog (emoji)');
         console.log('  pnpm changelog:last:plain         - Generate since last tag changelog (plain)');
+        console.log('  pnpm changelog:all                - Rebuild all version sections from git tags (emoji)');
+        console.log('  pnpm changelog:all:plain          - Rebuild all version sections from git tags (plain)');
     } catch (error) {
         console.error('❌ Error generating changelog:', error.message);
         process.exit(1);
