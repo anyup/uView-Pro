@@ -43,20 +43,22 @@ const props = defineProps(CheckboxProps);
 
 const emit = defineEmits(['change', 'update:modelValue']);
 
+const instance = getCurrentInstance();
+const instanceProxy = instance?.proxy;
 // 父组件 group 注入
-// 支付宝小程序不支持provide/inject？
-const parent = inject<any>('u-checkbox-group', null);
+let parent = inject<any>('u-checkbox-group', null);
 
 // 组件注册到 group
 onMounted(() => {
+    // 兼容头条小程序不支持provide/inject
+    // #ifdef MP-TOUTIAO
+    parent = $u.parentData('u-checkbox-group', instance);
+    // #endif
     // 如果存在u-checkbox-group，将本组件的实例塞进父组件的children中
     if (parent && parent.children && !parent.children.value.includes(instanceProxy)) {
         parent.children.value.push(instanceProxy);
     }
 });
-
-const instance = getCurrentInstance();
-const instanceProxy = instance?.proxy;
 
 // 是否禁用，如果父组件u-checkbox-group禁用的话，将会忽略子组件的配置
 const isDisabled = computed(() => {
