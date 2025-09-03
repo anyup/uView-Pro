@@ -1,3 +1,17 @@
+## 0.0.18（2025-09-03）
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- update release script for better version management ([b64f38f](https://github.com/anyup/uView-Pro/commit/b64f38fea28de39c99cdf84f7e767aa7ceac1344))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-checkbox:** 兼容头条小程序获取父组件数据不支持provide/inject的写法 ([498e12e](https://github.com/anyup/uView-Pro/commit/498e12e2f3aa52021d1be282426536b45f39ca6a))
+
+### 👷 Continuous Integration | CI 配置
+
+- optimize changelog generation and spacing ([3103e7b](https://github.com/anyup/uView-Pro/commit/3103e7b56a0e2dd0392efdb6a85824b11ef6800c))
+
 ## 0.0.17（2025-09-02）
 
 ### ♻️ Code Refactoring | 代码重构
