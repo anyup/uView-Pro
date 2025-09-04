@@ -1,5 +1,3 @@
-// 全局挂载引入http相关请求拦截插件
-import http from './libs/request/index';
 // post类型对象参数转为get类型url参数
 import queryParams from './libs/function/queryParams';
 // 路由封装
@@ -55,7 +53,8 @@ import config from './libs/config/config';
 import zIndex from './libs/config/zIndex';
 import { dispatch, broadcast } from './libs/util/emitter';
 import { mitt } from './libs/util/mitt';
-import { type RequestOptions } from './libs/request/index';
+// http相关
+import httpPlugin, { Request, http, type RequestOptions, type RequestConfig, type RequestInterceptor, type RequestMeta } from './libs/request/index';
 
 declare const uni: {
     [key: string]: any;
@@ -85,10 +84,6 @@ export interface UViewUtils {
     randomArray: typeof randomArray;
     dispatch: typeof dispatch;
     broadcast: typeof broadcast;
-    get: typeof http.get;
-    post: typeof http.post;
-    put: typeof http.put;
-    delete: typeof http.delete;
     hexToRgb: typeof colorGradients.hexToRgb;
     rgbToHex: typeof colorGradients.rgbToHex;
     test: typeof test;
@@ -128,10 +123,6 @@ export const $u: UViewUtils = {
     randomArray,
     dispatch,
     broadcast,
-    get: http.get,
-    post: http.post,
-    put: http.put,
-    delete: http.delete,
     hexToRgb: colorGradients.hexToRgb,
     rgbToHex: colorGradients.rgbToHex,
     test,
@@ -193,10 +184,12 @@ export {
     parentData,
     dispatch,
     broadcast,
-    http,
     config,
     zIndex
 };
 
 // 颜色相关方法单独导出
 export const { colorGradient, colorToRgba, hexToRgb, rgbToHex } = colorGradients;
+
+// http相关导出
+export { Request, httpPlugin, http, type RequestOptions, type RequestConfig, type RequestInterceptor, type RequestMeta };
