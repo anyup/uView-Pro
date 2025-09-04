@@ -49,6 +49,10 @@ const httpInterceptor: RequestInterceptor = {
             meta.toast && showToast('网络错误', 'error');
             throw new Error('网络错误');
         }
+        if (errMsg && errMsg.includes('request:fail')) {
+            meta.toast && showToast('请求错误：未知', 'error');
+            throw new Error('请求错误：未知');
+        }
         // 请求错误
         if (!(statusCode >= 200 && statusCode < 300)) {
             const errorMessage = `请求错误[${statusCode}]`;
@@ -94,11 +98,14 @@ function showToast(title = '', icon: 'success' | 'error' | 'none' = 'none', opti
     if (title.length === 0) {
         return;
     }
-    uni.showToast({
-        title,
-        icon: title.length && title.length > 7 ? 'none' : icon,
-        duration: options.duration || 2000
-    });
+    // 代码示例使用settimeout，仅为演示，实际开发中去掉
+    setTimeout(() => {
+        uni.showToast({
+            title,
+            icon: title.length && title.length > 7 ? 'none' : icon,
+            duration: options.duration || 2000
+        });
+    }, 1000);
 }
 
 // 导出

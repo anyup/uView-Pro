@@ -13,15 +13,15 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">请求方式</view>
-                <u-subsection :list="['get']"></u-subsection>
+                <u-subsection :list="['get', 'post']" @change="changeMethod"></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">请求 Loading</view>
-                <u-subsection :list="['隐藏', '显示']" @change="changeLoading"></u-subsection>
+                <u-subsection :list="['显示', '隐藏']" @change="changeLoading"></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">请求错误时显示 Toast</view>
-                <u-subsection :list="['隐藏', '显示']" @change="changeToast"></u-subsection>
+                <u-subsection :list="['显示', '隐藏']" @change="changeToast"></u-subsection>
             </view>
         </view>
     </view>
@@ -39,8 +39,8 @@ interface Result {
 
 // 请求结果
 const result = ref<any>({});
-const loading = ref(false);
-const toast = ref(false);
+const loading = ref(true);
+const toast = ref(true);
 
 // get请求
 function doGet(url = '/api/demo.json') {
@@ -56,14 +56,34 @@ function doGet(url = '/api/demo.json') {
     });
 }
 
+// post请求
+function doPost(url = '/api/demo.json') {
+    $u.http.post(url, { name: 'uview-pro' },
+        { meta: { loading: loading.value, toast: toast.value } }
+    ).then((res: Result) => {
+        if (res.code === 200) {
+            setTimeout(() => {
+                $u.toast('请求成功', 'success');
+            }, 1000);
+        }
+        result.value = res;
+    });
+}
+
 // 切换请求方式
+function changeMethod(index: number) {
+    index === 0 ? doGet() : doPost();
+}
+
+// 切换模式，切换请求 Loading 的显示与隐藏
 function changeLoading(index: number) {
-    loading.value = index === 1;
+    loading.value = index === 0;
     doGet()
 }
 
+// 切换模式，切换请求错误时 Toast 的显示与隐藏
 function changeToast(index: number) {
-    toast.value = index === 1;
+    toast.value = index === 0;
     doGet(toast.value ? '/api/demo1.json' : '/api/demo.json');
 }
 
