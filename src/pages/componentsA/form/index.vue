@@ -349,10 +349,10 @@ function actionSheetCallback(index: number) {
     uni.hideKeyboard();
     model.sex = actionSheetList.value[index].text;
 }
-		// checkbox选择发生变化
-		function checkboxGroupChange(e) {
-			model.likeFruit = e;
-		}
+// checkbox选择发生变化
+function checkboxGroupChange(e) {
+    model.likeFruit = e;
+}
 // 勾选版权协议
 function checkboxChange(e: { value: boolean }) {
     model.agreement = e.value;

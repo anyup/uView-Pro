@@ -1,17 +1,17 @@
 export default [
-    // {
-    //     groupName: '网络',
-    //     groupName_en: 'Network',
-    //     icon: 'color',
-    //     list: [
-    //         {
-    //             path: 'http',
-    //             icon: 'http',
-    //             title: 'Http 请求',
-    //             title_en: 'Http'
-    //         }
-    //     ]
-    // },
+    {
+        groupName: '网络',
+        groupName_en: 'Network',
+        icon: 'color',
+        list: [
+            {
+                path: 'http',
+                icon: 'http',
+                title: 'Http 请求',
+                title_en: 'Http'
+            }
+        ]
+    },
     // {
     // 	groupName: '全局变量',
     // 	groupName_en: 'Global variable',
