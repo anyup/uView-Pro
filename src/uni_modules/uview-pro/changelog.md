@@ -1,3 +1,23 @@
+## 0.0.19（2025-09-04）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- include uview-pro changelog.md in release commit ([18d902d](https://github.com/anyup/uView-Pro/commit/18d902db2bba4f8f574d7b3b72be218747525bb9))
+
+### 📝 Documentation | 文档
+
+- update uview pro changelog ([31261db](https://github.com/anyup/uView-Pro/commit/31261dbd6b17aea8126a43def1912324b782096e))
+
+### ♻️ Code Refactoring | 代码重构
+
+- 移除 uni-http 模块 ([5f21735](https://github.com/anyup/uView-Pro/commit/5f2173503cc904fb0a7fa2abd3ed3b9dbe09aeb2))
+
+### ✨ Features | 新功能
+
+- 新增http请求模块并实现插件化 ([31c6f88](https://github.com/anyup/uView-Pro/commit/31c6f880d12e586d445faddcc1a3910fda9926bc))
+- 增强 toast 工具函数的灵活性 ([2232054](https://github.com/anyup/uView-Pro/commit/22320540acee36c6c11688387431a4ddba93520f))
+- 添加 HTTP 请求拦截器和配置示例代码 ([aba7cf9](https://github.com/anyup/uView-Pro/commit/aba7cf97ed2424432da51be1841aa17a5a2d7932))
+
 ## 0.0.18（2025-09-03）
 
 ### 🚀 Chore | 构建/工程依赖/工具
