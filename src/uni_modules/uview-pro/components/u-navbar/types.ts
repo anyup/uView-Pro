@@ -94,7 +94,14 @@ export const NavbarProps = {
     customBack: {
         type: Function as PropType<() => void>,
         default: null
-    }
+    },
+	/**
+	 * 是否需要状态栏
+	 */
+	statusBar:{
+		type:Boolean,
+		default:true
+	},
 };
 
 /**
