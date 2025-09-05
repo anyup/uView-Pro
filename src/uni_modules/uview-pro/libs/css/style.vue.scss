@@ -17,11 +17,13 @@ page {
 /* end-icon图标外层套一个view，让其达到更好的垂直居中的效果--end */
 
 /* start--iPhoneX底部安全区定义--start */
-.safe-area-inset-bottom {
-  padding-bottom: 0;  
-  padding-bottom: constant(safe-area-inset-bottom);  
-  padding-bottom: env(safe-area-inset-bottom);  
-} 
+@each $d in top, right, bottom, left {
+    .safe-area-inset-#{$d} {
+        padding-#{$d}: 0;
+        padding-#{$d}: constant(safe-area-inset-#{$d});
+        padding-#{$d}: env(safe-area-inset-#{$d});
+    }
+}
 /* end-iPhoneX底部安全区定义--end */
 
 /* start--各种hover点击反馈相关的类名-start */
@@ -61,7 +63,7 @@ page {
 .u-line-2, .u-line-3, .u-line-4, .u-line-5 {
     overflow: hidden;
 	word-break: break-all;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
     display: -webkit-box; // 弹性伸缩盒
     -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
 }
@@ -142,9 +144,9 @@ page {
 
 /* start--高斯模糊tabbar底部处理--start */
 .u-blur-effect-inset {
-	width: 750rpx;  
-	height: var(--window-bottom);   
-	background-color: #FFFFFF;  
+	width: 750rpx;
+	height: var(--window-bottom);
+	background-color: #FFFFFF;
 }
 /* end--高斯模糊tabbar底部处理--end */
 
