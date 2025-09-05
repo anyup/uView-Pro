@@ -17,10 +17,12 @@ page {
 /* end-icon图标外层套一个view，让其达到更好的垂直居中的效果--end */
 
 /* start--iPhoneX底部安全区定义--start */
-.safe-area-inset-bottom {
-    padding-bottom: 0;
-    padding-bottom: constant(safe-area-inset-bottom);
-    padding-bottom: env(safe-area-inset-bottom);
+@each $d in top, right, bottom, left {
+    .safe-area-inset-#{$d} {
+        padding-#{$d}: 0;
+        padding-#{$d}: constant(safe-area-inset-#{$d});
+        padding-#{$d}: env(safe-area-inset-#{$d});
+    }
 }
 /* end-iPhoneX底部安全区定义--end */
 
