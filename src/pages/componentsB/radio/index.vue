@@ -53,6 +53,7 @@
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
+import type { Shape } from '@/uni_modules/uview-pro/types/global';
 import { ref } from 'vue';
 
 const list = [
@@ -79,7 +80,7 @@ const list = [
 ];
 const disabled = ref(false);
 const result = ref('荔枝');
-const shape = ref('circle');
+const shape = ref<Shape>('circle');
 const value = ref('荔枝');
 const activeColor = ref('#2979ff');
 const size = ref(34);

@@ -38,47 +38,44 @@
 	</view>
 </template>
 
-<script>
-	import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() {
-			return {
-				percent: 50,
-				mode: 'line',
-				activeColor: '#19be6b',
-				striped: false,
-				stripedActive: false,
-				current: 0,
-			}
-		},
-		methods: {
-			modeChange(index) {
-				this.current = index;
-				this.mode = index == 0 ? 'line' : 'circle';
-			},
-			calcChange(index) {
-				this.percent = index == 0 ? (this.percent - 30) : (this.percent + 30);
-				if(this.percent > 100) this.percent = 100;
-				if(this.percent < 0) this.percent = 0;
-			},
-			styleChange(index) {
-				this.activeColor = index == 0 ? $u.color['error'] : '#19be6b';
-				if(index == 0) {
-					this.mode = 'line';
-					this.current = 0;
-				}
-			},
-			stripedChange(index) {
-				this.striped = index == 0 ? true : false;
-				this.stripedActive = this.striped;
-				if(index == 0) {
-					this.mode = 'line';
-					this.current = 0;
-				}
-			},
-			
-		}
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { $u } from '@/uni_modules/uview-pro';
+
+const percent = ref(50);
+const mode = ref('line');
+const activeColor = ref('#19be6b');
+const striped = ref(false);
+const stripedActive = ref(false);
+const current = ref(0);
+
+function modeChange(index: number) {
+	current.value = index;
+	mode.value = index === 0 ? 'line' : 'circle';
+}
+
+function calcChange(index: number) {
+	percent.value = index === 0 ? (percent.value - 30) : (percent.value + 30);
+	if (percent.value > 100) percent.value = 100;
+	if (percent.value < 0) percent.value = 0;
+}
+
+function styleChange(index: number) {
+	activeColor.value = index === 0 ? $u.color['error'] : '#19be6b';
+	if (index === 0) {
+		mode.value = 'line';
+		current.value = 0;
 	}
+}
+
+function stripedChange(index: number) {
+	striped.value = index === 0;
+	stripedActive.value = striped.value;
+	if (index === 0) {
+		mode.value = 'line';
+		current.value = 0;
+	}
+}
 </script>
 
 <style lang="scss" scoped>

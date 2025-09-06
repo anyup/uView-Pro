@@ -28,11 +28,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">每个栅格占用栏数(演示共3个栅格)</view>
-				<u-subsection :current="2" :list="[1, 2, 3, 4]" @change="spanChange"></u-subsection>
+				<u-subsection :current="2" :list="['1', '2', '3', '4', '5']" @change="spanChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">分栏偏移</view>
-				<u-subsection :list="[0, 1, 2, 3]" @change="offsetChange"></u-subsection>
+				<u-subsection :list="['0', '1', '2', '3', '4']" @change="offsetChange"></u-subsection>
 			</view>
 			<!-- #ifndef MP -->
 			<view class="u-config-item">
@@ -44,75 +44,75 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				span: 3,
-				offset: 0,
-				justify: 'start'
-			}
-		},
-		methods: {
-			click() {
-				console.log('col click');
-			},
-			rowClick() {
-				console.log('row click');
-			},
-			spanChange(e) {
-				switch (e) {
-					case 0:
-						this.span = 1;
-						break;
-					case 1:
-						this.span = 2;
-						break;
-					case 2:
-						this.span = 3;
-						break;
-					case 3:
-						this.span = 4;
-						break;
-					case 4:
-						this.span = 5;
-						break;
-				}
-			},
-			offsetChange(e) {
-				switch (e) {
-					case 0:
-						this.offset = 0;
-						break;
-					case 1:
-						this.offset = 1;
-						break;
-					case 2:
-						this.offset = 2;
-						break;
-					case 3:
-						this.offset = 3;
-						break;
-				}
-			},
-			justifyChange(e) {
-				switch (e) {
-					case 0:
-						this.justify = 'start';
-						break;
-					case 1:
-						this.justify = 'end';
-						break;
-					case 2:
-						this.justify = 'around';
-						break;
-					case 3:
-						this.justify = 'between';
-						break;
-				}
-			},
-		}
+<script lang="ts" setup>
+import { ref } from 'vue';
+import type { RowJustify } from '@/uni_modules/uview-pro/types/global';
+
+const span = ref(3);
+const offset = ref(0);
+const justify = ref<RowJustify>('start');
+
+function click() {
+	console.log('col click');
+}
+
+function rowClick() {
+	console.log('row click');
+}
+
+function spanChange(e: number) {
+	switch (e) {
+		case 0:
+			span.value = 1;
+			break;
+		case 1:
+			span.value = 2;
+			break;
+		case 2:
+			span.value = 3;
+			break;
+		case 3:
+			span.value = 4;
+			break;
+		case 4:
+			span.value = 5;
+			break;
 	}
+}
+
+function offsetChange(e: number) {
+	switch (e) {
+		case 0:
+			offset.value = 0;
+			break;
+		case 1:
+			offset.value = 1;
+			break;
+		case 2:
+			offset.value = 2;
+			break;
+		case 3:
+			offset.value = 3;
+			break;
+	}
+}
+
+function justifyChange(e: number) {
+	switch (e) {
+		case 0:
+			justify.value = 'start';
+			break;
+		case 1:
+			justify.value = 'end';
+			break;
+		case 2:
+			justify.value = 'around';
+			break;
+		case 3:
+			justify.value = 'between';
+			break;
+	}
+}
 </script>
 
 <style scoped lang="scss">

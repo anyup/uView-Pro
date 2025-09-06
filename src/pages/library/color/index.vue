@@ -21,27 +21,26 @@
     </view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            color: $u.color['primary']
-        };
-    },
-    methods: {
-        modeChange(index) {
-            let colorName = index == 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning' : 'info';
-            this.color = $u.color[colorName];
-        },
-        colorChange(index) {
-            this.color = index == 0 ? '#303133' : index == 1 ? '#606266' : index == 2 ? '#909399' : index == 3 ? '#c0c4cc' : '#e4e7ed';
-        },
-        getResult() {
-            this.result = $u.trim(this.string, this.pos);
-        }
-    }
-};
+
+const color = ref($u.color['primary']);
+
+function modeChange(index: number): void {
+    let colorName = index === 0 ? 'primary' : 
+                                   index === 1 ? 'success' : 
+                                   index === 2 ? 'error' : 
+                                   index === 3 ? 'warning' : 'info';
+    color.value = $u.color[colorName];
+}
+
+function colorChange(index: number): void {
+    color.value = index === 0 ? '#303133' : 
+                 index === 1 ? '#606266' : 
+                 index === 2 ? '#909399' : 
+                 index === 3 ? '#c0c4cc' : '#e4e7ed';
+}
 </script>
 
 <style lang="scss" scoped></style>

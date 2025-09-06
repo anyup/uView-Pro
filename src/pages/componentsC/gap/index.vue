@@ -30,31 +30,28 @@
 	</view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-	data() {
-		return {
-			height: 30,
-			bgColor: $u.color.bgColor,
-			marginTop: 30,
-			marginBottom: 30
-		};
-	},
-	methods: {
-		bgColorChange(index) {
-			let color = index == 0 ? 'default' : index == 1 ? 'primary' : index == 2 ? 'error' : index == 3 ? 'warning' : 'success';
-			this.bgColor = color == 'default' ? $u.color['bgColor'] : $u.color[color];
-		},
-		heightChange(index) {
-			this.height = index == 0 ? 30 : index == 1 ? 50 : 70;
-		},
-		marginChange(index) {
-			this.marginTop = ['30', '50', '70'][index];
-			this.marginBottom = this.marginTop;
-		}
-	}
-};
+
+const height = ref(30);
+const bgColor = ref($u.color.bgColor);
+const marginTop = ref<number | string>(30);
+const marginBottom = ref<number | string>(30);
+
+function bgColorChange(index: number) {
+	const color = index === 0 ? 'default' : index === 1 ? 'primary' : index === 2 ? 'error' : index === 3 ? 'warning' : 'success';
+	bgColor.value = color === 'default' ? $u.color['bgColor'] : $u.color[color];
+}
+
+function heightChange(index: number) {
+	height.value = index === 0 ? 30 : index === 1 ? 50 : 70;
+}
+
+function marginChange(index: number) {
+	marginTop.value = ['30', '50', '70'][index];
+	marginBottom.value = marginTop.value;
+}
 </script>
 
 <style lang="scss" scoped>

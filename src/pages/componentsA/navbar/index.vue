@@ -28,7 +28,7 @@
 					<u-icon name="arrow-down-fill" color="#ffffff" size="22"></u-icon>
 				</view>
 			</view>
-			<template #right v-if="slotRight">
+			<template #right v-if="rightSlot">
 				<view class="navbar-right">
 					<view class="message-box right-item">
 						<u-icon name="chat" size="38"></u-icon>

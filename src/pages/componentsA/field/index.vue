@@ -56,6 +56,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import type { InputType } from '@/uni_modules/uview-pro/types/global';
 
 const mobile = ref('');
 const code = ref('');
@@ -65,7 +66,7 @@ const arrow = ref(false);
 const showBtn = ref(false);
 const icon1 = ref('');
 const icon2 = ref('');
-const type = ref('text');
+const type = ref<InputType>('text');
 
 function showBtnChange(index: number) {
 	showBtn.value = index === 0;

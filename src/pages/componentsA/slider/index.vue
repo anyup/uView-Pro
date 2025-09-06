@@ -60,14 +60,12 @@ import { computed, ref } from 'vue'
 
 const value = ref(30);
 const useSlot = ref(false);
-const step = ref(1);
+const step = ref<string | number>(1);
 const activeColor = ref('#2979ff');
 const height = ref(6);
 const blockWidth = ref(30);
 const min = ref(0);
 const max = ref(100);
-
-const current = computed(() => show.value ? 0 : 1);
 
 function typeChange(index: number) {
 	let type = ['primary', 'warning', 'error', 'success'];

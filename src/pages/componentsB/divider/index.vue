@@ -34,12 +34,13 @@
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { ref } from 'vue';
+import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
 
 const text = ref('没有更多了');
 const bgColor = ref('#fafafa');
 const halfWidth = ref(150);
 const borderColor = ref('#dcdfe6');
-const type = ref('primary');
+const type = ref<ThemeType>('primary');
 const color = ref('#909399');
 const fontSize = ref(26);
 

@@ -47,6 +47,7 @@ const chooseAvatar = () => {
 }
 
 function preAvatar(path) {
+	// @ts-ignore
 	wx.previewImage({
 		current: '', // 当前显示图片的 http 链接
 		urls: [path] // 需要预览的图片 http 链接列表

@@ -4,7 +4,8 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-switch v-model="checked" :loading="loading" 
-					:size="size" @change="change" 
+					:size="size"
+					@change="change" 
 					:active-color="activeColor"
 					:disabled="disabled"
 					:activeValue="100"
@@ -44,71 +45,68 @@
 	</view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() {
-			return {
-				checked: false,
-				activeColor: '#2979ff',
-				size: 50,
-				loading: false,
-				disabled: false
-			}
-		},
-		methods: {
-			modelChange(index) {
-				// 两个!!可以把0变成false，1变成true
-				this.checked = !!index;
-			},
-			colorChange(index) {
-				let color = index == 0 ? 'primary' : index == 1 ? 'error' : index == 2 ? 'warning' : 'success';
-				this.activeColor = $u.color[color];
-			},
-			sizeChange(index) {
-				this.size = index == 0 ? '40' : index == 1 ? '60' : '80';
-			},
-			loadingChange(index) {
-				this.loading = !!index;
-			},
-			disabledChange(index) {
-				this.disabled = index == 0 ? true : false;
-			},
-			asyncChange(index) {
-				if(this.checked && index == 1) {
-					$u.toast('请先关闭选择器');
-					return;
-				}
-				if(!this.checked && index == 0) {
-					$u.toast('请先打开选择器');
-					return;
-				}
-				let str = index == 0 ? '是否要关闭？' : '是否要打开？';
-				this.loading = true;
-				let oldStatus = this.checked;
-				this.checked = true;
-				uni.showModal({
-					title: '提示',
-					content: str,
-					complete: (res) => {
-						this.loading = false;
-						if(res.confirm) {
-							if(oldStatus) this.checked = false;
-							else this.checked = true;
-						} else {
-							if(!oldStatus) this.checked = false;
-							else this.checked = true;
-						}
-					}
-				})
-			},
-			change(value) {
-				// console.log(value);
+
+const checked = ref(false);
+const activeColor = ref('#2979ff');
+const size = ref<number | string>(50);
+const loading = ref(false);
+const disabled = ref(false);
+
+function modelChange(index: number) {
+	// 两个!!可以把0变成false，1变成true
+	checked.value = !!index;
+}
+
+function colorChange(index: number) {
+	const color = index === 0 ? 'primary' : index === 1 ? 'error' : index === 2 ? 'warning' : 'success';
+	activeColor.value = $u.color[color];
+}
+
+function sizeChange(index: number) {
+	size.value = index === 0 ? '40' : index === 1 ? '60' : '80';
+}
+
+function loadingChange(index: number) {
+	loading.value = !!index;
+}
+
+function disabledChange(index: number) {
+	disabled.value = index === 0 ? true : false;
+}
+
+function asyncChange(index: number) {
+	if(checked.value && index === 1) {
+		$u.toast('请先关闭选择器');
+		return;
+	}
+	if(!checked.value && index === 0) {
+		$u.toast('请先打开选择器');
+		return;
+	}
+	const str = index === 0 ? '是否要关闭？' : '是否要打开？';
+	loading.value = true;
+	const oldStatus = checked.value;
+	checked.value = true;
+	uni.showModal({
+		title: '提示',
+		content: str,
+		complete: (res: { confirm: boolean }) => {
+			loading.value = false;
+			if(res.confirm) {
+				if(oldStatus) checked.value = false;
+				else checked.value = true;
+			} else {
+				if(!oldStatus) checked.value = false;
+				else checked.value = true;
 			}
 		}
-	}
-</script>
+	});
+}
 
-<style scoped lang="scss">
-	.u-demo {}
-</style>
+function change(value: any) {
+	// console.log(value);
+}
+</script>

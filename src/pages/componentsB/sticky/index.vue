@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-toast ref="uToast"></u-toast>
+				<u-toast ref="uToastRef"></u-toast>
 				<u-sticky :offset-top="offsetTop" :enable="enable" @fixed="fixed" @unfixed="unfixed">
 					<view class="sticky">
 						宝剑锋从磨砺出,梅花香自苦寒来
@@ -17,7 +17,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">吸顶高度</view>
-				<u-subsection :list="[0, 120, 200]" @change="offsetTopChange"></u-subsection>
+				<u-subsection :list="['0', '120', '200']" @change="offsetTopChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
@@ -27,39 +27,38 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				offsetTop: 0,
-				enable: true,
-			}
-		},
-		methods: {
-			offsetTopChange(index) {
-				this.offsetTop = index == 0 ? 0 : index == 1 ? 120 : 200;
-				uni.pageScrollTo({
-					scrollTop: 0,
-					duration: 0
-				})
-			},
-			enableChange(index) {
-				this.enable = index == 0 ? true : false;
-			},
-			fixed() {
-				this.$refs.uToast.show({
-					type: 'warning',
-					title: '触发吸顶'
-				})
-			},
-			unfixed() {
-				this.$refs.uToast.show({
-					type: 'success',
-					title: '取消吸顶'
-				})
-			}
-		}
-	}
+<script lang="ts" setup>
+import { ref } from 'vue';
+
+const offsetTop = ref(0);
+const enable = ref(true);
+const uToastRef = ref(null);
+
+function offsetTopChange(index: number) {
+	offsetTop.value = index === 0 ? 0 : index === 1 ? 120 : 200;
+	uni.pageScrollTo({
+		scrollTop: 0,
+		duration: 0
+	});
+}
+
+function enableChange(index: number) {
+	enable.value = index === 0 ? true : false;
+}
+
+function fixed() {
+	uToastRef.value.show({
+		type: 'warning',
+		title: '触发吸顶'
+	});
+}
+
+function unfixed() {
+	uToastRef.value.show({
+		type: 'success',
+		title: '取消吸顶'
+	});
+}
 </script>
 
 <style lang="scss" scoped>

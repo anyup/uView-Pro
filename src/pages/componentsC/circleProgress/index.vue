@@ -20,22 +20,16 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				percent: 33
-			}
-		},
-		onLoad() {
-			setTimeout(() => {
-				this.percent = 50;
-			}, 1500);
-		},
-		methods: {
-			
-		}
-	}
+<script lang="ts" setup>
+import { ref, onMounted } from 'vue';
+
+const percent = ref(33);
+
+onMounted(() => {
+	setTimeout(() => {
+		percent.value = 50;
+	}, 1500);
+});
 </script>
 
 <style lang="scss" scoped>

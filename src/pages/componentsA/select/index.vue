@@ -24,11 +24,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
+import type { SelectMode } from '@/uni_modules/uview-pro/types/global';
 
 const show = ref(false);
 const result = ref('尚未选择');
 const defaultValue = ref([3]);
-const mode = ref('single-column');
+const mode = ref<SelectMode>('single-column');
 const list = ref([]);
 const list1 = [
     {
@@ -163,7 +164,7 @@ function statusChange(index: number) {
 }
 
 function modeChange(index: number) {
-	let type = ['single-column', 'mutil-column', 'mutil-column-auto'];
+	let type: SelectMode[] = ['single-column', 'mutil-column', 'mutil-column-auto'];
 	mode.value = type[index];
 	list.value = index == 0 ? list1 : index == 1 ? list2 : list3;
 	show.value = true;

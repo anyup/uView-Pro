@@ -30,40 +30,44 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				steps: [{
-					name: '下单'
-				}, {
-					name: '出库'
-				}, {
-					name: '运输'
-				}, {
-					name: '签收'
-				}, ],
-				current: 0,
-				icon: 'checkmark',
-				mode: 'number',
-				direction: 'row'
-			}
-		},
-		methods: {
-			modeChange(index) {
-				this.mode = index == 0 ? 'number' : 'dot';
-			},
-			stepChange(index) {
-				this.current = [0, 1, 2, 3][index];
-			},
-			iconChange(index) {
-				this.icon = index == 0 ? 'checkmark' : 'map-fill';
-			},
-			directionChange(index) {
-				this.direction = index == 0 ? 'row' : 'column';
-			}
-		}
-	}
+<script lang="ts" setup>
+import { ref } from 'vue';
+import type { StepDirection, StepMode } from '@/uni_modules/uview-pro/types/global';
+
+const steps = ref([
+	{
+		name: '下单'
+	},
+	{
+		name: '出库'
+	},
+	{
+		name: '运输'
+	},
+	{
+		name: '签收'
+	},
+]);
+const current = ref(0);
+const icon = ref('checkmark');
+const mode = ref<StepMode>('number');
+const direction = ref<StepDirection>('row');
+
+function modeChange(index: number) {
+	mode.value = index === 0 ? 'number' : 'dot';
+}
+
+function stepChange(index: number) {
+	current.value = [0, 1, 2, 3][index];
+}
+
+function iconChange(index: number) {
+	icon.value = index === 0 ? 'checkmark' : 'map-fill';
+}
+
+function directionChange(index: number) {
+	direction.value = index === 0 ? 'row' : 'column';
+}
 </script>
 
 <style lang="scss" scoped>
