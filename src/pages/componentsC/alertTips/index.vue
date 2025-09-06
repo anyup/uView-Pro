@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-toast ref="uToast"></u-toast>
+				<u-toast ref="uToastRef"></u-toast>
 				<u-alert-tips @close="close" :closeAble="closeAble" :show="show" @click="click"
 				:type="type" :title="title" :description="description" :showIcon="showIcon"></u-alert-tips>
 			</view>
@@ -32,51 +32,52 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				title: '大漠孤烟直，长河落日圆',
-				description: "月落乌啼霜满天，江枫渔火对愁眠。姑苏城外寒山寺，夜半钟声到客船。飞流直下三千尺，疑是银河落九天！",
-				show: true,
-				closeAble: false,
-				showIcon: false,
-				type: 'warning',
-			}
-		},
-		computed: {
-			current() {
-				return this.show ? 0 : 1;
-			}
-		},
-		methods: {
-			showIconChange(index) {
-				this.showIcon = index == 0 ? true : false;
-			},
-			showChange(index) {
-				this.show = index == 0 ? true : false;
-			},
-			closeAbleChange(index) {
-				this.closeAble = index == 0 ? true : false;
-			},
-			typeChange(index) {
-				this.type = index == 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning'  : 'info';
-			},
-			close() {
-				this.show = false;
-				this.$refs.uToast.show({
-					type: 'warning',
-					title: '点击关闭按钮'
-				})
-			},
-			click() {
-				this.$refs.uToast.show({
-					type: 'warning',
-					title: '点击内容'
-				})
-			},
-		}
-	}
+<script lang="ts" setup>
+import { ref, computed } from 'vue';
+import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
+
+const title = ref('大漠孤烟直，长河落日圆');
+const description = ref("月落乌啼霜满天，江枫渔火对愁眠。姑苏城外寒山寺，夜半钟声到客船。飞流直下三千尺，疑是银河落九天！");
+const show = ref(true);
+const closeAble = ref(false);
+const showIcon = ref(false);
+const type = ref<ThemeType>('warning');
+const uToastRef = ref(null);
+
+const current = computed<number>(() => {
+	return show.value ? 0 : 1;
+});
+
+function showIconChange(index: number) {
+	showIcon.value = index === 0;
+}
+
+function showChange(index: number) {
+	show.value = index === 0;
+}
+
+function closeAbleChange(index: number) {
+	closeAble.value = index === 0;
+}
+
+function typeChange(index: number) {
+	type.value = index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : 'info';
+}
+
+function close() {
+	show.value = false;
+	uToastRef.value?.show({
+		type: 'warning',
+		title: '点击关闭按钮'
+	});
+}
+
+function click() {
+	uToastRef.value?.show({
+		type: 'warning',
+		title: '点击内容'
+	});
+}
 </script>
 
 <style lang="scss" scoped>

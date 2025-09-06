@@ -39,55 +39,59 @@
     </view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
+import type { SwiperIndicatorPosition, SwiperMode } from '@/uni_modules/uview-pro/types/global';
 import { img1, img2, img3 } from "./image";
-export default {
-    data() {
-        return {
-            list: [
-                {
-                    image: img1,
-                    title: '昨夜星辰昨夜风，画楼西畔桂堂东'
-                },
-                {
-                    image: img2,
-                    title: '身无彩凤双飞翼，心有灵犀一点通'
-                },
-                {
-                    image: img3,
-                    title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-                }
-            ],
-            title: false,
-            mode: 'round',
-            indicatorPos: 'bottomCenter',
-            effect3d: false
-        };
+
+const uToastRef = ref(null);
+
+const list = ref([
+    {
+        image: img1,
+        title: '昨夜星辰昨夜风，画楼西畔桂堂东'
     },
-    methods: {
-        titleChange(index) {
-            this.title = index == 0 ? true : false;
-        },
-        modeChange(index) {
-            this.mode = index == 0 ? 'round' : index == 1 ? 'rect' : index == 2 ? 'number' : 'none';
-        },
-        indicatorPosChange(index) {
-            this.indicatorPos = index == 0 ? 'topLeft' : index == 1 ? 'topRight' : index == 2 ? 'bottomLeft' : index == 3 ? 'bottomCenter' : 'bottomRight';
-        },
-        effect3dChange(index) {
-            this.effect3d = index == 0 ? true : false;
-        },
-        click(index) {
-            this.$refs.uToast.show({
-                title: `点击了第${index + 1}张图片`,
-                type: 'success'
-            });
-        },
-        change(index) {
-            // console.log(index);
-        }
+    {
+        image: img2,
+        title: '身无彩凤双飞翼，心有灵犀一点通'
+    },
+    {
+        image: img3,
+        title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
     }
-};
+]);
+
+const title = ref(false);
+const mode = ref<SwiperMode>('round');
+const indicatorPos = ref<SwiperIndicatorPosition>('bottomCenter');
+const effect3d = ref(false);
+
+function titleChange(index: number) {
+    title.value = index === 0 ? true : false;
+}
+
+function modeChange(index: number) {
+    mode.value = index === 0 ? 'round' : index === 1 ? 'rect' : index === 2 ? 'number' : 'none';
+}
+
+function indicatorPosChange(index: number) {
+    indicatorPos.value = index === 0 ? 'topLeft' : index === 1 ? 'topRight' : index === 2 ? 'bottomLeft' : index === 3 ? 'bottomCenter' : 'bottomRight';
+}
+
+function effect3dChange(index: number) {
+    effect3d.value = index === 0 ? true : false;
+}
+
+function click(index: number) {
+    uToastRef.value?.show({
+        title: `点击了第${index + 1}张图片`,
+        type: 'success'
+    });
+}
+
+function change(index: number) {
+    // console.log(index);
+}
 </script>
 
 <style lang="scss" scoped>

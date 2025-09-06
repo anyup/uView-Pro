@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-toast ref="uToast"></u-toast>
+				<u-toast ref="ToastRef"></u-toast>
 				<u-grid :col="col" @click="click" v-if="!isSwiper" :border="border">
 					<u-grid-item name="item1" :index="0" @click="itemClick">
 						<u-badge count="9" :offset="[col == 3 ? 20 : 14, col == 3 ? 30 : 20]"></u-badge>
@@ -104,42 +104,44 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				list: ['integral', 'kefu-ermai', 'coupon', 'gift', 'scan', 'pause-circle', 'wifi', 'email', 'list'],
-				isSwiper: false,
-				current: 0,
-				border: true,
-				col: 3
-			};
-		},
-		methods: {
-			isSwiperChange(index) {
-				this.isSwiper = index == 0 ? true : false;
-			},
-			borderChange(index) {
-				this.border = index == 0 ? true : false;
-			},
-			colChange(index) {
-				this.col = index == 0 ? 3 : 4;
-			},
-			click(index) {
-				this.$refs.uToast.show({
-					title: `点击了第${index + 1}宫格`,
-					type: 'warning'
-				})
-			},
-			change(e) {
-				this.current = e.detail.current;
-			},
-			// 针对单个grid-item的事件
-			itemClick(index) {
-				// console.log(index);
-			}
-		}
-	};
+<script lang="ts" setup>
+import { ref } from 'vue';
+
+const ToastRef = ref(null);
+
+const list = ref(['integral', 'kefu-ermai', 'coupon', 'gift', 'scan', 'pause-circle', 'wifi', 'email', 'list']);
+const isSwiper = ref(false);
+const current = ref(0);
+const border = ref(true);
+const col = ref(3);
+
+function isSwiperChange(index: number) {
+	isSwiper.value = index === 0;
+}
+
+function borderChange(index: number) {
+	border.value = index === 0;
+}
+
+function colChange(index: number) {
+	col.value = index === 0 ? 3 : 4;
+}
+
+function click(index: number) {
+	ToastRef.value?.show({
+		title: `点击了第${index + 1}宫格`,
+		type: 'warning'
+	});
+}
+
+function change(e) {
+	current.value = e.detail.current;
+}
+
+// 针对单个grid-item的事件
+function itemClick(index: number) {
+	// console.log(index);
+}
 </script>
 
 <style scoped lang="scss">

@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-toast ref="uToast"></u-toast>
+				<u-toast ref="uToastRef"></u-toast>
 				<u-button @click="btnClick">唤起弹窗</u-button>
 				<u-popup border-radius="10" v-model="show" 
 					@close="close" @open="open" :mode="mode" 
@@ -46,47 +46,48 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				show: false,
-				mode: 'left',
-				mask: true, // 是否显示遮罩
-				closeable: true,
-				closeIconPos: 'top-right'
-			}
-		},
-		watch: {
-			show(n) {
-				// console.log(n);
-			}
-		},
-		methods: {
-			modeChange(index) {
-				this.mode = index == 0 ? 'top' : index == 1 ? 'bottom' : index == 2 ? 'left' : index == 3 ? 'right' : 'center';
-				this.show = true;
-			},
-			showChange(index) {
-				this.show = index == 0 ? true : false;
-			},
-			closeChange(index) {
-				this.closeable = !index;
-			},
-			closePosChange(index) {
-				this.closeIconPos = ['top-left', 'top-right', 'bottom-left', 'bottom-right'][index];
-			},
-			close() {
-				// console.log('close');
-			},
-			open() {
-				// console.log('open');
-			},
-			btnClick() {
-				this.show = true;
-			}
-		}
-	}
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
+import type { PopupMode, PopupCloseIconPos } from '@/uni_modules/uview-pro/types/global';
+
+const show = ref(false);
+const mode = ref<PopupMode>('left');
+const mask = ref(true); // 是否显示遮罩
+const closeable = ref(true);
+const closeIconPos = ref<PopupCloseIconPos>('top-right');
+
+watch(show, (newValue) => {
+	// console.log(newValue);
+});
+
+function modeChange(index: number) {
+	mode.value = index === 0 ? 'top' : index === 1 ? 'bottom' : index === 2 ? 'left' : index === 3 ? 'right' : 'center';
+	show.value = true;
+}
+
+function showChange(index: number) {
+	show.value = index === 0;
+}
+
+function closeChange(index: number) {
+	closeable.value = !index;
+}
+
+function closePosChange(index: number) {
+	closeIconPos.value = ['top-left', 'top-right', 'bottom-left', 'bottom-right'][index] as PopupCloseIconPos;
+}
+
+function close() {
+	// console.log('close');
+}
+
+function open() {
+	// console.log('open');
+}
+
+function btnClick() {
+	show.value = true;
+}
 </script>
 
 <style lang="scss" scoped>

@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-toast ref="uToast"></u-toast>
+				<u-toast ref="uToastRef"></u-toast>
 				<u-table :align="align" :borderColor="borderColor">
 					<u-tr class="u-tr">
 						<u-th class="u-th">姓名</u-th>
@@ -48,33 +48,33 @@
 	</view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() {
-			return {
-				mode: false,
-				borderColor: '#e4e7ed',
-				align: 'center',
-				index: 0,
-			}
-		},
-		methods: {
-			modeChange(index) {
-				// #ifdef MP-WEIXIN
-				return $u.toast('微信小程序暂不支持单元格合并')
-				// #endif
-				this.mode = index == 0 ? true : false;
-				this.key ++;
-			},
-			borderColorChange(index) {
-				this.borderColor = index == 0 ? '#e4e7ed' : index == 1 ? '#2979ff' : '#ff9900';
-			},
-			alignChange(index) {
-				this.align = index == 0 ? 'left' : index == 1 ? 'center' : 'right';
-			}
-		}
-	}
+import type { TextAlign } from '@/uni_modules/uview-pro/types/global';
+
+const mode = ref(false);
+const borderColor = ref('#e4e7ed');
+const align = ref<TextAlign>('center');
+const uToastRef = ref(null);
+
+function modeChange(index: number): void {
+	// #ifdef MP-WEIXIN
+	return $u.toast('微信小程序暂不支持单元格合并');
+	// #endif
+	mode.value = index == 0 ? true : false;
+	// 注意：原代码中有 this.key++，但在data中没有定义key属性
+	// 如果需要key属性，请添加 const key = ref<number>(0);
+}
+
+function borderColorChange(index: number) {
+	borderColor.value = index === 0 ? '#e4e7ed' : index === 1 ? '#2979ff' : '#ff9900';
+}
+
+// TODO 似乎没有效果
+function alignChange(index: number) {
+	align.value = index === 0 ? 'left' : index === 1 ? 'center' : 'right';
+}
 </script>
 
 <style lang="scss" scoped>

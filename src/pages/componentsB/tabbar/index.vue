@@ -40,90 +40,91 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				current: 0,
-				show: true,
-				bgColor: '#ffffff',
-				borderTop: true,
-				list: [{
-						iconPath: "home",
-						selectedIconPath: "home-fill",
-						text: '首页',
-						count: 2,
-						isDot: true,
-						customIcon: false,
-					},
-					{
-						iconPath: "photo",
-						selectedIconPath: "photo-fill",
-						text: '放映厅',
-						customIcon: false,
-					},
-					{
-						iconPath: "/static/uview/example/min_button.png",
-						selectedIconPath: "/static/uview/example/min_button_select.png",
-						text: '发布',
-						midButton: true,
-						customIcon: false,
-					},
-					{
-						iconPath: "play-right",
-						selectedIconPath: "play-right-fill",
-						text: '直播',
-						customIcon: false,
-					},
-					{
-						iconPath: "account",
-						selectedIconPath: "account-fill",
-						text: '我的',
-						count: 23,
-						isDot: false,
-						customIcon: false,
-					},
-				],
-				midButton: true,
-				inactiveColor: '#909399',
-				activeColor: '#5098FF'
-			}
-		},
-		methods: {
-			beforeSwitch(index) {
-				return true;
-			},
-			showChange(index) {
-				this.show = !index;
-			},
-			bgColorChange(index) {
-				if(index == 0) {
-					this.activeColor = '#5098FF';
-					this.inactiveColor = '#909399';
-				}
-				if(index == 1) {
-					this.activeColor = '#D0D0D0';
-					this.inactiveColor = '#5A5A5A';
-				}
-				this.bgColor = ['#ffffff', '#1f1f1d'][index];
-			},
-			borderTopChange(index) {
-				this.borderTop = !index;
-			},
-			badgeChange(index) {
-				if (index == 1) {
-					this.list[0].count = 0;
-					this.list[4].count = 0;
-				} else {
-					this.list[0].count = 2;
-					this.list[4].count = 23;
-				}
-			},
-			minButtonChange(index) {
-				this.midButton = !index;
-			}
-		}
+<script lang="ts" setup>
+import { ref } from 'vue';
+
+const current = ref(0);
+const show = ref(true);
+const bgColor = ref('#ffffff');
+const borderTop = ref(true);
+const list = ref([
+	{
+		iconPath: "home",
+		selectedIconPath: "home-fill",
+		text: '首页',
+		count: 2,
+		isDot: true,
+		customIcon: false,
+	},
+	{
+		iconPath: "photo",
+		selectedIconPath: "photo-fill",
+		text: '放映厅',
+		customIcon: false,
+	},
+	{
+		iconPath: "/static/uview/example/min_button.png",
+		selectedIconPath: "/static/uview/example/min_button_select.png",
+		text: '发布',
+		midButton: true,
+		customIcon: false,
+	},
+	{
+		iconPath: "play-right",
+		selectedIconPath: "play-right-fill",
+		text: '直播',
+		customIcon: false,
+	},
+	{
+		iconPath: "account",
+		selectedIconPath: "account-fill",
+		text: '我的',
+		count: 23,
+		isDot: false,
+		customIcon: false,
+	},
+]);
+const midButton = ref(true);
+const inactiveColor = ref('#909399');
+const activeColor = ref('#5098FF');
+
+function beforeSwitch(index: number): boolean {
+	return true;
+}
+
+function showChange(index: number) {
+	show.value = !index;
+}
+
+function bgColorChange(index: number) {
+	if(index === 0) {
+		activeColor.value = '#5098FF';
+		inactiveColor.value = '#909399';
 	}
+	if(index === 1) {
+		activeColor.value = '#D0D0D0';
+		inactiveColor.value = '#5A5A5A';
+	}
+	bgColor.value = ['#ffffff', '#1f1f1d'][index];
+}
+
+function borderTopChange(index: number) {
+	borderTop.value = !index;
+}
+
+function badgeChange(index: number) {
+	if (index === 1) {
+		list.value[0].count = 0;
+		list.value[4].count = 0;
+	} else {
+		list.value[0].count = 2;
+		list.value[4].count = 23;
+	}
+}
+
+function minButtonChange(index: number) {
+	midButton.value = !index;
+}
 </script>
 
 <style scoped lang="scss">

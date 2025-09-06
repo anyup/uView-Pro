@@ -40,46 +40,44 @@
     </view>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            show: false,
-            zoom: false,
-            content: '慈母手中线，游子身上衣',
-            contentSlot: false,
-            showTitle: true,
-            asyncClose: false
-        };
-    },
-    computed: {
-        current() {
-            return this.show ? 0 : 1;
-        }
-    },
-    methods: {
-        showChange(index) {
-            this.show = !index;
-        },
-        titleChange(index) {
-            this.showTitle = !index;
-            this.show = true;
-        },
-        contentChange(index) {
-            this.contentSlot = !index;
-            this.show = true;
-        },
-        asyncChange(index) {
-            this.show = true;
-            this.asyncClose = !index;
-        },
-        confirm() {
-            setTimeout(() => {
-                this.show = false;
-            }, 2000);
-        }
-    }
-};
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+
+const show = ref<boolean>(false);
+const zoom = ref<boolean>(false);
+const content = ref<string>('慈母手中线，游子身上衣');
+const contentSlot = ref<boolean>(false);
+const showTitle = ref<boolean>(true);
+const asyncClose = ref<boolean>(false);
+
+const current = computed(() => {
+    return show.value ? 0 : 1;
+});
+
+function showChange(index: number) {
+    show.value = !index;
+}
+
+function titleChange(index: number) {
+    showTitle.value = !index;
+    show.value = true;
+}
+
+function contentChange(index: number) {
+    contentSlot.value = !index;
+    show.value = true;
+}
+
+function asyncChange(index: number) {
+    show.value = true;
+    asyncClose.value = !index;
+}
+
+function confirm() {
+    setTimeout(() => {
+        show.value = false;
+    }, 2000);
+}
 </script>
 
 <style scoped lang="scss">

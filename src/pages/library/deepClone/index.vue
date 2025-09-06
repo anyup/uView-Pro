@@ -5,35 +5,33 @@
             <view class="u-demo-area">
                 <view class="u-no-demo-here"> 源对象为："{info: {name: 'mary'}}" </view>
                 <view class="u-demo-result-line">
-                    {{ reslutValue }}
+                    {{ resultValue }}
                 </view>
             </view>
         </view>
     </view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref, computed } from 'vue';
+import { onLoad } from '@dcloudio/uni-app'
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            obj: {
-                info: {
-                    name: 'mary'
-                }
-            },
-            result: ''
-        };
-    },
-    computed: {
-        reslutValue() {
-            return this.result ? JSON.stringify(this.result) : '';
-        }
-    },
-    onLoad() {
-        this.result = $u.deepClone(this.obj);
+
+const obj = ref({
+    info: {
+        name: 'mary'
     }
-};
+});
+const result = ref<typeof obj.value | null>();
+
+const resultValue = computed(() => {
+    return result.value ? JSON.stringify(result.value) : '';
+});
+
+onLoad(() => {
+    result.value = $u.deepClone(obj.value);
+});
+
 </script>
 
 <style lang="scss" scoped></style>

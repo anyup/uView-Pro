@@ -84,23 +84,19 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				mode: 'data',
-				slot: false
-			}
-		},
-		methods: {
-			modeChange(mode = 'data') {
-				this.mode = mode;
-			},
-			slotChange(index) {
-				this.slot = !index;
-			}
-		}
-	}
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const mode = ref('data');
+const slot = ref(false);
+
+function modeChange(m = 'data') {
+	mode.value = m;
+}
+
+function slotChange(index: number) {
+	slot.value = !index;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -110,7 +106,7 @@
 		align-items: center;
 		justify-content: center;
 	}
-	
+
 	.u-demo-area .u-empty {
 		padding-top: 0;
 	}

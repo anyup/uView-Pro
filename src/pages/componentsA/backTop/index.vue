@@ -35,67 +35,62 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				scrollTop: 0,
-				mode: 'circle',
-				bottom: 200,
-				right: 40,
-				top: 400,
-				icon: 'arrow-upward',
-				iconStyle: {
-					color: '#909399',
-					fontSize: '38rpx'
-				},
-				customStyle: {},
-				tips: ''
-			}
-		},
-		methods: {
-			modeChange(index) {
-				this.mode = !index ? 'circle' : 'square';
-			},
-			positionChange(index) {
-				if(index == 0) {
-					this.bottom = 200;
-					this.right = 40;
-				} else {
-					this.bottom = 400;
-					this.right = 80;
-				}
-			},
-			scrollTopChange(index) {
-				this.top = [200, 400, 600][index];
-			},
-			styleChange(index) {
-				if(index == 0) {
-					this.icon = 'arrow-up';
-					this.iconStyle = {
-						color: '#2979ff',
-						fontSize: '34rpx'
-					};
-					this.customStyle = {
-						backgroundColor: '#a0cfff',
-						color: '#2979ff'
-					};
-					this.tips = '顶部';
-				} else {
-					this.icon = 'arrow-upward';
-					this.iconStyle = {
-						color: '#909399',
-						fontSize: '38rpx'
-					};
-					this.customStyle = {};
-					this.tips = '';
-				}
-			}
-		},
-		onPageScroll(e) {
-			this.scrollTop = e.scrollTop;
+<script setup lang="ts">
+import { ref } from 'vue';
+import type { Shape } from '@/uni_modules/uview-pro/types/global'
+
+const scrollTop = ref(0);
+const mode = ref<Shape>('circle');
+const bottom = ref(200);
+const right = ref(40);
+const top = ref(400);
+const icon = ref('arrow-upward');
+const iconStyle = ref({
+	color: '#909399',
+	fontSize: '38rpx'
+});
+const customStyle = ref({});
+const tips = ref('');
+
+function modeChange(index: number) {
+	mode.value = !index ? 'circle' : 'square';
+}
+
+function positionChange(index: number) {
+	if(index === 0) {
+		bottom.value = 200;
+		right.value = 40;
+	} else {
+		bottom.value = 400;
+		right.value = 80;
+	}
+}
+
+function scrollTopChange(index: number) {
+	top.value = [200, 400, 600][index];
+}
+
+function styleChange(index: number) {
+	if(index === 0) {
+		icon.value = 'arrow-up';
+		iconStyle.value = {
+			color: '#2979ff',
+			fontSize: '34rpx'
+		};
+		customStyle.value = {
+			backgroundColor: '#a0cfff',
+			color: '#2979ff'
+		};
+		tips.value = '顶部';
+	} else {
+		icon.value = 'arrow-upward';
+		iconStyle.value = {
+			color: '#909399',
+			fontSize: '38rpx'
 		}
 	}
+}
+
 </script>
 
 <style lang="scss" scoped>

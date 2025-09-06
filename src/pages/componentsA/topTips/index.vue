@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-top-tips ref="uTips"></u-top-tips>
+				<u-top-tips ref="uTipsRef"></u-top-tips>
 				<text class="u-no-demo-here">点击参数配置查看效果</text>
 			</view>
 		</view>
@@ -23,35 +23,31 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				duration: 2000,
-				title: '忽如一夜春风来，千树万树梨花开',
-				type: 'primary'
-			}
-		},
-		methods: {
-			showTips() {
-				this.$refs.uTips.show({
-					duration: this.duration,
-					title: this.title,
-					type: this.type
-				});
-			},
-			typeChange(index) {
-				this.type = index == 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning'  : 'info';
-				this.showTips();
-			},
-			durationChange(index) {
-				this.duration = index == 0 ? 4000 : index == 1 ? 2000 : 500;
-				this.showTips();
-			}
-		}
-	}
-</script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import type { ThemeType } from '@/uni_modules/uview-pro/types/global'
 
-<style lang="scss" scoped>
-	.u-demo {}
-</style>
+const duration = ref(2000);
+const title = ref('忽如一夜春风来，千树万树梨花开');
+const type = ref<ThemeType>('primary');
+
+const uTipsRef = ref(null);
+
+function typeChange(index: number) {
+	type.value = index === 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning'  : 'info';
+	showTips();
+}
+
+function durationChange(index: number) {
+	duration.value = index === 0 ? 4000 : index == 1 ? 2000 : 500;
+	showTips();
+}
+
+function showTips() {
+	uTipsRef.value.show({
+		duration: duration.value,
+		title: title.value,
+		type: type.value
+	});
+}
+</script>

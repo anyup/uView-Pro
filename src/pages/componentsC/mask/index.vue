@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-toast ref="uToast"></u-toast>
+				<u-toast ref="uToastRef"></u-toast>
 				<view class="u-no-demo-here">
 					请点击弹出遮罩查看效果
 				</view>
@@ -38,39 +38,37 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				show: false,
-				zoom: true,
-				duration: 300,
-				content: false,
-			}
-		},
-		computed: {
-			current() {
-				return this.show ? 0 : 1;
-			}
-		},
-		methods: {
-			showChange(index) {
-				this.show = index == 0 ? true : false;
-			},
-			zoomChange(index) {
-				this.zoom = index == 0 ? true : false;
-				this.show = true;
-			},
-			durationChange(index) {
-				this.duration = index == 0 ? 100 : index == 1 ? 300 : 800;
-				this.show = true;
-			},
-			contentChange(index) {
-				this.content = index == 0 ? true : false;
-				this.show = true;
-			}
-		}
-	}
+<script lang="ts" setup>
+import { ref, computed } from 'vue';
+
+const uToastRef = ref();
+const show = ref(false);
+const zoom = ref(true);
+const duration = ref(300);
+const content = ref(false);
+
+const current = computed<number>(() => {
+	return show.value ? 0 : 1;
+});
+
+function showChange(index: number) {
+	show.value = index === 0;
+}
+
+function zoomChange(index: number) {
+	zoom.value = index === 0;
+	show.value = true;
+}
+
+function durationChange(index: number) {
+	duration.value = index === 0 ? 100 : index === 1 ? 300 : 800;
+	show.value = true;
+}
+
+function contentChange(index: number) {
+	content.value = index === 0;
+	show.value = true;
+}
 </script>
 
 <style scoped lang="scss">

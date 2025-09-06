@@ -40,58 +40,57 @@
     </view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            userInfo: {
-                avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
-                nickName: 'uView'
-            },
-            lists: ['君不见，黄河之水天上来，奔流到海不复回。君不见，高堂明镜悲白发，朝如青丝暮成雪。', '人生得意须尽欢，莫使金樽空对月', '天生我材必有用，千金散尽还复来'],
-            loading: true, // 是否显示骨架屏组件
-            animation: false,
-            elColor: '#e5e5e5',
-            borderRadius: 10
-        };
-    },
-    computed: {
-        current() {
-            return this.loading ? 0 : 1;
-        }
-    },
-    onLoad() {
-        this.getData();
-    },
-    methods: {
-        animationChange(index) {
-            this.animation = index == 0 ? true : false;
-            this.getData();
-        },
-        loadingChange(index) {
-            this.loading = index == 0 ? true : false;
-            if (index == 0) this.getData();
-        },
-        styleChange(index) {
-            if (index == 0) {
-                this.elColor = $u.color['primary'];
-                this.borderRadius = 14;
-            } else {
-                this.elColor = '#e5e5e5';
-                this.borderRadius = 10;
-            }
-            this.getData();
-        },
-        getData() {
-            this.loading = true;
-            // 通过延时模拟向后端请求数据，调隐藏骨架屏
-            setTimeout(() => {
-                this.loading = false;
-            }, 3000);
-        }
+import { onLoad } from '@dcloudio/uni-app'
+
+const userInfo = ref({
+    avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
+    nickName: 'uView'
+});
+const lists = ref(['君不见，黄河之水天上来，奔流到海不复回。君不见，高堂明镜悲白发，朝如青丝暮成雪。', '人生得意须尽欢，莫使金樽空对月', '天生我材必有用，千金散尽还复来']);
+const loading = ref(true); // 是否显示骨架屏组件
+const animation = ref(false);
+const elColor = ref('#e5e5e5');
+const borderRadius = ref(10);
+
+const current = computed(() => {
+    return loading.value ? 0 : 1;
+});
+
+onLoad(() => {
+    getData();
+});
+
+function animationChange(index: number) {
+    animation.value = index === 0 ? true : false;
+    getData();
+}
+
+function loadingChange(index: number) {
+    loading.value = index === 0 ? true : false;
+    if (index === 0) getData();
+}
+
+function styleChange(index: number) {
+    if (index === 0) {
+        elColor.value = $u.color['primary'];
+        borderRadius.value = 14;
+    } else {
+        elColor.value = '#e5e5e5';
+        borderRadius.value = 10;
     }
-};
+    getData();
+}
+
+function getData() {
+    loading.value = true;
+    // 通过延时模拟向后端请求数据，调隐藏骨架屏
+    setTimeout(() => {
+        loading.value = false;
+    }, 3000);
+}
 </script>
 
 <style lang="scss" scoped>

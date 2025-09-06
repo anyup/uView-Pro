@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { Shape, TagMode, TagSize, ThemeType } from '../../types/global';
+import type { TagShape, TagMode, TagSize, ThemeType } from '../../types/global';
 
 /**
  * TagProps tag props 类型定义
@@ -13,7 +13,7 @@ export const TagProps = {
     /** 尺寸，default/mini/medium */
     size: { type: String as PropType<TagSize>, default: 'default' },
     /** 形状，square为方形，circle为圆形 */
-    shape: { type: String as PropType<Shape>, default: 'square' },
+    shape: { type: String as PropType<TagShape>, default: 'square' },
     /** 显示的文本内容 */
     text: { type: [String, Number] as PropType<string | number>, default: '' },
     /** 文字颜色 */

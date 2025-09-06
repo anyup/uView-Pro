@@ -34,39 +34,34 @@
 	</view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() {
-			return {
-				title: '红豆生南国',
-				bold: true,
-				right: true,
-				color: $u.color['mainColor'],
-				showLine: true
-			}
-		},
-		methods: {
-			titleChange(index) {
-				if(index == 0) this.title = '春来发几枝';
-				else  this.title = '红豆生南国';
-			},
-			rightChange(index) {
-				this.right = index == 0 ? true : false;
-			},
-			boldChange(index) {
-				this.bold = index == 0 ? true : false;
-			},
-			colorChange(index) {
-				this.color = index == 0 ? $u.color['mainColor'] : $u.color['primary'];
-			},
-			showLineChange(index) {
-				this.showLine = !index;
-			}
-		}
-	}
-</script>
 
-<style lang="scss" scoped>
-	.u-demo {}
-</style>
+const title = ref('红豆生南国');
+const bold = ref(true);
+const right = ref(true);
+const color = ref($u.color['mainColor']);
+const showLine = ref(true);
+
+function titleChange(index: number) {
+	if (index === 0) title.value = '春来发几枝';
+	else title.value = '红豆生南国';
+}
+
+function rightChange(index: number) {
+	right.value = index === 0;
+}
+
+function boldChange(index: number) {
+	bold.value = index === 0;
+}
+
+function colorChange(index: number) {
+	color.value = index === 0 ? $u.color['mainColor'] : $u.color['primary'];
+}
+
+function showLineChange(index: number) {
+	showLine.value = !index;
+}
+</script>

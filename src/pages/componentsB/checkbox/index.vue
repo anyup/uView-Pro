@@ -4,16 +4,16 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<view class="">
-					<u-checkbox-group :size="size" :width="width" 
-						:wrap="wrap" :max="max" 
-						@change="checkboxGroupChange" 
-						:activeColor="activeColor"
+					<u-checkbox-group :size="size" :width="width"
+									  :wrap="wrap" :max="max"
+									  @change="checkboxGroupChange"
+									  :activeColor="activeColor"
 					>
 						<u-checkbox @change="checkboxChange"
-							v-model="item.checked" v-for="(item, index) in list" 
-							:key="index" :name="item.name"
-							:shape="shape"
-							:disabled="item.disabled"
+									v-model="item.checked" v-for="(item, index) in list"
+									:key="index" :name="item.name"
+									:shape="shape"
+									:disabled="item.disabled"
 						>{{item.name}}</u-checkbox>
 					</u-checkbox-group>
 				</view>
@@ -62,101 +62,94 @@
 	</view>
 </template>
 
-<script>
-import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() {
-			return {
-				list: [
-					{
-						name: '荔枝',
-						checked: false,
-						disabled: false
-					},
-					{
-						name: '香蕉',
-						checked: false,
-						disabled: false
-					},
-					{
-						name: '橙子',
-						checked: false,
-						disabled: false
-					},
-					{
-						name: '草莓',
-						checked: false,
-						disabled: false
-					}
-				],
-				disabled: false,
-				checked: true,
-				result: [],
-				shape: 'square',
-				max: 3,
-				activeColor: '#2979ff',
-				size: 34,
-				wrap: false,
-				width: 'auto'
-			}
-		},
-		computed: {
-			getResult() {
-				return this.result.join(",");
-			}
-		},
-		methods: {
-			shapeChange(index) {
-				this.shape = index == 0 ? 'square' : 'circle';
-			},
-			sizeChange(index) {
-				this.size = index == 0 ? 30 : index == 1 ? 40 : 50;
-			},
-			defaultChooseChange(index) {
-				// 特别处理对第一个选的选中的情况，涉及到提示语，选中状态等
-				// 实际开发中不会存在这些情况，只是演示用
-				if(index == 0) {
-					this.list[0].checked = true;
-					this.result = [this.list[0].name];
-				} else {
-					this.list[0].checked = false;
-					this.result.splice(this.result.indexOf(this.list[0].name), 1);
-				}
-			},
-			maxChange(index) {
-				this.max = index + 1;
-			},
-			disabledChange(index) {
-				if(index == 0) {
-					this.list[0].disabled = true;
-				} else {
-					this.list[0].disabled = false;
-				}
-			},
-			activeColorChange(index) {
-				// 如果用户尚未勾选任何checkbox，切换颜色时，默认选中第一个让用户看到效果，因为勾选了才有效果
-				if(!this.result.length) this.list[0].checked = true;
-				let theme = index == 0 ? 'primary' : index == 1 ? 'error' : index == 2 ? 'warning' : index == 3 ? 'success' : 'info';
-				this.activeColor = $u.color[theme];
-			},
-			// 选中某个复选框时，由checkbox时触发
-			checkboxChange(e) {
-				// console.log(e);
-			},
-			// 选中任一checkbox时，由checkbox-group触发
-			checkboxGroupChange(e) {
-				this.result = e;
-			},
-			widthChange(index) {
-				this.width = index == 0 ? '50%' : '';
-			},
-			wrapChange(index) {
-				this.wrap = !index;
-			}
-		}
-	}
-</script>
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import type { Shape } from '@/uni_modules/uview-pro/types/global'
+import { $u } from '@/uni_modules/uview-pro'
 
-<style scoped lang="scss">
-	.u-demo {}
-</style>
+const list = ref([
+	{
+		name: '荔枝',
+		checked: false,
+		disabled: false
+	},
+	{
+		name: '香蕉',
+		checked: false,
+		disabled: false
+	},
+	{
+		name: '橙子',
+		checked: false,
+		disabled: false
+	},
+	{
+		name: '草莓',
+		checked: false,
+		disabled: false
+	}
+]);
+const disabled = ref(false);
+const checked = ref(true);
+const result = ref([]);
+const shape = ref<Shape>('square');
+const max = ref(3);
+const activeColor = ref('primary');
+const size = ref(34);
+const wrap = ref(false);
+const width = ref('auto');
+
+const getResult = computed(() => result.value.join(","));
+
+function shapeChange(index: number) {
+	shape.value = index === 0 ? 'square' : 'circle';
+}
+
+function sizeChange(index: number) {
+	size.value = index === 0 ? 30 : index === 1 ? 40 : 50;
+}
+
+function defaultChooseChange(index: number) {
+	// 特别处理对第一个选的选中的情况，涉及到提示语，选中状态等
+	// 实际开发中不会存在这些情况，只是演示用
+	if(index === 0) {
+		list.value[0].checked = true;
+		result.value = [list.value[0].name];
+	} else {
+		list.value[0].checked = false;
+		result.value.splice(result.value.indexOf(list.value[0].name), 1);
+	}
+}
+
+function maxChange(index: number) {
+	max.value = index + 1;
+}
+
+function disabledChange(index: number) {
+	list.value[0].disabled = index === 0;
+}
+
+function activeColorChange(index: number) {
+	console.log(index, index)
+	// 如果用户尚未勾选任何checkbox，切换颜色时，默认选中第一个让用户看到效果，因为勾选了才有效果
+	if(!result.value.length) list.value[0].checked = true;
+	let theme = index === 0 ? 'primary' : index === 1 ? 'error' : index === 2 ? 'warning' : index === 3 ? 'success' : 'info';
+	activeColor.value = $u.color[theme];
+}
+
+function checkboxChange(e) {
+	console.log(e)
+}
+
+function checkboxGroupChange(e) {
+	console.log(e)
+}
+
+function widthChange(index: number) {
+	width.value = index === 0 ? '50%' : '';
+}
+
+function wrapChange(index: number) {
+	wrap.value = !index;
+}
+</script>

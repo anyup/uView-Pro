@@ -3,9 +3,9 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-toast ref="uToast"></u-toast>
+				<u-toast ref="uToastRef"></u-toast>
 				<u-count-down class="count-down-demo"  :timestamp="timestamp" :separator="separator" :showBorder="showBorder"
-				:separator-color="separatorColor" :showDays="showDays" :fontSize="fontSize" @change="change" ref="uCountDown"
+				:separator-color="separatorColor" :showDays="showDays" :fontSize="fontSize" @change="change" ref="uCountDownRef"
 				:border-color="borderColor" :color="color" @end="end" bg-color="rgb(250, 250, 250)"></u-count-down>
 			</view>
 		</view>
@@ -37,61 +37,67 @@
 	</view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-	data() {
-		return {
-			timestamp: 60,
-			separator: 'colon',
-			showBorder: false,
-			borderColor: '#303133',
-			color: '#303133',
-			showDays: false,
-			fontSize: 30,
-			separatorColor: '#303133',
-		};
-	},
-	methods: {
-		timestampChange(index) {
-			this.timestamp = index == 0 ? 60 : index == 1 ? 86400 : 983272;
-		},
-		separatorChange(index) {
-			this.separator = index == 0 ? 'colon' : 'zh';
-		},
-		styleChange(index) {
-			if(index == 0) {
-				this.showBorder = true;
-				this.borderColor = $u.color['primary'];
-				this.color = $u.color['primary'];
-				this.separatorColor = $u.color['primary'];
-			} else {
-				this.showBorder = false;
-				this.borderColor = '#303133';
-				this.color = '#303133';
-				this.separatorColor = '#303133';
-			}
-		},
-		showDaysChange(index) {
-			this.showDays = index == 0 ? true : false;
-		},
-		fontSizeChange(index) {
-			this.fontSize = index == 0 ? 26 : index == 1 ? 30 : 34;
-		},
-		end() {
-			this.$refs.uToast.show({
-				title: '倒计时结束',
-				type: 'warning'
-			})
-		},
-		change(timestamp) {
-			// console.log(timestamp);
-		},
-		getSeconds() {
-			// console.log(this.$refs.uCountDown.seconds);
-		}
+
+const uToastRef = ref(null);
+const uCountDownRef = ref(null);
+
+const timestamp = ref(60);
+const separator = ref('colon');
+const showBorder = ref(false);
+const borderColor = ref('#303133');
+const color = ref('#303133');
+const showDays = ref(false);
+const fontSize = ref(30);
+const separatorColor = ref('#303133');
+
+function timestampChange(index: number) {
+	timestamp.value = index === 0 ? 60 : index === 1 ? 86400 : 983272;
+}
+
+function separatorChange(index: number) {
+	separator.value = index === 0 ? 'colon' : 'zh';
+}
+
+function styleChange(index: number) {
+	if (index === 0) {
+		showBorder.value = true;
+		borderColor.value = $u.color['primary'];
+		color.value = $u.color['primary'];
+		separatorColor.value = $u.color['primary'];
+	} else {
+		showBorder.value = false;
+		borderColor.value = '#303133';
+		color.value = '#303133';
+		separatorColor.value = '#303133';
 	}
-};
+}
+
+function showDaysChange(index: number) {
+	showDays.value = index === 0;
+}
+
+function fontSizeChange(index: number) {
+	fontSize.value = index === 0 ? 26 : index === 1 ? 30 : 34;
+}
+
+function end() {
+	uToastRef.value?.show({
+		title: '倒计时结束',
+		type: 'warning'
+	});
+}
+
+function change(timestamp: number) {
+	// console.log(timestamp);
+}
+
+function getSeconds(): number | undefined {
+	// console.log(uCountDown.value?.seconds);
+	return uCountDownRef.value?.seconds;
+}
 </script>
 
 <style scoped lang="scss">

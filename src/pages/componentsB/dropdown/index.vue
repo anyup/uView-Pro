@@ -2,7 +2,7 @@
 	<view class="">
 		<view class="u-m-p-50">
 			<view class="u-demo-area u-flex u-row-center">
-				<u-dropdown :close-on-click-mask="mask" ref="uDropdown" :activeColor="activeColor" :borderBottom="borderBottom">
+				<u-dropdown :close-on-click-mask="mask" ref="uDropdownRef" :activeColor="activeColor" :borderBottom="borderBottom">
 					<u-dropdown-item @change="change" v-model="value1" title="距离" :options="options1"></u-dropdown-item>
 					<u-dropdown-item @change="change" v-model="value2" title="温度" :options="options2"></u-dropdown-item>
 					<u-dropdown-item title="属性">
@@ -33,124 +33,129 @@
 			<view class="u-config-item">
 				<view class="u-item-title">遮罩是否可点击</view>
 				<u-subsection :list="['是', '否']" @change="maskChange"></u-subsection>
-			</view> 
+			</view>
 		</view>
 	</view>
 </template>
 
-<script>
+<script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() { 
-			return {
-				value1: '',
-				value2: '2',
-				mask: true,
-				options1: [{
-						label: '默认排序',
-						value: 1,
-					},
-					{
-						label: '距离优先',
-						value: 2,
-					},
-					{
-						label: '价格优先',
-						value: 3,
-					}
-				],
-				options2: [{
-						label: '去冰',
-						value: 1,
-					},
-					{
-						label: '加冰',
-						value: 2,
-					},
-					{
-						label: '正常温',
-						value: 3,
-					},
-					{
-						label: '加热',
-						value: 4,
-					},
-					{
-						label: '极寒风暴',
-						value: 5,
-					}
-				],
-				list: [{
-						label: '琪花瑶草',
-						active: true,
-					},
-					{
-						label: '清词丽句',
-						active: false,
-					},
-					{
-						label: '宛转蛾眉',
-						active: false,
-					},
-					{
-						label: '煦色韶光',
-						active: false,
-					},
-					{
-						label: '鱼沉雁落',
-						active: false,
-					},
-					{
-						label: '章台杨柳',
-						active: false,
-					},
-					{
-						label: '霞光万道',
-						active: false,
-					}
-				],
-				borderBottom: false,
-				activeColor: '#2979ff'
-			}
-		},
-		methods: {
-			borderChange(index) {
-				this.borderBottom = !index;
-			},
-			activeColorChange(index) {
-				this.activeColor = ['#2979ff', '#ff9900', '#19be6b'][index];
-			},
-			change(index) {
-				$u.toast(`点击了第${index}项`);
-			},
-			closeDropdown() {
-				this.$refs.uDropdown.close();
-			},
-			tagClick(index) {
-				this.list[index].active = !this.list[index].active;
-			},
-			maskChange(index) {
-				this.mask = !index;
-			}
-		}
+import { ref } from 'vue';
+
+const value1 = ref('');
+const value2 = ref(2);
+const mask = ref(true);
+const options1 = ref([{
+		label: '默认排序',
+		value: 1,
+	},
+	{
+		label: '距离优先',
+		value: 2,
+	},
+	{
+		label: '价格优先',
+		value: 3,
 	}
+]);
+const options2 = ref([{
+		label: '去冰',
+		value: 1,
+	},
+	{
+		label: '加冰',
+		value: 2,
+	},
+	{
+		label: '正常温',
+		value: 3,
+	},
+	{
+		label: '加热',
+		value: 4,
+	},
+	{
+		label: '极寒风暴',
+		value: 5,
+	}
+]);
+const list = ref([{
+	label: '琪花瑶草',
+	active: true,
+},
+	{
+		label: '清词丽句',
+		active: false,
+	},
+	{
+		label: '宛转蛾眉',
+		active: false,
+	},
+	{
+		label: '煦色韶光',
+		active: false,
+	},
+	{
+		label: '鱼沉雁落',
+		active: false,
+	},
+	{
+		label: '章台杨柳',
+		active: false,
+	},
+	{
+		label: '霞光万道',
+		active: false,
+	}
+]);
+const activeColor = ref('#2979ff');
+const borderBottom = ref(false);
+
+const uDropdownRef = ref(null);
+
+function borderChange(index: number) {
+	borderBottom.value = !index;
+}
+
+function activeColorChange(index: number) {
+	activeColor.value = ['#2979ff', '#ff9900', '#19be6b'][index];
+}
+
+function change(index: number) {
+	$u.toast(`点击了第${index}项`);
+}
+
+function tagClick(index: number) {
+	list.value[index].active = !list.value[index].active;
+}
+
+function closeDropdown() {
+	$u.toast('关闭了下拉菜单');
+	uDropdownRef.value.close();
+}
+
+function maskChange(index: number) {
+	mask.value = !index;
+}
+
+
 </script>
 
 <style scoped lang="scss">
 	.u-config-wrap {
 		padding: 40rpx;
 	}
-	
+
 	.slot-content {
 		background-color: #FFFFFF;
 		padding: 24rpx;
-		
+
 		.item-box {
 			margin-bottom: 50rpx;
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-between;
-			
+
 			.item {
 				border: 1px solid $u-type-primary;
 				color: $u-type-primary;
@@ -158,7 +163,7 @@ import { $u } from '@/uni_modules/uview-pro';
 				border-radius: 100rpx;
 				margin-top: 30rpx;
 			}
-			
+
 			.active {
 				color: #FFFFFF;
 				background-color: $u-type-primary;

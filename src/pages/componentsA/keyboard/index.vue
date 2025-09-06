@@ -50,54 +50,55 @@
     </view>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            show: false,
-            input: '',
-            mode: 'number',
-            random: false,
-            tooltip: true,
-            mask: true
-        };
-    },
-    methods: {
-        clear() {
-            this.input = '';
-        },
-        statusChange(index) {
-            this.show = index == 0 ? true : false;
-        },
-        modeChange(index) {
-            if (index == 0) this.mode = 'number';
-            if (index == 1) this.mode = 'card';
-            if (index == 2) this.mode = 'car';
-            this.show = true;
-        },
-        randomChange(index) {
-            this.random = index == 0 ? true : false;
-            this.show = true;
-        },
-        tooltipChange(index) {
-            this.tooltip = index == 0 ? true : false;
-            this.show = true;
-        },
-        maskChange(index) {
-            this.show = true;
-            this.mask = !index;
-        },
-        // 点击退格键
-        backspace() {
-            if (this.input.length) this.input = this.input.substr(0, this.input.length - 1);
-        },
-        // 键盘按键发生变化
-        change(detail) {
-            this.input += detail;
-        },
-        confirm(e) {}
-    }
-};
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const show = ref(false);
+const input = ref('');
+const mode = ref('number');
+const random = ref(false);
+const tooltip = ref(true);
+const mask = ref(true);
+
+function clear() {
+    input.value = '';
+}
+
+function statusChange(index: number) {
+    show.value = index === 0;
+}
+
+function modeChange(index) {
+	mode.value = index === 0 ? 'number' : index === 1 ? 'card' : 'car';
+	show.value = true;
+}
+
+function randomChange(index: number) {
+    random.value = index === 0;
+    show.value = true;
+}
+
+function tooltipChange(index: number) {
+    tooltip.value = index === 0;
+    show.value = true;
+}
+
+function maskChange(index: number) {
+    show.value = true;
+    mask.value = index === 0;
+}
+
+function backspace() {
+    if (input.value.length) input.value = input.value.substring(0, input.value.length - 1);
+}
+
+function change(detail: string) {
+    input.value += detail;
+}
+
+function confirm(e: any) {
+    console.log(e);
+}
 </script>
 
 <style lang="scss" scoped>

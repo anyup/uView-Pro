@@ -33,79 +33,54 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				show: false,
-				mode: 'range',
-				result: "请选择日期",
-				startText: '开始',
-				endText: '结束',
-				rangeColor: '#2979ff',
-				rangeBgColor: 'rgba(41,121,255,0.13)',
-				activeBgColor: '#2979ff',
-				btnType: 'primary',
-			}
-		},
-		computed: {
-			showBtnStatus() {
-				return this.show ? 0 : 1;
-			}
-		},
-		methods: {
-			showChange(index) {
-				this.show = !index;
-			},
-			modeChange(index) {
-				this.mode = index == 0 ? 'date' : 'range';
-				this.show = true;
-			},
-			styleChange(index) {
-				if(index == 0) {
-					this.startText = '住店';
-					this.endText = '离店';
-					this.activeBgColor = '#19be6b';
-					this.rangeColor = '#19be6b';
-					this.rangeBgColor = 'rgba(25,190,107, 0.13)';
-					this.btnType = 'success';
-				} else {
-					this.startText = '开始';
-					this.endText = '结束';
-					this.activeBgColor = '#2979ff';
-					this.rangeColor = '#2979ff';
-					this.rangeBgColor = 'rgba(41,121,255,0.13)';
-					this.btnType = 'primary';
-				}
-				this.show = true;
-			},
-			customChange(index) {
-				if(index == 0) {
-					this.icon1 = 'map';
-					this.icon2 = 'photo';
-					this.arrow = true;
-				} else {
-					this.icon1 = '';
-					this.icon2 = '';
-					this.arrow = false;
-				}
-			},
-			textareaChange(index) {
-				this.type = index == 0 ? 'textarea' : 'text';
-			},
-			change(e) {
-				if (this.mode == 'range') {
-					this.result = e.startDate + " - " + e.endDate;
-				} else {
-					this.result = e.result;
-				}
-			}
-		}
-	}
-</script>
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import type { CalendarMode, ThemeType } from '@/uni_modules/uview-pro/types/global'
 
-<style lang="scss" scoped>
-	.u-demo {
-		
+const show = ref(false);
+const mode = ref<CalendarMode>('range');
+const result = ref('请选择日期');
+const startText = ref('开始');
+const endText = ref('结束');
+const rangeColor = ref('#2979ff');
+const rangeBgColor = ref('rgba(41,121,255,0.13)');
+const activeBgColor = ref('#2979ff');
+const btnType = ref<ThemeType>('primary');
+
+const showBtnStatus = computed(() => {
+	return show.value ? 0 : 1;
+});
+
+function showChange(index: number) {
+	show.value = !index;
+}
+
+function modeChange(index: number) {
+	mode.value = index === 0 ? 'date' : 'range';
+	show.value = true;
+}
+
+function styleChange(index: number) {
+	if(index === 0) {
+		startText.value = '住店';
+		endText.value = '离店';
+		activeBgColor.value = '#19be6b';
+		rangeColor.value = '#19be6b';
+		rangeBgColor.value = 'rgba(25,190,107, 0.13)';
+		btnType.value = 'success';
+	} else {
+		startText.value = '开始';
+		endText.value = '结束';
+		activeBgColor.value = '#2979ff';
 	}
-</style>
+}
+
+function change (e: any) {
+	if (mode.value == 'range') {
+		result.value = e.startDate + " - " + e.endDate;
+	} else {
+		result.value = e.result;
+	}
+}
+
+</script>

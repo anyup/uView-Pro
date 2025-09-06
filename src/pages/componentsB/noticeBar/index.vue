@@ -3,7 +3,7 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-toast :type="type" ref="uToast"></u-toast>
+                <u-toast :type="type" ref="uToastRef"></u-toast>
                 <u-notice-bar
                     :autoplay="autoplay"
                     :playState="playState"
@@ -53,93 +53,95 @@
     </view>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            show: true,
-            autoplay: false,
-            type: 'warning',
-            list: ['锦瑟无端五十弦，一弦一柱思华年', '庄生晓梦迷蝴蝶，望帝春心托杜鹃', '沧海月明珠有泪，蓝田日暖玉生烟'],
-            mode: 'horizontal',
-            playState: 'play',
-            speed: 160,
-            duration: 2000,
-            moreIcon: true,
-            volumeIcon: true,
-            isCircular: true,
-            current: 0
-        };
-    },
-    onLoad() {},
-    methods: {
-        typeChange(index) {
-            let type = ['primary', 'success', 'error', 'warning', 'none'];
-            this.type = type[index];
-        },
-        modeChange(index) {
-            this.current = index;
-            this.mode = index == 0 ? 'horizontal' : 'vertical';
-        },
-        playStateChange(index) {
-            this.playState = index == 0 ? 'play' : 'paused';
-        },
-        speedChange(index) {
-            if (index == 0) {
-                this.$nextTick(() => {
-                    this.speed = 50;
-                    this.duration = 6000;
-                });
-            } else if (index == 1) {
-                this.$nextTick(() => {
-                    this.speed = 160;
-                    this.duration = 2000;
-                });
-            } else {
-                this.$nextTick(() => {
-                    this.speed = 350;
-                    this.duration = 400;
-                });
-            }
-        },
-        iconChange(index) {
-            if (index == 0) {
-                this.moreIcon = true;
-                this.volumeIcon = true;
-            } else {
-                this.moreIcon = false;
-                this.volumeIcon = false;
-            }
-        },
-        isCircularChange(index) {
-            this.isCircular = index == 0 ? true : false;
-            this.current = 0;
-            this.mode = 'horizontal';
-        },
-        close() {
-            this.toast(`点击了关闭图标`);
-        },
-        click(index) {
-            if (this.mode == 'horizontal' && this.isCircular) {
-                this.toast('此模式无法获取Index值');
-            } else {
-                this.toast(`点击了第${index + 1}条消息`);
-            }
-        },
-        getMore() {
-            this.toast(`点击了更多图标`);
-        },
-        toast(title) {
-            this.$refs.uToast.show({
-                title: title,
-                type: 'warning'
-            });
-        },
-        end() {
-            // console.log('end');
-        }
+<script setup lang="ts">
+import { ref } from 'vue';
+import type { Direction, PlayState, ThemeType } from '@/uni_modules/uview-pro/types/global'
+
+const show = ref(true);
+const autoplay = ref(false);
+const type = ref<ThemeType>('warning');
+const list = ref([
+    '锦瑟无端五十弦，一弦一柱思华年',
+    '庄生晓梦迷蝴蝶，望帝春心托杜鹃',
+    '沧海月明珠有泪，蓝田日暖玉生烟'
+]);
+const mode = ref<Direction>('horizontal');
+const playState = ref<PlayState>('play');
+const speed = ref(160);
+const duration = ref(2000);
+const moreIcon = ref(true);
+const volumeIcon = ref(true);
+const isCircular = ref(true);
+const current = ref(0);
+
+const uToastRef = ref(null);
+
+function typeChange(index: number) {
+	type.value = index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : undefined;
+}
+
+function modeChange(index: number) {
+	current.value = index;
+	mode.value = index === 0 ? 'horizontal' : 'vertical';
+}
+
+function playStateChange(index: number) {
+	playState.value = index === 0 ? 'play' : 'paused';
+}
+
+function speedChange(index: number) {
+    if (index === 0) {
+        speed.value = 50;
+        duration.value = 6000;
+    } else if (index === 1) {
+        speed.value = 160;
+        duration.value = 2000;
+    } else {
+        speed.value = 350;
+        duration.value = 400;
     }
-};
+}
+
+function iconChange(index: number) {
+	if (index === 0) {
+		moreIcon.value = true;
+		volumeIcon.value = true;
+	} else {
+		moreIcon.value = false;
+		volumeIcon.value = false;
+	}
+}
+
+function isCircularChange(index: number) {
+	isCircular.value = index === 0;
+	current.value = index;
+	mode.value = 'horizontal';
+}
+
+function getMore() {
+	toast('点击了更多')
+}
+
+function toast(title: string) {
+    uToastRef.value.show({ title: title, type: 'warning' });
+}
+
+function end() {
+    console.log('end');
+}
+
+function close() {
+    console.log('close');
+}
+
+function click(index: number) {
+	if (mode.value == 'horizontal' && isCircular) {
+		toast('此模式无法获取Index值')
+	} else {
+		toast('点击了第' + index + '项')
+	}
+}
+
 </script>
 
 <style lang="scss" scoped>
