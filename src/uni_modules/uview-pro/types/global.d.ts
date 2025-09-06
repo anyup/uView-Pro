@@ -211,6 +211,8 @@ export type TabsSwiperListItem = {
 export type TabsSwiperAutoCenterMode = 'window';
 // tag 组件 mode
 export type TagMode = 'light' | 'dark' | 'plain';
+// tag 组件 shape
+export type TagShape = 'square' | 'circle' |  'circleLeft' | 'circleRight';
 // tag 组件 size
 export type TagSize = 'default' | 'mini' | 'medium';
 // toast 组件 position
