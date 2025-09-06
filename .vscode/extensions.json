@@ -1,0 +1,10 @@
+{
+    // 推荐团队/贡献者安装的 VS Code 插件
+    "recommendations": [
+        "esbenp.prettier-vscode", // Prettier 代码格式化
+        "Vue.volar", // Vue3 官方语法支持（推荐代替 vetur）
+        "dbaeumer.vscode-eslint", // ESLint 代码规范
+        "stylelint.vscode-stylelint", // CSS/SCSS/Less 规范
+        "streetsidesoftware.code-spell-checker" // 拼写检查
+    ]
+}

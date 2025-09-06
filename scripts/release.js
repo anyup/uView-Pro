@@ -26,10 +26,10 @@ console.log(`🚀 开始发布 ${versionType} 版本...`);
 // 执行命令的辅助函数
 function execCommand(command, options = {}) {
     try {
-        const result = execSync(command, { 
-            encoding: 'utf8', 
+        const result = execSync(command, {
+            encoding: 'utf8',
             stdio: 'inherit',
-            ...options 
+            ...options
         });
         return result;
     } catch (error) {
@@ -53,15 +53,15 @@ console.log('🌿 检查当前分支...');
 const currentBranch = execCommand('git branch --show-current', { stdio: 'pipe' }).trim();
 if (currentBranch !== 'main' && currentBranch !== 'master') {
     console.warn(`⚠️  警告: 当前分支是 ${currentBranch}，建议在 main 或 master 分支上发布`);
-    
+
     // 在Node.js中实现交互式输入
     const readline = require('readline');
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
     });
-    
-    rl.question('是否继续? (y/N): ', (answer) => {
+
+    rl.question('是否继续? (y/N): ', answer => {
         rl.close();
         if (!/^[Yy]$/.test(answer)) {
             console.log('❌ 操作已取消');
@@ -78,13 +78,13 @@ function continueRelease() {
         // 更新版本号
         console.log('📦 更新版本号...');
         execCommand(`npm version ${versionType} --no-git-tag-version`);
-        
+
         // 获取新版本号
         const packageJsonPath = path.join(process.cwd(), 'package.json');
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
         const newVersion = packageJson.version;
         console.log(`✨ 新版本: ${newVersion}`);
-        
+
         // 同时更新uview-pro模块的版本号
         console.log('📦 更新uview-pro模块版本号...');
         const uviewProPackagePath = path.join(process.cwd(), 'src', 'uni_modules', 'uview-pro', 'package.json');
@@ -96,11 +96,11 @@ function continueRelease() {
         } else {
             console.warn('⚠️  未找到uview-pro模块的package.json文件');
         }
-        
+
         // 生成 changelog（按当前版本生成版本化条目，可配置是否保留 Unreleased）
         console.log('📝 生成 changelog...');
         execCommand('npm run changelog:current:no-unreleased');
-        
+
         // 提交更改
         console.log('💾 提交更改...');
         execCommand('git add package.json src/uni_modules/uview-pro/package.json CHANGELOG.md src/uni_modules/uview-pro/changelog.md');
@@ -110,16 +110,16 @@ function continueRelease() {
 - Update uview-pro module version
 - Generate changelog for ${newVersion}
 - Update uview-pro component changelog"`);
-        
+
         // 创建标签
         console.log(`🏷️  创建标签 v${newVersion}...`);
         execCommand(`git tag -a "v${newVersion}" -m "Release version ${newVersion}"`);
-        
+
         // 推送更改和标签
         console.log('🚀 推送更改和标签...');
         execCommand('git push origin HEAD');
         execCommand(`git push origin "v${newVersion}"`);
-        
+
         // 尝试创建 GitHub/Gitee Release（如果检测到相应仓库且提供了 Token）
         try {
             const repoInfo = getRepoInfo();
@@ -154,7 +154,6 @@ function continueRelease() {
         console.log('📋 下一步:');
         console.log('1. 如需上传构建产物，可前往 Release 页面添加');
         console.log('2. 或者配置 GITHUB_TOKEN 以启用自动创建 Release');
-        
     } catch (error) {
         console.error('❌ 发布过程中出现错误:', error.message);
         process.exit(1);
@@ -188,7 +187,9 @@ function parseGitUrl(url) {
         if (url.startsWith('git@')) {
             const match = url.match(/^git@([^:]+):([^/]+)\/([^\.]+)(?:\.git)?$/);
             if (match) {
-                host = match[1]; owner = match[2]; repo = match[3];
+                host = match[1];
+                owner = match[2];
+                repo = match[3];
             }
         } else {
             const u = new URL(url.replace(/\.git$/, ''));
