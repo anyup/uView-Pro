@@ -92,21 +92,13 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				
-			}
-		}
-	}
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
 	.wrap {
 		padding: 24rpx 24rpx 24rpx 40rpx;
 	}
-	
+
 	.u-node {
 		width: 44rpx;
 		height: 44rpx;
@@ -116,28 +108,28 @@
 		align-items: center;
 		background: #d0d0d0;
 	}
-	
+
 	.u-order-title {
 		color: #333333;
 		font-weight: bold;
 		font-size: 32rpx;
 	}
-	
+
 	.u-order-title.unacive {
 		color: rgb(150, 150, 150);
 	}
-	
+
 	.u-order-desc {
 		color: rgb(150, 150, 150);
 		font-size: 28rpx;
 		margin-bottom: 6rpx;
 	}
-	
+
 	.u-order-time {
 		color: rgb(200, 200, 200);
 		font-size: 26rpx;
 	}
-	
+
 	.tel {
 		color: $u-type-primary;
 	}

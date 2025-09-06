@@ -2,7 +2,7 @@
 	<view class="">
 		<view class="u-card-wrap">
 			<u-card @click="click" @head-click="headClick" :title="title" :sub-title="subTitle" :thumb="thumb" :padding="padding" :border="border">
-				<template #body> 
+				<template #body>
 					<view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
 						<view class="u-body-item-title u-line-2">
 							瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半
@@ -45,57 +45,57 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				title: '素胚勾勒出青花，笔锋浓转淡',
-				subTitle: '2020-05-15',
-				thumb: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
-				padding: 20,
-				bottomSlot: true,
-				border: true
-			}
-		},
-		methods: {
-			thumbChange(index) {
-				this.thumb = index == 0 ? 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png' : '';
-			},
-			paddingChange(index) {
-				this.padding = [20, 30, 40][index];
-			},
-			bottomChange(index) {
-				this.bottomSlot = !index;
-			},
-			borderChange(index) {
-				this.border = !index;
-			},
-			click(index) {
-				console.log(index);
-			},
-			headClick(index) {
-				console.log(index);
-			}
-		}
-	}
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const title = ref('素胚勾勒出青花，笔锋浓转淡');
+const subTitle = ref('2020-05-15');
+const thumb = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo.png');
+const padding = ref(20);
+const bottomSlot = ref(true);
+const border = ref(true);
+
+function thumbChange(index: number) {
+	thumb.value = index === 0 ? 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png' : '';
+}
+
+function paddingChange(index: number) {
+	padding.value = [20, 30, 40][index];
+}
+
+function bottomChange(index: number) {
+	bottomSlot.value = !index;
+}
+
+function borderChange(index: number) {
+	border.value = !index;
+}
+
+function click(index: number) {
+	console.log(index);
+}
+
+function headClick(index: number) {
+	console.log(index);
+}
 </script>
 
 <style scoped lang="scss">
 	.u-demo {
 		padding-top: 0;
 	}
-	
-	.u-card-wrap { 
+
+	.u-card-wrap {
 		background-color: $u-bg-color;
 		padding: 1px;
 	}
-	
+
 	.u-body-item {
 		font-size: 32rpx;
 		color: #333;
 		padding: 20rpx 10rpx;
 	}
-		
+
 	.u-body-item image {
 		width: 120rpx;
 		flex: 0 0 120rpx;

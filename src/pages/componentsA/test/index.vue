@@ -47,43 +47,44 @@
     </u-form>
 </template>
 
-<script>
-    export default {
-        data() {
-            return {
-                form: {
-                    name: '',
-                    intro: '',
-                    sex: ''
-                },
-                checkboxList: [{
-                        name: '苹果',
-                        checked: false,
-                        disabled: false
-                    },
-                    {
-                        name: '雪梨',
-                        checked: false,
-                        disabled: false
-                    },
-                    {
-                        name: '柠檬',
-                        checked: false,
-                        disabled: false
-                    }
-                ],
-                radioList: [{
-                        name: '鲜甜',
-                        disabled: false
-                    },
-                    {
-                        name: '麻辣',
-                        disabled: false
-                    }
-                ],
-                radio: '',
-                switchVal: false
-            };
-        }
-    };
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const form = ref({
+    name: '',
+    intro: '',
+    sex: ''
+});
+
+const checkboxList = ref([
+    {
+        name: '苹果',
+        checked: false,
+        disabled: false
+    },
+    {
+        name: '雪梨',
+        checked: false,
+        disabled: false
+    },
+    {
+        name: '柠檬',
+        checked: false,
+        disabled: false
+    }
+]);
+
+const radioList = ref([
+    {
+        name: '鲜甜',
+        disabled: false
+    },
+    {
+        name: '麻辣',
+        disabled: false
+    }
+]);
+
+const radio = ref('');
+const switchVal = ref(false);
 </script>
