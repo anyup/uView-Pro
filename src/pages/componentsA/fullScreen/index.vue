@@ -21,28 +21,47 @@
 	</view>
 </template>
 
-<script>
+<!--<script>-->
+<!--import { $u } from '@/uni_modules/uview-pro';-->
+<!--	export default {-->
+<!--		data() {-->
+<!--			return {-->
+<!--				current: 1-->
+<!--			}-->
+<!--		},-->
+<!--		onShow() {-->
+<!--			this.$nextTick(() => {-->
+<!--				this.current = 1;-->
+<!--			})-->
+<!--		},-->
+<!--		methods: {-->
+<!--			openModal(index) {-->
+<!--				// 可以传递参数-->
+<!--				if(index == 0) {-->
+<!--					$u.route("/uni_modules/uview-pro/components/u-full-screen/u-full-screen?id=1");-->
+<!--				}-->
+<!--			}-->
+<!--		}-->
+<!--	}-->
+<!--</script>-->
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import { onShow } from '@dcloudio/uni-app'
 import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() {
-			return {
-				current: 1
-			}
-		},
-		onShow() {
-			this.$nextTick(() => {
-				this.current = 1;
-			})
-		},
-		methods: {
-			openModal(index) {
-				// 可以传递参数
-				if(index == 0) {
-					$u.route("/uni_modules/uview-pro/components/u-full-screen/u-full-screen?id=1");
-				}
-			}
-		}
+
+const current = ref(1);
+
+onShow(() => {
+	current.value = 1;
+});
+
+function openModal(index: number) {
+	// 可以传递参数
+	if(index === 0) {
+		$u.route("/uni_modules/uview-pro/components/u-full-screen/u-full-screen?id=1");
 	}
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,9 +1,9 @@
 <template>
 	<view class="">
-		<u-navbar title-color="#fff" back-icon-color="#ffffff" 
-			:is-fixed="isFixed" :is-back="isBack" 
-			:background="background" 
-			:back-text-style="{color: '#fff'}" :title="title" 
+		<u-navbar title-color="#fff" back-icon-color="#ffffff"
+			:is-fixed="isFixed" :is-back="isBack"
+			:background="background"
+			:back-text-style="{color: '#fff'}" :title="title"
 			:back-icon-name="backIconName" :back-text="backText"
 			:custom-back="customBack"
 		>
@@ -47,7 +47,7 @@
 				<view class="u-demo-area">
 					<u-toast ref="uToast"></u-toast>
 					<view class="u-no-demo-here">查看顶部导航栏效果</view>
-				</view> 
+				</view>
 			</view>
 			<view class="u-config-wrap">
 				<view class="u-config-title u-border-bottom">
@@ -90,135 +90,138 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				title: '新闻',
-				backText: '返回',
-				backIconName: 'nav-back',
-				right: false,
-				showAction: false,
-				rightSlot: false,
-				useSlot: false,
-				background: {
-					'background-image': 'linear-gradient(45deg, rgb(28, 187, 180), rgb(141, 198, 63))'
-				},
-				isBack: true,
-				search: false,
-				custom: false,
-				isFixed: true,
-				keyword: '',
-				// #ifdef MP
-				slotRight: false,
-				// #endif
-				// #ifndef MP
-				slotRight: true,
-				// #endif
-				customBack: null
-			}
-		},
-		computed: {
-			slotRightCurrent() {
-				return this.slotRight ? 0 : 1;
-			}
-		},
-		methods: {
-			customBackChange(index) {
-				if(index == 0) {
-					this.customBack = () => {
-						this.$refs.uToast.show({
-							title: '自定义返回逻辑',
-							type: 'success'
-						});
-					};
-				} else {
-					this.customBack = null;
-				}
-			},
-			titleChange(index) {
-				this.useSlot = false;
-				this.title = index == 0 ? '新闻' : index == 1 ? '新闻列表' : '雨打梨花深闭门，忘了青春，误了青春';
-			},
-			leftChange(index) {
-				if(index == 0) {
-					this.backText = '';
-					this.backIconName = 'arrow-leftward';
-				} else {
-					this.backText = '返回';
-					this.backIconName = 'arrow-left';
-				}
-			},
-			searchChange(index) {
-				this.title = null;
-				this.useSlot = true;
-				this.search = false;
-				this.custom = false;
-				if(index == 0) {
-					this.title = '新闻';
-					this.useSlot = false;
-					this.rightSlot = false;
-				} else if(index == 1) {
-					this.showAction = false;
-					this.useSlot = true;
-					this.rightSlot = false;
-					this.search = true;
-					this.slotRight = false;
-				} else if(index == 2) {
-					this.useSlot = true;
-					this.showAction = true;
-					this.rightSlot = false;
-					this.search = true;
-					this.slotRight = false;
-				} else {
-					this.useSlot = true;
-					this.search = true;
-					this.showAction = false;
-					this.rightSlot = true;
-					this.slotRight = false;
-				}
-			},
-			backChange(index) {
-				this.isBack = !!index;
-			},
-			bgColorChange(index) {
-				this.background = {};
-				if(index == 0) {
-					this.background = {
-						'background-image': 'linear-gradient(45deg, rgb(28, 187, 180), rgb(141, 198, 63))'
-					}
-				} else {
-					let color = index == 1 ? '#39CCCC' : index == 2 ? '#B471CC' : '#001f3f';
-					this.background = {
-						background: color
-					}
-				}
-				
-			},
-			rightChange(index) {
-				if(index == 0) {
-					this.slotRight = true;
-					this.useSlot = false;
-				} else {
-					this.slotRight = false;
-				}
-			},
-			customChange(index) {
-				this.search = false;
-				this.rightSlot = false;
-				if(index == 0) {
-					this.custom = true;
-					this.title = null;
-					this.isBack = false;
-					this.useSlot = true;
-				} else {
-					this.useSlot = false;
-					this.title = '新闻';
-					this.isBack = true;
-				}
-			}
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+
+const title = ref<string | null>('新闻');
+const backText = ref<string>('返回');
+const backIconName = ref<string>('nav-back');
+const right = ref<boolean>(false);
+const showAction = ref<boolean>(false);
+const rightSlot = ref<boolean>(false);
+const useSlot = ref<boolean>(false);
+const background = ref<Record<string, string>>({
+	'background-image': 'linear-gradient(45deg, rgb(28, 187, 180), rgb(141, 198, 63))'
+});
+const isBack = ref<boolean>(true);
+const search = ref<boolean>(false);
+const custom = ref<boolean>(false);
+const isFixed = ref<boolean>(true);
+const keyword = ref<string>('');
+
+// #ifdef MP
+rightSlot.value = false;
+// #endif
+// #ifndef MP
+rightSlot.value = true;
+// #endif
+
+const customBack = ref<(() => void) | null>(null);
+const uToast = ref<any>(null);
+
+const slotRightCurrent = computed(() => {
+	return rightSlot.value ? 0 : 1;
+});
+
+function customBackChange(index: number): void {
+	if(index == 0) {
+		customBack.value = () => {
+			uToast.value.show({
+				title: '自定义返回逻辑',
+				type: 'success'
+			});
+		};
+	} else {
+		customBack.value = null;
+	}
+}
+
+function titleChange(index: number): void {
+	useSlot.value = false;
+	title.value = index == 0 ? '新闻' : index == 1 ? '新闻列表' : '雨打梨花深闭门，忘了青春，误了青春';
+}
+
+function leftChange(index: number): void {
+	if(index == 0) {
+		backText.value = '';
+		backIconName.value = 'arrow-leftward';
+	} else {
+		backText.value = '返回';
+		backIconName.value = 'arrow-left';
+	}
+}
+
+function searchChange(index: number): void {
+	title.value = null;
+	useSlot.value = true;
+	search.value = false;
+	custom.value = false;
+	if(index == 0) {
+		title.value = '新闻';
+		useSlot.value = false;
+		rightSlot.value = false;
+	} else if(index == 1) {
+		showAction.value = false;
+		useSlot.value = true;
+		rightSlot.value = false;
+		search.value = true;
+		rightSlot.value = false;
+	} else if(index == 2) {
+		useSlot.value = true;
+		showAction.value = true;
+		rightSlot.value = false;
+		search.value = true;
+		rightSlot.value = false;
+	} else {
+		useSlot.value = true;
+		search.value = true;
+		showAction.value = false;
+		rightSlot.value = true;
+		rightSlot.value = false;
+	}
+}
+
+function backChange(index: number): void {
+	isBack.value = !!index;
+}
+
+function bgColorChange(index: number): void {
+	background.value = {};
+	if(index == 0) {
+		background.value = {
+			'background-image': 'linear-gradient(45deg, rgb(28, 187, 180), rgb(141, 198, 63))'
+		}
+	} else {
+		const color = index == 1 ? '#39CCCC' : index == 2 ? '#B471CC' : '#001f3f';
+		background.value = {
+			background: color
 		}
 	}
+}
+
+function rightChange(index: number): void {
+	if(index == 0) {
+		rightSlot.value = true;
+		useSlot.value = false;
+	} else {
+		rightSlot.value = false;
+	}
+}
+
+function customChange(index: number): void {
+	search.value = false;
+	rightSlot.value = false;
+	if(index == 0) {
+		custom.value = true;
+		title.value = null;
+		isBack.value = false;
+		useSlot.value = true;
+	} else {
+		useSlot.value = false;
+		title.value = '新闻';
+		isBack.value = true;
+	}
+}
 </script>
 
 <style lang="scss" scoped>
@@ -228,38 +231,38 @@
 		height: calc(100% - 44px - constant(safe-area-inset-top));
 		height: calc(100% - 44px - env(safe-area-inset-top));
 	}
-	
+
 	.wrap {
 		padding: 24rpx;
 	}
-	
+
 	.navbar-right {
 		margin-right: 24rpx;
 		display: flex;
 	}
-	
+
 	.search-wrap {
 		margin: 0 20rpx;
 		flex: 1;
 	}
-	
+
 	.right-item {
 		margin: 0 12rpx;
 		position: relative;
 		color: #ffffff;
 		display: flex;
 	}
-	
+
 	.message-box {
-		
+
 	}
-	
+
 	.slot-wrap {
 		display: flex;
 		align-items: center;
 		flex: 1;
 	}
-	
+
 	.map-wrap {
 		display: flex;
 		align-items: center;
@@ -270,7 +273,7 @@
 		border-radius: 100rpx;
 		margin-left: 30rpx;
 	}
-	
+
 	.map-wrap-text {
 		padding: 0 6rpx;
 	}

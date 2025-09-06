@@ -21,182 +21,164 @@
 	</view>
 </template>
 
-<script>
-export default {
-	data() {
-		return {
-			show: false,
-			result: '尚未选择',
-			defaultValue: [3],
-			mode: 'single-column', // single-column, mutil-column, mutil-column-auto
-			list: [],
-			list1: [
-				{
-					value: '江',
-					label: '江'
-				},
-				{
-					value: '湖',
-					label: '湖'
-				},
-				{
-					value: '夜',
-					label: '夜'
-				},
-				{
-					value: '雨',
-					label: '雨'
-				},
-				{
-					value: '十',
-					label: '十'
-				},
-				{
-					value: '年',
-					label: '年'
-				},
-				{
-					value: '灯',
-					label: '灯'
-				}
-			],
-			list2: [
-				[
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
+
+const show = ref(false);
+const result = ref('尚未选择');
+const defaultValue = ref([3]);
+const mode = ref('single-column');
+const list = ref([]);
+const list1 = [
+    {
+        value: '江',
+        label: '江'
+    },
+    {
+        value: '湖',
+        label: '湖'
+    },
+    {
+        value: '夜',
+        label: '夜'
+    },
+    {
+        value: '雨',
+        label: '雨'
+    },
+    {
+        value: '十',
+        label: '十'
+    },
+    {
+        value: '年',
+        label: '年'
+    },
+    {
+        value: '灯',
+    }
+]
+const list2 = [
+    [
+        {
+            value: '昔',
+            label: '昔'
+        },
+        {
+            value: '去',
+            label: '去'
+        },
+        {
+            value: '雪',
+            label: '雪'
+        },
+        {
+            value: '如',
+            label: '如'
+        },
+        {
+            value: '花',
+            label: '花'
+        }
+    ],
+    [
+        {
+            value: '今',
+            label: '今'
+        }
+    ]
+]
+const list3 = [
+    {
+        label: '中国',
+        value: '1',
+        children: [
+            {
+                label: '广西',
+                value: '2',
+                children: [
+                    {
+                        label: '南宁',
+                        value: '3'
+                    },
+                    {
+                        label: '梧州',
+                        value: '3'
+                    },
+                    {
+                        label: '柳州',
+                        value: '3'
+                    }
+                ]
+            },
+			{
+				label: '广东',
+				value: '2',
+				children: [
 					{
-						value: '昔',
-						label: '昔'
+						label: '深圳',
+						value: '3'
 					},
 					{
-						value: '去',
-						label: '去'
+						label: '惠州',
+						value: '3'
 					},
 					{
-						value: '雪',
-						label: '雪'
-					},
-					{
-						value: '如',
-						label: '如'
-					},
-					{
-						value: '花',
-						label: '花'
-					}
-				],
-				[
-					{
-						value: '今',
-						label: '今'
-					},
-					{
-						value: '来',
-						label: '来'
-					},
-					{
-						value: '花',
-						label: '花'
-					},
-					{
-						value: '似',
-						label: '似'
-					},
-					{
-						value: '雪',
-						label: '雪'
+						label: '清远',
+						value: '3'
 					}
 				]
-			],
-			list3: [
-				{
-					label: '中国',
-					value: '1',
-					children: [
-						{
-							label: '广西',
-							value: '2',
-							children: [
-								{
-									label: '南宁',
-									value: '3'
-								},
-								{
-									label: '梧州',
-									value: '3'
-								},
-								{
-									label: '柳州',
-									value: '3'
-								}
-							]
-						},
-						{
-							label: '广东',
-							value: '2',
-							children: [
-								{
-									label: '深圳',
-									value: '3'
-								},
-								{
-									label: '惠州',
-									value: '3'
-								},
-								{
-									label: '清远',
-									value: '3'
-								}
-							]
-						}
-					]
-				},
-				{
-					label: '美国',
-					value: '1',
-					children: [
-						{
-							label: '纽约',
-							value: '2',
-							children: [
-								{
-									label: '皇后街道',
-									value: '3'
-								}
-							]
-						}
-					]
-				}
-			]
-		};
-	},
-	onLoad() {
-		this.list = this.list1;
-	},
-	computed: {
-		current() {
-			return this.show ? 0 : 1;
-		}
-	},
-	methods: {
-		statusChange(index) {
-			this.show = !index;
-		},
-		modeChange(index) {
-			let type = ['single-column', 'mutil-column', 'mutil-column-auto'];
-			this.mode = type[index];
-			this.list = index == 0 ? this.list1 : index == 1 ? this.list2 : this.list3;
-			this.show = true;
-		},
-		confirm(e) {
-			this.result = '';
-			e.map((val, index) => {
-				this.result += this.result == '' ? val.label : '-' + val.label;
-			})
-		},
-		cancel(e) {
-			console.log(e);
-		}
-	}
-};
+			},
+			{
+				label: '美国',
+				value: '1',
+				children: [
+					{
+						label: '纽约',
+						value: '2',
+						children: [
+							{
+								label: '皇后街道',
+								value: '3'
+							}
+						]
+					}
+				]
+			}
+        ]
+    }
+]
+
+onLoad(() => {
+	list.value = list1;
+})
+
+const current = computed(() => {
+	return show.value ? 0 : 1;
+})
+
+function statusChange(index: number) {
+	show.value = !index;
+}
+
+function modeChange(index: number) {
+	let type = ['single-column', 'mutil-column', 'mutil-column-auto'];
+	mode.value = type[index];
+	list.value = index == 0 ? list1 : index == 1 ? list2 : list3;
+	show.value = true;
+}
+
+function confirm(e) {
+	result.value = '';
+	e.map((val, index) => {
+		result.value += result.value == '' ? val.label : '-' + val.label;
+	})
+}
+
+function cancel(e) {
+	console.log(e);
+}
 </script>
 
 <style scoped lang="scss">

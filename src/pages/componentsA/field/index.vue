@@ -54,53 +54,44 @@
 	</view>
 </template>
 
-<script>
-import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() {
-			return {
-				mobile: '',
-				code: '',
-				errorMessage: '',
-				required: false,
-				placeholderColor: $u.color['tipsColor'],
-				arrow: false,
-				showBtn: false,
-				icon1: '',
-				icon2: '',
-				type: 'text',
-			}
-		},
-		methods: {
-			showBtnChange(index) {
-				this.showBtn = index == 0 ? true : false;
-			},
-			errorMessageChange(index) {
-				this.errorMessage = index == 0 ? '手机号有误' : false
-			},
-			requiredChange(index) {
-				this.required = index == 0 ? true : false;
-			},
-			customChange(index) {
-				if(index == 0) {
-					this.icon1 = 'map';
-					this.icon2 = 'photo';
-					this.arrow = true;
-				} else {
-					this.icon1 = '';
-					this.icon2 = '';
-					this.arrow = false;
-				}
-			},
-			textareaChange(index) {
-				this.type = index == 0 ? 'textarea' : 'text';
-			}
-		}
-	}
-</script>
+<script setup lang="ts">
+import { ref } from 'vue';
 
-<style lang="scss" scoped>
-	.u-demo {
-		
+const mobile = ref('');
+const code = ref('');
+const errorMessage = ref('');
+const required = ref(false);
+const arrow = ref(false);
+const showBtn = ref(false);
+const icon1 = ref('');
+const icon2 = ref('');
+const type = ref('text');
+
+function showBtnChange(index: number) {
+	showBtn.value = index === 0;
+}
+
+function errorMessageChange(index: number) {
+	errorMessage.value = index === 0 ? '手机号有误' : '';
+}
+
+function requiredChange(index: number) {
+	required.value = index === 0;
+}
+
+function customChange(index: number) {
+	if (index === 0) {
+		icon1.value = 'map';
+		icon2.value = 'photo';
+		arrow.value = true;
+	} else {
+		icon1.value = '';
+		icon2.value = '';
+		arrow.value = false;
 	}
-</style>
+}
+
+function textareaChange(index: number) {
+	type.value = index === 0 ? 'textarea' : 'text';
+}
+</script>

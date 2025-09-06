@@ -26,71 +26,45 @@
 	</view>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() {
-			return {
-				avatar: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
-			}
-		},
-		created() {
-			uni.$on('uAvatarCropper', path => {
-				this.avatar = path;
-				// 可以在此上传到服务端
-				// uni.uploadFile({
-				// 	url: 'http://192.168.100.17/index.php/index/index/upload',
-				// 	filePath: path,
-				// 	name: 'file',
-				// 	complete: (res) => {
-				// 		console.log(res);
-				// 	}
-				// });
-			})
-		},
-		methods: {
-			chooseAvatar() {
-				$u.route({
-					url: '/uni_modules/uview-pro/components/u-avatar-cropper/u-avatar-cropper',
-					params: {
-						// 输出图片宽度，高等于宽，单位px
-						destWidth: 300,
-						// 裁剪框宽度，高等于宽，单位px
-						rectWidth: 200,
-						// 输出的图片类型，如果'png'类型发现裁剪的图片太大，改成"jpg"即可
-						fileType: 'jpg',
-					}
-				})
-			},
-			qualityChange(index) {
-				this.quality = index == 0 ? 0.3 : index == 1 ? 0.7 : 1;
-			},
-			styleChange(index) {
-				if (index == 0) {
-					this.rectHeight = this.rectWidth = this.destHeight = this.destWidth = 200;
-					this.boundStyle = {
-						lineWidth: 8,
-						borderColor: $u.color['error'],
-						mask: 'rgba(0, 0, 0, 0.8)'
-					}
-				} else {
-					this.rectHeight = this.rectWidth = this.destHeight = this.destWidth = 400;
-					this.boundStyle = {
-						lineWidth: 4,
-						borderColor: 'rgb(245, 245, 245)',
-						mask: 'rgba(0, 0, 0, 0.35)'
-					}
-				}
-			},
-			// 预览图片
-			preAvatar() {
-				wx.previewImage({
-					current: '', // 当前显示图片的 http 链接
-					urls: [this.avatar] // 需要预览的图片 http 链接列表
-				})
-			}
+
+const avatar = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo.png')
+
+const chooseAvatar = () => {
+	$u.route({
+		url: '/uni_modules/uview-pro/components/u-avatar-cropper/u-avatar-cropper',
+		params: {
+			// 输出图片宽度，高等于宽，单位px
+			destWidth: 300,
+			// 裁剪框宽度，高等于宽，单位px
+			rectWidth: 200,
+			// 输出的图片类型，如果'png'类型发现裁剪的图片太大，改成"jpg"即可
+			fileType: 'jpg',
 		}
-	}
+	})
+}
+
+function preAvatar(path) {
+	wx.previewImage({
+		current: '', // 当前显示图片的 http 链接
+		urls: [path] // 需要预览的图片 http 链接列表
+	})
+}
+
+uni.$on('uAvatarCropper', path => {
+	avatar.value = path;
+	// 可以在此上传到服务端
+	// uni.uploadFile({
+	// 	url: 'http://192.168.100.17/index.php/index/index/upload',
+	// 	filePath: path,
+	// 	name: 'file',
+	// 	complete: (res) => {
+	// 		console.log(res);
+	// 	}
+	// });
+})
 </script>
 
 <style lang="scss" scoped>

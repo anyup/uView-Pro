@@ -4,7 +4,7 @@ export type ImgMode = 'aspectFit' | 'aspectFill' | 'widthFix' | 'top' | 'bottom'
 
 export type Direction = 'horizontal' | 'vertical';
 
-export type Sex = 'male' | 'female';
+export type Sex = 'man' | 'woman';
 
 export type Shape = 'circle' | 'square';
 export type Effect = 'linear' | 'ease' | 'ease-in' | 'ease-in-out' | 'ease-out' | 'step-start' | 'step-end';
@@ -48,8 +48,6 @@ export type ButtonSize = 'default' | 'medium' | 'mini';
 export type ButtonFormType = '' | 'submit' | 'reset';
 // button 按钮 scope
 export type ButtonScope = 'phoneNumber' | 'userInfo';
-// button 按钮大小
-export type ButtonSize = 'default' | 'medium' | 'mini';
 // button 按钮open-type
 export type ButtonOpenType =
     | 'feedback'

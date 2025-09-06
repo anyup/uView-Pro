@@ -4,10 +4,10 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
-				<u-slider :step="step" :height="height" :block-width="blockWidth" 
-					:active-color="activeColor" :value="30" 
+				<u-slider :step="step" :height="height" :block-width="blockWidth"
+					:active-color="activeColor" :value="30"
 					:use-slot="useSlot" v-model="value"
-					:min="min" :max="max" 
+					:min="min" :max="max"
 					@end="end"
 					@moving="moving"
 				>
@@ -54,68 +54,62 @@
 	</view>
 </template>
 
-<script>
+<script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
-	export default {
-		data() {
-			return {
-				value: 30,
-				useSlot: false,
-				setp: 1,
-				activeColor: '#2979ff',
-				height: 6,
-				blockWidth: 30,
-				step: 1,
-				min: 0,
-				max: 100
-			};
-		},
-		onLoad() {
-			
-		},
-		computed: {
-			current() {
-				return this.show ? 0 : 1;
-			}
-		},
-		methods: {
-			typeChange(index) {
-				let type = ['primary', 'warning', 'error', 'success'];
-				this.activeColor = $u.color[type[index]];
-			},
-			sizeChange(index) {
-				if(index == 0) {
-					this.height = 4;
-					this.blockWidth = 30;
-				} else {
-					this.height = 6;
-					this.blockWidth = 20;
-				}
-			},
-			stepChange(index) {
-				let arr = ['1', '10', '20'];
-				this.step = arr[index];
-			},
-			slotChange(index) {
-				this.useSlot = !index;
-			},
-			minMaxchange(index) {
-				if(index == 0) {
-					this.min = 0;
-					this.max = 100;
-				} else {
-					this.min = 40;
-					this.max = 80;
-				}
-			},
-			end() {
-				// console.log('end');
-			},
-			moving() {
-				// console.log('moving');
-			}
-		}
-	};
+import { computed, ref } from 'vue'
+
+const value = ref(30);
+const useSlot = ref(false);
+const step = ref(1);
+const activeColor = ref('#2979ff');
+const height = ref(6);
+const blockWidth = ref(30);
+const min = ref(0);
+const max = ref(100);
+
+const current = computed(() => show.value ? 0 : 1);
+
+function typeChange(index: number) {
+	let type = ['primary', 'warning', 'error', 'success'];
+	activeColor.value = $u.color[type[index]];
+}
+
+function sizeChange(index: number) {
+	if(index === 0) {
+		height.value = 4;
+		blockWidth.value = 30;
+	} else {
+		height.value = 6;
+		blockWidth.value = 20;
+	}
+}
+
+function stepChange(index: number) {
+	let arr = ['1', '10', '20'];
+	step.value = arr[index];
+}
+
+function slotChange(index: number) {
+	useSlot.value = !index;
+}
+
+function minMaxchange(index: number) {
+	if(index === 0) {
+		min.value = 0;
+		max.value = 100;
+	} else {
+		min.value = 40;
+		max.value = 80;
+	}
+}
+
+function end() {
+	// console.log('end');
+}
+
+function moving() {
+	// console.log('moving');
+}
 </script>
 
 <style scoped lang="scss">

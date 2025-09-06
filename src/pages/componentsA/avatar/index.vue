@@ -3,10 +3,10 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-avatar 
-					:mode="mode" 
-					:size="size" 
-					:src="src" 
+				<u-avatar
+					:mode="mode"
+					:size="size"
+					:src="src"
 					:text="text"
 					:showLevel="showLevel"
 					:showSex="showSex"
@@ -37,54 +37,55 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">尺寸</view>
-				<u-subsection current="1" :list="['large', 'default', 'mini', 160]" @change="sizeChange"></u-subsection>
-			</view> 
+				<u-subsection current="1" :list="['large', 'default', 'mini', '160']" @change="sizeChange"></u-subsection>
+			</view>
 		</view>
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				mode: 'circle',
-				src: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
-				text: '', // 优先级比src高
-				size: '90',
-				showLevel: true,
-				showSex: true,
-				sexIcon: 'man',
-				bgColor: '#fcbd71'
-			}
-		},
-		methods: {
-			modeChange(index) {
-				this.mode = index == 0 ? 'circle' : 'square';
-			},
-			styleChange(index) {
-				if(index == 0) {
-					this.text = '';
-					this.src = 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg';
-				} else {
-					this.text = '无头像';
-				}
-			},
-			sizeChange(index) {
-				this.size = index == 0 ? 'large' : index == 1 ? 'default' : index == 2 ? 'mini' : 160;
-			},
-			sexChange(index) {
-				this.showSex = true;
-				if(index == 0) this.sexIcon = 'man';
-				if(index == 1) this.sexIcon = 'woman';
-				if(index == 2) this.showSex = false;
-			},
-			levelChange(index) {
-				this.showLevel = !index;
-			}
-		}
+<script setup lang="ts">
+import { ref } from 'vue';
+import type { Sex, Shape } from '@/uni_modules/uview-pro/types/global';
+
+const mode = ref<Shape>('circle');
+const src = ref('http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg');
+const text = ref('');
+const size = ref('90');
+const showLevel = ref(true);
+const showSex = ref(true);
+const sexIcon = ref<Sex>('man');
+const bgColor = ref('#fcbd71');
+
+function modeChange(index: number) {
+	mode.value = index === 0 ? 'circle' : 'square';
+}
+
+function styleChange(index: number) {
+	if(index === 0) {
+		text.value = '';
+		src.value = 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg';
+	} else {
+		text.value = '无头像';
 	}
+}
+
+function sizeChange(index: number) {
+	size.value = index === 0 ? 'large' : index === 1 ? 'default' : index === 2 ? 'mini' : '160';
+}
+
+function sexChange(index: number) {
+	showSex.value = true;
+	if(index === 0) sexIcon.value = 'man';
+	if(index === 1) sexIcon.value = 'woman';
+	if(index === 2) showSex.value = false;
+}
+
+ function levelChange(index: number) {
+	showLevel.value = !index;
+}
+
 </script>
 
 <style lang="scss" scoped>
-	
+
 </style>
