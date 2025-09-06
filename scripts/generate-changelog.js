@@ -252,23 +252,26 @@ function generateChangelog() {
             if (headerEndIndex !== -1) {
                 const header = finalContent.slice(0, headerEndIndex);
                 const body = finalContent.slice(headerEndIndex);
-                
+
                 // 移除所有重复的头部和重复的版本区块
                 let cleanBody = body;
-                
+
                 // 移除重复的头部
-                cleanBody = cleanBody.replace(/# Changelog\n\nAll notable changes to this project will be documented in this file\.\n\nThe format is based on \[Keep a Changelog\].*?and this project adheres to \[Semantic Versioning\].*?\n\n/g, '');
-                
+                cleanBody = cleanBody.replace(
+                    /# Changelog\n\nAll notable changes to this project will be documented in this file\.\n\nThe format is based on \[Keep a Changelog\].*?and this project adheres to \[Semantic Versioning\].*?\n\n/g,
+                    ''
+                );
+
                 // 移除重复的版本区块（保留第一个）
                 const versionBlocks = cleanBody.split('\n## [');
                 if (versionBlocks.length > 1) {
                     const firstBlock = versionBlocks[0];
                     const otherBlocks = versionBlocks.slice(1);
-                    
+
                     // 去重：只保留唯一的版本区块
                     const uniqueBlocks = [];
                     const seenVersions = new Set();
-                    
+
                     otherBlocks.forEach(block => {
                         const versionMatch = block.match(/^(\d+\.\d+\.\d+)/);
                         if (versionMatch && !seenVersions.has(versionMatch[1])) {
@@ -276,10 +279,10 @@ function generateChangelog() {
                             uniqueBlocks.push('## [' + block);
                         }
                     });
-                    
+
                     cleanBody = firstBlock + (uniqueBlocks.length > 0 ? '\n' + uniqueBlocks.join('\n') : '');
                 }
-                
+
                 finalContent = header + cleanBody;
             }
         }
@@ -288,10 +291,10 @@ function generateChangelog() {
         if (finalContent.includes('## [')) {
             // 清理头部后的多余空行，只保留1行间隔
             finalContent = finalContent.replace(/(# Changelog[\s\S]*?)\n\n\n+## \[/, '$1\n\n## [');
-            
+
             // 清理版本区块之间的多余空行，只保留1行间隔
             finalContent = finalContent.replace(/\n\n\n+## \[/g, '\n\n## [');
-            
+
             // 清理文件末尾的多余空行
             finalContent = finalContent.replace(/\n+$/, '\n');
         }
@@ -306,14 +309,14 @@ function generateChangelog() {
                 const componentChangelogPath = 'src/uni_modules/uview-pro/changelog.md';
                 if (fs.existsSync(componentChangelogPath)) {
                     const componentContent = fs.readFileSync(componentChangelogPath, 'utf8');
-                    
+
                     // 提取当前版本的内容
                     const currentVersion = JSON.parse(fs.readFileSync('package.json', 'utf8')).version;
                     const currentSectionMatch = finalContent.match(new RegExp(`## \\[${currentVersion}\\][\\s\\S]*?(?=\\n## \\[|$)`));
-                    
+
                     if (currentSectionMatch) {
                         let currentSection = currentSectionMatch[0];
-                        
+
                         // 转换为组件库 changelog 的格式（去掉 emoji，调整日期格式）
                         currentSection = currentSection
                             .replace(/## \[(\d+\.\d+\.\d+)\] - (\d{4}-\d{2}-\d{2})/, '## $1（$2）')
@@ -328,20 +331,20 @@ function generateChangelog() {
                             .replace(/### 📦‍ Build System \| 打包构建/, '### 📦‍ Build System | 打包构建')
                             .replace(/### 👷 Continuous Integration \| CI 配置/, '### 👷 Continuous Integration | CI 配置')
                             .replace(/### ⏪ Revert \| 回退/, '### ⏪ Revert | 回退');
-                        
+
                         // 检查是否已经存在该版本
                         const versionExists = new RegExp(`## ${currentVersion}（`).test(componentContent);
-                        
-                                                 if (!versionExists) {
-                             // 在文件开头插入新版本，只保留1行间隔
-                             // 清理 currentSection 末尾的多余空行
-                             const cleanSection = currentSection.replace(/\n+$/, '');
-                             const newContent = cleanSection + '\n\n' + componentContent;
-                             fs.writeFileSync(componentChangelogPath, newContent);
-                             console.log(`✅ Component changelog updated: ${componentChangelogPath}`);
-                         } else {
-                             console.log(`ℹ️  Version ${currentVersion} already exists in component changelog`);
-                         }
+
+                        if (!versionExists) {
+                            // 在文件开头插入新版本，只保留1行间隔
+                            // 清理 currentSection 末尾的多余空行
+                            const cleanSection = currentSection.replace(/\n+$/, '');
+                            const newContent = cleanSection + '\n\n' + componentContent;
+                            fs.writeFileSync(componentChangelogPath, newContent);
+                            console.log(`✅ Component changelog updated: ${componentChangelogPath}`);
+                        } else {
+                            console.log(`ℹ️  Version ${currentVersion} already exists in component changelog`);
+                        }
                     }
                 } else {
                     console.log(`⚠️  Component changelog file not found: ${componentChangelogPath}`);

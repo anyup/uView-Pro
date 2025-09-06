@@ -1,0 +1,20 @@
+{
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "emmet.includeLanguages": {
+        "vue-html": "html",
+        "vue": "html"
+    },
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "files.associations": {
+        "*.cz-config.js": "javascript"
+    },
+    "i18n-ally.localesPaths": ["src/locales", "src/locales/langs", "src/uni_modules/uview-pro/locale"],
+    "eslint.validate": ["javascript", "typescript", "vue"]
+}

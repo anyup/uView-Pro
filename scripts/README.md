@@ -4,10 +4,10 @@
 
 ## 脚本文件说明
 
--   `release.sh` - Bash 脚本 (适用于 Linux/macOS)
--   `release.ps1` - PowerShell 脚本 (适用于 Windows)
--   `release.bat` - 批处理脚本 (适用于 Windows)
--   `release.js` - Node.js 脚本 (适用于所有平台，推荐使用)
+- `release.sh` - Bash 脚本 (适用于 Linux/macOS)
+- `release.ps1` - PowerShell 脚本 (适用于 Windows)
+- `release.bat` - 批处理脚本 (适用于 Windows)
+- `release.js` - Node.js 脚本 (适用于所有平台，推荐使用)
 
 ## 使用方法
 
@@ -93,9 +93,9 @@ npm run release:major
 
 ## 版本类型说明
 
--   `patch` - 补丁版本 (修复 bug，如 1.0.0 → 1.0.1)
--   `minor` - 次要版本 (新功能，如 1.0.0 → 1.1.0)
--   `major` - 主要版本 (破坏性更新，如 1.0.0 → 2.0.0)
+- `patch` - 补丁版本 (修复 bug，如 1.0.0 → 1.0.1)
+- `minor` - 次要版本 (新功能，如 1.0.0 → 1.1.0)
+- `major` - 主要版本 (破坏性更新，如 1.0.0 → 2.0.0)
 
 ## 脚本功能
 
@@ -112,10 +112,10 @@ npm run release:major
 
 ## 注意事项
 
--   确保已安装 Node.js 和 npm
--   确保 Git 已配置并可以推送到远程仓库
--   确保有足够的权限执行脚本
--   在 Windows 上使用 PowerShell 时，可能需要调整执行策略
+- 确保已安装 Node.js 和 npm
+- 确保 Git 已配置并可以推送到远程仓库
+- 确保有足够的权限执行脚本
+- 在 Windows 上使用 PowerShell 时，可能需要调整执行策略
 
 ## 故障排除
 
@@ -156,7 +156,6 @@ git config --global user.email "your.email@example.com"
         - classic：勾选 `repo`（至少包含 repo:status、repo_deployment、public_repo）
         - fine-grained：选择当前仓库，权限建议：`Contents: Read and write`、`Metadata: Read-only`
 2. 设置环境变量（Windows PowerShell）：
-
     - 仅当前会话：
 
     ```powershell
@@ -181,7 +180,6 @@ git config --global user.email "your.email@example.com"
     - Gitee → 头像 → 设置 → 私人令牌（或 安全设置 → 私人令牌）
     - 新建令牌，授予仓库相关权限（至少包含发布 Release 所需权限）
 2. 设置环境变量（Windows PowerShell）：
-
     - 仅当前会话：
 
     ```powershell
@@ -212,5 +210,5 @@ pnpm release:patch | pnpm release:minor | pnpm release:major
 
 脚本会自动识别远程仓库：
 
--   GitHub 仓库使用 `GITHUB_TOKEN`/`GH_TOKEN` 创建 Release
--   Gitee 仓库使用 `GITEE_TOKEN` 创建 Release
+- GitHub 仓库使用 `GITHUB_TOKEN`/`GH_TOKEN` 创建 Release
+- Gitee 仓库使用 `GITEE_TOKEN` 创建 Release

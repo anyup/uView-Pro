@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
 
 # 可以在这里添加其他pre-commit检查，比如lint-staged等
+npx lint-staged
