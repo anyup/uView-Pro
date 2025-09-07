@@ -18,25 +18,24 @@
     </view>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
 import md5Libs from '@/uni_modules/uview-pro/libs/function/md5';
-export default {
-    data() {
-        return {
-            result: null,
-            string: 'Take me'
-        };
-    },
-    onLoad() {
-        this.getResult();
-    },
-    methods: {
-        getResult(index) {
-            this.string = index == 0 ? 'Take me' : index == 1 ? 'to' : 'you heart';
-            this.result = md5Libs.md5(this.string);
-        }
+
+const result = ref(null);
+const string = ref('Take me');
+
+onLoad(() => {
+    getResult();
+});
+
+function getResult(index?: number) {
+    if (index !== undefined) {
+        string.value = index === 0 ? 'Take me' : index === 1 ? 'to' : 'your heart';
     }
-};
+    result.value = md5Libs.md5(string.value);
+}
 </script>
 
 <style lang="scss" scoped></style>

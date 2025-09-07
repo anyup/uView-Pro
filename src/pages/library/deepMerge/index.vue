@@ -23,52 +23,58 @@
     </view>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            obj1: {
-                info: {
-                    name: 'mary'
-                }
-            },
-            obj2: {
-                info: {
-                    age: '22'
-                }
-            },
-            // obj1和obj3一样，原因是Object.assign(this.obj1, this.obj2)会修改obj1的值
-            obj3: {
-                info: {
-                    name: 'mary'
-                }
-            },
-            result: ''
-        };
-    },
-    computed: {
-        reslutValue() {
-            return this.result ? JSON.stringify(this.result) : '';
-        }
-    },
-    onLoad() {
-        this.result = Object.assign(this.obj1, this.obj2);
-        // 重新修改obj1为原来的值
-        this.obj1 = $u.deepClone(this.obj3);
-    },
-    methods: {
-        modeChange(index) {
-            if (!index) {
-                this.result = Object.assign(this.obj1, this.obj2);
-                // 重新修改obj1为原来的值
-                this.obj1 = $u.deepClone(this.obj3);
-            } else {
-                this.result = $u.deepMerge(this.obj1, this.obj2);
-            }
-        }
-    }
+
+type InfoType = {
+    name?: string;
+    age?: string;
 };
+
+type ObjType = {
+    info: InfoType;
+};
+
+const obj1 = ref<ObjType>({
+    info: {
+        name: 'mary'
+    }
+});
+
+const obj2 = ref<ObjType>({
+    info: {
+        age: '22'
+    }
+});
+
+const obj3 = ref<ObjType>({
+    info: {
+        name: 'mary'
+    }
+});
+
+const result = ref<ObjType | string>('');
+
+const reslutValue = computed(() => {
+    return result.value ? JSON.stringify(result.value) : '';
+});
+
+onLoad(() => {
+    result.value = Object.assign(obj1.value, obj2.value);
+    obj1.value = $u.deepClone(obj3.value);
+});
+
+function modeChange(index: number) {
+    if (index === 0) {
+        result.value = Object.assign(obj1.value, obj2.value);
+        // 重新修改obj1为原来的值
+        obj1.value = $u.deepClone(obj3.value);
+    } else {
+        result.value = $u.deepMerge(obj1.value, obj2.value);
+    }
+}
 </script>
 
 <style lang="scss" scoped></style>

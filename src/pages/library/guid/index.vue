@@ -16,7 +16,7 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">首字符为"u"</view>
-                <u-subsection :list="['是', '否']" @change="fristUChange"></u-subsection>
+                <u-subsection :list="['是', '否']" @change="firstUChange"></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">取值基数(进制)</view>
@@ -26,38 +26,38 @@
     </view>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            length: 32,
-            firstU: true,
-            radix: 62,
-            result: null
-        };
-    },
-    onLoad() {
-        this.getResult();
-    },
-    methods: {
-        lengthChange(index) {
-            this.length = index == 0 ? 10 : index == 1 ? 16 : index == 2 ? 32 : null;
-            this.getResult();
-        },
-        fristUChange(index) {
-            this.firstU = index == 0 ? true : false;
-            this.getResult();
-        },
-        radixChange(index) {
-            this.radix = index == 0 ? 2 : index == 1 ? 8 : index == 2 ? 10 : 62;
-            this.getResult();
-        },
-        getResult() {
-            this.result = $u.guid(this.length, this.firstU, this.radix);
-        }
-    }
-};
+
+const length = ref(32);
+const firstU = ref(true);
+const radix = ref(62);
+const result = ref(null);
+
+onLoad(() => {
+    getResult();
+});
+
+function lengthChange(index: number) {
+    length.value = index === 0 ? 10 : index === 1 ? 16 : index === 2 ? 32 : null;
+    getResult();
+}
+
+function firstUChange(index: number) {
+    firstU.value = index === 0;
+    getResult();
+}
+
+function radixChange(index: number) {
+    radix.value = index === 0 ? 2 : index === 1 ? 8 : index === 2 ? 10 : 62;
+    getResult();
+}
+
+function getResult() {
+    result.value = $u.guid(length.value, firstU.value, radix.value);
+}
 </script>
 
 <style lang="scss" scoped></style>
