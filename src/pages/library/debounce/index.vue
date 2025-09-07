@@ -63,7 +63,6 @@ function btnClick() {
         $u.debounce(getResult, timeout.value, immediate.value);
     }
 }
-
 </script>
 
 <style lang="scss" scoped>

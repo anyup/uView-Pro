@@ -40,17 +40,16 @@ onLoad(() => {
 function rgbToHexChange(index: number) {
     const color = index === 0 ? 'rgb(12,57,231)' : index === 1 ? 'rgb(15,148,32)' : 'rgb(91,52,210)';
     result.value = $u.rgbToHex(color);
-};
+}
 
 function hexToRgbChange(index: number) {
     const color = index === 0 ? '#0edc8a' : index === 1 ? '#d0a73c' : '#3308dd';
     result.value = $u.hexToRgb(color) as string;
-};
+}
 
 function colorGradientChange() {
     result.value = JSON.stringify($u.colorGradient('rgb(21,21,21)', 'rgb(56,56,56)', 10));
-};
-
+}
 </script>
 
 <style lang="scss" scoped></style>

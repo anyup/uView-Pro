@@ -62,5 +62,4 @@ onLoad(() => {
     // {{1585926095536 | date('yyyy-mm-dd')}} 或者 {{1585926095536 | date}}，因为'yyyy-mm-dd'为默认的参数
     getResult('yyyy-mm-dd');
 });
-
 </script>

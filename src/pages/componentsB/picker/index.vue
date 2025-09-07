@@ -47,10 +47,10 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import type { PickerMode } from '@/uni_modules/uview-pro/types/global'
+import type { PickerMode } from '@/uni_modules/uview-pro/types/global';
 
 const show = ref(false);
-const input = ref<string | string[] >('');
+const input = ref<string | string[]>('');
 const range = ref<string[] | string[][]>(['一', '片', '冰', '心', '在', '玉', '壶']);
 const rangKey = ref('name');
 const mode = ref<PickerMode>('selector');
@@ -70,19 +70,19 @@ const params = ref({
     timestamp: true
 });
 
-const status = computed(() => show.value === true ? 0 : 1);
+const status = computed(() => (show.value === true ? 0 : 1));
 
 function statusChange(index: number) {
     show.value = index === 0;
 }
 
 function modeChange(index: number) {
-	mode.value = ['selector', 'multiSelector', 'time', 'region'][index] as PickerMode;
-	if (mode.value == 'selector') {
+    mode.value = ['selector', 'multiSelector', 'time', 'region'][index] as PickerMode;
+    if (mode.value == 'selector') {
         range.value = ['一', '片', '冰', '心', '在', '玉', '壶'];
         defaultSelector.value = [0];
     }
-	if (mode.value == 'multiSelector') {
+    if (mode.value == 'multiSelector') {
         range.value = [
             ['亚洲', '欧洲'],
             ['中国', '日本'],
@@ -90,101 +90,101 @@ function modeChange(index: number) {
         ];
         defaultSelector.value = [0, 0, 0];
     }
-	show.value = true;
+    show.value = true;
 }
 
 function defaultTimeChange(index: number) {
-	defaultTime.value = index == 0 ? '2019-12-11 20:15:35' : '2020-02-05 13:09:42';
-	mode.value = 'time';
-	show.value = true;
+    defaultTime.value = index == 0 ? '2019-12-11 20:15:35' : '2020-02-05 13:09:42';
+    mode.value = 'time';
+    show.value = true;
 }
 
 function defaultRegionChange(index: number) {
-	defaultRegion.value = index == 0 ? ['广东省', '深圳市', '宝安区'] : ['海南省', '三亚市', '海棠区'];
-	mode.value = 'region';
-	show.value = true;
+    defaultRegion.value = index == 0 ? ['广东省', '深圳市', '宝安区'] : ['海南省', '三亚市', '海棠区'];
+    mode.value = 'region';
+    show.value = true;
 }
 
 function minSecChange(index: number) {
-	 if (index === 0) {
-		 params.value.hour = true;
-		 params.value.minute = true;
-		 params.value.second = true;
-	 }
-	 if (index === 1) {
-		 params.value.hour = false;
-		 params.value.minute = false;
-		 params.value.second = false;
-	 }
-	 mode.value = 'time';
-	 show.value = true;
+    if (index === 0) {
+        params.value.hour = true;
+        params.value.minute = true;
+        params.value.second = true;
+    }
+    if (index === 1) {
+        params.value.hour = false;
+        params.value.minute = false;
+        params.value.second = false;
+    }
+    mode.value = 'time';
+    show.value = true;
 }
 
 function confirm(e) {
-	input.value = '';
-	if (mode.value == 'time') {
-		if (params.value.year) input.value += e.year;
-		if (params.value.month) input.value += '-' + e.month;
-		if (params.value.day) input.value += '-' + e.day;
-		if (params.value.hour) input.value += ' ' + e.hour;
-		if (params.value.minute) input.value += ':' + e.minute;
-		if (params.value.second) input.value += ':' + e.second;
-	} else if (mode.value == 'region') {
-		input.value = e.province.label + '-' + e.city.label + '-' + e.area.label;
-	} else if (mode.value == 'selector') {
-		input.value = range.value[e[0]];
-	} else if (mode.value == 'multiSelector') {
-		input.value= range.value[0][e[0]] + '-' + range.value[1][e[1]] + '-' + range.value[2][e[2]];
-	}
+    input.value = '';
+    if (mode.value == 'time') {
+        if (params.value.year) input.value += e.year;
+        if (params.value.month) input.value += '-' + e.month;
+        if (params.value.day) input.value += '-' + e.day;
+        if (params.value.hour) input.value += ' ' + e.hour;
+        if (params.value.minute) input.value += ':' + e.minute;
+        if (params.value.second) input.value += ':' + e.second;
+    } else if (mode.value == 'region') {
+        input.value = e.province.label + '-' + e.city.label + '-' + e.area.label;
+    } else if (mode.value == 'selector') {
+        input.value = range.value[e[0]];
+    } else if (mode.value == 'multiSelector') {
+        input.value = range.value[0][e[0]] + '-' + range.value[1][e[1]] + '-' + range.value[2][e[2]];
+    }
 }
 
-function     columnchange(e) {
-	let column = e.column,
-		index = e.index;
-	defaultSelector.value[column] = index;
-	switch (column) {
-		case 0:
-			switch (index) {
-				case 0:
-					range.value[1] = ['中国', '日本'];
-					range.value[2] = ['北京', '上海', '广州'];
-					break;
-				case 1:
-					range.value[1] = ['英国', '法国'];
-					range.value[2] = ['伦敦', '曼彻斯特'];
-					break;
-			}
-			defaultSelector.value.splice(1, 1, 0);
-			defaultSelector.value.splice(2, 1, 0);
-			break;
-		case 1: //拖动第2列
-			switch (
-				defaultSelector.value[0] //判断第一列是什么
-				) {
-				case 0:
-					switch (defaultSelector.value[1]) {
-						case 0:
-							range.value[2] = ['北京', '上海', '广州'];
-							break;
-						case 1:
-							range.value[2] = ['东京', '北海道'];
-							break;
-					}
-					break;
-				case 1:
-					switch (defaultSelector.value[1]) {
-						case 0:
-							range.value[2] = ['伦敦', '曼彻斯特'];
-							break;
-						case 1:
-							range.value[2] = ['巴黎', '马赛'];
-							break;
-					}
-					break;
-			}
-			defaultSelector.value.splice(2, 1, 0);
-			break;
-	}
+function columnchange(e) {
+    let column = e.column,
+        index = e.index;
+    defaultSelector.value[column] = index;
+    switch (column) {
+        case 0:
+            switch (index) {
+                case 0:
+                    range.value[1] = ['中国', '日本'];
+                    range.value[2] = ['北京', '上海', '广州'];
+                    break;
+                case 1:
+                    range.value[1] = ['英国', '法国'];
+                    range.value[2] = ['伦敦', '曼彻斯特'];
+                    break;
+            }
+            defaultSelector.value.splice(1, 1, 0);
+            defaultSelector.value.splice(2, 1, 0);
+            break;
+        case 1: //拖动第2列
+            switch (
+                defaultSelector.value[0] //判断第一列是什么
+            ) {
+                case 0:
+                    switch (defaultSelector.value[1]) {
+                        case 0:
+                            range.value[2] = ['北京', '上海', '广州'];
+                            break;
+                        case 1:
+                            range.value[2] = ['东京', '北海道'];
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch (defaultSelector.value[1]) {
+                        case 0:
+                            range.value[2] = ['伦敦', '曼彻斯特'];
+                            break;
+                        case 1:
+                            range.value[2] = ['巴黎', '马赛'];
+                            break;
+                    }
+                    break;
+            }
+            defaultSelector.value.splice(2, 1, 0);
+            break;
+    }
 }
 </script>
 

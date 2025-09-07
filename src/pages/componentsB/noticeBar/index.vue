@@ -55,16 +55,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Direction, PlayState, ThemeType } from '@/uni_modules/uview-pro/types/global'
+import type { Direction, PlayState, ThemeType } from '@/uni_modules/uview-pro/types/global';
 
 const show = ref(true);
 const autoplay = ref(false);
 const type = ref<ThemeType>('warning');
-const list = ref([
-    '锦瑟无端五十弦，一弦一柱思华年',
-    '庄生晓梦迷蝴蝶，望帝春心托杜鹃',
-    '沧海月明珠有泪，蓝田日暖玉生烟'
-]);
+const list = ref(['锦瑟无端五十弦，一弦一柱思华年', '庄生晓梦迷蝴蝶，望帝春心托杜鹃', '沧海月明珠有泪，蓝田日暖玉生烟']);
 const mode = ref<Direction>('horizontal');
 const playState = ref<PlayState>('play');
 const speed = ref(160);
@@ -77,16 +73,16 @@ const current = ref(0);
 const uToastRef = ref(null);
 
 function typeChange(index: number) {
-	type.value = index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : undefined;
+    type.value = index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : undefined;
 }
 
 function modeChange(index: number) {
-	current.value = index;
-	mode.value = index === 0 ? 'horizontal' : 'vertical';
+    current.value = index;
+    mode.value = index === 0 ? 'horizontal' : 'vertical';
 }
 
 function playStateChange(index: number) {
-	playState.value = index === 0 ? 'play' : 'paused';
+    playState.value = index === 0 ? 'play' : 'paused';
 }
 
 function speedChange(index: number) {
@@ -103,23 +99,23 @@ function speedChange(index: number) {
 }
 
 function iconChange(index: number) {
-	if (index === 0) {
-		moreIcon.value = true;
-		volumeIcon.value = true;
-	} else {
-		moreIcon.value = false;
-		volumeIcon.value = false;
-	}
+    if (index === 0) {
+        moreIcon.value = true;
+        volumeIcon.value = true;
+    } else {
+        moreIcon.value = false;
+        volumeIcon.value = false;
+    }
 }
 
 function isCircularChange(index: number) {
-	isCircular.value = index === 0;
-	current.value = index;
-	mode.value = 'horizontal';
+    isCircular.value = index === 0;
+    current.value = index;
+    mode.value = 'horizontal';
 }
 
 function getMore() {
-	toast('点击了更多')
+    toast('点击了更多');
 }
 
 function toast(title: string) {
@@ -135,13 +131,12 @@ function close() {
 }
 
 function click(index: number) {
-	if (mode.value == 'horizontal' && isCircular) {
-		toast('此模式无法获取Index值')
-	} else {
-		toast('点击了第' + index + '项')
-	}
+    if (mode.value == 'horizontal' && isCircular) {
+        toast('此模式无法获取Index值');
+    } else {
+        toast('点击了第' + index + '项');
+    }
 }
-
 </script>
 
 <style lang="scss" scoped>

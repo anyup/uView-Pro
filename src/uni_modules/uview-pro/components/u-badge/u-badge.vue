@@ -4,16 +4,16 @@
         class="u-badge"
         :class="[isDot ? 'u-badge-dot' : '', size === 'mini' ? 'u-badge-mini' : '', type ? 'u-badge--bg--' + type : '']"
         :style="[
-      {
-        top: (offset as number[])[0] + 'rpx',
-        right: (offset as number[])[1] + 'rpx',
-        fontSize: fontSize + 'rpx',
-        position: absolute ? 'absolute' : 'static',
-        color: color,
-        backgroundColor: bgColor
-      },
-      boxStyle
-    ]"
+            {
+                top: (offset as number[])[0] + 'rpx',
+                right: (offset as number[])[1] + 'rpx',
+                fontSize: fontSize + 'rpx',
+                position: absolute ? 'absolute' : 'static',
+                color: color,
+                backgroundColor: bgColor
+            },
+            boxStyle
+        ]"
     >
         {{ showText }}
     </view>

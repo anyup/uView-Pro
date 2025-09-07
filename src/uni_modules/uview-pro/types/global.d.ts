@@ -93,7 +93,7 @@ export type FormRuleItem = {
     type?: string;
     validator?: (rule: any, value: any, callback: any) => boolean;
     asyncValidator?: (rule: any, value: any, callback: any) => void;
-}
+};
 export type FormRules = Record<string, FormRuleItem | FormRuleItem[]>;
 
 export type InputType = 'text' | 'number' | 'idcard' | 'digit' | 'password' | 'textarea' | 'phone' | 'url' | 'email' | 'safe-password' | 'name' | 'bank-card' | 'tel' | 'select';
@@ -212,7 +212,7 @@ export type TabsSwiperAutoCenterMode = 'window';
 // tag 组件 mode
 export type TagMode = 'light' | 'dark' | 'plain';
 // tag 组件 shape
-export type TagShape = 'square' | 'circle' |  'circleLeft' | 'circleRight';
+export type TagShape = 'square' | 'circle' | 'circleLeft' | 'circleRight';
 // tag 组件 size
 export type TagSize = 'default' | 'mini' | 'medium';
 // toast 组件 position

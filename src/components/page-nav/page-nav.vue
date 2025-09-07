@@ -58,7 +58,6 @@ function switchLang() {
     uni.setLocale(locale);
     i18n.global.locale = locale;
 }
-
 </script>
 
 <style lang="scss" scoped>

@@ -212,7 +212,7 @@ function clearTimer() {
 
 defineExpose({
     start,
-    end,
+    end
 });
 </script>
 

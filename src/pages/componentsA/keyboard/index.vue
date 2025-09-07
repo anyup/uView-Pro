@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const show = ref(false);
 const input = ref('');
@@ -69,8 +69,8 @@ function statusChange(index: number) {
 }
 
 function modeChange(index) {
-	mode.value = index === 0 ? 'number' : index === 1 ? 'card' : 'car';
-	show.value = true;
+    mode.value = index === 0 ? 'number' : index === 1 ? 'card' : 'car';
+    show.value = true;
 }
 
 function randomChange(index: number) {

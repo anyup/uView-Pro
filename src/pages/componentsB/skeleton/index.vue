@@ -43,7 +43,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { onLoad } from '@dcloudio/uni-app'
+import { onLoad } from '@dcloudio/uni-app';
 
 const userInfo = ref({
     avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',

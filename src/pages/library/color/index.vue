@@ -28,18 +28,12 @@ import { $u } from '@/uni_modules/uview-pro';
 const color = ref($u.color['primary']);
 
 function modeChange(index: number): void {
-    let colorName = index === 0 ? 'primary' : 
-                                   index === 1 ? 'success' : 
-                                   index === 2 ? 'error' : 
-                                   index === 3 ? 'warning' : 'info';
+    let colorName = index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : 'info';
     color.value = $u.color[colorName];
 }
 
 function colorChange(index: number): void {
-    color.value = index === 0 ? '#303133' : 
-                 index === 1 ? '#606266' : 
-                 index === 2 ? '#909399' : 
-                 index === 3 ? '#c0c4cc' : '#e4e7ed';
+    color.value = index === 0 ? '#303133' : index === 1 ? '#606266' : index === 2 ? '#909399' : index === 3 ? '#c0c4cc' : '#e4e7ed';
 }
 </script>
 

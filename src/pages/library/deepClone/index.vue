@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { onLoad } from '@dcloudio/uni-app'
+import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
 
 const obj = ref({
@@ -31,7 +31,6 @@ const resultValue = computed(() => {
 onLoad(() => {
     result.value = $u.deepClone(obj.value);
 });
-
 </script>
 
 <style lang="scss" scoped></style>

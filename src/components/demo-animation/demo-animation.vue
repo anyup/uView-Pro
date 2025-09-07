@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onBeforeMount, defineProps, defineExpose } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 
 type AnimationType = 'fade' | 'scale-up' | 'scale-down' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right' | 'shake' | '';
 
@@ -44,7 +44,6 @@ function toggle(name?: AnimationType, delay?: number) {
 defineExpose({
     toggle
 });
-
 </script>
 
 <style>

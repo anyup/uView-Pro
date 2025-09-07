@@ -33,7 +33,7 @@ let parent: any = null; // 父组件实例
  */
 function updateStyle() {
     if (!parent) return;
-    
+
     const style: Record<string, any> = {};
     if (props.width !== 'auto') style.flex = `0 0 ${props.width}`;
     style.textAlign = parent.props.align;
@@ -55,11 +55,15 @@ onMounted(() => {
         parent = $u.$parent('u-table');
         if (parent) {
             updateStyle();
-            
+
             // 监听父组件属性变化
-            watch(() => parent.props, () => {
-                updateStyle();
-            }, { deep: true });
+            watch(
+                () => parent.props,
+                () => {
+                    updateStyle();
+                },
+                { deep: true }
+            );
         }
     }
 });

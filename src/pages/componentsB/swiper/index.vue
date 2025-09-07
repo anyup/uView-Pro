@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { SwiperIndicatorPosition, SwiperMode } from '@/uni_modules/uview-pro/types/global';
-import { img1, img2, img3 } from "./image";
+import { img1, img2, img3 } from './image';
 
 const uToastRef = ref(null);
 

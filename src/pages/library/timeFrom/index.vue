@@ -65,5 +65,4 @@ function timeArr2Change(index: number) {
 onLoad(() => {
     timeArr1Change(0);
 });
-
 </script>

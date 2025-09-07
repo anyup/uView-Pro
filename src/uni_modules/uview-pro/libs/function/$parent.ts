@@ -5,11 +5,10 @@
 import { type ComponentInternalInstance, getCurrentInstance } from 'vue';
 
 export default function $parent(componentName?: string, _instance: ComponentInternalInstance | null | undefined = null) {
-
     const instance: ComponentInternalInstance | null | undefined = _instance || getCurrentInstance();
     let parent = instance && (instance.parent as ComponentInternalInstance | null | undefined);
 
-    if(!componentName) return parent;
+    if (!componentName) return parent;
 
     while (parent) {
         const name = (parent.type as any)?.name as string | undefined;

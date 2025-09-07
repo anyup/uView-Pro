@@ -68,7 +68,6 @@ function modeChange(index: number) {
 onLoad(() => {
     getResult();
 });
-
 </script>
 
 <style lang="scss" scoped></style>
