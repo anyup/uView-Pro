@@ -360,34 +360,6 @@
                         "navigationBarTitleText": "timeFrom-多久之前"
                     }
                 },
-                // globalData-全局变量
-                {
-                    "path": "globalVariable/globalData",
-                    "style": {
-                        "navigationBarTitleText": "globalData-全局变量"
-                    }
-                },
-                // prototype-全局变量
-                {
-                    "path": "globalVariable/prototype",
-                    "style": {
-                        "navigationBarTitleText": "prototype-全局变量"
-                    }
-                },
-                // vuex-全局变量
-                {
-                    "path": "globalVariable/vuex",
-                    "style": {
-                        "navigationBarTitleText": "vuex-全局变量"
-                    }
-                },
-                // globalVariable-全局变量
-                {
-                    "path": "globalVariable/index",
-                    "style": {
-                        "navigationBarTitleText": "globalVariable-全局变量"
-                    }
-                },
                 // http-请求
                 {
                     "path": "http/index",
