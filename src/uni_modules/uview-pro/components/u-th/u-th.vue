@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, getCurrentInstance } from 'vue';
+import { ref, onMounted, getCurrentInstance, watch } from 'vue';
 import { $u } from '../..';
 import { ThProps } from './types';
 
@@ -25,6 +25,22 @@ const thStyle = ref<Record<string, any>>({}); // 标题单元格样式
 let parent: any = null; // 父组件实例
 
 /**
+ * 更新标题单元格样式
+ */
+function updateStyle() {
+    if (!parent) return;
+    
+    const style: Record<string, any> = {};
+    if (props.width) style.flex = `0 0 ${props.width}`;
+    style.textAlign = parent.props.align;
+    style.padding = parent.props.padding;
+    style.borderBottom = `solid 1px ${parent.props.borderColor}`;
+    style.borderRight = `solid 1px ${parent.props.borderColor}`;
+    Object.assign(style, parent.props.thStyle);
+    thStyle.value = style;
+}
+
+/**
  * 组件挂载时查找父组件u-table并合并样式
  */
 onMounted(() => {
@@ -33,15 +49,12 @@ onMounted(() => {
     if (instance) {
         parent = $u.$parent('u-table');
         if (parent) {
-            // 将父组件的相关参数，合并到本组件
-            const style: Record<string, any> = {};
-            if (props.width) style.flex = `0 0 ${props.width}`;
-            style.textAlign = parent.props.align;
-            style.padding = parent.props.padding;
-            style.borderBottom = `solid 1px ${parent.props.borderColor}`;
-            style.borderRight = `solid 1px ${parent.props.borderColor}`;
-            Object.assign(style, parent.props.thStyle);
-            thStyle.value = style;
+            updateStyle();
+            
+            // 监听父组件属性变化
+            watch(() => parent.props, () => {
+                updateStyle();
+            }, { deep: true });
         }
     }
 });

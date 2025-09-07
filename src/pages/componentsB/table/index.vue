@@ -37,7 +37,7 @@
 				参数配置
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">边框颜色</view>   
+				<view class="u-item-title">边框颜色</view>
 				<u-subsection :list="['gray', 'primary', 'warning']" @change="borderColorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
@@ -62,7 +62,7 @@ function modeChange(index: number): void {
 	// #ifdef MP-WEIXIN
 	return $u.toast('微信小程序暂不支持单元格合并');
 	// #endif
-	mode.value = index == 0 ? true : false;
+	mode.value = index === 0;
 	// 注意：原代码中有 this.key++，但在data中没有定义key属性
 	// 如果需要key属性，请添加 const key = ref<number>(0);
 }
@@ -71,7 +71,6 @@ function borderColorChange(index: number) {
 	borderColor.value = index === 0 ? '#e4e7ed' : index === 1 ? '#2979ff' : '#ff9900';
 }
 
-// TODO 似乎没有效果
 function alignChange(index: number) {
 	align.value = index === 0 ? 'left' : index === 1 ? 'center' : 'right';
 }
