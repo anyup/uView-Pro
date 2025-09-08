@@ -3,3 +3,7 @@
 
 # 可以在这里添加其他pre-commit检查，比如lint-staged等
 npx lint-staged
+
+# 校验已缓存区文件格式和类型
+# npx lint-staged
+# pnpm exec vue-tsc --noEmit --incremental --include $(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|vue)$' | tr '\n' ' ')
