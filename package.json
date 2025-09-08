@@ -1,6 +1,6 @@
 {
     "name": "uview-pro-demo",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "scripts": {
         "dev": "uni",
         "dev:custom": "uni -p",
@@ -115,6 +115,6 @@
         "vue-tsc": "^3.0.5"
     },
     "lint-staged": {
-        "*.{js,ts,vue,scss,md,json}": "prettier --check"
+        "*.{js,ts,vue,scss,md,json}": "prettier --write"
     }
 }
