@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.20] - 2025-09-08
+
+### ♻️ Code Refactoring | 代码重构
+
+- 优化http使用示例 ([39d0910](https://github.com/anyup/uView-Pro/commit/39d091056dc1e335625ce884aade35c8bd11ee6f))
+
+### 📝 Documentation | 文档
+
+- 更新微信交流群图片 ([21bbec1](https://github.com/anyup/uView-Pro/commit/21bbec14937ee52b225d1f415d90aecbe4d4950f))
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- update project configuration and add prettier support ([74a714d](https://github.com/anyup/uView-Pro/commit/74a714ddc30dc0c2c5a6389f254f1e2c922d905e))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- 修复微信小程序环境下 http interceptor 的路径问题 ([6db4db8](https://github.com/anyup/uView-Pro/commit/6db4db89ef1ab22e3051a6ee944ba44430aa3474))
+
+### 👷 Continuous Integration | CI 配置
+
+- update husky pre-commit ([dd04f9a](https://github.com/anyup/uView-Pro/commit/dd04f9a8f2ebdbec37a148e1cf2fa3280c1ab2cd))
+
 ## [0.0.19] - 2025-09-04
 
 ### 🐛 Bug Fixes | Bug 修复
