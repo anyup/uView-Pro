@@ -87,8 +87,6 @@ const list = ref([
         disabled: false
     }
 ]);
-const disabled = ref(false);
-const checked = ref(true);
 const result = ref([]);
 const shape = ref<Shape>('square');
 const max = ref(3);
@@ -110,6 +108,10 @@ function sizeChange(index: number) {
 function defaultChooseChange(index: number) {
     // 特别处理对第一个选的选中的情况，涉及到提示语，选中状态等
     // 实际开发中不会存在这些情况，只是演示用
+    list.value = list.value.map(item => {
+        item.checked = false;
+        return item;
+    });
     if (index === 0) {
         list.value[0].checked = true;
         result.value = [list.value[0].name];
@@ -140,6 +142,7 @@ function checkboxChange(e) {
 }
 
 function checkboxGroupChange(e) {
+    result.value = e;
     console.log(e);
 }
 
