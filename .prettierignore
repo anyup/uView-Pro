@@ -5,3 +5,4 @@ build
 coverage
 *.min.js
 *.map
+pnpm-lock.yaml
