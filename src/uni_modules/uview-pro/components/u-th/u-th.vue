@@ -31,7 +31,8 @@ function updateStyle() {
     if (!parent) return;
 
     const style: Record<string, any> = {};
-    if (props.width) style.flex = `0 0 ${props.width}`;
+    if (props.width && props.width !== 'auto') style.width = props.width;
+    else style.flex = '1';
     style.textAlign = parent.props.align;
     style.padding = parent.props.padding;
     style.borderBottom = `solid 1px ${parent.props.borderColor}`;
@@ -70,7 +71,7 @@ onMounted(() => {
 .u-th {
     @include vue-flex;
     flex-direction: column;
-    flex: 1;
+    // flex: 1;
     justify-content: center;
     font-size: 28rpx;
     color: $u-main-color;
