@@ -5,6 +5,47 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.21] - 2025-09-09
+
+### ⚡ Performance Improvements | 性能优化
+
+- **pages:** options 语法升级为 composition 语法 ([e38878c](https://github.com/anyup/uView-Pro/commit/e38878c696ffc548374169423613e97c3878bafd))
+- **pages:** options 语法升级为 composition 语法 ([0403545](https://github.com/anyup/uView-Pro/commit/040354507bd187a9bff4371fc4950dfd6412cd5b))
+- **pages:** options 语法升级为 composition 语法 ([514ecb6](https://github.com/anyup/uView-Pro/commit/514ecb6f8e2b133b962a6cbe7609a64e4d973928))
+- **pages:** options 语法升级为 composition 语法 ([ffcc1cb](https://github.com/anyup/uView-Pro/commit/ffcc1cb8993196252535ea6553d7fd999ab57719))
+- **pages:** options 语法升级为 composition 语法 ([2c755e3](https://github.com/anyup/uView-Pro/commit/2c755e3e1f386c3be1ae8955607d64f72b2b6640))
+- 优化首页图标渲染问题 ([a6d4b16](https://github.com/anyup/uView-Pro/commit/a6d4b1690544f3261fb138cb490a10131d4fb749))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-tag:** 修复 u-tag 类型 ([c9071a6](https://github.com/anyup/uView-Pro/commit/c9071a610e08efc4581eff97e4d4998c2d01c9eb))
+- **u-table:** 修复 u-table props style 属性变化时，u-th/t-td 未更新问题 ([b1ee7d6](https://github.com/anyup/uView-Pro/commit/b1ee7d6ade7a59e305d7a4081415418387bb6832))
+- 修复微信小程序环境下 http interceptor 的路径问题 ([a7fe746](https://github.com/anyup/uView-Pro/commit/a7fe7466b3f66644e097ee6be23f231bce77fa5f))
+- 优化checkbox示例页面逻辑 ([9818b20](https://github.com/anyup/uView-Pro/commit/9818b20471e11b96ded606db808f2eda32904f82))
+- 修复微信小程序不支持u-circle-progress绘制canvas失败问题 ([46406c5](https://github.com/anyup/uView-Pro/commit/46406c593260f29b081c6a5d98c48dc97e225600))
+- 修复 u-picker 组件 params 属性默认值设置 ([36a713b](https://github.com/anyup/uView-Pro/commit/36a713b3c84ddb6e9ef40132512063cdde35ea19))
+
+### 📝 Documentation | 文档
+
+- 更新微信交流群图片 ([825b187](https://github.com/anyup/uView-Pro/commit/825b187619ee745a23559bfe0b597b75f90f220d))
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- update project configuration and add prettier support ([9c0cc6a](https://github.com/anyup/uView-Pro/commit/9c0cc6ae3719b975d702b0283bd0c15ee4f3c374))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **library:** 移除不需要的 globalVariable ([420c40e](https://github.com/anyup/uView-Pro/commit/420c40eac3c67e184924e166edaf4cf2ea904477))
+- 更新 pages.json ([03297ce](https://github.com/anyup/uView-Pro/commit/03297ce219ae9337c1a424b9583fa53c74f0291d))
+
+### 💄 Styles | 风格
+
+- 格式化代码 ([a9e0a38](https://github.com/anyup/uView-Pro/commit/a9e0a387ffa55df740b828ea4a1463d97089c4bd))
+
+### 📦‍ Build System | 打包构建
+
+- mp-alipay 开启 component2 支持 ([430d248](https://github.com/anyup/uView-Pro/commit/430d248ef9e805365dcee0373f6a524bd7084a38))
+
 ## [0.0.20] - 2025-09-08
 
 ### ♻️ Code Refactoring | 代码重构
