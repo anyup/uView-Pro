@@ -1,6 +1,18 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { PickerMode, PickerParams } from '../../types/global';
 
+const defaultParams: PickerParams = {
+    year: true,
+    month: true,
+    day: true,
+    hour: false,
+    minute: false,
+    second: false,
+    province: true,
+    city: true,
+    area: true,
+    timestamp: true
+};
 /**
  * PickerProps 选择器 props 类型定义
  * @description 支持时间、地区、单列、多列等多种模式
@@ -9,7 +21,7 @@ export const PickerProps = {
     /** picker中需要显示的参数 */
     params: {
         type: Object as PropType<PickerParams>,
-        default: () => ({ timestamp: true })
+        default: () => defaultParams
     },
     /** 当mode=selector或者mode=multiSelector时，提供的数组 */
     range: {
