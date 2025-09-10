@@ -7,11 +7,11 @@ import type { ImgMode, UploadSizeType, UploadSourceType } from '../../types/glob
  */
 export const UploadProps = {
     /** 选择器宽度，单位rpx */
-    width: { type: [Number, String] as PropType<number | string>, default: 80 },
+    width: { type: [Number, String] as PropType<number | string>, default: 200 },
     /** 选择器高度，单位rpx */
-    height: { type: [Number, String] as PropType<number | string>, default: 80 },
+    height: { type: [Number, String] as PropType<number | string>, default: 200 },
     /** 最大上传数量 */
-    maxCount: { type: [Number, String] as PropType<number | string>, default: 9 },
+    maxCount: { type: [Number, String] as PropType<number | string>, default: 52 },
     /** 是否可删除 */
     deletable: { type: Boolean, default: true },
     /** 是否显示上传列表 */
@@ -29,12 +29,12 @@ export const UploadProps = {
     /** 是否自定义上传按钮 */
     customBtn: { type: Boolean, default: false },
     /** 上传按钮文字 */
-    uploadText: { type: String, default: '上传' },
+    uploadText: { type: String, default: '选择图片' },
     /** 上传地址 */
     action: { type: String, default: '' },
     /** 是否禁用 */
     disabled: { type: Boolean, default: false },
-    /** 索引值 */
+    /** 索引值，在各个回调事件中的最后一个参数返回，用于区别是哪一个组件的事件 */
     index: { type: [String, Number] as PropType<string | number>, default: '' },
     /** 请求头对象 */
     header: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
@@ -55,7 +55,10 @@ export const UploadProps = {
     /** 文件列表 */
     fileList: { type: Array as PropType<any[]>, default: () => [] },
     /** 限制文件类型 */
-    limitType: { type: Array as PropType<string[]>, default: () => [] },
+    /** 允许上传的图片后缀 */
+    /** 支付宝小程序真机选择图片的后缀为"image" */
+    /** https://opendocs.alipay.com/mini/api/media-image */
+    limitType: { type: Array as PropType<string[]>, default: () => ['png', 'jpg', 'jpeg', 'webp', 'gif', 'image'] },
     /** 是否自动上传 */
     autoUpload: { type: Boolean, default: true },
     /** 是否显示提示 */
@@ -64,8 +67,8 @@ export const UploadProps = {
     beforeUpload: { type: Function as PropType<((index: number, files: any[]) => boolean | Promise<any>) | null>, default: null },
     /** 删除前钩子，返回true或Promise */
     beforeRemove: { type: Function as PropType<((index: number, files: any[]) => boolean | Promise<any>) | null>, default: null },
-    /** 是否转为json格式 */
-    toJson: { type: Boolean, default: false }
+    /** 如果上传后的返回值为json字符串，是否转为json格式 */
+    toJson: { type: Boolean, default: true }
 };
 
 export type UploadProps = ExtractPropTypes<typeof UploadProps>;
