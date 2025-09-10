@@ -28,40 +28,41 @@
     </view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            result: [],
-            timeout: 1000,
-            immediate: true,
-            mode: 'throttle'
-        };
-    },
-    methods: {
-        modeChange(index) {
-            this.mode = index ? 'debouncd' : 'throttle';
-        },
-        timeoutChange(index) {
-            this.timeout = [500, 1000, 2000][index];
-        },
-        immediateChange(index) {
-            this.immediate = !index;
-        },
-        getResult() {
-            if (this.result.length >= 6) this.result = [];
-            this.result.push(0);
-        },
-        btnClick() {
-            if (this.mode == 'throttle') {
-                $u.throttle(this.getResult, this.timeout, this.immediate);
-            } else {
-                $u.debounce(this.getResult, this.timeout, this.immediate);
-            }
-        }
+
+type ModeType = 'throttle' | 'debouncd';
+
+const result = ref<number[]>([]);
+const timeout = ref(1000);
+const immediate = ref(true);
+const mode = ref<ModeType>('throttle');
+
+function modeChange(index: number) {
+    mode.value = index ? 'debouncd' : 'throttle';
+}
+
+function timeoutChange(index: number) {
+    timeout.value = [500, 1000, 2000][index];
+}
+
+function immediateChange(index: number) {
+    immediate.value = !index;
+}
+
+function getResult() {
+    if (result.value.length >= 6) result.value = [];
+    result.value.push(0);
+}
+
+function btnClick() {
+    if (mode.value === 'throttle') {
+        $u.throttle(getResult, timeout.value, immediate.value);
+    } else {
+        $u.debounce(getResult, timeout.value, immediate.value);
     }
-};
+}
 </script>
 
 <style lang="scss" scoped>

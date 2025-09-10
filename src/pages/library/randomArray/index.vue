@@ -19,24 +19,24 @@
     </view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            orginArray: [1, 2, 3, 4, 5],
-            result: []
-        };
-    },
-    onLoad() {
-        this.getResult();
-    },
-    methods: {
-        getResult() {
-            this.result = $u.randomArray(this.orginArray);
-        }
-    }
-};
+
+const orginArray = ref([1, 2, 3, 4, 5]);
+const result = ref<number[]>([]);
+
+onLoad(() => {
+    getResult();
+});
+
+/**
+ * 获取随机排序后的数组
+ */
+function getResult() {
+    result.value = $u.randomArray(orginArray.value);
+}
 </script>
 
 <style lang="scss" scoped></style>

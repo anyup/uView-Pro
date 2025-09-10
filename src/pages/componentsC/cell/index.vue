@@ -16,10 +16,10 @@
                         :title="title"
                         :icon="icon"
                     >
-                        <template v-if="rightSlot == 'badge'" #right-icon>
+                        <template v-if="rightSlot === 'badge'" #right-icon>
                             <u-badge :absolute="false" count="105"></u-badge>
                         </template>
-                        <template v-if="rightSlot == 'switch'" #right-icon>
+                        <template v-if="rightSlot === 'switch'" #right-icon>
                             <u-switch v-model="checked"></u-switch>
                         </template>
                     </u-cell-item>
@@ -66,47 +66,47 @@
     </view>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            icon: 'setting',
-            arrow: true,
-            label: '',
-            title: '青山一道同云雨',
-            rightSlot: true,
-            checked: false
-        };
-    },
-    computed: {
-        hoverClass() {
-            // 如果右侧是switch步进器组件的话，去掉cell的点击反馈，因为这个时候点击的反馈应该在switch上
-            return this.rightSlot == 'switch' ? 'none' : 'u-cell-hover';
-        }
-    },
-    methods: {
-        iconChange(index) {
-            this.icon = index == 0 ? 'setting' : 'file-text';
-        },
-        arrowChange(index) {
-            this.arrow = index == 0 ? true : false;
-        },
-        labelChange(index) {
-            this.label = index == 0 ? '岂曰无衣，与子同裳' : '';
-        },
-        titleChange(index) {
-            this.title = index == 0 ? '青山一道同云雨' : '明月何曾是两乡';
-        },
-        rightSlotChange(index) {
-            this.rightSlot = index == 0 ? 'text' : index == 1 ? 'switch' : 'badge';
-            if (index == 0) this.arrow = true;
-            else this.arrow = false;
-        },
-        click(index) {
-            // console.log(index);
-        }
-    }
-};
+<script lang="ts" setup>
+import { ref, computed } from 'vue';
+
+const icon = ref('setting');
+const arrow = ref(true);
+const label = ref('');
+const title = ref('青山一道同云雨');
+const rightSlot = ref('');
+const checked = ref(false);
+
+const hoverClass = computed<string>(() => {
+    // 如果右侧是switch步进器组件的话，去掉cell的点击反馈，因为这个时候点击的反馈应该在switch上
+    return rightSlot.value === 'switch' ? 'none' : 'u-cell-hover';
+});
+
+// 方法
+function iconChange(index: number) {
+    icon.value = index === 0 ? 'setting' : 'file-text';
+}
+
+function arrowChange(index: number) {
+    arrow.value = index === 0 ? true : false;
+}
+
+function labelChange(index: number) {
+    label.value = index === 0 ? '岂曰无衣，与子同裳' : '';
+}
+
+function titleChange(index: number) {
+    title.value = index === 0 ? '青山一道同云雨' : '明月何曾是两乡';
+}
+
+function rightSlotChange(index: number) {
+    rightSlot.value = index === 0 ? 'text' : index === 1 ? 'switch' : 'badge';
+    if (index === 0) arrow.value = true;
+    else arrow.value = false;
+}
+
+function click(index: any) {
+    // console.log(index);
+}
 </script>
 
 <style lang="scss" scoped>

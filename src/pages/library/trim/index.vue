@@ -19,39 +19,55 @@
     </view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            string: '  我用十年  青春，赴你  最后之约  ',
-            result: '',
-            pos: 'left'
-        };
-    },
-    onLoad() {
-        this.getResult();
-    },
-    methods: {
-        paramsChange(index) {
-            if (index == 0) {
-                this.min = 0;
-                this.max = 5;
-            } else {
-                this.min = 541;
-                this.max = 8164;
-            }
-            this.getResult();
-        },
-        modeChange(index) {
-            this.pos = index == 0 ? 'left' : index == 1 ? 'all' : index == 2 ? 'both' : 'right';
-            this.getResult();
-        },
-        getResult() {
-            this.result = $u.trim(this.string, this.pos);
-        }
+
+type TrimPosition = 'left' | 'all' | 'both' | 'right';
+
+const string = ref('  我用十年  青春，赴你  最后之约  ');
+const result = ref('');
+const pos = ref<TrimPosition>('left');
+
+// 可能在 paramsChange 中使用的变量
+const min = ref<number>(0);
+const max = ref<number>(5);
+
+/**
+ * 获取处理结果
+ */
+function getResult() {
+    result.value = $u.trim(string.value, pos.value);
+}
+
+/**
+ * 参数变更事件
+ * @param index 选择的索引
+ */
+function paramsChange(index: number) {
+    if (index === 0) {
+        min.value = 0;
+        max.value = 5;
+    } else {
+        min.value = 541;
+        max.value = 8164;
     }
-};
+    getResult();
+}
+
+/**
+ * 模式变更事件
+ * @param index 选择的索引
+ */
+function modeChange(index: number) {
+    pos.value = index === 0 ? 'left' : index === 1 ? 'all' : index === 2 ? 'both' : 'right';
+    getResult();
+}
+
+onLoad(() => {
+    getResult();
+});
 </script>
 
 <style lang="scss" scoped></style>

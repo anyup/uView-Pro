@@ -19,32 +19,35 @@
     </view>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            prefix: true,
-            params: {
-                name: '典韦',
-                age: 32
-            },
-            result: ''
-        };
-    },
-    onLoad() {
-        this.getResult();
-    },
-    methods: {
-        prefixChange(index) {
-            this.prefix = index == 0 ? true : false;
-            this.getResult();
-        },
-        async getResult() {
-            this.result = $u.queryParams(this.params, this.prefix);
-        }
-    }
-};
+
+interface ParamsType {
+    name: string;
+    age: number;
+}
+
+const prefix = ref(true);
+const params = ref<ParamsType>({
+    name: '典韦',
+    age: 32
+});
+const result = ref('');
+
+onLoad(() => {
+    getResult();
+});
+
+function prefixChange(index: number) {
+    prefix.value = index === 0;
+    getResult();
+}
+
+async function getResult(): Promise<void> {
+    result.value = $u.queryParams(params.value, prefix.value);
+}
 </script>
 
 <style lang="scss" scoped></style>

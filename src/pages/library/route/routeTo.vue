@@ -12,31 +12,30 @@
     </view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref, computed } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            params: {}
-        };
-    },
-    onLoad(option) {
-        this.params = option;
-    },
-    computed: {
-        paramsStr() {
-            return JSON.stringify(this.params);
-        }
-    },
-    methods: {
-        back() {
-            $u.route({
-                type: 'back',
-                animationType: 'slide-in-top'
-            });
-        }
-    }
-};
+
+const params = ref<Record<string, any>>({});
+
+const paramsStr = computed(() => {
+    return JSON.stringify(params.value);
+});
+
+onLoad((option: Record<string, any>) => {
+    params.value = option;
+});
+
+/**
+ * 返回上一页
+ */
+function back() {
+    $u.route({
+        type: 'back',
+        animationType: 'slide-in-top'
+    });
+}
 </script>
 
 <style lang="scss" scoped>

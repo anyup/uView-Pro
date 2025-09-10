@@ -5,6 +5,69 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.21] - 2025-09-09
+
+### ⚡ Performance Improvements | 性能优化
+
+- **pages:** options 语法升级为 composition 语法 ([e38878c](https://github.com/anyup/uView-Pro/commit/e38878c696ffc548374169423613e97c3878bafd))
+- **pages:** options 语法升级为 composition 语法 ([0403545](https://github.com/anyup/uView-Pro/commit/040354507bd187a9bff4371fc4950dfd6412cd5b))
+- **pages:** options 语法升级为 composition 语法 ([514ecb6](https://github.com/anyup/uView-Pro/commit/514ecb6f8e2b133b962a6cbe7609a64e4d973928))
+- **pages:** options 语法升级为 composition 语法 ([ffcc1cb](https://github.com/anyup/uView-Pro/commit/ffcc1cb8993196252535ea6553d7fd999ab57719))
+- **pages:** options 语法升级为 composition 语法 ([2c755e3](https://github.com/anyup/uView-Pro/commit/2c755e3e1f386c3be1ae8955607d64f72b2b6640))
+- 优化首页图标渲染问题 ([a6d4b16](https://github.com/anyup/uView-Pro/commit/a6d4b1690544f3261fb138cb490a10131d4fb749))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-tag:** 修复 u-tag 类型 ([c9071a6](https://github.com/anyup/uView-Pro/commit/c9071a610e08efc4581eff97e4d4998c2d01c9eb))
+- **u-table:** 修复 u-table props style 属性变化时，u-th/t-td 未更新问题 ([b1ee7d6](https://github.com/anyup/uView-Pro/commit/b1ee7d6ade7a59e305d7a4081415418387bb6832))
+- 修复微信小程序环境下 http interceptor 的路径问题 ([a7fe746](https://github.com/anyup/uView-Pro/commit/a7fe7466b3f66644e097ee6be23f231bce77fa5f))
+- 优化checkbox示例页面逻辑 ([9818b20](https://github.com/anyup/uView-Pro/commit/9818b20471e11b96ded606db808f2eda32904f82))
+- 修复微信小程序不支持u-circle-progress绘制canvas失败问题 ([46406c5](https://github.com/anyup/uView-Pro/commit/46406c593260f29b081c6a5d98c48dc97e225600))
+- 修复 u-picker 组件 params 属性默认值设置 ([36a713b](https://github.com/anyup/uView-Pro/commit/36a713b3c84ddb6e9ef40132512063cdde35ea19))
+
+### 📝 Documentation | 文档
+
+- 更新微信交流群图片 ([825b187](https://github.com/anyup/uView-Pro/commit/825b187619ee745a23559bfe0b597b75f90f220d))
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- update project configuration and add prettier support ([9c0cc6a](https://github.com/anyup/uView-Pro/commit/9c0cc6ae3719b975d702b0283bd0c15ee4f3c374))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **library:** 移除不需要的 globalVariable ([420c40e](https://github.com/anyup/uView-Pro/commit/420c40eac3c67e184924e166edaf4cf2ea904477))
+- 更新 pages.json ([03297ce](https://github.com/anyup/uView-Pro/commit/03297ce219ae9337c1a424b9583fa53c74f0291d))
+
+### 💄 Styles | 风格
+
+- 格式化代码 ([a9e0a38](https://github.com/anyup/uView-Pro/commit/a9e0a387ffa55df740b828ea4a1463d97089c4bd))
+
+### 📦‍ Build System | 打包构建
+
+- mp-alipay 开启 component2 支持 ([430d248](https://github.com/anyup/uView-Pro/commit/430d248ef9e805365dcee0373f6a524bd7084a38))
+
+## [0.0.20] - 2025-09-08
+
+### ♻️ Code Refactoring | 代码重构
+
+- 优化http使用示例 ([39d0910](https://github.com/anyup/uView-Pro/commit/39d091056dc1e335625ce884aade35c8bd11ee6f))
+
+### 📝 Documentation | 文档
+
+- 更新微信交流群图片 ([21bbec1](https://github.com/anyup/uView-Pro/commit/21bbec14937ee52b225d1f415d90aecbe4d4950f))
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- update project configuration and add prettier support ([74a714d](https://github.com/anyup/uView-Pro/commit/74a714ddc30dc0c2c5a6389f254f1e2c922d905e))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- 修复微信小程序环境下 http interceptor 的路径问题 ([6db4db8](https://github.com/anyup/uView-Pro/commit/6db4db89ef1ab22e3051a6ee944ba44430aa3474))
+
+### 👷 Continuous Integration | CI 配置
+
+- update husky pre-commit ([dd04f9a](https://github.com/anyup/uView-Pro/commit/dd04f9a8f2ebdbec37a148e1cf2fa3280c1ab2cd))
+
 ## [0.0.19] - 2025-09-04
 
 ### 🐛 Bug Fixes | Bug 修复
@@ -40,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - optimize changelog generation and spacing ([3103e7b](https://github.com/anyup/uView-Pro/commit/3103e7b56a0e2dd0392efdb6a85824b11ef6800c))
 
 ## [0.0.17] - tag v0.0.17
+
 Tagger: anyup <anyupxing@163.com>
 
 Release version 0.0.17
@@ -70,6 +134,7 @@ Release version 0.0.17
 - **release:** bump version to 0.0.17 ([9fcbdd9](https://github.com/anyup/uView-Pro/commit/9fcbdd90a0a1764134c8d33a011223a5dda990be))
 
 ## [0.0.15] - tag v0.0.15
+
 Tagger: anyup <anyupxing@163.com>
 
 Release version 0.0.15
@@ -108,6 +173,7 @@ Release version 0.0.15
 - update changelog script with correct github url ([7761721](https://github.com/anyup/uView-Pro/commit/7761721dbd580de37fa94ac48514aeb4d570bc77))
 
 ## [0.0.13] - tag v0.0.13
+
 Tagger: anyup <anyupxing@163.com>
 
 Release version 0.0.13
@@ -126,6 +192,7 @@ Release version 0.0.13
 - **release:** bump version to 0.0.13 ([ea5c4df](https://github.com/anyup/uView-Pro/commit/ea5c4df6b77c4a7004fb0e4a9d538917e1ed4003))
 
 ## [0.0.12] - tag v0.0.12
+
 Tagger: anyup <anyupxing@163.com>
 
 Release version 0.0.12
@@ -150,6 +217,7 @@ Release version 0.0.12
 - **release:** bump version to 0.0.12 ([f791252](https://github.com/anyup/uView-Pro/commit/f7912525316f493d925eef34fed01594eb6d7d61))
 
 ## [0.0.11] - tag v0.0.11
+
 Tagger: anyup <anyupxing@163.com>
 
 Release version 0.0.11
@@ -174,6 +242,7 @@ Release version 0.0.11
 - **release:** bump version to 0.0.11 ([86f972a](https://github.com/anyup/uView-Pro/commit/86f972ab537120e86acac35441466ca710370b0b))
 
 ## [0.0.10] - tag v0.0.10
+
 Tagger: anyup <anyupxing@163.com>
 
 Release version 0.0.10
@@ -197,6 +266,7 @@ Release version 0.0.10
 - **release:** bump version to 0.0.10 ([7914ffb](https://github.com/anyup/uView-Pro/commit/7914ffb5d13ddf192c8d489b85ce7c38804deda4))
 
 ## [0.0.9] - tag v0.0.9
+
 Tagger: anyup <anyupxing@163.com>
 
 Release version 0.0.9
@@ -219,6 +289,7 @@ Release version 0.0.9
 - **release:** bump version to 0.0.9 ([e7cedb3](https://github.com/anyup/uView-Pro/commit/e7cedb37e2b1917f1bb66c43012e4d33662b5ec2))
 
 ## [0.0.8] - tag v0.0.8
+
 Tagger: anyup <anyupxing@163.com>
 
 Release version 0.0.8
@@ -239,6 +310,7 @@ Release version 0.0.8
 - **release:** bump version to 0.0.8 ([168fd72](https://github.com/anyup/uView-Pro/commit/168fd7298f89e886e44d418250297b487b573c93))
 
 ## [0.0.7] - tag v0.0.7
+
 Tagger: anyup <anyupxing@163.com>
 
 Release version 0.0.7
@@ -335,6 +407,7 @@ Release version 0.0.7
 - 添加 referrer 策略 meta 标签 ([5f8961a](https://github.com/anyup/uView-Pro/commit/5f8961ab19cd166b06f7d42af204c84ed61f42b9))
 
 ## [0.0.3] - tag v0.0.3
+
 Tagger: anyup <anyupxing@163.com>
 
 - 添加插件使用示例工程
@@ -366,12 +439,13 @@ Tagger: anyup <anyupxing@163.com>
 - **uview-pro:** 更新 Vue 版本兼容性并调整文档 ([82c3725](https://github.com/anyup/uView-Pro/commit/82c37255f42a0b7a26bf829552fb0d27f8a38a15))
 
 ## [0.0.2] - tag v0.0.2
+
 Tagger: anyup <anyupxing@163.com>
 
-67个组件已使用Vue3+TS完成重构，如下：
----
+## 67个组件已使用Vue3+TS完成重构，如下：
 
 ### 基础组件（8）
+
 - Color 色彩
 - Icon 图标
 - Image 图片
@@ -384,6 +458,7 @@ Tagger: anyup <anyupxing@163.com>
 ---
 
 ### 表单组件（15）
+
 - Form 表单
 - Calendar 日历
 - Select 列选择器
@@ -403,6 +478,7 @@ Tagger: anyup <anyupxing@163.com>
 ---
 
 ### 数据组件（4）
+
 - Progress 进度条
 - Table 表格
 - CountDown 倒计时
@@ -411,6 +487,7 @@ Tagger: anyup <anyupxing@163.com>
 ---
 
 ### 反馈组件（10）
+
 - ActionSheet 操作菜单
 - AlertTips 警告提示
 - Toast 消息提示
@@ -425,6 +502,7 @@ Tagger: anyup <anyupxing@163.com>
 ---
 
 ### 布局组件（11）
+
 - Line 线条
 - Card 卡片
 - Mask 遮罩层
@@ -440,6 +518,7 @@ Tagger: anyup <anyupxing@163.com>
 ---
 
 ### 导航组件（11）
+
 - Dropdown 下拉菜单
 - Tabbar 底部导航栏
 - BackTop 返回顶部
@@ -455,6 +534,7 @@ Tagger: anyup <anyupxing@163.com>
 ---
 
 ### 其他组件（8）
+
 - MessageInput 验证码输入
 - Loadmore 加载更多
 - ReadMore 展开阅读更多
@@ -465,6 +545,7 @@ Tagger: anyup <anyupxing@163.com>
 - Loading 加载动画
 
 ---
+
 2025-08-04
 
 ### ♻️ Code Refactoring | 代码重构

@@ -69,21 +69,13 @@ const statusChange = (index: number) => {
 const loadingChange = (index: number) => {
     statusCurrent.value = 1;
     statusChange(1);
-    if (index == 0) {
-        loadingSlot.value = false;
-    } else {
-        loadingSlot.value = true;
-    }
+    loadingSlot.value = index !== 0;
 };
 
 const errorChange = (index: number) => {
     statusCurrent.value = 2;
     statusChange(2);
-    if (index == 0) {
-        errorSlot.value = false;
-    } else {
-        errorSlot.value = true;
-    }
+    errorSlot.value = index !== 0;
 };
 
 const shapeChange = (index: number) => {

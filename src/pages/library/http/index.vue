@@ -44,9 +44,7 @@ const toast = ref(true);
 
 // get请求
 function doGet(url = '/api/demo.json') {
-    $u.http.get(url, {},
-        { meta: { loading: loading.value, toast: toast.value } }
-    ).then((res: Result) => {
+    $u.http.get(url, {}, { meta: { loading: loading.value, toast: toast.value } }).then((res: Result) => {
         if (res.code === 200) {
             setTimeout(() => {
                 $u.toast('请求成功', 'success');
@@ -58,9 +56,7 @@ function doGet(url = '/api/demo.json') {
 
 // post请求
 function doPost(url = '/api/demo.json') {
-    $u.http.post(url, { name: 'uview-pro' },
-        { meta: { loading: loading.value, toast: toast.value } }
-    ).then((res: Result) => {
+    $u.http.post(url, { name: 'uview-pro' }, { meta: { loading: loading.value, toast: toast.value } }).then((res: Result) => {
         if (res.code === 200) {
             setTimeout(() => {
                 $u.toast('请求成功', 'success');
@@ -78,7 +74,7 @@ function changeMethod(index: number) {
 // 切换模式，切换请求 Loading 的显示与隐藏
 function changeLoading(index: number) {
     loading.value = index === 0;
-    doGet()
+    doGet();
 }
 
 // 切换模式，切换请求错误时 Toast 的显示与隐藏

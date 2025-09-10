@@ -1,5 +1,5 @@
-(function(window, document, exportName, undefined) {
-    "use strict";
+(function (window, document, exportName, undefined) {
+    'use strict';
 
     var isMultiTouch = false;
     var multiTouchStartPos;
@@ -7,10 +7,10 @@
     var touchElements = {};
 
     // polyfills
-    if(!document.createTouch) {
-        document.createTouch = function(view, target, identifier, pageX, pageY, screenX, screenY, clientX, clientY) {
+    if (!document.createTouch) {
+        document.createTouch = function (view, target, identifier, pageX, pageY, screenX, screenY, clientX, clientY) {
             // auto set
-            if(clientX == undefined || clientY == undefined) {
+            if (clientX == undefined || clientY == undefined) {
                 clientX = pageX - window.pageXOffset;
                 clientY = pageY - window.pageYOffset;
             }
@@ -26,8 +26,8 @@
         };
     }
 
-    if(!document.createTouchList) {
-        document.createTouchList = function() {
+    if (!document.createTouchList) {
+        document.createTouchList = function () {
             var touchList = new TouchList();
             for (var i = 0; i < arguments.length; i++) {
                 touchList[i] = arguments[i];
@@ -69,18 +69,17 @@
     function TouchList() {
         var touchList = [];
 
-        touchList.item = function(index) {
+        touchList.item = function (index) {
             return this[index] || null;
         };
 
         // specified by Mozilla
-        touchList.identifiedTouch = function(id) {
+        touchList.identifiedTouch = function (id) {
             return this[id + 1] || null;
         };
 
         return touchList;
     }
-
 
     /**
      * Simple trick to fake touch event support
@@ -90,9 +89,9 @@
         var objs = [window, document.documentElement];
         var props = ['ontouchstart', 'ontouchmove', 'ontouchcancel', 'ontouchend'];
 
-        for(var o=0; o<objs.length; o++) {
-            for(var p=0; p<props.length; p++) {
-                if(objs[o] && objs[o][props[p]] == undefined) {
+        for (var o = 0; o < objs.length; o++) {
+            for (var p = 0; p < props.length; p++) {
+                if (objs[o] && objs[o][props[p]] == undefined) {
                     objs[o][props[p]] = null;
                 }
             }
@@ -104,9 +103,11 @@
      * @returns {boolean}
      */
     function hasTouchSupport() {
-        return ("ontouchstart" in window) || // touch events
-               (window.Modernizr && window.Modernizr.touch) || // modernizr
-               (navigator.msMaxTouchPoints || navigator.maxTouchPoints) > 2; // pointer events
+        return (
+            'ontouchstart' in window || // touch events
+            (window.Modernizr && window.Modernizr.touch) || // modernizr
+            (navigator.msMaxTouchPoints || navigator.maxTouchPoints) > 2
+        ); // pointer events
     }
 
     /**
@@ -114,7 +115,7 @@
      * @param ev
      */
     function preventMouseEvents(ev) {
-		// 注释启用默认事件
+        // 注释启用默认事件
         // ev.preventDefault();
         // ev.stopPropagation();
     }
@@ -125,7 +126,7 @@
      * @returns {Function}
      */
     function onMouse(touchType) {
-        return function(ev) {
+        return function (ev) {
             // prevent mouse events
             preventMouseEvents(ev);
 
@@ -168,7 +169,7 @@
                 isMultiTouch = false;
                 eventTarget = null;
             }
-        }
+        };
     }
 
     /**
@@ -205,8 +206,8 @@
             var deltaX = multiTouchStartPos.pageX - mouseEv.pageX;
             var deltaY = multiTouchStartPos.pageY - mouseEv.pageY;
 
-            touchList.push(new Touch(eventTarget, 1, multiTouchStartPos, (deltaX*-1) - f, (deltaY*-1) + f));
-            touchList.push(new Touch(eventTarget, 2, multiTouchStartPos, deltaX+f, deltaY-f));
+            touchList.push(new Touch(eventTarget, 1, multiTouchStartPos, deltaX * -1 - f, deltaY * -1 + f));
+            touchList.push(new Touch(eventTarget, 2, multiTouchStartPos, deltaX + f, deltaY - f));
         } else {
             touchList.push(new Touch(eventTarget, 1, mouseEv, 0, 0));
         }
@@ -226,7 +227,7 @@
         }
 
         var touchList = createTouchList(mouseEv);
-        if(isMultiTouch && mouseEv.type != 'mouseup' && eventName == 'touchend') {
+        if (isMultiTouch && mouseEv.type != 'mouseup' && eventName == 'touchend') {
             touchList.splice(1, 1);
         }
         return touchList;
@@ -246,8 +247,7 @@
         //
         // but when the mouseEv.type is mouseup, we want to send all touches because then
         // no new input will be possible
-        if(isMultiTouch && mouseEv.type != 'mouseup' &&
-            (eventName == 'touchstart' || eventName == 'touchend')) {
+        if (isMultiTouch && mouseEv.type != 'mouseup' && (eventName == 'touchstart' || eventName == 'touchend')) {
             touchList.splice(0, 1);
         }
 
@@ -261,26 +261,26 @@
         var touch, i, el, styles;
 
         // first all visible touches
-        for(i = 0; i < ev.touches.length; i++) {
+        for (i = 0; i < ev.touches.length; i++) {
             touch = ev.touches[i];
             el = touchElements[touch.identifier];
-            if(!el) {
-                el = touchElements[touch.identifier] = document.createElement("div");
+            if (!el) {
+                el = touchElements[touch.identifier] = document.createElement('div');
                 document.body.appendChild(el);
             }
 
             styles = TouchEmulator.template(touch);
-            for(var prop in styles) {
+            for (var prop in styles) {
                 el.style[prop] = styles[prop];
             }
         }
 
         // remove all ended touches
-        if(ev.type == 'touchend' || ev.type == 'touchcancel') {
-            for(i = 0; i < ev.changedTouches.length; i++) {
+        if (ev.type == 'touchend' || ev.type == 'touchcancel') {
+            for (i = 0; i < ev.changedTouches.length; i++) {
                 touch = ev.changedTouches[i];
                 el = touchElements[touch.identifier];
-                if(el) {
+                if (el) {
                     el.parentNode.removeChild(el);
                     delete touchElements[touch.identifier];
                 }
@@ -298,20 +298,20 @@
 
         fakeTouchSupport();
 
-        window.addEventListener("mousedown", onMouse('touchstart'), true);
-        window.addEventListener("mousemove", onMouse('touchmove'), true);
-        window.addEventListener("mouseup", onMouse('touchend'), true);
+        window.addEventListener('mousedown', onMouse('touchstart'), true);
+        window.addEventListener('mousemove', onMouse('touchmove'), true);
+        window.addEventListener('mouseup', onMouse('touchend'), true);
 
-        window.addEventListener("mouseenter", preventMouseEvents, true);
-        window.addEventListener("mouseleave", preventMouseEvents, true);
-        window.addEventListener("mouseout", preventMouseEvents, true);
-        window.addEventListener("mouseover", preventMouseEvents, true);
+        window.addEventListener('mouseenter', preventMouseEvents, true);
+        window.addEventListener('mouseleave', preventMouseEvents, true);
+        window.addEventListener('mouseout', preventMouseEvents, true);
+        window.addEventListener('mouseover', preventMouseEvents, true);
 
         // it uses itself!
-        window.addEventListener("touchstart", showTouches, true);
-        window.addEventListener("touchmove", showTouches, true);
-        window.addEventListener("touchend", showTouches, true);
-        window.addEventListener("touchcancel", showTouches, true);
+        window.addEventListener('touchstart', showTouches, true);
+        window.addEventListener('touchmove', showTouches, true);
+        window.addEventListener('touchend', showTouches, true);
+        window.addEventListener('touchcancel', showTouches, true);
     }
 
     // start distance when entering the multitouch mode
@@ -322,16 +322,16 @@
      * @param touch
      * @returns object
      */
-    TouchEmulator.template = function(touch) {
+    TouchEmulator.template = function (touch) {
         var size = 0;
-        var transform = 'translate('+ (touch.clientX-(size/2)) +'px, '+ (touch.clientY-(size/2)) +'px)';
+        var transform = 'translate(' + (touch.clientX - size / 2) + 'px, ' + (touch.clientY - size / 2) + 'px)';
         return {
             position: 'fixed',
             left: 0,
             top: 0,
             background: '#fff',
             border: 'solid 1px #999',
-            opacity: .6,
+            opacity: 0.6,
             borderRadius: '100%',
             height: size + 'px',
             width: size + 'px',
@@ -347,17 +347,17 @@
             mozTransform: transform,
             transform: transform,
             zIndex: 100
-        }
+        };
     };
 
     // export
-    if (typeof define == "function" && define.amd) {
-        define(function() {
+    if (typeof define == 'function' && define.amd) {
+        define(function () {
             return TouchEmulator;
         });
-    } else if (typeof module != "undefined" && module.exports) {
+    } else if (typeof module != 'undefined' && module.exports) {
         module.exports = TouchEmulator;
     } else {
         window[exportName] = TouchEmulator;
     }
-})(window, document, "TouchEmulator");
+})(window, document, 'TouchEmulator');

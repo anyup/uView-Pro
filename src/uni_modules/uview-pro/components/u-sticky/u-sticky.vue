@@ -60,7 +60,7 @@ let contentObserver: any = null;
 
 elClass.value = $u.guid();
 
-const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u?.zIndex?.sticky ?? 970));
+const uZIndex = computed(() => (props.zIndex ? props.zIndex : ($u?.zIndex?.sticky ?? 970)));
 
 watch(
     () => props.offsetTop,

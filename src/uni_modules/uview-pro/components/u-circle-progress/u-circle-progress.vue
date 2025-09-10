@@ -10,7 +10,6 @@
         <!-- 支付宝小程序不支持canvas-id属性，必须用id属性 -->
         <canvas
             class="u-canvas-bg"
-            type="2d"
             :canvas-id="elBgId"
             :id="elBgId"
             :style="{
@@ -20,7 +19,6 @@
         ></canvas>
         <canvas
             class="u-canvas"
-            type="2d"
             :canvas-id="elId"
             :id="elId"
             :style="{
@@ -33,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { CircleProgressProps } from './types';
 
@@ -63,6 +61,7 @@ let elId = $u.guid();
 elBgId = 'uCircleProgressBgId'; // 微信小程序中不能使用$u.guid()形式动态生成id值，否则会报错
 elId = 'uCircleProgressElId';
 // #endif
+const instance = getCurrentInstance();
 
 const widthPx = computed(() => (typeof uni !== 'undefined' && uni.upx2px ? uni.upx2px(Number(props.width)) : Number(props.width)));
 const borderWidthPx = computed(() => (typeof uni !== 'undefined' && uni.upx2px ? uni.upx2px(Number(props.borderWidth)) : Number(props.borderWidth)));
@@ -112,8 +111,7 @@ onMounted(() => {
  * 绘制底部灰色圆环
  */
 function drawProgressBg() {
-    const ctx = uni.createCanvasContext(elBgId);
-
+    const ctx = uni.createCanvasContext(elBgId, instance);
     ctx.setLineWidth(borderWidthPx.value); // 设置圆环宽度
     ctx.setStrokeStyle(props.inactiveColor); // 线条颜色
     ctx.beginPath(); // 开始描绘路径
@@ -131,7 +129,7 @@ function drawCircleByProgress(progress: number) {
     // 第一次操作进度环时将上下文保存到了this.data中，直接使用即可
     let ctx = progressContext.value;
     if (!ctx) {
-        ctx = uni.createCanvasContext(elId);
+        ctx = uni.createCanvasContext(elId, instance);
         progressContext.value = ctx;
     }
     // 表示进度的两端为圆形

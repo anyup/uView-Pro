@@ -1,29 +1,29 @@
 name: 新功能征集
 about: 提出新功能或优化建议，使 uView Pro 更强大！
 labels: ['enhancement', 'feature-request']
-title: "【新功能征集】"
+title: '【新功能征集】'
 body:
-  - type: textarea
-    attributes:
-      label: 功能描述
-      description: 简要说明您希望实现的功能是什么。
-  - type: textarea
-    attributes:
-      label: 使用场景
-      description: 举例说明该功能在实际项目中的应用场景或痛点。
-  - type: textarea
-    attributes:
-      label: 期望效果
-      description: 描述该功能实现后，开发者或用户将获得哪些便利。
-  - type: textarea
-    attributes:
-      label: API 设计（可选）
-      description: 如有具体 API 或用法建议，请一并提供。
-  - type: textarea
-    attributes:
-      label: 相关资料（可选）
-      description: 如有参考的其他框架、设计稿、交互原型等，请附上链接或截图。
-  - type: textarea
-    attributes:
-      label: 扩展建议（可选）
-      description: 如有多端兼容性、性能、可配置性、文档等建议可补充。
+    - type: textarea
+      attributes:
+          label: 功能描述
+          description: 简要说明您希望实现的功能是什么。
+    - type: textarea
+      attributes:
+          label: 使用场景
+          description: 举例说明该功能在实际项目中的应用场景或痛点。
+    - type: textarea
+      attributes:
+          label: 期望效果
+          description: 描述该功能实现后，开发者或用户将获得哪些便利。
+    - type: textarea
+      attributes:
+          label: API 设计（可选）
+          description: 如有具体 API 或用法建议，请一并提供。
+    - type: textarea
+      attributes:
+          label: 相关资料（可选）
+          description: 如有参考的其他框架、设计稿、交互原型等，请附上链接或截图。
+    - type: textarea
+      attributes:
+          label: 扩展建议（可选）
+          description: 如有多端兼容性、性能、可配置性、文档等建议可补充。

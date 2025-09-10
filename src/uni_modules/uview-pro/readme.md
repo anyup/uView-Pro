@@ -25,12 +25,12 @@
 
 ## 特性
 
--   兼容安卓，iOS，微信小程序，H5，QQ 小程序，百度小程序，支付宝小程序，头条小程序
--   70+精选组件，功能丰富，多端兼容，让您快速集成，开箱即用
--   众多贴心的 JS 利器，让您飞镖在手，召之即来，百步穿杨
--   众多的常用页面和布局，让您专注逻辑，事半功倍
--   详尽的文档支持，现代化的演示效果
--   按需引入，精简打包体积
+- 兼容安卓，iOS，微信小程序，H5，QQ 小程序，百度小程序，支付宝小程序，头条小程序
+- 70+精选组件，功能丰富，多端兼容，让您快速集成，开箱即用
+- 众多贴心的 JS 利器，让您飞镖在手，召之即来，百步穿杨
+- 众多的常用页面和布局，让您专注逻辑，事半功倍
+- 详尽的文档支持，现代化的演示效果
+- 按需引入，精简打包体积
 
 ## 手机预览
 
@@ -58,10 +58,10 @@ pnpm dev
 
 ## 链接
 
--   [Github](https://github.com/anyup/uview-pro)
--   [Gitee](https://gitee.com/anyup/uview-pro)
--   [官方文档](https://uview-pro.netlify.app/)
--   [更新日志](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
+- [Github](https://github.com/anyup/uview-pro)
+- [Gitee](https://gitee.com/anyup/uview-pro)
+- [官方文档](https://uview-pro.netlify.app/)
+- [更新日志](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
 
 ## 交流反馈
 
@@ -69,7 +69,7 @@ pnpm dev
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1756979255628" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1757299344899" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>
@@ -90,7 +90,7 @@ pnpm dev
 
 ### 1. 安装 uView Pro
 
--   npm 安装：
+- npm 安装：
 
 ```bash
 npm install uview-pro
@@ -100,7 +100,7 @@ yarn add uview-pro
 pnpm add uview-pro
 ```
 
--   uni_modules 安装：
+- uni_modules 安装：
 
 通过 HBuilderX 插件市场或手动下载，将 uView Pro 放入 `uni_modules` 目录。
 
@@ -169,9 +169,9 @@ export function createApp() {
 
 **温馨提示**
 
--   1.修改 `easycom` 规则后需重启 HX 或重新编译项目。
--   2.请确保 `pages.json` 中只有一个 easycom 字段，否则请自行合并多个规则。
--   3.一定要放在 `custom` 内，否则无效。
+- 1.修改 `easycom` 规则后需重启 HX 或重新编译项目。
+- 2.请确保 `pages.json` 中只有一个 easycom 字段，否则请自行合并多个规则。
+- 3.一定要放在 `custom` 内，否则无效。
 
 ### 5. Volar 类型提示支持
 
@@ -225,7 +225,7 @@ export function createApp() {
 
 再次感谢 `uView UI` 开发团队，以及所有为 `uView UI` 的贡献者，以及所有为 `uView Pro` 的贡献者。
 
--   [Github](https://github.com/anyup/uview-pro)
--   [Gitee](https://gitee.com/anyup/uview-pro)
--   [uView UI 1.0](https://github.com/umicro/uView)
--   [uView UI 2.0](https://github.com/umicro/uView2.0)
+- [Github](https://github.com/anyup/uview-pro)
+- [Gitee](https://gitee.com/anyup/uview-pro)
+- [uView UI 1.0](https://github.com/umicro/uView)
+- [uView UI 2.0](https://github.com/umicro/uView2.0)

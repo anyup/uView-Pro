@@ -100,10 +100,18 @@ function onClick() {
     z-index: 1;
     background-color: #fff;
     background-color: #fff;
-    box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
-    box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
+    box-shadow:
+        0 3px 1px 0 rgba(0, 0, 0, 0.05),
+        0 2px 2px 0 rgba(0, 0, 0, 0.1),
+        0 3px 3px 0 rgba(0, 0, 0, 0.05);
+    box-shadow:
+        0 3px 1px 0 rgba(0, 0, 0, 0.05),
+        0 2px 2px 0 rgba(0, 0, 0, 0.1),
+        0 3px 3px 0 rgba(0, 0, 0, 0.05);
     transition: transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05);
-    transition: transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05), -webkit-transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05);
+    transition:
+        transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05),
+        -webkit-transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05);
     transition: transform cubic-bezier(0.3, 1.05, 0.4, 1.05);
     transition: transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05);
 }

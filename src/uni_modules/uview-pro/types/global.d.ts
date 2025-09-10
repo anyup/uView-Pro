@@ -4,7 +4,7 @@ export type ImgMode = 'aspectFit' | 'aspectFill' | 'widthFix' | 'top' | 'bottom'
 
 export type Direction = 'horizontal' | 'vertical';
 
-export type Sex = 'male' | 'female';
+export type Sex = 'man' | 'woman';
 
 export type Shape = 'circle' | 'square';
 export type Effect = 'linear' | 'ease' | 'ease-in' | 'ease-in-out' | 'ease-out' | 'step-start' | 'step-end';
@@ -48,8 +48,6 @@ export type ButtonSize = 'default' | 'medium' | 'mini';
 export type ButtonFormType = '' | 'submit' | 'reset';
 // button 按钮 scope
 export type ButtonScope = 'phoneNumber' | 'userInfo';
-// button 按钮大小
-export type ButtonSize = 'default' | 'medium' | 'mini';
 // button 按钮open-type
 export type ButtonOpenType =
     | 'feedback'
@@ -95,7 +93,7 @@ export type FormRuleItem = {
     type?: string;
     validator?: (rule: any, value: any, callback: any) => boolean;
     asyncValidator?: (rule: any, value: any, callback: any) => void;
-}
+};
 export type FormRules = Record<string, FormRuleItem | FormRuleItem[]>;
 
 export type InputType = 'text' | 'number' | 'idcard' | 'digit' | 'password' | 'textarea' | 'phone' | 'url' | 'email' | 'safe-password' | 'name' | 'bank-card' | 'tel' | 'select';
@@ -213,6 +211,8 @@ export type TabsSwiperListItem = {
 export type TabsSwiperAutoCenterMode = 'window';
 // tag 组件 mode
 export type TagMode = 'light' | 'dark' | 'plain';
+// tag 组件 shape
+export type TagShape = 'square' | 'circle' | 'circleLeft' | 'circleRight';
 // tag 组件 size
 export type TagSize = 'default' | 'mini' | 'medium';
 // toast 组件 position

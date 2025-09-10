@@ -1,29 +1,29 @@
 name: 问题反馈
 about: 提交问题反馈或使用疑问，便于强化项目维护和优化体验
 labels: ['bug', 'question']
-title: "【问题反馈】"
+title: '【问题反馈】'
 body:
-  - type: textarea
-    attributes:
-      label: 问题描述
-      description: 请简要描述您遇到的问题或疑问。
-  - type: textarea
-    attributes:
-      label: 复现步骤
-      description: 请详细描述如何复现该问题，建议提供相关页面/组件/功能入口、操作步骤、期望结果与实际结果。
-  - type: textarea
-    attributes:
-      label: 复现环境
-      description: |
-        - uView Pro 版本：
-        - uni-app 版本：
-        - 运行平台：H5 / 微信小程序 / 支付宝小程序 / App / 其他
-        - 浏览器或系统版本：
-  - type: textarea
-    attributes:
-      label: 截图或日志（可选）
-      description: 如有报错信息、控制台输出、页面截图等，请一并附上，便于定位问题。
-  - type: textarea
-    attributes:
-      label: 其他补充信息（可选）
-      description: 如有相关代码片段、配置文件、第三方依赖等信息，请补充说明。
+    - type: textarea
+      attributes:
+          label: 问题描述
+          description: 请简要描述您遇到的问题或疑问。
+    - type: textarea
+      attributes:
+          label: 复现步骤
+          description: 请详细描述如何复现该问题，建议提供相关页面/组件/功能入口、操作步骤、期望结果与实际结果。
+    - type: textarea
+      attributes:
+          label: 复现环境
+          description: |
+              - uView Pro 版本：
+              - uni-app 版本：
+              - 运行平台：H5 / 微信小程序 / 支付宝小程序 / App / 其他
+              - 浏览器或系统版本：
+    - type: textarea
+      attributes:
+          label: 截图或日志（可选）
+          description: 如有报错信息、控制台输出、页面截图等，请一并附上，便于定位问题。
+    - type: textarea
+      attributes:
+          label: 其他补充信息（可选）
+          description: 如有相关代码片段、配置文件、第三方依赖等信息，请补充说明。

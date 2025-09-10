@@ -26,34 +26,30 @@
     </view>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-export default {
-    data() {
-        return {
-            result: null
-        };
-    },
-    onLoad() {
-        this.result = $u.rgbToHex('rgb(12,57,231)');
-    },
-    methods: {
-        rgbToHexChange(index) {
-            let color = index == 0 ? 'rgb(12,57,231)' : index == 1 ? 'rgb(15,148,32)' : 'rgb(91,52,210)';
-            this.result = $u.rgbToHex(color);
-        },
-        hexToRgbChange(index) {
-            let color = index == 0 ? '#0edc8a' : index == 1 ? '#d0a73c' : '#3308dd';
-            this.result = $u.hexToRgb(color);
-        },
-        colorGradientChange(index) {
-            this.result = JSON.stringify($u.colorGradient('rgb(21,21,21)', 'rgb(56,56,56)', 10));
-        },
-        getResult() {
-            this.result = $u.guid(this.length, this.firstU, this.radix);
-        }
-    }
-};
+
+const result = ref<string>('');
+
+onLoad(() => {
+    result.value = $u.rgbToHex('rgb(12,57,231)');
+});
+
+function rgbToHexChange(index: number) {
+    const color = index === 0 ? 'rgb(12,57,231)' : index === 1 ? 'rgb(15,148,32)' : 'rgb(91,52,210)';
+    result.value = $u.rgbToHex(color);
+}
+
+function hexToRgbChange(index: number) {
+    const color = index === 0 ? '#0edc8a' : index === 1 ? '#d0a73c' : '#3308dd';
+    result.value = $u.hexToRgb(color) as string;
+}
+
+function colorGradientChange() {
+    result.value = JSON.stringify($u.colorGradient('rgb(21,21,21)', 'rgb(56,56,56)', 10));
+}
 </script>
 
 <style lang="scss" scoped></style>

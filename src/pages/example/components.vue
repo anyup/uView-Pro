@@ -6,7 +6,7 @@
                 <u-collapse-item :index="index" v-for="(item, index) in list" :key="index" :open="true">
                     <template #title>
                         <view class="group-title">
-                            <image style="width: 30rpx" :src="getIcon(item.icon)" mode="widthFix"></image>
+                            <!-- <image style="width: 30rpx" :src="getIcon(item.icon)" mode="widthFix"></image> -->
                             <text>{{ getGroupTitle(item) }}（{{ item.list.length }}）</text>
                         </view>
                     </template>

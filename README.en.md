@@ -35,12 +35,12 @@ uView Pro is a uni-app ecosystem framework that fully supports Vue3.0 and TypeSc
 
 ## Features
 
--   Compatible with Android, iOS, WeChat Mini Programs, H5, QQ Mini Programs, Baidu Mini Programs, Alipay Mini Programs, and Toutiao Mini Programs
--   70+ selected components, rich in functionality, multi-end compatibility, quick integration, and ready to use out of the box
--   Numerous handy JS tools for efficient development
--   A variety of commonly used pages and layouts, allowing you to focus on logic and achieve more with less effort
--   Detailed documentation and modern demo effects
--   On-demand import, streamlined bundle size
+- Compatible with Android, iOS, WeChat Mini Programs, H5, QQ Mini Programs, Baidu Mini Programs, Alipay Mini Programs, and Toutiao Mini Programs
+- 70+ selected components, rich in functionality, multi-end compatibility, quick integration, and ready to use out of the box
+- Numerous handy JS tools for efficient development
+- A variety of commonly used pages and layouts, allowing you to focus on logic and achieve more with less effort
+- Detailed documentation and modern demo effects
+- On-demand import, streamlined bundle size
 
 ## Mobile Preview
 
@@ -70,10 +70,10 @@ For more running and building commands, please refer to the [pnpm Running Guide]
 
 ## Links
 
--   [Github](https://github.com/anyup/uview-pro)
--   [Gitee](https://gitee.com/anyup/uview-pro)
--   [Official Documentation](https://uview-pro.netlify.app/)
--   [Changelog](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
+- [Github](https://github.com/anyup/uview-pro)
+- [Gitee](https://gitee.com/anyup/uview-pro)
+- [Official Documentation](https://uview-pro.netlify.app/)
+- [Changelog](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
 
 ## Communication & Feedback
 
@@ -81,7 +81,7 @@ uView Pro QQ Group: [Click to Join](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1756979255628" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1757299344899" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>
@@ -102,7 +102,7 @@ uView Pro supports both `npm` and `uni_modules` installation methods, and the co
 
 ### 1. Install uView Pro
 
--   npm installation:
+- npm installation:
 
 ```bash
 npm install uview-pro
@@ -112,7 +112,7 @@ yarn add uview-pro
 pnpm add uview-pro
 ```
 
--   uni_modules installation:
+- uni_modules installation:
 
 Download from HBuilderX plugin market or manually, and place uView Pro in the `uni_modules` directory.
 
@@ -242,7 +242,7 @@ uView Pro follows the [MIT](https://en.wikipedia.org/wiki/MIT_License) open sour
 
 Special thanks to the uView UI development team, all contributors to uView UI, and all contributors to uView Pro.
 
--   [Github](https://github.com/anyup/uview-pro)
--   [Gitee](https://gitee.com/anyup/uview-pro)
--   [uView UI 1.0](https://github.com/umicro/uView)
--   [uView UI 2.0](https://github.com/umicro/uView2.0)
+- [Github](https://github.com/anyup/uview-pro)
+- [Gitee](https://gitee.com/anyup/uview-pro)
+- [uView UI 1.0](https://github.com/umicro/uView)
+- [uView UI 2.0](https://github.com/umicro/uView2.0)
