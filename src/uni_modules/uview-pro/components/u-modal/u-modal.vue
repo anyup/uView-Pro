@@ -151,6 +151,10 @@ function popupClose() {
 function clearLoading() {
     loading.value = false;
 }
+
+defineExpose({
+    clearLoading
+});
 </script>
 
 <style lang="scss" scoped>
