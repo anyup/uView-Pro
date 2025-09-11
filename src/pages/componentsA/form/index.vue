@@ -420,6 +420,13 @@ function errorChange(index: number) {
     if (index === 2) errorType.value = ['border-bottom'];
     if (index === 3) errorType.value = ['border'];
 }
+onMounted(() => {
+    uni.showModal({
+        title: '提示',
+        content: '该页面仅为表单校验演示功能，所有用户相关信息不存储',
+        success: res => {}
+    });
+});
 </script>
 
 <style scoped lang="scss">

@@ -24,6 +24,15 @@
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+    uni.showModal({
+        title: '提示',
+        content: '该页面仅为布局演示功能，非电商类小程序，不具备实际功能',
+        success: res => {}
+    });
+});
 </script>
 
 <style lang="scss" scoped>

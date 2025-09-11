@@ -315,6 +315,11 @@ const { proxy } = getCurrentInstance() as any;
 
 // 页面加载时初始化部分 tab 的订单数据
 onMounted(() => {
+    uni.showModal({
+        title: '提示',
+        content: '该页面仅为布局演示功能，非电商类小程序，不具备实际功能',
+        success: res => {}
+    });
     getOrderList(0);
     getOrderList(1);
     getOrderList(3);
