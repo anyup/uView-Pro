@@ -1,3 +1,20 @@
+## 0.0.22（2025-09-11）
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- 忽略 pnpm-lock.yaml 文件 ([28802d3](https://github.com/anyup/uView-Pro/commit/28802d308d3c1f2d0d6b583b3b27725b6b40b1a9))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **td/th:** fix invalid width setting ([21718fc](https://github.com/anyup/uView-Pro/commit/21718fc3b2f09e1ccf9f1ce8247b78f30e5fe465))
+- **u-modal:** 修复在 modal 组件中添加 clearLoading 方法的暴露，以便外部可以调用 ([34b51a7](https://github.com/anyup/uView-Pro/commit/34b51a7187da296b11f4b5db027a86c41a50a477))
+
+### ✨ Features | 新功能
+
+- **components:** add u-status-bar and u-safe-bottom component ([2085e73](https://github.com/anyup/uView-Pro/commit/2085e73be725f921c436069c27c124e507b24d0e))
+- **u-upload:** 调整上传组件默认值和功能 ([4808627](https://github.com/anyup/uView-Pro/commit/48086274f5fe16f4b3b7554a99038a76aa08e8c5))
+- **pages:** 在多个页面中添加功能说明的弹窗提示 ([5e59855](https://github.com/anyup/uView-Pro/commit/5e59855ff81f21c54cbfa44a3f4641b4b9f1f6bd))
+
 ## 0.0.21（2025-09-09）
 
 ### ⚡ Performance Improvements | 性能优化
