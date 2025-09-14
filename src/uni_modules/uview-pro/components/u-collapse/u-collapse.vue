@@ -30,13 +30,13 @@ const props = defineProps(CollapseProps);
 const emit = defineEmits(['change']);
 
 // 子元素集合
-const childrens = ref<any[]>([]);
+const children = ref<any[]>([]);
 
 /**
  * 重新初始化一次内部的所有子元素的高度计算，用于异步获取数据渲染的情况
  */
 function init() {
-    childrens.value.forEach((vm, index) => {
+    children.value.forEach((vm, index) => {
         vm.init && vm.init();
     });
 }
@@ -49,7 +49,7 @@ function onChange(index: string | number) {
 }
 
 provide('u-collapse', {
-    childrens,
+    children,
     props,
     init,
     onChange
@@ -57,7 +57,7 @@ provide('u-collapse', {
 
 defineExpose({
     props,
-    childrens,
+    children,
     init,
     onChange
 });
