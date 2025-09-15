@@ -229,6 +229,12 @@ export function createApp() {
     </tr>
 </table>
 
+## 贡献者
+
+<a href="https://github.com/anyup/uView-Pro/graphs/contributors">
+  <img alt="Contributors" src="https://contrib.rocks/image?repo=anyup/uView-Pro" />
+</a>
+
 ## 版权信息
 
 `uView Pro` 遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，意味着您无需支付任何费用，也无需授权，即可将 `uView Pro` 应用到您的产品中。
