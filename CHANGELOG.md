@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.23] - 2025-09-15
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-collapse:** fix accordion mode ([c411fef](https://github.com/anyup/uView-Pro/commit/c411fef340cff07ab06a64f623741e9c1ad125cb))
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- revert comments ([3eed330](https://github.com/anyup/uView-Pro/commit/3eed330c27a7026eb87cb9ef285d1ecbe6789552))
+- **docs:** 增加贡献者 ([8b9d44e](https://github.com/anyup/uView-Pro/commit/8b9d44e281c02f639079b77b7c32cc0a566b35a1))
+- **docs:** add contributors ([b4035da](https://github.com/anyup/uView-Pro/commit/b4035da5a39acc5ae9dcb13b06143cda6a73fec3))
+
+### 📝 Documentation | 文档
+
+- 更新交流群二维码图片 ([00c0581](https://github.com/anyup/uView-Pro/commit/00c058159ea9d169219474728e8b31cdc892ab2c))
+
 ## [0.0.22] - 2025-09-11
 
 ### 🚀 Chore | 构建/工程依赖/工具
