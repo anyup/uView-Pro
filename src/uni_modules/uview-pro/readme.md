@@ -69,7 +69,7 @@ pnpm dev
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1757299344899" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1757940337724" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>
@@ -216,6 +216,12 @@ export function createApp() {
         <td align="center"><strong>支付宝</strong><br></td>
     </tr>
 </table>
+
+## 贡献者
+
+<a href="https://github.com/anyup/uView-Pro/graphs/contributors">
+  <img alt="Contributors" src="https://contrib.rocks/image?repo=anyup/uView-Pro" />
+</a>
 
 ## 版权信息
 
