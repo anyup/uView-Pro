@@ -35,8 +35,8 @@ export interface RequestInterceptor {
  */
 export interface RequestOptions {
     url: string;
-    header?: Record<string, any>;
-    method?: 'GET' | 'POST' | 'OPTIONS' | 'HEAD' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT';
+    header: Record<string, any>;
+    method: 'GET' | 'POST' | 'OPTIONS' | 'HEAD' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT';
     data?: any;
     dataType?: string;
     responseType?: string;

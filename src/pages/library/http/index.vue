@@ -1,7 +1,7 @@
 <template>
     <view class="u-demo">
         <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
+            <view class="u-demo-title"> 演示效果 </view>
             <view class="u-demo-area">
                 <view class="no-mode-here"> 请求结果为： </view>
                 <view class="u-demo-result-line">
@@ -12,24 +12,24 @@
         <view class="u-config-wrap">
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
-                <view class="u-item-title">请求方式</view>
-                <u-subsection :list="['get', 'post']" @change="changeMethod"></u-subsection>
+                <view class="u-item-title"> 请求方式 </view>
+                <u-subsection :list="['get', 'post']" @change="changeMethod" />
             </view>
             <view class="u-config-item">
-                <view class="u-item-title">请求 Loading</view>
-                <u-subsection :list="['显示', '隐藏']" @change="changeLoading"></u-subsection>
+                <view class="u-item-title"> 请求 Loading </view>
+                <u-subsection :list="['显示', '隐藏']" @change="changeLoading" />
             </view>
             <view class="u-config-item">
-                <view class="u-item-title">请求错误时显示 Toast</view>
-                <u-subsection :list="['显示', '隐藏']" @change="changeToast"></u-subsection>
+                <view class="u-item-title"> 请求错误时显示 Toast </view>
+                <u-subsection :list="['显示', '隐藏']" @change="changeToast" />
             </view>
         </view>
     </view>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-import { $u } from '@/uni_modules/uview-pro';
+import { $u } from 'uview-pro';
+import { onMounted, ref } from 'vue';
 
 interface Result {
     code: number;
@@ -44,7 +44,7 @@ const toast = ref(true);
 
 // get请求
 function doGet(url = '/api/demo.json') {
-    $u.http.get(url, {}, { meta: { loading: loading.value, toast: toast.value } }).then((res: Result) => {
+    $u.http.get<Result>(url, {}, { meta: { loading: loading.value, toast: toast.value } }).then((res: Result) => {
         if (res.code === 200) {
             setTimeout(() => {
                 $u.toast('请求成功', 'success');
@@ -56,7 +56,7 @@ function doGet(url = '/api/demo.json') {
 
 // post请求
 function doPost(url = '/api/demo.json') {
-    $u.http.post(url, { name: 'uview-pro' }, { meta: { loading: loading.value, toast: toast.value } }).then((res: Result) => {
+    $u.http.post<Result>(url, { name: 'uview-pro' }, { meta: { loading: loading.value, toast: toast.value } }).then((res: Result) => {
         if (res.code === 200) {
             setTimeout(() => {
                 $u.toast('请求成功', 'success');

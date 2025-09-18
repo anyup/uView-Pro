@@ -1,4 +1,4 @@
-import type { RequestConfig, RequestInterceptor, RequestMeta } from 'uview-pro';
+import type { RequestConfig, RequestInterceptor, RequestMeta, RequestOptions } from 'uview-pro';
 
 // 示例：演示如何使用token
 const token = '';
@@ -29,7 +29,7 @@ const httpRequestConfig: RequestConfig = {
 // 请求/响应拦截器
 const httpInterceptor: RequestInterceptor = {
     // 请求拦截器
-    request: config => {
+    request: (config: RequestOptions) => {
         console.log('请求拦截器', config);
         const meta: RequestMeta = config.meta || {};
         meta.loading && showLoading();
@@ -39,7 +39,7 @@ const httpInterceptor: RequestInterceptor = {
         return config;
     },
     // 响应拦截器
-    response: async response => {
+    response: async (response: any) => {
         console.log('响应拦截器', response);
         const meta: RequestMeta = response.config?.meta || {};
         meta.loading && hideLoading();
