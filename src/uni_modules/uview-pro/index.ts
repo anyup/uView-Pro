@@ -11,7 +11,7 @@ import colorGradients from './libs/function/colorGradient';
 // 生成全局唯一guid字符串
 import guid from './libs/function/guid';
 // 主题相关颜色,info|success|warning|primary|default|error,此颜色已在uview.scss中定义,但是为js中也能使用,故也定义一份
-import color from './libs/function/color';
+import color, { type ThemeColor } from './libs/function/color';
 // 根据type获取图标名称
 import type2icon from './libs/function/type2icon';
 // 打乱数组的顺序
@@ -147,9 +147,18 @@ export const $u: UViewUtils = {
 };
 
 // $u挂载到uni对象上
+interface UViewProOptions {
+    color?: ThemeColor;
+    // 可扩展更多配置项
+}
 
-const install = (): void => {
+const install = (app: any, options?: UViewProOptions): void => {
     uni.$u = $u;
+    if (options && options.color) {
+        $u.color = deepMerge($u.color, options.color);
+    }
+    // 可扩展更多配置项
+    app.config.globalProperties.$u = $u;
 };
 
 export default {

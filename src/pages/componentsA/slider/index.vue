@@ -65,7 +65,7 @@ import { computed, ref } from 'vue';
 const value = ref(30);
 const useSlot = ref(false);
 const step = ref<string | number>(1);
-const activeColor = ref('#2979ff');
+const activeColor = ref($u.color.primary);
 const height = ref(6);
 const blockWidth = ref(30);
 const min = ref(0);
