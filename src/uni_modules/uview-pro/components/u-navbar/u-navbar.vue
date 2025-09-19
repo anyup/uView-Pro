@@ -1,5 +1,5 @@
 <template>
-    <view class="">
+    <view>
         <view class="u-navbar" :style="navbarStyle" :class="{ 'u-navbar-fixed': props.isFixed, 'u-border-bottom': props.borderBottom }">
             <view class="u-status-bar" :style="{ height: statusBarHeight + 'px' }"></view>
             <view class="u-navbar-inner" :style="navbarInnerStyle">

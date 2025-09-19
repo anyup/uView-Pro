@@ -5,7 +5,7 @@
             <view class="u-demo-area">
                 <view class="u-no-demo-here">
                     源对象1为："{info: {name: 'mary'}}"
-                    <view class=""> </view>
+                    <view> </view>
                     源对象2为："{info: {age: '22'}}"
                 </view>
                 <view class="u-demo-result-line">

@@ -3,7 +3,7 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <view class="">
+                <view>
                     <u-radio-group :shape="shape" :size="size" :width="width" :wrap="wrap" v-model="value" @change="radioGroupChange" :activeColor="activeColor">
                         <u-radio @change="radioChange" v-for="(item, index) in list" :disabled="item.disabled" :key="index" :name="item.name">{{ item.name }}</u-radio>
                     </u-radio-group>

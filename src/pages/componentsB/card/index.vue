@@ -1,5 +1,5 @@
 <template>
-    <view class="">
+    <view>
         <view class="u-card-wrap">
             <u-card @click="click" @head-click="headClick" :title="title" :sub-title="subTitle" :thumb="thumb" :padding="padding" :border="border">
                 <template #body>

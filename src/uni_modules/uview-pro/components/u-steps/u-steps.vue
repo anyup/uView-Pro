@@ -1,5 +1,5 @@
 <template>
-    <view class="">
+    <view>
         <view class="u-steps" :style="directionStyle">
             <view class="u-steps__item" :class="['u-steps__item--' + direction]" v-for="(item, index) in list" :key="index">
                 <view class="u-steps__item__num" v-if="mode == 'number'" :style="numberStyle(index)">

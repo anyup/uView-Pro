@@ -1,5 +1,5 @@
 <template>
-    <view class="">
+    <view>
         <movable-area class="u-swipe-action" :style="{ backgroundColor: props.bgColor }">
             <movable-view
                 class="u-swipe-view"

@@ -19,7 +19,7 @@
                 >
                     <!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
                     <template v-if="useSlot" #default>
-                        <view class="">
+                        <view>
                             <view class="badge-button">
                                 {{ value }}
                             </view>

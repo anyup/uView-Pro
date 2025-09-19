@@ -1,5 +1,5 @@
 <template>
-    <view class="">
+    <view>
         <u-navbar
             title-color="#fff"
             back-icon-color="#ffffff"

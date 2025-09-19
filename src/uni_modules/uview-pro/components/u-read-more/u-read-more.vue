@@ -1,5 +1,5 @@
 <template>
-    <view class="">
+    <view>
         <view
             class="u-content"
             :class="[elId]"

@@ -4,7 +4,6 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <view
-                    class=""
                     :style="{
                         display: !top ? 'block' : 'none'
                     }"

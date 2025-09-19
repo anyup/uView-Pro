@@ -1,5 +1,5 @@
 <template>
-    <view class="">
+    <view>
         <view class="u-demo">
             <view class="u-config-wrap">
                 <view class="u-config-title u-border-bottom"> 参数配置 </view>

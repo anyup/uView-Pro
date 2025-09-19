@@ -1,5 +1,5 @@
 <template>
-    <view class="">
+    <view>
         <view class="u-m-p-50">
             <view class="u-demo-area u-flex u-row-center">
                 <u-dropdown :close-on-click-mask="mask" ref="uDropdownRef" :activeColor="activeColor" :borderBottom="borderBottom">
