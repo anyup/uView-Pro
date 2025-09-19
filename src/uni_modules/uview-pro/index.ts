@@ -148,14 +148,14 @@ export const $u: UViewUtils = {
 
 // $u挂载到uni对象上
 interface UViewProOptions {
-    color?: ThemeColor;
+    theme?: ThemeColor;
     // 可扩展更多配置项
 }
 
 const install = (app: any, options?: UViewProOptions): void => {
     uni.$u = $u;
-    if (options && options.color) {
-        $u.color = deepMerge($u.color, options.color);
+    if (options && options.theme) {
+        $u.color = deepMerge($u.color, options.theme);
     }
     // 可扩展更多配置项
     app.config.globalProperties.$u = $u;
