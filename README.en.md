@@ -18,7 +18,7 @@
 [![forks](https://img.shields.io/github/forks/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro)
 [![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro/issues)
 [![npm version](https://img.shields.io/npm/v/uview-pro)](https://www.npmjs.com/package/uview-pro)
-[![Website](https://img.shields.io/badge/uView%20Pro-docs-blue?style=flat-square)](https://uview-pro.anyup.cn/)
+[![Website](https://img.shields.io/badge/uView%20Pro-docs-blue?style=flat-square)](https://uviewpro.cn)
 [![node version](https://img.shields.io/badge/node-%3E%3D18-green)](https://nodejs.org/)
 [![pnpm version](https://img.shields.io/badge/pnpm-%3E%3D7.30-green)](https://pnpm.io/)
 [![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
@@ -31,7 +31,7 @@ uView UI is an excellent UI framework in the [uni-app](https://uniapp.dcloud.io/
 
 uView Pro is a uni-app ecosystem framework that fully supports Vue3.0 and TypeScript. The baseline version of uView Pro is modified based on uView 1.8.8, completely reconstructed using TypeScript, and now fully supports uni-app Vue3.0.
 
-## [Official Documentation: https://uview-pro.netlify.app/](https://uview-pro.netlify.app/)
+## [Official Documentation: https://uviewpro.cn](https://uviewpro.cn)
 
 ## Features
 
@@ -72,7 +72,7 @@ For more running and building commands, please refer to the [pnpm Running Guide]
 
 - [Github](https://github.com/anyup/uview-pro)
 - [Gitee](https://gitee.com/anyup/uview-pro)
-- [Official Documentation](https://uview-pro.netlify.app/)
+- [Official Documentation](https://uviewpro.cn)
 - [Changelog](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
 
 ## Communication & Feedback
@@ -217,7 +217,7 @@ After configuration, you can use uView Pro components directly in SFC without im
 </template>
 ```
 
-See [Quick Start](https://uview-pro.netlify.app/components/quickstart.html) for more details.
+See [Quick Start](https://uviewpro.cn/zh/components/quickstart.html) for more details.
 
 ## Donate to uView Pro
 

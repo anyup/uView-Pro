@@ -1,5 +1,5 @@
 // 此自定义uView Pro主题生成于2025-09-19 09:38
-// 地址：https://uview-pro.netlify.app/guide/theme.html
+// 地址：https://uviewpro.cn/zh/guide/theme.html
 
 export default {
     primary: '#2979ff',

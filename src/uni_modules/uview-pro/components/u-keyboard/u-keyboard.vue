@@ -42,7 +42,7 @@ defineOptions({
 /**
  * keyboard 键盘
  * @description 此为uViw自定义的键盘面板，内含了数字键盘，车牌号键，身份证号键盘3中模式，都有可以打乱按键顺序的选项。
- * @tutorial https://uview-pro.netlify.app/components/keyboard.html
+ * @tutorial https://uviewpro.cn/zh/components/keyboard.html
  * @property {String} mode 键盘类型，见官网基本使用的说明（默认number）
  * @property {Boolean} dot-enabled 是否显示"."按键，只在mode=number时有效（默认true）
  * @property {Boolean} tooltip 是否显示键盘顶部工具条（默认true）

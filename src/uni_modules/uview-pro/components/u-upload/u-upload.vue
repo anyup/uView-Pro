@@ -62,7 +62,7 @@ defineOptions({
 /**
  * upload 图片上传
  * @description 该组件用于上传图片场景
- * @tutorial https://uview-pro.netlify.app/components/upload.html
+ * @tutorial https://uviewpro.cn/zh/components/upload.html
  * @property {String} action 服务器上传地址
  * @property {String Number} max-count 最大选择图片的数量（默认99）
  * @property {Boolean} custom-btn 如果需要自定义选择图片的按钮，设置为true（默认false）

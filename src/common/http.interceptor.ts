@@ -3,7 +3,7 @@ import type { RequestConfig, RequestInterceptor, RequestMeta, RequestOptions } f
 // 示例：演示如何使用token
 const token = '';
 // 演示
-const baseUrl = 'https://uview-pro.anyup.cn';
+const baseUrl = 'https://env-00jxty5jnvo5-static.normal.cloudstatic.cn';
 // 演示
 function logout() {
     return new Promise(resolve => {

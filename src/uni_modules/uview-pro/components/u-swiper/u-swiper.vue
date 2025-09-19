@@ -63,7 +63,7 @@ defineOptions({ name: 'u-swiper' });
 /**
  * swiper 轮播图
  * @description 该组件一般用于导航轮播，广告展示等场景,可开箱即用
- * @tutorial https://uview-pro.netlify.app/components/swiper.html
+ * @tutorial https://uviewpro.cn/zh/components/swiper.html
  * @property {Array} list 轮播图数据，见官网"基本使用"说明
  * @property {Boolean} title 是否显示标题文字，需要配合list参数，见官网说明（默认false）
  * @property {String} mode 指示器模式，见官网说明（默认round）

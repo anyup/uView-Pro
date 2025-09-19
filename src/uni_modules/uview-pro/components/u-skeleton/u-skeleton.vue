@@ -16,7 +16,7 @@ defineOptions({ name: 'u-skeleton' });
 /**
  * skeleton 骨架屏
  * @description 骨架屏一般用于页面在请求远程数据尚未完成时，页面用灰色块预显示本来的页面结构，给用户更好的体验。
- * @tutorial https://uview-pro.netlify.app/components/skeleton.html
+ * @tutorial https://uviewpro.cn/zh/components/skeleton.html
  * @property {String} elColor 骨架块状元素的背景颜色（默认#e5e5e5）
  * @property {String} bgColor 骨架组件背景颜色（默认#ffffff）
  * @property {Boolean} animation 骨架块是否显示动画效果（默认false）

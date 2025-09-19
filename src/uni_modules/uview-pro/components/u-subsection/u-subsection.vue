@@ -24,7 +24,7 @@ defineOptions({ name: 'u-subsection' });
 /**
  * subsection 分段器
  * @description 该分段器一般用于用户从几个选项中选择某一个的场景
- * @tutorial https://uview-pro.netlify.app/components/subsection.html
+ * @tutorial https://uviewpro.cn/zh/components/subsection.html
  * @property {Array} list 选项的数组，形式见上方"基本使用"
  * @property {String | Number} current 初始化时默认选中的选项索引值（默认0）
  * @property {String} activeColor 激活时的颜色，mode为subsection时固定为白色（默认#303133）

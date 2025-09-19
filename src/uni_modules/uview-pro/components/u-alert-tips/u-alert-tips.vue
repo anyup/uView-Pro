@@ -57,7 +57,7 @@ defineOptions({
 /**
  * alertTips 警告提示
  * @description 警告提示，展现需要关注的信息
- * @tutorial https://uview-pro.netlify.app/components/alertTips.html
+ * @tutorial https://uviewpro.cn/zh/components/alertTips.html
  * @property {String} title 显示的标题文字
  * @property {String} description 辅助性文字，颜色比title浅一点，字号也小一点，可选
  * @property {String} type 关闭按钮(默认为叉号icon图标)

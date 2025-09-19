@@ -32,7 +32,7 @@ defineOptions({ name: 'u-dropdown-item' });
 /**
  * dropdown-item 下拉菜单
  * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景
- * @tutorial https://uview-pro.netlify.app/components/dropdown.html
+ * @tutorial https://uviewpro.cn/zh/components/dropdown.html
  * @property {String | Number} v-model 双向绑定选项卡选择值
  * @property {String} title 菜单项标题
  * @property {Array[Object]} options 选项数据，如果传入了默认slot，此参数无效

@@ -92,7 +92,7 @@ defineOptions({
 /**
  * calendar 日历
  * @description 此组件用于单个选择日期，范围选择日期等，日历被包裹在底部弹起的容器中。
- * @tutorial https://uview-pro.netlify.app/components/calendar.html
+ * @tutorial https://uviewpro.cn/zh/components/calendar.html
  * @property {String} mode 选择日期的模式，date-为单个日期，range-为选择日期范围
  * @property {Boolean} v-model 布尔值变量，用于控制日历的弹出与收起
  * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配(默认false)

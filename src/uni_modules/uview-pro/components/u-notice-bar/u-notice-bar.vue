@@ -55,7 +55,7 @@ defineOptions({ name: 'u-notice-bar' });
 /**
  * noticeBar 滚动通知
  * @description 该组件用于滚动通告场景，有多种模式可供选择
- * @tutorial https://uview-pro.netlify.app/components/noticeBar.html
+ * @tutorial https://uviewpro.cn/zh/components/noticeBar.html
  * @property {Array} list 滚动内容，数组形式，见上方说明
  * @property {String} type 显示的主题（默认warning）
  * @property {Boolean} volumeIcon 是否显示小喇叭图标（默认true）

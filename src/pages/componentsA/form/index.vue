@@ -154,7 +154,7 @@ const rules: FormRules = {
         {
             // 此为同步验证，可以直接返回true或者false，如果是异步验证，稍微不同，见下方说明
             validator: (rule, value, callback) => {
-                // 调用uView自带的js验证规则，详见：https://uview-pro.netlify.app/js/test.html
+                // 调用uView自带的js验证规则，详见：https://uviewpro.cn/zh/js/test.html
                 return $u.test.chinese(value);
             },
             message: '姓名必须为中文',
@@ -240,7 +240,7 @@ const rules: FormRules = {
         },
         {
             validator: (rule, value, callback) => {
-                // 调用uView自带的js验证规则，详见：https://uview-pro.netlify.app/js/test.html
+                // 调用uView自带的js验证规则，详见：https://uviewpro.cn/zh/js/test.html
                 return $u.test.mobile(value);
             },
             message: '手机号码不正确',

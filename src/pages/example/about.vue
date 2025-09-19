@@ -54,9 +54,9 @@ const infoList = ref([
     {
         icon: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
         title: '官网文档',
-        label: 'https://uview-pro.netlify.app/',
+        label: 'https://uviewpro.cn/zh/',
         click: () => {
-            copyLink('https://uview-pro.netlify.app/');
+            copyLink('https://uviewpro.cn/zh/');
         }
     },
     {

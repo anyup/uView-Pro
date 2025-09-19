@@ -59,7 +59,7 @@ defineOptions({ name: 'u-search' });
 /**
  * search 搜索框
  * @description 搜索组件，集成了常见搜索框所需功能，用户可以一键引入，开箱即用。
- * @tutorial https://uview-pro.netlify.app/components/search.html
+ * @tutorial https://uviewpro.cn/zh/components/search.html
  * @property {String} shape 搜索框形状，round-圆形，square-方形（默认round）
  * @property {String} bg-color 搜索框背景颜色（默认#f2f2f2）
  * @property {String} border-color 边框颜色，配置了颜色，才会有边框

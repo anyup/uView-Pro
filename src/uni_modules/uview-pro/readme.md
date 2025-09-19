@@ -10,7 +10,7 @@
 [![forks](https://img.shields.io/github/forks/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro)
 [![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro/issues)
 [![npm version](https://img.shields.io/npm/v/uview-pro)](https://www.npmjs.com/package/uview-pro)
-[![Website](https://img.shields.io/badge/uView%20Pro-docs-blue?style=flat-square)](https://uview-pro.anyup.cn/)
+[![Website](https://img.shields.io/badge/uView%20Pro-docs-blue?style=flat-square)](https://uviewpro.cn)
 [![node version](https://img.shields.io/badge/node-%3E%3D18-green)](https://nodejs.org/)
 [![pnpm version](https://img.shields.io/badge/pnpm-%3E%3D7.30-green)](https://pnpm.io/)
 [![license](https://img.shields.io/github/license/anyup/uView-Pro?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
@@ -21,7 +21,7 @@
 
 `uView Pro`，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
 
-## [官方文档：https://uview-pro.netlify.app/](https://uview-pro.netlify.app/)
+## [官方文档：https://uviewpro.cn](https://uviewpro.cn)
 
 ## 特性
 
@@ -60,7 +60,7 @@ pnpm dev
 
 - [Github](https://github.com/anyup/uview-pro)
 - [Gitee](https://gitee.com/anyup/uview-pro)
-- [官方文档](https://uview-pro.netlify.app/)
+- [官方文档](https://uviewpro.cn)
 - [更新日志](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
 
 ## 交流反馈
@@ -200,7 +200,7 @@ export function createApp() {
 </template>
 ```
 
-请通过[快速上手](https://uview-pro.netlify.app/components/quickstart.html)了解更详细的内容
+请通过[快速上手](https://uviewpro.cn/zh/components/quickstart.html)了解更详细的内容
 
 ## 捐赠 uView Pro
 

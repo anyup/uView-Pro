@@ -81,7 +81,7 @@ defineOptions({
 /**
  * form-item 表单item
  * @description 此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。
- * @tutorial https://uview-pro.netlify.app/components/form.html
+ * @tutorial https://uviewpro.cn/zh/components/form.html
  * @property {String} label 左侧提示文字
  * @property {Object} prop 表单域model对象的属性名，在使用 validate、resetFields 方法的情况下，该属性是必填的
  * @property {Boolean} border-bottom 是否显示表单域的下划线边框

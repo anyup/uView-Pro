@@ -16,7 +16,7 @@ defineOptions({
 /**
  * radioGroup 单选框父组件
  * @description 单选框用于有一个选择，用户只能选择其中一个的场景。搭配u-radio使用
- * @tutorial https://uview-pro.netlify.app/components/radio.html
+ * @tutorial https://uviewpro.cn/zh/components/radio.html
  * @property {Boolean} disabled 是否禁用所有radio（默认false）
  * @property {String|Number} size 组件整体的大小，单位rpx（默认40）
  * @property {String} active-color 选中时的颜色，应用到所有子Radio组件（默认#2979ff）

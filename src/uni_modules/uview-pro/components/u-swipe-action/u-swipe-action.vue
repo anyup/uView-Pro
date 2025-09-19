@@ -33,7 +33,7 @@ defineOptions({ name: 'u-swipe-action' });
 /**
  * swipeAction 左滑单元格
  * @description 该组件一般用于左滑唤出操作菜单的场景，用的最多的是左滑删除操作。
- * @tutorial https://uview-pro.netlify.app/components/swipeAction.html
+ * @tutorial https://uviewpro.cn/zh/components/swipeAction.html
  * @property {String} bg-color 整个组件背景颜色（默认#ffffff）
  * @property {Array} options 数组形式，可以配置背景颜色和文字
  * @property {String|Number} index 标识符，点击时候用于区分点击了哪一个，用v-for循环时的index即可

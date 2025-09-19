@@ -58,7 +58,7 @@ defineOptions({
 /**
  * indexList 索引列表
  * @description 通过折叠面板收纳内容区域,搭配<u-index-anchor>使用
- * @tutorial https://uview-pro.netlify.app/components/indexList.html#indexanchor-props
+ * @tutorial https://uviewpro.cn/zh/components/indexList.html#indexanchor-props
  * @property {Number|String} scroll-top 当前滚动高度，自定义组件无法获得滚动条事件，所以依赖接入方传入
  * @property {Array} index-list 索引字符列表，数组（默认A-Z）
  * @property {Number|String} z-index 锚点吸顶时的层级（默认965）

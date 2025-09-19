@@ -24,7 +24,7 @@
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 
-const href = ref('https://uview-pro.netlify.app/');
+const href = ref('https://uviewpro.cn/zh/');
 const underLine = ref(true);
 const fontSize = ref(28);
 const color = ref('#2979ff');

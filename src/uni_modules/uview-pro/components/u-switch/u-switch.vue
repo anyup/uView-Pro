@@ -24,7 +24,7 @@ defineOptions({
 /**
  * switch 开关选择器
  * @description 选择开关一般用于只有两个选择，且只能选其一的场景。
- * @tutorial https://uview-pro.netlify.app/components/switch.html
+ * @tutorial https://uviewpro.cn/zh/components/switch.html
  * @property {Boolean} loading 是否处于加载中（默认false）
  * @property {Boolean} disabled 是否禁用（默认false）
  * @property {String|Number} size 开关尺寸，单位rpx（默认50）

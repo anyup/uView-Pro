@@ -24,7 +24,7 @@ defineOptions({
 /**
  * tag 提示
  * @description 该组件一般用于标记和选择
- * @tutorial https://uview-pro.netlify.app/components/tag.html
+ * @tutorial https://uviewpro.cn/zh/components/tag.html
  * @property {String} type 主题类型（默认primary）
  * @property {String} size 标签大小（默认default）
  * @property {String} shape 标签形状（默认square）

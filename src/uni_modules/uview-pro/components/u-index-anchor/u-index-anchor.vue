@@ -24,7 +24,7 @@ defineOptions({
 /**
  * indexAnchor 索引列表锚点
  * @description 通过折叠面板收纳内容区域,搭配<u-index-anchor>使用
- * @tutorial https://uview-pro.netlify.app/components/indexList.html#indexanchor-props
+ * @tutorial https://uviewpro.cn/zh/components/indexList.html#indexanchor-props
  * @property {Boolean} use-slot 是否使用自定义内容的插槽（默认false）
  * @property {String|Number} index 索引字符，如果定义了use-slot，此参数自动失效
  * @property {Object} customStyle 自定义样式，对象形式，如"{color: 'red'}"

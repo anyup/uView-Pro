@@ -13,7 +13,7 @@ defineOptions({
 /**
  * loading 加载动画
  * @description 此组件为一个小动画，目前用在uView的loadmore加载更多和switch开关等组件的正在加载状态场景。
- * @tutorial https://uview-pro.netlify.app/components/loading.html
+ * @tutorial https://uviewpro.cn/zh/components/loading.html
  * @property {String} mode 模式选择，见官网说明（默认circle）
  * @property {String} color 动画活动区域的颜色，只对 mode = flower 模式有效（默认#c7c7c7）
  * @property {String|Number} size 加载图标的大小，单位rpx（默认34）

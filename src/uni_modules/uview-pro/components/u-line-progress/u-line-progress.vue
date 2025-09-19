@@ -27,7 +27,7 @@ defineOptions({
 /**
  * lineProgress 线型进度条
  * @description 展示操作或任务的当前进度，比如上传文件，是一个线形的进度条。
- * @tutorial https://uview-pro.netlify.app/components/lineProgress.html
+ * @tutorial https://uviewpro.cn/zh/components/lineProgress.html
  * @property {String Number} percent 进度条百分比值，为数值类型，0-100
  * @property {Boolean} round 进度条两端是否为半圆（默认true）
  * @property {String} type 如设置，active-color值将会失效

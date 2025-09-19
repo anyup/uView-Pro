@@ -71,7 +71,7 @@ defineOptions({
 /**
  * button 按钮
  * @description Button 按钮
- * @tutorial https://uview-pro.netlify.app/components/button.html
+ * @tutorial https://uviewpro.cn/zh/components/button.html
  * @property {String} size 按钮的大小
  * @property {Boolean} ripple 是否开启点击水波纹效果
  * @property {String} ripple-bg-color 水波纹的背景色，ripple为true时有效

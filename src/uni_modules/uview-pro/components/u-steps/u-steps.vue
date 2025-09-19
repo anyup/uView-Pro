@@ -29,7 +29,7 @@ defineOptions({ name: 'u-steps' });
 /**
  * steps 步骤条
  * @description 该组件一般用于完成一个任务要分几个步骤，标识目前处于第几步的场景。
- * @tutorial https://uview-pro.netlify.app/components/steps.html
+ * @tutorial https://uviewpro.cn/zh/components/steps.html
  * @property {String} mode 设置模式（默认dot）
  * @property {Array<{name: string}>} list 数轴条数据，数组。具体见上方示例
  * @property {String} type type主题（默认primary）

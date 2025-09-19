@@ -26,7 +26,7 @@ defineOptions({
 /**
  * toast 消息提示
  * @description 此组件表现形式类似uni的uni.showToastAPI，但也有不同的地方。
- * @tutorial https://uview-pro.netlify.app/components/toast.html
+ * @tutorial https://uviewpro.cn/zh/components/toast.html
  * @property {String|Number} z-index toast展示时的z-index值
  * @event {Function} show 显示toast，如需一进入页面就显示toast，请在onReady生命周期调用
  * @example <u-toast ref="uToast" />

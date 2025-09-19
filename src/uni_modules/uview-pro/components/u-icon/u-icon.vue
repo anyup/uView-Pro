@@ -22,7 +22,7 @@ defineOptions({
 /**
  * icon 图标
  * @description 基于字体的图标集，包含了大多数常见场景的图标。
- * @tutorial https://uview-pro.netlify.app/components/icon.html
+ * @tutorial https://uviewpro.cn/zh/components/icon.html
  * @property {String} name 图标名称，见示例图标集
  * @property {String} color 图标颜色（默认inherit）
  * @property {String | Number} size 图标字体大小，单位rpx（默认32）

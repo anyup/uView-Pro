@@ -13,7 +13,7 @@ defineOptions({ name: 'u-verification-code' });
 /**
  * verificationCode 验证码输入框
  * @description 考虑到用户实际发送验证码的场景，可能是一个按钮，也可能是一段文字，提示语各有不同，所以本组件不提供界面显示，只提供提示语，由用户将提示语嵌入到具体的场景
- * @tutorial https://uview-pro.netlify.app/components/verificationCode.html
+ * @tutorial https://uviewpro.cn/zh/components/verificationCode.html
  * @property {Number|String} seconds 倒计时所需的秒数（默认60）
  * @property {String} startText 开始前的提示语，见官网说明（默认获取验证码）
  * @property {String} changeText 倒计时期间的提示语，必须带有字母"x"，见官网说明（默认X秒重新获取）
