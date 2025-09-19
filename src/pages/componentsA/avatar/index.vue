@@ -73,5 +73,3 @@ function levelChange(index: number) {
     showLevel.value = !index;
 }
 </script>
-
-<style lang="scss" scoped></style>

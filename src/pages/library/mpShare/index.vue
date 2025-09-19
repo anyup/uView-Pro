@@ -19,5 +19,3 @@ onShareAppMessage(res => {
     };
 });
 </script>
-
-<style lang="scss" scoped></style>

@@ -59,5 +59,3 @@ function getResult() {
     result.value = $u.guid(length.value, firstU.value, radix.value);
 }
 </script>
-
-<style lang="scss" scoped></style>

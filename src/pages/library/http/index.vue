@@ -87,5 +87,3 @@ onMounted(() => {
     doGet();
 });
 </script>
-
-<style lang="scss" scoped></style>

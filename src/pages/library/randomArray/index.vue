@@ -38,5 +38,3 @@ function getResult() {
     result.value = $u.randomArray(orginArray.value);
 }
 </script>
-
-<style lang="scss" scoped></style>

@@ -36,5 +36,3 @@ function colorChange(index: number): void {
     color.value = index === 0 ? '#303133' : index === 1 ? '#606266' : index === 2 ? '#909399' : index === 3 ? '#c0c4cc' : '#e4e7ed';
 }
 </script>
-
-<style lang="scss" scoped></style>

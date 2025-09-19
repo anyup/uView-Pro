@@ -49,5 +49,3 @@ async function getResult(): Promise<void> {
     result.value = $u.queryParams(params.value, prefix.value);
 }
 </script>
-
-<style lang="scss" scoped></style>

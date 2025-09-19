@@ -51,5 +51,3 @@ function colorGradientChange() {
     result.value = JSON.stringify($u.colorGradient('rgb(21,21,21)', 'rgb(56,56,56)', 10));
 }
 </script>
-
-<style lang="scss" scoped></style>

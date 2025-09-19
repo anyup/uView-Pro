@@ -37,5 +37,3 @@ function getResult(index?: number) {
     result.value = md5Libs.md5(string.value);
 }
 </script>
-
-<style lang="scss" scoped></style>

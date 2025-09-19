@@ -32,5 +32,3 @@ onLoad(() => {
     result.value = $u.deepClone(obj.value);
 });
 </script>
-
-<style lang="scss" scoped></style>

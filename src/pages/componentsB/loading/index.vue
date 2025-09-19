@@ -84,5 +84,3 @@ function showChange(index: number): void {
     show.value = !!index;
 }
 </script>
-
-<style scoped lang="scss"></style>

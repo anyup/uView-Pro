@@ -69,5 +69,3 @@ onLoad(() => {
     getResult();
 });
 </script>
-
-<style lang="scss" scoped></style>

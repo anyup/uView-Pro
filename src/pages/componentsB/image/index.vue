@@ -90,5 +90,3 @@ const srcChange = (index: number) => {
     }
 };
 </script>
-
-<style scoped lang="scss"></style>

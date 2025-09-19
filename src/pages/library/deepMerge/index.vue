@@ -76,5 +76,3 @@ function modeChange(index: number) {
     }
 }
 </script>
-
-<style lang="scss" scoped></style>
