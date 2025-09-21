@@ -11,7 +11,7 @@
                 <view class="issue">遇到问题</view>
             </view>
         </view>
-        <view class="buttom">
+        <view class="loginBottom">
             <view class="loginType">
                 <view class="wechat item">
                     <view class="icon"><u-icon size="70" name="weixin-fill" color="rgb(83,194,64)"></u-icon></view>
@@ -103,7 +103,7 @@ function submit() {
             margin-top: 30rpx;
         }
     }
-    .buttom {
+    .loginBottom {
         .loginType {
             display: flex;
             padding: 350rpx 150rpx 150rpx 150rpx;
