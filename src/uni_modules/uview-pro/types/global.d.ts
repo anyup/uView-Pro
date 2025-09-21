@@ -219,3 +219,37 @@ export type TagSize = 'default' | 'mini' | 'medium';
 export type ToastPosition = 'top' | 'center' | 'bottom';
 export type UploadSizeType = 'original' | 'compressed';
 export type UploadSourceType = 'album' | 'camera';
+// 自定义主题色
+export type ThemeColor = Partial<{
+    primary: string;
+    primaryDark: string;
+    primaryDisabled: string;
+    primaryLight: string;
+    bgColor: string;
+    info: string;
+    infoDark: string;
+    infoDisabled: string;
+    infoLight: string;
+    warning: string;
+    warningDark: string;
+    warningDisabled: string;
+    warningLight: string;
+    error: string;
+    errorDark: string;
+    errorDisabled: string;
+    errorLight: string;
+    success: string;
+    successDark: string;
+    successDisabled: string;
+    successLight: string;
+    mainColor: string;
+    contentColor: string;
+    tipsColor: string;
+    lightColor: string;
+    borderColor: string;
+}>;
+
+export interface UViewProOptions {
+    theme?: ThemeColor;
+    // 可扩展更多配置项
+}
