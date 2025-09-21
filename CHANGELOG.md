@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0] - 2025-09-21
+
+### ♻️ Code Refactoring | 代码重构
+
+- **http:** 优化 HTTP 请求和响应拦截器 ([b9ea27f](https://github.com/anyup/uView-Pro/commit/b9ea27f7a2fc3425316211784a07b2cde030282a))
+- 修改路由基础路径 ([23143c8](https://github.com/anyup/uView-Pro/commit/23143c839242fcd19c9c6ca73a8ff1bcfdb8b83b))
+- 移除多个组件中未使用的样式标签 ([f8d353a](https://github.com/anyup/uView-Pro/commit/f8d353a0b99b3d9a2530d8d8a4bd8d0d5fe7dcc5))
+- 更新项目文档链接和基础配置 ([435a1ea](https://github.com/anyup/uView-Pro/commit/435a1ea5b89f8ba850f3cd469f4583d3946f8142))
+
+### 📦‍ Build System | 打包构建
+
+- **vite:** 配置别名和服务器设置 ([b319288](https://github.com/anyup/uView-Pro/commit/b3192882a104963ab6a2c7b6c03e2fb8ee17f609))
+- **vite:** 配置别名和服务器设置 ([9483730](https://github.com/anyup/uView-Pro/commit/9483730b371a5722511cd515d20a1eac28834f04))
+- 添加修复空 CSS 文件的脚本 ([38b943d](https://github.com/anyup/uView-Pro/commit/38b943d0f1234978e90284fa759f13b604160e96))
+
+### ✨ Features | 新功能
+
+- **theme:** 支持自定义的color值传入 ([3de798f](https://github.com/anyup/uView-Pro/commit/3de798f8de48af07774376366f5472f463b07177))
+
+### 💄 Styles | 风格
+
+- 移除多余空格和换行 ([80df4d4](https://github.com/anyup/uView-Pro/commit/80df4d44b631b12adb1ae45a6dd0dfa69a2694b1))
+
+### 📝 Documentation | 文档
+
+- 更新交流群图片 ([3b71cb0](https://github.com/anyup/uView-Pro/commit/3b71cb092efd4c5a89c36ee559028d0fe438a013))
+
 ## [0.0.23] - 2025-09-15
 
 ### 🐛 Bug Fixes | Bug 修复
