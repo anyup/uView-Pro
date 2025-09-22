@@ -58,8 +58,8 @@
             @confirm="onConfirm"
         />
         <view class="u-input__right-icon u-flex">
-            <view class="u-input__right-icon__clear u-input__right-icon__item" @tap="onClear" v-if="clearable && modelValue != '' && focused">
-                <u-icon size="32" name="close-circle-fill" color="#c0c4cc" />
+            <view class="u-input__right-icon__clear u-input__right-icon__item" v-if="clearable && modelValue != ''">
+                <u-icon size="32" name="close-circle-fill" color="#c0c4cc" @click="onClear" />
             </view>
             <view class="u-input__right-icon__clear u-input__right-icon__item" v-if="passwordIcon && type == 'password'">
                 <u-icon size="32" :name="!showPassword ? 'eye' : 'eye-fill'" color="#c0c4cc" @click="showPassword = !showPassword" />
@@ -77,15 +77,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-input',
+    options: {
+        addGlobalClass: true,
+        virtualHost: true,
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { dispatch } from '../../libs/util/emitter';
 import { InputProps } from './types';
-
-defineOptions({
-    name: 'u-input'
-});
 
 const props = defineProps(InputProps);
 const emit = defineEmits(['update:modelValue', 'blur', 'focus', 'confirm', 'click']);
@@ -244,8 +251,10 @@ function inputClick() {
         &__item {
             margin-left: 10rpx;
         }
+
         &--select {
             transition: transform 0.4s;
+
             &--reverse {
                 transform: rotate(-180deg);
             }
