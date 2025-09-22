@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2025-09-22
+
+### ♻️ Code Refactoring | 代码重构
+
+- **theme:** 重构主题颜色定义和导出 ([a58a477](https://github.com/anyup/uView-Pro/commit/a58a477c8af42e466ed544d7737d84de80f3dc27))
+
+### ✨ Features | 新功能
+
+- **i18n:** 优化国际化配置并添加安全措施 ([952dd88](https://github.com/anyup/uView-Pro/commit/952dd887dcadeebccb98a25ec066181904ab727e))
+
+### 📝 Documentation | 文档
+
+- 简化提交 issue 模板结构 ([c818685](https://github.com/anyup/uView-Pro/commit/c818685383ae400b10d6662e7f4b9ba6be5b31f6))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-input:** 解决u-input组件在微信小程序端，开启clearable属性后，focus会自动清空输入问题 ([283551c](https://github.com/anyup/uView-Pro/commit/283551c54cd7006899a66b97afe7137b4bbb14b1))
+
 ## [0.1.0] - 2025-09-21
 
 ### ♻️ Code Refactoring | 代码重构
