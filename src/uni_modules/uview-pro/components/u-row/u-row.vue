@@ -7,12 +7,12 @@
         }"
         @tap="onClick"
     >
-        <slot />
+        <slot v-if="ready" />
     </view>
 </template>
 
 <script setup lang="ts">
-import { computed, provide } from 'vue';
+import { computed, onMounted, provide, ready } from 'vue';
 import { RowProps } from './types';
 
 defineOptions({
@@ -30,6 +30,8 @@ defineOptions({
  */
 
 const emit = defineEmits<{ (e: 'click'): void }>();
+
+const ready = ref(false);
 
 const props = defineProps(RowProps);
 
@@ -64,6 +66,9 @@ function onClick(e: Event) {
     // 触发 click 事件
     emit('click');
 }
+onMounted(() => {
+    ready.value = true;
+});
 </script>
 
 <style lang="scss">
