@@ -110,11 +110,11 @@ const validateMessage = ref(''); // 校验失败的提示语
 const errorType = ref<string[]>(['message']); // 错误提示方式，默认 message
 const fieldValue = ref(''); // 当前表单项的值
 const parentData = ref({
-    borderBottom: true, // 父表单下划线边框
-    labelWidth: 90, // 父表单 label 宽度
-    labelPosition: 'left', // 父表单 label 位置
-    labelStyle: {}, // 父表单 label 样式
-    labelAlign: 'left' // 父表单 label 对齐
+    borderBottom: parent.props.borderBottom, // 父表单下划线边框
+    labelWidth: parent.props.labelWidth || 90, // 父表单 label 宽度
+    labelPosition: parent.props.labelPosition || 'left', // 父表单 label 位置
+    labelStyle: parent.props.labelStyle || {}, // 父表单 label 样式
+    labelAlign: parent.props.labelAlign || 'left' // 父表单 label 对齐
 });
 
 // 监听校验状态和父表单 errorType 变化
@@ -171,7 +171,7 @@ const elLabelAlign = computed(() => {
 // label的下划线
 const elBorderBottom = computed(() => {
     // 子组件的borderBottom默认为空字符串，如果不等于空字符串，意味着子组件设置了值，优先使用子组件的值
-    return props.borderBottom !== '' ? props.borderBottom : parentData.value.borderBottom ? parentData.value.borderBottom : true;
+    return props.borderBottom !== '' ? props.borderBottom : parentData.value.borderBottom;
 });
 
 // 事件派发/广播工具

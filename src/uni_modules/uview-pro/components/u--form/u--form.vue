@@ -8,7 +8,12 @@ import { ref, provide, onMounted } from 'vue';
 import { $u } from '../..';
 
 defineOptions({
-    name: 'u-form'
+    // #ifdef MP-WEIXIN
+    name: 'u-form',
+    // #endif
+    // #ifndef MP-WEIXIN
+    name: 'u--form'
+    // #endif
 });
 
 /**
