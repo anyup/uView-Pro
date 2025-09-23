@@ -54,9 +54,9 @@ const infoList = ref([
     {
         icon: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
         title: '官网文档',
-        label: 'https://uviewpro.cn/zh/',
+        label: 'https://uviewpro.cn',
         click: () => {
-            copyLink('https://uviewpro.cn/zh/');
+            copyLink('https://uviewpro.cn');
         }
     },
     {
@@ -125,29 +125,13 @@ function preview(url: string) {
 /**
  * 复制链接，兼容H5和小程序
  */
-function copyLink(data: string) {
+function copyLink(url: string) {
     // #ifdef H5
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-        navigator.clipboard
-            .writeText(data)
-            .then(() => {
-                uni.showToast({
-                    title: '链接已复制，请到浏览器中打开',
-                    icon: 'none'
-                });
-            })
-            .catch(() => {
-                uni.showToast({
-                    title: '复制失败',
-                    icon: 'none'
-                });
-            });
-        return;
-    }
+    window.open(url);
     // #endif
     // #ifndef H5
     uni.setClipboardData({
-        data,
+        data: url,
         success: () => {
             uni.showToast({
                 title: '链接已复制，请到浏览器中打开',
