@@ -202,6 +202,56 @@ function code(value: string, len: number = 6): boolean {
     return new RegExp(`^\\d{${len}}$`).test(value);
 }
 
+/**
+ * 是否函数方法
+ * @param {Object} value
+ */
+function func(value) {
+    return typeof value === 'function';
+}
+
+/**
+ * 是否promise对象
+ * @param {Object} value
+ */
+function promise(value) {
+    return object(value) && func(value.then) && func(value.catch);
+}
+
+/** 是否图片格式
+ * @param {Object} value
+ */
+function image(value) {
+    const newValue = value.split('?')[0];
+    const IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
+    return IMAGE_REGEXP.test(newValue);
+}
+
+/**
+ * 是否视频格式
+ * @param {Object} value
+ */
+function video(value) {
+    const VIDEO_REGEXP = /\.(mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv|m3u8)/i;
+    return VIDEO_REGEXP.test(value);
+}
+
+/**
+ * 是否为正则对象
+ * @param {Object}
+ * @return {Boolean}
+ */
+function regExp(o) {
+    return o && Object.prototype.toString.call(o) === '[object RegExp]';
+}
+
+/**
+ * 验证字符串
+ */
+function string(value) {
+    return typeof value === 'string';
+}
+
 export default {
     email,
     mobile,
@@ -225,5 +275,11 @@ export default {
     landline,
     object,
     array,
-    code
+    code,
+    func,
+    promise,
+    video,
+    image,
+    regExp,
+    string
 };
