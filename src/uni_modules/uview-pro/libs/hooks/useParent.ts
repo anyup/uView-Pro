@@ -1,29 +1,31 @@
-import { type ComponentInternalInstance, getCurrentInstance } from 'vue';
+import { getCurrentInstance, onUnmounted } from 'vue';
 
 export function useParent(name: string) {
-    const instance: ComponentInternalInstance | null | undefined = getCurrentInstance();
+    const instance = getCurrentInstance();
+    if (!instance) return { parent: null };
 
-    function getParent(componentName?: string) {
-        componentName = componentName || name;
-        let parent = instance && (instance.parent as ComponentInternalInstance | null | undefined);
-
-        while (parent) {
-            const name = (parent.type as any)?.name as string | undefined;
-            if (name === componentName) {
-                return parent;
-            }
-            parent = parent.parent;
-        }
-        return null;
+    // 查找父组件
+    let parent: any = instance.parent;
+    while (parent) {
+        const parentName = parent.type?.name;
+        if (parentName === name) break;
+        parent = parent.parent;
     }
-    function getParentData(componentName?: string) {
-        componentName = componentName || name;
-        const parent = getParent(componentName);
-        return parent ? parent.exposed : null;
+
+    // 建立父子关系
+    if (parent) {
+        (parent as any).children = (parent as any).children || [];
+        (parent as any).children.push(instance);
+        // 卸载时移除
+        onUnmounted(() => {
+            const i = parent.children.indexOf(instance);
+            i > -1 && parent.children.splice(i, 1);
+        });
     }
 
     return {
-        getParent,
-        getParentData
+        parent,
+        parentChildren: parent?.children || [],
+        parentExposed: parent?.exposed || null
     };
 }
