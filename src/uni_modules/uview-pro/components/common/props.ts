@@ -6,7 +6,7 @@ export const stringProp = <T>(defaultVal: T) => ({
 });
 
 export const stringOrObjectProp = <T>(defaultVal: T) => ({
-    type: [String, Object] as unknown as PropType<T>,
+    type: [String, Object] as PropType<string | Record<string, any>>,
     default: defaultVal
 });
 

@@ -147,7 +147,11 @@ export function addStyle(customStyle: Record<string, string> | string, target: '
  * @returns {string} 格式化后的 CSS 样式字符串
  */
 export function toStyle(styles: Record<string, any> | Record<string, any>[] | string): string {
-    if (test.string(styles)) return styles;
+    // 如果 styles 是字符串类型
+    if (test.string(styles)) {
+        // 如果是字符串且不为空，确保末尾有分号
+        return styles ? (styles.endsWith(';') ? styles : styles + ';') : '';
+    }
     // 如果 styles 是数组类型
     if (test.array(styles)) {
         // 使用过滤函数去除空值和 null 值的元素
@@ -164,12 +168,6 @@ export function toStyle(styles: Record<string, any> | Record<string, any>[] | st
         // 如果结果不为空，确保末尾有分号
         return result ? (result.endsWith(';') ? result : result + ';') : '';
     }
-
-    if (test.string(styles)) {
-        // 如果是字符串且不为空，确保末尾有分号
-        return styles ? (styles.endsWith(';') ? styles : styles + ';') : '';
-    }
-
     // 如果 styles 是对象类型
     if (test.object(styles)) {
         // 使用 Object.keys 获取所有属性名
