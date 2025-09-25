@@ -15,7 +15,7 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">手风琴模式</view>
-                <u-subsection :list="['是', '否']" @change="accordionChange"></u-subsection>
+                <u-subsection current="1" :list="['是', '否']" @change="accordionChange"></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">右侧箭头</view>
@@ -60,7 +60,7 @@ const itemList = ref([
         open: false
     }
 ]);
-const accordion = ref(true);
+const accordion = ref(false);
 const arrow = ref(true);
 const hoverClass = ref('hover2');
 const itemStyle = ref({});
