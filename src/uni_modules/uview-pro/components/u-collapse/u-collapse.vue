@@ -1,16 +1,24 @@
 <template>
-    <view class="u-collapse">
+    <view class="u-collapse" :style="$u.toStyle(customStyle)" :class="customClass">
         <slot />
     </view>
 </template>
 
-<script setup lang="ts">
-import { ref, provide } from 'vue';
-import { CollapseProps } from './types';
+<script lang="ts">
+export default {
+    name: 'u-collapse',
+    options: {
+        addGlobalClass: true,
+        virtualHost: true,
+        styleIsolation: 'shared'
+    }
+};
+</script>
 
-defineOptions({
-    name: 'u-collapse'
-});
+<script setup lang="ts">
+import { ref } from 'vue';
+import { CollapseProps } from './types';
+import { $u } from '../../';
 
 /**
  * collapse 手风琴
@@ -47,13 +55,6 @@ function init() {
 function onChange(index: string | number) {
     emit('change', index);
 }
-
-provide('u-collapse', {
-    children,
-    props,
-    init,
-    onChange
-});
 
 defineExpose({
     props,

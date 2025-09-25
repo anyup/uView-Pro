@@ -62,7 +62,6 @@ const itemList = ref([
 ]);
 const accordion = ref(false);
 const arrow = ref(true);
-const hoverClass = ref('hover2');
 const itemStyle = ref({});
 const key = ref(true);
 

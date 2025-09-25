@@ -1,5 +1,5 @@
 <template>
-    <view class="u-collapse-item" :style="itemStyle">
+    <view class="u-collapse-item" :style="`${$u.toStyle(itemStyle)}${$u.toStyle(customStyle)}`" :class="customClass">
         <view :hover-stay-time="200" class="u-collapse-head" @tap.stop="headClick" :hover-class="hoverClass" :style="headStyle">
             <template v-if="!slots['title-all']">
                 <view v-if="!slots['title']" class="u-collapse-title u-line-1" :style="[{ textAlign: align ? align : 'left' }, isShow && activeStyle && !arrow ? activeStyle : '']">
@@ -21,12 +21,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-collapse-item',
+    options: {
+        addGlobalClass: true,
+        virtualHost: true,
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, inject } from 'vue';
-import { $u } from '../..';
+import { $u, toStyle } from '../..';
 import { CollapseItemProps } from './types';
-
-defineOptions({ name: 'u-collapse-item' });
+import { useParent } from '../../libs/hooks/useParent';
 
 /**
  * collapseItem 手风琴Item
@@ -58,7 +68,7 @@ const hoverClass = ref(''); // 头部按下时的效果样式类
 const accordion = ref(true); // 是否显示右侧箭头
 const arrow = ref(true);
 
-const parent = inject<any>('u-collapse', null);
+const { parent, parentExposed } = useParent('u-collapse');
 
 watch(
     () => props.open,
@@ -73,17 +83,13 @@ watch(
  */
 function init() {
     if (parent) {
-        // 不存在时才添加本实例
-        if (!parent.children.value.includes(instance?.exposed)) {
-            parent.children.value.push(instance?.exposed);
-        }
-        headStyle.value = parent.props.headStyle;
-        bodyStyle.value = parent.props.bodyStyle;
-        arrowColor.value = parent.props.arrowColor;
-        hoverClass.value = parent.props.hoverClass;
-        arrow.value = parent.props.arrow;
-        itemStyle.value = parent.props.itemStyle;
-        accordion.value = parent.props.accordion;
+        headStyle.value = parentExposed.props.headStyle;
+        bodyStyle.value = parentExposed.props.bodyStyle;
+        arrowColor.value = parentExposed.props.arrowColor;
+        hoverClass.value = parentExposed.props.hoverClass;
+        arrow.value = parentExposed.props.arrow;
+        itemStyle.value = parentExposed.props.itemStyle;
+        accordion.value = parentExposed.props.accordion;
     }
     elId.value = $u.guid();
     nextTick(() => {
@@ -96,16 +102,15 @@ function init() {
  */
 function headClick() {
     if (props.disabled) return;
-
     if (accordion.value && parent) {
-        parent.children.value.forEach((vm: any) => {
-            if (vm.elId !== elId.value) {
-                vm.isShow = false;
+        parent.children.forEach((vm: any) => {
+            if (vm.exposed.elId.value !== elId.value) {
+                vm.exposed.isShow.value = false;
             } else {
-                vm.isShow = !vm.isShow;
+                vm.exposed.isShow.value = !vm.exposed.isShow.value;
                 emit('change', {
                     index: props.index,
-                    show: vm.isShow
+                    show: vm.exposed.isShow.value
                 });
             }
         });
@@ -116,8 +121,7 @@ function headClick() {
             show: isShow.value
         });
     }
-
-    if (isShow.value) parent && parent.onChange && parent.onChange(props.index);
+    if (isShow.value) parentExposed && parentExposed.onChange && parentExposed.onChange(props.index);
 }
 
 /**

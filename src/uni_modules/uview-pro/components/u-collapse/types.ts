@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * u-collapse 手风琴 Props
@@ -12,6 +13,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
  * @property {String} hoverClass 样式类名，按下时有效（默认u-hover-class）
  */
 export const CollapseProps = {
+    ...baseProps,
     /** 是否手风琴模式 */
     accordion: { type: Boolean, default: true },
     /** 头部的样式 */
