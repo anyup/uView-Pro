@@ -38,37 +38,39 @@ page {
 /* end--各种hover点击反馈相关的类名--end */
 
 /* start--文本行数限制--start */
-.u-line-1 {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+// 超出行数，自动显示行尾省略号，最多5行
+// 来自uView的温馨提示：当您在控制台看到此报错，说明需要在App.vue的style标签加上【lang="scss"】
+@for $i from 1 through 5 {
+    .u-line-#{$i} {
+        /* #ifdef APP-NVUE */
+        // nvue下，可以直接使用lines属性，这是weex特有样式
+        lines: $i;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        flex: 1;
+        /* #endif */
+
+        /* #ifndef APP-NVUE */
+        // vue下，单行和多行显示省略号需要单独处理
+        @if $i == '1' {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        } @else {
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+            -webkit-line-clamp: $i;
+            -webkit-box-orient: vertical;
+        }
+        /* #endif */
+    }
 }
 
-.u-line-2 {
-    -webkit-line-clamp: 2;
-}
-
-.u-line-3 {
-    -webkit-line-clamp: 3;
-}
-
-.u-line-4 {
-    -webkit-line-clamp: 4;
-}
-
-.u-line-5 {
-    -webkit-line-clamp: 5;
-}
-
-.u-line-2,
-.u-line-3,
-.u-line-4,
-.u-line-5 {
-    overflow: hidden;
-    word-break: break-all;
-    text-overflow: ellipsis;
-    display: -webkit-box; // 弹性伸缩盒
-    -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
+.u-line-force {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
 }
 
 /* end--文本行数限制--end */
@@ -163,15 +165,24 @@ uni-toast .uni-toast {
 /* end--提升H5端uni.toast()的层级，避免被uView的modal等遮盖--end */
 
 /* start--去除button的所有默认样式--start */
+// 去除button的所有默认样式，让其表现跟普通的view、text元素一样
 .u-reset-button {
     padding: 0;
+    margin: 0;
+    background-color: transparent;
+    /* #ifndef APP-PLUS */
     font-size: inherit;
     line-height: inherit;
-    background-color: transparent;
     color: inherit;
+    /* #endif */
+    /* #ifdef APP-NVUE */
+    border-width: 0;
+    /* #endif */
 }
 
+/* #ifndef APP-NVUE */
 .u-reset-button::after {
     border: none;
 }
+/* #endif */
 /* end--去除button的所有默认样式--end */
