@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { IconLabelPosition, ImgMode } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * u-icon 组件 Props 类型定义
  * 所有属性均带详细注释，类型安全，便于 IDE 智能提示
  */
 export const IconProps = {
+    ...baseProps,
     /** 图标名称，见示例图标集 */
     name: { type: String, default: '' },
     /** 图标颜色，可接受主题色 */
@@ -40,8 +42,6 @@ export const IconProps = {
     space: { type: [String, Number] as PropType<string | number>, default: '' },
     /** 图片的mode，参考uni-app image组件 */
     imgMode: { type: String as PropType<ImgMode>, default: 'widthFix' },
-    /** 自定义样式，对象形式 */
-    customStyle: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
     /** 用于显示图片小图标时，图片的宽度，单位rpx */
     width: { type: [String, Number] as PropType<string | number>, default: '' },
     /** 用于显示图片小图标时，图片的高度，单位rpx */

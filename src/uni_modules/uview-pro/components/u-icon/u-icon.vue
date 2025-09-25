@@ -10,14 +10,21 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-icon',
+    options: {
+        addGlobalClass: true,
+        virtualHost: true,
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { $u } from '../..';
 import { IconProps } from './types';
-
-defineOptions({
-    name: 'u-icon'
-});
 
 /**
  * icon 图标
