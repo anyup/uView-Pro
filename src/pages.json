@@ -209,6 +209,13 @@
                     "style": {
                         "navigationBarTitleText": "loadmore-加载更多"
                     }
+                },
+                // 文本
+                {
+                    "path": "text/index",
+                    "style": {
+                        "navigationBarTitleText": "text-文本"
+                    }
                 }
             ]
         },

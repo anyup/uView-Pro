@@ -89,6 +89,7 @@ declare module 'vue' {
         uUpload: (typeof import('../components/u-upload/u-upload.vue'))['default'];
         uVerificationCode: (typeof import('../components/u-verification-code/u-verification-code.vue'))['default'];
         uWaterfall: (typeof import('../components/u-waterfall/u-waterfall.vue'))['default'];
+        uText: (typeof import('../components/u-text/u-text.vue'))['default'];
     }
 }
 

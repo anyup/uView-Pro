@@ -29,6 +29,12 @@ export default [
                 title_en: 'Button'
             },
             {
+                path: '/pages/componentsC/text/index',
+                icon: 'text',
+                title: 'Text 文本',
+                title_en: 'Text'
+            },
+            {
                 path: '/pages/componentsC/layout/index',
                 icon: 'layout',
                 title: 'Layout 布局',
