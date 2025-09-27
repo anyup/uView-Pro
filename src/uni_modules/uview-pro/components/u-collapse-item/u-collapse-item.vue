@@ -13,7 +13,7 @@
             <slot v-else name="title-all" />
         </view>
 
-        <view class="u-collapse-body" :style="{ height: isShow ? height + 'px' : '0' }">
+        <view class="u-collapse-body" :style="{ height: isShow ? height : '0' }">
             <view class="u-collapse-content" :id="elId" :style="bodyStyle">
                 <slot></slot>
             </view>
@@ -59,7 +59,7 @@ const instance = getCurrentInstance();
 
 const isShow = ref(false);
 const elId = ref('');
-const height = ref(0); // body内容的高度
+const height = ref('0'); // body内容的高度
 const headStyle = ref<Record<string, any>>({}); // 头部样式，对象形式
 const bodyStyle = ref<Record<string, any>>({}); // 主体部分样式
 const itemStyle = ref<Record<string, any>>({}); // 每个item的整体样式
@@ -128,10 +128,13 @@ function headClick() {
  * 查询内容高度
  */
 function queryRect() {
-    // getRect为uView自带的节点查询简化方法，详见文档介绍：https://uviewpro.cn/zh/js/getRect.html
+    // getRect为uView自带的节点查询简化方法，详见文档介绍：https://uviewpro.cn/zh/tools/getRect.html
     // 组件内部一般用this.$uGetRect，对外的为this.$u.getRect，二者功能一致，名称不同
     $u.getRect('#' + elId.value, instance).then((res: any) => {
-        height.value = res.height;
+        height.value = res.height + 'px';
+        // #ifdef MP-TOUTIAO
+        height.value = 'auto';
+        // #endif
     });
 }
 
