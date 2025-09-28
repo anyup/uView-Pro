@@ -1,38 +1,46 @@
 <template>
-    <view class="navigation">
-        <view class="left">
-            <view class="item">
-                <u-icon name="server-fill" :size="40" :color="$u.color['contentColor']"></u-icon>
-                <view class="text u-line-1">客服</view>
+    <view>
+        <!-- #ifdef MP-WEIXIN -->
+        <u-sticky>
+            <u-alert-tips
+                :show="show"
+                title="提示"
+                description="该页面为布局演示功能，非电商类小程序，不具备实际功能！"
+                type="error"
+                :close-able="true"
+                @close="show = false"
+            ></u-alert-tips>
+        </u-sticky>
+        <!-- #endif -->
+        <view class="navigation">
+            <view class="left">
+                <view class="item">
+                    <u-icon name="server-fill" :size="40" :color="$u.color['contentColor']"></u-icon>
+                    <view class="text u-line-1">客服</view>
+                </view>
+                <view class="item">
+                    <u-icon name="home" :size="40" :color="$u.color['contentColor']"></u-icon>
+                    <view class="text u-line-1">店铺</view>
+                </view>
+                <view class="item car">
+                    <u-badge class="car-num" :count="9" type="error" :offset="[-3, -6]"></u-badge>
+                    <u-icon name="shopping-cart" :size="40" :color="$u.color['contentColor']"></u-icon>
+                    <view class="text u-line-1">购物车</view>
+                </view>
             </view>
-            <view class="item">
-                <u-icon name="home" :size="40" :color="$u.color['contentColor']"></u-icon>
-                <view class="text u-line-1">店铺</view>
+            <view class="right">
+                <view class="cart btn u-line-1">加入购物车</view>
+                <view class="buy btn u-line-1">立即购买</view>
             </view>
-            <view class="item car">
-                <u-badge class="car-num" :count="9" type="error" :offset="[-3, -6]"></u-badge>
-                <u-icon name="shopping-cart" :size="40" :color="$u.color['contentColor']"></u-icon>
-                <view class="text u-line-1">购物车</view>
-            </view>
-        </view>
-        <view class="right">
-            <view class="cart btn u-line-1">加入购物车</view>
-            <view class="buy btn u-line-1">立即购买</view>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
-import { onMounted } from 'vue';
+import { ref } from 'vue';
 
-onMounted(() => {
-    uni.showModal({
-        title: '提示',
-        content: '该页面仅为布局演示功能，非电商类小程序，不具备实际功能',
-        success: res => {}
-    });
-});
+const show = ref(true);
 </script>
 
 <style lang="scss" scoped>

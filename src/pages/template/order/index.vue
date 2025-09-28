@@ -1,6 +1,18 @@
 <template>
     <view>
         <view class="wrap">
+            <!-- #ifdef MP-WEIXIN -->
+            <u-sticky>
+                <u-alert-tips
+                    :show="show"
+                    title="提示"
+                    description="该页面为布局演示功能，非电商类小程序，不具备实际功能！"
+                    type="error"
+                    :close-able="true"
+                    @close="show = false"
+                ></u-alert-tips>
+            </u-sticky>
+            <!-- #endif -->
             <view class="u-tabs-box">
                 <u-tabs-swiper activeColor="#f29100" ref="tabs" :list="list" :current="current" @change="change" :is-scroll="false" swiperWidth="750"></u-tabs-swiper>
             </view>
@@ -166,8 +178,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, getCurrentInstance } from 'vue';
+import { ref, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+
+const show = ref(true);
 
 // 商品信息类型
 interface GoodsItem {
@@ -315,11 +329,6 @@ const { proxy } = getCurrentInstance() as any;
 
 // 页面加载时初始化部分 tab 的订单数据
 onMounted(() => {
-    uni.showModal({
-        title: '提示',
-        content: '该页面仅为布局演示功能，非电商类小程序，不具备实际功能',
-        success: res => {}
-    });
     getOrderList(0);
     getOrderList(1);
     getOrderList(3);

@@ -1,5 +1,17 @@
 <template>
     <view class="wrap">
+        <!-- #ifdef MP-WEIXIN -->
+        <u-sticky>
+            <u-alert-tips
+                :show="show"
+                title="提示"
+                description="该页面为表单校验演示功能，所有用户信息不存储！"
+                type="error"
+                :close-able="true"
+                @close="show = false"
+            ></u-alert-tips>
+        </u-sticky>
+        <!-- #endif -->
         <u-form :model="model" :rules="rules" ref="uFormRef" :errorType="errorType">
             <u-form-item :leftIconStyle="{ color: '#888', fontSize: '32rpx' }" left-icon="account" label-width="120" :label-position="labelPosition" label="姓名" prop="name">
                 <u-input :border="border" placeholder="请输入姓名" v-model="model.name" type="text"></u-input>
@@ -90,9 +102,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, nextTick, onMounted } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import type { FormErrorType, FormRules } from '@/uni_modules/uview-pro/types/global';
+
+const show = ref(true);
 
 // 表单模型类型声明
 interface Model {
@@ -420,13 +434,6 @@ function errorChange(index: number) {
     if (index === 2) errorType.value = ['border-bottom'];
     if (index === 3) errorType.value = ['border'];
 }
-onMounted(() => {
-    uni.showModal({
-        title: '提示',
-        content: '该页面仅为表单校验演示功能，所有用户相关信息不存储',
-        success: res => {}
-    });
-});
 </script>
 
 <style scoped lang="scss">
