@@ -1,5 +1,17 @@
 <template>
     <view>
+        <!-- #ifdef MP-WEIXIN -->
+        <u-sticky>
+            <u-alert-tips
+                :show="alertShow"
+                title="提示"
+                description="该页面为布局演示功能，非电商类小程序，不具备实际功能！"
+                type="error"
+                :close-able="true"
+                @close="alertShow = false"
+            ></u-alert-tips>
+        </u-sticky>
+        <!-- #endif -->
         <view class="u-padding-40">
             <u-button type="success" @click="showPop(true)">
                 <u-icon name="red-packet"></u-icon>
@@ -39,6 +51,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const alertShow = ref(true);
 // 支付弹窗显示状态
 const show = ref(false);
 // 支付密码
