@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2025-09-28
+
+### ♻️ Code Refactoring | 代码重构
+
+- **example:** 优化 about 页面中的链接处理 ([d04ba8a](https://github.com/anyup/uView-Pro/commit/d04ba8a26278b6a0ea4f5e906bfec89ce6954459))
+- **css:** 重构 CSS 样式并添加新样式 ([50b2670](https://github.com/anyup/uView-Pro/commit/50b2670a5e09aff9994a97f60a7d376b5b99a544))
+- **libs:** 重构 libs 工具类代码并优化导出方式 ([10a604e](https://github.com/anyup/uView-Pro/commit/10a604e86f8712ee65c658a019c231b56cdcc7e7))
+- **u-icon:** 移除 customStyle 属性并整合全局样式 ([cd52e14](https://github.com/anyup/uView-Pro/commit/cd52e14739604f1f126205e16383f187f1d38e8e))
+- **props:** 优化 Props 类型定义和样式处理 ([c6ca0de](https://github.com/anyup/uView-Pro/commit/c6ca0de0876cb61671c25e58f33e51674edab266))
+- **u-text:** 优化文本组件的样式和布局 ([885a0cf](https://github.com/anyup/uView-Pro/commit/885a0cf3f348184b3546979f1cc1914ded198411))
+- **u-text:** 优化文本组件样式和属性 ([315d437](https://github.com/anyup/uView-Pro/commit/315d4379148fddbed059e55e5f9a0d0268345e62))
+- **pages:** 优化微信小程序多个页面的用户提示展示，审核相关 ([0f3741f](https://github.com/anyup/uView-Pro/commit/0f3741f65d39f74bc3dc27df8514324e02c3582a))
+- **pages:** 添加微信小程序端布局演示提示 ([9eaac70](https://github.com/anyup/uView-Pro/commit/9eaac70cf143327589d56a627160f33c56585d2e))
+
+### ✨ Features | 新功能
+
+- **components:** 添加 input 组件演示页面 ([91baf00](https://github.com/anyup/uView-Pro/commit/91baf0012e381856b79ca49edb60735928d78099))
+- **collapse:** 更新折叠面板组件默认配置和样式 ([a03e0be](https://github.com/anyup/uView-Pro/commit/a03e0be3a9f8ac8b03dbd406d5d8c37227e869bd))
+- **components:** 新增 Text 组件 ([a034f9d](https://github.com/anyup/uView-Pro/commit/a034f9d029ab38dbf1a066978f3c62c1328c96a5))
+- **hooks:** 重构 useParent 并添加父子组件关系管理 ([37e35d8](https://github.com/anyup/uView-Pro/commit/37e35d84112a08b3d28aa8e5caec12a0a2696594))
+- **hooks:** 新增自定义 Hooks 工具库 ([0b3f680](https://github.com/anyup/uView-Pro/commit/0b3f68051b09917fbd39006093291f6dcc4eb0ef))
+
+### 📝 Documentation | 文档
+
+- 添加 Copilot 提示词 ([c10cd20](https://github.com/anyup/uView-Pro/commit/c10cd201214907ae2ac8228498927a59f8411cfb))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-collapse:** 重构手风琴组件并解决手风琴失效问题 ([a64e607](https://github.com/anyup/uView-Pro/commit/a64e6075f556ffeb3f5ad6b9ea443e3a22f83a86))
+- **u-collapse:** 修复折叠面板内容高度在头条小程序适配 ([5fdcd26](https://github.com/anyup/uView-Pro/commit/5fdcd262ab3e134a97a4f25482d188d93222fddf))
+
+### 👷 Continuous Integration | CI 配置
+
+- **vscode:** 设置 Vue 文件默认格式化工具为 Prettier ([84d5259](https://github.com/anyup/uView-Pro/commit/84d52599f2632e814a137e8d553793fb3cdad1f1))
+
 ## [0.1.1] - 2025-09-22
 
 ### ♻️ Code Refactoring | 代码重构
