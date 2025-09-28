@@ -2,7 +2,13 @@
     <view
         v-if="props.show"
         class="u-text"
-        :class="[props.bold ? 'u-text--bold' : '', props.block ? 'u-text--block' : '', props.lines ? 'u-text--ellipsis' : '', `u-text--align-${props.align}`, customClass]"
+        :class="[
+            props.bold ? 'u-text--bold' : '',
+            props.block ? 'u-text--block' : 'u-text--inline',
+            props.lines ? 'u-text--ellipsis' : '',
+            `u-text--align-${props.align}`,
+            customClass
+        ]"
         :style="textStyle"
         @click="onClick"
     >
@@ -243,6 +249,31 @@ function onOpenSetting(event) {
     /* #ifndef APP-NVUE */
     width: 100%;
     /* #endif */
+    word-break: break-all;
+
+    &--bold {
+        font-weight: bold;
+    }
+
+    &--inline {
+        display: inline;
+    }
+
+    &--inline &__value {
+        display: inline;
+    }
+
+    &--block {
+        display: block;
+        /* #ifndef APP-NVUE */
+        width: 100%;
+        /* #endif */
+    }
+
+    &--block &__value {
+        display: flex;
+        flex: 1;
+    }
 
     &__price {
         font-size: 14px;
