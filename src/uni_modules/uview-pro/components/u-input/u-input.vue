@@ -58,7 +58,7 @@
             @confirm="onConfirm"
         />
         <view class="u-input__right-icon u-flex">
-            <view class="u-input__right-icon__clear u-input__right-icon__item" v-if="clearable && modelValue != ''">
+            <view class="u-input__right-icon__clear u-input__right-icon__item" v-if="clearable && modelValue != '' && !disabled">
                 <u-icon size="32" name="close-circle-fill" color="#c0c4cc" @click="onClear" />
             </view>
             <view class="u-input__right-icon__clear u-input__right-icon__item" v-if="passwordIcon && type == 'password'">
