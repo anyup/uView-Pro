@@ -13,43 +13,43 @@
         @click="onClick"
     >
         <!-- prefixIcon -->
-        <view class="u-text__prefix-icon" v-if="props.prefixIcon">
-            <u-icon :name="props.prefixIcon" :custom-style="$u.toStyle(iconStyle)"></u-icon>
+        <view class="u-text__icon u-text__prefix-icon" v-if="props.prefixIcon">
+            <u-icon :name="props.prefixIcon" :custom-style="$u.toStyle(props.iconStyle)"></u-icon>
         </view>
         <!-- 价格模式 -->
-        <text v-if="props.mode === 'price'" :class="['u-text__price', props.type && `u-text__value--${type}`]" :style="textValueStyle"> ￥{{ displayValue }} </text>
+        <text v-if="props.mode === 'price'" :class="['u-text__price', props.type && `u-text__value--${props.type}`]" :style="textValueStyle"> ￥{{ displayValue }} </text>
         <!-- link 模式 -->
         <u-link v-else-if="props.mode === 'link'" :href="props.href" underLine>{{ displayValue }}</u-link>
-        <template v-else-if="openType && isMp">
+        <template v-else-if="props.openType && isMp">
             <button
                 class="u-reset-button u-text__value"
-                :class="props.type && `u-text__value--${type}`"
+                :class="props.type && `u-text__value--${props.type}`"
                 :style="textValueStyle"
-                :openType="openType"
+                :openType="props.openType"
                 @getuserinfo="onGetUserInfo"
                 @contact="onContact"
                 @getphonenumber="onGetPhoneNumber"
                 @error="onError"
                 @launchapp="onLaunchApp"
                 @opensetting="onOpenSetting"
-                :lang="lang"
-                :session-from="sessionFrom"
-                :send-message-title="sendMessageTitle"
-                :send-message-path="sendMessagePath"
-                :send-message-img="sendMessageImg"
-                :show-message-card="showMessageCard"
-                :app-parameter="appParameter"
+                :lang="props.lang"
+                :session-from="props.sessionFrom"
+                :send-message-title="props.sendMessageTitle"
+                :send-message-path="props.sendMessagePath"
+                :send-message-img="props.sendMessageImg"
+                :show-message-card="props.showMessageCard"
+                :app-parameter="props.appParameter"
             >
                 {{ displayValue }}
             </button>
         </template>
         <!-- 默认模式 -->
-        <text v-else class="u-text__value" :style="textValueStyle" :class="[type && `u-text__value--${type}`, props.lines ? `u-line-${props.lines}` : '']">
+        <text v-else class="u-text__value" :style="textValueStyle" :class="[props.type && `u-text__value--${props.type}`, props.lines ? `u-line-${props.lines}` : '']">
             {{ displayValue }}
         </text>
         <!-- 后缀图标 -->
-        <view class="u-text__suffix-icon" v-if="props.suffixIcon">
-            <u-icon :name="props.suffixIcon" :custom-style="$u.toStyle(iconStyle)"></u-icon>
+        <view class="u-text__icon u-text__suffix-icon" v-if="props.suffixIcon">
+            <u-icon :name="props.suffixIcon" :custom-style="$u.toStyle(props.iconStyle)"></u-icon>
         </view>
     </view>
 </template>
@@ -123,10 +123,7 @@ const isNvue = computed(() => {
 const displayValue = computed(() => {
     const { format, text, href, mode } = props;
     let val = text;
-    // 进行格式化，判断用户传入的format参数为正则，或者函数，如果没有传入format，则使用默认的金额格式化处理
-
     if (typeof format === 'function') {
-        // 如果用户传入的是函数，使用函数格式化
         val = format(val);
     } else if (typeof format === 'string' && format) {
         // 可扩展字符串格式化
@@ -136,6 +133,7 @@ const displayValue = computed(() => {
             if (!/^\d+(\.\d+)?$/.test(String(val))) return val;
             // 如果format非正则，非函数，则使用默认的金额格式化方法进行操作
             val = $u.formatPrice(val, 2);
+            break;
         case 'phone':
             // 判断是否合法的手机号
             if (format === 'encrypt') {
@@ -160,7 +158,6 @@ const displayValue = computed(() => {
             // 如果没有设置format，则设置为默认的时间格式化形式
             return $u.timeFormat(val, 'yyyy-mm-dd');
         case 'link':
-            // 链接模式
             if (!$u.test.url(href)) return val;
             break;
     }
@@ -193,16 +190,17 @@ const textValueStyle = computed(() => {
         style['display'] = '-webkit-box';
         style['-webkit-box-orient'] = 'vertical';
     }
-    !props.type && (style.color = props.color);
-    isNvue && props.lines && (style.lines = props.lines);
-    props.lineHeight && (style.lineHeight = $u.addUnit(props.lineHeight));
-    !isNvue && props.block && (style.display = 'block');
+    if (!props.type) style.color = props.color;
+    if (isNvue.value && props.lines) style.lines = props.lines;
+    if (props.lineHeight) style.lineHeight = $u.addUnit(props.lineHeight);
 
+    // 合并 textStyle，优先对象，其次字符串
+    if ($u.test.object(props.textStyle)) {
+        // 只合并对象类型，防止类型错误
+        return $u.toStyle($u.deepMerge(style, props.textStyle as Record<string, any>));
+    }
     if ($u.test.string(props.textStyle)) {
         return `${$u.toStyle(style)}${props.textStyle}`;
-    }
-    if ($u.test.object(props.textStyle)) {
-        return $u.toStyle($u.deepMerge(style, props.textStyle));
     }
     return $u.toStyle(style);
 });
@@ -246,9 +244,6 @@ function onOpenSetting(event) {
     align-items: center;
     flex-wrap: nowrap;
     flex: 1;
-    /* #ifndef APP-NVUE */
-    width: 100%;
-    /* #endif */
     word-break: break-all;
 
     &--bold {
@@ -256,15 +251,19 @@ function onOpenSetting(event) {
     }
 
     &--inline {
-        display: inline;
+        display: inline-flex;
     }
 
     &--inline &__value {
-        display: inline;
+        display: inline-flex;
+    }
+
+    &--inline &__icon {
+        display: inline-flex;
     }
 
     &--block {
-        display: block;
+        display: flex;
         /* #ifndef APP-NVUE */
         width: 100%;
         /* #endif */
@@ -272,7 +271,6 @@ function onOpenSetting(event) {
 
     &--block &__value {
         display: flex;
-        flex: 1;
     }
 
     &__price {
