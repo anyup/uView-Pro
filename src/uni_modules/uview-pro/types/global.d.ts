@@ -80,6 +80,46 @@ export type ButtonOpenType =
 
 // calendar 组件 mode
 export type CalendarMode = 'date' | 'range';
+
+// calendar 农历数据类型定义
+export type CalendarLunarItem = {
+    dayCn: string;
+    weekCn: string;
+    monthCn: string;
+    day: number;
+    week: number;
+    month: number;
+    year: number;
+};
+
+// calendar 事件类型定义，单个日期
+export type CalendarChangeDate = {
+    year: number;
+    month: number;
+    day: number;
+    days: number;
+    result: string;
+    week: string;
+    isToday: boolean;
+    lunar: CalendarLunarItem | null; // getLunar 返回类型，建议后续补充具体类型
+};
+
+// calendar 事件类型定义，范围选择
+export type CalendarChangeRange = {
+    startYear: number;
+    startMonth: number;
+    startDay: number;
+    startDate: string;
+    startWeek: string;
+    endYear: number;
+    endMonth: number;
+    endDay: number;
+    endDate: string;
+    endWeek: string;
+    startLunar: CalendarLunarItem | null;
+    endLunar: CalendarLunarItem | null;
+};
+
 // CellItem 右侧箭头方向，可选值：right|up|down，默认为right
 export type CellItemArrowDirection = 'right' | 'up' | 'down';
 

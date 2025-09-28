@@ -49,8 +49,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import type { CalendarMode, ThemeType } from '@/uni_modules/uview-pro/types/global';
-import type { CalendarChangeDate, CalendarChangeRange } from '@/uni_modules/uview-pro/components/u-calendar/types';
+import type { CalendarChangeDate, CalendarChangeRange, CalendarMode, ThemeType } from '@/uni_modules/uview-pro/types/global';
 
 const show = ref(false);
 const showLunar = ref(false);

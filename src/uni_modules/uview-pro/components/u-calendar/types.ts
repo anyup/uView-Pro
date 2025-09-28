@@ -1,5 +1,5 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
-import type { CalendarMode, ThemeType } from '../../types/global';
+import type { CalendarChangeDate, CalendarChangeRange, CalendarMode, ThemeType } from '../../types/global';
 import { baseProps } from '../common/props';
 
 /**
@@ -65,33 +65,6 @@ export const CalendarProps = {
 };
 
 export type CalendarProps = ExtractPropTypes<typeof CalendarProps>;
-
-// u-calendar 事件类型定义
-export type CalendarChangeDate = {
-    year: number;
-    month: number;
-    day: number;
-    days: number;
-    result: string;
-    week: string;
-    isToday: boolean;
-    lunar: any | null; // getLunar 返回类型，建议后续补充具体类型
-};
-
-export type CalendarChangeRange = {
-    startYear: number;
-    startMonth: number;
-    startDay: number;
-    startDate: string;
-    startWeek: string;
-    endYear: number;
-    endMonth: number;
-    endDay: number;
-    endDate: string;
-    endWeek: string;
-    startLunar: any | null;
-    endLunar: any | null;
-};
 
 export type CalendarEmits = {
     (e: 'update:modelValue', value: boolean): void;
