@@ -9,7 +9,7 @@
             "uview-pro": ["./src/uni_modules/uview-pro"]
         },
         "lib": ["esnext", "dom"],
-        "types": ["@dcloudio/types", "uview-pro/types"],
+        "types": ["@dcloudio/types"],
         "typeRoots": ["./types", "./src/uni_modules/uview-pro/types", "./node_modules/@types"],
         "skipLibCheck": true,
         "allowJs": true,

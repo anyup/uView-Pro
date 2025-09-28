@@ -1,11 +1,13 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { CalendarMode, ThemeType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * calendar 日历类型定义
  * @description 供 u-calendar 组件 props 使用
  */
 export const CalendarProps = {
+    ...baseProps,
     /** 是否开启底部安全区适配 */
     safeAreaInsetBottom: { type: Boolean, default: false },
     /** 是否允许通过点击遮罩关闭Picker */
@@ -57,7 +59,42 @@ export const CalendarProps = {
     /** 是否显示右上角的关闭图标 */
     closeable: { type: Boolean, default: true },
     /** 顶部的提示文字 */
-    toolTip: { type: String, default: '选择日期' }
+    toolTip: { type: String, default: '选择日期' },
+    /** 是否显示农历 */
+    showLunar: { type: Boolean, default: false }
 };
 
 export type CalendarProps = ExtractPropTypes<typeof CalendarProps>;
+
+// u-calendar 事件类型定义
+export type CalendarChangeDate = {
+    year: number;
+    month: number;
+    day: number;
+    days: number;
+    result: string;
+    week: string;
+    isToday: boolean;
+    lunar: any | null; // getLunar 返回类型，建议后续补充具体类型
+};
+
+export type CalendarChangeRange = {
+    startYear: number;
+    startMonth: number;
+    startDay: number;
+    startDate: string;
+    startWeek: string;
+    endYear: number;
+    endMonth: number;
+    endDay: number;
+    endDate: string;
+    endWeek: string;
+    startLunar: any | null;
+    endLunar: any | null;
+};
+
+export type CalendarEmits = {
+    (e: 'update:modelValue', value: boolean): void;
+    (e: 'input', value: boolean): void;
+    (e: 'change', value: CalendarChangeDate | CalendarChangeRange): void;
+};

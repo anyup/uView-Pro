@@ -8,6 +8,7 @@
                     ref="calendar"
                     @change="change"
                     :mode="mode"
+                    :show-lunar="showLunar"
                     :start-text="startText"
                     :end-text="endText"
                     :range-color="rangeColor"
@@ -19,6 +20,9 @@
                 <view class="u-demo-result-line">
                     {{ result }}
                 </view>
+                <view v-if="showLunar && lunarResult">
+                    {{ lunarResult }}
+                </view>
             </view>
         </view>
         <view class="u-config-wrap">
@@ -29,7 +33,11 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">模式</view>
-                <u-subsection current="1" :list="['单个日期', '日期范围']" @change="modeChange"></u-subsection>
+                <u-subsection current="0" :list="['单个日期', '日期范围']" @change="modeChange"></u-subsection>
+            </view>
+            <view class="u-config-item">
+                <view class="u-item-title">农历</view>
+                <u-subsection current="1" :list="['显示', '隐藏']" @change="lunarChange"></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">自定义样式</view>
@@ -42,10 +50,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import type { CalendarMode, ThemeType } from '@/uni_modules/uview-pro/types/global';
+import type { CalendarChangeDate, CalendarChangeRange } from '@/uni_modules/uview-pro/components/u-calendar/types';
 
 const show = ref(false);
-const mode = ref<CalendarMode>('range');
+const showLunar = ref(false);
+const mode = ref<CalendarMode>('date');
 const result = ref('请选择日期');
+const lunarResult = ref('');
 const startText = ref('开始');
 const endText = ref('结束');
 const rangeColor = ref('#2979ff');
@@ -66,6 +77,11 @@ function modeChange(index: number) {
     show.value = true;
 }
 
+function lunarChange(index: number) {
+    showLunar.value = index === 0;
+    show.value = true;
+}
+
 function styleChange(index: number) {
     if (index === 0) {
         startText.value = '住店';
@@ -79,13 +95,26 @@ function styleChange(index: number) {
         endText.value = '结束';
         activeBgColor.value = '#2979ff';
     }
+    show.value = true;
 }
 
-function change(e: any) {
-    if (mode.value == 'range') {
-        result.value = e.startDate + ' - ' + e.endDate;
+function change(e: CalendarChangeRange | CalendarChangeDate) {
+    if (mode.value === 'range') {
+        const range = e as CalendarChangeRange;
+        result.value = range.startDate + ' - ' + range.endDate;
+        if (showLunar.value && range.startLunar && range.endLunar) {
+            lunarResult.value = `${range.startLunar.monthCn ?? ''}${range.startLunar.dayCn ?? ''}` + ' - ' + `${range.endLunar.monthCn ?? ''}${range.endLunar.dayCn ?? ''}`;
+        } else {
+            lunarResult.value = '';
+        }
     } else {
-        result.value = e.result;
+        const single = e as CalendarChangeDate;
+        result.value = single.result;
+        if (showLunar.value && single.lunar) {
+            lunarResult.value = `${single.lunar.monthCn ?? ''}${single.lunar.dayCn ?? ''}`;
+        } else {
+            lunarResult.value = '';
+        }
     }
 }
 </script>

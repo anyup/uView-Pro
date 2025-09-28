@@ -11,7 +11,7 @@
         :border-radius="borderRadius"
         :closeable="closeable"
     >
-        <view class="u-calendar">
+        <view class="u-calendar" :class="props.customClass" :style="$u.toStyle(customStyle)">
             <view class="u-calendar__header">
                 <view class="u-calendar__header__text" v-if="!slots.tooltip">
                     {{ toolTip }}
@@ -65,6 +65,17 @@
                     <view class="u-calendar__content__item__tips" :style="{ color: activeColor }" v-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`">{{
                         endText
                     }}</view>
+                    <view
+                        v-if="
+                            props.showLunar &&
+                            !(mode == 'range' && startDate == `${year}-${month}-${index + 1}` && startDate != endDate) &&
+                            !(mode == 'range' && endDate == `${year}-${month}-${index + 1}`)
+                        "
+                        class="u-calendar__content__item__tips"
+                        :style="{ color: getColor(index, 2) }"
+                    >
+                        {{ lunarArr[index]?.dayCn === '初一' ? lunarArr[index].monthCn : (lunarArr[index]?.dayCn ?? '') }}
+                    </view>
                 </view>
                 <view class="u-calendar__content__bg-month">{{ month }}</view>
             </view>
@@ -84,7 +95,8 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, useSlots } from 'vue';
 import { $u } from '../..';
-import { CalendarProps } from './types';
+import { CalendarProps, type CalendarEmits } from './types';
+import Calendar from '../../libs/util/calendar';
 
 defineOptions({
     name: 'u-calendar'
@@ -121,7 +133,7 @@ defineOptions({
  */
 
 const props = defineProps(CalendarProps);
-const emit = defineEmits(['update:modelValue', 'input', 'change']);
+const emit = defineEmits<CalendarEmits>();
 const slots = useSlots();
 
 // 组件内部状态
@@ -130,6 +142,7 @@ const weekday = ref(1);
 const weekdayArr = ref<number[]>([]);
 const days = ref(0);
 const daysArr = ref<number[]>([]);
+const lunarArr = ref<any[]>([]);
 const showTitle = ref('');
 const year = ref(2020);
 const month = ref(0);
@@ -151,6 +164,7 @@ const max = ref<{ year: number; month: number; day: number } | null>(null);
 const weekDayZh = ref(['日', '一', '二', '三', '四', '五', '六']);
 
 const dataChange = computed(() => `${props.mode}-${props.minDate}-${props.maxDate}`);
+const lunarChange = computed(() => props.showLunar);
 // 如果用户有传递z-index值，优先使用
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 const popupValue = computed({
@@ -158,7 +172,7 @@ const popupValue = computed({
     set: (val: boolean) => emit('update:modelValue', val)
 });
 
-watch(dataChange, () => {
+watch([dataChange, lunarChange], () => {
     init();
 });
 
@@ -327,9 +341,31 @@ function changeData() {
     weekday.value = getWeekday(year.value, month.value);
     weekdayArr.value = generateArray(1, weekday.value);
     showTitle.value = `${year.value}年${month.value}月`;
+    if (props.showLunar) {
+        lunarArr.value = [];
+        daysArr.value.forEach(d => {
+            lunarArr.value.push(getLunar(year.value, month.value, d));
+        });
+    }
     if (props.isChange && props.mode == 'date') {
         btnFix(true);
     }
+}
+
+/**
+ * 获取农历
+ */
+function getLunar(year, month, day) {
+    const val = Calendar.solar2lunar(year, month, day);
+    return {
+        dayCn: val.IDayCn,
+        weekCn: val.ncWeek,
+        monthCn: val.IMonthCn,
+        day: val.lDay,
+        week: val.nWeek,
+        month: val.lMonth,
+        year: val.lYear
+    };
 }
 
 /**
@@ -403,6 +439,7 @@ function btnFix(show: boolean) {
             // 今天
             isToday = true;
         }
+        const lunar = props.showLunar ? getLunar(y, m, d) : null;
         emit('change', {
             year: y,
             month: m,
@@ -410,7 +447,8 @@ function btnFix(show: boolean) {
             days: daysNum,
             result: result,
             week: weekText,
-            isToday: isToday
+            isToday: isToday,
+            lunar: lunar
             // switch: show //是否是切换年月操作
         });
     } else {
@@ -423,6 +461,12 @@ function btnFix(show: boolean) {
         let endDayStr = formatNum(endDay.value);
         let endDateStr = `${endYear.value}-${endMonthStr}-${endDayStr}`;
         let endWeek = getWeekText(endDateStr);
+        let startLunar = null;
+        let endLunar = null;
+        if (props.showLunar) {
+            startLunar = getLunar(startYear.value, startMonth.value, startDay.value);
+            endLunar = getLunar(endYear.value, endMonth.value, endDay.value);
+        }
         emit('change', {
             startYear: startYear.value,
             startMonth: startMonth.value,
@@ -433,7 +477,9 @@ function btnFix(show: boolean) {
             endMonth: endMonth.value,
             endDay: endDay.value,
             endDate: endDateStr,
-            endWeek: endWeek
+            endWeek: endWeek,
+            startLunar: startLunar,
+            endLunar: endLunar
         });
     }
 }
