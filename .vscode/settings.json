@@ -16,5 +16,8 @@
         "*.cz-config.js": "javascript"
     },
     "i18n-ally.localesPaths": ["src/locales", "src/locales/langs", "src/uni_modules/uview-pro/locale"],
-    "eslint.validate": ["javascript", "typescript", "vue"]
+    "eslint.validate": ["javascript", "typescript", "vue"],
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
