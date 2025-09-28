@@ -6,3 +6,8 @@ coverage
 *.min.js
 *.map
 pnpm-lock.yaml
+async-validator.js
+calendar.js
+area.ts
+city.ts
+province.ts

@@ -68,7 +68,7 @@
         "release:major:bat": "scripts\\release.bat major",
         "publish": "cd src/uni_modules/uview-pro && npm publish --access public && cd ../../..",
         "prepare": "husky",
-        "format": "prettier --write ."
+        "format": "prettier --write . --ignore-path .prettierignore"
     },
     "config": {
         "commitizen": {
@@ -116,6 +116,6 @@
         "vue-tsc": "^3.0.5"
     },
     "lint-staged": {
-        "*.{js,ts,vue,scss,md,json}": "prettier --write"
+        "*.{js,ts,vue,scss,md,json}": "prettier --write --ignore-path .prettierignore"
     }
 }

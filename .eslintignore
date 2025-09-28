@@ -1,2 +1,7 @@
 unpackage
 node_modules
+async-validator.js
+calendar.js
+area.ts
+city.ts
+province.ts
