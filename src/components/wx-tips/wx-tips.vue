@@ -1,6 +1,6 @@
 <template>
     <view>
-        <!-- #ifdef MP-WEIXIN -->
+        <!-- #ifdef MP -->
         <u-sticky>
             <u-alert-tips :show="show" title="提示" :description="description" type="error" :close-able="true" @close="show = false"></u-alert-tips>
         </u-sticky>

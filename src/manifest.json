@@ -103,6 +103,7 @@
         "usingComponents": true
     },
     "mp-alipay": {
+        "appid": "2021005198657329",
         "usingComponents": true,
         "component2": true
     },
