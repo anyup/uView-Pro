@@ -49,11 +49,13 @@ You can scan the following QR codes with **WeChat** or **mobile browser** to vie
 <table class="table">
     <tr>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_wx.jpg" width="200" height="200" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_alipay.png" width="200" height="200" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_h5.png" width="200" height="200" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="200" height="200" ></td>
     </tr>
     <tr>
         <td align="center"><strong>WeChat Mini Program</strong><br>(Scan with WeChat)</td>
+        <td align="center"><strong>AliPay Mini Program</strong><br>(Scan with AliPay)</td>
         <td align="center"><strong>H5</strong><br>(Scan with browser)</td>
         <td align="center"><strong>Android</strong><br>(Scan with browser)</td>
     </tr>
@@ -81,7 +83,7 @@ uView Pro QQ Group: [Click to Join](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1758420557584" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1759130088211" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>
