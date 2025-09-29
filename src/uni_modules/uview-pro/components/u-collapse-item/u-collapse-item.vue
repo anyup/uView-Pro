@@ -2,12 +2,12 @@
     <view class="u-collapse-item" :style="`${$u.toStyle(itemStyle)}${$u.toStyle(customStyle)}`" :class="customClass">
         <view :hover-stay-time="200" class="u-collapse-head" @tap.stop="headClick" :hover-class="hoverClass" :style="headStyle">
             <template v-if="!slots['title-all']">
-                <view v-if="!slots['title']" class="u-collapse-title u-line-1" :style="[{ textAlign: align ? align : 'left' }, isShow && activeStyle && !arrow ? activeStyle : '']">
+                <view v-if="!slots['title']" class="u-collapse-title u-line-1" :style="titleStyle">
                     {{ title }}
                 </view>
                 <slot v-else name="title" />
                 <view class="u-icon-wrap">
-                    <u-icon v-if="arrow" :color="arrowColor" :class="{ 'u-arrow-down-icon-active': isShow }" class="u-arrow-down-icon" name="arrow-down" />
+                    <u-icon v-if="arrow" :color="arrowColor" :name="isShow ? 'arrow-up' : 'arrow-down'" />
                 </view>
             </template>
             <slot v-else name="title-all" />
@@ -33,8 +33,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, inject } from 'vue';
-import { $u, toStyle } from '../..';
+import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, computed } from 'vue';
+import { $u } from '../..';
 import { CollapseItemProps } from './types';
 import { useParent } from '../../libs/hooks/useParent';
 
@@ -77,6 +77,18 @@ watch(
     },
     { immediate: true }
 );
+
+/**
+ * 获取父组件的配置项
+ */
+const titleStyle = computed(() => {
+    let style = { textAlign: props.align ? props.align : 'left' };
+
+    if (isShow.value && props.activeStyle && !arrow.value) {
+        style = $u.deepMerge(style, props.activeStyle);
+    }
+    return $u.toStyle(style);
+});
 
 /**
  * 异步获取内容，或者动态修改了内容时，需要重新初始化

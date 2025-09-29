@@ -4,7 +4,7 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <u-toast ref="uToastRef"></u-toast>
-                <u-collapse v-if="key" :item-style="itemStyle" event-type="close" :arrow="arrow" :accordion="accordion" @change="change">
+                <u-collapse v-if="key" :item-style="itemStyle" event-type="close" :arrow="arrow" @change="change" :accordion="accordion">
                     <u-collapse-item :index="index" @change="itemChange" :title="item.head" v-for="(item, index) in itemList" :key="index" :open="item.open">
                         {{ item.body }}
                     </u-collapse-item>
@@ -15,7 +15,7 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">手风琴模式</view>
-                <u-subsection current="1" :list="['是', '否']" @change="accordionChange"></u-subsection>
+                <u-subsection :list="['否', '是']" @change="accordionChange"></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">右侧箭头</view>
@@ -23,7 +23,7 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">自定义样式</view>
-                <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+                <u-subsection :list="['否', '是']" @change="styleChange"></u-subsection>
             </view>
         </view>
     </view>
@@ -66,7 +66,7 @@ const itemStyle = ref({});
 const key = ref(true);
 
 function accordionChange(index: number) {
-    accordion.value = index === 0;
+    accordion.value = index === 1;
     changeStatus();
 }
 
@@ -76,7 +76,7 @@ function arrowChange(index: number) {
 }
 
 function styleChange(index: number) {
-    if (index === 0) {
+    if (index === 1) {
         itemStyle.value = {
             border: '1px solid rgb(230, 230, 230)',
             marginTop: '20px',

@@ -10,7 +10,7 @@ export function useRect(selector: string, all = false) {
     const rect = ref<any>(all ? [] : null);
     const instance = getCurrentInstance();
 
-    async function refresh(delay = 0) {
+    async function refreshRect(delay = 0) {
         await nextTick();
         return new Promise(resolve => {
             setTimeout(() => {
@@ -28,6 +28,6 @@ export function useRect(selector: string, all = false) {
 
     return {
         rect,
-        refresh
+        refreshRect
     };
 }
