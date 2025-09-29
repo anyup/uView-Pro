@@ -1,3 +1,25 @@
+## 0.2.1（2025-09-29）
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- 优化代码格式化和 ESLint 配置 ([771eacd](https://github.com/anyup/uView-Pro/commit/771eacd58d410e468a8aec4225bbe7b402480b2f))
+
+### ⚡ Performance Improvements | 性能优化
+
+- 压缩部分js工具库 ([6615b70](https://github.com/anyup/uView-Pro/commit/6615b7085a51c4fbc9f884ec68e05db1a1e89e27))
+
+### ✨ Features | 新功能
+
+- **u-calendar:** 日历组件增加农历显示功能 ([e2368ac](https://github.com/anyup/uView-Pro/commit/e2368ac88b0abb4493ab12a1785eb2a0e38e502c))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **calendar:** 重构日历组件类型定义 ([0040e9e](https://github.com/anyup/uView-Pro/commit/0040e9e1095446536370e9aca3c135bc05527acb))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-input:** 修复输入框禁用状态时清空按钮仍显示的问题 ([722715f](https://github.com/anyup/uView-Pro/commit/722715f7d6607584c0e158ba2de2342147e3be17))
+
 ## 0.2.0（2025-09-28）
 
 ### ♻️ Code Refactoring | 代码重构
