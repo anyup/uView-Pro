@@ -90,6 +90,7 @@ declare module 'vue' {
         uVerificationCode: (typeof import('../components/u-verification-code/u-verification-code.vue'))['default'];
         uWaterfall: (typeof import('../components/u-waterfall/u-waterfall.vue'))['default'];
         uText: (typeof import('../components/u-text/u-text.vue'))['default'];
+        uRootPortal: (typeof import('../components/u-root-portal/u-root-portal.vue'))['default'];
     }
 }
 
