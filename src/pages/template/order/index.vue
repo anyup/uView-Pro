@@ -1,18 +1,7 @@
 <template>
     <view>
         <view class="wrap">
-            <!-- #ifdef MP-WEIXIN -->
-            <u-sticky>
-                <u-alert-tips
-                    :show="show"
-                    title="提示"
-                    description="该页面为布局演示功能，非电商类小程序，不具备实际功能！"
-                    type="error"
-                    :close-able="true"
-                    @close="show = false"
-                ></u-alert-tips>
-            </u-sticky>
-            <!-- #endif -->
+            <wx-tips :type="1" />
             <view class="u-tabs-box">
                 <u-tabs-swiper activeColor="#f29100" ref="tabs" :list="list" :current="current" @change="change" :is-scroll="false" swiperWidth="750"></u-tabs-swiper>
             </view>
@@ -180,8 +169,6 @@
 <script setup lang="ts">
 import { ref, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-
-const show = ref(true);
 
 // 商品信息类型
 interface GoodsItem {

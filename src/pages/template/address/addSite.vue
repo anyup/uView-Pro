@@ -1,5 +1,6 @@
 <template>
     <view class="wrap">
+        <wx-tips />
         <view class="top">
             <view class="item">
                 <view class="left">收货人</view>

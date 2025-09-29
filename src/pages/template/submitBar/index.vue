@@ -1,17 +1,6 @@
 <template>
     <view>
-        <!-- #ifdef MP-WEIXIN -->
-        <u-sticky>
-            <u-alert-tips
-                :show="show"
-                title="提示"
-                description="该页面为布局演示功能，非电商类小程序，不具备实际功能！"
-                type="error"
-                :close-able="true"
-                @close="show = false"
-            ></u-alert-tips>
-        </u-sticky>
-        <!-- #endif -->
+        <wx-tips :type="1" />
         <view class="navigation">
             <view class="left">
                 <view class="item">
@@ -38,9 +27,6 @@
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
-import { ref } from 'vue';
-
-const show = ref(true);
 </script>
 
 <style lang="scss" scoped>
