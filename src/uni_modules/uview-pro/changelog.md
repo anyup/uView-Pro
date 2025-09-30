@@ -1,3 +1,23 @@
+## 0.2.2（2025-09-30）
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- 删除未使用的公共 API 和国际化文件 ([e73d3da](https://github.com/anyup/uView-Pro/commit/e73d3da7ede71584ec8b58a386307747b62f5e7a))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **components:** 提示组件抽离为全局组件 wx-tips ([3fc0111](https://github.com/anyup/uView-Pro/commit/3fc0111f296de37bdb9b56fdfc023537aa6d79c4))
+- **u-collapse:** 优化手风琴模式和样式配置 ([5cff422](https://github.com/anyup/uView-Pro/commit/5cff422a8462403f3c3f23a66f9306a81499a3b0))
+
+### ✨ Features | 新功能
+
+- **components:** 新增 u-root-portal 根节点传送组件 ([891d021](https://github.com/anyup/uView-Pro/commit/891d021faf76ad0248ef21248d89ff1fe1c5b669))
+- **manifest:** 添加支付宝小程序配置 ([cb0b42a](https://github.com/anyup/uView-Pro/commit/cb0b42a9397df1c335d2c5492136efa38dde2ca0))
+
+### 📝 Documentation | 文档
+
+- 添加支付宝小程序二维码并更新微信群聊图片 ([1dc0db3](https://github.com/anyup/uView-Pro/commit/1dc0db340e34675f15a7e83c79c3ac5d453853a2))
+
 ## 0.2.1（2025-09-29）
 
 ### 🚀 Chore | 构建/工程依赖/工具
