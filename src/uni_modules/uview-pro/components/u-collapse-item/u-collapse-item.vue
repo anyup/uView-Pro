@@ -67,8 +67,10 @@ const arrowColor = ref(''); // 箭头的颜色
 const hoverClass = ref(''); // 头部按下时的效果样式类
 const accordion = ref(true); // 是否显示右侧箭头
 const arrow = ref(true);
+let parentExposed = null;
+let parent = null;
 
-const { parent, parentExposed } = useParent('u-collapse');
+const { getParent } = useParent('u-collapse');
 
 watch(
     () => props.open,
@@ -94,6 +96,8 @@ const titleStyle = computed(() => {
  * 异步获取内容，或者动态修改了内容时，需要重新初始化
  */
 function init() {
+    parent = getParent();
+    parentExposed = parent ? parent.exposed : null;
     if (parent) {
         headStyle.value = parentExposed.props.headStyle;
         bodyStyle.value = parentExposed.props.bodyStyle;

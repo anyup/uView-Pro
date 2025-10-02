@@ -2,7 +2,7 @@
     <view class="wrap">
         <page-nav :desc="desc" title="nav.components"></page-nav>
         <view class="list-wrap">
-            <u-collapse :item-style="itemStyle" event-type="close" :arrow="true" :accordion="true">
+            <u-collapse :item-style="itemStyle" event-type="close" :arrow="true" :accordion="false">
                 <u-collapse-item :index="index" v-for="(item, index) in list" :key="index" :open="true">
                     <template #title>
                         <view class="group-title">
