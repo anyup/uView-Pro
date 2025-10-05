@@ -34,9 +34,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted, watch } from 'vue';
-import { $u, useChildren } from '../..';
+import { computed, onUnmounted } from 'vue';
+import { $u, useChildren, onParentEvent } from '../..';
 import { CheckboxProps } from './types';
+
 /**
  * checkbox 复选框
  * @description 该组件需要搭配checkboxGroup组件使用，以便用户进行操作时，获得当前复选框组的选中情况。
@@ -55,95 +56,37 @@ import { CheckboxProps } from './types';
 const props = defineProps(CheckboxProps);
 const emit = defineEmits(['change', 'update:modelValue']);
 
-// 使用子组件Hook - 明确指定父组件名称
-const {
-    childId,
-    childName,
-    parent,
-    emitToParent,
-    updateData,
-    refreshLink,
-    getParentExposed,
-    refreshParentExposed,
-    parentExposed,
-    parentExposedVersion
-} = useChildren('u-checkbox', 'u-checkbox-group');
-
-// 监听父组件exposed的变化（包括版本号变化）
-watch(parentExposedVersion, newVersion => {
-    console.log(`u-checkbox ${childName} detected parent exposed version change: ${newVersion}`);
-    // 强制刷新父组件exposed
-    refreshParentExposed();
-});
-
-// 深度监听父组件exposed的props变化
-watch(
-    () => parentExposed.value.props,
-    newProps => {
-        if (newProps) {
-            console.log(`u-checkbox ${childName} detected parent props change:`, Object.keys(newProps));
-            // 这里可以添加对特定props变化的响应逻辑
-        }
-    },
-    { deep: true, immediate: true }
-);
-
-onMounted(() => {
-    refreshLink();
-    // 初始化数据
-    updateData({
-        checked: props.modelValue,
-        name: props.name,
-        mountedAt: new Date().toISOString(),
-        componentName: childName
-    });
-    if (!parent.value) {
-        setTimeout(() => {
-            refreshLink();
-        }, 50);
-    }
-});
+// 使用子组件Hook
+const { childId, parentExposed } = useChildren('u-checkbox', 'u-checkbox-group');
 
 // 是否禁用，如果父组件u-checkbox-group禁用的话，将会忽略子组件的配置
 const isDisabled = computed(() => {
-    return props.disabled !== ''
-        ? props.disabled
-        : parentExposed.value.props
-          ? parentExposed.value.props.disabled
-          : false;
+    return props.disabled !== '' ? props.disabled : (parentExposed.value?.props?.disabled ?? false);
 });
 
 // 是否禁用label点击
 const isLabelDisabled = computed(() => {
-    return props.labelDisabled !== ''
-        ? props.labelDisabled
-        : parentExposed.value.props
-          ? parentExposed.value.props.labelDisabled
-          : false;
+    return props.labelDisabled !== '' ? props.labelDisabled : (parentExposed.value?.props?.labelDisabled ?? false);
 });
 
 // 组件尺寸，对应size的值，默认值为34rpx
 const checkboxSize = computed(() => {
-    return props.size ? props.size : parentExposed.value.props ? parentExposed.value.props.size : 34;
+    return props.size ? props.size : (parentExposed.value?.props?.size ?? 34);
 });
 
 // 组件的勾选图标的尺寸，默认20
 const checkboxIconSize = computed(() => {
-    return props.iconSize ? props.iconSize : parentExposed.value.props ? parentExposed.value.props.iconSize : 20;
+    return props.iconSize ? props.iconSize : (parentExposed.value?.props?.iconSize ?? 20);
 });
 
 // 组件选中激活时的颜色
 const elActiveColor = computed(() => {
-    return props.activeColor
-        ? props.activeColor
-        : parentExposed.value.props
-          ? parentExposed.value.props.activeColor
-          : 'primary';
+    return props.activeColor ? props.activeColor : (parentExposed.value?.props?.activeColor ?? 'primary');
 });
 
 // 组件的形状
 const elShape = computed(() => {
-    return props.shape ? props.shape : parentExposed.value.props ? parentExposed.value.props.shape : 'square';
+    return props.shape ? props.shape : (parentExposed.value?.props?.shape ?? 'square');
 });
 
 // 图标样式
@@ -174,7 +117,7 @@ const iconClass = computed(() => {
 
 const checkboxStyle = computed(() => {
     let style: Record<string, string> = {};
-    if (parentExposed.value.props && parentExposed.value.props.width) {
+    if (parentExposed.value?.props?.width) {
         style.width = parentExposed.value.props.width;
         // #ifdef MP
         style.float = 'left';
@@ -183,7 +126,7 @@ const checkboxStyle = computed(() => {
         style.flex = `0 0 ${parentExposed.value.props.width}`;
         // #endif
     }
-    if (parentExposed.value.props && parentExposed.value.props.wrap) {
+    if (parentExposed.value?.props?.wrap) {
         style.width = '100%';
         // #ifndef MP
         style.flex = '0 0 100%';
@@ -220,15 +163,9 @@ function emitEvent() {
     };
     emit('change', changeValue);
 
-    // 更新组件数据
-    updateData({
-        checked: !props.modelValue,
-        name: props.name,
-        changedAt: new Date().toISOString()
-    });
-
+    // 通知父组件状态变化
     setTimeout(() => {
-        if (parentExposed.value.emitEvent) {
+        if (parentExposed.value?.emitEvent) {
             parentExposed.value.emitEvent();
         }
     }, 80);
@@ -243,7 +180,7 @@ function setValue() {
         emitEvent();
         emit('update:modelValue', false);
     } else {
-        if (!parentExposed.value.validateSelection()) {
+        if (!parentExposed.value?.validateSelection()) {
             return;
         }
         emitEvent();
@@ -251,19 +188,24 @@ function setValue() {
     }
 }
 
-// 监听modelValue变化，更新组件数据
-watch(
-    () => props.modelValue,
-    newValue => {
-        updateData({
-            checked: newValue,
-            name: props.name,
-            updatedAt: new Date().toISOString()
-        });
+// 监听父组件事件
+const unsubscribeSetChecked = onParentEvent(childId, 'setChecked', data => {
+    if (!isDisabled.value) {
+        emit('update:modelValue', data.checked);
+        if (data.checked !== props.modelValue) {
+            emitEvent();
+        }
     }
-);
+});
+
+// 在适当的时候取消监听
+onUnmounted(() => {
+    unsubscribeSetChecked();
+});
 
 defineExpose({
+    isChecked: computed(() => props.modelValue),
+    name: props.name,
     setValue,
     emitEvent,
     props

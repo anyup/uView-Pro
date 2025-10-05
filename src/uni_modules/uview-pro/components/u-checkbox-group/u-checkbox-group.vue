@@ -18,7 +18,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { getCurrentInstance, onMounted, computed, nextTick, watch } from 'vue';
+import { getCurrentInstance, computed } from 'vue';
 import { $u, useParent } from '../..';
 import { CheckboxGroupProps } from './types';
 
@@ -42,24 +42,8 @@ const instance = getCurrentInstance();
 const props = defineProps(CheckboxGroupProps);
 const emit = defineEmits(['update:modelValue', 'change']);
 
-// 使用父组件Hook，传入props
-const { parentName, children, broadcast, getChildren, refreshChildren, expose, updateExposed, exposedVersion } =
-    useParent('u-checkbox-group', props);
-
-onMounted(() => {
-    nextTick(() => {
-        refreshChildren();
-    });
-});
-
-// 监听props变化，实时更新exposed内容
-watch(
-    props,
-    newProps => {
-        updateExposed({ props: newProps });
-    },
-    { deep: true }
-);
+// 使用父组件Hook
+const { children, broadcast } = useParent('u-checkbox-group');
 
 /**
  * 派发 change 事件和表单校验
@@ -68,8 +52,8 @@ function emitEvent() {
     // 收集所有选中的 name
     let values: any[] = [];
     children.forEach((child: any) => {
-        if (child.data?.checked) {
-            values.push(child.data.name);
+        if (child.getExposed?.()?.isChecked.value) {
+            values.push(child.getExposed?.()?.name);
         }
     });
     emit('change', values);
@@ -78,36 +62,42 @@ function emitEvent() {
     }, 60);
 }
 
-// 全选/全不选方法
-const setAllChecked = (checked: boolean) => {
+/**
+ * 全选/全不选方法
+ */
+function setAllChecked(checked: boolean) {
     if (props.disabled) {
         console.warn('u-checkbox-group已禁用，无法操作');
         return;
     }
-    broadcast('setChecked', { checked, disabled: props.disabled });
-};
+    broadcast('setChecked', { checked });
+}
 
-// 获取选中的值
-const getSelectedValues = () => {
+/**
+ * 获取选中的值
+ */
+function getSelectedValues() {
     return children
-        .filter(child => child.data?.checked)
-        .map(child => child.data?.name)
+        .filter(child => child.getExposed?.()?.isChecked.value)
+        .map(child => child.getExposed?.()?.name)
         .filter(Boolean);
-};
+}
 
-// 验证选择
-const validateSelection = () => {
-    const selectedCount = children.filter(child => child.data?.checked).length;
+/**
+ * 验证选择是否超过最大数量
+ */
+function validateSelection() {
+    const selectedCount = children.filter(child => child.getExposed?.()?.isChecked.value).length;
     if (props.max && selectedCount >= props.max) {
         $u.toast(`超过最大选择数量: ${props.max}`);
         return false;
     }
     return true;
-};
+}
 
-// 暴露给子组件的内容
-const exposedContent = {
-    // props (会在watch中自动更新)
+// 使用defineExpose暴露给外部
+defineExpose({
+    // props
     props,
 
     // 方法
@@ -117,27 +107,15 @@ const exposedContent = {
     validateSelection,
 
     // 计算属性
-    selectedCount: computed(() => children.filter(child => child.data?.checked).length),
+    selectedCount: computed(() => children.filter(child => child.getExposed?.()?.isChecked.value).length),
     isFull: computed(() => {
-        const selectedCount = children.filter(child => child.data?.checked).length;
+        const selectedCount = children.filter(child => child.getExposed?.()?.isChecked.value).length;
         return props.max && selectedCount >= props.max;
     }),
-    isEmpty: computed(() => children.filter(child => child.data?.checked).length === 0),
-
+    isEmpty: computed(() => children.filter(child => child.getExposed?.()?.isChecked.value).length === 0),
     // 工具方法
-    getChildrenCount: () => children.length,
-    getChildIds: () => children.map(child => child.id),
-    refreshChildren,
-
-    // 调试信息
-    exposedVersion: computed(() => exposedVersion.value)
-};
-
-// 使用defineExpose暴露给外部
-defineExpose(exposedContent);
-
-// 使用通信库的expose方法暴露给子组件
-expose(exposedContent);
+    getChildrenCount: () => children.length
+});
 </script>
 
 <style lang="scss" scoped>

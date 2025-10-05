@@ -41,7 +41,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, computed } from 'vue';
+import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, computed, onUnmounted } from 'vue';
 import { $u, useChildren, onParentEvent } from '../..';
 import { CollapseItemProps } from './types';
 
@@ -73,22 +73,12 @@ const itemStyle = ref<Record<string, any>>({});
 const arrowColor = ref('');
 const hoverClass = ref('');
 
-// 使用子组件Hook - 明确指定父组件名称
-const {
-    childId,
-    childName,
-    parent,
-    emitToParent,
-    updateData,
-    refreshLink,
-    getParentExposed,
-    refreshParentExposed,
-    parentExposed
-} = useChildren('u-collapse-item', 'u-collapse');
+// 使用通信库的子组件Hook
+const { childId, parentExposed } = useChildren('u-collapse-item', 'u-collapse');
 
 // 计算属性
 const showArrow = computed(() => {
-    return parentExposed.value.props ? parentExposed.value.props.arrow : true;
+    return parentExposed.value?.props ? parentExposed.value.props.arrow : true;
 });
 
 const titleStyle = computed(() => {
@@ -100,7 +90,7 @@ const titleStyle = computed(() => {
     return $u.toStyle(style);
 });
 
-// 获取唯一标识符 - 关键优化：保持向后兼容
+// 获取唯一标识符
 const itemName = computed(() => {
     // 优先级：name > index > childId
     if (props.name !== undefined && props.name !== '') {
@@ -118,11 +108,6 @@ const itemName = computed(() => {
 function setShowState(show: boolean) {
     if (isShow.value !== show) {
         isShow.value = show;
-        updateData({
-            isShow: isShow.value,
-            name: itemName.value,
-            updatedAt: new Date().toISOString()
-        });
 
         // 如果展开，需要重新计算高度
         if (show) {
@@ -130,6 +115,13 @@ function setShowState(show: boolean) {
                 queryRect();
             });
         }
+
+        // 本地触发change事件
+        emit('change', {
+            index: props.index,
+            name: itemName.value,
+            show: isShow.value
+        });
     }
 }
 
@@ -137,7 +129,7 @@ function setShowState(show: boolean) {
  * 异步获取内容，或者动态修改了内容时，需要重新初始化
  */
 function init() {
-    if (parentExposed.value && parentExposed.value.props) {
+    if (parentExposed.value?.props) {
         headStyle.value = parentExposed.value.props.headStyle || {};
         bodyStyle.value = parentExposed.value.props.bodyStyle || {};
         arrowColor.value = parentExposed.value.props.arrowColor || '#909399';
@@ -156,17 +148,11 @@ function init() {
  */
 function headClick() {
     if (props.disabled) return;
+
     // 通知父组件状态变化
-    if (parentExposed.value && parentExposed.value.onChange) {
+    if (parentExposed.value?.onChange) {
         parentExposed.value.onChange(itemName.value);
     }
-
-    // 本地也触发change事件
-    emit('change', {
-        index: props.index,
-        name: itemName.value,
-        show: !isShow.value
-    });
 }
 
 /**
@@ -191,51 +177,39 @@ function queryRect() {
 }
 
 // 监听父组件的事件
-onParentEvent(childId, 'openSingle', data => {
+const unsubscribeOpenSingle = onParentEvent(childId, 'openSingle', (data: any) => {
     // 只有目标项展开，其他都关闭
     const shouldShow = data.targetName === itemName.value;
     setShowState(shouldShow);
 });
 
-onParentEvent(childId, 'closeAll', data => {
+const unsubscribeCloseAll = onParentEvent(childId, 'closeAll', () => {
     setShowState(false);
 });
 
-onParentEvent(childId, 'setMultiple', data => {
+const unsubscribeSetMultiple = onParentEvent(childId, 'setMultiple', (data: any) => {
     const shouldShow = data.targetNames.includes(itemName.value);
     setShowState(shouldShow);
 });
 
-onParentEvent(childId, 'toggleSingle', data => {
+const unsubscribeToggleSingle = onParentEvent(childId, 'toggleSingle', (data: any) => {
     // 只有目标项才切换状态
     if (data.targetName === itemName.value) {
         setShowState(!isShow.value);
     }
 });
 
-onMounted(() => {
-    refreshLink();
+// 监听父组件的重连事件（热更新后）
+const unsubscribeReconnect = onParentEvent(childId, 'reconnect', () => {
+    console.log('Collapse item reconnected to parent after hot update');
+});
 
+onMounted(() => {
     // 关键修复：根据 open 属性设置初始状态
     setShowState(props.open);
 
-    // 初始化数据
-    updateData({
-        isShow: isShow.value,
-        name: itemName.value,
-        title: props.title,
-        disabled: props.disabled,
-        mountedAt: new Date().toISOString(),
-        componentName: childName
-    });
     // 初始化
     init();
-
-    if (!parent.value) {
-        setTimeout(() => {
-            refreshLink();
-        }, 50);
-    }
 });
 
 // 监听 open 属性变化
@@ -248,14 +222,33 @@ watch(
 
 // 监听父组件exposed的变化
 watch(
-    () => parentExposed.value?.props,
-    newProps => {
-        if (newProps) {
+    parentExposed,
+    newExposed => {
+        if (newExposed) {
             init();
         }
     },
     { deep: true, immediate: true }
 );
+
+// 组件卸载时清理事件监听
+onUnmounted(() => {
+    unsubscribeOpenSingle();
+    unsubscribeCloseAll();
+    unsubscribeSetMultiple();
+    unsubscribeToggleSingle();
+    unsubscribeReconnect();
+});
+
+// 热更新处理
+if (import.meta.hot) {
+    import.meta.hot.accept(() => {
+        setTimeout(() => {
+            console.log('Collapse item hot updated, reinitializing...');
+            init();
+        }, 150);
+    });
+}
 
 defineExpose({
     init,

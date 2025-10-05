@@ -18,7 +18,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref, watch } from 'vue';
+import { nextTick, onMounted, ref } from 'vue';
 import { CollapseProps } from './types';
 import { $u, useParent } from '../../';
 
@@ -36,21 +36,16 @@ import { $u, useParent } from '../../';
  * @example <u-collapse></u-collapse>
  */
 const props = defineProps(CollapseProps);
-
 const emit = defineEmits(['change']);
 
-// 使用父组件Hook，传入props
-const { parentName, children, broadcast, getChildren, refreshChildren, expose, updateExposed } = useParent(
-    'u-collapse',
-    props
-);
+// 使用通信库的父组件Hook
+const { children, broadcast, getChildrenExposed } = useParent('u-collapse');
 
 // 当前激活的面板 - 只在手风琴模式下使用
 const activeName = ref<string | number>('');
 
 onMounted(() => {
     nextTick(() => {
-        refreshChildren();
         // 初始化：收集所有open为true的项
         setTimeout(() => {
             initializeActiveName();
@@ -58,23 +53,17 @@ onMounted(() => {
     });
 });
 
-// 监听props变化，实时更新exposed内容
-watch(
-    props,
-    newProps => {
-        updateExposed({ props: newProps });
-    },
-    { deep: true }
-);
-
 /**
  * 初始化activeName - 找到第一个open为true的项
  */
 function initializeActiveName() {
-    const openItems = children.filter(child => child.data?.isShow === true);
-    if (openItems.length > 0 && props.accordion) {
+    if (props.accordion) {
         // 手风琴模式下，取第一个open为true的项作为初始激活项
-        activeName.value = openItems[0].data?.name || '';
+        const childrenExposed = getChildrenExposed();
+        const openChild = childrenExposed.find(child => child.exposed.isShow === true);
+        if (openChild) {
+            activeName.value = openChild.exposed.itemName || '';
+        }
     }
 }
 
@@ -83,10 +72,10 @@ function initializeActiveName() {
  */
 function onChange(name: string | number) {
     if (props.accordion) {
-        // 手风琴模式 - 关键修复：使用当前子组件的状态来判断
-        const targetChild = children.find(child => child.data?.name === name);
-        const isTargetCurrentlyOpen = targetChild?.data?.isShow === true;
-        if (isTargetCurrentlyOpen) {
+        // 手风琴模式
+        const childrenExposed = getChildrenExposed();
+        const targetChild = childrenExposed.find(child => child.exposed.itemName === name);
+        if (targetChild?.exposed.isShow.value === true) {
             // 目标项当前是展开状态，点击后要关闭它
             activeName.value = '';
             broadcast('closeAll', {});
@@ -140,7 +129,8 @@ function openAll() {
         console.warn('手风琴模式下不能打开所有面板');
         return;
     }
-    const allNames = children.map(child => child.data?.name).filter(Boolean);
+    const childrenExposed = getChildrenExposed();
+    const allNames = childrenExposed.map(child => child.exposed.itemName).filter(Boolean);
     broadcast('setMultiple', { targetNames: allNames });
 }
 
@@ -158,9 +148,10 @@ function closeAll() {
  * 重新初始化，用于动态内容变化
  */
 function init() {
-    children.forEach((child: any) => {
-        if (child.componentInstance && child.componentInstance.exposed && child.componentInstance.exposed.init) {
-            child.componentInstance.exposed.init();
+    const childrenExposed = getChildrenExposed();
+    childrenExposed.forEach(child => {
+        if (child.exposed.init) {
+            child.exposed.init();
         }
     });
 
@@ -170,9 +161,18 @@ function init() {
     }, 150);
 }
 
-// 暴露给子组件的内容
-const exposedContent = {
-    // props (会在watch中自动更新)
+// 热更新处理 - 重新连接所有子组件
+if (import.meta.hot) {
+    import.meta.hot.accept(() => {
+        setTimeout(() => {
+            broadcast('reconnect', {});
+        }, 100);
+    });
+}
+
+// 使用defineExpose暴露给外部
+defineExpose({
+    // props
     props,
 
     // 状态
@@ -186,17 +186,8 @@ const exposedContent = {
     init,
 
     // 计算属性
-    childrenCount: () => children.length,
-
-    // 工具方法
-    refreshChildren
-};
-
-// 使用defineExpose暴露给外部
-defineExpose(exposedContent);
-
-// 使用通信库的expose方法暴露给子组件
-expose(exposedContent);
+    childrenCount: () => children.length
+});
 </script>
 
 <style lang="scss" scoped>
