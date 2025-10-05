@@ -8,7 +8,7 @@ import type { Shape } from '../../types/global';
 
 export const CheckboxGroupProps = {
     /** 最多能选中多少个checkbox */
-    max: { type: [Number, String], default: 999 },
+    max: { type: Number, default: 999 },
     /** 是否禁用所有复选框 */
     disabled: { type: Boolean, default: false },
     /** 在表单内提交时的标识符 */

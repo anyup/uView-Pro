@@ -4,14 +4,23 @@
     </view>
 </template>
 
-<script setup lang="ts">
-import { ref, getCurrentInstance, provide } from 'vue';
-import { $u } from '../..';
-import { CheckboxGroupProps } from './types';
+<script lang="ts">
+export default {
+    name: 'u-checkbox-group',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
 
-defineOptions({
-    name: 'u-checkbox-group'
-});
+<script setup lang="ts">
+import { getCurrentInstance, onMounted, computed, nextTick, watch } from 'vue';
+import { $u, useParent } from '../..';
+import { CheckboxGroupProps } from './types';
 
 /**
  * checkboxGroup 开关选择器父组件Group
@@ -29,22 +38,28 @@ defineOptions({
  * @event {Function} change 任一个checkbox状态发生变化时触发，回调为一个对象
  * @example <u-checkbox-group></u-checkbox-group>
  */
-
+const instance = getCurrentInstance();
 const props = defineProps(CheckboxGroupProps);
+const emit = defineEmits(['update:modelValue', 'change']);
 
-const emit = defineEmits(['change']);
+// 使用父组件Hook，传入props
+const { parentName, children, broadcast, getChildren, refreshChildren, expose, updateExposed, exposedVersion } =
+    useParent('u-checkbox-group', props);
 
-// 复选框子项集合
-const children = ref<any[]>([]); // 用于存储所有子checkbox实例
-
-// 向子组件 provide 本 group 实例
-provide('u-checkbox-group', {
-    props,
-    emitEvent,
-    children
+onMounted(() => {
+    nextTick(() => {
+        refreshChildren();
+    });
 });
 
-const instance = getCurrentInstance();
+// 监听props变化，实时更新exposed内容
+watch(
+    props,
+    newProps => {
+        updateExposed({ props: newProps });
+    },
+    { deep: true }
+);
 
 /**
  * 派发 change 事件和表单校验
@@ -52,19 +67,77 @@ const instance = getCurrentInstance();
 function emitEvent() {
     // 收集所有选中的 name
     let values: any[] = [];
-    children.value.forEach(val => {
-        if (val.modelValue) values.push(val.name);
+    children.forEach((child: any) => {
+        if (child.data?.checked) {
+            values.push(child.data.name);
+        }
     });
     emit('change', values);
-    // 发出事件，用于在表单组件中嵌入checkbox的情况，进行验证
-    // 由于头条小程序执行迟钝，故需要用几十毫秒的延时
     setTimeout(() => {
-        // 将当前的值发送到 u-form-item 进行校验
         $u.dispatch(instance, 'u-form-item', 'on-form-change', values);
     }, 60);
 }
 
-defineExpose({ emitEvent, children, props });
+// 全选/全不选方法
+const setAllChecked = (checked: boolean) => {
+    if (props.disabled) {
+        console.warn('u-checkbox-group已禁用，无法操作');
+        return;
+    }
+    broadcast('setChecked', { checked, disabled: props.disabled });
+};
+
+// 获取选中的值
+const getSelectedValues = () => {
+    return children
+        .filter(child => child.data?.checked)
+        .map(child => child.data?.name)
+        .filter(Boolean);
+};
+
+// 验证选择
+const validateSelection = () => {
+    const selectedCount = children.filter(child => child.data?.checked).length;
+    if (props.max && selectedCount >= props.max) {
+        $u.toast(`超过最大选择数量: ${props.max}`);
+        return false;
+    }
+    return true;
+};
+
+// 暴露给子组件的内容
+const exposedContent = {
+    // props (会在watch中自动更新)
+    props,
+
+    // 方法
+    emitEvent,
+    setAllChecked,
+    getSelectedValues,
+    validateSelection,
+
+    // 计算属性
+    selectedCount: computed(() => children.filter(child => child.data?.checked).length),
+    isFull: computed(() => {
+        const selectedCount = children.filter(child => child.data?.checked).length;
+        return props.max && selectedCount >= props.max;
+    }),
+    isEmpty: computed(() => children.filter(child => child.data?.checked).length === 0),
+
+    // 工具方法
+    getChildrenCount: () => children.length,
+    getChildIds: () => children.map(child => child.id),
+    refreshChildren,
+
+    // 调试信息
+    exposedVersion: computed(() => exposedVersion.value)
+};
+
+// 使用defineExpose暴露给外部
+defineExpose(exposedContent);
+
+// 使用通信库的expose方法暴露给子组件
+expose(exposedContent);
 </script>
 
 <style lang="scss" scoped>

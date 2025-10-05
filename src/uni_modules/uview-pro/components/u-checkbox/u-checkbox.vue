@@ -1,7 +1,12 @@
 <template>
     <view class="u-checkbox" :style="[checkboxStyle]">
-        <view class="u-checkbox__icon-wrap" @tap="toggle" :class="[iconClass]" :style="[iconStyle]">
-            <u-icon class="u-checkbox__icon-wrap__icon" name="checkbox-mark" :size="checkboxIconSize" :color="iconColor" />
+        <view class="u-checkbox__icon-wrap" @tap="toggle" :class="iconClass" :style="$u.toStyle(iconStyle)">
+            <u-icon
+                class="u-checkbox__icon-wrap__icon"
+                name="checkbox-mark"
+                :size="checkboxIconSize"
+                :color="iconColor"
+            />
         </view>
         <view
             class="u-checkbox__label"
@@ -15,15 +20,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-checkbox',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
-import { computed, inject, getCurrentInstance, onMounted } from 'vue';
-import { $u } from '../..';
+import { computed, onMounted, watch } from 'vue';
+import { $u, useChildren } from '../..';
 import { CheckboxProps } from './types';
-
-defineOptions({
-    name: 'u-checkbox'
-});
-
 /**
  * checkbox 复选框
  * @description 该组件需要搭配checkboxGroup组件使用，以便用户进行操作时，获得当前复选框组的选中情况。
@@ -40,54 +53,102 @@ defineOptions({
  */
 
 const props = defineProps(CheckboxProps);
-
 const emit = defineEmits(['change', 'update:modelValue']);
 
-const instance = getCurrentInstance();
-const instanceProxy = instance?.proxy;
-// 父组件 group 注入
-let parent = inject<any>('u-checkbox-group', null);
+// 使用子组件Hook - 明确指定父组件名称
+const {
+    childId,
+    childName,
+    parent,
+    emitToParent,
+    updateData,
+    refreshLink,
+    getParentExposed,
+    refreshParentExposed,
+    parentExposed,
+    parentExposedVersion
+} = useChildren('u-checkbox', 'u-checkbox-group');
 
-// 组件注册到 group
+// 监听父组件exposed的变化（包括版本号变化）
+watch(parentExposedVersion, newVersion => {
+    console.log(`u-checkbox ${childName} detected parent exposed version change: ${newVersion}`);
+    // 强制刷新父组件exposed
+    refreshParentExposed();
+});
+
+// 深度监听父组件exposed的props变化
+watch(
+    () => parentExposed.value.props,
+    newProps => {
+        if (newProps) {
+            console.log(`u-checkbox ${childName} detected parent props change:`, Object.keys(newProps));
+            // 这里可以添加对特定props变化的响应逻辑
+        }
+    },
+    { deep: true, immediate: true }
+);
+
 onMounted(() => {
-    // 兼容头条小程序不支持provide/inject
-    // #ifdef MP-TOUTIAO
-    parent = $u.parentData('u-checkbox-group', instance);
-    // #endif
-    // 如果存在u-checkbox-group，将本组件的实例塞进父组件的children中
-    if (parent && parent.children && !parent.children.value.includes(instanceProxy)) {
-        parent.children.value.push(instanceProxy);
+    refreshLink();
+    // 初始化数据
+    updateData({
+        checked: props.modelValue,
+        name: props.name,
+        mountedAt: new Date().toISOString(),
+        componentName: childName
+    });
+    if (!parent.value) {
+        setTimeout(() => {
+            refreshLink();
+        }, 50);
     }
 });
 
 // 是否禁用，如果父组件u-checkbox-group禁用的话，将会忽略子组件的配置
 const isDisabled = computed(() => {
-    return props.disabled !== '' ? props.disabled : parent ? parent.props.disabled : false;
+    return props.disabled !== ''
+        ? props.disabled
+        : parentExposed.value.props
+          ? parentExposed.value.props.disabled
+          : false;
 });
+
 // 是否禁用label点击
 const isLabelDisabled = computed(() => {
-    return props.labelDisabled !== '' ? props.labelDisabled : parent ? parent.props.labelDisabled : false;
+    return props.labelDisabled !== ''
+        ? props.labelDisabled
+        : parentExposed.value.props
+          ? parentExposed.value.props.labelDisabled
+          : false;
 });
+
 // 组件尺寸，对应size的值，默认值为34rpx
 const checkboxSize = computed(() => {
-    return props.size ? props.size : parent ? parent.props.size : 34;
+    return props.size ? props.size : parentExposed.value.props ? parentExposed.value.props.size : 34;
 });
+
 // 组件的勾选图标的尺寸，默认20
 const checkboxIconSize = computed(() => {
-    return props.iconSize ? props.iconSize : parent ? parent.props.iconSize : 20;
+    return props.iconSize ? props.iconSize : parentExposed.value.props ? parentExposed.value.props.iconSize : 20;
 });
+
 // 组件选中激活时的颜色
 const elActiveColor = computed(() => {
-    return props.activeColor ? props.activeColor : parent ? parent.props.activeColor : 'primary';
+    return props.activeColor
+        ? props.activeColor
+        : parentExposed.value.props
+          ? parentExposed.value.props.activeColor
+          : 'primary';
 });
+
 // 组件的形状
 const elShape = computed(() => {
-    return props.shape ? props.shape : parent ? parent.props.shape : 'square';
+    return props.shape ? props.shape : parentExposed.value.props ? parentExposed.value.props.shape : 'square';
 });
+
 // 图标样式
 const iconStyle = computed(() => {
     let style: Record<string, string> = {};
-    // 既要判断是否手动禁用，还要判断用户v-model绑定的值，如果绑定为false，那么也无法选中
     if (elActiveColor.value && props.modelValue && !isDisabled.value) {
         style.borderColor = elActiveColor.value;
         style.backgroundColor = elActiveColor.value;
@@ -96,36 +157,35 @@ const iconStyle = computed(() => {
     style.height = $u.addUnit(checkboxSize.value);
     return style;
 });
+
 // checkbox内部的勾选图标，如果选中状态，为白色，否则为透明色即可
 const iconColor = computed(() => {
     return props.modelValue ? '#ffffff' : 'transparent';
 });
+
 const iconClass = computed(() => {
     let classes: string[] = [];
     classes.push('u-checkbox__icon-wrap--' + elShape.value);
     if (props.modelValue == true) classes.push('u-checkbox__icon-wrap--checked');
     if (isDisabled.value) classes.push('u-checkbox__icon-wrap--disabled');
     if (props.modelValue && isDisabled.value) classes.push('u-checkbox__icon-wrap--disabled--checked');
-    // 支付宝小程序无法动态绑定一个数组类名，否则解析出来的结果会带有","，而导致失效
     return classes.join(' ');
 });
+
 const checkboxStyle = computed(() => {
     let style: Record<string, string> = {};
-    if (parent && parent.props.width) {
-        style.width = parent.props.width;
+    if (parentExposed.value.props && parentExposed.value.props.width) {
+        style.width = parentExposed.value.props.width;
         // #ifdef MP
-        // 各家小程序因为它们特殊的编译结构，使用float布局
         style.float = 'left';
         // #endif
         // #ifndef MP
-        // H5和APP使用flex布局
-        style.flex = `0 0 ${parent.props.width}`;
+        style.flex = `0 0 ${parentExposed.value.props.width}`;
         // #endif
     }
-    if (parent && parent.props.wrap) {
+    if (parentExposed.value.props && parentExposed.value.props.wrap) {
         style.width = '100%';
         // #ifndef MP
-        // H5和APP使用flex布局，将宽度设置100%，即可自动换行
         style.flex = '0 0 100%';
         // #endif
     }
@@ -140,6 +200,7 @@ function onClickLabel() {
         setValue();
     }
 }
+
 /**
  * 点击icon
  */
@@ -148,48 +209,65 @@ function toggle() {
         setValue();
     }
 }
+
 /**
  * 触发change事件
  */
 function emitEvent() {
-    emit('change', {
+    const changeValue = {
         value: !props.modelValue,
         name: props.name
+    };
+    emit('change', changeValue);
+
+    // 更新组件数据
+    updateData({
+        checked: !props.modelValue,
+        name: props.name,
+        changedAt: new Date().toISOString()
     });
-    // 执行父组件u-checkbox-group的事件方法
-    // 等待下一个周期再执行，因为emit('input')作用于父组件，再反馈到子组件内部，需要时间
+
     setTimeout(() => {
-        if (parent && parent.children && parent.children.value && parent.children.value.includes(instanceProxy) && parent.emitEvent) parent.emitEvent();
+        if (parentExposed.value.emitEvent) {
+            parentExposed.value.emitEvent();
+        }
     }, 80);
 }
+
 /**
- * 设置input的值，这里通过input事件，设置通过v-model绑定的组件的值
+ * 设置通过v-model绑定的组件的值
  */
 function setValue() {
     // 判断是否超过了可选的最大数量
-    let checkedNum = 0;
-    if (parent && parent.children && parent.children.value) {
-        // 只要父组件的某一个子元素的value为true，就加1(已有的选中数量)
-        parent.children.value.forEach((val: any) => {
-            if (val.value) checkedNum++;
-        });
-    }
-    // 如果原来为选中状态，那么可以取消
     if (props.modelValue == true) {
         emitEvent();
-        emit('update:modelValue', !props.modelValue);
+        emit('update:modelValue', false);
     } else {
-        // 如果超出最多可选项，提示
-        if (parent && checkedNum >= parent.props.max) {
-            return $u.toast(`最多可选${parent.props.max}项`);
+        if (!parentExposed.value.validateSelection()) {
+            return;
         }
-        // 如果原来为未选中状态，需要选中的数量少于父组件中设置的max值，才可以选中
         emitEvent();
-        emit('update:modelValue', !props.modelValue);
+        emit('update:modelValue', true);
     }
 }
 
-defineExpose({ setValue, emitEvent });
+// 监听modelValue变化，更新组件数据
+watch(
+    () => props.modelValue,
+    newValue => {
+        updateData({
+            checked: newValue,
+            name: props.name,
+            updatedAt: new Date().toISOString()
+        });
+    }
+);
+
+defineExpose({
+    setValue,
+    emitEvent,
+    props
+});
 </script>
 
 <style lang="scss" scoped>
@@ -222,7 +300,6 @@ defineExpose({ setValue, emitEvent });
         transition-duration: 0.2s;
 
         /* #ifdef MP-TOUTIAO */
-        // 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
         &__icon {
             line-height: 0;
         }

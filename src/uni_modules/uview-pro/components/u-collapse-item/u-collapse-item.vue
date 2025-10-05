@@ -1,13 +1,19 @@
 <template>
     <view class="u-collapse-item" :style="`${$u.toStyle(itemStyle)}${$u.toStyle(customStyle)}`" :class="customClass">
-        <view :hover-stay-time="200" class="u-collapse-head" @tap.stop="headClick" :hover-class="hoverClass" :style="headStyle">
+        <view
+            :hover-stay-time="200"
+            class="u-collapse-head"
+            @tap.stop="headClick"
+            :hover-class="hoverClass"
+            :style="headStyle"
+        >
             <template v-if="!slots['title-all']">
                 <view v-if="!slots['title']" class="u-collapse-title u-line-1" :style="titleStyle">
                     {{ title }}
                 </view>
                 <slot v-else name="title" />
                 <view class="u-icon-wrap">
-                    <u-icon v-if="arrow" :color="arrowColor" :name="isShow ? 'arrow-up' : 'arrow-down'" />
+                    <u-icon v-if="showArrow" :color="arrowColor" :name="isShow ? 'arrow-up' : 'arrow-down'" />
                 </view>
             </template>
             <slot v-else name="title-all" />
@@ -26,7 +32,9 @@ export default {
     name: 'u-collapse-item',
     options: {
         addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
         virtualHost: true,
+        // #endif
         styleIsolation: 'shared'
     }
 };
@@ -34,9 +42,8 @@ export default {
 
 <script setup lang="ts">
 import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, computed } from 'vue';
-import { $u } from '../..';
+import { $u, useChildren, onParentEvent } from '../..';
 import { CollapseItemProps } from './types';
-import { useParent } from '../../libs/hooks/useParent';
 
 /**
  * collapseItem 手风琴Item
@@ -59,54 +66,85 @@ const instance = getCurrentInstance();
 
 const isShow = ref(false);
 const elId = ref('');
-const height = ref('0'); // body内容的高度
-const headStyle = ref<Record<string, any>>({}); // 头部样式，对象形式
-const bodyStyle = ref<Record<string, any>>({}); // 主体部分样式
-const itemStyle = ref<Record<string, any>>({}); // 每个item的整体样式
-const arrowColor = ref(''); // 箭头的颜色
-const hoverClass = ref(''); // 头部按下时的效果样式类
-const accordion = ref(true); // 是否显示右侧箭头
-const arrow = ref(true);
-let parentExposed = null;
-let parent = null;
+const height = ref('0');
+const headStyle = ref<Record<string, any>>({});
+const bodyStyle = ref<Record<string, any>>({});
+const itemStyle = ref<Record<string, any>>({});
+const arrowColor = ref('');
+const hoverClass = ref('');
 
-const { getParent } = useParent('u-collapse');
+// 使用子组件Hook - 明确指定父组件名称
+const {
+    childId,
+    childName,
+    parent,
+    emitToParent,
+    updateData,
+    refreshLink,
+    getParentExposed,
+    refreshParentExposed,
+    parentExposed
+} = useChildren('u-collapse-item', 'u-collapse');
 
-watch(
-    () => props.open,
-    val => {
-        isShow.value = val;
-    },
-    { immediate: true }
-);
+// 计算属性
+const showArrow = computed(() => {
+    return parentExposed.value.props ? parentExposed.value.props.arrow : true;
+});
 
-/**
- * 获取父组件的配置项
- */
 const titleStyle = computed(() => {
     let style = { textAlign: props.align ? props.align : 'left' };
 
-    if (isShow.value && props.activeStyle && !arrow.value) {
+    if (isShow.value && props.activeStyle && !showArrow.value) {
         style = $u.deepMerge(style, props.activeStyle);
     }
     return $u.toStyle(style);
 });
 
+// 获取唯一标识符 - 关键优化：保持向后兼容
+const itemName = computed(() => {
+    // 优先级：name > index > childId
+    if (props.name !== undefined && props.name !== '') {
+        return props.name;
+    } else if (props.index !== undefined && props.index !== '') {
+        return props.index;
+    } else {
+        return childId;
+    }
+});
+
+/**
+ * 设置显示状态
+ */
+function setShowState(show: boolean) {
+    if (isShow.value !== show) {
+        isShow.value = show;
+        updateData({
+            isShow: isShow.value,
+            name: itemName.value,
+            updatedAt: new Date().toISOString()
+        });
+
+        // 如果展开，需要重新计算高度
+        if (show) {
+            nextTick(() => {
+                queryRect();
+            });
+        }
+    }
+}
+
 /**
  * 异步获取内容，或者动态修改了内容时，需要重新初始化
  */
 function init() {
-    parent = getParent();
-    parentExposed = parent ? parent.exposed : null;
-    if (parent) {
-        headStyle.value = parentExposed.props.headStyle;
-        bodyStyle.value = parentExposed.props.bodyStyle;
-        arrowColor.value = parentExposed.props.arrowColor;
-        hoverClass.value = parentExposed.props.hoverClass;
-        arrow.value = parentExposed.props.arrow;
-        itemStyle.value = parentExposed.props.itemStyle;
-        accordion.value = parentExposed.props.accordion;
+    if (parentExposed.value && parentExposed.value.props) {
+        headStyle.value = parentExposed.value.props.headStyle || {};
+        bodyStyle.value = parentExposed.value.props.bodyStyle || {};
+        arrowColor.value = parentExposed.value.props.arrowColor || '#909399';
+        hoverClass.value = parentExposed.value.props.hoverClass || 'u-hover-class';
+        itemStyle.value = parentExposed.value.props.itemStyle || {};
     }
+
     elId.value = $u.guid();
     nextTick(() => {
         queryRect();
@@ -118,45 +156,106 @@ function init() {
  */
 function headClick() {
     if (props.disabled) return;
-    if (accordion.value && parent) {
-        parent.children.forEach((vm: any) => {
-            if (vm.exposed.elId.value !== elId.value) {
-                vm.exposed.isShow.value = false;
-            } else {
-                vm.exposed.isShow.value = !vm.exposed.isShow.value;
-                emit('change', {
-                    index: props.index,
-                    show: vm.exposed.isShow.value
-                });
-            }
-        });
-    } else {
-        isShow.value = !isShow.value;
-        emit('change', {
-            index: props.index,
-            show: isShow.value
-        });
+    // 通知父组件状态变化
+    if (parentExposed.value && parentExposed.value.onChange) {
+        parentExposed.value.onChange(itemName.value);
     }
-    if (isShow.value) parentExposed && parentExposed.onChange && parentExposed.onChange(props.index);
+
+    // 本地也触发change事件
+    emit('change', {
+        index: props.index,
+        name: itemName.value,
+        show: !isShow.value
+    });
 }
 
 /**
  * 查询内容高度
  */
 function queryRect() {
-    // getRect为uView自带的节点查询简化方法，详见文档介绍：https://uviewpro.cn/zh/tools/getRect.html
-    // 组件内部一般用this.$uGetRect，对外的为this.$u.getRect，二者功能一致，名称不同
-    $u.getRect('#' + elId.value, instance).then((res: any) => {
-        height.value = res.height + 'px';
-        // #ifdef MP-TOUTIAO
-        height.value = 'auto';
-        // #endif
-    });
+    $u.getRect('#' + elId.value, instance)
+        .then((res: any) => {
+            if (res && res.height) {
+                height.value = res.height + 'px';
+            }
+            // #ifdef MP-TOUTIAO
+            if (isShow.value) {
+                height.value = 'auto';
+            }
+            // #endif
+        })
+        .catch((err: any) => {
+            console.warn('queryRect error:', err);
+            height.value = 'auto';
+        });
 }
 
-onMounted(() => {
-    init();
+// 监听父组件的事件
+onParentEvent(childId, 'openSingle', data => {
+    // 只有目标项展开，其他都关闭
+    const shouldShow = data.targetName === itemName.value;
+    setShowState(shouldShow);
 });
+
+onParentEvent(childId, 'closeAll', data => {
+    setShowState(false);
+});
+
+onParentEvent(childId, 'setMultiple', data => {
+    const shouldShow = data.targetNames.includes(itemName.value);
+    setShowState(shouldShow);
+});
+
+onParentEvent(childId, 'toggleSingle', data => {
+    // 只有目标项才切换状态
+    if (data.targetName === itemName.value) {
+        setShowState(!isShow.value);
+    }
+});
+
+onMounted(() => {
+    refreshLink();
+
+    // 关键修复：根据 open 属性设置初始状态
+    setShowState(props.open);
+
+    // 初始化数据
+    updateData({
+        isShow: isShow.value,
+        name: itemName.value,
+        title: props.title,
+        disabled: props.disabled,
+        mountedAt: new Date().toISOString(),
+        componentName: childName
+    });
+    // 初始化
+    init();
+
+    if (!parent.value) {
+        setTimeout(() => {
+            refreshLink();
+        }, 50);
+    }
+});
+
+// 监听 open 属性变化
+watch(
+    () => props.open,
+    newVal => {
+        setShowState(newVal);
+    }
+);
+
+// 监听父组件exposed的变化
+watch(
+    () => parentExposed.value?.props,
+    newProps => {
+        if (newProps) {
+            init();
+        }
+    },
+    { deep: true, immediate: true }
+);
 
 defineExpose({
     init,
@@ -168,7 +267,9 @@ defineExpose({
     itemStyle,
     arrowColor,
     hoverClass,
-    arrow
+    itemName: itemName.value,
+    queryRect,
+    setShowState
 });
 </script>
 
