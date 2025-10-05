@@ -42,7 +42,6 @@ export function cleanupComponentRelations(): void {
 
 // 热更新处理
 if (import.meta.hot) {
-    console.error('Component relations are being hot updated');
     import.meta.hot.accept(() => {
         setTimeout(() => {
             cleanupComponentRelations();
