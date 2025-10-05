@@ -136,7 +136,21 @@ export type FormRuleItem = {
 };
 export type FormRules = Record<string, FormRuleItem | FormRuleItem[]>;
 
-export type InputType = 'text' | 'number' | 'idcard' | 'digit' | 'password' | 'textarea' | 'phone' | 'url' | 'email' | 'safe-password' | 'name' | 'bank-card' | 'tel' | 'select';
+export type InputType =
+    | 'text'
+    | 'number'
+    | 'idcard'
+    | 'digit'
+    | 'password'
+    | 'textarea'
+    | 'phone'
+    | 'url'
+    | 'email'
+    | 'safe-password'
+    | 'name'
+    | 'bank-card'
+    | 'tel'
+    | 'select';
 
 export type InputAlign = 'left' | 'center' | 'right';
 
@@ -192,7 +206,16 @@ export type PopupMode = 'left' | 'right' | 'top' | 'bottom' | 'center';
 export type PopupCloseIconPos = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
 // Row水平排列方式，可选值为`start`(或`flex-start`)、`end`(或`flex-end`)、`center`、`around`(或`space-around`)、`between`(或`space-between`)
-export type RowJustify = 'start' | 'flex-start' | 'end' | 'flex-end' | 'center' | 'around' | 'space-around' | 'between' | 'space-between';
+export type RowJustify =
+    | 'start'
+    | 'flex-start'
+    | 'end'
+    | 'flex-end'
+    | 'center'
+    | 'around'
+    | 'space-around'
+    | 'between'
+    | 'space-between';
 // Row垂直对齐方式，可选值为top、center、bottom
 export type RowAlign = 'top' | 'center' | 'bottom';
 // search 组件形状
@@ -234,7 +257,13 @@ export type SwipeActionOption = {
 // swiper 组件 mode
 export type SwiperMode = 'round' | 'dot' | 'rect' | 'number' | 'none';
 // swiper 组件 indicatorPos
-export type SwiperIndicatorPosition = 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomCenter' | 'bottomRight';
+export type SwiperIndicatorPosition =
+    | 'topLeft'
+    | 'topCenter'
+    | 'topRight'
+    | 'bottomLeft'
+    | 'bottomCenter'
+    | 'bottomRight';
 // tabs 组件 props
 export type TabsItem = {
     [key: string]: any;
@@ -289,7 +318,14 @@ export type ThemeColor = Partial<{
     borderColor: string;
 }>;
 
+export type LogConfig = Partial<{
+    debug?: boolean;
+    prefix?: string;
+    showCallerInfo?: boolean;
+}>;
+
 export interface UViewProOptions {
     theme?: ThemeColor;
+    log?: LogConfig;
     // 可扩展更多配置项
 }

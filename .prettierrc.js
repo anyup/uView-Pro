@@ -18,7 +18,7 @@ module.exports = {
     // JSX 使用单引号
     jsxSingleQuote: true,
     // 每行最大字符数
-    printWidth: 180, // 推荐 100~120
+    printWidth: 120, // 推荐 100~120
     // markdown/文档换行策略
     proseWrap: 'preserve',
     // 对象属性是否强制加引号

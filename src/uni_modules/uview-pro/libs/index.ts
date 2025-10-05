@@ -53,7 +53,14 @@ import zIndex from './config/zIndex';
 import { dispatch, broadcast } from './util/emitter';
 import { mitt } from './util/mitt';
 // http相关
-import httpPlugin, { Request, http, type RequestOptions, type RequestConfig, type RequestInterceptor, type RequestMeta } from './request/index';
+import httpPlugin, {
+    Request,
+    http,
+    type RequestOptions,
+    type RequestConfig,
+    type RequestInterceptor,
+    type RequestMeta
+} from './request/index';
 
 /**
  * @description 数字格式化
@@ -63,7 +70,12 @@ import httpPlugin, { Request, http, type RequestOptions, type RequestConfig, typ
  * @param thousandsSeparator 千分位符号
  * @returns 格式化后的数字
  */
-export function formatPrice(number: number | string, decimals: number = 0, decimalPoint: string = '.', thousandsSeparator: string = ','): string {
+export function formatPrice(
+    number: number | string,
+    decimals: number = 0,
+    decimalPoint: string = '.',
+    thousandsSeparator: string = ','
+): string {
     // 辅助函数：四舍五入到指定小数位
     function round(num: number, precision: number): string {
         const factor = Math.pow(10, precision);
@@ -109,9 +121,16 @@ export function formatName(name: string): string {
  * @param {String} target 转换的目的，object-转为对象，string-转为字符串
  * @returns {object|string}
  */
-export function addStyle(customStyle: Record<string, string> | string, target: 'object' | 'string' = 'object'): Record<string, string> | string {
+export function addStyle(
+    customStyle: Record<string, string> | string,
+    target: 'object' | 'string' = 'object'
+): Record<string, string> | string {
     // 字符串转字符串，对象转对象情形，直接返回
-    if (test.empty(customStyle) || (typeof customStyle === 'object' && target === 'object') || (target === 'string' && typeof customStyle === 'string')) {
+    if (
+        test.empty(customStyle) ||
+        (typeof customStyle === 'object' && target === 'object') ||
+        (target === 'string' && typeof customStyle === 'string')
+    ) {
         return customStyle;
     }
     // 字符串转对象
@@ -286,6 +305,16 @@ export const $u = {
 // 颜色相关方法单独导出
 export const { colorGradient, colorToRgba, hexToRgb, rgbToHex } = colorGradients;
 // http相关导出
-export { Request, httpPlugin, http, type RequestOptions, type RequestConfig, type RequestInterceptor, type RequestMeta };
+export {
+    Request,
+    httpPlugin,
+    http,
+    type RequestOptions,
+    type RequestConfig,
+    type RequestInterceptor,
+    type RequestMeta
+};
 
 export * from './hooks';
+
+export * from './util/logger';
