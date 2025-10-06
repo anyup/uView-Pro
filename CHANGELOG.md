@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3] - 2025-10-06
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-collapse:** 修复手风琴组件在头条小程序的兼容性 ([3189dc4](https://github.com/anyup/uView-Pro/commit/3189dc468edd977bc3e20256bd8a6c1b124bc4e6))
+
+### ✨ Features | 新功能
+
+- **util:** 新增日志功能并调整主题配置 ([5e07894](https://github.com/anyup/uView-Pro/commit/5e078945fb64867e4e49be1c9228aac7be8c1104))
+- **components:** 重构复选框和手风琴组件，新增父子组件通信库 ([55b9b60](https://github.com/anyup/uView-Pro/commit/55b9b6069f1a40a6c4190b27952bcf9a489f8923))
+- **util:** 添加自定义事件总线 ([6589f4f](https://github.com/anyup/uView-Pro/commit/6589f4f20b1391a9267670f6622538d4a6db0d82))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **components:** 重构复选框和折叠组件，支持多平台小程序，微信，支付宝，头条 ([0ebc0f5](https://github.com/anyup/uView-Pro/commit/0ebc0f5edcc1df6ccd9baaaf659a0bde7b37d21d))
+- **hooks:** 移除组件关系热更新时的错误日志输出 ([c8a2a3d](https://github.com/anyup/uView-Pro/commit/c8a2a3d041a55f94c8bd86d47eaaee9657cbd597))
+
+### 📝 Documentation | 文档
+
+- **readme:** 更新微信交流群二维码 ([cff3a3d](https://github.com/anyup/uView-Pro/commit/cff3a3dbb035ca365a1ab9839b14f300ef775c16))
+
 ## [0.2.2] - 2025-09-30
 
 ### 🚀 Chore | 构建/工程依赖/工具
