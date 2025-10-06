@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import i18n from '@/locales';
 
 /**
  * 页面导航栏组件
@@ -38,25 +37,22 @@ defineProps<{
 }>();
 
 // 国际化钩子
-const { t } = useI18n();
-
-// 版本号（如需展示可用）
-// const version = uni.$u.config.v;
+const { t, locale } = useI18n();
 
 /**
  * 当前语言标识
  */
 const lang = computed(() => {
-    return i18n.global.locale == 'zh-Hans' ? 'zh' : 'en';
+    return locale.value === 'zh-Hans' ? 'zh' : 'en';
 });
 
 /**
  * 语言切换
  */
 function switchLang() {
-    const locale = i18n.global.locale == 'zh-Hans' ? 'en' : 'zh-Hans';
-    uni.setLocale(locale);
-    i18n.global.locale = locale;
+    const nextLocale = locale.value === 'zh-Hans' ? 'en' : 'zh-Hans';
+    uni.setLocale(nextLocale);
+    locale.value = nextLocale;
 }
 </script>
 
