@@ -79,11 +79,13 @@ For more running and building commands, please refer to the [pnpm Running Guide]
 
 ## Communication & Feedback
 
+uView Pro WeChat Group： [Click to Join](https://uviewpro.cn/zh/resource/about.html)
+
 uView Pro QQ Group: [Click to Join](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98nSVDldWEbDdq4lxiP4aL7uATfMSlI6&authKey=G2yQJ5MQiKzMldaxBsIfKt17NuJuUw8Fr6zdKLggc6NZXgw4BVbqkU2U3EE994yd&noverify=0&group_code=811732166)
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1759130088211" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1759732874425" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>
