@@ -41,7 +41,11 @@
                         <view class="grid-text">音量</view>
                     </u-grid-item>
                     <u-grid-item :index="6">
-                        <image src="https://ik.imagekit.io/anyup/uview-pro/grid/hot6.png" style="width: 44rpx; height: 44rpx; top: 0; right: 0" class="badge-icon"></image>
+                        <image
+                            src="https://ik.imagekit.io/anyup/uview-pro/grid/hot6.png"
+                            style="width: 44rpx; height: 44rpx; top: 0; right: 0"
+                            class="badge-icon"
+                        ></image>
                         <u-icon name="trash" :size="46"></u-icon>
                         <view class="grid-text">回收站</view>
                     </u-grid-item>

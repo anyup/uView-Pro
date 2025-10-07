@@ -4,7 +4,14 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <view>
-                    <u-checkbox-group :size="size" :width="width" :wrap="wrap" :max="max" @change="checkboxGroupChange" :activeColor="activeColor">
+                    <u-checkbox-group
+                        :size="size"
+                        :width="width"
+                        :wrap="wrap"
+                        :max="max"
+                        @change="checkboxGroupChange"
+                        :activeColor="activeColor"
+                    >
                         <u-checkbox
                             @change="checkboxChange"
                             v-model="item.checked"
@@ -34,7 +41,10 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">激活颜色</view>
-                <u-subsection :list="['primary', 'error', 'warning', 'success', 'info']" @change="activeColorChange"></u-subsection>
+                <u-subsection
+                    :list="['primary', 'error', 'warning', 'success', 'info']"
+                    @change="activeColorChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">默认选中第一个</view>
@@ -133,7 +143,8 @@ function activeColorChange(index: number) {
     console.log(index, index);
     // 如果用户尚未勾选任何checkbox，切换颜色时，默认选中第一个让用户看到效果，因为勾选了才有效果
     if (!result.value.length) list.value[0].checked = true;
-    let theme = index === 0 ? 'primary' : index === 1 ? 'error' : index === 2 ? 'warning' : index === 3 ? 'success' : 'info';
+    let theme =
+        index === 0 ? 'primary' : index === 1 ? 'error' : index === 2 ? 'warning' : index === 3 ? 'success' : 'info';
     activeColor.value = $u.color[theme];
 }
 

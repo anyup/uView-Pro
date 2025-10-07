@@ -14,7 +14,10 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">颜色(只对圆圈模式有效)</view>
-                <u-subsection :list="['default', 'primary', 'error', 'warning', 'success']" @change="colorChange"></u-subsection>
+                <u-subsection
+                    :list="['default', 'primary', 'error', 'warning', 'success']"
+                    @change="colorChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">尺寸(单位rpx)</view>

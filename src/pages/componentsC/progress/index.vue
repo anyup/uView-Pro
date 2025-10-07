@@ -3,7 +3,13 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-line-progress v-if="mode == 'line'" :percent="percent" :active-color="activeColor" :striped="striped" :stripedActive="stripedActive"></u-line-progress>
+                <u-line-progress
+                    v-if="mode == 'line'"
+                    :percent="percent"
+                    :active-color="activeColor"
+                    :striped="striped"
+                    :stripedActive="stripedActive"
+                ></u-line-progress>
                 <u-circle-progress v-else :percent="percent" :active-color="activeColor" bg-color="rgb(250, 250, 250)">
                     <view class="u-progress-content">
                         <view class="u-progress-dot"></view>

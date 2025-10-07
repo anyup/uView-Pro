@@ -1,13 +1,23 @@
 <template>
     <view>
-        <view class="u-navbar" :style="navbarStyle" :class="{ 'u-navbar-fixed': props.isFixed, 'u-border-bottom': props.borderBottom }">
+        <view
+            class="u-navbar"
+            :style="navbarStyle"
+            :class="{ 'u-navbar-fixed': props.isFixed, 'u-border-bottom': props.borderBottom }"
+        >
             <view class="u-status-bar" :style="{ height: statusBarHeight + 'px' }"></view>
             <view class="u-navbar-inner" :style="navbarInnerStyle">
                 <view class="u-back-wrap" v-if="props.isBack" @tap="goBack">
                     <view class="u-icon-wrap">
-                        <u-icon :name="props.backIconName" :color="props.backIconColor" :size="props.backIconSize"></u-icon>
+                        <u-icon
+                            :name="props.backIconName"
+                            :color="props.backIconColor"
+                            :size="props.backIconSize"
+                        ></u-icon>
                     </view>
-                    <view class="u-icon-wrap u-back-text u-line-1" v-if="props.backText" :style="props.backTextStyle">{{ props.backText }}</view>
+                    <view class="u-icon-wrap u-back-text u-line-1" v-if="props.backText" :style="props.backTextStyle">
+                        {{ props.backText }}
+                    </view>
                 </view>
                 <view class="u-navbar-content-title" v-if="props.title" :style="titleStyle">
                     <view
@@ -113,7 +123,11 @@ const titleStyle = computed(() => {
     // 此处是为了让标题显示区域即使在小程序有右侧胶囊的情况下也能处于屏幕的中间，是通过绝对定位实现的
     let rightButtonWidth = systemInfo.windowWidth - menuButtonInfo.left;
     style.left = (systemInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 + 'px';
-    style.right = rightButtonWidth - (systemInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 + rightButtonWidth + 'px';
+    style.right =
+        rightButtonWidth -
+        (systemInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 +
+        rightButtonWidth +
+        'px';
     // #endif
     style.width = uni.upx2px(Number(props.titleWidth)) + 'px';
     return style;

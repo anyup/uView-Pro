@@ -112,7 +112,10 @@ function rstr2b64(input: string): string {
     let output = '';
     const len: number = input.length;
     for (let i = 0; i < len; i += 3) {
-        const triplet: number = (input.charCodeAt(i) << 16) | (i + 1 < len ? input.charCodeAt(i + 1) << 8 : 0) | (i + 2 < len ? input.charCodeAt(i + 2) : 0);
+        const triplet: number =
+            (input.charCodeAt(i) << 16) |
+            (i + 1 < len ? input.charCodeAt(i + 1) << 8 : 0) |
+            (i + 2 < len ? input.charCodeAt(i + 2) : 0);
         for (let j = 0; j < 4; j++) {
             if (i * 8 + j * 6 > input.length * 8) output += b64pad;
             else output += tab.charAt((triplet >>> (6 * (3 - j))) & 0x3f);
@@ -187,8 +190,15 @@ function str2rstr_utf8(input: string): string {
         /* Encode output as utf-8 */
         if (x <= 0x7f) output += String.fromCharCode(x);
         else if (x <= 0x7ff) output += String.fromCharCode(0xc0 | ((x >>> 6) & 0x1f), 0x80 | (x & 0x3f));
-        else if (x <= 0xffff) output += String.fromCharCode(0xe0 | ((x >>> 12) & 0x0f), 0x80 | ((x >>> 6) & 0x3f), 0x80 | (x & 0x3f));
-        else if (x <= 0x1fffff) output += String.fromCharCode(0xf0 | ((x >>> 18) & 0x07), 0x80 | ((x >>> 12) & 0x3f), 0x80 | ((x >>> 6) & 0x3f), 0x80 | (x & 0x3f));
+        else if (x <= 0xffff)
+            output += String.fromCharCode(0xe0 | ((x >>> 12) & 0x0f), 0x80 | ((x >>> 6) & 0x3f), 0x80 | (x & 0x3f));
+        else if (x <= 0x1fffff)
+            output += String.fromCharCode(
+                0xf0 | ((x >>> 18) & 0x07),
+                0x80 | ((x >>> 12) & 0x3f),
+                0x80 | ((x >>> 6) & 0x3f),
+                0x80 | (x & 0x3f)
+            );
     }
     return output;
 }
@@ -200,7 +210,8 @@ function str2rstr_utf8(input: string): string {
  */
 function str2rstr_utf16le(input: string): string {
     let output = '';
-    for (let i = 0; i < input.length; i++) output += String.fromCharCode(input.charCodeAt(i) & 0xff, (input.charCodeAt(i) >>> 8) & 0xff);
+    for (let i = 0; i < input.length; i++)
+        output += String.fromCharCode(input.charCodeAt(i) & 0xff, (input.charCodeAt(i) >>> 8) & 0xff);
     return output;
 }
 
@@ -211,7 +222,8 @@ function str2rstr_utf16le(input: string): string {
  */
 function str2rstr_utf16be(input: string): string {
     let output = '';
-    for (let i = 0; i < input.length; i++) output += String.fromCharCode((input.charCodeAt(i) >>> 8) & 0xff, input.charCodeAt(i) & 0xff);
+    for (let i = 0; i < input.length; i++)
+        output += String.fromCharCode((input.charCodeAt(i) >>> 8) & 0xff, input.charCodeAt(i) & 0xff);
     return output;
 }
 

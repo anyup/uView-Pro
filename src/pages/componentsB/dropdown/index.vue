@@ -2,13 +2,34 @@
     <view>
         <view class="u-m-p-50">
             <view class="u-demo-area u-flex u-row-center">
-                <u-dropdown :close-on-click-mask="mask" ref="uDropdownRef" :activeColor="activeColor" :borderBottom="borderBottom">
-                    <u-dropdown-item @change="change" v-model="value1" title="距离" :options="options1"></u-dropdown-item>
-                    <u-dropdown-item @change="change" v-model="value2" title="温度" :options="options2"></u-dropdown-item>
+                <u-dropdown
+                    :close-on-click-mask="mask"
+                    ref="uDropdownRef"
+                    :activeColor="activeColor"
+                    :borderBottom="borderBottom"
+                >
+                    <u-dropdown-item
+                        @change="change"
+                        v-model="value1"
+                        title="距离"
+                        :options="options1"
+                    ></u-dropdown-item>
+                    <u-dropdown-item
+                        @change="change"
+                        v-model="value2"
+                        title="温度"
+                        :options="options2"
+                    ></u-dropdown-item>
                     <u-dropdown-item title="属性">
                         <view class="slot-content">
                             <view class="item-box">
-                                <view class="item" :class="[item.active ? 'active' : '']" @tap="tagClick(index)" v-for="(item, index) in list" :key="index">
+                                <view
+                                    class="item"
+                                    :class="[item.active ? 'active' : '']"
+                                    @tap="tagClick(index)"
+                                    v-for="(item, index) in list"
+                                    :key="index"
+                                >
                                     {{ item.label }}
                                 </view>
                             </view>

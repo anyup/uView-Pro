@@ -1,6 +1,13 @@
 <template>
     <view class="u-avatar" :style="wrapStyle" @tap="onClick">
-        <image @error="onLoadError" :style="imgStyle" class="u-avatar__img" v-if="!uText && avatar" :src="avatar" :mode="imgMode"></image>
+        <image
+            @error="onLoadError"
+            :style="imgStyle"
+            class="u-avatar__img"
+            v-if="!uText && avatar"
+            :src="avatar"
+            :mode="imgMode"
+        ></image>
         <text class="u-line-1" v-else-if="uText" :style="{ fontSize: '38rpx' }">{{ uText }}</text>
         <slot v-else></slot>
         <view class="u-avatar__sex" v-if="showSex" :class="['u-avatar__sex--' + sexIcon]" :style="uSexStyle">
@@ -69,7 +76,14 @@ watch(
  */
 const wrapStyle = computed(() => {
     let style: Record<string, string> = {};
-    style.height = props.size === 'large' ? '120rpx' : props.size === 'default' ? '90rpx' : props.size === 'mini' ? '70rpx' : props.size + 'rpx';
+    style.height =
+        props.size === 'large'
+            ? '120rpx'
+            : props.size === 'default'
+              ? '90rpx'
+              : props.size === 'mini'
+                ? '70rpx'
+                : props.size + 'rpx';
     style.width = style.height;
     style.flex = `0 0 ${style.height}`;
     style.backgroundColor = props.bgColor;

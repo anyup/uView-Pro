@@ -4,8 +4,24 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <view>
-                    <u-radio-group :shape="shape" :size="size" :width="width" :wrap="wrap" v-model="value" @change="radioGroupChange" :activeColor="activeColor">
-                        <u-radio @change="radioChange" v-for="(item, index) in list" :disabled="item.disabled" :key="index" :name="item.name">{{ item.name }}</u-radio>
+                    <u-radio-group
+                        :shape="shape"
+                        :size="size"
+                        :width="width"
+                        :wrap="wrap"
+                        v-model="value"
+                        @change="radioGroupChange"
+                        :activeColor="activeColor"
+                    >
+                        <u-radio
+                            @change="radioChange"
+                            v-for="(item, index) in list"
+                            :disabled="item.disabled"
+                            :key="index"
+                            :name="item.name"
+                        >
+                            {{ item.name }}
+                        </u-radio>
                     </u-radio-group>
                 </view>
                 <view class="u-demo-result-line">
@@ -25,7 +41,10 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">激活颜色</view>
-                <u-subsection :list="['primary', 'error', 'warning', 'success', 'info']" @change="activeColorChange"></u-subsection>
+                <u-subsection
+                    :list="['primary', 'error', 'warning', 'success', 'info']"
+                    @change="activeColorChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">每个占一行</view>
@@ -106,7 +125,8 @@ function defaultChooseChange(index: number) {
 function activeColorChange(index: number) {
     // 如果用户尚未勾选任何radio，切换颜色时，默认选中第一个让用户看到效果，因为勾选了才有效果
     if (!result.value) result.value = value.value = list[0].name;
-    let theme = index == 0 ? 'primary' : index == 1 ? 'error' : index == 2 ? 'warning' : index == 3 ? 'success' : 'info';
+    let theme =
+        index == 0 ? 'primary' : index == 1 ? 'error' : index == 2 ? 'warning' : index == 3 ? 'success' : 'info';
     activeColor.value = $u.color[theme];
 }
 

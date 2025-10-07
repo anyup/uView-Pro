@@ -4,14 +4,24 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area u-flex u-row-center">
                 <!-- 头条小程序因为兼容性，必须要给组件写上u-line类 -->
-                <u-line class="u-line" :border-style="borderStyle" :color="color" :length="length" :direction="direction" :hair-line="hairLine"></u-line>
+                <u-line
+                    class="u-line"
+                    :border-style="borderStyle"
+                    :color="color"
+                    :length="length"
+                    :direction="direction"
+                    :hair-line="hairLine"
+                ></u-line>
             </view>
         </view>
         <view class="u-config-wrap">
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">颜色</view>
-                <u-subsection :list="['primary', 'success', 'warning', 'error', 'info']" @change="colorChange"></u-subsection>
+                <u-subsection
+                    :list="['primary', 'success', 'warning', 'error', 'info']"
+                    @change="colorChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">线条类型</view>

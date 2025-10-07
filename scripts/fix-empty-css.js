@@ -23,7 +23,11 @@ function ensureCssNotEmpty(filePath) {
     try {
         const stat = fs.statSync(filePath);
         if (stat.size === 0) {
-            fs.writeFileSync(filePath, '/* keep: prevent hosting from stripping empty CSS; referenced by JS chunk */\n', 'utf8');
+            fs.writeFileSync(
+                filePath,
+                '/* keep: prevent hosting from stripping empty CSS; referenced by JS chunk */\n',
+                'utf8'
+            );
             // eslint-disable-next-line no-console
             console.log(`fixed empty css: ${path.relative(process.cwd(), filePath)}`);
         }

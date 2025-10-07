@@ -7,7 +7,16 @@
 <script lang="ts" setup>
 import { ref, onBeforeMount } from 'vue';
 
-type AnimationType = 'fade' | 'scale-up' | 'scale-down' | 'slide-top' | 'slide-bottom' | 'slide-left' | 'slide-right' | 'shake' | '';
+type AnimationType =
+    | 'fade'
+    | 'scale-up'
+    | 'scale-down'
+    | 'slide-top'
+    | 'slide-bottom'
+    | 'slide-left'
+    | 'slide-right'
+    | 'shake'
+    | '';
 
 const props = defineProps({
     name: {

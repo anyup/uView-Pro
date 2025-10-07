@@ -1,8 +1,21 @@
 <template>
     <view class="u-tabs" :style="{ zIndex: zIndex, background: bgColor }">
-        <scroll-view scroll-x class="u-scroll-view" :scroll-left="scrollLeft" scroll-with-animation :style="{ zIndex: Number(zIndex) + 1 }">
+        <scroll-view
+            scroll-x
+            class="u-scroll-view"
+            :scroll-left="scrollLeft"
+            scroll-with-animation
+            :style="{ zIndex: Number(zIndex) + 1 }"
+        >
             <view class="u-tabs-scroll-box" :class="{ 'u-tabs-scroll-flex': !isScroll }">
-                <view class="u-tabs-item" :style="tabItemStyle(index)" v-for="(item, index) in getTabs" :key="index" :class="[preId + index]" @tap="emitTabChange(index)">
+                <view
+                    class="u-tabs-item"
+                    :style="tabItemStyle(index)"
+                    v-for="(item, index) in getTabs"
+                    :key="index"
+                    :class="[preId + index]"
+                    @tap="emitTabChange(index)"
+                >
                     <u-badge :count="item[count] || item['count'] || 0" :offset="offset" size="mini"></u-badge>
                     {{ item[name] || item['name'] }}
                 </view>
@@ -96,7 +109,12 @@ function tabItemStyle(index: number) {
         height: props.height + 'rpx',
         lineHeight: props.height + 'rpx',
         padding: `0 ${Number(props.gutter) / 2}rpx`,
-        color: tabsInfo.value.length > 0 ? (tabsInfo.value[index] ? tabsInfo.value[index].color : props.activeColor) : props.inactiveColor,
+        color:
+            tabsInfo.value.length > 0
+                ? tabsInfo.value[index]
+                    ? tabsInfo.value[index].color
+                    : props.activeColor
+                : props.inactiveColor,
         fontSize: props.fontSize + 'rpx',
         zIndex: Number(props.zIndex) + 2,
         fontWeight: index == getCurrent.value && props.bold ? 'bold' : 'normal'

@@ -4,7 +4,17 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <u-toast ref="uToastRef"></u-toast>
-                <u-tag :text="text" :type="type" :shape="shape" :closeable="closeable" :mode="mode" @close="close" @click="click" :show="show" :size="size" />
+                <u-tag
+                    :text="text"
+                    :type="type"
+                    :shape="shape"
+                    :closeable="closeable"
+                    :mode="mode"
+                    @close="close"
+                    @click="click"
+                    :show="show"
+                    :size="size"
+                />
             </view>
         </view>
         <view class="u-config-wrap">
@@ -19,11 +29,18 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">主题选择</view>
-                <u-subsection current="2" :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
+                <u-subsection
+                    current="2"
+                    :list="['primary', 'success', 'error', 'warning', 'info']"
+                    @change="typeChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">形状</view>
-                <u-subsection :list="['square', 'circle', 'circleLeft', 'circleRight']" @change="shapeChange"></u-subsection>
+                <u-subsection
+                    :list="['square', 'circle', 'circleLeft', 'circleRight']"
+                    @change="shapeChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">尺寸</view>
@@ -60,7 +77,8 @@ function textChange(index: number) {
 }
 
 function typeChange(index: number) {
-    type.value = index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : 'info';
+    type.value =
+        index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : 'info';
 }
 
 function shapeChange(index: number) {

@@ -10,7 +10,9 @@
                 <template v-slot:content>
                     <view>
                         <view class="u-order-title">待取件</view>
-                        <view class="u-order-desc">[自提柜]您的快件已放在楼下侧门，直走前方53.6米，左拐约10步，再右拐直走，见一红灯笼停下，叩门三下，喊“芝麻开门”即可。</view>
+                        <view class="u-order-desc">
+                            [自提柜]您的快件已放在楼下侧门，直走前方53.6米，左拐约10步，再右拐直走，见一红灯笼停下，叩门三下，喊“芝麻开门”即可。
+                        </view>
                         <view class="u-order-time">2019-05-08 12:12</view>
                     </view>
                 </template>
@@ -24,7 +26,10 @@
                 <template v-slot:content>
                     <view>
                         <view class="u-order-title unacive">派送中</view>
-                        <view class="u-order-desc">【深圳市】快件已到达目的地，派件员为国产锦衣卫007号，电话：<text class="tel">13833882438</text>，请留意快递信息</view>
+                        <view class="u-order-desc">
+                            【深圳市】快件已到达目的地，派件员为国产锦衣卫007号，电话：
+                            <text class="tel"> 13833882438 </text>，请留意快递信息
+                        </view>
                         <view class="u-order-time">2019-05-08 06:03</view>
                     </view>
                 </template>
@@ -83,7 +88,9 @@
                 </template>
                 <template v-slot:content>
                     <view>
-                        <view class="u-order-desc">您购买的商品【尚方宝剑，先斩后奏】，经由北京军区仓库发货，国内快递承运人【中南海保镖】。</view>
+                        <view class="u-order-desc">
+                            您购买的商品【尚方宝剑，先斩后奏】，经由北京军区仓库发货，国内快递承运人【中南海保镖】。
+                        </view>
                         <view class="u-order-time">2019-12-01 07:00</view>
                     </view>
                 </template>

@@ -45,9 +45,20 @@
                     </view>
                 </view>
                 <view class="u-select__body">
-                    <picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector" @pickstart="pickstart" @pickend="pickend" v-if="modelValue">
+                    <picker-view
+                        @change="columnChange"
+                        class="u-select__body__picker-view"
+                        :value="defaultSelector"
+                        @pickstart="pickstart"
+                        @pickend="pickend"
+                        v-if="modelValue"
+                    >
                         <picker-view-column v-for="(item, index) in columnData" :key="index">
-                            <view class="u-select__body__picker-view__item" v-for="(item1, index1) in item" :key="index1">
+                            <view
+                                class="u-select__body__picker-view__item"
+                                v-for="(item1, index1) in item"
+                                :key="index1"
+                            >
                                 <view class="u-line-1">{{ item1[labelName] }}</view>
                             </view>
                         </picker-view-column>
@@ -141,7 +152,8 @@ function init() {
 // 获取默认选中列下标
 function setDefaultSelector() {
     // 如果没有传入默认选中的值，生成长度为columnNum，用0填充的数组
-    defaultSelector.value = props.defaultValue.length == columnNum.value ? props.defaultValue : Array(columnNum.value).fill(0);
+    defaultSelector.value =
+        props.defaultValue.length == columnNum.value ? props.defaultValue : Array(columnNum.value).fill(0);
     lastSelectIndex.value = [...defaultSelector.value];
 }
 // 计算列数
@@ -180,7 +192,9 @@ function setColumnData() {
                 // 大于第一列时，判断是否有默认选中的，如果没有就用该列的第一项
                 data[i] = Array.isArray(column) ? column : [];
                 column =
-                    Array.isArray(column) && column[defaultSelector.value[i]] && typeof column[defaultSelector.value[i]] === 'object'
+                    Array.isArray(column) &&
+                    column[defaultSelector.value[i]] &&
+                    typeof column[defaultSelector.value[i]] === 'object'
                         ? column[defaultSelector.value[i]][props.childName]
                         : [];
             }
@@ -225,7 +239,10 @@ function columnChange(e: any) {
             // 默认是队列的第一个为默认选项
             const prevCol = columnData.value[i - 1];
             const prevIdx = i - 1 == index ? columnIndex[index] : 0;
-            columnData.value[i] = Array.isArray(prevCol) && prevCol[prevIdx] && typeof prevCol[prevIdx] === 'object' ? prevCol[prevIdx][props.childName] : [];
+            columnData.value[i] =
+                Array.isArray(prevCol) && prevCol[prevIdx] && typeof prevCol[prevIdx] === 'object'
+                    ? prevCol[prevIdx][props.childName]
+                    : [];
             // 改变的列之后的所有列，默认选中第一个
             defaultSelector.value[i] = 0;
         }

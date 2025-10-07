@@ -1,8 +1,23 @@
 <template>
     <view v-if="loading" :style="rootStyle" @touchmove.stop.prevent>
-        <view v-for="item in RectNodes" :key="$u.guid()" :class="[animation ? 'skeleton-fade' : '']" :style="rectStyle(item)"></view>
-        <view v-for="item in circleNodes" :key="$u.guid()" :class="[animation ? 'skeleton-fade' : '']" :style="circleStyle(item)"></view>
-        <view v-for="item in filletNodes" :key="$u.guid()" :class="[animation ? 'skeleton-fade' : '']" :style="filletStyle(item)"></view>
+        <view
+            v-for="item in RectNodes"
+            :key="$u.guid()"
+            :class="[animation ? 'skeleton-fade' : '']"
+            :style="rectStyle(item)"
+        ></view>
+        <view
+            v-for="item in circleNodes"
+            :key="$u.guid()"
+            :class="[animation ? 'skeleton-fade' : '']"
+            :style="circleStyle(item)"
+        ></view>
+        <view
+            v-for="item in filletNodes"
+            :key="$u.guid()"
+            :class="[animation ? 'skeleton-fade' : '']"
+            :style="filletStyle(item)"
+        ></view>
     </view>
 </template>
 

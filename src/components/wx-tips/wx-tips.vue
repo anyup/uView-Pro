@@ -2,7 +2,14 @@
     <view>
         <!-- #ifdef MP -->
         <u-sticky>
-            <u-alert-tips :show="show" title="提示" :description="description" type="error" :close-able="true" @close="show = false"></u-alert-tips>
+            <u-alert-tips
+                :show="show"
+                title="提示"
+                :description="description"
+                type="error"
+                :close-able="true"
+                @close="show = false"
+            ></u-alert-tips>
         </u-sticky>
         <!-- #endif -->
     </view>

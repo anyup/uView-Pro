@@ -5,7 +5,9 @@
             <view class="u-demo-area">
                 <view class="input-wrap">
                     <input class="input" disabled type="text" :value="input" placeholder="来自键盘的输入内容" />
-                    <u-button :custom-style="{ height: '32px' }" :hairLine="false" class="clear-btn" @click="clear()">清空</u-button>
+                    <u-button :custom-style="{ height: '32px' }" :hairLine="false" class="clear-btn" @click="clear()">
+                        清空
+                    </u-button>
                 </view>
                 <u-keyboard
                     :mask="mask"
@@ -28,7 +30,11 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">键盘开关</view>
-                <u-subsection :current="show == true ? 0 : 1" :list="['开', '关']" @change="statusChange"></u-subsection>
+                <u-subsection
+                    :current="show == true ? 0 : 1"
+                    :list="['开', '关']"
+                    @change="statusChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">键盘类型</view>

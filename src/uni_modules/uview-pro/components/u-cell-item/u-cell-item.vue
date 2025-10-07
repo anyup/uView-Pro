@@ -12,7 +12,13 @@
         :hover-class="hoverClass"
         :style="{ backgroundColor: bgColor }"
     >
-        <u-icon :size="iconSize" :name="icon" v-if="icon" :custom-style="iconStyle" class="u-cell__left-icon-wrap"></u-icon>
+        <u-icon
+            :size="iconSize"
+            :name="icon"
+            v-if="icon"
+            :custom-style="iconStyle"
+            class="u-cell__left-icon-wrap"
+        ></u-icon>
         <view class="u-flex" v-else>
             <slot name="icon"></slot>
         </view>
@@ -31,7 +37,12 @@
         <view class="u-flex u-cell_right" v-if="$slots['right-icon']">
             <slot name="right-icon"></slot>
         </view>
-        <u-icon v-if="arrow" name="arrow-right" :style="[arrowStyle]" class="u-icon-wrap u-cell__right-icon-wrap"></u-icon>
+        <u-icon
+            v-if="arrow"
+            name="arrow-right"
+            :style="[arrowStyle]"
+            class="u-icon-wrap u-cell__right-icon-wrap"
+        ></u-icon>
     </view>
 </template>
 

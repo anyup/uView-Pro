@@ -7,7 +7,13 @@
                     <view class="name">{{ res.name }}</view>
                     <view class="like" :class="{ highlight: res.isLike }">
                         <view class="num">{{ res.likeNum }}</view>
-                        <u-icon v-if="!res.isLike" name="thumb-up" :size="30" color="#9a9a9a" @click="getLike(index)"></u-icon>
+                        <u-icon
+                            v-if="!res.isLike"
+                            name="thumb-up"
+                            :size="30"
+                            color="#9a9a9a"
+                            @click="getLike(index)"
+                        ></u-icon>
                         <u-icon v-if="res.isLike" name="thumb-up-fill" :size="30" @click="getLike(index)"></u-icon>
                     </view>
                 </view>

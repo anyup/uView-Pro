@@ -10,7 +10,10 @@ declare type ValidateError = {
     [key: string]: any;
 };
 
-declare type ValidateCallback = (errors?: ValidateError[] | null, fields?: Record<string, ValidateError[]> | null) => void;
+declare type ValidateCallback = (
+    errors?: ValidateError[] | null,
+    fields?: Record<string, ValidateError[]> | null
+) => void;
 
 declare interface ValidateRule {
     type?: string;
@@ -23,7 +26,13 @@ declare interface ValidateRule {
         source: Record<string, any>,
         options: ValidateOptions
     ) => void | boolean | string | Error | string[] | Promise<any>;
-    asyncValidator?: (rule: ValidateRule, value: any, callback: ValidateCallback, source: Record<string, any>, options: ValidateOptions) => Promise<any>;
+    asyncValidator?: (
+        rule: ValidateRule,
+        value: any,
+        callback: ValidateCallback,
+        source: Record<string, any>,
+        options: ValidateOptions
+    ) => Promise<any>;
     enum?: any[];
     len?: number;
     min?: number;
@@ -50,7 +59,11 @@ declare class Schema {
     constructor(descriptor: Record<string, ValidateRule | ValidateRule[]>);
     messages(messages?: Record<string, any>): Record<string, any>;
     define(rules: Record<string, ValidateRule | ValidateRule[]>): void;
-    validate(source: Record<string, any>, options?: ValidateOptions | ValidateCallback, callback?: ValidateCallback): Promise<void>;
+    validate(
+        source: Record<string, any>,
+        options?: ValidateOptions | ValidateCallback,
+        callback?: ValidateCallback
+    ): Promise<void>;
     getType(rule: ValidateRule): string;
     getValidationMethod(rule: ValidateRule): Function | false;
     static register(type: string, validator: Function): void;

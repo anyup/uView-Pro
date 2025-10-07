@@ -24,7 +24,11 @@
                     }"
                 >
                     <image class="u-swiper-image" :src="item[name] || item" :mode="imgMode"></image>
-                    <view v-if="title && item.title" class="u-swiper-title u-line-1" :style="[{ 'padding-bottom': titlePaddingBottom }, titleStyle]">
+                    <view
+                        v-if="title && item.title"
+                        class="u-swiper-title u-line-1"
+                        :style="[{ 'padding-bottom': titlePaddingBottom }, titleStyle]"
+                    >
                         {{ item.title }}
                     </view>
                 </view>
@@ -33,20 +37,41 @@
         <view
             class="u-swiper-indicator"
             :style="{
-                top: indicatorPos == 'topLeft' || indicatorPos == 'topCenter' || indicatorPos == 'topRight' ? '12rpx' : 'auto',
-                bottom: indicatorPos == 'bottomLeft' || indicatorPos == 'bottomCenter' || indicatorPos == 'bottomRight' ? '12rpx' : 'auto',
+                top:
+                    indicatorPos == 'topLeft' || indicatorPos == 'topCenter' || indicatorPos == 'topRight'
+                        ? '12rpx'
+                        : 'auto',
+                bottom:
+                    indicatorPos == 'bottomLeft' || indicatorPos == 'bottomCenter' || indicatorPos == 'bottomRight'
+                        ? '12rpx'
+                        : 'auto',
                 justifyContent: justifyContent,
                 padding: `0 ${effect3d ? '74rpx' : '24rpx'}`
             }"
         >
             <block v-if="mode == 'rect'">
-                <view class="u-indicator-item-rect" :class="{ 'u-indicator-item-rect-active': index == uCurrent }" v-for="(item, index) in list" :key="index"></view>
+                <view
+                    class="u-indicator-item-rect"
+                    :class="{ 'u-indicator-item-rect-active': index == uCurrent }"
+                    v-for="(item, index) in list"
+                    :key="index"
+                ></view>
             </block>
             <block v-if="mode == 'dot'">
-                <view class="u-indicator-item-dot" :class="{ 'u-indicator-item-dot-active': index == uCurrent }" v-for="(item, index) in list" :key="index"></view>
+                <view
+                    class="u-indicator-item-dot"
+                    :class="{ 'u-indicator-item-dot-active': index == uCurrent }"
+                    v-for="(item, index) in list"
+                    :key="index"
+                ></view>
             </block>
             <block v-if="mode == 'round'">
-                <view class="u-indicator-item-round" :class="{ 'u-indicator-item-round-active': index == uCurrent }" v-for="(item, index) in list" :key="index"></view>
+                <view
+                    class="u-indicator-item-round"
+                    :class="{ 'u-indicator-item-round-active': index == uCurrent }"
+                    v-for="(item, index) in list"
+                    :key="index"
+                ></view>
             </block>
             <block v-if="mode == 'number'">
                 <view class="u-indicator-item-number">{{ uCurrent + 1 }}/{{ list.length }}</view>

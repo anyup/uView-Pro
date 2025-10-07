@@ -11,8 +11,21 @@
                 </view>
                 <view class="right" :class="{ highlight: comment.isLike }">
                     {{ comment.likeNum }}
-                    <u-icon v-if="!comment.isLike" name="thumb-up" class="like" color="#9a9a9a" :size="30" @click="getLike"></u-icon>
-                    <u-icon v-if="comment.isLike" name="thumb-up-fill" class="like" :size="30" @click="getLike"></u-icon>
+                    <u-icon
+                        v-if="!comment.isLike"
+                        name="thumb-up"
+                        class="like"
+                        color="#9a9a9a"
+                        :size="30"
+                        @click="getLike"
+                    ></u-icon>
+                    <u-icon
+                        v-if="comment.isLike"
+                        name="thumb-up-fill"
+                        class="like"
+                        :size="30"
+                        @click="getLike"
+                    ></u-icon>
                 </view>
             </view>
             <view class="content">{{ comment.contentText }}</view>
@@ -31,8 +44,21 @@
                         </view>
                         <view class="right" :class="{ highlight: item.isLike }">
                             <view class="num">{{ item.likeNum }}</view>
-                            <u-icon v-if="!item.isLike" name="thumb-up" class="like" :size="30" color="#9a9a9a" @click="getLike(index)"></u-icon>
-                            <u-icon v-if="item.isLike" name="thumb-up-fill" class="like" :size="30" @click="getLike(index)"></u-icon>
+                            <u-icon
+                                v-if="!item.isLike"
+                                name="thumb-up"
+                                class="like"
+                                :size="30"
+                                color="#9a9a9a"
+                                @click="getLike(index)"
+                            ></u-icon>
+                            <u-icon
+                                v-if="item.isLike"
+                                name="thumb-up-fill"
+                                class="like"
+                                :size="30"
+                                @click="getLike(index)"
+                            ></u-icon>
                         </view>
                     </view>
                     <view class="reply" v-if="item.reply">

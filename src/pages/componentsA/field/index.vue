@@ -3,7 +3,16 @@
         <view class="u-demo-wrap" style="background-color: #ffffff">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-field v-model="mobile" label="手机号" :error-message="errorMessage" placeholder="请填写手机号" :required="required" :icon="icon1" :type="type"> </u-field>
+                <u-field
+                    v-model="mobile"
+                    label="手机号"
+                    :error-message="errorMessage"
+                    placeholder="请填写手机号"
+                    :required="required"
+                    :icon="icon1"
+                    :type="type"
+                >
+                </u-field>
                 <u-field v-model="code" label="验证码" placeholder="请填写验证码" :required="required" :icon="icon2">
                     <template #right>
                         <u-button v-if="showBtn" size="mini" type="success">发送验证码</u-button>

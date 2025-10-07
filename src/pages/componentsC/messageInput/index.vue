@@ -4,7 +4,15 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <u-toast ref="uToastRef"></u-toast>
-                <u-message-input :mode="mode" :maxlength="maxlength" :value="value" :breathe="breathe" :bold="bold" @finish="finish" :dot-fill="dotFill"></u-message-input>
+                <u-message-input
+                    :mode="mode"
+                    :maxlength="maxlength"
+                    :value="value"
+                    :breathe="breathe"
+                    :bold="bold"
+                    @finish="finish"
+                    :dot-fill="dotFill"
+                ></u-message-input>
             </view>
         </view>
         <view class="u-config-wrap">

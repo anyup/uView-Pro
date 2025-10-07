@@ -1,8 +1,21 @@
 <template>
     <view :style="[customStyle]" class="u-icon" @tap="onClick" :class="['u-icon--' + labelPos]">
         <image class="u-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="[imgStyle]" />
-        <text v-else class="u-icon__icon" :class="customClass" :style="[iconStyle]" :hover-class="hoverClass" @touchstart="onTouchstart">
-            <text v-if="showDecimalIcon" :style="[decimalIconStyle]" :class="decimalIconClass" :hover-class="hoverClass" class="u-icon__decimal"></text>
+        <text
+            v-else
+            class="u-icon__icon"
+            :class="customClass"
+            :style="[iconStyle]"
+            :hover-class="hoverClass"
+            @touchstart="onTouchstart"
+        >
+            <text
+                v-if="showDecimalIcon"
+                :style="[decimalIconStyle]"
+                :class="decimalIconClass"
+                :hover-class="hoverClass"
+                class="u-icon__decimal"
+            ></text>
         </text>
         <text v-if="label !== ''" class="u-icon__label" :style="labelStyle">
             {{ label }}

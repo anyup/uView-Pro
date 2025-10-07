@@ -21,7 +21,14 @@
                     <view v-else class="u-model__content__message" :style="[contentStyle]">{{ content }}</view>
                 </view>
                 <view class="u-model__footer u-border-top" v-if="showCancelButton || showConfirmButton">
-                    <view v-if="showCancelButton" :hover-stay-time="100" hover-class="u-model__btn--hover" class="u-model__footer__button" :style="[cancelBtnStyle]" @tap="cancel">
+                    <view
+                        v-if="showCancelButton"
+                        :hover-stay-time="100"
+                        hover-class="u-model__btn--hover"
+                        class="u-model__footer__button"
+                        :style="[cancelBtnStyle]"
+                        @tap="cancel"
+                    >
                         {{ cancelText }}
                     </view>
                     <view

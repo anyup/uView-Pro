@@ -3,7 +3,12 @@
         <view class="u-keyboard-grids">
             <view
                 class="u-keyboard-grids-item"
-                :class="[btnBgGray(index) ? 'u-bg-gray' : '', index <= 2 ? 'u-border-top' : '', index < 9 ? 'u-border-bottom' : '', (index + 1) % 3 != 0 ? 'u-border-right' : '']"
+                :class="[
+                    btnBgGray(index) ? 'u-bg-gray' : '',
+                    index <= 2 ? 'u-border-top' : '',
+                    index < 9 ? 'u-border-bottom' : '',
+                    (index + 1) % 3 != 0 ? 'u-border-right' : ''
+                ]"
                 :style="[itemStyle(index)]"
                 v-for="(item, index) in numList"
                 :key="index"
@@ -13,7 +18,13 @@
             >
                 <view class="u-keyboard-grids-btn">{{ item }}</view>
             </view>
-            <view class="u-keyboard-grids-item u-bg-gray" hover-class="u-hover-class" :hover-stay-time="100" @touchstart.stop="backspaceClick" @touchend="clearTimer">
+            <view
+                class="u-keyboard-grids-item u-bg-gray"
+                hover-class="u-hover-class"
+                :hover-stay-time="100"
+                @touchstart.stop="backspaceClick"
+                @touchend="clearTimer"
+            >
                 <view class="u-keyboard-back u-keyboard-grids-btn">
                     <u-icon name="backspace" :size="38" :bold="true"></u-icon>
                 </view>
@@ -89,16 +100,18 @@ const itemStyle = (index: number) => {
  * 是否让按键显示灰色，只在非乱序&&数字键盘&&且允许点按键的时候
  */
 const btnBgGray = (index: number) => {
-    if (!props.random && index == 9 && (props.mode != 'number' || (props.mode == 'number' && props.dotEnabled))) return true;
-    else return false;
+    if (!props.random && index == 9 && (props.mode != 'number' || (props.mode == 'number' && props.dotEnabled))) {
+        return true;
+    } else return false;
 };
 
 /**
  * 按键 hover class
  */
 const hoverClass = (index: number) => {
-    if (!props.random && index == 9 && ((props.mode == 'number' && props.dotEnabled) || props.mode == 'card')) return 'u-hover-class';
-    else return 'u-keyboard-hover';
+    if (!props.random && index == 9 && ((props.mode == 'number' && props.dotEnabled) || props.mode == 'card')) {
+        return 'u-hover-class';
+    } else return 'u-keyboard-hover';
 };
 
 /**

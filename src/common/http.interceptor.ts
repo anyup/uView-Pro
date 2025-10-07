@@ -94,7 +94,11 @@ function hideLoading() {
 }
 
 // 显示toast，可以替换为uview-pro的u-toast组件
-function showToast(title = '', icon: 'success' | 'error' | 'none' = 'none', options: { duration: number } = { duration: 2000 }) {
+function showToast(
+    title = '',
+    icon: 'success' | 'error' | 'none' = 'none',
+    options: { duration: number } = { duration: 2000 }
+) {
     if (title.length === 0) {
         return;
     }

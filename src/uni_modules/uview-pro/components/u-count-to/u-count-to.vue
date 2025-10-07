@@ -162,9 +162,16 @@ function count(ts: number) {
     let val: number;
     if (props.useEasing) {
         if (countDown.value) {
-            val = localStartVal.value - easingFn(progress, 0, localStartVal.value - Number(props.endVal), localDuration.value);
+            val =
+                localStartVal.value -
+                easingFn(progress, 0, localStartVal.value - Number(props.endVal), localDuration.value);
         } else {
-            val = easingFn(progress, localStartVal.value, Number(props.endVal) - localStartVal.value, localDuration.value);
+            val = easingFn(
+                progress,
+                localStartVal.value,
+                Number(props.endVal) - localStartVal.value,
+                localDuration.value
+            );
         }
     } else {
         if (countDown.value) {

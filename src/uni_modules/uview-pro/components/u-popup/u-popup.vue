@@ -1,5 +1,10 @@
 <template>
-    <view v-if="visibleSync" :style="[customStyle, { zIndex: Number(uZindex) - 1 }]" class="u-drawer" hover-stop-propagation>
+    <view
+        v-if="visibleSync"
+        :style="[customStyle, { zIndex: Number(uZindex) - 1 }]"
+        class="u-drawer"
+        hover-stop-propagation
+    >
         <u-mask
             :duration="duration"
             :custom-style="maskCustomStyle"
@@ -21,7 +26,13 @@
             @tap.stop.prevent
             :style="[style]"
         >
-            <view class="u-mode-center-box" @tap.stop.prevent @touchmove.stop.prevent v-if="mode == 'center'" :style="[centerStyle]">
+            <view
+                class="u-mode-center-box"
+                @tap.stop.prevent
+                @touchmove.stop.prevent
+                v-if="mode == 'center'"
+                :style="[centerStyle]"
+            >
                 <u-icon
                     @click="close"
                     v-if="closeable"
@@ -39,7 +50,12 @@
                 <slot />
             </scroll-view>
             <view @tap="close" class="u-close" :class="['u-close--' + closeIconPos]">
-                <u-icon v-if="mode != 'center' && closeable" :name="closeIcon" :color="closeIconColor" :size="closeIconSize"></u-icon>
+                <u-icon
+                    v-if="mode != 'center' && closeable"
+                    :name="closeIcon"
+                    :color="closeIconColor"
+                    :size="closeIconSize"
+                ></u-icon>
             </view>
         </view>
     </view>

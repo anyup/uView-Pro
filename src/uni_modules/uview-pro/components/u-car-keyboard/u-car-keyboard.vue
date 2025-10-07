@@ -3,14 +3,32 @@
         <view class="u-keyboard-grids">
             <view>
                 <view class="u-keyboard-grids-item" v-for="(group, i) in abc ? EngKeyBoardList : areaList" :key="i">
-                    <view :hover-stay-time="100" @tap="carInputClick(i, j)" hover-class="u-carinput-hover" class="u-keyboard-grids-btn" v-for="(item, j) in group" :key="j">
+                    <view
+                        :hover-stay-time="100"
+                        @tap="carInputClick(i, j)"
+                        hover-class="u-carinput-hover"
+                        class="u-keyboard-grids-btn"
+                        v-for="(item, j) in group"
+                        :key="j"
+                    >
                         {{ item }}
                     </view>
                 </view>
-                <view @touchstart="backspaceClick" @touchend="clearTimer" :hover-stay-time="100" class="u-keyboard-back" hover-class="u-hover-class">
+                <view
+                    @touchstart="backspaceClick"
+                    @touchend="clearTimer"
+                    :hover-stay-time="100"
+                    class="u-keyboard-back"
+                    hover-class="u-hover-class"
+                >
                     <u-icon :size="38" name="backspace" :bold="true"></u-icon>
                 </view>
-                <view :hover-stay-time="100" class="u-keyboard-change" hover-class="u-carinput-hover" @tap="changeCarInputMode">
+                <view
+                    :hover-stay-time="100"
+                    class="u-keyboard-change"
+                    hover-class="u-carinput-hover"
+                    @tap="changeCarInputMode"
+                >
                     <text class="zh" :class="[!abc ? 'active' : 'inactive']">中</text>
                     /
                     <text class="en" :class="[abc ? 'active' : 'inactive']">英</text>
@@ -96,6 +114,7 @@ const areaList = computed(() => {
 });
 
 const EngKeyBoardList = computed(() => {
+    // prettier-ignore
     let data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
     let tmp: (string | number)[][] = [];
     if (props.random) {

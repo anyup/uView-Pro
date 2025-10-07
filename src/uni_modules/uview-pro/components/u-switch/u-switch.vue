@@ -1,5 +1,10 @@
 <template>
-    <view class="u-switch" :class="[modelValue == true ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '']" @tap="onClick" :style="[switchStyle]">
+    <view
+        class="u-switch"
+        :class="[modelValue == true ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '']"
+        @tap="onClick"
+        :style="[switchStyle]"
+    >
         <view
             class="u-switch__node node-class"
             :style="{

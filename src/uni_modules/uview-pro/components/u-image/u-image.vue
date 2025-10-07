@@ -11,11 +11,19 @@
             :show-menu-by-longpress="showMenuByLongpress"
             :style="{ borderRadius: shape === 'circle' ? '50%' : $u.addUnit(borderRadius) }"
         ></image>
-        <view v-if="showLoading && loading" class="u-image__loading" :style="{ borderRadius: shape === 'circle' ? '50%' : $u.addUnit(borderRadius), backgroundColor: bgColor }">
+        <view
+            v-if="showLoading && loading"
+            class="u-image__loading"
+            :style="{ borderRadius: shape === 'circle' ? '50%' : $u.addUnit(borderRadius), backgroundColor: bgColor }"
+        >
             <slot v-if="hasSlot('loading')" name="loading" />
             <u-icon v-else :name="loadingIcon" :width="width" :height="height"></u-icon>
         </view>
-        <view v-if="showError && isError && !loading" class="u-image__error" :style="{ borderRadius: shape === 'circle' ? '50%' : $u.addUnit(borderRadius) }">
+        <view
+            v-if="showError && isError && !loading"
+            class="u-image__error"
+            :style="{ borderRadius: shape === 'circle' ? '50%' : $u.addUnit(borderRadius) }"
+        >
             <slot v-if="hasSlot('error')" name="error" />
             <u-icon v-else :name="errorIcon" :width="width" :height="height"></u-icon>
         </view>

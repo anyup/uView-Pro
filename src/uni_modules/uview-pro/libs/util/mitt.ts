@@ -15,7 +15,10 @@ export type EventHandlerList<T = unknown> = Array<Handler<T>>;
 export type WildCardEventHandlerList<T = Record<string, unknown>> = Array<WildcardHandler<T>>;
 
 // A map of event types and their corresponding event handlers.
-export type EventHandlerMap<Events extends Record<EventType, unknown>> = Map<'*' | keyof Events, EventHandlerList<Events[keyof Events]> | WildCardEventHandlerList<Events>>;
+export type EventHandlerMap<Events extends Record<EventType, unknown>> = Map<
+    '*' | keyof Events,
+    EventHandlerList<Events[keyof Events]> | WildCardEventHandlerList<Events>
+>;
 
 export interface Emitter<Events extends Record<EventType, unknown>> {
     all: EventHandlerMap<Events>;

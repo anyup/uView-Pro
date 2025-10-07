@@ -18,12 +18,23 @@
             <view v-if="showTips" class="u-tooltip-item u-tooltip-tips">
                 {{ tips ? tips : mode == 'number' ? '数字键盘' : mode == 'card' ? '身份证键盘' : '车牌号键盘' }}
             </view>
-            <view v-if="confirmBtn" @tap="onConfirm" class="u-tooltip-item u-tooltips-submit" hover-class="u-tooltips-submit-hover">
+            <view
+                v-if="confirmBtn"
+                @tap="onConfirm"
+                class="u-tooltip-item u-tooltips-submit"
+                hover-class="u-tooltips-submit-hover"
+            >
                 {{ confirmBtn ? confirmText : '' }}
             </view>
         </view>
         <block v-if="mode == 'number' || mode == 'card'">
-            <u-number-keyboard :random="random" @backspace="backspace" @change="change" :mode="mode" :dotEnabled="dotEnabled"></u-number-keyboard>
+            <u-number-keyboard
+                :random="random"
+                @backspace="backspace"
+                @change="change"
+                :mode="mode"
+                :dotEnabled="dotEnabled"
+            ></u-number-keyboard>
         </block>
         <block v-else>
             <u-car-keyboard :random="random" @backspace="backspace" @change="change"></u-car-keyboard>

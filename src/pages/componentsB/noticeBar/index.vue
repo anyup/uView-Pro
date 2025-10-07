@@ -27,7 +27,11 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">主题</view>
-                <u-subsection :current="3" :list="['primary', 'success', 'error', 'warning', 'none']" @change="typeChange"></u-subsection>
+                <u-subsection
+                    :current="3"
+                    :list="['primary', 'success', 'error', 'warning', 'none']"
+                    @change="typeChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">滚动模式</view>
@@ -60,7 +64,11 @@ import type { Direction, PlayState, ThemeType } from '@/uni_modules/uview-pro/ty
 const show = ref(true);
 const autoplay = ref(false);
 const type = ref<ThemeType>('warning');
-const list = ref(['锦瑟无端五十弦，一弦一柱思华年', '庄生晓梦迷蝴蝶，望帝春心托杜鹃', '沧海月明珠有泪，蓝田日暖玉生烟']);
+const list = ref([
+    '锦瑟无端五十弦，一弦一柱思华年',
+    '庄生晓梦迷蝴蝶，望帝春心托杜鹃',
+    '沧海月明珠有泪，蓝田日暖玉生烟'
+]);
 const mode = ref<Direction>('horizontal');
 const playState = ref<PlayState>('play');
 const speed = ref(160);
@@ -73,7 +81,8 @@ const current = ref(0);
 const uToastRef = ref(null);
 
 function typeChange(index: number) {
-    type.value = index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : undefined;
+    type.value =
+        index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : undefined;
 }
 
 function modeChange(index: number) {

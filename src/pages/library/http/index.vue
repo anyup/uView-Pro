@@ -56,14 +56,16 @@ function doGet(url = '/api/demo.json') {
 
 // post请求
 function doPost(url = '/api/demo.json') {
-    $u.http.post<Result>(url, { name: 'uview-pro' }, { meta: { loading: loading.value, toast: toast.value } }).then((res: Result) => {
-        if (res.code === 200) {
-            setTimeout(() => {
-                $u.toast('请求成功', 'success');
-            }, 1000);
-        }
-        result.value = res;
-    });
+    $u.http
+        .post<Result>(url, { name: 'uview-pro' }, { meta: { loading: loading.value, toast: toast.value } })
+        .then((res: Result) => {
+            if (res.code === 200) {
+                setTimeout(() => {
+                    $u.toast('请求成功', 'success');
+                }, 1000);
+            }
+            result.value = res;
+        });
 }
 
 // 切换请求方式

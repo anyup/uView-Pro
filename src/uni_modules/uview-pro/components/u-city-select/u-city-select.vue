@@ -11,7 +11,14 @@
         :maskCloseAble="props.maskCloseAble"
         @close="close"
     >
-        <u-tabs v-if="popupValue" :list="genTabsList" :is-scroll="true" :current="tabsIndex" @change="tabsChange" ref="tabs"></u-tabs>
+        <u-tabs
+            v-if="popupValue"
+            :list="genTabsList"
+            :is-scroll="true"
+            :current="tabsIndex"
+            @change="tabsChange"
+            ref="tabs"
+        ></u-tabs>
         <view class="area-box">
             <view class="u-flex" :class="{ change: isChange }">
                 <!-- 省 -->
@@ -19,7 +26,14 @@
                     <view class="u-padding-10 u-bg-gray" style="height: 100%">
                         <scroll-view :scroll-y="true" style="height: 100%">
                             <u-cell-group>
-                                <u-cell-item v-for="(item, index) in provincesList" :title="item.label" :arrow="false" :index="index" :key="index" @click="provinceChange(index)">
+                                <u-cell-item
+                                    v-for="(item, index) in provincesList"
+                                    :title="item.label"
+                                    :arrow="false"
+                                    :index="index"
+                                    :key="index"
+                                    @click="provinceChange(index)"
+                                >
                                     <template v-if="isChooseP && province === index" #right-icon>
                                         <u-icon size="34" name="checkbox-mark"></u-icon>
                                     </template>
@@ -33,7 +47,14 @@
                     <view class="u-padding-10 u-bg-gray" style="height: 100%">
                         <scroll-view :scroll-y="true" style="height: 100%">
                             <u-cell-group v-if="isChooseP">
-                                <u-cell-item v-for="(item, index) in citys" :title="item.label" :arrow="false" :index="index" :key="index" @click="cityChange(index)">
+                                <u-cell-item
+                                    v-for="(item, index) in citys"
+                                    :title="item.label"
+                                    :arrow="false"
+                                    :index="index"
+                                    :key="index"
+                                    @click="cityChange(index)"
+                                >
                                     <template v-if="isChooseC && city === index" #right-icon>
                                         <u-icon size="34" name="checkbox-mark"></u-icon>
                                     </template>
@@ -47,7 +68,14 @@
                     <view class="u-padding-10 u-bg-gray" style="height: 100%">
                         <scroll-view :scroll-y="true" style="height: 100%">
                             <u-cell-group v-if="isChooseC">
-                                <u-cell-item v-for="(item, index) in areas" :title="item.label" :arrow="false" :index="index" :key="index" @click="areaChange(index)">
+                                <u-cell-item
+                                    v-for="(item, index) in areas"
+                                    :title="item.label"
+                                    :arrow="false"
+                                    :index="index"
+                                    :key="index"
+                                    @click="areaChange(index)"
+                                >
                                     <template v-if="isChooseA && area === index" #right-icon>
                                         <u-icon size="34" name="checkbox-mark"></u-icon>
                                     </template>

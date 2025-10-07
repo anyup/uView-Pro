@@ -5,7 +5,9 @@
                 <view class="name">{{ res.name }}</view>
                 <view class="phone">{{ res.phone }}</view>
                 <view class="tag">
-                    <text v-for="(item, index) in res.tag" :key="index" :class="{ red: item.tagText == '默认' }">{{ item.tagText }}</text>
+                    <text v-for="(item, index) in res.tag" :key="index" :class="{ red: item.tagText == '默认' }">
+                        {{ item.tagText }}
+                    </text>
                 </view>
             </view>
             <view class="bottom">

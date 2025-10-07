@@ -12,7 +12,10 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">GRB转HEX</view>
-                <u-subsection :list="['rgb(12,57,231)', 'rgb(15,148,32)', 'rgb(91,52,210)']" @change="rgbToHexChange"></u-subsection>
+                <u-subsection
+                    :list="['rgb(12,57,231)', 'rgb(15,148,32)', 'rgb(91,52,210)']"
+                    @change="rgbToHexChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">HEX转GRB</view>

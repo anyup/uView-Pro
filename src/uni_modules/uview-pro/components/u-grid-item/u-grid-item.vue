@@ -9,7 +9,11 @@
             width: width
         }"
     >
-        <view class="u-grid-item-box" :style="[customStyle]" :class="[parentData.border ? 'u-border-right u-border-bottom' : '']">
+        <view
+            class="u-grid-item-box"
+            :style="[customStyle]"
+            :class="[parentData.border ? 'u-border-right u-border-bottom' : '']"
+        >
             <slot />
         </view>
     </view>

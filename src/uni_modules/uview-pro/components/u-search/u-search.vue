@@ -16,7 +16,12 @@
             }"
         >
             <view class="u-icon-wrap">
-                <u-icon class="u-clear-icon" :size="30" :name="searchIcon" :color="searchIconColor ? searchIconColor : color"></u-icon>
+                <u-icon
+                    class="u-clear-icon"
+                    :size="30"
+                    :name="searchIcon"
+                    :color="searchIconColor ? searchIconColor : color"
+                ></u-icon>
             </view>
             <input
                 confirm-type="search"
@@ -46,7 +51,14 @@
                 <u-icon class="u-clear-icon" name="close-circle-fill" size="34" color="#c0c4cc"></u-icon>
             </view>
         </view>
-        <view :style="[actionStyle]" class="u-action" :class="[showActionBtn || show ? 'u-action-active' : '']" @tap.stop.prevent="custom">{{ actionText }}</view>
+        <view
+            :style="[actionStyle]"
+            class="u-action"
+            :class="[showActionBtn || show ? 'u-action-active' : '']"
+            @tap.stop.prevent="custom"
+        >
+            {{ actionText }}
+        </view>
     </view>
 </template>
 

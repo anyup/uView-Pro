@@ -1,6 +1,9 @@
 <template>
     <view class="u-field" :class="{ 'u-border-top': props.borderTop, 'u-border-bottom': props.borderBottom }">
-        <view class="u-field-inner" :class="[props.type === 'textarea' ? 'u-textarea-inner' : '', 'u-label-postion-' + props.labelPosition]">
+        <view
+            class="u-field-inner"
+            :class="[props.type === 'textarea' ? 'u-textarea-inner' : '', 'u-label-postion-' + props.labelPosition]"
+        >
             <view
                 class="u-label"
                 :class="[props.required ? 'u-required' : '']"
@@ -10,10 +13,18 @@
                 }"
             >
                 <view class="u-icon-wrap" v-if="props.icon">
-                    <u-icon size="32" :custom-style="props.iconStyle" :name="props.icon" :color="props.iconColor" class="u-icon"></u-icon>
+                    <u-icon
+                        size="32"
+                        :custom-style="props.iconStyle"
+                        :name="props.icon"
+                        :color="props.iconColor"
+                        class="u-icon"
+                    ></u-icon>
                 </view>
                 <slot name="icon"></slot>
-                <text class="u-label-text" :class="[$slots.icon || props.icon ? 'u-label-left-gap' : '']">{{ props.label }}</text>
+                <text class="u-label-text" :class="[$slots.icon || props.icon ? 'u-label-left-gap' : '']">
+                    {{ props.label }}
+                </text>
             </view>
             <view class="fild-body">
                 <view class="u-flex-1 u-flex" :style="[inputWrapStyle]">
@@ -64,7 +75,15 @@
                     @click="onClear"
                 />
                 <view class="u-button-wrap"><slot name="right" /></view>
-                <u-icon v-if="props.rightIcon" @click="rightIconClick" :name="props.rightIcon" color="#c0c4cc" :style="[rightIconStyle]" size="26" class="u-arror-right" />
+                <u-icon
+                    v-if="props.rightIcon"
+                    @click="rightIconClick"
+                    :name="props.rightIcon"
+                    color="#c0c4cc"
+                    :style="[rightIconStyle]"
+                    size="26"
+                    class="u-arror-right"
+                />
             </view>
         </view>
         <view

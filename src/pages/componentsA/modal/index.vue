@@ -5,11 +5,24 @@
             <view class="u-demo-area">
                 <u-toast ref="uToast"></u-toast>
                 <view class="u-no-demo-here">请点击弹出弹窗查看效果</view>
-                <u-modal ref="uModalRef" v-model="show" :show-cancel-button="true" :show-title="showTitle" :async-close="asyncClose" @confirm="confirm" :content="content">
+                <u-modal
+                    ref="uModalRef"
+                    v-model="show"
+                    :show-cancel-button="true"
+                    :show-title="showTitle"
+                    :async-close="asyncClose"
+                    @confirm="confirm"
+                    :content="content"
+                >
                     <!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
                     <template #default v-if="contentSlot">
                         <view class="warp" style="margin: 30rpx">
-                            <image class="logo" src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png" style="width: 220rpx" mode="widthFix"></image>
+                            <image
+                                class="logo"
+                                src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png"
+                                style="width: 220rpx"
+                                mode="widthFix"
+                            ></image>
                         </view>
                     </template>
                     <!-- #endif -->

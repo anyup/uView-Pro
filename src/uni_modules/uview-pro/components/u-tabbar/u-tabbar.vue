@@ -13,7 +13,13 @@
                 @tap.stop="clickHandler(index)"
                 :style="{ backgroundColor: props.bgColor }"
             >
-                <view :class="[props.midButton && item.midButton ? 'u-tabbar__content__circle__button' : 'u-tabbar__content__item__button']">
+                <view
+                    :class="[
+                        props.midButton && item.midButton
+                            ? 'u-tabbar__content__circle__button'
+                            : 'u-tabbar__content__item__button'
+                    ]"
+                >
                     <u-icon
                         :size="props.midButton && item.midButton ? props.midButtonSize : props.iconSize"
                         :name="elIconPath(index)"
@@ -21,7 +27,12 @@
                         :color="elColor(index)"
                         :custom-prefix="item.customIcon ? 'custom-icon' : 'uicon'"
                     ></u-icon>
-                    <u-badge :count="item.count" :is-dot="item.isDot" v-if="item.count || item.isDot" :offset="[-2, getOffsetRight(item.count, item.isDot)]"></u-badge>
+                    <u-badge
+                        :count="item.count"
+                        :is-dot="item.isDot"
+                        v-if="item.count || item.isDot"
+                        :offset="[-2, getOffsetRight(item.count, item.isDot)]"
+                    ></u-badge>
                 </view>
                 <view class="u-tabbar__content__item__text" :style="{ color: elColor(index) }">
                     <text class="u-line-1">{{ item.text }}</text>
@@ -36,7 +47,10 @@
         </view>
         <!-- 这里加上一个48rpx的高度,是为了增高有凸起按钮时的防塌陷高度(也即按钮凸出来部分的高度) -->
         <!-- calc 计算0时单位不一致会计算失败，这里+1px -->
-        <view class="u-fixed-placeholder safe-area-inset-bottom" :style="{ height: `calc(${$u.addUnit(props.height)} + ${props.midButton ? '48rpx' : '1px'})` }"></view>
+        <view
+            class="u-fixed-placeholder safe-area-inset-bottom"
+            :style="{ height: `calc(${$u.addUnit(props.height)} + ${props.midButton ? '48rpx' : '1px'})` }"
+        ></view>
     </view>
 </template>
 
@@ -131,7 +145,11 @@ async function clickHandler(index: number) {
         // 执行回调，同时传入索引当作参数
         let beforeSwitchResult = props.beforeSwitch(index);
         // 判断是否返回了promise
-        if (typeof beforeSwitchResult === 'object' && beforeSwitchResult !== null && typeof beforeSwitchResult.then === 'function') {
+        if (
+            typeof beforeSwitchResult === 'object' &&
+            beforeSwitchResult !== null &&
+            typeof beforeSwitchResult.then === 'function'
+        ) {
             await beforeSwitchResult
                 .then(() => {
                     // promise返回成功，

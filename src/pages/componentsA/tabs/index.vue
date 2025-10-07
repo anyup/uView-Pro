@@ -29,7 +29,11 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">活动选项字颜色</view>
-                <u-subsection mode="button" :list="['primary', 'success', 'error', 'warning']" @change="colorChange"></u-subsection>
+                <u-subsection
+                    mode="button"
+                    :list="['primary', 'success', 'error', 'warning']"
+                    @change="colorChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">字体加粗</view>

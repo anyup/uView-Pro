@@ -17,7 +17,13 @@
             <u-icon :name="props.prefixIcon" :custom-style="$u.toStyle(props.iconStyle)"></u-icon>
         </view>
         <!-- 价格模式 -->
-        <text v-if="props.mode === 'price'" :class="['u-text__price', props.type && `u-text__value--${props.type}`]" :style="textValueStyle"> ￥{{ displayValue }} </text>
+        <text
+            v-if="props.mode === 'price'"
+            :class="['u-text__price', props.type && `u-text__value--${props.type}`]"
+            :style="textValueStyle"
+        >
+            ￥{{ displayValue }}
+        </text>
         <!-- link 模式 -->
         <u-link v-else-if="props.mode === 'link'" :href="props.href" underLine>{{ displayValue }}</u-link>
         <template v-else-if="props.openType && isMp">
@@ -44,7 +50,12 @@
             </button>
         </template>
         <!-- 默认模式 -->
-        <text v-else class="u-text__value" :style="textValueStyle" :class="[props.type && `u-text__value--${props.type}`, props.lines ? `u-line-${props.lines}` : '']">
+        <text
+            v-else
+            class="u-text__value"
+            :style="textValueStyle"
+            :class="[props.type && `u-text__value--${props.type}`, props.lines ? `u-line-${props.lines}` : '']"
+        >
             {{ displayValue }}
         </text>
         <!-- 后缀图标 -->
@@ -184,7 +195,11 @@ const textValueStyle = computed(() => {
         fontWeight: props.bold ? 'bold' : 'normal',
         wordWrap: props.wordWrap,
         fontSize: $u.addUnit(props.size),
-        lineHeight: props.lineHeight ? (typeof props.lineHeight === 'number' ? `${props.lineHeight}px` : props.lineHeight) : undefined
+        lineHeight: props.lineHeight
+            ? typeof props.lineHeight === 'number'
+                ? `${props.lineHeight}px`
+                : props.lineHeight
+            : undefined
     };
     if (props.lines) {
         style['display'] = '-webkit-box';

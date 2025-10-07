@@ -35,7 +35,10 @@ export const TextProps = {
     /** 字体大小 */
     size: { type: [String, Number] as PropType<string | number>, default: 28 },
     /** 图标样式 */
-    iconStyle: { type: [Object, String] as PropType<Record<string, any> | string>, default: () => ({ fontSize: '15px' }) },
+    iconStyle: {
+        type: [Object, String] as PropType<Record<string, any> | string>,
+        default: () => ({ fontSize: '15px' })
+    },
     /** 文字样式 */
     textStyle: { type: [Object, String] as PropType<Record<string, any> | string>, default: () => ({}) },
     /** 文字装饰 */

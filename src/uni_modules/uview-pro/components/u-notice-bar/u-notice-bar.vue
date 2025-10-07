@@ -85,7 +85,12 @@ defineOptions({ name: 'u-notice-bar' });
 
 const props = defineProps(NoticeBarProps);
 
-const emit = defineEmits<{ (e: 'click', index: number): void; (e: 'close'): void; (e: 'getMore'): void; (e: 'end'): void }>();
+const emit = defineEmits<{
+    (e: 'click', index: number): void;
+    (e: 'close'): void;
+    (e: 'getMore'): void;
+    (e: 'end'): void;
+}>();
 
 /**
  * 是否显示组件

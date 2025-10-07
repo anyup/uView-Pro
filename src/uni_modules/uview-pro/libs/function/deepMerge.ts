@@ -8,7 +8,8 @@ import deepClone from './deepClone';
  */
 function deepMerge<T extends object, S extends object>(target: T = {} as T, source: S = {} as S): T & S {
     target = deepClone(target);
-    if (typeof target !== 'object' || target === null || typeof source !== 'object' || source === null) return target as T & S;
+    if (typeof target !== 'object' || target === null || typeof source !== 'object' || source === null)
+        return target as T & S;
     const merged: any = Array.isArray(target) ? target.slice() : Object.assign({}, target);
     for (const prop in source) {
         if (!Object.prototype.hasOwnProperty.call(source, prop)) continue;

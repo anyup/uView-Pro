@@ -5,7 +5,11 @@
  * @param arrayFormat 数组参数格式，indices/brackets/repeat/comma，默认brackets
  * @returns url参数字符串
  */
-function queryParams(data: Record<string, any> = {}, isPrefix: boolean = true, arrayFormat: 'indices' | 'brackets' | 'repeat' | 'comma' = 'brackets'): string {
+function queryParams(
+    data: Record<string, any> = {},
+    isPrefix: boolean = true,
+    arrayFormat: 'indices' | 'brackets' | 'repeat' | 'comma' = 'brackets'
+): string {
     const prefix = isPrefix ? '?' : '';
     const _result: string[] = [];
     if (!['indices', 'brackets', 'repeat', 'comma'].includes(arrayFormat)) arrayFormat = 'brackets';

@@ -1,7 +1,12 @@
 <template>
     <view>
         <view class="u-steps" :style="directionStyle">
-            <view class="u-steps__item" :class="['u-steps__item--' + direction]" v-for="(item, index) in list" :key="index">
+            <view
+                class="u-steps__item"
+                :class="['u-steps__item--' + direction]"
+                v-for="(item, index) in list"
+                :key="index"
+            >
                 <view class="u-steps__item__num" v-if="mode == 'number'" :style="numberStyle(index)">
                     <text v-if="currentIndex < index" :style="textStyle(index)">
                         {{ index + 1 }}
@@ -12,7 +17,11 @@
                 <text class="u-line-1" :style="textStyle(index)" :class="['u-steps__item__text--' + direction]">
                     {{ item.name }}
                 </text>
-                <view class="u-steps__item__line" :class="['u-steps__item__line--' + mode]" v-if="index < list.length - 1">
+                <view
+                    class="u-steps__item__line"
+                    :class="['u-steps__item__line--' + mode]"
+                    v-if="index < list.length - 1"
+                >
                     <u-line :direction="direction" length="100%" :hair-line="false" :color="unActiveColor"></u-line>
                 </view>
             </view>

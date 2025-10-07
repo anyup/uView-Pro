@@ -58,11 +58,22 @@
             @confirm="onConfirm"
         />
         <view class="u-input__right-icon u-flex">
-            <view class="u-input__right-icon__clear u-input__right-icon__item" v-if="clearable && modelValue != '' && !disabled">
+            <view
+                class="u-input__right-icon__clear u-input__right-icon__item"
+                v-if="clearable && modelValue != '' && !disabled"
+            >
                 <u-icon size="32" name="close-circle-fill" color="#c0c4cc" @click="onClear" />
             </view>
-            <view class="u-input__right-icon__clear u-input__right-icon__item" v-if="passwordIcon && type == 'password'">
-                <u-icon size="32" :name="!showPassword ? 'eye' : 'eye-fill'" color="#c0c4cc" @click="showPassword = !showPassword" />
+            <view
+                class="u-input__right-icon__clear u-input__right-icon__item"
+                v-if="passwordIcon && type == 'password'"
+            >
+                <u-icon
+                    size="32"
+                    :name="!showPassword ? 'eye' : 'eye-fill'"
+                    color="#c0c4cc"
+                    @click="showPassword = !showPassword"
+                />
             </view>
             <view
                 class="u-input__right-icon--select u-input__right-icon__item"
@@ -129,7 +140,11 @@ const inputMaxlength = computed(() => Number(props.maxlength));
 const getStyle = computed(() => {
     let style: Record<string, any> = {};
     // 如果没有自定义高度，就根据type为input还是textarea来分配一个默认的高度
-    style.minHeight = props.height ? props.height + 'rpx' : props.type == 'textarea' ? `${textareaHeight}rpx` : `${inputHeight}rpx`;
+    style.minHeight = props.height
+        ? props.height + 'rpx'
+        : props.type == 'textarea'
+          ? `${textareaHeight}rpx`
+          : `${inputHeight}rpx`;
     style = Object.assign(style, props.customStyle);
     return style;
 });

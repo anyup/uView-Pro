@@ -154,7 +154,9 @@ function renderFallbackBody() {
 function generateChangelog() {
     try {
         const range = resolveRange();
-        console.log(`🔄 Generating changelog... ${shouldUseEmoji ? 'with emoji' : 'without emoji'}${range ? ` (range: ${range})` : ''}`);
+        console.log(
+            `🔄 Generating changelog... ${shouldUseEmoji ? 'with emoji' : 'without emoji'}${range ? ` (range: ${range})` : ''}`
+        );
 
         // 解析提交
         const commits = collectCommits(range);
@@ -195,7 +197,10 @@ function generateChangelog() {
             }
 
             const headerIdx = existingContent.indexOf('## [Unreleased]');
-            const base = headerIdx !== -1 ? existingContent.slice(0, existingContent.indexOf('\n', headerIdx) + 1) : standardHeader;
+            const base =
+                headerIdx !== -1
+                    ? existingContent.slice(0, existingContent.indexOf('\n', headerIdx) + 1)
+                    : standardHeader;
             finalContent = base + '\n' + sections.trim() + '\n';
         } else if (onlyCurrent) {
             // 将当前范围内容生成到版本段落，并插入到 Unreleased 之后
@@ -215,7 +220,12 @@ function generateChangelog() {
                     // 不保留 Unreleased 模式：找到第一个版本区块，在其前插入新版本
                     const firstVersionIndex = existingContent.indexOf('\n## [');
                     if (firstVersionIndex !== -1) {
-                        finalContent = existingContent.slice(0, firstVersionIndex) + '\n' + newSection + '\n' + existingContent.slice(firstVersionIndex);
+                        finalContent =
+                            existingContent.slice(0, firstVersionIndex) +
+                            '\n' +
+                            newSection +
+                            '\n' +
+                            existingContent.slice(firstVersionIndex);
                     } else {
                         // 没有版本区块，直接追加
                         finalContent = existingContent + '\n' + newSection + '\n';
@@ -225,9 +235,17 @@ function generateChangelog() {
                     const unreleasedIndex = existingContent.indexOf('## [Unreleased]');
                     if (unreleasedIndex !== -1) {
                         // 找到 Unreleased 段落的结束位置（下一个 "## " 标题或文件末尾）
-                        const afterUnreleased = existingContent.indexOf('\n## ', unreleasedIndex + '## [Unreleased]'.length);
+                        const afterUnreleased = existingContent.indexOf(
+                            '\n## ',
+                            unreleasedIndex + '## [Unreleased]'.length
+                        );
                         if (afterUnreleased !== -1) {
-                            finalContent = existingContent.slice(0, afterUnreleased) + '\n' + newSection + '\n' + existingContent.slice(afterUnreleased);
+                            finalContent =
+                                existingContent.slice(0, afterUnreleased) +
+                                '\n' +
+                                newSection +
+                                '\n' +
+                                existingContent.slice(afterUnreleased);
                         } else {
                             finalContent = existingContent + '\n' + newSection + '\n';
                         }
@@ -312,7 +330,9 @@ function generateChangelog() {
 
                     // 提取当前版本的内容
                     const currentVersion = JSON.parse(fs.readFileSync('package.json', 'utf8')).version;
-                    const currentSectionMatch = finalContent.match(new RegExp(`## \\[${currentVersion}\\][\\s\\S]*?(?=\\n## \\[|$)`));
+                    const currentSectionMatch = finalContent.match(
+                        new RegExp(`## \\[${currentVersion}\\][\\s\\S]*?(?=\\n## \\[|$)`)
+                    );
 
                     if (currentSectionMatch) {
                         let currentSection = currentSectionMatch[0];
@@ -326,10 +346,16 @@ function generateChangelog() {
                             .replace(/### ♻️ Code Refactoring \| 代码重构/, '### ♻️ Code Refactoring | 代码重构')
                             .replace(/### 📝 Documentation \| 文档/, '### 📝 Documentation | 文档')
                             .replace(/### 💄 Styles \| 风格/, '### 💄 Styles | 风格')
-                            .replace(/### ⚡ Performance Improvements \| 性能优化/, '### ⚡ Performance Improvements | 性能优化')
+                            .replace(
+                                /### ⚡ Performance Improvements \| 性能优化/,
+                                '### ⚡ Performance Improvements | 性能优化'
+                            )
                             .replace(/### ✅ Tests \| 测试/, '### ✅ Tests | 测试')
                             .replace(/### 📦‍ Build System \| 打包构建/, '### 📦‍ Build System | 打包构建')
-                            .replace(/### 👷 Continuous Integration \| CI 配置/, '### 👷 Continuous Integration | CI 配置')
+                            .replace(
+                                /### 👷 Continuous Integration \| CI 配置/,
+                                '### 👷 Continuous Integration | CI 配置'
+                            )
                             .replace(/### ⏪ Revert \| 回退/, '### ⏪ Revert | 回退');
 
                         // 检查是否已经存在该版本

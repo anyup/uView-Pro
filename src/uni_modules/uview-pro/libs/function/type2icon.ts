@@ -4,7 +4,10 @@
  * @param fill 是否使用fill填充实体的图标，默认false
  * @returns 图标名称字符串
  */
-function type2icon(type: 'primary' | 'info' | 'error' | 'warning' | 'success' = 'success', fill: boolean = false): string {
+function type2icon(
+    type: 'primary' | 'info' | 'error' | 'warning' | 'success' = 'success',
+    fill: boolean = false
+): string {
     // 如果非预置值,默认为success
     if (!['primary', 'info', 'error', 'warning', 'success'].includes(type)) type = 'success';
     let iconName = '';

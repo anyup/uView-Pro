@@ -3,7 +3,10 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <view class="u-no-demo-here"> 通过压窗屏打开的模态框，可以遮盖顶部原生的导航栏和底部tabbar栏。 注意：压窗屏只对APP有效，其他端无效。 </view>
+                <view class="u-no-demo-here">
+                    通过压窗屏打开的模态框，可以遮盖顶部原生的导航栏和底部tabbar栏。
+                    注意：压窗屏只对APP有效，其他端无效。
+                </view>
             </view>
         </view>
         <view class="u-config-wrap">

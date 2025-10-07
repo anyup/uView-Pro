@@ -33,7 +33,12 @@
                         :style="[
                             elLabelStyle,
                             {
-                                'justify-content': elLabelAlign == 'left' ? 'flex-start' : elLabelAlign == 'center' ? 'center' : 'flex-end'
+                                'justify-content':
+                                    elLabelAlign == 'left'
+                                        ? 'flex-start'
+                                        : elLabelAlign == 'center'
+                                          ? 'center'
+                                          : 'flex-end'
                             }
                         ]"
                     >
@@ -135,7 +140,11 @@ watch(
 // 计算属性
 const uLabelWidth = computed(() => {
     // 如果用户设置label为空字符串(微信小程序空字符串最终会变成字符串的'true')，意味着要将label的位置宽度设置为auto
-    return elLabelPosition.value == 'left' ? (props.label === 'true' || props.label === '' ? 'auto' : $u.addUnit(elLabelWidth.value)) : '100%';
+    return elLabelPosition.value == 'left'
+        ? props.label === 'true' || props.label === ''
+            ? 'auto'
+            : $u.addUnit(elLabelWidth.value)
+        : '100%';
 });
 
 // 显示错误提示
@@ -150,17 +159,29 @@ const showError = computed(() => (type: string) => {
 // label的宽度
 const elLabelWidth = computed(() => {
     // label默认宽度为90，优先使用本组件的值，如果没有(如果设置为0，也算是配置了值，依然起效)，则用u-form的值
-    return props.labelWidth != 0 && props.labelWidth !== '' ? props.labelWidth : parentData.value.labelWidth ? parentData.value.labelWidth : 90;
+    return props.labelWidth != 0 && props.labelWidth !== ''
+        ? props.labelWidth
+        : parentData.value.labelWidth
+          ? parentData.value.labelWidth
+          : 90;
 });
 
 // label的样式
 const elLabelStyle = computed(() => {
-    return Object.keys(props.labelStyle).length ? props.labelStyle : parentData.value.labelStyle ? parentData.value.labelStyle : {};
+    return Object.keys(props.labelStyle).length
+        ? props.labelStyle
+        : parentData.value.labelStyle
+          ? parentData.value.labelStyle
+          : {};
 });
 
 // label的位置，左侧或者上方
 const elLabelPosition = computed(() => {
-    return props.labelPosition ? props.labelPosition : parentData.value.labelPosition ? parentData.value.labelPosition : 'left';
+    return props.labelPosition
+        ? props.labelPosition
+        : parentData.value.labelPosition
+          ? parentData.value.labelPosition
+          : 'left';
 });
 
 // label的对齐方式
@@ -171,7 +192,11 @@ const elLabelAlign = computed(() => {
 // label的下划线
 const elBorderBottom = computed(() => {
     // 子组件的borderBottom默认为空字符串，如果不等于空字符串，意味着子组件设置了值，优先使用子组件的值
-    return props.borderBottom !== '' ? props.borderBottom : parentData.value.borderBottom ? parentData.value.borderBottom : true;
+    return props.borderBottom !== ''
+        ? props.borderBottom
+        : parentData.value.borderBottom
+          ? parentData.value.borderBottom
+          : true;
 });
 
 // 事件派发/广播工具
@@ -180,7 +205,12 @@ function broadcastInputError() {
     if (instance) {
         // 这里可用 emitter 工具库的 broadcast 方法
         // 子组件发出事件，第三个参数为true或者false，true代表有错误
-        broadcast(instance, 'u-input', 'on-form-item-error', validateState.value === 'error' && showError.value('border'));
+        broadcast(
+            instance,
+            'u-input',
+            'on-form-item-error',
+            validateState.value === 'error' && showError.value('border')
+        );
     }
 }
 

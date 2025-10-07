@@ -5,7 +5,17 @@
             <view class="u-demo-area">
                 <u-toast ref="uToastRef"></u-toast>
                 <u-button @click="btnClick">唤起弹窗</u-button>
-                <u-popup border-radius="10" v-model="show" @close="close" @open="open" :mode="mode" length="50%" :mask="mask" :closeable="closeable" :close-icon-pos="closeIconPos">
+                <u-popup
+                    border-radius="10"
+                    v-model="show"
+                    @close="close"
+                    @open="open"
+                    :mode="mode"
+                    length="50%"
+                    :mask="mask"
+                    :closeable="closeable"
+                    :close-icon-pos="closeIconPos"
+                >
                     <view v-if="mode == 'center'" style="height: 400rpx">
                         <view class="close-btn">
                             <u-button @click="show = false" size="medium">关闭弹窗</u-button>
@@ -21,7 +31,11 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">状态</view>
-                <u-subsection :current="show == false ? 1 : 0" :list="['打开', '关闭']" @change="showChange"></u-subsection>
+                <u-subsection
+                    :current="show == false ? 1 : 0"
+                    :list="['打开', '关闭']"
+                    @change="showChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">弹出方向</view>
@@ -33,7 +47,11 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">关闭按钮位置</view>
-                <u-subsection :current="1" :list="['左上角', '右上角', '左下角', '右下角']" @change="closePosChange"></u-subsection>
+                <u-subsection
+                    :current="1"
+                    :list="['左上角', '右上角', '左下角', '右下角']"
+                    @change="closePosChange"
+                ></u-subsection>
             </view>
         </view>
     </view>

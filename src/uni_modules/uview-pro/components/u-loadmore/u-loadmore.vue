@@ -20,7 +20,12 @@
                 ></u-loading>
             </view>
             <!-- 如果没有更多的状态下，显示内容为dot（粗点），加载特定样式 -->
-            <view class="u-line-1" :style="loadTextStyle" :class="[props.status == 'nomore' && props.isDot == true ? 'u-dot-text' : 'u-more-text']" @tap="loadMore">
+            <view
+                class="u-line-1"
+                :style="loadTextStyle"
+                :class="[props.status == 'nomore' && props.isDot == true ? 'u-dot-text' : 'u-more-text']"
+                @tap="loadMore"
+            >
                 {{ showText }}
             </view>
         </view>

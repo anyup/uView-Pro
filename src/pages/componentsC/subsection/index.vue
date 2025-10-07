@@ -3,7 +3,14 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-subsection v-if="change" :bold="bold" :active-color="activeColor" :current="current" :mode="mode" :list="['代付款', '待收货', '待评价']"></u-subsection>
+                <u-subsection
+                    v-if="change"
+                    :bold="bold"
+                    :active-color="activeColor"
+                    :current="current"
+                    :mode="mode"
+                    :list="['代付款', '待收货', '待评价']"
+                ></u-subsection>
             </view>
         </view>
         <view class="u-config-wrap">
@@ -18,7 +25,11 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">活动选项字颜色</view>
-                <u-subsection mode="button" :list="['primary', 'success', 'error', 'warning']" @change="colorChange"></u-subsection>
+                <u-subsection
+                    mode="button"
+                    :list="['primary', 'success', 'error', 'warning']"
+                    @change="colorChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">字体加粗</view>

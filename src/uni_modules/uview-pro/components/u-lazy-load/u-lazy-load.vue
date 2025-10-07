@@ -199,14 +199,16 @@ onMounted(() => {
             contentObserver = uni.createIntersectionObserver(instance?.proxy);
             // 要理解这里怎么计算的，请看这个：
             // https://blog.csdn.net/qq_25324335/article/details/83687695
-            contentObserver.relativeToViewport({ bottom: getThreshold.value }).observe('.u-lazy-item-' + elIndex.value, (res: any) => {
-                if (res.intersectionRatio > 0) {
-                    // 懒加载状态改变
-                    isShow.value = true;
-                    // 如果图片已经加载，去掉监听，减少性能的消耗
-                    disconnectObserver('contentObserver');
-                }
-            });
+            contentObserver
+                .relativeToViewport({ bottom: getThreshold.value })
+                .observe('.u-lazy-item-' + elIndex.value, (res: any) => {
+                    if (res.intersectionRatio > 0) {
+                        // 懒加载状态改变
+                        isShow.value = true;
+                        // 如果图片已经加载，去掉监听，减少性能的消耗
+                        disconnectObserver('contentObserver');
+                    }
+                });
         }, 30);
     });
 });

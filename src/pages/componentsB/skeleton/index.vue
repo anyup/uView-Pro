@@ -19,7 +19,13 @@
                     </view>
                 </view>
                 <!--引用组件-->
-                <u-skeleton bg-color="rgb(250, 250, 250)" :loading="loading" :animation="animation" :el-color="elColor" :border-radius="borderRadius"></u-skeleton>
+                <u-skeleton
+                    bg-color="rgb(250, 250, 250)"
+                    :loading="loading"
+                    :animation="animation"
+                    :el-color="elColor"
+                    :border-radius="borderRadius"
+                ></u-skeleton>
             </view>
         </view>
         <view class="u-config-wrap">
@@ -49,7 +55,11 @@ const userInfo = ref({
     avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
     nickName: 'uView'
 });
-const lists = ref(['君不见，黄河之水天上来，奔流到海不复回。君不见，高堂明镜悲白发，朝如青丝暮成雪。', '人生得意须尽欢，莫使金樽空对月', '天生我材必有用，千金散尽还复来']);
+const lists = ref([
+    '君不见，黄河之水天上来，奔流到海不复回。君不见，高堂明镜悲白发，朝如青丝暮成雪。',
+    '人生得意须尽欢，莫使金樽空对月',
+    '天生我材必有用，千金散尽还复来'
+]);
 const loading = ref(true); // 是否显示骨架屏组件
 const animation = ref(false);
 const elColor = ref('#e5e5e5');

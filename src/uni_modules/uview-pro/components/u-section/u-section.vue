@@ -13,7 +13,13 @@
             }"
         >
             <view class="u-section__title__icon-wrap u-flex" :style="lineStyle" v-if="showLine">
-                <u-icon top="0" name="column-line" :size="Number(fontSize) * 1.25" bold :color="lineColor ? lineColor : color"></u-icon>
+                <u-icon
+                    top="0"
+                    name="column-line"
+                    :size="Number(fontSize) * 1.25"
+                    bold
+                    :color="lineColor ? lineColor : color"
+                ></u-icon>
             </view>
             <text class="u-flex u-section__title__text">{{ title }}</text>
         </view>

@@ -23,12 +23,16 @@
                             <u-button :hair-line="false" size="mini" @click="modeChange('page')">页面不存在</u-button>
                         </u-td>
                         <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('search')">没有搜索结果</u-button>
+                            <u-button :hair-line="false" size="mini" @click="modeChange('search')">
+                                没有搜索结果
+                            </u-button>
                         </u-td>
                     </u-tr>
                     <u-tr class="u-tr">
                         <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('address')">没有收货地址</u-button>
+                            <u-button :hair-line="false" size="mini" @click="modeChange('address')">
+                                没有收货地址
+                            </u-button>
                         </u-td>
                         <u-td class="u-td">
                             <u-button :hair-line="false" size="mini" @click="modeChange('wifi')">没有WiFi</u-button>
@@ -50,13 +54,17 @@
                     </u-tr>
                     <u-tr class="u-tr">
                         <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('history')">无历史记录</u-button>
+                            <u-button :hair-line="false" size="mini" @click="modeChange('history')">
+                                无历史记录
+                            </u-button>
                         </u-td>
                         <u-td class="u-td">
                             <u-button :hair-line="false" size="mini" @click="modeChange('news')">无新闻列表</u-button>
                         </u-td>
                         <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('message')">消息列表为空</u-button>
+                            <u-button :hair-line="false" size="mini" @click="modeChange('message')">
+                                消息列表为空
+                            </u-button>
                         </u-td>
                     </u-tr>
                     <u-tr class="u-tr">

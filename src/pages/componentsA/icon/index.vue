@@ -1,7 +1,12 @@
 <template>
     <view class="wrap">
         <view class="u-border-left u-border-top inner-wrap">
-            <view @tap="selectIcon(item.name)" class="u-icon-item u-border-bottom u-border-right" v-for="(item, index) in iconList" :key="index">
+            <view
+                @tap="selectIcon(item.name)"
+                class="u-icon-item u-border-bottom u-border-right"
+                v-for="(item, index) in iconList"
+                :key="index"
+            >
                 <u-icon :name="item.name" size="40" color="#909399"></u-icon>
                 <text class="u-icon-name">{{ item.name }}</text>
             </view>

@@ -3,7 +3,8 @@
 if (!String.prototype.padStart) {
     // 为了方便表示这里 fillString 用了ES6 的默认参数，不影响理解
     String.prototype.padStart = function (this: string, maxLength: number, fillString: string = ' '): string {
-        if (Object.prototype.toString.call(fillString) !== '[object String]') throw new TypeError('fillString must be String');
+        if (Object.prototype.toString.call(fillString) !== '[object String]')
+            throw new TypeError('fillString must be String');
         let str = this;
         if (str.length >= maxLength) return String(str);
         let fillLength = maxLength - str.length,

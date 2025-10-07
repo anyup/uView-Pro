@@ -15,7 +15,12 @@
             <view class="slot-wrap" v-if="useSlot">
                 <view class="search-wrap" v-if="search">
                     <!-- 如果使用u-search组件，必须要给v-model绑定一个变量 -->
-                    <u-search v-model="keyword" :show-action="showAction" height="56" :action-style="{ color: '#fff' }"></u-search>
+                    <u-search
+                        v-model="keyword"
+                        :show-action="showAction"
+                        height="56"
+                        :action-style="{ color: '#fff' }"
+                    ></u-search>
                 </view>
                 <view class="navbar-right" v-if="rightSlot">
                     <view class="message-box right-item">
@@ -74,7 +79,10 @@
                 </view>
                 <view class="u-config-item">
                     <view class="u-item-title">传入整体slot</view>
-                    <u-subsection :list="['无', '搜索框', '搜索+按钮', '搜索+图标']" @change="searchChange"></u-subsection>
+                    <u-subsection
+                        :list="['无', '搜索框', '搜索+按钮', '搜索+图标']"
+                        @change="searchChange"
+                    ></u-subsection>
                 </view>
                 <view class="u-config-item">
                     <view class="u-item-title">完全自定义传入内容</view>
@@ -82,7 +90,10 @@
                 </view>
                 <view class="u-config-item">
                     <view class="u-item-title">背景色</view>
-                    <u-subsection :list="['渐变', '#39CCCC', '#B471CC', '#001f3f']" @change="bgColorChange"></u-subsection>
+                    <u-subsection
+                        :list="['渐变', '#39CCCC', '#B471CC', '#001f3f']"
+                        @change="bgColorChange"
+                    ></u-subsection>
                 </view>
                 <view class="u-config-item">
                     <view class="u-item-title">自定义返回事件</view>

@@ -11,9 +11,15 @@
     >
         <view class="u-datetime-picker">
             <view class="u-picker-header" @touchmove.stop.prevent="">
-                <view class="u-btn-picker u-btn-picker--tips" :style="{ color: cancelColor }" hover-class="u-opacity" :hover-stay-time="150" @tap="getResult('cancel')">{{
-                    cancelText
-                }}</view>
+                <view
+                    class="u-btn-picker u-btn-picker--tips"
+                    :style="{ color: cancelColor }"
+                    hover-class="u-opacity"
+                    :hover-stay-time="150"
+                    @tap="getResult('cancel')"
+                >
+                    {{ cancelText }}
+                </view>
                 <view class="u-picker__title">{{ title }}</view>
                 <view
                     class="u-btn-picker u-btn-picker--primary"
@@ -27,7 +33,14 @@
                 </view>
             </view>
             <view class="u-picker-body">
-                <picker-view v-if="mode == 'region'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+                <picker-view
+                    v-if="mode == 'region'"
+                    :value="valueArr"
+                    @change="change"
+                    class="u-picker-view"
+                    @pickstart="pickstart"
+                    @pickend="pickend"
+                >
                     <picker-view-column v-if="!reset && params.province">
                         <view class="u-column-item" v-for="(item, index) in provinces" :key="index">
                             <view class="u-line-1">{{ item.label }}</view>
@@ -44,7 +57,14 @@
                         </view>
                     </picker-view-column>
                 </picker-view>
-                <picker-view v-else-if="mode == 'time'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+                <picker-view
+                    v-else-if="mode == 'time'"
+                    :value="valueArr"
+                    @change="change"
+                    class="u-picker-view"
+                    @pickstart="pickstart"
+                    @pickend="pickend"
+                >
                     <picker-view-column v-if="!reset && params.year">
                         <view class="u-column-item" v-for="(item, index) in years" :key="index">
                             {{ item }}
@@ -82,14 +102,28 @@
                         </view>
                     </picker-view-column>
                 </picker-view>
-                <picker-view v-else-if="mode == 'selector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+                <picker-view
+                    v-else-if="mode == 'selector'"
+                    :value="valueArr"
+                    @change="change"
+                    class="u-picker-view"
+                    @pickstart="pickstart"
+                    @pickend="pickend"
+                >
                     <picker-view-column v-if="!reset">
                         <view class="u-column-item" v-for="(item, index) in range" :key="index">
                             <view class="u-line-1">{{ getItemValue(item, 'selector') }}</view>
                         </view>
                     </picker-view-column>
                 </picker-view>
-                <picker-view v-else-if="mode == 'multiSelector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+                <picker-view
+                    v-else-if="mode == 'multiSelector'"
+                    :value="valueArr"
+                    @change="change"
+                    class="u-picker-view"
+                    @pickstart="pickstart"
+                    @pickend="pickend"
+                >
                     <picker-view-column v-if="!reset" v-for="(item, index) in range" :key="index">
                         <view class="u-column-item" v-for="(item1, index1) in item" :key="index1">
                             <view class="u-line-1">{{ getItemValue(item1, 'multiSelector') }}</view>
@@ -176,7 +210,10 @@ const multiSelectorValue = ref<number[]>([]);
 
 // 计算属性
 // 引用这几个变量，是为了监听其变化
-const propsChange = computed(() => `${props.mode}-${props.defaultTime}-${props.startYear}-${props.endYear}-${props.defaultRegion}-${props.areaCode}`);
+const propsChange = computed(
+    () =>
+        `${props.mode}-${props.defaultTime}-${props.startYear}-${props.endYear}-${props.defaultRegion}-${props.areaCode}`
+);
 // 引用这几个变量，是为了监听其变化
 const regionChange = computed(() => `${province.value}-${city.value}`);
 
@@ -535,7 +572,8 @@ function getResult(event: string | null = null) {
         result = valueArr.value;
     }
     // 只允许 emit 已声明的事件类型
-    if (event && ['update:modelValue', 'confirm', 'cancel', 'columnchange'].includes(event)) emit(event as 'update:modelValue' | 'confirm' | 'cancel' | 'columnchange', result);
+    if (event && ['update:modelValue', 'confirm', 'cancel', 'columnchange'].includes(event))
+        emit(event as 'update:modelValue' | 'confirm' | 'cancel' | 'columnchange', result);
     close();
 }
 /**
@@ -544,7 +582,8 @@ function getResult(event: string | null = null) {
  */
 function getTimestamp() {
     // yyyy-mm-dd为安卓写法，不支持iOS，需要使用"/"分隔，才能二者兼容
-    let time = year.value + '/' + month.value + '/' + day.value + ' ' + hour.value + ':' + minute.value + ':' + second.value;
+    let time =
+        year.value + '/' + month.value + '/' + day.value + ' ' + hour.value + ':' + minute.value + ':' + second.value;
     return new Date(time).getTime() / 1000;
 }
 

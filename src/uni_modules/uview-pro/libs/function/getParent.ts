@@ -13,7 +13,11 @@ interface VueInstance {
  * @param keys 需要获取的参数名数组或对象
  * @returns 父组件参数对象
  */
-export default function getParent(this: VueInstance, name: string, keys: string[] | Record<string, any>): Record<string, any> {
+export default function getParent(
+    this: VueInstance,
+    name: string,
+    keys: string[] | Record<string, any>
+): Record<string, any> {
     let parent = this.$parent;
     // 通过while历遍，这里主要是为了H5需要多层解析的问题
     while (parent) {

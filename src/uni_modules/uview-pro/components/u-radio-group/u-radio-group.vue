@@ -77,7 +77,17 @@ provide('u-radio-group', {
 
 // 监听 props 变化，通知子组件刷新
 watch(
-    () => [props.modelValue, props.disabled, props.activeColor, props.size, props.labelDisabled, props.shape, props.iconSize, props.width, props.wrap],
+    () => [
+        props.modelValue,
+        props.disabled,
+        props.activeColor,
+        props.size,
+        props.labelDisabled,
+        props.shape,
+        props.iconSize,
+        props.width,
+        props.wrap
+    ],
     () => {
         // 这里可通过事件或响应式通知子组件刷新
         // 兼容性处理，子组件可通过 inject 的 getData 获取最新值

@@ -1,7 +1,15 @@
 <template>
     <view class="u-char-box">
         <view class="u-char-flex">
-            <input :disabled="props.disabledKeyboard" :value="valueModel" type="number" :focus="props.focus" :maxlength="props.maxlength" class="u-input" @input="getVal" />
+            <input
+                :disabled="props.disabledKeyboard"
+                :value="valueModel"
+                type="number"
+                :focus="props.focus"
+                :maxlength="props.maxlength"
+                class="u-input"
+                @input="getVal"
+            />
             <view v-for="(item, index) in loopCharArr" :key="index">
                 <view
                     :class="[
@@ -16,7 +24,8 @@
                         width: props.width + 'rpx',
                         height: props.width + 'rpx',
                         color: props.inactiveColor,
-                        borderColor: charArrLength === index && props.mode == 'box' ? props.activeColor : props.inactiveColor
+                        borderColor:
+                            charArrLength === index && props.mode == 'box' ? props.activeColor : props.inactiveColor
                     }"
                 >
                     <view
@@ -29,7 +38,10 @@
                     ></view>
                     <view
                         v-if="props.mode === 'middleLine' && charArrLength <= index"
-                        :class="[props.breathe && charArrLength === index ? 'u-breathe' : '', charArrLength === index ? 'u-middle-line-active' : '']"
+                        :class="[
+                            props.breathe && charArrLength === index ? 'u-breathe' : '',
+                            charArrLength === index ? 'u-middle-line-active' : ''
+                        ]"
                         class="u-middle-line"
                         :style="{
                             height: props.bold ? '4px' : '2px',
@@ -38,7 +50,10 @@
                     ></view>
                     <view
                         v-if="props.mode === 'bottomLine'"
-                        :class="[props.breathe && charArrLength === index ? 'u-breathe' : '', charArrLength === index ? 'u-bottom-line-active' : '']"
+                        :class="[
+                            props.breathe && charArrLength === index ? 'u-breathe' : '',
+                            charArrLength === index ? 'u-bottom-line-active' : ''
+                        ]"
                         class="u-bottom-line"
                         :style="{
                             height: props.bold ? '4px' : '2px',

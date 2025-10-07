@@ -1,5 +1,11 @@
 <template>
-    <view v-if="show" class="u-loading" :class="mode === 'circle' ? 'u-loading-circle' : 'u-loading-flower'" :style="[cricleStyle]"> </view>
+    <view
+        v-if="show"
+        class="u-loading"
+        :class="mode === 'circle' ? 'u-loading-circle' : 'u-loading-flower'"
+        :style="[cricleStyle]"
+    >
+    </view>
 </template>
 
 <script setup lang="ts">

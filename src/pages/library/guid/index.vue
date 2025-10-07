@@ -12,7 +12,11 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">长度</view>
-                <u-subsection current="2" :list="['10', '16', '32', 'rfc4122标准']" @change="lengthChange"></u-subsection>
+                <u-subsection
+                    current="2"
+                    :list="['10', '16', '32', 'rfc4122标准']"
+                    @change="lengthChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">首字符为"u"</view>

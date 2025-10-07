@@ -50,7 +50,12 @@ function parent(instance: ComponentInternalInstance | null | undefined = undefin
  * @param eventName 事件名
  * @param params 参数
  */
-function dispatch(instance: ComponentInternalInstance | null | undefined, componentName: string, eventName: string, ...params: any[]) {
+function dispatch(
+    instance: ComponentInternalInstance | null | undefined,
+    componentName: string,
+    eventName: string,
+    ...params: any[]
+) {
     let parent = instance && (instance.parent as ComponentInternalInstance | null | undefined);
     while (parent) {
         const name = (parent.type as any)?.name as string | undefined;
@@ -75,7 +80,12 @@ function dispatch(instance: ComponentInternalInstance | null | undefined, compon
  * @param eventName 事件名
  * @param params 参数
  */
-function broadcast(instance: ComponentInternalInstance | null | undefined, componentName: string, eventName: string, ...params: any[]) {
+function broadcast(
+    instance: ComponentInternalInstance | null | undefined,
+    componentName: string,
+    eventName: string,
+    ...params: any[]
+) {
     if (!instance) return;
     const subTree = (instance.subTree as any)?.children || [];
     const children = Array.isArray(subTree) ? subTree : [subTree];

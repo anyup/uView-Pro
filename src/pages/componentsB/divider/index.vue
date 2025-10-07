@@ -3,9 +3,17 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-divider :type="type" :borderColor="borderColor" :bg-color="bgColor" @click="click" :half-width="halfWidth" :color="color" :font-size="fontSize">{{
-                    text
-                }}</u-divider>
+                <u-divider
+                    :type="type"
+                    :borderColor="borderColor"
+                    :bg-color="bgColor"
+                    @click="click"
+                    :half-width="halfWidth"
+                    :color="color"
+                    :font-size="fontSize"
+                >
+                    {{ text }}
+                </u-divider>
             </view>
         </view>
         <view class="u-config-wrap">
@@ -20,7 +28,10 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">横线颜色</view>
-                <u-subsection :list="['#dcdfe6', 'primary', 'error', 'warning', 'success']" @change="borderColorChange"></u-subsection>
+                <u-subsection
+                    :list="['#dcdfe6', 'primary', 'error', 'warning', 'success']"
+                    @change="borderColorChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">内容样式</view>

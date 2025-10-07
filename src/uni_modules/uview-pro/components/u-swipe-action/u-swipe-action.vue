@@ -15,7 +15,14 @@
                 <view class="u-swipe-content" @tap.stop="contentClick">
                     <slot></slot>
                 </view>
-                <view class="u-swipe-del" v-if="showBtn" @tap.stop="btnClick(index)" :style="btnStyle(item.style)" v-for="(item, index) in props.options" :key="index">
+                <view
+                    class="u-swipe-del"
+                    v-if="showBtn"
+                    @tap.stop="btnClick(index)"
+                    :style="btnStyle(item.style)"
+                    v-for="(item, index) in props.options"
+                    :key="index"
+                >
                     <view class="u-btn-text">{{ item.text }}</view>
                 </view>
             </movable-view>

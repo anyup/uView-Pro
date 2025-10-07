@@ -63,7 +63,10 @@ const uZIndex = ref(-1);
  */
 const showBackTop = computed(() => {
     // uni.upx2px 用于将 rpx 转为 px
-    return Number(props.scrollTop) > (typeof uni !== 'undefined' && uni.upx2px ? uni.upx2px(Number(props.top)) : Number(props.top));
+    return (
+        Number(props.scrollTop) >
+        (typeof uni !== 'undefined' && uni.upx2px ? uni.upx2px(Number(props.top)) : Number(props.top))
+    );
     // #else
     // return Number(props.scrollTop) > Number(props.top)
 });

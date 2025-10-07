@@ -5,7 +5,11 @@
  * @param step 颜色等分的份额
  * @returns 渐变色数组
  */
-function colorGradient(startColor: string = 'rgb(0, 0, 0)', endColor: string = 'rgb(255, 255, 255)', step: number = 10): string[] {
+function colorGradient(
+    startColor: string = 'rgb(0, 0, 0)',
+    endColor: string = 'rgb(255, 255, 255)',
+    step: number = 10
+): string[] {
     const startRGB = hexToRgb(startColor, false) as [number, number, number]; // 转换为rgb数组模式
     const [startR, startG, startB] = startRGB;
     const endRGB = hexToRgb(endColor, false) as [number, number, number];
@@ -17,7 +21,9 @@ function colorGradient(startColor: string = 'rgb(0, 0, 0)', endColor: string = '
     const colorArr: string[] = [];
     for (let i = 0; i < step; i++) {
         // 计算每一步的hex值
-        const hex = rgbToHex(`rgb(${Math.round(sR * i + startR)},${Math.round(sG * i + startG)},${Math.round(sB * i + startB)})`);
+        const hex = rgbToHex(
+            `rgb(${Math.round(sR * i + startR)},${Math.round(sG * i + startG)},${Math.round(sB * i + startB)})`
+        );
         colorArr.push(hex as string);
     }
     return colorArr;
@@ -41,7 +47,11 @@ function hexToRgb(sColor: string, str: boolean = true): [number, number, number]
             sColor = sColorNew;
         }
         // 处理六位的颜色值
-        const sColorChange: [number, number, number] = [parseInt('0x' + sColor.slice(1, 3)), parseInt('0x' + sColor.slice(3, 5)), parseInt('0x' + sColor.slice(5, 7))];
+        const sColorChange: [number, number, number] = [
+            parseInt('0x' + sColor.slice(1, 3)),
+            parseInt('0x' + sColor.slice(3, 5)),
+            parseInt('0x' + sColor.slice(5, 7))
+        ];
         if (!str) {
             return sColorChange;
         } else {
@@ -110,7 +120,11 @@ function colorToRgba(color: string, alpha: number = 0.3): string {
             }
             sColor = sColorNew;
         }
-        const sColorChange: [number, number, number] = [parseInt('0x' + sColor.slice(1, 3)), parseInt('0x' + sColor.slice(3, 5)), parseInt('0x' + sColor.slice(5, 7))];
+        const sColorChange: [number, number, number] = [
+            parseInt('0x' + sColor.slice(1, 3)),
+            parseInt('0x' + sColor.slice(3, 5)),
+            parseInt('0x' + sColor.slice(5, 7))
+        ];
         return `rgba(${sColorChange.join(',')},${alpha})`;
     } else {
         return sColor;

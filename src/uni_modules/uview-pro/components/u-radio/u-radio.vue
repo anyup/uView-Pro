@@ -66,12 +66,20 @@ const parentData = computed(
 /**
  * 是否禁用，如果父组件u-radio-group禁用的话，将会忽略子组件的配置
  */
-const elDisabled = computed(() => (props.disabled !== '' ? props.disabled : parentData.value.disabled !== null ? parentData.value.disabled : false));
+const elDisabled = computed(() =>
+    props.disabled !== '' ? props.disabled : parentData.value.disabled !== null ? parentData.value.disabled : false
+);
 
 /**
  * 是否禁用label点击
  */
-const elLabelDisabled = computed(() => (props.labelDisabled !== '' ? props.labelDisabled : parentData.value.labelDisabled !== null ? parentData.value.labelDisabled : false));
+const elLabelDisabled = computed(() =>
+    props.labelDisabled !== ''
+        ? props.labelDisabled
+        : parentData.value.labelDisabled !== null
+          ? parentData.value.labelDisabled
+          : false
+);
 
 /**
  * 组件尺寸，对应size的值，默认值为34rpx
@@ -86,17 +94,23 @@ const elSize = computed(() => {
 /**
  * 组件的勾选图标的尺寸，默认20
  */
-const elIconSize = computed(() => (props.iconSize ? props.iconSize : parentData.value.iconSize ? parentData.value.iconSize : 20));
+const elIconSize = computed(() =>
+    props.iconSize ? props.iconSize : parentData.value.iconSize ? parentData.value.iconSize : 20
+);
 
 /**
  * 组件选中激活时的颜色
  */
-const elActiveColor = computed(() => (props.activeColor ? props.activeColor : parentData.value.activeColor ? parentData.value.activeColor : 'primary'));
+const elActiveColor = computed(() =>
+    props.activeColor ? props.activeColor : parentData.value.activeColor ? parentData.value.activeColor : 'primary'
+);
 
 /**
  * 组件的形状
  */
-const elShape = computed(() => (props.shape ? props.shape : parentData.value.shape ? parentData.value.shape : 'circle'));
+const elShape = computed(() =>
+    props.shape ? props.shape : parentData.value.shape ? parentData.value.shape : 'circle'
+);
 
 /**
  * 设置radio的状态，要求radio的name等于parent的value时才为选中状态

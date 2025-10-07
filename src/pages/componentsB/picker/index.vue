@@ -31,7 +31,10 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">默认时间</view>
-                <u-subsection :list="['2019-12-11 20:15:35', '2020-02-05 13:09:42']" @change="defaultTimeChange"></u-subsection>
+                <u-subsection
+                    :list="['2019-12-11 20:15:35', '2020-02-05 13:09:42']"
+                    @change="defaultTimeChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">显示时分秒</view>

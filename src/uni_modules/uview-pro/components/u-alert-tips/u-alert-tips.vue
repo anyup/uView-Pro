@@ -2,14 +2,25 @@
     <view
         class="u-alert-tips"
         v-if="show"
-        :class="[!show ? 'u-close-alert-tips' : '', type ? 'u-alert-tips--bg--' + type + '-light' : '', type ? 'u-alert-tips--border--' + type + '-disabled' : '']"
+        :class="[
+            !show ? 'u-close-alert-tips' : '',
+            type ? 'u-alert-tips--bg--' + type + '-light' : '',
+            type ? 'u-alert-tips--border--' + type + '-disabled' : ''
+        ]"
         :style="{
             backgroundColor: bgColor,
             borderColor: borderColor
         }"
     >
         <view class="u-icon-wrap">
-            <u-icon v-if="showIcon" :name="uIconName" :size="description ? 40 : 32" class="u-icon" :color="uIconType" :custom-style="iconStyle"></u-icon>
+            <u-icon
+                v-if="showIcon"
+                :name="uIconName"
+                :size="description ? 40 : 32"
+                class="u-icon"
+                :color="uIconType"
+                :custom-style="iconStyle"
+            ></u-icon>
         </view>
         <view class="u-alert-content" @tap.stop="onClick">
             <view class="u-alert-title" :style="uTitleStyle">

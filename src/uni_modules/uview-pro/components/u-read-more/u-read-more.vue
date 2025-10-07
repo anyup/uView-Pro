@@ -10,7 +10,13 @@
         >
             <slot></slot>
         </view>
-        <view @tap="toggleReadMore" v-if="isLongContent" class="u-content__showmore-wrap" :class="{ 'u-content__show-more': showMore }" :style="[innerShadowStyle]">
+        <view
+            @tap="toggleReadMore"
+            v-if="isLongContent"
+            class="u-content__showmore-wrap"
+            :class="{ 'u-content__show-more': showMore }"
+            :style="[innerShadowStyle]"
+        >
             <text
                 class="u-content__showmore-wrap__readmore-btn"
                 :style="{

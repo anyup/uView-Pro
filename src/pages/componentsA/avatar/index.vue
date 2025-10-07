@@ -3,7 +3,16 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-avatar :mode="mode" :size="size" :src="src" :text="text" :showLevel="showLevel" :showSex="showSex" :sexIcon="sexIcon" :bgColor="bgColor"></u-avatar>
+                <u-avatar
+                    :mode="mode"
+                    :size="size"
+                    :src="src"
+                    :text="text"
+                    :showLevel="showLevel"
+                    :showSex="showSex"
+                    :sexIcon="sexIcon"
+                    :bgColor="bgColor"
+                ></u-avatar>
             </view>
         </view>
         <view class="u-config-wrap">
@@ -26,7 +35,11 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">尺寸</view>
-                <u-subsection current="1" :list="['large', 'default', 'mini', '160']" @change="sizeChange"></u-subsection>
+                <u-subsection
+                    current="1"
+                    :list="['large', 'default', 'mini', '160']"
+                    @change="sizeChange"
+                ></u-subsection>
             </view>
         </view>
     </view>

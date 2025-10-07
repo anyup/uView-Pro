@@ -11,7 +11,11 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">主题</view>
-                <u-subsection :current="4" :list="['primary', 'success', 'error', 'warning', 'default']" @change="typeChange"></u-subsection>
+                <u-subsection
+                    :current="4"
+                    :list="['primary', 'success', 'error', 'warning', 'default']"
+                    @change="typeChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">结束后自动跳转</view>
@@ -55,7 +59,8 @@ const uToastRef = ref();
  * @param index 主题下标
  */
 function typeChange(index: number) {
-    type.value = index == 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning' : 'default';
+    type.value =
+        index == 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning' : 'default';
     show();
 }
 /**

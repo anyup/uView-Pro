@@ -1,13 +1,21 @@
 <template>
     <view class="u-countdown">
-        <view class="u-countdown-item" :style="[itemStyle]" v-if="props.showDays && (props.hideZeroDay || (!props.hideZeroDay && d != '00'))">
+        <view
+            class="u-countdown-item"
+            :style="[itemStyle]"
+            v-if="props.showDays && (props.hideZeroDay || (!props.hideZeroDay && d != '00'))"
+        >
             <view class="u-countdown-time" :style="[letterStyle]">
                 {{ d }}
             </view>
         </view>
         <view
             class="u-countdown-colon"
-            :style="{ fontSize: props.separatorSize + 'rpx', color: props.separatorColor, paddingBottom: props.separator == 'colon' ? '4rpx' : 0 }"
+            :style="{
+                fontSize: props.separatorSize + 'rpx',
+                color: props.separatorColor,
+                paddingBottom: props.separator == 'colon' ? '4rpx' : 0
+            }"
             v-if="props.showDays && (props.hideZeroDay || (!props.hideZeroDay && d != '00'))"
         >
             {{ props.separator == 'colon' && props.showHours ? ':' : '天' }}
@@ -19,7 +27,11 @@
         </view>
         <view
             class="u-countdown-colon"
-            :style="{ fontSize: props.separatorSize + 'rpx', color: props.separatorColor, paddingBottom: props.separator == 'colon' ? '4rpx' : 0 }"
+            :style="{
+                fontSize: props.separatorSize + 'rpx',
+                color: props.separatorColor,
+                paddingBottom: props.separator == 'colon' ? '4rpx' : 0
+            }"
             v-if="props.showHours"
         >
             {{ props.separator == 'colon' && props.showMinutes ? ':' : '时' }}
@@ -31,7 +43,11 @@
         </view>
         <view
             class="u-countdown-colon"
-            :style="{ fontSize: props.separatorSize + 'rpx', color: props.separatorColor, paddingBottom: props.separator == 'colon' ? '4rpx' : 0 }"
+            :style="{
+                fontSize: props.separatorSize + 'rpx',
+                color: props.separatorColor,
+                paddingBottom: props.separator == 'colon' ? '4rpx' : 0
+            }"
             v-if="props.showMinutes"
         >
             {{ props.separator == 'colon' && props.showSeconds ? ':' : '分' }}

@@ -3,7 +3,17 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-button @click="btnClick" data-name="3333" :loading="loading" :plain="plain" :shape="shape" :size="size" :ripple="ripple" :hairLine="hairLine" :type="type">
+                <u-button
+                    @click="btnClick"
+                    data-name="3333"
+                    :loading="loading"
+                    :plain="plain"
+                    :shape="shape"
+                    :size="size"
+                    :ripple="ripple"
+                    :hairLine="hairLine"
+                    :type="type"
+                >
                     山川异域，风月同天
                 </u-button>
             </view>
@@ -12,7 +22,10 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">主题选择</view>
-                <u-subsection :list="['default', 'primary', 'error', 'warning', 'success']" @change="typeChange"></u-subsection>
+                <u-subsection
+                    :list="['default', 'primary', 'error', 'warning', 'success']"
+                    @change="typeChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">尺寸大小</view>

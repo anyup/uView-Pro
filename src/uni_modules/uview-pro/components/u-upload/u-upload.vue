@@ -28,7 +28,13 @@
                 :percent="item.progress"
             ></u-line-progress>
             <view @tap.stop="retry(index)" v-if="item.error" class="u-error-btn">点击重试</view>
-            <image @tap.stop="doPreviewImage(item.url || item.path, index)" class="u-preview-image" v-if="!item.isImage" :src="item.url || item.path" :mode="imageMode"></image>
+            <image
+                @tap.stop="doPreviewImage(item.url || item.path, index)"
+                class="u-preview-image"
+                v-if="!item.isImage"
+                :src="item.url || item.path"
+                :mode="imageMode"
+            ></image>
         </view>
         <slot name="file" :file="lists"></slot>
         <view style="display: inline-block" @tap="selectFile" v-if="Number(maxCount) > lists.length">
@@ -259,7 +265,11 @@ async function uploadFile(index = 0) {
         // 明白意思即可，无需纠结this.$u.$parent.call(this)的细节
         let beforeResponse = props.beforeUpload(index, lists.value);
         // 判断是否返回了promise
-        if (typeof beforeResponse === 'object' && beforeResponse !== null && typeof (beforeResponse as Promise<any>).then === 'function') {
+        if (
+            typeof beforeResponse === 'object' &&
+            beforeResponse !== null &&
+            typeof (beforeResponse as Promise<any>).then === 'function'
+        ) {
             await (beforeResponse as Promise<any>)
                 .then(() => {
                     // promise返回成功，不进行动作，继续上传
@@ -349,7 +359,11 @@ function deleteItem(index: number) {
                     // 此处钩子执行 原理同before-remove参数，见上方注释
                     let beforeResponse = props.beforeRemove(index, lists.value);
                     // 判断是否返回了promise
-                    if (typeof beforeResponse === 'object' && beforeResponse !== null && typeof (beforeResponse as Promise<any>).then === 'function') {
+                    if (
+                        typeof beforeResponse === 'object' &&
+                        beforeResponse !== null &&
+                        typeof (beforeResponse as Promise<any>).then === 'function'
+                    ) {
                         await (beforeResponse as Promise<any>)
                             .then(() => {
                                 // promise返回成功，不进行动作，继续上传

@@ -29,7 +29,11 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">指示器位置</view>
-                <u-subsection current="3" :list="['上左', '上右', '下左', '下中', '下右']" @change="indicatorPosChange"></u-subsection>
+                <u-subsection
+                    current="3"
+                    :list="['上左', '上右', '下左', '下中', '下右']"
+                    @change="indicatorPosChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">3D效果</view>
@@ -75,7 +79,16 @@ function modeChange(index: number) {
 }
 
 function indicatorPosChange(index: number) {
-    indicatorPos.value = index === 0 ? 'topLeft' : index === 1 ? 'topRight' : index === 2 ? 'bottomLeft' : index === 3 ? 'bottomCenter' : 'bottomRight';
+    indicatorPos.value =
+        index === 0
+            ? 'topLeft'
+            : index === 1
+              ? 'topRight'
+              : index === 2
+                ? 'bottomLeft'
+                : index === 3
+                  ? 'bottomCenter'
+                  : 'bottomRight';
 }
 
 function effect3dChange(index: number) {

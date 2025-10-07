@@ -1,12 +1,25 @@
 <template>
     <view class="u-dropdown">
-        <view class="u-dropdown__menu" :style="{ height: $u.addUnit(height) }" :class="{ 'u-border-bottom': borderBottom }">
-            <view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
+        <view
+            class="u-dropdown__menu"
+            :style="{ height: $u.addUnit(height) }"
+            :class="{ 'u-border-bottom': borderBottom }"
+        >
+            <view
+                class="u-dropdown__menu__item"
+                v-for="(item, index) in menuList"
+                :key="index"
+                @tap.stop="menuClick(index)"
+            >
                 <view class="u-flex">
                     <text
                         class="u-dropdown__menu__item__text"
                         :style="{
-                            color: item.disabled ? '#c0c4cc' : index === current || highlightIndex == index ? activeColor : inactiveColor,
+                            color: item.disabled
+                                ? '#c0c4cc'
+                                : index === current || highlightIndex == index
+                                  ? activeColor
+                                  : inactiveColor,
                             fontSize: $u.addUnit(titleSize)
                         }"
                         >{{ item.title }}</text

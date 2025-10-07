@@ -17,7 +17,13 @@
                 }
             ]"
         >
-            <view class="u-slider__button-wrap" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchEnd">
+            <view
+                class="u-slider__button-wrap"
+                @touchstart="onTouchStart"
+                @touchmove="onTouchMove"
+                @touchend="onTouchEnd"
+                @touchcancel="onTouchEnd"
+            >
                 <slot v-if="slots.default" />
                 <view
                     v-else
@@ -176,7 +182,10 @@ function updateValue(value: number | string, drag: boolean) {
  */
 function format(value: number | string): number {
     // 将小数变成整数，为了减少对视图的更新，造成视图层与逻辑层的阻塞
-    return Math.round(Math.max(Number(props.min), Math.min(Number(value), Number(props.max))) / Number(props.step)) * Number(props.step);
+    return (
+        Math.round(Math.max(Number(props.min), Math.min(Number(value), Number(props.max))) / Number(props.step)) *
+        Number(props.step)
+    );
 }
 
 /**

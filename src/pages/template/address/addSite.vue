@@ -12,7 +12,13 @@
             </view>
             <view class="item" @click="showRegionPicker">
                 <view class="left">所在地区</view>
-                <input disabled :value="inputRegion" type="text" placeholder-class="line" placeholder="省市区县、乡镇等" />
+                <input
+                    disabled
+                    :value="inputRegion"
+                    type="text"
+                    placeholder-class="line"
+                    placeholder="省市区县、乡镇等"
+                />
             </view>
             <view class="item address">
                 <view class="left">详细地址</view>

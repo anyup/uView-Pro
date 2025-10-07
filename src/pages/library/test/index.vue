@@ -4,7 +4,9 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <u-toast ref="uToastRef"></u-toast>
-                <view class="u-no-demo-here" style="text-align: left"> 这里仅对部分验证规则进行演示，目前总的验证规则有如下： </view>
+                <view class="u-no-demo-here" style="text-align: left">
+                    这里仅对部分验证规则进行演示，目前总的验证规则有如下：
+                </view>
                 <u-table style="margin-top: 20rpx">
                     <u-tr>
                         <u-td>邮箱号</u-td>

@@ -57,7 +57,11 @@
         <view class="taobao">
             <view class="title">
                 <view class="left">
-                    <image class="buddha" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1975388697,1068670603&fm=26&gp=0.jpg" mode="aspectFill"></image>
+                    <image
+                        class="buddha"
+                        src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1975388697,1068670603&fm=26&gp=0.jpg"
+                        mode="aspectFill"
+                    ></image>
                     <view class="store">袜子精保护协会</view>
                 </view>
                 <view class="entrance" @tap="onEnterShop">进店</view>

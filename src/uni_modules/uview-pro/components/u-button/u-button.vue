@@ -110,7 +110,17 @@ defineOptions({
  * @example <u-button>月落</u-button>
  */
 
-const emit = defineEmits(['click', 'getuserinfo', 'contact', 'getphonenumber', 'error', 'launchapp', 'opensetting', 'chooseavatar', 'agreeprivacyauthorization']);
+const emit = defineEmits([
+    'click',
+    'getuserinfo',
+    'contact',
+    'getphonenumber',
+    'error',
+    'launchapp',
+    'opensetting',
+    'chooseavatar',
+    'agreeprivacyauthorization'
+]);
 
 const props = defineProps(ButtonProps);
 

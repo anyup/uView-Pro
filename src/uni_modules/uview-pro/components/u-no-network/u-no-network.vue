@@ -7,7 +7,9 @@
             </view>
             <!-- 只有APP平台，才能跳转设置页，因为需要调用plus环境 -->
             <!-- #ifdef APP-PLUS -->
-            <view class="u-to-setting"> 请检查网络，或前往<text class="u-setting-btn" @tap="openSettings">设置</text> </view>
+            <view class="u-to-setting">
+                请检查网络，或前往<text class="u-setting-btn" @tap="openSettings">设置</text>
+            </view>
             <!-- #endif -->
             <view class="u-retry" :hover-stay-time="150" @tap="retry" hover-class="u-retry-hover"> 重试 </view>
         </view>

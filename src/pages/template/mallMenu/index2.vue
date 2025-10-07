@@ -7,12 +7,30 @@
             </view>
         </view>
         <view class="u-menu-wrap">
-            <scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop" :scroll-into-view="itemId">
-                <view v-for="(item, index) in tabbar" :key="index" class="u-tab-item" :class="[current == index ? 'u-tab-item-active' : '']" @tap.stop="swichMenu(index)">
+            <scroll-view
+                scroll-y
+                scroll-with-animation
+                class="u-tab-view menu-scroll-view"
+                :scroll-top="scrollTop"
+                :scroll-into-view="itemId"
+            >
+                <view
+                    v-for="(item, index) in tabbar"
+                    :key="index"
+                    class="u-tab-item"
+                    :class="[current == index ? 'u-tab-item-active' : '']"
+                    @tap.stop="swichMenu(index)"
+                >
                     <text class="u-line-1">{{ item.name }}</text>
                 </view>
             </scroll-view>
-            <scroll-view :scroll-top="scrollRightTop" scroll-y scroll-with-animation class="right-box" @scroll="rightScroll">
+            <scroll-view
+                :scroll-top="scrollRightTop"
+                scroll-y
+                scroll-with-animation
+                class="right-box"
+                @scroll="rightScroll"
+            >
                 <view class="page-view">
                     <view class="class-item" :id="'item' + index" v-for="(item, index) in tabbar" :key="index">
                         <view class="item-title">

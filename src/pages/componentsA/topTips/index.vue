@@ -11,7 +11,10 @@
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">主题选择</view>
-                <u-subsection :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
+                <u-subsection
+                    :list="['primary', 'success', 'error', 'warning', 'info']"
+                    @change="typeChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">显示时间</view>
@@ -32,7 +35,8 @@ const type = ref<ThemeType>('primary');
 const uTipsRef = ref(null);
 
 function typeChange(index: number) {
-    type.value = index === 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning' : 'info';
+    type.value =
+        index === 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning' : 'info';
     showTips();
 }
 

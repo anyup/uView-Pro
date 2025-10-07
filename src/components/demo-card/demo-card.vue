@@ -46,7 +46,18 @@ const navColors = ref<Record<string, string>>({});
  * 生成随机浅色背景
  */
 function getRandomColor() {
-    const colors = ['#39b54a', '#f39c12', '#3498db', '#e74c3c', '#9b59b6', '#16a085', '#e67e22', '#2ecc71', '#1abc9c', '#34495e'];
+    const colors = [
+        '#39b54a',
+        '#f39c12',
+        '#3498db',
+        '#e74c3c',
+        '#9b59b6',
+        '#16a085',
+        '#e67e22',
+        '#2ecc71',
+        '#1abc9c',
+        '#34495e'
+    ];
     return colors[Math.floor(Math.random() * colors.length)];
 }
 /**

@@ -75,7 +75,13 @@
                     <u-text prefixIcon="baidu" iconStyle="font-size: 19px" text="百度一下"></u-text>
                 </view>
                 <view class="u-page__text-item">
-                    <u-text suffixIcon="arrow-rightward" iconStyle="font-size: 18px" text="查看更多" align="right" block></u-text>
+                    <u-text
+                        suffixIcon="arrow-rightward"
+                        iconStyle="font-size: 18px"
+                        text="查看更多"
+                        align="right"
+                        block
+                    ></u-text>
                 </view>
             </view>
         </view>

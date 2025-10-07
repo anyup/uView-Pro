@@ -240,7 +240,14 @@
         self.deviceRadio = windowWidth / 750;
     }
 
-    var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+    var commonjsGlobal =
+        typeof window !== 'undefined'
+            ? window
+            : typeof global !== 'undefined'
+              ? global
+              : typeof self !== 'undefined'
+                ? self
+                : {};
 
     function createCommonjsModule(fn, module) {
         return (
@@ -478,14 +485,22 @@
                     buffer = a + b + c;
                     // Turn the 24 bits into four chunks of 6 bits each, and append the
                     // matching character for each of them to the output.
-                    output += TABLE.charAt((buffer >> 18) & 0x3f) + TABLE.charAt((buffer >> 12) & 0x3f) + TABLE.charAt((buffer >> 6) & 0x3f) + TABLE.charAt(buffer & 0x3f);
+                    output +=
+                        TABLE.charAt((buffer >> 18) & 0x3f) +
+                        TABLE.charAt((buffer >> 12) & 0x3f) +
+                        TABLE.charAt((buffer >> 6) & 0x3f) +
+                        TABLE.charAt(buffer & 0x3f);
                 }
 
                 if (padding == 2) {
                     a = input.charCodeAt(position) << 8;
                     b = input.charCodeAt(++position);
                     buffer = a + b;
-                    output += TABLE.charAt(buffer >> 10) + TABLE.charAt((buffer >> 4) & 0x3f) + TABLE.charAt((buffer << 2) & 0x3f) + '=';
+                    output +=
+                        TABLE.charAt(buffer >> 10) +
+                        TABLE.charAt((buffer >> 4) & 0x3f) +
+                        TABLE.charAt((buffer << 2) & 0x3f) +
+                        '=';
                 } else if (padding == 1) {
                     buffer = input.charCodeAt(position);
                     output += TABLE.charAt(buffer >> 2) + TABLE.charAt((buffer << 4) & 0x3f) + '==';
@@ -701,7 +716,10 @@
             var strPixelRow = '';
             for (var x = 0; x < biWidth; x++) {
                 var iOffsetX = x << 2;
-                strPixelRow += fromCharCode(aImgData[iOffsetY + iOffsetX + 2]) + fromCharCode(aImgData[iOffsetY + iOffsetX + 1]) + fromCharCode(aImgData[iOffsetY + iOffsetX]);
+                strPixelRow +=
+                    fromCharCode(aImgData[iOffsetY + iOffsetX + 2]) +
+                    fromCharCode(aImgData[iOffsetY + iOffsetX + 1]) +
+                    fromCharCode(aImgData[iOffsetY + iOffsetX]);
             }
 
             for (var c = 0; c < iPadding; c++) {
@@ -881,7 +899,13 @@
             if (tools_10(customOptions) && customOptions.original) {
                 // original mode
                 task = function () {
-                    self.targetCtx.drawImage(self.croperTarget, self.imgLeft * pixelRatio, self.imgTop * pixelRatio, self.scaleWidth * pixelRatio, self.scaleHeight * pixelRatio);
+                    self.targetCtx.drawImage(
+                        self.croperTarget,
+                        self.imgLeft * pixelRatio,
+                        self.imgTop * pixelRatio,
+                        self.scaleWidth * pixelRatio,
+                        self.scaleHeight * pixelRatio
+                    );
 
                     canvasOptions = {
                         canvasId: targetId,
@@ -905,7 +929,9 @@
                         fn = customOptions;
                     }
 
-                    var arg = canvasOptions.componentContext ? [canvasOptions, canvasOptions.componentContext] : [canvasOptions];
+                    var arg = canvasOptions.componentContext
+                        ? [canvasOptions, canvasOptions.componentContext]
+                        : [canvasOptions];
 
                     return canvasToTempFilePath.apply(null, arg);
                 })
@@ -1094,9 +1120,11 @@
          * @param imgTop 图片左上角纵坐标值
          */
         self.outsideBound = function (imgLeft, imgTop) {
-            self.imgLeft = imgLeft >= x ? x : self.scaleWidth + imgLeft - x <= width ? x + width - self.scaleWidth : imgLeft;
+            self.imgLeft =
+                imgLeft >= x ? x : self.scaleWidth + imgLeft - x <= width ? x + width - self.scaleWidth : imgLeft;
 
-            self.imgTop = imgTop >= y ? y : self.scaleHeight + imgTop - y <= height ? y + height - self.scaleHeight : imgTop;
+            self.imgTop =
+                imgTop >= y ? y : self.scaleHeight + imgTop - y <= height ? y + height - self.scaleHeight : imgTop;
         };
 
         /**

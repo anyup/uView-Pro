@@ -9,7 +9,11 @@
         }"
         @tap="onClick"
     >
-        <view class="u-divider-line" :class="[type ? 'u-divider-line--bordercolor--' + type : '']" :style="lineStyle"></view>
+        <view
+            class="u-divider-line"
+            :class="[type ? 'u-divider-line--bordercolor--' + type : '']"
+            :style="lineStyle"
+        ></view>
         <view
             v-if="useSlot"
             class="u-divider-text"
@@ -19,7 +23,11 @@
             }"
             ><slot
         /></view>
-        <view class="u-divider-line" :class="[type ? 'u-divider-line--bordercolor--' + type : '']" :style="lineStyle"></view>
+        <view
+            class="u-divider-line"
+            :class="[type ? 'u-divider-line--bordercolor--' + type : '']"
+            :style="lineStyle"
+        ></view>
     </view>
 </template>
 

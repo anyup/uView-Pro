@@ -4,7 +4,9 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <u-toast ref="uToastRef"></u-toast>
-                <view class="u-no-demo-here" style="text-align: left"> 根据当前时间，返回类似"刚刚，5分钟前，8小时前，3天前"等字样 </view>
+                <view class="u-no-demo-here" style="text-align: left">
+                    根据当前时间，返回类似"刚刚，5分钟前，8小时前，3天前"等字样
+                </view>
                 <view class="u-demo-result-line">
                     {{ result }}
                 </view>

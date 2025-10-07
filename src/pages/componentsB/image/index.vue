@@ -3,7 +3,15 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area u-flex u-row-center">
-                <u-image :shape="shape" ref="uImageRef" :width="width" :height="height" :src="src" mode="aspectFill" :use-slots="{ loading: loadingSlot, error: errorSlot }">
+                <u-image
+                    :shape="shape"
+                    ref="uImageRef"
+                    :width="width"
+                    :height="height"
+                    :src="src"
+                    mode="aspectFill"
+                    :use-slots="{ loading: loadingSlot, error: errorSlot }"
+                >
                     <template #loading>
                         <u-loading size="44" mode="flower"></u-loading>
                     </template>
@@ -17,7 +25,11 @@
             <view class="u-config-title u-border-bottom">参数配置</view>
             <view class="u-config-item">
                 <view class="u-item-title">状态</view>
-                <u-subsection :current="statusCurrent" :list="['加载成功', '加载中', '加载失败']" @change="statusChange"></u-subsection>
+                <u-subsection
+                    :current="statusCurrent"
+                    :list="['加载成功', '加载中', '加载失败']"
+                    @change="statusChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">加载中状态</view>

@@ -99,7 +99,11 @@ function validate(callback?: (valid: boolean) => void): Promise<boolean> {
                     if (++count === fields.value.length) {
                         resolve(valid); // 进入promise的then方法
                         // 判断是否设置了toast的提示方式，只提示最前面的表单域的第一个错误信息
-                        if (props.errorType.indexOf('none') === -1 && props.errorType.indexOf('toast') >= 0 && errorArr.length) {
+                        if (
+                            props.errorType.indexOf('none') === -1 &&
+                            props.errorType.indexOf('toast') >= 0 &&
+                            errorArr.length
+                        ) {
                             $u.toast(errorArr[0]);
                         }
                         // 调用回调方法

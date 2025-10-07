@@ -4,14 +4,24 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <u-toast ref="uToastRef" />
-                <u-loadmore :status="status" :loadText="loadText" :icon-type="iconType" :is-dot="isDot" @loadmore="loadmore" />
+                <u-loadmore
+                    :status="status"
+                    :loadText="loadText"
+                    :icon-type="iconType"
+                    :is-dot="isDot"
+                    @loadmore="loadmore"
+                />
             </view>
         </view>
         <view class="u-config-wrap">
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
                 <view class="u-item-title">模式选择</view>
-                <u-subsection :current="current" :list="['加载前', '加载中', '加载后', '没有更多']" @change="statusChange"></u-subsection>
+                <u-subsection
+                    :current="current"
+                    :list="['加载前', '加载中', '加载后', '没有更多']"
+                    @change="statusChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">自定义提示语</view>

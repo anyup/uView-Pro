@@ -12,7 +12,12 @@
                             :key="index"
                             :title-style="{ color: modelValue == item.value ? activeColor : inactiveColor }"
                         >
-                            <u-icon v-if="modelValue == item.value" name="checkbox-mark" :color="activeColor" size="32"></u-icon>
+                            <u-icon
+                                v-if="modelValue == item.value"
+                                name="checkbox-mark"
+                                :color="activeColor"
+                                size="32"
+                            ></u-icon>
                         </u-cell-item>
                     </u-cell-group>
                 </view>

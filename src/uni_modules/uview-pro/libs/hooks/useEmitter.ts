@@ -32,7 +32,8 @@ export function useEmitter(name: string) {
                 // 如果有对应的方法，执行方法
                 // 这里可以考虑将 eventName 转换为驼峰格式
                 // 例如：on-form-change -> onFormChange
-                parent.exposed?.[formatToCamelCase(eventName)] && parent.exposed[formatToCamelCase(eventName)](...params);
+                parent.exposed?.[formatToCamelCase(eventName)] &&
+                    parent.exposed[formatToCamelCase(eventName)](...params);
                 break;
             }
             parent = parent.parent;
@@ -62,7 +63,8 @@ export function useEmitter(name: string) {
                     // 如果有对应的方法，执行方法
                     // 这里可以考虑将 eventName 转换为驼峰格式
                     // 例如：on-form-change -> onFormChange
-                    child.exposed?.[formatToCamelCase(eventName)] && child.exposed[formatToCamelCase(eventName)](...params);
+                    child.exposed?.[formatToCamelCase(eventName)] &&
+                        child.exposed[formatToCamelCase(eventName)](...params);
                 } else {
                     broadcast.call(child, componentName, eventName, ...params);
                 }

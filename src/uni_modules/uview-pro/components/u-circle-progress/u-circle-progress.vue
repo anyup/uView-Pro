@@ -63,8 +63,12 @@ elId = 'uCircleProgressElId';
 // #endif
 const instance = getCurrentInstance();
 
-const widthPx = computed(() => (typeof uni !== 'undefined' && uni.upx2px ? uni.upx2px(Number(props.width)) : Number(props.width)));
-const borderWidthPx = computed(() => (typeof uni !== 'undefined' && uni.upx2px ? uni.upx2px(Number(props.borderWidth)) : Number(props.borderWidth)));
+const widthPx = computed(() =>
+    typeof uni !== 'undefined' && uni.upx2px ? uni.upx2px(Number(props.width)) : Number(props.width)
+);
+const borderWidthPx = computed(() =>
+    typeof uni !== 'undefined' && uni.upx2px ? uni.upx2px(Number(props.borderWidth)) : Number(props.borderWidth)
+);
 const startAngle = -Math.PI / 2; // canvas画圆的起始角度，默认为3点钟方向，定位到12点钟方向
 const progressContext = ref<any>(null); // 活动圆的canvas上下文
 const newPercent = ref(props.percent); // 当动态修改进度值的时候，保存进度值的变化前后值，用于比较用

@@ -4,8 +4,22 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <u-toast ref="uToastRef"></u-toast>
-                <u-collapse v-if="key" :item-style="itemStyle" event-type="close" :arrow="arrow" @change="change" :accordion="accordion">
-                    <u-collapse-item :index="index" @change="itemChange" :title="item.head" v-for="(item, index) in itemList" :key="index" :open="item.open">
+                <u-collapse
+                    v-if="key"
+                    :item-style="itemStyle"
+                    event-type="close"
+                    :arrow="arrow"
+                    @change="change"
+                    :accordion="accordion"
+                >
+                    <u-collapse-item
+                        :index="index"
+                        @change="itemChange"
+                        :title="item.head"
+                        v-for="(item, index) in itemList"
+                        :key="index"
+                        :open="item.open"
+                    >
                         {{ item.body }}
                     </u-collapse-item>
                 </u-collapse>

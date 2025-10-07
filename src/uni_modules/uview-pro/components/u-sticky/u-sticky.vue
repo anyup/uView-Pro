@@ -95,7 +95,10 @@ onBeforeUnmount(() => {
 function initObserver() {
     if (!props.enable) return;
     // #ifdef H5
-    stickyTop.value = Number(props.offsetTop) !== 0 ? uni.upx2px(Number(props.offsetTop)) + Number(props.h5NavHeight) : Number(props.h5NavHeight);
+    stickyTop.value =
+        Number(props.offsetTop) !== 0
+            ? uni.upx2px(Number(props.offsetTop)) + Number(props.h5NavHeight)
+            : Number(props.h5NavHeight);
     // #endif
     // #ifndef H5
     stickyTop.value = Number(props.offsetTop) !== 0 ? uni.upx2px(Number(props.offsetTop)) : 0;

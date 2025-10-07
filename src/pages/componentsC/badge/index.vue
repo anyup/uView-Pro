@@ -3,7 +3,17 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <view class="u-badge-wrap"><u-badge :is-center="isCenter" :type="type" :count="count" :is-dot="isDot" :offset="offset" :size="size"></u-badge></view>
+                <view class="u-badge-wrap">
+                    <u-badge
+                        :is-center="isCenter"
+                        :type="type"
+                        :count="count"
+                        :is-dot="isDot"
+                        :offset="offset"
+                        :size="size"
+                    >
+                    </u-badge>
+                </view>
             </view>
         </view>
         <view class="u-config-wrap">
@@ -14,7 +24,11 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">主题选择</view>
-                <u-subsection current="2" :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
+                <u-subsection
+                    current="2"
+                    :list="['primary', 'success', 'error', 'warning', 'info']"
+                    @change="typeChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">显示点</view>
@@ -26,7 +40,11 @@
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">位置偏移</view>
-                <u-subsection current="1" :list="['[20, 20]', '[-8, -8]', '[-20, -20]']" @change="offsetChange"></u-subsection>
+                <u-subsection
+                    current="1"
+                    :list="['[20, 20]', '[-8, -8]', '[-20, -20]']"
+                    @change="offsetChange"
+                ></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">中心点与父右上角重合</view>
@@ -52,7 +70,8 @@ function countChange(index: number) {
 }
 
 function typeChange(index: number) {
-    type.value = index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : 'info';
+    type.value =
+        index === 0 ? 'primary' : index === 1 ? 'success' : index === 2 ? 'error' : index === 3 ? 'warning' : 'info';
 }
 
 function sizeChange(index: number) {

@@ -147,12 +147,19 @@ export class Request {
                 }
             };
             // 判断用户传递的URL是否http开头
-            options.url = options.url && options.url.indexOf('http') !== 0 ? this.config.baseUrl + (options.url.indexOf('/') === 0 ? options.url : `/${options.url}`) : options.url;
+            options.url =
+                options.url && options.url.indexOf('http') !== 0
+                    ? this.config.baseUrl + (options.url.indexOf('/') === 0 ? options.url : `/${options.url}`)
+                    : options.url;
             uni.request(options);
         });
     }
 
-    get<T = unknown>(url: string, data: any = {}, options: { header?: Record<string, any>; meta?: RequestMeta } = {}): Promise<T> {
+    get<T = unknown>(
+        url: string,
+        data: any = {},
+        options: { header?: Record<string, any>; meta?: RequestMeta } = {}
+    ): Promise<T> {
         return this.request<T>({
             method: 'GET',
             url,
@@ -162,7 +169,11 @@ export class Request {
         });
     }
 
-    post<T = unknown>(url: string, data: any = {}, options: { header?: Record<string, any>; meta?: RequestMeta } = {}): Promise<T> {
+    post<T = unknown>(
+        url: string,
+        data: any = {},
+        options: { header?: Record<string, any>; meta?: RequestMeta } = {}
+    ): Promise<T> {
         return this.request<T>({
             url,
             method: 'POST',
@@ -172,7 +183,11 @@ export class Request {
         });
     }
 
-    put<T = unknown>(url: string, data: any = {}, options: { header?: Record<string, any>; meta?: RequestMeta } = {}): Promise<T> {
+    put<T = unknown>(
+        url: string,
+        data: any = {},
+        options: { header?: Record<string, any>; meta?: RequestMeta } = {}
+    ): Promise<T> {
         return this.request<T>({
             url,
             method: 'PUT',
@@ -182,7 +197,11 @@ export class Request {
         });
     }
 
-    delete<T = unknown>(url: string, data: any = {}, options: { header?: Record<string, any>; meta?: RequestMeta } = {}): Promise<T> {
+    delete<T = unknown>(
+        url: string,
+        data: any = {},
+        options: { header?: Record<string, any>; meta?: RequestMeta } = {}
+    ): Promise<T> {
         return this.request<T>({
             url,
             method: 'DELETE',

@@ -1,7 +1,17 @@
 <template>
-    <view class="u-notice-bar" :style="{ background: computeBgColor, padding: props.padding }" :class="[props.type ? `u-type-${props.type}-light-bg` : '']">
+    <view
+        class="u-notice-bar"
+        :style="{ background: computeBgColor, padding: props.padding }"
+        :class="[props.type ? `u-type-${props.type}-light-bg` : '']"
+    >
         <view class="u-icon-wrap">
-            <u-icon class="u-left-icon" v-if="props.volumeIcon" name="volume-fill" :size="props.volumeSize" :color="computeColor"></u-icon>
+            <u-icon
+                class="u-left-icon"
+                v-if="props.volumeIcon"
+                name="volume-fill"
+                :size="props.volumeSize"
+                :color="computeColor"
+            ></u-icon>
         </view>
         <swiper
             :disable-touch="props.disableTouch"
@@ -13,14 +23,33 @@
             class="u-swiper"
         >
             <swiper-item v-for="(item, index) in props.list" :key="index" class="u-swiper-item">
-                <view class="u-news-item u-line-1" :style="textStyle" @tap="click(index)" :class="['u-type-' + props.type]">
+                <view
+                    class="u-news-item u-line-1"
+                    :style="textStyle"
+                    @tap="click(index)"
+                    :class="['u-type-' + props.type]"
+                >
                     {{ item }}
                 </view>
             </swiper-item>
         </swiper>
         <view class="u-icon-wrap">
-            <u-icon @click="getMore" class="u-right-icon" v-if="props.moreIcon" name="arrow-right" :size="26" :color="computeColor"></u-icon>
-            <u-icon @click="close" class="u-right-icon" v-if="props.closeIcon" name="close" :size="24" :color="computeColor"></u-icon>
+            <u-icon
+                @click="getMore"
+                class="u-right-icon"
+                v-if="props.moreIcon"
+                name="arrow-right"
+                :size="26"
+                :color="computeColor"
+            ></u-icon>
+            <u-icon
+                @click="close"
+                class="u-right-icon"
+                v-if="props.closeIcon"
+                name="close"
+                :size="24"
+                :color="computeColor"
+            ></u-icon>
         </view>
     </view>
 </template>
@@ -56,7 +85,12 @@ defineOptions({ name: 'u-column-notice' });
 
 const props = defineProps(ColumnNoticeProps);
 
-const emit = defineEmits<{ (e: 'click', index: number): void; (e: 'close'): void; (e: 'getMore'): void; (e: 'end'): void }>();
+const emit = defineEmits<{
+    (e: 'click', index: number): void;
+    (e: 'close'): void;
+    (e: 'getMore'): void;
+    (e: 'end'): void;
+}>();
 
 /**
  * 计算字体颜色，如果没有自定义的，就用uview主题颜色

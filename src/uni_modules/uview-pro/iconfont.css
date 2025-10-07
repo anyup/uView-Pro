@@ -23,7 +23,8 @@
             format('woff2'),
         url('//at.alicdn.com/t/font_1529455_k4s6di1d1.woff?t=1596960292384') format('woff'),
         url('//at.alicdn.com/t/font_1529455_k4s6di1d1.ttf?t=1596960292384') format('truetype'),
-        /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */ url('//at.alicdn.com/t/font_1529455_k4s6di1d1.svg?t=1596960292384#iconfont') format('svg');
+        /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+            url('//at.alicdn.com/t/font_1529455_k4s6di1d1.svg?t=1596960292384#iconfont') format('svg');
 }
 
 /* #endif */

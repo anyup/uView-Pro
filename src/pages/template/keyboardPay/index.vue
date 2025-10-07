@@ -29,7 +29,14 @@
                     </view>
                 </view>
                 <view class="u-flex u-row-center">
-                    <u-message-input mode="box" :maxlength="6" :dot-fill="true" v-model="password" :disabled-keyboard="true" @finish="finish"></u-message-input>
+                    <u-message-input
+                        mode="box"
+                        :maxlength="6"
+                        :dot-fill="true"
+                        v-model="password"
+                        :disabled-keyboard="true"
+                        @finish="finish"
+                    ></u-message-input>
                 </view>
                 <view class="u-text-center u-padding-top-10 u-padding-bottom-20 tips">支付键盘</view>
             </view>
