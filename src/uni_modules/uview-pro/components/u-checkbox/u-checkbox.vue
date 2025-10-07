@@ -34,8 +34,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, onUnmounted } from 'vue';
-import { $u, useChildren, onParentEvent } from '../..';
+import { computed } from 'vue';
+import { $u, useChildren, useParentEvents } from '../..';
 import { CheckboxProps } from './types';
 
 /**
@@ -188,19 +188,16 @@ function setValue() {
     }
 }
 
-// 监听父组件事件
-const unsubscribeSetChecked = onParentEvent(childId, 'setChecked', data => {
-    if (!isDisabled.value) {
-        emit('update:modelValue', data.checked);
-        if (data.checked !== props.modelValue) {
-            emitEvent();
+// 使用自动取消监听注册父组件事件
+useParentEvents(childId, {
+    setChecked: data => {
+        if (!isDisabled.value) {
+            emit('update:modelValue', data.checked);
+            if (data.checked !== props.modelValue) {
+                emitEvent();
+            }
         }
     }
-});
-
-// 在适当的时候取消监听
-onUnmounted(() => {
-    unsubscribeSetChecked();
 });
 
 defineExpose({
