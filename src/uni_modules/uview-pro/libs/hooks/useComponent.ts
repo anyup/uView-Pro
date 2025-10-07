@@ -1,7 +1,7 @@
 // utils/useComponent.ts
 import { ref, reactive, getCurrentInstance, onUnmounted, nextTick, computed } from 'vue';
 import { logger } from '../util/logger';
-import { eventBus } from '../util/eventBus';
+import { mitt } from '../util/mitt';
 
 // 简化类型定义
 interface ParentContext {
@@ -33,19 +33,89 @@ const PARENT_REGISTERED_EVENT = 'parent:registered';
 const PARENT_UNMOUNTED_EVENT = 'parent:unmounted';
 const CHILD_REGISTERED_EVENT = 'child:registered';
 
+// 创建事件总线实例
+type EventBusEvents = {
+    [PARENT_REGISTERED_EVENT]: { name: string; parent: ParentContext };
+    [PARENT_UNMOUNTED_EVENT]: { name: string };
+    [CHILD_REGISTERED_EVENT]: { id: string; name: string; parentName: string };
+    [key: `parent:${string}:${string}`]: { data?: any; childId: string; childName: string };
+    [key: `child:${string}:${string}`]: any;
+};
+
+const eventBus = mitt<EventBusEvents>();
+
+// 热更新重新注册管理器
+let isHotReloading = false;
+const hotReloadReconnectCallbacks: Map<string, Function[]> = new Map();
+
+/**
+ * 注册热更新重新连接回调
+ */
+function registerHotReloadReconnect(key: string, callback: Function): void {
+    if (!hotReloadReconnectCallbacks.has(key)) {
+        hotReloadReconnectCallbacks.set(key, []);
+    }
+    hotReloadReconnectCallbacks.get(key)!.push(callback);
+}
+
+/**
+ * 注销热更新重新连接回调
+ */
+function unregisterHotReloadReconnect(key: string, callback: Function): void {
+    const callbacks = hotReloadReconnectCallbacks.get(key);
+    if (callbacks) {
+        const index = callbacks.indexOf(callback);
+        if (index > -1) {
+            callbacks.splice(index, 1);
+        }
+        if (callbacks.length === 0) {
+            hotReloadReconnectCallbacks.delete(key);
+        }
+    }
+}
+
+/**
+ * 执行热更新重新连接
+ */
+function executeHotReloadReconnect(): void {
+    logger.log('Executing hot reload reconnection for all registered callbacks');
+    hotReloadReconnectCallbacks.forEach((callbacks, key) => {
+        callbacks.forEach(callback => {
+            try {
+                callback();
+                logger.log(`Successfully reconnected: ${key}`);
+            } catch (error) {
+                logger.warn(`Failed to reconnect ${key}:`, error);
+            }
+        });
+    });
+}
+
 // 热更新清理函数
 export function cleanupComponentRelations(): void {
     logger.log('Cleaning up component relations for hot reload');
     parentMap.clear();
     childMap.clear();
+    eventBus.clear();
 }
 
 // 热更新处理
 if (import.meta.hot) {
     import.meta.hot.accept(() => {
+        isHotReloading = true;
+        logger.log('Hot reload detected, starting reconnection process');
+
+        // 第一步：清理旧的组件关系
         setTimeout(() => {
             cleanupComponentRelations();
-        }, 50);
+
+            // 第二步：执行重新连接
+            setTimeout(() => {
+                executeHotReloadReconnect();
+                isHotReloading = false;
+                logger.log('Hot reload reconnection completed');
+            }, 30);
+        }, 20);
     });
 }
 
@@ -246,7 +316,7 @@ export function useChildren(componentName: string, parentName: string) {
 
     // 如果没连接上，监听父组件注册事件
     if (!connected) {
-        const parentRegisteredHandler = (eventData: any) => {
+        const parentRegisteredHandler = (eventData: { name: string; parent: ParentContext }) => {
             if (eventData.name === parentName) {
                 connected = linkParent();
                 if (connected) {
@@ -258,7 +328,7 @@ export function useChildren(componentName: string, parentName: string) {
     }
 
     // 监听父组件卸载事件
-    const parentUnmountedHandler = (eventData: any) => {
+    const parentUnmountedHandler = (eventData: { name: string }) => {
         if (eventData.name === parentName && parentRef.value) {
             parentRef.value = null;
             parentExposed.value = {};
@@ -290,28 +360,199 @@ export function useChildren(componentName: string, parentName: string) {
 }
 
 /**
- * 监听子组件事件
+ * 监听子组件事件（返回取消监听函数）
  */
-export function onChildEvent(parentName: string, event: string, handler: Function) {
-    eventBus.on(`parent:${parentName}:${event}`, eventData => {
+export function onChildEvent(
+    parentName: string,
+    event: string,
+    handler: (data?: any, childId?: string, childName?: string) => void
+): () => void {
+    const eventHandler = (eventData: { data?: any; childId: string; childName: string }) => {
         handler(eventData.data, eventData.childId, eventData.childName);
-    });
-}
-
-/**
- * 监听父组件事件
- */
-export function onParentEvent(childId: string, event: string, handler: Function) {
-    // 修复类型问题：将 Function 转换为 EventCallback
-    const eventCallback = (data?: any, ...args: any[]) => {
-        handler(data, ...args);
     };
-    eventBus.on(`child:${childId}:${event}`, eventCallback);
+
+    eventBus.on(`parent:${parentName}:${event}`, eventHandler);
 
     // 返回取消监听函数
     return () => {
-        eventBus.off(`child:${childId}:${event}`, eventCallback);
+        eventBus.off(`parent:${parentName}:${event}`, eventHandler);
     };
+}
+
+/**
+ * 监听父组件事件（返回取消监听函数）
+ */
+export function onParentEvent(childId: string, event: string, handler: (data?: any) => void): () => void {
+    eventBus.on(`child:${childId}:${event}`, handler);
+
+    // 返回取消监听函数
+    return () => {
+        eventBus.off(`child:${childId}:${event}`, handler);
+    };
+}
+
+/**
+ * 自动取消监听的事件注册 - 单个事件
+ */
+export function useParentEvent(
+    childId: string,
+    event: string,
+    handler: (data?: any) => void,
+    autoClean = true,
+    hotReloadReconnect = true
+): () => void {
+    const instance = getCurrentInstance();
+    const unsubscribe = onParentEvent(childId, event, handler);
+
+    // 热更新重新注册支持
+    if (hotReloadReconnect && instance) {
+        const reconnectKey = `parent-event-${childId}-${event}`;
+        const reconnectCallback = () => {
+            logger.log(`Reconnecting parent event: ${event} for child: ${childId}`);
+            onParentEvent(childId, event, handler);
+        };
+
+        registerHotReloadReconnect(reconnectKey, reconnectCallback);
+
+        // 组件卸载时清理重新注册回调
+        onUnmounted(() => {
+            unregisterHotReloadReconnect(reconnectKey, reconnectCallback);
+        });
+    }
+
+    // 自动在组件卸载时清理
+    if (autoClean && instance) {
+        onUnmounted(unsubscribe);
+    }
+
+    return unsubscribe;
+}
+
+/**
+ * 自动取消监听的事件注册 - 批量事件
+ */
+export function useParentEvents(
+    childId: string,
+    events: Record<string, (data?: any) => void>,
+    autoClean = true,
+    hotReloadReconnect = true
+): () => void {
+    const instance = getCurrentInstance();
+    const cleanups: Function[] = [];
+
+    Object.entries(events).forEach(([event, handler]) => {
+        const unsubscribe = onParentEvent(childId, event, handler);
+        cleanups.push(unsubscribe);
+
+        // 热更新重新注册支持
+        if (hotReloadReconnect && instance) {
+            const reconnectKey = `parent-events-${childId}-${event}`;
+            const reconnectCallback = () => {
+                logger.log(`Reconnecting parent event: ${event} for child: ${childId}`);
+                onParentEvent(childId, event, handler);
+            };
+
+            registerHotReloadReconnect(reconnectKey, reconnectCallback);
+
+            // 组件卸载时清理重新注册回调
+            onUnmounted(() => {
+                unregisterHotReloadReconnect(reconnectKey, reconnectCallback);
+            });
+        }
+    });
+
+    const cleanupAll = () => {
+        cleanups.forEach(cleanup => cleanup());
+        cleanups.length = 0;
+    };
+
+    if (autoClean && instance) {
+        onUnmounted(cleanupAll);
+    }
+
+    return cleanupAll;
+}
+
+/**
+ * 自动取消监听的子组件事件注册 - 单个事件
+ */
+export function useChildEvent(
+    parentName: string,
+    event: string,
+    handler: (data?: any, childId?: string, childName?: string) => void,
+    autoClean = true,
+    hotReloadReconnect = true
+): () => void {
+    const instance = getCurrentInstance();
+    const unsubscribe = onChildEvent(parentName, event, handler);
+
+    // 热更新重新注册支持
+    if (hotReloadReconnect && instance) {
+        const reconnectKey = `child-event-${parentName}-${event}`;
+        const reconnectCallback = () => {
+            logger.log(`Reconnecting child event: ${event} for parent: ${parentName}`);
+            onChildEvent(parentName, event, handler);
+        };
+
+        registerHotReloadReconnect(reconnectKey, reconnectCallback);
+
+        // 组件卸载时清理重新注册回调
+        onUnmounted(() => {
+            unregisterHotReloadReconnect(reconnectKey, reconnectCallback);
+        });
+    }
+
+    // 自动在组件卸载时清理
+    if (autoClean && instance) {
+        onUnmounted(unsubscribe);
+    }
+
+    return unsubscribe;
+}
+
+/**
+ * 自动取消监听的子组件事件注册 - 批量事件
+ */
+export function useChildEvents(
+    parentName: string,
+    events: Record<string, (data?: any, childId?: string, childName?: string) => void>,
+    autoClean = true,
+    hotReloadReconnect = true
+): () => void {
+    const instance = getCurrentInstance();
+    const cleanups: Function[] = [];
+
+    Object.entries(events).forEach(([event, handler]) => {
+        const unsubscribe = onChildEvent(parentName, event, handler);
+        cleanups.push(unsubscribe);
+
+        // 热更新重新注册支持
+        if (hotReloadReconnect && instance) {
+            const reconnectKey = `child-events-${parentName}-${event}`;
+            const reconnectCallback = () => {
+                logger.log(`Reconnecting child event: ${event} for parent: ${parentName}`);
+                onChildEvent(parentName, event, handler);
+            };
+
+            registerHotReloadReconnect(reconnectKey, reconnectCallback);
+
+            // 组件卸载时清理重新注册回调
+            onUnmounted(() => {
+                unregisterHotReloadReconnect(reconnectKey, reconnectCallback);
+            });
+        }
+    });
+
+    const cleanupAll = () => {
+        cleanups.forEach(cleanup => cleanup());
+        cleanups.length = 0;
+    };
+
+    if (autoClean && instance) {
+        onUnmounted(cleanupAll);
+    }
+
+    return cleanupAll;
 }
 
 /**
@@ -340,4 +581,27 @@ export function getParent(parentName: string): ParentContext | undefined {
  */
 export function getChild(childId: string): ChildContext | undefined {
     return childMap.get(childId);
+}
+
+/**
+ * 手动触发热更新重新连接（用于调试）
+ */
+export function manualHotReloadReconnect(): void {
+    logger.log('Manual hot reload reconnection triggered');
+    executeHotReloadReconnect();
+}
+
+/**
+ * 获取热更新状态
+ */
+export function getHotReloadStatus(): { isHotReloading: boolean; reconnectCallbacksCount: number } {
+    let totalCallbacks = 0;
+    hotReloadReconnectCallbacks.forEach(callbacks => {
+        totalCallbacks += callbacks.length;
+    });
+
+    return {
+        isHotReloading,
+        reconnectCallbacksCount: totalCallbacks
+    };
 }
