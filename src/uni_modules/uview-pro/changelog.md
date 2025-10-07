@@ -1,3 +1,26 @@
+## 0.2.4（2025-10-08）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **i18n:** 修复切换中英文切换失效问题 ([d61d817](https://github.com/anyup/uView-Pro/commit/d61d81790aecd774435999c9ab8c3672a2df38ad))
+- **style:** 修复文本溢出样式u-line-1生成错误问题 ([5d2bf3c](https://github.com/anyup/uView-Pro/commit/5d2bf3ca080f8c5bc9fe40bb1f421c28f7ee8017))
+
+### ✨ Features | 新功能
+
+- **calendar:** 增加日历组件的页面显示模式 ([af13724](https://github.com/anyup/uView-Pro/commit/af137241e644a5f1e99b07e580c8d3aca9250e9e))
+
+### ♻️ Code Refactoring | 代码重构
+
+- 优化代码格式和可读性 ([2e338d5](https://github.com/anyup/uView-Pro/commit/2e338d5cb2dbf3ce42f38c9581c04164b852f992))
+- **useComponent:** 重构组件事件处理并添加热更新支持 ([80f7e5e](https://github.com/anyup/uView-Pro/commit/80f7e5efaa2b2ab1668969072cb6d18652d00cc2))
+- **u-collapse:** 重构 u-collapse 组件中的事件处理逻辑 ([6aadfd1](https://github.com/anyup/uView-Pro/commit/6aadfd16d5aefd45f022c8da1612ba1921942f6e))
+- **u-checkbox:** 优化复选框组件的父组件事件处理 ([3b597ea](https://github.com/anyup/uView-Pro/commit/3b597ea2833ca71e5752d097b2f07c143869f0d2))
+- **hooks:** 优化 useComponent 以支持页面级别组件关系管理 ([429192f](https://github.com/anyup/uView-Pro/commit/429192f66ba59a26acb957acfc01d5f318d43fb6))
+
+### 📝 Documentation | 文档
+
+- 更新微信交流群图片链接 ([e67588a](https://github.com/anyup/uView-Pro/commit/e67588ae392d5150ec4d271ce45e65fe32372460))
+
 ## 0.2.3（2025-10-06）
 
 ### 🐛 Bug Fixes | Bug 修复
