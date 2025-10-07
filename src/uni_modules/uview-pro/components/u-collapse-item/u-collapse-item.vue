@@ -41,8 +41,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, computed, onUnmounted } from 'vue';
-import { $u, useChildren, onParentEvent } from '../..';
+import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, computed } from 'vue';
+import { $u, useChildren, useParentEvents } from '../..';
 import { CollapseItemProps } from './types';
 
 /**
@@ -176,38 +176,31 @@ function queryRect() {
         });
 }
 
-// 监听父组件的事件
-const unsubscribeOpenSingle = onParentEvent(childId, 'openSingle', (data: any) => {
-    // 只有目标项展开，其他都关闭
-    const shouldShow = data.targetName === itemName.value;
-    setShowState(shouldShow);
-});
-
-const unsubscribeCloseAll = onParentEvent(childId, 'closeAll', () => {
-    setShowState(false);
-});
-
-const unsubscribeSetMultiple = onParentEvent(childId, 'setMultiple', (data: any) => {
-    const shouldShow = data.targetNames.includes(itemName.value);
-    setShowState(shouldShow);
-});
-
-const unsubscribeToggleSingle = onParentEvent(childId, 'toggleSingle', (data: any) => {
-    // 只有目标项才切换状态
-    if (data.targetName === itemName.value) {
-        setShowState(!isShow.value);
+// 使用自动取消监听注册父组件事件
+useParentEvents(childId, {
+    openSingle: (data: any) => {
+        // 只有目标项展开，其他都关闭
+        const shouldShow = data.targetName === itemName.value;
+        setShowState(shouldShow);
+    },
+    closeAll: () => {
+        setShowState(false);
+    },
+    setMultiple: (data: any) => {
+        const shouldShow = data.targetNames.includes(itemName.value);
+        setShowState(shouldShow);
+    },
+    toggleSingle: (data: any) => {
+        // 只有目标项才切换状态
+        if (data.targetName === itemName.value) {
+            setShowState(!isShow.value);
+        }
     }
-});
-
-// 监听父组件的重连事件（热更新后）
-const unsubscribeReconnect = onParentEvent(childId, 'reconnect', () => {
-    console.log('Collapse item reconnected to parent after hot update');
 });
 
 onMounted(() => {
     // 关键修复：根据 open 属性设置初始状态
     setShowState(props.open);
-
     // 初始化
     init();
 });
@@ -230,25 +223,6 @@ watch(
     },
     { deep: true, immediate: true }
 );
-
-// 组件卸载时清理事件监听
-onUnmounted(() => {
-    unsubscribeOpenSingle();
-    unsubscribeCloseAll();
-    unsubscribeSetMultiple();
-    unsubscribeToggleSingle();
-    unsubscribeReconnect();
-});
-
-// 热更新处理
-if (import.meta.hot) {
-    import.meta.hot.accept(() => {
-        setTimeout(() => {
-            console.log('Collapse item hot updated, reinitializing...');
-            init();
-        }, 150);
-    });
-}
 
 defineExpose({
     init,

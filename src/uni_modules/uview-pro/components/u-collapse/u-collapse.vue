@@ -161,15 +161,6 @@ function init() {
     }, 150);
 }
 
-// 热更新处理 - 重新连接所有子组件
-if (import.meta.hot) {
-    import.meta.hot.accept(() => {
-        setTimeout(() => {
-            broadcast('reconnect', {});
-        }, 100);
-    });
-}
-
 // 使用defineExpose暴露给外部
 defineExpose({
     // props
