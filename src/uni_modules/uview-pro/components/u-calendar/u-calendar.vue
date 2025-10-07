@@ -1,5 +1,111 @@
 <template>
+    <view v-if="props.isPage" class="u-calendar" :class="props.customClass" :style="$u.toStyle(customStyle)">
+        <!-- <view class="u-calendar__header">
+            <view class="u-calendar__header__text" v-if="!slots.tooltip">
+                {{ toolTip }}
+            </view>
+            <slot v-else name="tooltip" />
+        </view> -->
+        <view class="u-calendar__action u-flex u-row-center">
+            <view class="u-calendar__action__icon">
+                <u-icon
+                    v-if="changeYear"
+                    name="arrow-left-double"
+                    :color="yearArrowColor"
+                    @click="changeYearHandler(0)"
+                ></u-icon>
+            </view>
+            <view class="u-calendar__action__icon">
+                <u-icon
+                    v-if="changeMonth"
+                    name="arrow-left"
+                    :color="monthArrowColor"
+                    @click="changeMonthHandler(0)"
+                ></u-icon>
+            </view>
+            <view class="u-calendar__action__text">{{ showTitle }}</view>
+            <view class="u-calendar__action__icon">
+                <u-icon
+                    v-if="changeMonth"
+                    name="arrow-right"
+                    :color="monthArrowColor"
+                    @click="changeMonthHandler(1)"
+                ></u-icon>
+            </view>
+            <view class="u-calendar__action__icon">
+                <u-icon
+                    v-if="changeYear"
+                    name="arrow-right-double"
+                    :color="yearArrowColor"
+                    @click="changeYearHandler(1)"
+                ></u-icon>
+            </view>
+        </view>
+        <view class="u-calendar__week-day">
+            <view class="u-calendar__week-day__text" v-for="(item, index) in weekDayZh" :key="index">{{ item }}</view>
+        </view>
+        <view class="u-calendar__content">
+            <!-- 前置空白部分 -->
+            <block v-for="(item, index) in weekdayArr" :key="index">
+                <view class="u-calendar__content__item"></view>
+            </block>
+            <view
+                class="u-calendar__content__item"
+                :class="{
+                    'u-hover-class': openDisAbled(year, month, index + 1),
+                    'u-calendar__content--start-date':
+                        (mode == 'range' && startDate == `${year}-${month}-${index + 1}`) || mode == 'date',
+                    'u-calendar__content--end-date':
+                        (mode == 'range' && endDate == `${year}-${month}-${index + 1}`) || mode == 'date'
+                }"
+                :style="{ backgroundColor: getColor(index, 1) }"
+                v-for="(item, index) in daysArr"
+                :key="index"
+                @tap="dateClick(index)"
+            >
+                <view class="u-calendar__content__item__inner" :style="{ color: getColor(index, 2) }">
+                    <view>{{ index + 1 }}</view>
+                </view>
+                <view
+                    class="u-calendar__content__item__tips"
+                    :style="{ color: activeColor }"
+                    v-if="mode == 'range' && startDate == `${year}-${month}-${index + 1}` && startDate != endDate"
+                >
+                    {{ startText }}
+                </view>
+                <view
+                    class="u-calendar__content__item__tips"
+                    :style="{ color: activeColor }"
+                    v-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`"
+                >
+                    {{ endText }}
+                </view>
+                <view
+                    v-if="
+                        props.showLunar &&
+                        !(mode == 'range' && startDate == `${year}-${month}-${index + 1}` && startDate != endDate) &&
+                        !(mode == 'range' && endDate == `${year}-${month}-${index + 1}`)
+                    "
+                    class="u-calendar__content__item__tips"
+                    :style="{ color: getColor(index, 2) }"
+                >
+                    {{ lunarArr[index]?.dayCn === '初一' ? lunarArr[index].monthCn : (lunarArr[index]?.dayCn ?? '') }}
+                </view>
+            </view>
+            <view class="u-calendar__content__bg-month">{{ month }}</view>
+        </view>
+        <!-- <view class="u-calendar__bottom">
+            <view class="u-calendar__bottom__choose">
+                <text>{{ mode == 'date' ? activeDate : startDate }}</text>
+                <text v-if="endDate">至{{ endDate }}</text>
+            </view>
+            <view class="u-calendar__bottom__btn">
+                <u-button :type="btnType" shape="circle" size="default" @click="btnFix(false)">确定</u-button>
+            </view>
+        </view> -->
+    </view>
     <u-popup
+        v-else
         :maskCloseAble="maskCloseAble"
         mode="bottom"
         :popup="false"
@@ -20,21 +126,43 @@
             </view>
             <view class="u-calendar__action u-flex u-row-center">
                 <view class="u-calendar__action__icon">
-                    <u-icon v-if="changeYear" name="arrow-left-double" :color="yearArrowColor" @click="changeYearHandler(0)"></u-icon>
+                    <u-icon
+                        v-if="changeYear"
+                        name="arrow-left-double"
+                        :color="yearArrowColor"
+                        @click="changeYearHandler(0)"
+                    ></u-icon>
                 </view>
                 <view class="u-calendar__action__icon">
-                    <u-icon v-if="changeMonth" name="arrow-left" :color="monthArrowColor" @click="changeMonthHandler(0)"></u-icon>
+                    <u-icon
+                        v-if="changeMonth"
+                        name="arrow-left"
+                        :color="monthArrowColor"
+                        @click="changeMonthHandler(0)"
+                    ></u-icon>
                 </view>
                 <view class="u-calendar__action__text">{{ showTitle }}</view>
                 <view class="u-calendar__action__icon">
-                    <u-icon v-if="changeMonth" name="arrow-right" :color="monthArrowColor" @click="changeMonthHandler(1)"></u-icon>
+                    <u-icon
+                        v-if="changeMonth"
+                        name="arrow-right"
+                        :color="monthArrowColor"
+                        @click="changeMonthHandler(1)"
+                    ></u-icon>
                 </view>
                 <view class="u-calendar__action__icon">
-                    <u-icon v-if="changeYear" name="arrow-right-double" :color="yearArrowColor" @click="changeYearHandler(1)"></u-icon>
+                    <u-icon
+                        v-if="changeYear"
+                        name="arrow-right-double"
+                        :color="yearArrowColor"
+                        @click="changeYearHandler(1)"
+                    ></u-icon>
                 </view>
             </view>
             <view class="u-calendar__week-day">
-                <view class="u-calendar__week-day__text" v-for="(item, index) in weekDayZh" :key="index">{{ item }}</view>
+                <view class="u-calendar__week-day__text" v-for="(item, index) in weekDayZh" :key="index">
+                    {{ item }}
+                </view>
             </view>
             <view class="u-calendar__content">
                 <!-- 前置空白部分 -->
@@ -45,8 +173,10 @@
                     class="u-calendar__content__item"
                     :class="{
                         'u-hover-class': openDisAbled(year, month, index + 1),
-                        'u-calendar__content--start-date': (mode == 'range' && startDate == `${year}-${month}-${index + 1}`) || mode == 'date',
-                        'u-calendar__content--end-date': (mode == 'range' && endDate == `${year}-${month}-${index + 1}`) || mode == 'date'
+                        'u-calendar__content--start-date':
+                            (mode == 'range' && startDate == `${year}-${month}-${index + 1}`) || mode == 'date',
+                        'u-calendar__content--end-date':
+                            (mode == 'range' && endDate == `${year}-${month}-${index + 1}`) || mode == 'date'
                     }"
                     :style="{ backgroundColor: getColor(index, 1) }"
                     v-for="(item, index) in daysArr"
@@ -60,21 +190,32 @@
                         class="u-calendar__content__item__tips"
                         :style="{ color: activeColor }"
                         v-if="mode == 'range' && startDate == `${year}-${month}-${index + 1}` && startDate != endDate"
-                        >{{ startText }}</view
                     >
-                    <view class="u-calendar__content__item__tips" :style="{ color: activeColor }" v-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`">{{
-                        endText
-                    }}</view>
+                        {{ startText }}
+                    </view>
+                    <view
+                        class="u-calendar__content__item__tips"
+                        :style="{ color: activeColor }"
+                        v-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`"
+                    >
+                        {{ endText }}
+                    </view>
                     <view
                         v-if="
                             props.showLunar &&
-                            !(mode == 'range' && startDate == `${year}-${month}-${index + 1}` && startDate != endDate) &&
+                            !(
+                                mode == 'range' &&
+                                startDate == `${year}-${month}-${index + 1}` &&
+                                startDate != endDate
+                            ) &&
                             !(mode == 'range' && endDate == `${year}-${month}-${index + 1}`)
                         "
                         class="u-calendar__content__item__tips"
                         :style="{ color: getColor(index, 2) }"
                     >
-                        {{ lunarArr[index]?.dayCn === '初一' ? lunarArr[index].monthCn : (lunarArr[index]?.dayCn ?? '') }}
+                        {{
+                            lunarArr[index]?.dayCn === '初一' ? lunarArr[index].monthCn : (lunarArr[index]?.dayCn ?? '')
+                        }}
                     </view>
                 </view>
                 <view class="u-calendar__content__bg-month">{{ month }}</view>
@@ -92,15 +233,25 @@
     </u-popup>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-calendar',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, useSlots } from 'vue';
 import { $u } from '../..';
 import { CalendarProps, type CalendarEmits } from './types';
 import Calendar from '../../libs/util/calendar';
 
-defineOptions({
-    name: 'u-calendar'
-});
 /**
  * calendar 日历
  * @description 此组件用于单个选择日期，范围选择日期等，日历被包裹在底部弹起的容器中。
@@ -372,6 +523,9 @@ function getLunar(year, month, day) {
  * 日期点击事件
  */
 function dateClick(dayIdx: number) {
+    if (props.isPage) {
+        return;
+    }
     const d = dayIdx + 1;
     if (!openDisAbled(year.value, month.value, d)) {
         day.value = d;
@@ -379,7 +533,8 @@ function dateClick(dayIdx: number) {
         if (props.mode == 'date') {
             activeDate.value = date;
         } else {
-            let compare = new Date(date.replace(/\-/g, '/')).getTime() < new Date(startDate.value.replace(/\-/g, '/')).getTime();
+            let compare =
+                new Date(date.replace(/\-/g, '/')).getTime() < new Date(startDate.value.replace(/\-/g, '/')).getTime();
             if (isStart.value || compare) {
                 startDate.value = date;
                 startYear.value = year.value;

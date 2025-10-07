@@ -61,7 +61,9 @@ export const CalendarProps = {
     /** 顶部的提示文字 */
     toolTip: { type: String, default: '选择日期' },
     /** 是否显示农历 */
-    showLunar: { type: Boolean, default: false }
+    showLunar: { type: Boolean, default: false },
+    /** 是否在页面中显示 */
+    isPage: { type: Boolean, default: false }
 };
 
 export type CalendarProps = ExtractPropTypes<typeof CalendarProps>;
