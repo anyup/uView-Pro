@@ -6,6 +6,7 @@ import { mitt } from '../util/mitt';
 // 简化类型定义
 interface ParentContext {
     name: string;
+    uid: string; // 添加唯一ID
     addChild: (child: ChildContext) => void;
     removeChild: (childId: string) => void;
     broadcast: (event: string, data?: any) => void;
@@ -17,6 +18,7 @@ interface ParentContext {
 
 interface ChildContext {
     id: string;
+    uid: string; // 添加唯一ID
     name: string;
     emitToParent: (event: string, data?: any) => void;
     getParentExposed: () => Record<string, any>;
@@ -24,9 +26,42 @@ interface ChildContext {
     getExposed: () => Record<string, any>;
 }
 
-// 全局存储
-const parentMap = new Map<string, ParentContext>();
-const childMap = new Map<string, ChildContext>();
+// 全局存储 - 改为页面级别存储
+const pageComponentMaps = new Map<
+    string,
+    {
+        parentMap: Map<string, ParentContext>;
+        childMap: Map<string, ChildContext>;
+    }
+>();
+
+// 获取当前页面的组件映射
+function getCurrentPageMaps() {
+    // 在uniapp中，可以通过getCurrentPages()获取当前页面路径
+    const pages = getCurrentPages();
+    const currentPage = pages[pages.length - 1];
+    const pagePath = currentPage?.route || 'default';
+
+    if (!pageComponentMaps.has(pagePath)) {
+        pageComponentMaps.set(pagePath, {
+            parentMap: new Map<string, ParentContext>(),
+            childMap: new Map<string, ChildContext>()
+        });
+    }
+
+    return pageComponentMaps.get(pagePath)!;
+}
+
+// 清理指定页面的组件关系
+function cleanupPageComponentRelations(pagePath: string) {
+    if (pageComponentMaps.has(pagePath)) {
+        const pageMaps = pageComponentMaps.get(pagePath)!;
+        pageMaps.parentMap.clear();
+        pageMaps.childMap.clear();
+        pageComponentMaps.delete(pagePath);
+        logger.log(`Cleaned up component relations for page: ${pagePath}`);
+    }
+}
 
 // 事件常量
 const PARENT_REGISTERED_EVENT = 'parent:registered';
@@ -35,10 +70,10 @@ const CHILD_REGISTERED_EVENT = 'child:registered';
 
 // 创建事件总线实例
 type EventBusEvents = {
-    [PARENT_REGISTERED_EVENT]: { name: string; parent: ParentContext };
-    [PARENT_UNMOUNTED_EVENT]: { name: string };
-    [CHILD_REGISTERED_EVENT]: { id: string; name: string; parentName: string };
-    [key: `parent:${string}:${string}`]: { data?: any; childId: string; childName: string };
+    [PARENT_REGISTERED_EVENT]: { name: string; parent: ParentContext; pagePath: string };
+    [PARENT_UNMOUNTED_EVENT]: { name: string; pagePath: string };
+    [CHILD_REGISTERED_EVENT]: { id: string; name: string; parentName: string; pagePath: string };
+    [key: `parent:${string}:${string}`]: { data?: any; childId: string; childName: string; pagePath: string };
     [key: `child:${string}:${string}`]: any;
 };
 
@@ -94,8 +129,7 @@ function executeHotReloadReconnect(): void {
 // 热更新清理函数
 export function cleanupComponentRelations(): void {
     logger.log('Cleaning up component relations for hot reload');
-    parentMap.clear();
-    childMap.clear();
+    pageComponentMaps.clear();
     eventBus.clear();
 }
 
@@ -114,8 +148,8 @@ if (import.meta.hot) {
                 executeHotReloadReconnect();
                 isHotReloading = false;
                 logger.log('Hot reload reconnection completed');
-            }, 30);
-        }, 20);
+            }, 100); // 增加延迟确保组件已重新创建
+        }, 50);
     });
 }
 
@@ -124,6 +158,27 @@ if (import.meta.hot) {
  */
 function generateInstanceId(componentName: string): string {
     return `${componentName}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+/**
+ * 生成组件唯一UID
+ */
+function generateComponentUid(): string {
+    return `uid_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+/**
+ * 获取当前页面路径
+ */
+function getCurrentPagePath(): string {
+    // 在uniapp中获取当前页面路径
+    try {
+        const pages = getCurrentPages();
+        const currentPage = pages[pages.length - 1];
+        return currentPage?.route || 'default';
+    } catch (error) {
+        return 'default';
+    }
 }
 
 /**
@@ -139,22 +194,32 @@ export function useParent(componentName: string) {
         throw new Error('Component name is required for useParent');
     }
 
+    const pagePath = getCurrentPagePath();
+    const pageMaps = getCurrentPageMaps();
+
+    // 生成父组件唯一UID
+    const parentUid = generateComponentUid();
+
+    // 使用组合名称：组件名 + UID，确保唯一性
+    const uniqueParentName = `${componentName}-${parentUid}`;
+
     // 热更新时清理旧的父组件
-    if (parentMap.has(componentName)) {
-        logger.log(`Cleaning up existing parent ${componentName} for hot reload`);
-        parentMap.delete(componentName);
+    if (pageMaps.parentMap.has(uniqueParentName)) {
+        logger.log(`Cleaning up existing parent ${uniqueParentName} for hot reload on page ${pagePath}`);
+        pageMaps.parentMap.delete(uniqueParentName);
     }
 
     const children = reactive<ChildContext[]>([]);
 
     // 父组件上下文
     const parentContext: ParentContext = {
-        name: componentName,
+        name: uniqueParentName, // 使用唯一名称
+        uid: parentUid, // 添加唯一ID
 
         addChild(child: ChildContext) {
             if (!children.find(c => c.id === child.id)) {
                 children.push(child);
-                logger.log(`Parent ${componentName} added child: ${child.name}`);
+                logger.log(`Parent ${uniqueParentName} on page ${pagePath} added child: ${child.name}`);
             }
         },
 
@@ -162,12 +227,12 @@ export function useParent(componentName: string) {
             const index = children.findIndex(c => c.id === childId);
             if (index > -1) {
                 children.splice(index, 1);
-                logger.log(`Parent ${componentName} removed child: ${childId}`);
+                logger.log(`Parent ${uniqueParentName} on page ${pagePath} removed child: ${childId}`);
             }
         },
 
         broadcast(event: string, data?: any) {
-            logger.log(`Parent ${componentName} broadcasting event: ${event}`);
+            logger.log(`Parent ${uniqueParentName} on page ${pagePath} broadcasting event: ${event}`);
             children.forEach(child => {
                 eventBus.emit(`child:${child.id}:${event}`, data);
             });
@@ -186,7 +251,7 @@ export function useParent(componentName: string) {
             if (child && child.getExposed) {
                 return child.getExposed();
             }
-            logger.warn(`Child ${childId} not found or does not have getExposed method`);
+            logger.warn(`Child ${childId} not found or does not have getExposed method on page ${pagePath}`);
             return {};
         },
 
@@ -206,26 +271,35 @@ export function useParent(componentName: string) {
     };
 
     // 注册父组件并广播事件
-    parentMap.set(componentName, parentContext);
-    logger.log(`Parent ${componentName} registered`);
+    pageMaps.parentMap.set(uniqueParentName, parentContext);
+    logger.log(`Parent ${uniqueParentName} registered on page ${pagePath}`);
 
-    // 广播父组件注册事件
-    eventBus.emit(PARENT_REGISTERED_EVENT, { name: componentName, parent: parentContext });
+    // 广播父组件注册事件（包含页面路径信息）
+    eventBus.emit(PARENT_REGISTERED_EVENT, {
+        name: uniqueParentName,
+        parent: parentContext,
+        pagePath
+    });
 
     // 组件卸载时清理
     onUnmounted(() => {
-        parentMap.delete(componentName);
-        eventBus.emit(PARENT_UNMOUNTED_EVENT, { name: componentName });
-        logger.log(`Parent ${componentName} unmounted`);
+        pageMaps.parentMap.delete(uniqueParentName);
+        eventBus.emit(PARENT_UNMOUNTED_EVENT, {
+            name: uniqueParentName,
+            pagePath
+        });
+        logger.log(`Parent ${uniqueParentName} unmounted from page ${pagePath}`);
     });
 
     return {
-        parentName: componentName,
+        parentName: uniqueParentName, // 返回唯一名称
+        parentUid, // 返回唯一ID
         children,
         broadcast: parentContext.broadcast,
         getChildren: parentContext.getChildren,
         getChildExposed: parentContext.getChildExposed,
-        getChildrenExposed: parentContext.getChildrenExposed
+        getChildrenExposed: parentContext.getChildrenExposed,
+        pagePath
     };
 }
 
@@ -242,14 +316,17 @@ export function useChildren(componentName: string, parentName: string) {
         throw new Error('Component name and parent name are required for useChildren');
     }
 
+    const pagePath = getCurrentPagePath();
+    const pageMaps = getCurrentPageMaps();
     const instanceId = generateInstanceId(componentName);
+    const childUid = generateComponentUid(); // 生成子组件唯一UID
     const parentRef = ref<ParentContext | null>(null);
     const parentExposed = ref<Record<string, any>>({});
 
     // 热更新时清理旧的子组件
-    if (childMap.has(instanceId)) {
-        logger.log(`Cleaning up existing child ${componentName} for hot reload`);
-        childMap.delete(instanceId);
+    if (pageMaps.childMap.has(instanceId)) {
+        logger.log(`Cleaning up existing child ${componentName} for hot reload on page ${pagePath}`);
+        pageMaps.childMap.delete(instanceId);
     }
 
     // 获取父组件暴露内容
@@ -267,14 +344,29 @@ export function useChildren(componentName: string, parentName: string) {
         return instance.exposed || {};
     };
 
-    // 链接到父组件
+    // 链接到父组件（只在当前页面查找）
     const linkParent = (): boolean => {
-        const parent = parentMap.get(parentName);
+        // 在当前页面中查找匹配的父组件
+        let parent: ParentContext | undefined;
+
+        // 首先尝试精确匹配
+        parent = pageMaps.parentMap.get(parentName);
+
+        // 如果精确匹配失败，尝试前缀匹配（支持向后兼容）
+        if (!parent) {
+            for (const [key, value] of pageMaps.parentMap.entries()) {
+                if (key.startsWith(parentName + '-')) {
+                    parent = value;
+                    break;
+                }
+            }
+        }
+
         if (parent) {
             parentRef.value = parent;
             parent.addChild(childContext);
             getParentExposed();
-            logger.log(`Child ${componentName} linked to parent ${parentName}`);
+            logger.log(`Child ${componentName} linked to parent ${parent.name} on page ${pagePath}`);
             return true;
         }
         return false;
@@ -283,14 +375,18 @@ export function useChildren(componentName: string, parentName: string) {
     // 子组件上下文
     const childContext: ChildContext = {
         id: instanceId,
+        uid: childUid, // 添加唯一ID
         name: componentName,
 
         emitToParent(event: string, data?: any) {
-            eventBus.emit(`parent:${parentName}:${event}`, {
-                data,
-                childId: instanceId,
-                childName: componentName
-            });
+            if (parentRef.value) {
+                eventBus.emit(`parent:${parentRef.value.name}:${event}`, {
+                    data,
+                    childId: instanceId,
+                    childName: componentName,
+                    pagePath
+                });
+            }
         },
 
         getParentExposed,
@@ -301,23 +397,28 @@ export function useChildren(componentName: string, parentName: string) {
     };
 
     // 注册子组件
-    childMap.set(instanceId, childContext);
-    logger.log(`Child ${componentName} registered`);
+    pageMaps.childMap.set(instanceId, childContext);
+    logger.log(`Child ${componentName} registered on page ${pagePath}`);
 
     // 广播子组件注册事件
     eventBus.emit(CHILD_REGISTERED_EVENT, {
         id: instanceId,
         name: componentName,
-        parentName: parentName
+        parentName: parentName,
+        pagePath
     });
 
     // 立即尝试连接父组件
     let connected = linkParent();
 
-    // 如果没连接上，监听父组件注册事件
+    // 如果没连接上，监听父组件注册事件（只监听当前页面的父组件）
     if (!connected) {
-        const parentRegisteredHandler = (eventData: { name: string; parent: ParentContext }) => {
-            if (eventData.name === parentName) {
+        const parentRegisteredHandler = (eventData: { name: string; parent: ParentContext; pagePath: string }) => {
+            // 检查是否是我们要连接的父组件（精确匹配或前缀匹配）
+            if (
+                (eventData.name === parentName || eventData.name.startsWith(parentName + '-')) &&
+                eventData.pagePath === pagePath
+            ) {
                 connected = linkParent();
                 if (connected) {
                     eventBus.off(PARENT_REGISTERED_EVENT, parentRegisteredHandler);
@@ -327,12 +428,16 @@ export function useChildren(componentName: string, parentName: string) {
         eventBus.on(PARENT_REGISTERED_EVENT, parentRegisteredHandler);
     }
 
-    // 监听父组件卸载事件
-    const parentUnmountedHandler = (eventData: { name: string }) => {
-        if (eventData.name === parentName && parentRef.value) {
+    // 监听父组件卸载事件（只监听当前页面的父组件）
+    const parentUnmountedHandler = (eventData: { name: string; pagePath: string }) => {
+        if (
+            (eventData.name === parentName || eventData.name.startsWith(parentName + '-')) &&
+            eventData.pagePath === pagePath &&
+            parentRef.value
+        ) {
             parentRef.value = null;
             parentExposed.value = {};
-            logger.log(`Parent ${parentName} unmounted, child ${componentName} disconnected`);
+            logger.log(`Parent ${parentName} unmounted from page ${pagePath}, child ${componentName} disconnected`);
         }
     };
     eventBus.on(PARENT_UNMOUNTED_EVENT, parentUnmountedHandler);
@@ -342,20 +447,22 @@ export function useChildren(componentName: string, parentName: string) {
         if (parentRef.value) {
             parentRef.value.removeChild(instanceId);
         }
-        childMap.delete(instanceId);
+        pageMaps.childMap.delete(instanceId);
         eventBus.off(PARENT_REGISTERED_EVENT);
         eventBus.off(PARENT_UNMOUNTED_EVENT, parentUnmountedHandler);
-        logger.log(`Child ${componentName} unmounted`);
+        logger.log(`Child ${componentName} unmounted from page ${pagePath}`);
     });
 
     return {
         childId: instanceId,
+        childUid, // 返回唯一ID
         childName: componentName,
         parent: parentRef,
         emitToParent: childContext.emitToParent,
         getParentExposed,
         parentExposed: computed(() => parentExposed.value),
-        getExposed: childContext.getExposed
+        getExposed: childContext.getExposed,
+        pagePath
     };
 }
 
@@ -367,8 +474,13 @@ export function onChildEvent(
     event: string,
     handler: (data?: any, childId?: string, childName?: string) => void
 ): () => void {
-    const eventHandler = (eventData: { data?: any; childId: string; childName: string }) => {
-        handler(eventData.data, eventData.childId, eventData.childName);
+    const pagePath = getCurrentPagePath();
+
+    const eventHandler = (eventData: { data?: any; childId: string; childName: string; pagePath: string }) => {
+        // 只处理当前页面的事件
+        if (eventData.pagePath === pagePath) {
+            handler(eventData.data, eventData.childId, eventData.childName);
+        }
     };
 
     eventBus.on(`parent:${parentName}:${event}`, eventHandler);
@@ -556,31 +668,71 @@ export function useChildEvents(
 }
 
 /**
- * 检查父组件是否存在
+ * 检查父组件是否存在（在当前页面）
  */
 export function hasParent(parentName: string): boolean {
-    return parentMap.has(parentName);
+    const pageMaps = getCurrentPageMaps();
+
+    // 精确匹配
+    if (pageMaps.parentMap.has(parentName)) {
+        return true;
+    }
+
+    // 前缀匹配（支持向后兼容）
+    for (const key of pageMaps.parentMap.keys()) {
+        if (key.startsWith(parentName + '-')) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 /**
- * 获取所有已注册的父组件名称
+ * 获取所有已注册的父组件名称（当前页面）
  */
 export function getRegisteredParents(): string[] {
-    return Array.from(parentMap.keys());
+    const pageMaps = getCurrentPageMaps();
+    return Array.from(pageMaps.parentMap.keys());
 }
 
 /**
- * 获取父组件实例
+ * 获取父组件实例（当前页面）
  */
 export function getParent(parentName: string): ParentContext | undefined {
-    return parentMap.get(parentName);
+    const pageMaps = getCurrentPageMaps();
+
+    // 精确匹配
+    let parent = pageMaps.parentMap.get(parentName);
+    if (parent) {
+        return parent;
+    }
+
+    // 前缀匹配（支持向后兼容）
+    for (const [key, value] of pageMaps.parentMap.entries()) {
+        if (key.startsWith(parentName + '-')) {
+            return value;
+        }
+    }
+
+    return undefined;
 }
 
 /**
- * 获取子组件实例
+ * 获取子组件实例（当前页面）
  */
 export function getChild(childId: string): ChildContext | undefined {
-    return childMap.get(childId);
+    const pageMaps = getCurrentPageMaps();
+    return pageMaps.childMap.get(childId);
+}
+
+/**
+ * 清理当前页面的组件关系（用于页面卸载时调用）
+ */
+export function cleanupCurrentPageComponents(): void {
+    const pagePath = getCurrentPagePath();
+    cleanupPageComponentRelations(pagePath);
+    logger.log(`Cleaned up component relations for current page: ${pagePath}`);
 }
 
 /**
