@@ -224,7 +224,7 @@ export function createApp() {
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-pay.png" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/wechat-pay.png" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png" width="250" height="345" ></td>
     </tr>
     <tr>

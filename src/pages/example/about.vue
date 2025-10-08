@@ -118,7 +118,7 @@ const infoList = ref([
         title: '捐赠',
         label: '每一份捐赠都是您对我的鼓励',
         click: () => {
-            preview('https://ik.imagekit.io/anyup/images/social/weixin-pay.png');
+            preview('https://ik.imagekit.io/anyup/images/social/wechat-pay.png');
         }
     }
 ]);
