@@ -29,7 +29,6 @@
                 :value="modelValue"
                 @confirm="search"
                 @input="inputChange"
-                :disabled="disabled"
                 @focus="getFocus"
                 :focus="focus"
                 :maxlength="maxlength"
@@ -42,7 +41,8 @@
                     {
                         textAlign: inputAlign,
                         color: color,
-                        backgroundColor: bgColor
+                        backgroundColor: bgColor,
+                        pointerEvents: disabled ? 'none' : 'auto'
                     },
                     inputStyle
                 ]"
