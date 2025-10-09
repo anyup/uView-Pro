@@ -42,7 +42,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, computed } from 'vue';
-import { $u, useChildren, useParentEvents } from '../..';
+import { $u, useChildren } from '../..';
 import { CollapseItemProps } from './types';
 
 /**
@@ -176,27 +176,31 @@ function queryRect() {
         });
 }
 
-// 使用自动取消监听注册父组件事件
-useParentEvents(childId, {
-    openSingle: (data: any) => {
-        // 只有目标项展开，其他都关闭
-        const shouldShow = data.targetName === itemName.value;
-        setShowState(shouldShow);
-    },
-    closeAll: () => {
-        setShowState(false);
-    },
-    setMultiple: (data: any) => {
-        const shouldShow = data.targetNames.includes(itemName.value);
-        setShowState(shouldShow);
-    },
-    toggleSingle: (data: any) => {
-        // 只有目标项才切换状态
-        if (data.targetName === itemName.value) {
-            setShowState(!isShow.value);
-        }
+// 单选
+function openSingle(data: any) {
+    // 只有目标项展开，其他都关闭
+    const shouldShow = data.targetName === itemName.value;
+    setShowState(shouldShow);
+}
+
+// 关闭所有
+function closeAll() {
+    setShowState(false);
+}
+
+// 多选
+function setMultiple(data: any) {
+    const shouldShow = data.targetNames.includes(itemName.value);
+    setShowState(shouldShow);
+}
+
+// 切换单个
+function toggleSingle(data: any) {
+    // 只有目标项才切换状态
+    if (data.targetName === itemName.value) {
+        setShowState(!isShow.value);
     }
-});
+}
 
 onMounted(() => {
     // 关键修复：根据 open 属性设置初始状态
@@ -236,7 +240,11 @@ defineExpose({
     hoverClass,
     itemName: itemName.value,
     queryRect,
-    setShowState
+    setShowState,
+    openSingle,
+    closeAll,
+    setMultiple,
+    toggleSingle
 });
 </script>
 

@@ -35,7 +35,7 @@ export default {
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { $u, useChildren, useParentEvents } from '../..';
+import { $u, useChildren } from '../..';
 import { CheckboxProps } from './types';
 
 /**
@@ -57,7 +57,7 @@ const props = defineProps(CheckboxProps);
 const emit = defineEmits(['change', 'update:modelValue']);
 
 // 使用子组件Hook
-const { childId, parentExposed } = useChildren('u-checkbox', 'u-checkbox-group');
+const { parentExposed } = useChildren('u-checkbox', 'u-checkbox-group');
 
 // 是否禁用，如果父组件u-checkbox-group禁用的话，将会忽略子组件的配置
 const isDisabled = computed(() => {
@@ -188,24 +188,23 @@ function setValue() {
     }
 }
 
-// 使用自动取消监听注册父组件事件
-useParentEvents(childId, {
-    setChecked: data => {
-        if (!isDisabled.value) {
-            emit('update:modelValue', data.checked);
-            if (data.checked !== props.modelValue) {
-                emitEvent();
-            }
+// 设置组件的modelValue值
+function setChecked(data: any) {
+    if (!isDisabled.value) {
+        emit('update:modelValue', data.checked);
+        if (data.checked !== props.modelValue) {
+            emitEvent();
         }
     }
-});
+}
 
 defineExpose({
     isChecked: computed(() => props.modelValue),
     name: props.name,
     setValue,
     emitEvent,
-    props
+    props,
+    setChecked
 });
 </script>
 

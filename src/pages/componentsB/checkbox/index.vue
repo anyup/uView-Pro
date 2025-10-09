@@ -5,6 +5,7 @@
             <view class="u-demo-area">
                 <view>
                     <u-checkbox-group
+                        ref="uCheckboxGroupRef"
                         :size="size"
                         :width="width"
                         :wrap="wrap"
@@ -31,6 +32,10 @@
         </view>
         <view class="u-config-wrap">
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
+            <view class="u-config-item">
+                <view class="u-item-title">批量操作</view>
+                <u-subsection :list="['全不选', '全选']" @change="checkedAllChange"></u-subsection>
+            </view>
             <view class="u-config-item">
                 <view class="u-item-title">形状</view>
                 <u-subsection :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
@@ -104,7 +109,7 @@ const activeColor = ref('primary');
 const size = ref(34);
 const wrap = ref(false);
 const width = ref('auto');
-
+const uCheckboxGroupRef = ref();
 const getResult = computed(() => result.value.join(','));
 
 function shapeChange(index: number) {
@@ -113,6 +118,15 @@ function shapeChange(index: number) {
 
 function sizeChange(index: number) {
     size.value = index === 0 ? 30 : index === 1 ? 40 : 50;
+}
+
+// 全选/全不选
+function checkedAllChange(index: number) {
+    // list.value.map(val => {
+    //     val.checked = true;
+    // });
+    // result.value = list.value.map(val => val.name);
+    uCheckboxGroupRef.value.setAllChecked(index === 1 ? true : false);
 }
 
 function defaultChooseChange(index: number) {
