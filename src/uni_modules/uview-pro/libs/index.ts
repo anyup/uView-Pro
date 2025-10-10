@@ -165,49 +165,66 @@ export function addStyle(
  * @param {object | object[]} styles 外部传入的样式对象或数组
  * @returns {string} 格式化后的 CSS 样式字符串
  */
-export function toStyle(styles: Record<string, any> | Record<string, any>[] | string): string {
-    // 如果 styles 是字符串类型
-    if (test.string(styles)) {
-        // 如果是字符串且不为空，确保末尾有分号
-        return styles ? (styles.endsWith(';') ? styles : styles + ';') : '';
+export function toStyle(...styles: Array<Record<string, any> | string | null | undefined>): string {
+    // 支持多参数：每个参数可以是 object 或 string，后面的参数优先级更高，会覆盖同名样式
+    // 如果传入单个数组（兼容旧调用），解构展开
+    if (styles.length === 1 && Array.isArray(styles[0])) {
+        styles = (styles[0] as any[]).slice();
     }
-    // 如果 styles 是数组类型
-    if (test.array(styles)) {
-        // 使用过滤函数去除空值和 null 值的元素
-        // 对每个非空元素递归调用 objToStyle，然后通过分号连接
-        const result = styles
-            .filter(function (item) {
-                return item != null && item !== '';
-            })
-            .map(function (item) {
-                return toStyle(item);
-            })
-            .join(';');
 
-        // 如果结果不为空，确保末尾有分号
-        return result ? (result.endsWith(';') ? result : result + ';') : '';
-    }
-    // 如果 styles 是对象类型
-    if (test.object(styles)) {
-        // 使用 Object.keys 获取所有属性名
-        // 使用过滤函数去除值为 null 或空字符串的属性
-        // 对每个属性名和属性值进行格式化，通过分号连接
-        const result = Object.keys(styles)
-            .filter(function (key) {
-                return styles[key] != null && styles[key] !== '';
-            })
-            .map(function (key) {
-                // 使用 kebabCase 函数将属性名转换为 kebab-case 格式
-                // 将属性名和属性值格式化为 CSS 样式的键值对
-                return [kebabCase(key), styles[key]].join(':');
-            })
-            .join(';');
+    // 用于合并样式的 Map，key 使用 kebab-case
+    const map = new Map<string, any>();
 
-        // 如果结果不为空，确保末尾有分号
-        return result ? (result.endsWith(';') ? result : result + ';') : '';
+    const processString = (str: string) => {
+        if (!str) return;
+        // 移除可能的末尾分号，再按分号分割
+        const parts = str.split(';');
+        for (let part of parts) {
+            part = part.trim();
+            if (!part) continue;
+            const idx = part.indexOf(':');
+            if (idx === -1) continue;
+            const key = trim(part.slice(0, idx));
+            const val = trim(part.slice(idx + 1));
+            if (key === '' || val === '') continue;
+            const k = kebabCase(key);
+            map.set(k, val);
+        }
+    };
+
+    const processObject = (obj: Record<string, any>) => {
+        if (!obj) return;
+        Object.keys(obj).forEach(key => {
+            const val = obj[key];
+            if (val == null || val === '') return;
+            const k = kebabCase(key);
+            map.set(k, val);
+        });
+    };
+
+    for (const item of styles) {
+        if (item == null || item === '') continue;
+        if (test.string(item)) {
+            processString(item as string);
+        } else if (test.array(item)) {
+            // 若传入数组作为参数，递归处理数组元素
+            (item as any[]).forEach(el => {
+                if (test.string(el)) processString(el as string);
+                else if (test.object(el)) processObject(el as Record<string, any>);
+            });
+        } else if (test.object(item)) {
+            processObject(item as Record<string, any>);
+        }
     }
-    // 如果 styles 不是对象也不是数组，则直接返回
-    return '';
+
+    if (map.size === 0) return '';
+
+    // 按插入顺序构造样式字符串，值转成字符串
+    const result = Array.from(map.entries())
+        .map(([k, v]) => `${k}:${String(v)}`)
+        .join(';');
+
+    return result ? (result.endsWith(';') ? result : result + ';') : '';
 }
 
 /**

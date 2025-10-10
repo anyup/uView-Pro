@@ -1,17 +1,26 @@
 <template>
-    <view class="u-radio-group u-clearfix">
+    <view class="u-radio-group u-clearfix" :style="$u.toStyle(props.customStyle)" :class="props.customClass">
         <slot></slot>
     </view>
 </template>
 
-<script setup lang="ts">
-import { ref, provide, watch, getCurrentInstance } from 'vue';
-import { $u } from '../..';
-import { RadioGroupProps } from './types';
+<script lang="ts">
+export default {
+    name: 'u-radio-group',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
 
-defineOptions({
-    name: 'u-radio-group'
-});
+<script setup lang="ts">
+import { getCurrentInstance } from 'vue';
+import { $u, useParent } from '../..';
+import { RadioGroupProps } from './types';
 
 /**
  * radioGroup 单选框父组件
@@ -33,8 +42,7 @@ const props = defineProps(RadioGroupProps);
 
 const emit = defineEmits(['update:modelValue', 'change']);
 
-// 当前所有子 radio 实例
-const children = ref<any[]>([]);
+useParent('u-radio-group');
 
 /**
  * 父组件数据，供子组件 inject 使用
@@ -69,31 +77,11 @@ function setValue(val: string | number) {
     }, 60);
 }
 
-// provide 父组件数据和方法，供子组件使用
-provide('u-radio-group', {
+defineExpose({
+    props,
     getData,
     setValue
 });
-
-// 监听 props 变化，通知子组件刷新
-watch(
-    () => [
-        props.modelValue,
-        props.disabled,
-        props.activeColor,
-        props.size,
-        props.labelDisabled,
-        props.shape,
-        props.iconSize,
-        props.width,
-        props.wrap
-    ],
-    () => {
-        // 这里可通过事件或响应式通知子组件刷新
-        // 兼容性处理，子组件可通过 inject 的 getData 获取最新值
-        console.log('u-radio-group 监听到属性变化');
-    }
-);
 </script>
 
 <style lang="scss" scoped>

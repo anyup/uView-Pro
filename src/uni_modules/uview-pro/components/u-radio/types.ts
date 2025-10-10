@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { Shape } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * RadioProps 单选框 props 类型定义
  * @description 单选框用于有一个选择，用户只能选择其中一个的场景。搭配u-radio-group使用
  */
 export const RadioProps = {
+    ...baseProps,
     /** radio的名称 */
     name: { type: [String, Number] as PropType<string | number>, default: '' },
     /** 形状，square为方形，circle为圆形 */

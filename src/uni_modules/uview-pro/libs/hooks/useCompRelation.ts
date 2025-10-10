@@ -280,35 +280,10 @@ export function useChildren(componentName?: string, parentName?: string) {
         nextTick(() => {
             // 立即尝试连接父组件
             let connected = linkParent();
-            // 如果没连接上，使用watch监听组件树变化
             if (!connected) {
-                const stopWatch = watch(
-                    () => instance?.parent,
-                    () => {
-                        if (!parentRef.value) {
-                            const linked = linkParent();
-                            if (linked) {
-                                stopWatch();
-                            }
-                        }
-                    },
-                    { immediate: false }
-                );
-
-                // 也尝试在nextTick后连接
-                nextTick(() => {
-                    if (!parentRef.value) {
-                        const linked = linkParent();
-                        if (linked) {
-                            stopWatch();
-                        }
-                    }
-                });
-
-                // 组件卸载时停止监听
-                onUnmounted(() => {
-                    stopWatch();
-                });
+                setTimeout(() => {
+                    linkParent();
+                }, 500);
             }
         });
     });

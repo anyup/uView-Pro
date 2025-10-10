@@ -1,6 +1,6 @@
 <template>
-    <view class="u-radio" :style="[radioStyle]">
-        <view class="u-radio__icon-wrap" @tap="toggle" :class="[iconClass]" :style="[iconStyle]">
+    <view class="u-radio" :style="$u.toStyle(props.customStyle, radioStyle)" :class="props.customClass">
+        <view class="u-radio__icon-wrap" @tap="toggle" :class="iconClass" :style="$u.toStyle(iconStyle)">
             <u-icon class="u-radio__icon-wrap__icon" name="checkbox-mark" :size="elIconSize" :color="iconColor" />
         </view>
         <view
@@ -15,14 +15,23 @@
     </view>
 </template>
 
-<script setup lang="ts">
-import { computed, inject } from 'vue';
-import { $u } from '../..';
-import { RadioProps } from './types';
+<script lang="ts">
+export default {
+    name: 'u-radio',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
 
-defineOptions({
-    name: 'u-radio'
-});
+<script setup lang="ts">
+import { computed } from 'vue';
+import { $u, useChildren } from '../..';
+import { RadioProps } from './types';
 
 /**
  * radio 单选框
@@ -43,13 +52,13 @@ const props = defineProps(RadioProps);
 
 const emit = defineEmits(['change']);
 
-// 获取父组件u-radio-group的provide数据
-const parent = inject<any>('u-radio-group', null);
+// 使用组件关系 hooks 获取父组件
+const { parentExposed } = useChildren('u-radio', 'u-radio-group');
 
-// 父组件的默认值
-const parentData = computed(
-    () =>
-        parent?.getData?.() || {
+// 父组件的默认值（兼容没有父组件的场景）
+const parentData = computed(() => {
+    return (
+        parentExposed?.value?.getData?.() || {
             iconSize: null,
             labelDisabled: null,
             disabled: null,
@@ -61,7 +70,8 @@ const parentData = computed(
             value: null,
             wrap: null
         }
-);
+    );
+});
 
 /**
  * 是否禁用，如果父组件u-radio-group禁用的话，将会忽略子组件的配置
@@ -191,10 +201,7 @@ function emitEvent() {
  */
 function setRadioCheckedStatus() {
     emitEvent();
-    if (parent && parent.setValue) {
-        parent.setValue(props.name);
-        parentData.value.value = props.name;
-    }
+    parentExposed?.value?.setValue(props.name);
 }
 </script>
 
