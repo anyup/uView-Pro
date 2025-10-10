@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { AlignType, JustifyType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * u-col 布局单元格 Props
@@ -13,6 +14,7 @@ import type { AlignType, JustifyType } from '../../types/global';
  */
 
 export const ColProps = {
+    ...baseProps,
     /** 占父容器宽度的多少等分，总分为12份 */
     span: { type: [Number, String] as PropType<number | string>, default: 12 },
     /** 指定栅格左侧的间隔数(总12栏) */

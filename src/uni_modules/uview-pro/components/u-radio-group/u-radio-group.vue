@@ -45,7 +45,7 @@ const emit = defineEmits(['update:modelValue', 'change']);
 useParent('u-radio-group');
 
 /**
- * 父组件数据，供子组件 inject 使用
+ * 父组件数据，供子组件使用
  */
 function getData() {
     return {

@@ -1,23 +1,35 @@
 <template>
     <view
         class="u-row"
-        :style="{
-            alignItems: uAlignItem,
-            justifyContent: uJustify
-        }"
+        :style="
+            $u.toStyle(customStyle, {
+                alignItems: uAlignItem,
+                justifyContent: uJustify
+            })
+        "
         @tap="onClick"
     >
         <slot />
     </view>
 </template>
 
-<script setup lang="ts">
-import { computed, provide } from 'vue';
-import { RowProps } from './types';
+<script lang="ts">
+export default {
+    name: 'u-row',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
 
-defineOptions({
-    name: 'u-row'
-});
+<script setup lang="ts">
+import { computed } from 'vue';
+import { RowProps } from './types';
+import { $u, useParent } from '../../';
 
 /**
  * row 行布局
@@ -33,8 +45,7 @@ const emit = defineEmits<{ (e: 'click'): void }>();
 
 const props = defineProps(RowProps);
 
-// 提供 gutter 给子组件 u-col 使用
-provide('u-row-gutter', props.gutter);
+useParent('u-row');
 
 /**
  * 计算水平排列方式
@@ -64,6 +75,10 @@ function onClick(e: Event) {
     // 触发 click 事件
     emit('click');
 }
+
+defineExpose({
+    props
+});
 </script>
 
 <style lang="scss">

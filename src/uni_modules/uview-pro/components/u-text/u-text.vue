@@ -9,7 +9,7 @@
             `u-text--align-${props.align}`,
             customClass
         ]"
-        :style="textStyle"
+        :style="$u.toStyle(customStyle, textStyle)"
         @click="onClick"
     >
         <!-- prefixIcon -->
@@ -70,7 +70,9 @@ export default {
     name: 'u-text',
     options: {
         addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
         virtualHost: true,
+        // #endif
         styleIsolation: 'shared'
     }
 };

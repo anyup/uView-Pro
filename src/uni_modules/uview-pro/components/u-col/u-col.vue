@@ -1,16 +1,31 @@
 <template>
-    <view class="u-col" :class="['u-col-' + span]" :style="colStyle" @tap="onClick">
+    <view
+        class="u-col"
+        :class="['u-col-' + span, customClass]"
+        :style="$u.toStyle(customStyle, colStyle)"
+        @tap="onClick"
+    >
         <slot></slot>
     </view>
 </template>
 
-<script setup lang="ts">
-import { computed, inject } from 'vue';
-import { ColProps } from './types';
+<script lang="ts">
+export default {
+    name: 'u-col',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
 
-defineOptions({
-    name: 'u-col'
-});
+<script setup lang="ts">
+import { computed } from 'vue';
+import { ColProps } from './types';
+import { $u, useChildren } from '../../';
 
 /**
  * col 布局单元格
@@ -26,10 +41,14 @@ const emit = defineEmits<{ (e: 'click'): void }>();
 
 const props = defineProps(ColProps);
 
+const { parentExposed } = useChildren('u-col', 'u-row');
+
 /**
  * gutter 给col添加间距，左右边距各占一半，从父组件u-row获取
  */
-const gutter = inject('u-row-gutter', 20);
+const gutter = computed(() => {
+    return parentExposed?.value?.props?.gutter ?? 20;
+});
 
 /**
  * 计算水平排列方式
@@ -55,7 +74,7 @@ const uAlignItem = computed(() => {
  * 计算样式对象
  */
 const colStyle = computed<any>(() => ({
-    padding: `0 ${Number(gutter) / 2}rpx`,
+    padding: `0 ${Number(gutter.value) / 2}px`,
     marginLeft: `${(100 / 12) * Number(props.offset)}%`,
     flex: `0 0 ${(100 / 12) * Number(props.span)}%`,
     alignItems: uAlignItem.value,

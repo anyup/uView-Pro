@@ -3,7 +3,7 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-row :justify="justify" @click="rowClick">
+                <u-row :justify="justify" @click="rowClick" :gutter="gutter">
                     <u-col :span="span" :offset="offset" @click="click" stop>
                         <view class="demo-layout bg-purple-dark"> </view>
                     </u-col>
@@ -23,6 +23,10 @@
                 <u-subsection :current="2" :list="['1', '2', '3', '4', '5']" @change="spanChange"></u-subsection>
             </view>
             <view class="u-config-item">
+                <view class="u-item-title">分栏间隔</view>
+                <u-subsection :list="['10', '20', '30', '40']" @change="gutterChange"></u-subsection>
+            </view>
+            <view class="u-config-item">
                 <view class="u-item-title">分栏偏移</view>
                 <u-subsection :list="['0', '1', '2', '3', '4']" @change="offsetChange"></u-subsection>
             </view>
@@ -40,6 +44,7 @@
 import { ref } from 'vue';
 import type { RowJustify } from '@/uni_modules/uview-pro/types/global';
 
+const gutter = ref(10);
 const span = ref(3);
 const offset = ref(0);
 const justify = ref<RowJustify>('start');
@@ -68,6 +73,23 @@ function spanChange(e: number) {
             break;
         case 4:
             span.value = 5;
+            break;
+    }
+}
+
+function gutterChange(e: number) {
+    switch (e) {
+        case 0:
+            gutter.value = 10;
+            break;
+        case 1:
+            gutter.value = 20;
+            break;
+        case 2:
+            gutter.value = 30;
+            break;
+        case 3:
+            gutter.value = 40;
             break;
     }
 }
