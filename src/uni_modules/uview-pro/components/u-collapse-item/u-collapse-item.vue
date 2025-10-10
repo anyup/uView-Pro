@@ -1,5 +1,5 @@
 <template>
-    <view class="u-collapse-item" :style="`${$u.toStyle(itemStyle)}${$u.toStyle(customStyle)}`" :class="customClass">
+    <view class="u-collapse-item" :style="$u.toStyle(itemStyle, customStyle)" :class="customClass">
         <view
             :hover-stay-time="200"
             class="u-collapse-head"

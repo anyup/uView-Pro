@@ -215,7 +215,7 @@ const textValueStyle = computed(() => {
         return $u.toStyle($u.deepMerge(style, props.textStyle as Record<string, any>));
     }
     if ($u.test.string(props.textStyle)) {
-        return `${$u.toStyle(style)}${props.textStyle}`;
+        return $u.toStyle(style, props.textStyle);
     }
     return $u.toStyle(style);
 });
