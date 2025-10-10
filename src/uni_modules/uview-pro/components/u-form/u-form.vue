@@ -2,14 +2,23 @@
     <view class="u-form"><slot /></view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-form',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { FormProps } from './types';
-import { ref, provide } from 'vue';
-import { $u } from '../..';
-
-defineOptions({
-    name: 'u-form'
-});
+import { ref } from 'vue';
+import { $u, useParent } from '../..';
 
 /**
  * form 表单
@@ -28,30 +37,13 @@ defineOptions({
 
 const props = defineProps(FormProps);
 
+useParent('u-form');
+
 // 存储当前form下的所有u-form-item的实例
 const fields = ref<any[]>([]);
 
 // 校验规则
 const rules = ref<Record<string, any>>(props.rules);
-
-// 提供 uForm 实例给子组件（注册方法供 u-form-item 调用）
-const uForm = {
-    addField(field: any) {
-        if (!fields.value.includes(field)) fields.value.push(field);
-    },
-    removeField(field: any) {
-        fields.value = fields.value.filter(f => f !== field);
-    },
-    // 兼容老用法
-    setRules,
-    resetFields,
-    validate,
-    fields,
-    rules,
-    props,
-    model: props.model
-};
-provide('u-form', uForm);
 
 /**
  * 设置校验规则

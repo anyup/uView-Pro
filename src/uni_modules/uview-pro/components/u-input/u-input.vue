@@ -93,7 +93,9 @@ export default {
     name: 'u-input',
     options: {
         addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
         virtualHost: true,
+        // #endif
         styleIsolation: 'shared'
     }
 };
@@ -220,6 +222,11 @@ function onConfirm(e: any) {
 }
 
 function onClear(event: any) {
+    try {
+        event.stopPropagation();
+    } catch (e) {
+        console.log(e);
+    }
     emit('update:modelValue', '');
 }
 

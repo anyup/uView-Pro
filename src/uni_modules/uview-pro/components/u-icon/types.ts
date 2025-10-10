@@ -4,7 +4,6 @@ import { baseProps } from '../common/props';
 
 /**
  * u-icon 组件 Props 类型定义
- * 所有属性均带详细注释，类型安全，便于 IDE 智能提示
  */
 export const IconProps = {
     ...baseProps,

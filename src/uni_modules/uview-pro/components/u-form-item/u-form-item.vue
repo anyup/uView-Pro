@@ -3,7 +3,8 @@
         class="u-form-item"
         :class="{
             'u-border-bottom': elBorderBottom,
-            'u-form-item__border-bottom--error': validateState === 'error' && showError('border-bottom')
+            'u-form-item__border-bottom--error': validateState === 'error' && showError('border-bottom'),
+            'u-form-item__border--error': validateState === 'error' && showError('border')
         }"
     >
         <view
@@ -69,19 +70,28 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-form-item',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, onBeforeUnmount, watch, getCurrentInstance, nextTick } from 'vue';
-import { $u } from '../..';
+import { ref, computed, onMounted, onBeforeUnmount, watch, getCurrentInstance, nextTick } from 'vue';
+import { $u, useChildren } from '../..';
 import { broadcast } from '../../libs/util/emitter';
 // @ts-ignore
 import schema from '../../libs/util/async-validator';
 import { FormItemProps } from './types';
 // 去除警告信息
 schema.warning = function () {};
-
-defineOptions({
-    name: 'u-form-item'
-});
 
 /**
  * form-item 表单item
@@ -104,8 +114,8 @@ defineOptions({
 
 const props = defineProps(FormItemProps);
 
-// inject 父表单实例
-let parent = inject<any>('u-form', null);
+const { parentExposed } = useChildren('u-form-item', 'u-form');
+
 const instance = getCurrentInstance();
 
 // 组件状态
@@ -129,7 +139,7 @@ watch(validateState, () => {
 
 // 监听u-form组件的errorType的变化
 watch(
-    () => parent?.errorType,
+    () => parentExposed?.value?.props?.errorType,
     val => {
         if (val) errorType.value = val;
         broadcastInputError();
@@ -215,30 +225,11 @@ function broadcastInputError() {
 }
 
 /**
- * 添加表单校验事件监听
- */
-function setRules() {
-    // 由于人性化考虑，必填"*"号通过props的required配置，不再通过rules的规则自动生成
-    // 从父组件u-form拿到当前u-form-item需要验证 的规则
-    // let rules = this.getRules();
-    // if (rules.length) {
-    // 	this.isRequired = rules.some(rule => {
-    // 		// 如果有必填项，就返回，没有的话，就是undefined
-    // 		return rule.required;
-    // 	});
-    // }
-    // // blur事件，失效了
-    // uni.$on('on-form-blur', onFieldBlur)
-    // // change事件，失效了
-    // uni.$on('on-form-change', onFieldChange)
-}
-
-/**
  * 获取当前u-form-item的校验规则
  */
 function getRules() {
     // 父组件的所有规则
-    let rules = parent?.rules?.value || parent?.rules || {};
+    let rules = parentExposed?.value?.rules?.value || {};
     rules = rules ? rules[props.prop] : [];
     // 保证返回的是一个数组形式
     return [].concat(rules || []);
@@ -284,7 +275,7 @@ function getFilteredRule(triggerType = '') {
  */
 function validation(trigger: string, callback: (msg: string) => void = () => {}) {
     // 检验之前，先获取需要校验的值
-    fieldValue.value = parent?.model?.[props.prop];
+    fieldValue.value = parentExposed?.value?.model?.[props.prop];
     // blur和change是否有当前方式的校验规则
     let rules = getFilteredRule(trigger);
     // 判断是否有验证规则，如果没有规则，也调用回调方法，否则父组件u-form会因为
@@ -310,8 +301,8 @@ function validation(trigger: string, callback: (msg: string) => void = () => {})
  * 清空当前的u-form-item
  */
 function resetField() {
-    if (parent?.model && props.prop) {
-        parent.model[props.prop] = initialValue.value;
+    if (parentExposed?.value?.model && props.prop) {
+        parentExposed.value.model[props.prop] = initialValue.value;
     }
     // 设置为`success`状态，只是为了清空错误标记
     validateState.value = 'success';
@@ -319,46 +310,45 @@ function resetField() {
 
 // 组件挂载时注册到父表单
 onMounted(() => {
-    // 支付宝、头条小程序不支持provide/inject，所以使用这个方法获取整个父组件，在created定义，避免循环应用
-    // 兼容 provide/inject 及 $u.$parent
-    parent = $u.parentData('u-form', instance);
-    if (parent) {
-        // 继承父表单配置
-        // 历遍parentData中的属性，将parent中的同名属性赋值给parentData
-        Object.keys(parentData.value).forEach(key => {
-            parentData.value[key] = parent.props[key];
-        });
-        // 如果没有传入prop，或者uForm为空(如果u-form-input单独使用，就不会有uForm注入)，就不进行校验
-        if (props.prop) {
-            // 将本实例添加到父组件中
-            parent.addField &&
-                parent.addField({
-                    validation,
-                    resetField,
-                    prop: props.prop
-                });
-            errorType.value = parent.errorType || errorType.value;
-            // 设置初始值
-            fieldValue.value = parent.model?.[props.prop];
-            // 设置初始值
-            initialValue.value = fieldValue.value;
-            // 添加表单校验，这里必须要写在$nextTick中，因为u-form的rules是通过ref手动传入的
-            // 不在$nextTick中的话，可能会造成执行此处代码时，父组件还没通过ref把规则给u-form，导致规则为空
-            nextTick(() => {
-                setRules();
+    nextTick(() => {
+        if (parentExposed.value) {
+            // 继承父表单配置
+            // 历遍parentData中的属性，将parent中的同名属性赋值给parentData
+            Object.keys(parentData.value).forEach(key => {
+                parentData.value[key] = parentExposed?.value?.props[key];
             });
+            // 如果没有传入prop，或者uForm为空(如果u-form-input单独使用，就不会有uForm注入)，就不进行校验
+            if (props.prop) {
+                // 将本实例添加到父组件中
+                parentExposed?.value?.addField &&
+                    parentExposed?.value?.addField({
+                        validation,
+                        resetField,
+                        prop: props.prop
+                    });
+                errorType.value = parentExposed?.value?.errorType || errorType.value;
+                // 设置初始值
+                fieldValue.value = parentExposed?.value?.model?.[props.prop];
+                // 设置初始值
+                initialValue.value = fieldValue.value;
+            }
         }
-    }
+    });
 });
 // 组件销毁前，将实例从u-form的缓存中移除
 onBeforeUnmount(() => {
     // 如果当前没有prop的话表示当前不要进行删除（因为没有注入）
-    if (parent && props.prop) {
-        parent.removeField && parent.removeField({ prop: props.prop });
+    if (parentExposed?.value && props.prop) {
+        parentExposed?.value?.removeField({ prop: props.prop });
     }
 });
 
-defineExpose({ validation, resetField, onFormBlur, onFormChange });
+defineExpose({
+    validation,
+    resetField,
+    onFormBlur,
+    onFormChange
+});
 </script>
 
 <style lang="scss" scoped>
@@ -376,6 +366,12 @@ defineExpose({ validation, resetField, onFormBlur, onFormChange });
 
     &__border-bottom--error:after {
         border-color: $u-type-error;
+    }
+
+    &__border--error {
+        :deep(.u-input--border) {
+            border-color: $u-type-error !important;
+        }
     }
 
     &__body {

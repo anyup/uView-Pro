@@ -1,5 +1,5 @@
 <template>
-    <view :style="[customStyle]" class="u-icon" @tap="onClick" :class="['u-icon--' + labelPos]">
+    <view :style="[customStyle]" class="u-icon" @click="onClick" :class="['u-icon--' + labelPos]">
         <image class="u-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="[imgStyle]" />
         <text
             v-else
@@ -28,7 +28,9 @@ export default {
     name: 'u-icon',
     options: {
         addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
         virtualHost: true,
+        // #endif
         styleIsolation: 'shared'
     }
 };
@@ -209,8 +211,8 @@ const labelStyle = computed(() => {
  * 点击图标时触发
  * @emits click(index)
  */
-function onClick() {
-    emit('click', props.index);
+function onClick(event: any) {
+    emit('click', props.index || event);
 }
 
 /**
