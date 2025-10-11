@@ -1,10 +1,13 @@
 <template>
     <view
         class="u-input"
-        :class="{
-            'u-input--border': border,
-            'u-input--error': validateState
-        }"
+        :class="[
+            {
+                'u-input--border': border,
+                'u-input--error': validateState
+            },
+            customClass
+        ]"
         :style="{
             padding: `0 ${border ? 20 : 0}rpx`,
             borderColor: borderColor,
@@ -147,8 +150,7 @@ const getStyle = computed(() => {
         : props.type == 'textarea'
           ? `${textareaHeight}rpx`
           : `${inputHeight}rpx`;
-    style = Object.assign(style, props.customStyle);
-    return style;
+    return $u.toStyle(props.customStyle, style);
 });
 const getCursorSpacing = computed(() => Number(props.cursorSpacing));
 // 光标起始位置

@@ -9,7 +9,8 @@
             shape === 'circle' ? 'u-round-circle' : '',
             hairLine ? showHairLineBorder : 'u-btn--bold-border',
             'u-btn--' + type,
-            disabled ? `u-btn--${type}--disabled` : ''
+            disabled ? `u-btn--${type}--disabled` : '',
+            customClass
         ]"
         :hover-start-time="Number(hoverStartTime)"
         :hover-stay-time="Number(hoverStayTime)"
@@ -34,12 +35,11 @@
         @opensetting="opensetting"
         @chooseavatar="chooseavatar"
         @agreeprivacyauthorization="agreeprivacyauthorization"
-        :style="[
-            customStyle,
-            {
+        :style="
+            $u.toStyle(customStyle, {
                 overflow: ripple ? 'hidden' : 'visible'
-            }
-        ]"
+            })
+        "
         @tap.stop="click($event)"
         :hover-class="getHoverClass"
         :loading="loading"

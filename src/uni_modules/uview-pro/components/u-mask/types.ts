@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * u-mask 组件 props 类型定义
  * @description 遮罩层，支持自定义样式、缩放、动画等
  */
 export const MaskProps = {
+    ...baseProps,
     /** 是否显示遮罩 */
     show: {
         type: Boolean,
@@ -14,11 +16,6 @@ export const MaskProps = {
     zIndex: {
         type: [Number, String] as PropType<number | string>,
         default: ''
-    },
-    /** 用户自定义样式 */
-    customStyle: {
-        type: Object as PropType<Record<string, any>>,
-        default: () => ({})
     },
     /** 遮罩的动画样式，是否使用zoom进行scale进行缩放 */
     zoom: {

@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { InputAlign, InputConfirmType, InputType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * u-input 组件 props 类型定义
@@ -7,6 +8,7 @@ import type { InputAlign, InputConfirmType, InputType } from '../../types/global
  */
 
 export const InputProps = {
+    ...baseProps,
     /** 用于双向绑定输入框的值 */
     modelValue: {
         type: [String, Number] as PropType<string | number>,
@@ -46,11 +48,6 @@ export const InputProps = {
     confirmType: {
         type: String as PropType<InputConfirmType>,
         default: 'done'
-    },
-    /** 自定义输入框的样式，对象形式 */
-    customStyle: {
-        type: Object as PropType<Record<string, any>>,
-        default: () => ({})
     },
     /** 如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true */
     fixed: {

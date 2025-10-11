@@ -2,17 +2,16 @@
     <view
         @tap="backToTop"
         class="u-back-top"
-        :class="['u-back-top--mode--' + mode]"
-        :style="[
-            {
+        :class="['u-back-top--mode--' + mode, customClass]"
+        :style="
+            $u.toStyle(customStyle, {
                 bottom: bottom + 'rpx',
                 right: right + 'rpx',
                 borderRadius: mode == 'circle' ? '10000rpx' : '8rpx',
                 zIndex: uZIndex,
                 opacity: opacity
-            },
-            customStyle
-        ]"
+            })
+        "
     >
         <view class="u-back-top__content" v-if="!slots.default">
             <u-icon @click="backToTop" :name="icon" :custom-style="iconStyle"></u-icon>
@@ -40,6 +39,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch, useSlots } from 'vue';
 import { BackTopProps } from './types';
+import { $u } from '../../';
 
 /**
  * back-top 返回顶部按钮

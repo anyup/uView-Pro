@@ -2,13 +2,16 @@
     <view
         class="u-mask"
         hover-stop-propagation
-        :style="[maskStyle, zoomStyle]"
+        :style="$u.toStyle(customStyle, maskStyle, zoomStyle)"
         @tap="click"
         @touchmove.stop.prevent="() => {}"
-        :class="{
-            'u-mask-zoom': props.zoom,
-            'u-mask-show': props.show
-        }"
+        :class="[
+            {
+                'u-mask-zoom': props.zoom,
+                'u-mask-show': props.show
+            },
+            customClass
+        ]"
     >
         <slot />
     </view>
@@ -74,13 +77,6 @@ const maskStyle = computed(() => {
     if (props.show) style.zIndex = props.zIndex ? props.zIndex : $u.zIndex.mask;
     else style.zIndex = -1;
     style.transition = `all ${Number(props.duration) / 1000}s ease-in-out`;
-    // 判断用户传递的对象是否为空，不为空就进行合并
-    if (props.customStyle && Object.keys(props.customStyle).length) {
-        style = {
-            ...style,
-            ...props.customStyle
-        };
-    }
     return style;
 });
 

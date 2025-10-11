@@ -1,8 +1,9 @@
 <template>
     <view
         v-if="visibleSync"
-        :style="[customStyle, { zIndex: Number(uZindex) - 1 }]"
         class="u-drawer"
+        :style="$u.toStyle(customStyle, { zIndex: Number(uZindex) - 1 })"
+        :class="customClass"
         hover-stop-propagation
     >
         <u-mask

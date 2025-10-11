@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ButtonFormType, ButtonOpenType, ButtonScope, ButtonSize, ButtonType, Shape } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * button 按钮类型定义
@@ -7,6 +8,7 @@ import type { ButtonFormType, ButtonOpenType, ButtonScope, ButtonSize, ButtonTyp
  */
 
 export const ButtonProps = {
+    ...baseProps,
     /** 是否细边框 */
     hairLine: { type: Boolean, default: true },
     /** 按钮的预置样式，default，primary，error，warning，success */
@@ -51,8 +53,6 @@ export const ButtonProps = {
     ripple: { type: Boolean, default: false },
     /** 按下的类名 */
     hoverClass: { type: String, default: '' },
-    /** 自定义样式，对象形式 */
-    customStyle: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
     /** 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取 */
     dataName: { type: String, default: '' },
     /** 节流，一定时间内只能触发一次 */

@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { PopupCloseIconPos, PopupMode } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * PopupMode 弹窗弹出方向类型
@@ -10,6 +11,7 @@ import type { PopupCloseIconPos, PopupMode } from '../../types/global';
  * @description 弹出层容器，支持多种弹出方向和自定义内容
  */
 export const PopupProps = {
+    ...baseProps,
     /** 显示状态 */
     show: { type: Boolean, default: false },
     /** 弹出方向，left|right|top|bottom|center */
@@ -24,8 +26,6 @@ export const PopupProps = {
     safeAreaInsetBottom: { type: Boolean, default: false },
     /** 是否可以通过点击遮罩进行关闭 */
     maskCloseAble: { type: Boolean, default: true },
-    /** 用户自定义样式 */
-    customStyle: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
     /** v-model 控制弹窗显示 */
     modelValue: { type: Boolean, default: false },
     /** 内部参数，解决多层调用报错不能修改props值的问题 */

@@ -2,7 +2,11 @@
     <!-- 支付宝小程序使用$u.getRect()获取组件的根元素尺寸，所以在外面套一个"壳" -->
     <view>
         <view class="u-index-anchor-wrapper" :id="$u.guid()" :style="wrapperStyle">
-            <view class="u-index-anchor" :class="[active ? 'u-index-anchor--active' : '']" :style="customAnchorStyle">
+            <view
+                class="u-index-anchor"
+                :class="[active ? 'u-index-anchor--active' : '', customClass]"
+                :style="$u.toStyle(anchorStyle, customStyle)"
+            >
                 <slot v-if="useSlot" />
                 <template v-else>
                     <text>{{ index }}</text>
@@ -48,11 +52,6 @@ const active = ref(false);
 const wrapperStyle = ref<Record<string, any>>({});
 const anchorStyle = ref<Record<string, any>>({});
 let parent: any = null;
-
-// 计算属性：合并 anchorStyle 和 customStyle
-const customAnchorStyle = computed(() => {
-    return Object.assign({}, anchorStyle.value, props.customStyle);
-});
 
 const instance = getCurrentInstance();
 
