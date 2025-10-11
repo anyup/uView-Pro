@@ -277,9 +277,10 @@ export function useChildren(componentName?: string, parentName?: string) {
     logger.log(`Child ${name} registered, looking for parent`);
 
     onMounted(() => {
+        // 立即尝试连接父组件
+        let connected = linkParent();
         nextTick(() => {
-            // 立即尝试连接父组件
-            let connected = linkParent();
+            // 如果未连接成功，500ms后重试一次
             if (!connected) {
                 setTimeout(() => {
                     linkParent();
