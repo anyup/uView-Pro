@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TagShape, TagMode, TagSize, ThemeType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * TagProps tag props 类型定义
  * @description 标签组件，支持多种类型、尺寸、形状、可关闭等
  */
 export const TagProps = {
+    ...baseProps,
     /** 类型，primary、success、info、warning、error */
     type: { type: String as PropType<ThemeType>, default: 'primary' },
     /** 是否禁用 */

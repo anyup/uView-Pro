@@ -1,5 +1,5 @@
 <template>
-    <view class="u-th" :style="thStyle">
+    <view class="u-th" :style="$u.toStyle(thStyle, customStyle)" :class="customClass">
         <slot></slot>
     </view>
 </template>

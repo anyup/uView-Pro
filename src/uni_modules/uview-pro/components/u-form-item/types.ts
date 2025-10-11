@@ -1,10 +1,12 @@
 import type { PropType, ExtractPropTypes } from 'vue';
 import type { InputAlign, InputLabelPosition } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * form-item 表单item Props
  */
 export const FormItemProps = {
+    ...baseProps,
     /** input的label提示语 */
     label: {
         type: String,

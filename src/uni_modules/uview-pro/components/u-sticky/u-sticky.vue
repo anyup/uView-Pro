@@ -2,11 +2,16 @@
     <view>
         <view
             class="u-sticky-wrap"
-            :class="[elClass]"
-            :style="{
-                height: fixed ? height + 'px' : 'auto',
-                backgroundColor: bgColor
-            }"
+            :class="[elClass, customClass]"
+            :style="
+                $u.toStyle(
+                    {
+                        height: fixed ? height + 'px' : 'auto',
+                        backgroundColor: bgColor
+                    },
+                    customStyle
+                )
+            "
         >
             <view
                 class="u-sticky"

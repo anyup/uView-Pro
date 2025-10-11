@@ -1,11 +1,17 @@
 <template>
     <view
         class="u-count-num"
-        :style="{
-            fontSize: props.fontSize + 'rpx',
-            fontWeight: props.bold ? 'bold' : 'normal',
-            color: props.color
-        }"
+        :class="customClass"
+        :style="
+            $u.toStyle(
+                {
+                    fontSize: props.fontSize + 'rpx',
+                    fontWeight: props.bold ? 'bold' : 'normal',
+                    color: props.color
+                },
+                customStyle
+            )
+        "
     >
         {{ displayValue }}
     </view>
@@ -27,6 +33,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { CountToProps } from './types';
+import { $u } from '../../';
 
 /**
  * countTo 数字滚动

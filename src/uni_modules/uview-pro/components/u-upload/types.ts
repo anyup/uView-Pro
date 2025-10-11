@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ImgMode, UploadSizeType, UploadSourceType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * UploadProps upload props 类型定义
  * @description 文件上传组件，支持多种自定义参数
  */
 export const UploadProps = {
+    ...baseProps,
     /** 选择器宽度，单位rpx */
     width: { type: [Number, String] as PropType<number | string>, default: 200 },
     /** 选择器高度，单位rpx */

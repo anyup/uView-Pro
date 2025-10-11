@@ -1,5 +1,5 @@
 <template>
-    <view :id="instanceId" class="u-subsection" :style="subsectionStyle">
+    <view :id="instanceId" class="u-subsection" :class="customClass" :style="$u.toStyle(subsectionStyle, customStyle)">
         <view
             class="u-item u-line-1"
             :style="itemStyle(index)"

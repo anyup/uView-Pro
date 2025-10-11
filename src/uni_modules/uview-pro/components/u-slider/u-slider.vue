@@ -2,20 +2,17 @@
     <view
         class="u-slider"
         @tap="onClick"
-        :class="[disabled ? 'u-slider--disabled' : '']"
-        :style="{
-            backgroundColor: inactiveColor
-        }"
+        :class="[disabled ? 'u-slider--disabled' : '', customClass]"
+        :style="$u.toStyle({ backgroundColor: inactiveColor }, customStyle)"
     >
         <view
             class="u-slider__gap"
-            :style="[
-                barStyle,
-                {
+            :style="
+                $u.toStyle(barStyle, {
                     height: height + 'rpx',
                     backgroundColor: activeColor
-                }
-            ]"
+                })
+            "
         >
             <view
                 class="u-slider__button-wrap"
@@ -28,14 +25,13 @@
                 <view
                     v-else
                     class="u-slider__button"
-                    :style="[
-                        blockStyle,
-                        {
+                    :style="
+                        $u.toStyle(blockStyle, {
                             height: blockWidth + 'rpx',
                             width: blockWidth + 'rpx',
                             backgroundColor: blockColor
-                        }
-                    ]"
+                        })
+                    "
                 />
             </view>
         </view>

@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { InputAlign, SearchShape } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * SearchProps 搜索框 props 类型定义
  * @description 集成常见搜索框功能，开箱即用
  */
 export const SearchProps = {
+    ...baseProps,
     /** 搜索框形状，round-圆形，square-方形 */
     shape: { type: String as PropType<SearchShape>, default: 'round' },
     /** 搜索框背景色，默认值#f2f2f2 */

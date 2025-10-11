@@ -4,13 +4,16 @@
         class="u-back-top"
         :class="['u-back-top--mode--' + mode, customClass]"
         :style="
-            $u.toStyle(customStyle, {
-                bottom: bottom + 'rpx',
-                right: right + 'rpx',
-                borderRadius: mode == 'circle' ? '10000rpx' : '8rpx',
-                zIndex: uZIndex,
-                opacity: opacity
-            })
+            $u.toStyle(
+                {
+                    bottom: bottom + 'rpx',
+                    right: right + 'rpx',
+                    borderRadius: mode == 'circle' ? '10000rpx' : '8rpx',
+                    zIndex: uZIndex,
+                    opacity: opacity
+                },
+                customStyle
+            )
         "
     >
         <view class="u-back-top__content" v-if="!slots.default">

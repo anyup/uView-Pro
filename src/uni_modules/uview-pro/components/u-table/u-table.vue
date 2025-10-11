@@ -1,5 +1,5 @@
 <template>
-    <view class="u-table" :style="tableStyle">
+    <view class="u-table" :style="$u.toStyle(tableStyle, customStyle)" :class="customClass">
         <slot />
     </view>
 </template>
@@ -20,6 +20,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { TableProps } from './types';
+import { $u } from '../..';
 
 /**
  * table 表格

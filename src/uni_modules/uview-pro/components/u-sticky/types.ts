@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * StickyProps 吸顶组件 props 类型定义
  * @description 吸顶组件，支持自定义吸顶距离、z-index、背景色等
  */
 export const StickyProps = {
+    ...baseProps,
     /** 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px */
     offsetTop: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 列表中的索引值 */

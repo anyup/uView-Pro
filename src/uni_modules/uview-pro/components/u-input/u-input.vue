@@ -150,7 +150,7 @@ const getStyle = computed(() => {
         : props.type == 'textarea'
           ? `${textareaHeight}rpx`
           : `${inputHeight}rpx`;
-    return $u.toStyle(props.customStyle, style);
+    return $u.toStyle(style, props.customStyle);
 });
 const getCursorSpacing = computed(() => Number(props.cursorSpacing));
 // 光标起始位置

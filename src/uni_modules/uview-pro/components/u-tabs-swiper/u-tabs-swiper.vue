@@ -1,5 +1,5 @@
 <template>
-    <view class="u-tabs" :style="{ zIndex: zIndex, background: bgColor }">
+    <view class="u-tabs" :style="$u.toStyle({ zIndex: zIndex, background: bgColor }, customStyle)" :class="customClass">
         <scroll-view
             scroll-x
             class="u-scroll-view"
@@ -42,6 +42,7 @@ export default {
 import { ref, computed, watch, nextTick, onMounted, getCurrentInstance } from 'vue';
 import colorGradient from '../../libs/function/colorGradient';
 import { TabsSwiperProps } from './types';
+import { $u } from '../..';
 
 /**
  * tabsSwiper 全屏选项卡

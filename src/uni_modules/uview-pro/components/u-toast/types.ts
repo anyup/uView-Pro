@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ThemeType, ToastPosition } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * ToastProps toast props 类型定义
  * @description 消息提示组件，支持 z-index 及多种配置项
  */
 export const ToastProps = {
+    ...baseProps,
     /** 层级 z-index */
     zIndex: { type: [Number, String] as PropType<number | string>, default: '' },
     /** 提示类型，success/warning/error/loading 等 */

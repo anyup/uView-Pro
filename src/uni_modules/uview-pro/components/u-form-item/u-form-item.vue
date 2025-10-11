@@ -1,11 +1,15 @@
 <template>
     <view
         class="u-form-item"
-        :class="{
-            'u-border-bottom': elBorderBottom,
-            'u-form-item__border-bottom--error': validateState === 'error' && showError('border-bottom'),
-            'u-form-item__border--error': validateState === 'error' && showError('border')
-        }"
+        :class="[
+            {
+                'u-border-bottom': elBorderBottom,
+                'u-form-item__border-bottom--error': validateState === 'error' && showError('border-bottom'),
+                'u-form-item__border--error': validateState === 'error' && showError('border')
+            },
+            customClass
+        ]"
+        :style="$u.toStyle(customStyle)"
     >
         <view
             class="u-form-item__body"

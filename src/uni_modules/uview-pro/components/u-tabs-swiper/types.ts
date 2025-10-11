@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TabsSwiperAutoCenterMode, TabsSwiperListItem } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * TabsSwiperProps 全屏选项卡 props 类型定义
  * @description 全屏选项卡，支持滑块、渐变色、滚动居中等
  */
 export const TabsSwiperProps = {
+    ...baseProps,
     /** tabs是否可以左右拖动 */
     isScroll: { type: Boolean, default: true },
     /** 标签数组，元素为对象，如[{name: '推荐'}] */

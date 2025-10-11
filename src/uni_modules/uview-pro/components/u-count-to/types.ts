@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * u-count-to 数字滚动 Props
  * @description 该组件一般用于需要滚动数字到某一个值的场景，目标要求是一个递增的值。
  */
 export const CountToProps = {
+    ...baseProps,
     /** 开始的数值，默认从0增长到某一个数 */
     startVal: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 要滚动的目标数值，必须 */

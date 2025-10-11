@@ -1,5 +1,5 @@
 <template>
-    <view class="u-checkbox" :style="[checkboxStyle]">
+    <view class="u-checkbox" :style="$u.toStyle(checkboxStyle, customStyle)" :class="customClass">
         <view class="u-checkbox__icon-wrap" @tap="toggle" :class="iconClass" :style="$u.toStyle(iconStyle)">
             <u-icon
                 class="u-checkbox__icon-wrap__icon"

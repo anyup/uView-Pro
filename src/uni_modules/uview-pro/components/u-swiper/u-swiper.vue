@@ -1,5 +1,9 @@
 <template>
-    <view class="u-swiper-wrap" :style="{ borderRadius: `${borderRadius}rpx` }">
+    <view
+        class="u-swiper-wrap"
+        :style="$u.toStyle({ borderRadius: `${borderRadius}rpx` }, customStyle)"
+        :class="customClass"
+    >
         <swiper
             :current="elCurrent"
             @change="change"
@@ -96,6 +100,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { SwiperProps } from './types';
+import { $u } from '../..';
 
 /**
  * swiper 轮播图

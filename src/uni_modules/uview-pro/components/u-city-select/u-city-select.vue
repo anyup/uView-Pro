@@ -1,6 +1,8 @@
 <template>
     <u-popup
         v-model="popupValue"
+        :class="customClass"
+        :style="$u.toStyle(customStyle)"
         mode="bottom"
         :popup="false"
         :mask="true"
@@ -108,6 +110,7 @@ import provinces from '../../libs/util/province';
 import citysData from '../../libs/util/city';
 import areasData from '../../libs/util/area';
 import { CitySelectProps } from './types';
+import { $u } from '../..';
 
 /**
  * u-city-select 城市选择器

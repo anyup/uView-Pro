@@ -1,5 +1,5 @@
 <template>
-    <view class="u-gap" :style="gapStyle"></view>
+    <view class="u-gap" :style="$u.toStyle(gapStyle, customStyle)"></view>
 </template>
 
 <script lang="ts">
@@ -18,6 +18,7 @@ export default {
 <script setup lang="ts">
 import { GapProps } from './types';
 import { computed } from 'vue';
+import { $u } from '../../';
 
 /**
  * gap 间隔槽

@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * SkeletonProps 骨架屏 props 类型定义
  * @description 骨架屏用于页面数据加载时的占位
  */
 export const SkeletonProps = {
+    ...baseProps,
     /** 骨架块状元素的背景颜色 */
     elColor: { type: String, default: '#e5e5e5' },
     /** 整个骨架屏页面的背景颜色 */

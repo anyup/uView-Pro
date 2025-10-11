@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * TimeLineItemProps 时间轴节点 props 类型定义
  * @description 时间轴节点组件，支持自定义节点颜色、位置
  */
 export const TimeLineItemProps = {
+    ...baseProps,
     /** 节点的背景颜色 */
     bgColor: { type: String, default: '#ffffff' },
     /** 节点左边图标绝对定位的top值，单位rpx */

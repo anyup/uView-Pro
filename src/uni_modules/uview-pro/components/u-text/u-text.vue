@@ -9,7 +9,7 @@
             `u-text--align-${props.align}`,
             customClass
         ]"
-        :style="$u.toStyle(customStyle, textStyle)"
+        :style="$u.toStyle(textStyle, customStyle)"
         @click="onClick"
     >
         <!-- prefixIcon -->

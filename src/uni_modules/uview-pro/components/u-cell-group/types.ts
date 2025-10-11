@@ -1,4 +1,5 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * cell-group 组件 props 类型定义
@@ -6,6 +7,7 @@ import { type ExtractPropTypes, type PropType } from 'vue';
  */
 
 export const CellGroupProps = {
+    ...baseProps,
     /** 分组标题 */
     title: { type: String, default: '' },
     /** 是否显示分组list上下边框 */

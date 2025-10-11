@@ -2,10 +2,13 @@
     <view
         class="u-row"
         :style="
-            $u.toStyle(customStyle, {
-                alignItems: uAlignItem,
-                justifyContent: uJustify
-            })
+            $u.toStyle(
+                {
+                    alignItems: uAlignItem,
+                    justifyContent: uJustify
+                },
+                customStyle
+            )
         "
         @tap="onClick"
     >

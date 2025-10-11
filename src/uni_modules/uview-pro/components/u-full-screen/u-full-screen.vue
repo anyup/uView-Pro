@@ -1,6 +1,8 @@
 <template>
     <u-modal
         v-model="show"
+        :class="customClass"
+        :style="$u.toStyle(customStyle)"
         :show-cancel-button="true"
         confirm-text="升级"
         title="发现新版本"
@@ -29,6 +31,7 @@ export default {
 <script setup lang="ts">
 import { FullScreenProps } from './types';
 import { ref, onMounted } from 'vue';
+import { $u } from '../../';
 
 /**
  * 压窗屏升级弹窗组件

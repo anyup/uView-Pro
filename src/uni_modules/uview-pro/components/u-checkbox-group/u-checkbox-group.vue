@@ -1,5 +1,5 @@
 <template>
-    <view class="u-checkbox-group u-clearfix">
+    <view class="u-checkbox-group u-clearfix" :class="customClass" :style="$u.toStyle(customStyle)">
         <slot></slot>
     </view>
 </template>

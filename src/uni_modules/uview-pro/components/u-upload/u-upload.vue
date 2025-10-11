@@ -1,5 +1,5 @@
 <template>
-    <view class="u-upload" v-if="!disabled">
+    <view class="u-upload" v-if="!disabled" :class="customClass" :style="$u.toStyle(customStyle)">
         <view
             v-if="showUploadList"
             class="u-list-item u-preview-wrap"

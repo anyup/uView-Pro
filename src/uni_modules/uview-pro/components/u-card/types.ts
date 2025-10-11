@@ -1,4 +1,5 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * card 卡片类型定义
@@ -8,6 +9,7 @@ export type CardIndex = string | number | Record<string, any>;
 export type CardStyle = Record<string, any>;
 
 export const CardProps = {
+    ...baseProps,
     /** 与屏幕两侧是否留空隙 */
     full: { type: Boolean, default: false },
     /** 标题 */

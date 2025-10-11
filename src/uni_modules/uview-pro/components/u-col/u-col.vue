@@ -2,7 +2,7 @@
     <view
         class="u-col"
         :class="['u-col-' + span, customClass]"
-        :style="$u.toStyle(customStyle, colStyle)"
+        :style="$u.toStyle(colStyle, customStyle)"
         @tap="onClick"
     >
         <slot></slot>

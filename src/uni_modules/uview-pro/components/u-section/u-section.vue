@@ -2,17 +2,25 @@
     <view class="u-section">
         <view
             class="u-section__title"
-            :style="{
-                fontWeight: bold ? 'bold' : 'normal',
-                color: color,
-                fontSize: fontSize + 'rpx',
-                paddingLeft: showLine ? Number(fontSize) * 0.7 + 'rpx' : 0
-            }"
-            :class="{
-                'u-section--line': showLine
-            }"
+            :style="
+                $u.toStyle(
+                    {
+                        fontWeight: bold ? 'bold' : 'normal',
+                        color: color,
+                        fontSize: fontSize + 'rpx',
+                        paddingLeft: showLine ? Number(fontSize) * 0.7 + 'rpx' : 0
+                    },
+                    customStyle
+                )
+            "
+            :class="[
+                {
+                    'u-section--line': showLine
+                },
+                customClass
+            ]"
         >
-            <view class="u-section__title__icon-wrap u-flex" :style="lineStyle" v-if="showLine">
+            <view class="u-section__title__icon-wrap u-flex" :style="$u.toStyle(lineStyle)" v-if="showLine">
                 <u-icon
                     top="0"
                     name="column-line"

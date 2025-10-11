@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ThemeType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * u-divider 分割线 Props
  * @description 区隔内容的分割线，一般用于页面底部"没有更多"的提示。
  */
 export const DividerProps = {
+    ...baseProps,
     /** 单一边divider横线的宽度(数值)，单位rpx。或者百分比 */
     halfWidth: { type: [Number, String] as PropType<number | string>, default: 150 },
     /** divider横线的颜色，如设置 */

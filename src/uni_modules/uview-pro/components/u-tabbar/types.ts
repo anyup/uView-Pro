@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * TabbarProps 底部导航栏 props 类型定义
  * @description 底部导航栏，支持凸起按钮、徽标、切换前回调等
  */
 export const TabbarProps = {
+    ...baseProps,
     /** 是否显示tabbar */
     show: { type: Boolean, default: true },
     /** v-model绑定当前激活项的值 */

@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { StepDirection, StepMode, StepsListItem, ThemeType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * StepsProps 步骤条 props 类型定义
@@ -7,6 +8,7 @@ import type { StepDirection, StepMode, StepsListItem, ThemeType } from '../../ty
  */
 
 export const StepsProps = {
+    ...baseProps,
     /** 步骤条的类型，dot|number */
     mode: { type: String as PropType<StepMode>, default: 'dot' },
     /** 步骤条的数据 */

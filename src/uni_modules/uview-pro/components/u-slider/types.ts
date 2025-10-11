@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * SliderProps 滑块选择器 props 类型定义
  * @description 滑块选择器，支持自定义样式、步长、禁用等
  */
 export const SliderProps = {
+    ...baseProps,
     /** 当前进度百分比值，范围0-100 */
     modelValue: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 是否禁用滑块 */

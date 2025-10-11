@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SwipeActionOption } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * swipeAction 左滑单元格 props 类型定义
@@ -7,6 +8,7 @@ import type { SwipeActionOption } from '../../types/global';
  */
 
 export const SwipeActionProps = {
+    ...baseProps,
     /** index值，用于得知点击删除的是哪个按钮 */
     index: {
         type: [Number, String] as PropType<string | number>,

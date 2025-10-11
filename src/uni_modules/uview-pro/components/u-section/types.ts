@@ -1,4 +1,5 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * section 组件 props 类型定义
@@ -7,6 +8,7 @@ import { type ExtractPropTypes, type PropType } from 'vue';
 export type FontSize = string | number;
 
 export const SectionProps = {
+    ...baseProps,
     /** 标题信息 */
     title: { type: String, default: '' },
     /** 右边副标题内容 */

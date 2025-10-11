@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SelectListItem, SelectMode } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * SelectProps 列选择器 props 类型定义
  * @description 用于单列、多列、多列联动的选择场景
  */
 export const SelectProps = {
+    ...baseProps,
     /** 列数据 */
     list: { type: Array as PropType<SelectListItem[] | SelectListItem[][]>, default: () => [] },
     /** 是否显示边框 */

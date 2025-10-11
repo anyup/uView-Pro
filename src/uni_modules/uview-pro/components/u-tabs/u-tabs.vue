@@ -1,5 +1,5 @@
 <template>
-    <view class="u-tabs" :style="{ background: bgColor }">
+    <view class="u-tabs" :style="$u.toStyle({ background: bgColor }, customStyle)" :class="customClass">
         <!-- $u.getRect()对组件根节点无效，因为写了.in(this)，故这里获取内层接点尺寸 -->
         <view>
             <scroll-view scroll-x class="u-scroll-view" :scroll-left="scrollLeft" scroll-with-animation>

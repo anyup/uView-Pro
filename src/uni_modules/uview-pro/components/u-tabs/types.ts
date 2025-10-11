@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TabsItem } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * TabsProps tabs标签 props 类型定义
  * @description 标签组件，支持横向滚动、滑块、徽标等
  */
 export const TabsProps = {
+    ...baseProps,
     /** tabs是否可以左右拖动 */
     isScroll: { type: Boolean, default: true },
     /** 标签数组 */

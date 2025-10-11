@@ -1,11 +1,13 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { ThemeType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * circleProgress 环形进度条 Props
  * @description 展示操作或任务的当前进度，比如上传文件，是一个圆形的进度条。注意：此组件的percent值只能动态增加，不能动态减少。
  */
 export const CircleProgressProps = {
+    ...baseProps,
     /** 圆环进度百分比值 */
     percent: {
         type: Number,

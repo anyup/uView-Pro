@@ -1,8 +1,10 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { ImgMode } from '../../types/global';
+import { baseProps } from '../common/props';
 
 // u-avatar 组件 props
 export const AvatarProps = {
+    ...baseProps,
     /** 背景颜色 */
     bgColor: { type: String, default: 'transparent' },
     /** 头像路径 */

@@ -1,5 +1,5 @@
 <template>
-    <view class="u-time-axis-item">
+    <view class="u-time-axis-item" :class="customClass" :style="$u.toStyle(customStyle)">
         <slot name="content" />
         <view class="u-time-axis-node" :style="[nodeStyle]">
             <slot name="node">
@@ -25,6 +25,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { TimeLineItemProps } from './types';
+import { $u } from '../../';
 
 /**
  * timeLineItem 时间轴Item

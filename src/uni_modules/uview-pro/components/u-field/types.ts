@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { InputAlign, InputConfirmType, InputLabelPosition, InputType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * u-field 组件 Props 类型定义
  * @description 表单输入框属性
  */
 export const FieldProps = {
+    ...baseProps,
     /** label左边的图标，限uView的图标名称 */
     icon: String,
     /** 输入框右边的图标名称，限uView的图标名称（默认false） */

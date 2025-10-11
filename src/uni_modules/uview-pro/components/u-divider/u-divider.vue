@@ -1,12 +1,18 @@
 <template>
     <view
         class="u-divider"
-        :style="{
-            height: height === 'auto' ? 'auto' : height + 'rpx',
-            backgroundColor: bgColor,
-            marginBottom: marginBottom + 'rpx',
-            marginTop: marginTop + 'rpx'
-        }"
+        :class="customClass"
+        :style="
+            $u.toStyle(
+                {
+                    height: height === 'auto' ? 'auto' : height + 'rpx',
+                    backgroundColor: bgColor,
+                    marginBottom: marginBottom + 'rpx',
+                    marginTop: marginTop + 'rpx'
+                },
+                customStyle
+            )
+        "
         @tap="onClick"
     >
         <view
@@ -47,6 +53,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { DividerProps } from './types';
+import { $u } from '../../';
 
 /**
  * divider 分割线

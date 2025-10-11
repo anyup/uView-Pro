@@ -6,10 +6,13 @@
         :hover-stay-time="200"
         @tap="click"
         :style="
-            $u.toStyle(customStyle, {
-                background: bgColor,
-                width: width
-            })
+            $u.toStyle(
+                {
+                    background: bgColor,
+                    width: width
+                },
+                customStyle
+            )
         "
     >
         <view class="u-grid-item-box" :style="[customStyle]" :class="[border ? 'u-border-right u-border-bottom' : '']">

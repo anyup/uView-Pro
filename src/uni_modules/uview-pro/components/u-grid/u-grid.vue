@@ -2,7 +2,7 @@
     <view
         class="u-grid"
         :class="{ 'u-border-top u-border-left': border, customClass }"
-        :style="$u.toStyle(customStyle, gridStyle)"
+        :style="$u.toStyle(gridStyle, customStyle)"
     >
         <slot />
     </view>

@@ -1,5 +1,6 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { Shape } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * checkbox 复选框类型定义
@@ -8,6 +9,7 @@ import type { Shape } from '../../types/global';
 export type CheckboxValue = string | number | boolean;
 
 export const CheckboxProps = {
+    ...baseProps,
     /** checkbox的名称 */
     name: { type: [String, Number], default: '' },
     /** 形状，square为方形，circle为原型 */

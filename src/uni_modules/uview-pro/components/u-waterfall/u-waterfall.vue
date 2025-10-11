@@ -1,5 +1,5 @@
 <template>
-    <view class="u-waterfall">
+    <view class="u-waterfall" :class="customClass" :style="$u.toStyle(customStyle)">
         <view id="u-left-column" class="u-column">
             <slot name="left" :leftList="leftList"></slot>
         </view>

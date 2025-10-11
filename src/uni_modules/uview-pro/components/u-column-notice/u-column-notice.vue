@@ -1,8 +1,8 @@
 <template>
     <view
         class="u-notice-bar"
-        :style="{ background: computeBgColor, padding: props.padding }"
-        :class="[props.type ? `u-type-${props.type}-light-bg` : '']"
+        :style="$u.toStyle({ background: computeBgColor, padding: props.padding }, customStyle)"
+        :class="[props.type ? `u-type-${props.type}-light-bg` : '', customClass]"
     >
         <view class="u-icon-wrap">
             <u-icon
@@ -70,6 +70,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { ColumnNoticeProps } from './types';
+import { $u } from '../../';
 
 /**
  * u-column-notice 通告栏

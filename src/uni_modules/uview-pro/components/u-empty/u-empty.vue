@@ -1,5 +1,10 @@
 <template>
-    <view class="u-empty" v-if="show" :style="{ marginTop: marginTop + 'rpx' }">
+    <view
+        v-if="show"
+        class="u-empty"
+        :class="customClass"
+        :style="$u.toStyle({ marginTop: marginTop + 'rpx' }, customStyle)"
+    >
         <u-icon
             :name="src ? src : 'empty-' + mode"
             :custom-style="iconStyle"
@@ -32,6 +37,7 @@ export default {
 
 <script setup lang="ts">
 import { EmptyProps } from './types';
+import { $u } from '../../';
 
 /**
  * empty 内容为空

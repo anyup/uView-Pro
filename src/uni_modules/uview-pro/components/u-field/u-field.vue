@@ -1,5 +1,9 @@
 <template>
-    <view class="u-field" :class="{ 'u-border-top': props.borderTop, 'u-border-bottom': props.borderBottom }">
+    <view
+        class="u-field"
+        :class="[{ 'u-border-top': props.borderTop, 'u-border-bottom': props.borderBottom }, customClass]"
+        :style="$u.toStyle(customStyle)"
+    >
         <view
             class="u-field-inner"
             :class="[props.type === 'textarea' ? 'u-textarea-inner' : '', 'u-label-postion-' + props.labelPosition]"

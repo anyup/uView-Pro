@@ -1,5 +1,5 @@
 <template>
-    <view class="u-time-axis">
+    <view class="u-time-axis" :class="customClass" :style="$u.toStyle(customStyle)">
         <slot />
     </view>
 </template>
@@ -18,6 +18,9 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { baseProps } from '../common/props';
+import { $u } from '../../';
+
 /**
  * timeLine 时间轴
  * @description 时间轴组件一般用于物流信息展示，各种跟时间相关的记录等场景。
@@ -25,7 +28,7 @@ export default {
  * @example <u-time-line></u-time-line>
  */
 
-// 当前组件无 props 和方法，仅作为时间轴容器使用
+const props = defineProps({ ...baseProps });
 </script>
 
 <style lang="scss" scoped>

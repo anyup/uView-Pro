@@ -2,9 +2,8 @@
     <view
         class="u-search"
         @tap="clickHandler"
-        :style="{
-            margin: margin
-        }"
+        :class="customClass"
+        :style="$u.toStyle({ margin: margin }, customStyle)"
     >
         <view
             class="u-content"
@@ -78,6 +77,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue';
 import { SearchProps } from './types';
+import { $u } from '../..';
 
 /**
  * search 搜索框

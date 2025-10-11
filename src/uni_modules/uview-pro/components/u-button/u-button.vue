@@ -36,9 +36,12 @@
         @chooseavatar="chooseavatar"
         @agreeprivacyauthorization="agreeprivacyauthorization"
         :style="
-            $u.toStyle(customStyle, {
-                overflow: ripple ? 'hidden' : 'visible'
-            })
+            $u.toStyle(
+                {
+                    overflow: ripple ? 'hidden' : 'visible'
+                },
+                customStyle
+            )
         "
         @tap.stop="click($event)"
         :hover-class="getHoverClass"

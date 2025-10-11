@@ -1,5 +1,5 @@
 <template>
-    <view class="u-select">
+    <view class="u-select" :class="customClass" :style="$u.toStyle(customStyle)">
         <!-- <view class="u-select__action" :class="{
 		'u-select--border': border
 	}" @tap.stop="selectHandler">
@@ -86,6 +86,7 @@ export default {
 import { ref, computed, watch } from 'vue';
 import { SelectProps } from './types';
 import type { SelectListItem } from '../../types/global';
+import { $u } from '../..';
 
 /**
  * select 列选择器

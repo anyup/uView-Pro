@@ -1,5 +1,11 @@
 <template>
-    <view class="u-tips" :class="['u-' + type, isShow ? 'u-tip-show' : '']" :style="tipStyle">{{ title }}</view>
+    <view
+        class="u-tips"
+        :class="['u-' + type, isShow ? 'u-tip-show' : '', customClass]"
+        :style="$u.toStyle(tipStyle, customStyle)"
+    >
+        {{ title }}
+    </view>
 </template>
 
 <script lang="ts">

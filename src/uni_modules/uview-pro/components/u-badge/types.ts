@@ -1,5 +1,6 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { BadgeSize, ThemeType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * badge 角标类型定义
@@ -7,6 +8,7 @@ import type { BadgeSize, ThemeType } from '../../types/global';
  */
 
 export const BadgeProps = {
+    ...baseProps,
     /** 使用预设的背景颜色 primary,warning,success,error,info */
     type: { type: String as PropType<ThemeType>, default: 'error' },
     /** Badge的尺寸，default, mini */

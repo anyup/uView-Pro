@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { PlayState, ThemeType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * RowNoticeProps 水平滚动通告栏 props 类型定义
  * @description 水平滚动通告栏，支持主题、图标、关闭等
  */
 export const RowNoticeProps = {
+    ...baseProps,
     /** 显示的内容，数组 */
     list: { type: Array as PropType<string[]>, default: () => [] },
     /** 显示的主题，success|error|primary|info|warning|none */

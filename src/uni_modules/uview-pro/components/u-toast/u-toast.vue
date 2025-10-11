@@ -1,10 +1,8 @@
 <template>
     <view
         class="u-toast"
-        :class="[isShow ? 'u-show' : '', 'u-type-' + tmpConfig.type, 'u-position-' + tmpConfig.position]"
-        :style="{
-            zIndex: uZIndex
-        }"
+        :class="[isShow ? 'u-show' : '', 'u-type-' + tmpConfig.type, 'u-position-' + tmpConfig.position, customClass]"
+        :style="$u.toStyle({ zIndex: uZIndex }, customStyle)"
     >
         <view class="u-icon-wrap">
             <u-icon v-if="tmpConfig.icon" class="u-icon" :name="iconName" :size="30" :color="tmpConfig.type"></u-icon>

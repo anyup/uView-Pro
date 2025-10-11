@@ -1,5 +1,5 @@
 <template>
-    <view class="u-radio" :style="$u.toStyle(props.customStyle, radioStyle)" :class="props.customClass">
+    <view class="u-radio" :style="$u.toStyle(radioStyle, customStyle)" :class="customClass">
         <view class="u-radio__icon-wrap" @tap="toggle" :class="iconClass" :style="$u.toStyle(iconStyle)">
             <u-icon class="u-radio__icon-wrap__icon" name="checkbox-mark" :size="elIconSize" :color="iconColor" />
         </view>

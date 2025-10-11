@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { FormRules, InputAlign, FormErrorType, InputLabelPosition } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * u-form 组件 Props 类型定义
  * @description 表单组件属性
  */
 export const FormProps = {
+    ...baseProps,
     /** 当前form的需要验证字段的集合 */
     model: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
     /** 表单验证规则 */

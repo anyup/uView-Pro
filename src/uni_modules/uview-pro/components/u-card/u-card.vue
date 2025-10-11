@@ -2,12 +2,17 @@
     <view
         class="u-card"
         @tap.stop="onClick"
-        :class="{ 'u-border': border, 'u-card-full': full, 'u-card--border': Number(borderRadius) > 0 }"
-        :style="{
-            borderRadius: borderRadius + 'rpx',
-            margin: margin,
-            boxShadow: boxShadow
-        }"
+        :class="[{ 'u-border': border, 'u-card-full': full, 'u-card--border': Number(borderRadius) > 0 }, customClass]"
+        :style="
+            $u.toStyle(
+                {
+                    borderRadius: borderRadius + 'rpx',
+                    margin: margin,
+                    boxShadow: boxShadow
+                },
+                customStyle
+            )
+        "
     >
         <view
             v-if="showHead"
@@ -88,6 +93,7 @@ export default {
 <script setup lang="ts">
 import { useSlots } from 'vue';
 import { CardProps } from './types';
+import { $u } from '../..';
 
 /**
  * card 卡片

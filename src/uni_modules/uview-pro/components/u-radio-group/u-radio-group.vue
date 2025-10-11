@@ -1,5 +1,5 @@
 <template>
-    <view class="u-radio-group u-clearfix" :style="$u.toStyle(props.customStyle)" :class="props.customClass">
+    <view class="u-radio-group u-clearfix" :style="$u.toStyle(customStyle)" :class="customClass">
         <slot></slot>
     </view>
 </template>

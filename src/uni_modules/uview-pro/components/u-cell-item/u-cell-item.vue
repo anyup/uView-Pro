@@ -2,15 +2,18 @@
     <view
         @tap="onClick"
         class="u-cell"
-        :class="{
-            'u-border-bottom': borderBottom,
-            'u-border-top': borderTop,
-            'u-col-center': center,
-            'u-cell--required': required
-        }"
+        :class="[
+            {
+                'u-border-bottom': borderBottom,
+                'u-border-top': borderTop,
+                'u-col-center': center,
+                'u-cell--required': required
+            },
+            customClass
+        ]"
         hover-stay-time="150"
         :hover-class="hoverClass"
-        :style="{ backgroundColor: bgColor }"
+        :style="$u.toStyle({ backgroundColor: bgColor }, customStyle)"
     >
         <u-icon
             :size="iconSize"
@@ -62,6 +65,7 @@ export default {
 <script setup lang="ts">
 import { computed, useSlots } from 'vue';
 import { CellItemProps } from './types';
+import { $u } from '../..';
 
 /**
  * cellItem 单元格Item

@@ -1,11 +1,11 @@
 <template>
-    <view class="u-countdown">
+    <view class="u-countdown" :class="customClass" :style="$u.toStyle(customStyle)">
         <view
             class="u-countdown-item"
-            :style="[itemStyle]"
+            :style="$u.toStyle(itemStyle)"
             v-if="props.showDays && (props.hideZeroDay || (!props.hideZeroDay && d != '00'))"
         >
-            <view class="u-countdown-time" :style="[letterStyle]">
+            <view class="u-countdown-time" :style="$u.toStyle(letterStyle)">
                 {{ d }}
             </view>
         </view>
@@ -20,7 +20,7 @@
         >
             {{ props.separator == 'colon' && props.showHours ? ':' : '天' }}
         </view>
-        <view class="u-countdown-item" :style="[itemStyle]" v-if="props.showHours">
+        <view class="u-countdown-item" :style="$u.toStyle(itemStyle)" v-if="props.showHours">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
                 {{ h }}
             </view>
@@ -36,7 +36,7 @@
         >
             {{ props.separator == 'colon' && props.showMinutes ? ':' : '时' }}
         </view>
-        <view class="u-countdown-item" :style="[itemStyle]" v-if="props.showMinutes">
+        <view class="u-countdown-item" :style="$u.toStyle(itemStyle)" v-if="props.showMinutes">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
                 {{ i }}
             </view>
@@ -52,7 +52,7 @@
         >
             {{ props.separator == 'colon' && props.showSeconds ? ':' : '分' }}
         </view>
-        <view class="u-countdown-item" :style="[itemStyle]" v-if="props.showSeconds">
+        <view class="u-countdown-item" :style="$u.toStyle(itemStyle)" v-if="props.showSeconds">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
                 {{ s }}
             </view>
@@ -83,6 +83,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
 import { CountDownProps } from './types';
+import { $u } from '../../';
 
 /**
  * countDown 倒计时

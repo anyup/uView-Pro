@@ -1,9 +1,9 @@
 <template>
     <view
         class="u-switch"
-        :class="[modelValue == true ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '']"
+        :class="[modelValue == true ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '', customClass]"
         @tap="onClick"
-        :style="[switchStyle]"
+        :style="$u.toStyle(switchStyle, customStyle)"
     >
         <view
             class="u-switch__node node-class"

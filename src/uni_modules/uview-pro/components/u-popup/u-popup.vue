@@ -2,7 +2,7 @@
     <view
         v-if="visibleSync"
         class="u-drawer"
-        :style="$u.toStyle(customStyle, { zIndex: Number(uZindex) - 1 })"
+        :style="$u.toStyle({ zIndex: Number(uZindex) - 1 }, customStyle)"
         :class="customClass"
         hover-stop-propagation
     >

@@ -1,5 +1,5 @@
 <template>
-    <view class="u-cell-box">
+    <view class="u-cell-box" :class="customClass" :style="$u.toStyle(customStyle)">
         <view class="u-cell-title" v-if="title" :style="[titleStyle]">
             {{ title }}
         </view>
@@ -24,6 +24,7 @@ export default {
 
 <script setup lang="ts">
 import { CellGroupProps } from './types';
+import { $u } from '../..';
 
 /**
  * cellGroup 单元格父组件Group

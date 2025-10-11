@@ -1,5 +1,5 @@
 <template>
-    <view class="u-code-wrap">
+    <view class="u-code-wrap" :class="customClass" :style="$u.toStyle(customStyle)">
         <!-- 此组件功能由js完成，无需写html逻辑 -->
     </view>
 </template>
@@ -20,6 +20,7 @@ export default {
 <script setup lang="ts">
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
 import { VerificationCodeProps } from './types';
+import { $u } from '../../';
 
 /**
  * verificationCode 验证码输入框

@@ -1,11 +1,13 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { ThemeType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * alertTips 警告提示
  * @description 警告提示，展现需要关注的信息
  */
 export const AlertTipsProps = {
+    ...baseProps,
     /** 显示文字 */
     title: { type: String, default: '' },
     /** 主题，success/warning/info/error */

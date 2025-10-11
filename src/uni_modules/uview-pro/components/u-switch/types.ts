@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * SwitchProps 开关选择器 props 类型定义
  * @description 选择开关，支持自定义颜色、尺寸、值等
  */
 export const SwitchProps = {
+    ...baseProps,
     /** 是否显示加载中状态 */
     loading: { type: Boolean, default: false },
     /** 是否禁用 */

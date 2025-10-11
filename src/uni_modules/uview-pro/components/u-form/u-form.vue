@@ -1,5 +1,7 @@
 <template>
-    <view class="u-form"><slot /></view>
+    <view class="u-form" :class="customClass" :style="$u.toStyle(customStyle)">
+        <slot />
+    </view>
 </template>
 
 <script lang="ts">

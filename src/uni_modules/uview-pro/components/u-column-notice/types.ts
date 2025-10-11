@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { Direction, PlayState, ScrollDirection, ThemeType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * u-column-notice 通告栏 Props
  */
 export const ColumnNoticeProps = {
+    ...baseProps,
     /** 显示的内容，数组 */
     list: { type: Array as PropType<string[]>, default: () => [] },
     /** 显示的主题，success|error|primary|info|warning */

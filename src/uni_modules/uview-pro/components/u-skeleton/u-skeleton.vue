@@ -1,5 +1,5 @@
 <template>
-    <view v-if="loading" :style="rootStyle" @touchmove.stop.prevent>
+    <view v-if="loading" :class="customClass" :style="$u.toStyle(rootStyle, customStyle)" @touchmove.stop.prevent>
         <view
             v-for="item in RectNodes"
             :key="$u.guid()"

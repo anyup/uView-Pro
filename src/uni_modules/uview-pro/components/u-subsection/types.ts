@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SubsectionListItem, SubsectionMode } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * SubsectionProps 分段器 props 类型定义
@@ -7,6 +8,7 @@ import type { SubsectionListItem, SubsectionMode } from '../../types/global';
  */
 
 export const SubsectionProps = {
+    ...baseProps,
     /** tab的数据 */
     list: { type: Array as PropType<Array<string | SubsectionListItem>>, default: () => [] },
     /** 当前活动的tab的index */

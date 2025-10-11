@@ -9,6 +9,8 @@
         :safeAreaInsetBottom="safeAreaInsetBottom"
         @close="popupClose"
         :z-index="uZIndex"
+        :custom-class="customClass"
+        :custom-style="customStyle"
     >
         <view class="u-tips u-border-bottom" v-if="tips.text" :style="[tipsStyle]">
             {{ tips.text }}

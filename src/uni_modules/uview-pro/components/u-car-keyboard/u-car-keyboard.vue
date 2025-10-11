@@ -1,5 +1,5 @@
 <template>
-    <view class="u-keyboard" @touchmove.stop.prevent="() => {}">
+    <view class="u-keyboard" :class="customClass" :style="$u.toStyle(customStyle)" @touchmove.stop.prevent="() => {}">
         <view class="u-keyboard-grids">
             <view>
                 <view class="u-keyboard-grids-item" v-for="(group, i) in abc ? EngKeyBoardList : areaList" :key="i">

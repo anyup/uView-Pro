@@ -2,7 +2,7 @@
     <view
         class="u-mask"
         hover-stop-propagation
-        :style="$u.toStyle(customStyle, maskStyle, zoomStyle)"
+        :style="$u.toStyle(maskStyle, zoomStyle, customStyle)"
         @tap="click"
         @touchmove.stop.prevent="() => {}"
         :class="[

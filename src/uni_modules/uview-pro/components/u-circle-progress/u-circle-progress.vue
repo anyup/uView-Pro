@@ -1,11 +1,17 @@
 <template>
     <view
         class="u-circle-progress"
-        :style="{
-            width: widthPx + 'px',
-            height: widthPx + 'px',
-            backgroundColor: bgColor
-        }"
+        :class="customClass"
+        :style="
+            $u.toStyle(
+                {
+                    width: widthPx + 'px',
+                    height: widthPx + 'px',
+                    backgroundColor: bgColor
+                },
+                customStyle
+            )
+        "
     >
         <!-- 支付宝小程序不支持canvas-id属性，必须用id属性 -->
         <canvas

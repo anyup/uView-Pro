@@ -1,9 +1,15 @@
 <template>
     <view
         v-if="show"
-        :class="[disabled ? 'u-disabled' : '', 'u-size-' + size, 'u-shape-' + shape, 'u-mode-' + mode + '-' + type]"
+        :class="[
+            disabled ? 'u-disabled' : '',
+            'u-size-' + size,
+            'u-shape-' + shape,
+            'u-mode-' + mode + '-' + type,
+            customClass
+        ]"
         class="u-tag"
-        :style="[customStyle]"
+        :style="$u.toStyle(customStyle)"
         @tap="clickTag"
     >
         {{ text }}
@@ -37,6 +43,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { TagProps } from './types';
+import { $u } from '../../';
 
 /**
  * tag 提示

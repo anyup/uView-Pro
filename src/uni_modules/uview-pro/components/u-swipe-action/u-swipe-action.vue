@@ -1,6 +1,11 @@
 <template>
     <view>
-        <movable-area class="u-swipe-action" :style="{ backgroundColor: props.bgColor }">
+        <movable-area
+            class="u-swipe-action"
+            :style="$u.toStyle({ backgroundColor: props.bgColor }, customStyle)"
+            :class="customClass"
+            :id="elId"
+        >
             <movable-view
                 class="u-swipe-view"
                 @change="change"

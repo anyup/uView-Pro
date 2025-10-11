@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * u-city-select 城市选择器 Props
  * @description 用于选择省、市、区三级行政区域，支持回显和自定义初始值。
  */
 export const CitySelectProps = {
+    ...baseProps,
     /** 控制弹窗显示与隐藏（v-model） */
     modelValue: { type: Boolean, default: false },
     /** 默认选中的省市区名称数组 */

@@ -1,5 +1,11 @@
 <template>
-    <view v-if="props.show" class="u-tabbar" @touchmove.stop.prevent="() => {}">
+    <view
+        v-if="props.show"
+        class="u-tabbar"
+        :class="customClass"
+        :style="$u.toStyle(customStyle)"
+        @touchmove.stop.prevent="() => {}"
+    >
         <view
             class="u-tabbar__content safe-area-inset-bottom"
             :style="{ height: $u.addUnit(props.height), backgroundColor: props.bgColor }"

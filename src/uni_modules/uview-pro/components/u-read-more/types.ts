@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * ReadMoreProps 阅读更多 props 类型定义
  * @description 内容较长时收起/展开的场景
  */
 export const ReadMoreProps = {
+    ...baseProps,
     /** 默认的显示占位高度，单位为rpx */
     showHeight: { type: [Number, String] as PropType<number | string>, default: 400 },
     /** 展开后是否显示"收起"按钮 */

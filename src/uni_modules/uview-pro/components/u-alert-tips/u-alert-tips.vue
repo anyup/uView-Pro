@@ -5,12 +5,18 @@
         :class="[
             !show ? 'u-close-alert-tips' : '',
             type ? 'u-alert-tips--bg--' + type + '-light' : '',
-            type ? 'u-alert-tips--border--' + type + '-disabled' : ''
+            type ? 'u-alert-tips--border--' + type + '-disabled' : '',
+            customClass
         ]"
-        :style="{
-            backgroundColor: bgColor,
-            borderColor: borderColor
-        }"
+        :style="
+            $u.toStyle(
+                {
+                    backgroundColor: bgColor,
+                    borderColor: borderColor
+                },
+                customStyle
+            )
+        "
     >
         <view class="u-icon-wrap">
             <u-icon

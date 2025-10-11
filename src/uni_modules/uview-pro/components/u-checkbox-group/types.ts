@@ -1,5 +1,6 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { Shape } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * checkbox-group 复选框组类型定义
@@ -7,6 +8,7 @@ import type { Shape } from '../../types/global';
  */
 
 export const CheckboxGroupProps = {
+    ...baseProps,
     /** 最多能选中多少个checkbox */
     max: { type: Number, default: 999 },
     /** 是否禁用所有复选框 */

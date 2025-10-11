@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * RateProps 评分组件 props 类型定义
  * @description 满意度调查、星型评分场景
  */
 export const RateProps = {
+    ...baseProps,
     /** v-model双向绑定选中的星星数量 */
     modelValue: { type: [Number, String] as PropType<number | string>, default: -1 },
     /** 要显示的星星数量 */

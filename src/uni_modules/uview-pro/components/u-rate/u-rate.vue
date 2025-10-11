@@ -1,5 +1,11 @@
 <template>
-    <view class="u-rate" :id="elId" @touchmove.stop.prevent="touchMove">
+    <view
+        class="u-rate"
+        :class="customClass"
+        :style="$u.toStyle(customStyle)"
+        :id="elId"
+        @touchmove.stop.prevent="touchMove"
+    >
         <view class="u-star-wrap" v-for="(item, index) in count" :key="index" :class="[elClass]">
             <u-icon
                 :name="String(activeIndex > index ? elActiveIcon : inactiveIcon)"

@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="u-steps" :style="directionStyle">
+        <view class="u-steps" :class="customClass" :style="$u.toStyle(directionStyle, customStyle)">
             <view
                 class="u-steps__item"
                 :class="['u-steps__item--' + direction]"
@@ -45,6 +45,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { StepsProps } from './types';
+import { $u } from '../..';
 
 /**
  * steps 步骤条

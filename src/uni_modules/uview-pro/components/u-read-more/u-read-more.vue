@@ -2,11 +2,16 @@
     <view>
         <view
             class="u-content"
-            :class="[elId]"
-            :style="{
-                height: isLongContent && !showMore ? showHeight + 'rpx' : 'auto',
-                textIndent: textIndent
-            }"
+            :class="[elId, customClass]"
+            :style="
+                $u.toStyle(
+                    {
+                        height: isLongContent && !showMore ? showHeight + 'rpx' : 'auto',
+                        textIndent: textIndent
+                    },
+                    customStyle
+                )
+            "
         >
             <slot></slot>
         </view>

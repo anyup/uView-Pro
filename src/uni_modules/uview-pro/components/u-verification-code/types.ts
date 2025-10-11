@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * VerificationCodeProps 验证码输入框 props 类型定义
  * @description 验证码输入倒计时组件
  */
 export const VerificationCodeProps = {
+    ...baseProps,
     /** 倒计时时长，单位秒 */
     seconds: { type: [String, Number] as PropType<string | number>, default: 60 },
     /** 开始时按钮文字 */
