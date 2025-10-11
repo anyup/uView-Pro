@@ -17,12 +17,21 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-empty',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { EmptyProps } from './types';
-
-defineOptions({
-    name: 'u-empty'
-});
 
 /**
  * empty 内容为空

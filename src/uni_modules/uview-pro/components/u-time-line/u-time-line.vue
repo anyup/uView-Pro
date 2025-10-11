@@ -4,9 +4,20 @@
     </view>
 </template>
 
-<script setup lang="ts">
-defineOptions({ name: 'u-time-line' });
+<script lang="ts">
+export default {
+    name: 'u-time-line',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
 
+<script setup lang="ts">
 /**
  * timeLine 时间轴
  * @description 时间轴组件一般用于物流信息展示，各种跟时间相关的记录等场景。

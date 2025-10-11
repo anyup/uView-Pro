@@ -8,13 +8,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-loading',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { LoadingProps } from './types';
-
-defineOptions({
-    name: 'u-loading'
-});
 
 /**
  * loading 加载动画

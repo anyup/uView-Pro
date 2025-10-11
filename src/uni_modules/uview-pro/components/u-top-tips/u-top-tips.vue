@@ -2,12 +2,23 @@
     <view class="u-tips" :class="['u-' + type, isShow ? 'u-tip-show' : '']" :style="tipStyle">{{ title }}</view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-top-tips',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { $u } from '../..';
 import { TopTipsProps } from './types';
-
-defineOptions({ name: 'u-top-tips' });
 
 /**
  * topTips 顶部提示

@@ -72,13 +72,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-card',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { useSlots } from 'vue';
 import { CardProps } from './types';
-
-defineOptions({
-    name: 'u-card'
-});
 
 /**
  * card 卡片

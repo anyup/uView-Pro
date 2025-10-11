@@ -14,12 +14,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-subsection',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { SubsectionProps } from './types';
-
-defineOptions({ name: 'u-subsection' });
 
 /**
  * subsection 分段器

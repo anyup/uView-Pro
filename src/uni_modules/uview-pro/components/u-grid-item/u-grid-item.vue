@@ -19,12 +19,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-grid-item',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { GridItemProps } from './types';
 import { ref, computed, getCurrentInstance, onMounted } from 'vue';
 import { $u } from '../..';
-
-defineOptions({ name: 'u-grid-item' });
 
 /**
  * gridItem 宫格项

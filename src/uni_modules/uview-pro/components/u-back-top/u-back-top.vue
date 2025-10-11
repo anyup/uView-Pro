@@ -24,13 +24,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-back-top',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, useSlots } from 'vue';
 import { BackTopProps } from './types';
-
-defineOptions({
-    name: 'u-back-top'
-});
 
 /**
  * back-top 返回顶部按钮

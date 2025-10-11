@@ -55,15 +55,24 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-alert-tips',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import uIcon from '../u-icon/u-icon.vue';
 import { computed } from 'vue';
 import { $u } from '../..';
 import { AlertTipsProps } from './types';
-
-defineOptions({
-    name: 'u-alert-tips'
-});
 
 /**
  * alertTips 警告提示

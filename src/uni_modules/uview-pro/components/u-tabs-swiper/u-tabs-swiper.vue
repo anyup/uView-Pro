@@ -25,12 +25,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-tabs-swiper',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted, getCurrentInstance } from 'vue';
 import colorGradient from '../../libs/function/colorGradient';
 import { TabsSwiperProps } from './types';
-
-defineOptions({ name: 'u-tabs-swiper' });
 
 /**
  * tabsSwiper 全屏选项卡

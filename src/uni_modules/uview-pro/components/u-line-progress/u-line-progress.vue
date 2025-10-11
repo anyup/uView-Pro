@@ -24,13 +24,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-line-progress',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed, useSlots } from 'vue';
 import { LineProgressProps } from './types';
-
-defineOptions({
-    name: 'u-line-progress'
-});
 
 /**
  * lineProgress 线型进度条

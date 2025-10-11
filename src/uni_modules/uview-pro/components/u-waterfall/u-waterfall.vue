@@ -8,12 +8,24 @@
         </view>
     </view>
 </template>
+
+<script lang="ts">
+export default {
+    name: 'u-waterfall',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { WaterfallProps } from './types';
-
-defineOptions({ name: 'u-waterfall' });
 
 /**
  * waterfall 瀑布流

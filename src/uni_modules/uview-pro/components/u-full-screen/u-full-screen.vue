@@ -13,11 +13,22 @@
     </u-modal>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-full-screen',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { FullScreenProps } from './types';
 import { ref, onMounted } from 'vue';
-
-defineOptions({ name: 'u-full-screen' });
 
 /**
  * 压窗屏升级弹窗组件

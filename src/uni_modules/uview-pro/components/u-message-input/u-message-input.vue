@@ -70,11 +70,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-message-input',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { MessageInputProps } from './types';
-
-defineOptions({ name: 'u-message-input' });
 
 /**
  * messageInput 验证码输入框

@@ -4,11 +4,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-verification-code',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
 import { VerificationCodeProps } from './types';
-
-defineOptions({ name: 'u-verification-code' });
 
 /**
  * verificationCode 验证码输入框

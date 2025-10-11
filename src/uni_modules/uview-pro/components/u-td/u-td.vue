@@ -4,12 +4,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-td',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, onMounted, getCurrentInstance, watch } from 'vue';
 import { $u } from '../..';
 import { TdProps } from './types';
-
-defineOptions({ name: 'u-td' });
 
 /**
  * td td单元格

@@ -11,11 +11,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-count-to',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { CountToProps } from './types';
-
-defineOptions({ name: 'u-count-to' });
 
 /**
  * countTo 数字滚动

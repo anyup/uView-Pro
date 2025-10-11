@@ -40,14 +40,23 @@
     </u-popup>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-action-sheet',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { $u } from '../..';
 import { ActionSheetProps } from './types';
-
-defineOptions({
-    name: 'u-action-sheet'
-});
 
 /**
  * actionSheet 操作菜单

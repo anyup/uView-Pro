@@ -4,11 +4,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-grid',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { GridProps } from './types';
 import { ref, computed, watch } from 'vue';
-
-defineOptions({ name: 'u-grid' });
 
 /**
  * grid 宫格布局

@@ -31,13 +31,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-divider',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { DividerProps } from './types';
-
-defineOptions({
-    name: 'u-divider'
-});
 
 /**
  * divider 分割线

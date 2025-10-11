@@ -48,11 +48,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-row-notice',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 import { RowNoticeProps } from './types';
-
-defineOptions({ name: 'u-row-notice' });
 
 /**
  * u-row-notice 水平滚动通告栏

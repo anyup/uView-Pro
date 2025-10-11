@@ -80,11 +80,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-swiper',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { SwiperProps } from './types';
 
-defineOptions({ name: 'u-swiper' });
 /**
  * swiper 轮播图
  * @description 该组件一般用于导航轮播，广告展示等场景,可开箱即用

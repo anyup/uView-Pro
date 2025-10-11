@@ -97,12 +97,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-field',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { FieldProps } from './types';
 import { ref, computed } from 'vue';
 import { $u } from '../..';
-
-defineOptions({ name: 'u-field' });
 
 /**
  * field 输入框

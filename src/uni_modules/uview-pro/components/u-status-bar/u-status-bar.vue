@@ -4,16 +4,25 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-status-bar',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, onMounted, withDefaults, type CSSProperties } from 'vue';
 import { sys } from '../../libs/function/sys';
 import addUnit from '../../libs/function/addUnit';
 import deepMerge from '../../libs/function/deepMerge';
 import { mergeStyles } from '../../libs/function/styleUtils';
-
-defineOptions({
-    name: 'u-status-bar'
-});
 
 /**
  * StatusBar 状态栏

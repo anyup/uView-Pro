@@ -45,12 +45,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-notice-bar',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { NoticeBarProps } from './types';
-
-// 组件名称声明
-defineOptions({ name: 'u-notice-bar' });
 
 /**
  * noticeBar 滚动通知

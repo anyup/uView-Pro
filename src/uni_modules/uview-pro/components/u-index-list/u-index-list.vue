@@ -46,14 +46,23 @@ function getIndexList() {
 }
 </script>
 
+<script lang="ts">
+export default {
+    name: 'u-index-list',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, reactive, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { IndexListProps } from './types';
-
-defineOptions({
-    name: 'u-index-list'
-});
 
 /**
  * indexList 索引列表

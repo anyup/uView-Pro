@@ -135,16 +135,25 @@
     </u-popup>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-picker',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick } from 'vue';
 import provinces from '../../libs/util/province';
 import citys from '../../libs/util/city';
 import areas from '../../libs/util/area';
 import { PickerProps } from './types';
-
-defineOptions({
-    name: 'u-picker'
-});
 
 /**
  * picker picker弹出选择器

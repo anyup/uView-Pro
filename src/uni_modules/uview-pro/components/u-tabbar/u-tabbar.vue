@@ -54,12 +54,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-tabbar',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { TabbarProps } from './types';
-
-defineOptions({ name: 'u-tabbar' });
 
 /**
  * u-tabbar 底部导航栏

@@ -13,13 +13,22 @@
     </text>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-link',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { $u } from '../..';
 import { LinkProps } from './types';
-
-defineOptions({
-    name: 'u-link'
-});
 
 /**
  * link 超链接

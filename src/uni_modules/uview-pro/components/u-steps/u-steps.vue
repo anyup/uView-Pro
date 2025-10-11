@@ -29,11 +29,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-steps',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { StepsProps } from './types';
-
-defineOptions({ name: 'u-steps' });
 
 /**
  * steps 步骤条

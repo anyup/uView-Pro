@@ -14,12 +14,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-mask',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { $u } from '../..';
 import { MaskProps } from './types';
-
-defineOptions({ name: 'u-mask' });
 
 /**
  * mask 遮罩

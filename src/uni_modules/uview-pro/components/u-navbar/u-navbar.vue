@@ -48,12 +48,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-navbar',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { $u } from '../..';
 import { NavbarProps } from './types';
-
-defineOptions({ name: 'u-navbar' });
 
 /**
  * navbar 自定义导航栏

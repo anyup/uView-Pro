@@ -46,13 +46,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-cell-item',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed, useSlots } from 'vue';
 import { CellItemProps } from './types';
-
-defineOptions({
-    name: 'u-cell-item'
-});
 
 /**
  * cellItem 单元格Item

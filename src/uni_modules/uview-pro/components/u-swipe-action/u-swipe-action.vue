@@ -30,12 +30,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-swipe-action',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script lang="ts" setup>
 import { ref, computed, watch, nextTick, onMounted } from 'vue';
 import { $u } from '../..';
 import { SwipeActionProps } from './types';
-
-defineOptions({ name: 'u-swipe-action' });
 
 /**
  * swipeAction 左滑单元格

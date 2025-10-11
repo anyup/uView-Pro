@@ -89,16 +89,25 @@
     </u-popup>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-city-select',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import provinces from '../../libs/util/province';
 import citysData from '../../libs/util/city';
 import areasData from '../../libs/util/area';
 import { CitySelectProps } from './types';
-
-defineOptions({
-    name: 'u-city-select'
-});
 
 /**
  * u-city-select 城市选择器

@@ -4,9 +4,20 @@
     </view>
 </template>
 
-<script setup lang="ts">
-defineOptions({ name: 'u-tr' });
+<script lang="ts">
+export default {
+    name: 'u-tr',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
 
+<script setup lang="ts">
 /**
  * tr 表格行标签
  * @description 表格组件一般用于展示大量结构化数据的场景（搭配<u-table>使用）

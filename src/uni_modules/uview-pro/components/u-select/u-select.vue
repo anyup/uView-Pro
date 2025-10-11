@@ -69,14 +69,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-select',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { SelectProps } from './types';
 import type { SelectListItem } from '../../types/global';
-
-defineOptions({
-    name: 'u-select'
-});
 
 /**
  * select 列选择器

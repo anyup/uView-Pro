@@ -9,12 +9,21 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-cell-group',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { CellGroupProps } from './types';
-
-defineOptions({
-    name: 'u-cell-group'
-});
 
 /**
  * cellGroup 单元格父组件Group

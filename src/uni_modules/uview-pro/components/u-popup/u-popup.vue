@@ -61,14 +61,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-popup',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick } from 'vue';
 import { $u } from '../..';
 import { PopupProps } from './types';
-
-defineOptions({
-    name: 'u-popup'
-});
 
 /**
  * popup 弹窗

@@ -42,7 +42,24 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-slider',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
+import { ref, watch, onMounted, useSlots, getCurrentInstance } from 'vue';
+import { $u } from '../..';
+import { SliderProps } from './types';
+
 /**
  * slider 滑块选择器
  * @tutorial https://uviewpro.cn/zh/components/slider.html
@@ -62,11 +79,6 @@
  * @event end 滑动结束
  * @example <u-slider v-model="value" />
  */
-import { ref, watch, onMounted, useSlots, getCurrentInstance } from 'vue';
-import { $u } from '../..';
-import { SliderProps } from './types';
-
-defineOptions({ name: 'u-slider' });
 
 const emit = defineEmits(['update:modelValue', 'start', 'moving', 'end']);
 

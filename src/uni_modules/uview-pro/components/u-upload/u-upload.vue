@@ -56,14 +56,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-upload',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { $u } from '../..';
 import { UploadProps } from './types';
-
-defineOptions({
-    name: 'u-upload'
-});
 
 /**
  * upload 图片上传

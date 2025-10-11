@@ -54,11 +54,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-column-notice',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { ColumnNoticeProps } from './types';
-
-defineOptions({ name: 'u-column-notice' });
 
 /**
  * u-column-notice 通告栏

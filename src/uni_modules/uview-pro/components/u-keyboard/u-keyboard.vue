@@ -42,13 +42,22 @@
     </u-popup>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-keyboard',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { KeyboardProps } from './types';
 import { computed } from 'vue';
-
-defineOptions({
-    name: 'u-keyboard'
-});
 
 /**
  * keyboard 键盘

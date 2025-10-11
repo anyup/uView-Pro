@@ -30,14 +30,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-image',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, useSlots } from 'vue';
 import { type ImageExpose, ImageProps } from './types';
 import { $u } from '../..';
-
-defineOptions({
-    name: 'u-image'
-});
 
 /**
  * Image 图片

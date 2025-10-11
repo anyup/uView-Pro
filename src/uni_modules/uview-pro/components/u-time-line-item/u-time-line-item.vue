@@ -9,11 +9,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-time-line-item',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { TimeLineItemProps } from './types';
-
-defineOptions({ name: 'u-time-line-item' });
 
 /**
  * timeLineItem 时间轴Item

@@ -19,13 +19,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-badge',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { BadgeProps } from './types';
-
-defineOptions({
-    name: 'u-badge'
-});
 
 /**
  * badge 角标

@@ -27,12 +27,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-dropdown-item',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, onMounted, getCurrentInstance, useSlots, watch } from 'vue';
 import { $u } from '../..';
 import { DropdownItemProps } from './types';
-
-defineOptions({ name: 'u-dropdown-item' });
 
 /**
  * dropdown-item 下拉菜单

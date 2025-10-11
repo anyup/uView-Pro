@@ -21,13 +21,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-tag',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { TagProps } from './types';
-
-defineOptions({
-    name: 'u-tag'
-});
 
 /**
  * tag 提示

@@ -37,6 +37,19 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-avatar-cropper',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 // @ts-nocheck
 import { ref, reactive, onMounted } from 'vue';
@@ -44,8 +57,6 @@ import { $u } from '../..';
 // 兼容 UMD/ESM 导入 weCropper.js
 import WeCropper from './weCropper';
 import { AvatarCropperProps } from './types';
-
-defineOptions({ name: 'u-avatar-cropper' });
 
 /**
  * 裁剪矩形框的样式，其中可包含的属性为lineWidth-边框宽度(单位rpx)，color: 边框颜色，

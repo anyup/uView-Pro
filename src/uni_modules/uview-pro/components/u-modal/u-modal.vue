@@ -53,13 +53,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-modal',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, useSlots } from 'vue';
 import { ModalProps } from './types';
-
-defineOptions({
-    name: 'u-modal'
-});
 
 /**
  * modal 模态框

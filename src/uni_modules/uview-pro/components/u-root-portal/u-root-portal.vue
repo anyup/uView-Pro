@@ -21,8 +21,10 @@
 export default {
     name: 'u-root-portal',
     options: {
-        virtualHost: true,
         addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
         styleIsolation: 'shared'
     }
 };

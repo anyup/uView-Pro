@@ -60,14 +60,24 @@
     </button>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-button',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, nextTick } from 'vue';
 import { $u } from '../../';
 import { ButtonProps } from './types';
 
-defineOptions({
-    name: 'u-button'
-});
 /**
  * button 按钮
  * @description Button 按钮

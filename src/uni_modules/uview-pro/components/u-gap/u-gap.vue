@@ -2,13 +2,22 @@
     <view class="u-gap" :style="gapStyle"></view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-gap',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { GapProps } from './types';
 import { computed } from 'vue';
-
-defineOptions({
-    name: 'u-gap'
-});
 
 /**
  * gap 间隔槽

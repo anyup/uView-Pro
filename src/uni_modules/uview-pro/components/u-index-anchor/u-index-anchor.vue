@@ -12,14 +12,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-index-anchor',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { IndexAnchorProps } from './types';
 import { ref, computed, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
-
-defineOptions({
-    name: 'u-index-anchor'
-});
 
 /**
  * indexAnchor 索引列表锚点

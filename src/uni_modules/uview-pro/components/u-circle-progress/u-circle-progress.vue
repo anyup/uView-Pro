@@ -30,14 +30,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-circle-progress',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { CircleProgressProps } from './types';
-
-defineOptions({
-    name: 'u-circle-progress'
-});
 
 /**
  * circleProgress 环形进度条

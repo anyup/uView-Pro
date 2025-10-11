@@ -46,13 +46,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-number-box',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, watch, computed, nextTick } from 'vue';
 import { NumberBoxProps } from './types';
-
-defineOptions({
-    name: 'u-number-box'
-});
 
 /**
  * numberBox 步进器

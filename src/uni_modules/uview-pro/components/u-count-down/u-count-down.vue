@@ -67,11 +67,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-count-down',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
 import { CountDownProps } from './types';
-
-defineOptions({ name: 'u-count-down' });
 
 /**
  * countDown 倒计时

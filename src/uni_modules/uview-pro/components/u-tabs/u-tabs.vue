@@ -22,12 +22,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-tabs',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { TabsProps } from './types';
-
-defineOptions({ name: 'u-tabs' });
 
 /**
  * tabs 标签

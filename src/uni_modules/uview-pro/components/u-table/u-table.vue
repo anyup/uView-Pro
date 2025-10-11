@@ -4,11 +4,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-table',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { TableProps } from './types';
-
-defineOptions({ name: 'u-table' });
 
 /**
  * table 表格

@@ -42,12 +42,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-section',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { SectionProps } from './types';
 import { $u } from '../..';
-
-defineOptions({ name: 'u-section' });
 
 /**
  * section 查看更多

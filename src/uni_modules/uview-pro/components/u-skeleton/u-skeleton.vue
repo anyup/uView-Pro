@@ -21,12 +21,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-skeleton',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { SkeletonProps } from './types';
-
-defineOptions({ name: 'u-skeleton' });
 
 /**
  * skeleton 骨架屏

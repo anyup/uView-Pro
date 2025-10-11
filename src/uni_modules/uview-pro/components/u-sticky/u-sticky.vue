@@ -24,12 +24,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-sticky',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { StickyProps } from './types';
-
-defineOptions({ name: 'u-sticky' });
 
 /**
  * sticky 吸顶

@@ -16,13 +16,24 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-no-network',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { imageSrc } from './image';
 import { $u } from '../..';
 import { NoNetworkProps } from './types';
-
-defineOptions({ name: 'u-no-network' });
 
 /**
  * noNetwork 无网络提示

@@ -9,6 +9,20 @@
         <view class="u-loading-mask" :class="[popupValue ? 'u-mask-show' : '']" @click="onMaskClick" />
     </view>
 </template>
+
+<script lang="ts">
+export default {
+    name: 'u-loading-popup',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script lang="ts" setup>
 import { computed, onUnmounted, ref, watch } from 'vue';
 import { LoadingPopupProps } from './types';

@@ -62,11 +62,22 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-search',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue';
 import { SearchProps } from './types';
-
-defineOptions({ name: 'u-search' });
 
 /**
  * search 搜索框

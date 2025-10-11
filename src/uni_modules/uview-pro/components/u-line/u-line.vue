@@ -2,14 +2,23 @@
     <view class="u-line" :style="lineStyle"></view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-line',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { $u } from '../..';
 import { LineProps } from './types';
-
-defineOptions({
-    name: 'u-line'
-});
 
 /**
  * line 线条

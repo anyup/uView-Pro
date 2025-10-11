@@ -33,14 +33,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-number-keyboard',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 import { $u } from '../..';
 import { NumberKeyboardProps } from './types';
-
-defineOptions({
-    name: 'u-number-keyboard'
-});
 
 /**
  * u-number-keyboard 数字/身份证键盘

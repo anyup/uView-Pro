@@ -33,12 +33,23 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'u-lazy-load',
+    options: {
+        addGlobalClass: true,
+        // #ifndef MP-TOUTIAO
+        virtualHost: true,
+        // #endif
+        styleIsolation: 'shared'
+    }
+};
+</script>
+
 <script setup lang="ts">
 import { LazyLoadProps } from './types';
 import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 import { $u } from '../..';
-
-defineOptions({ name: 'u-lazy-load' });
 
 /**
  * lazyLoad 懒加载
