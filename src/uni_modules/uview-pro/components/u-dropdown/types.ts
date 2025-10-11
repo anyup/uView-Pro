@@ -1,10 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { baseProps } from '../common/props';
 
 /**
  * u-dropdown 下拉菜单 Props
  * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景
  */
 export const DropdownProps = {
+    ...baseProps,
     /** 菜单标题和选项的激活态颜色 */
     activeColor: { type: String, default: '#2979ff' },
     /** 菜单标题和选项的未激活态颜色 */

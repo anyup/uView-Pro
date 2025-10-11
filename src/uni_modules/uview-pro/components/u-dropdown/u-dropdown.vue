@@ -1,5 +1,5 @@
 <template>
-    <view class="u-dropdown">
+    <view class="u-dropdown" :style="$u.toStyle(styles, customStyle)" :class="customClass">
         <view
             class="u-dropdown__menu"
             :style="{ height: $u.addUnit(height) }"
@@ -75,8 +75,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, getCurrentInstance } from 'vue';
-import { $u } from '../..';
+import { ref, computed, onMounted, getCurrentInstance, nextTick } from 'vue';
+import { $u, useParent } from '../..';
 import { DropdownProps } from './types';
 
 /**
@@ -98,14 +98,11 @@ import { DropdownProps } from './types';
  */
 
 const props = defineProps(DropdownProps);
-
-// emits 定义
 const emit = defineEmits(['open', 'close']);
 
+const { children } = useParent('u-dropdown');
 // 菜单列表
 const menuList = ref<any[]>([]);
-// 是否打开下拉菜单
-const showDropdown = ref(true);
 // 下拉菜单的状态
 const active = ref(false);
 // 当前激活菜单索引
@@ -119,9 +116,15 @@ const highlightIndex = ref<number>(99999);
 // 下拉内容高度
 const contentHeight = ref<number>(0);
 // 子组件引用
-// 引用所有子组件(u-dropdown-item)的this，不能在data中声明变量，否则在微信小程序会造成循环引用而报错
-const children = ref<any[]>([]);
 const instance = getCurrentInstance();
+// 兼容头条样式
+const styles = computed(() => {
+    const style: any = {};
+    // #ifdef MP-TOUTIAO
+    style.width = '100vw';
+    // #endif
+    return style;
+});
 
 // 下拉出来部分的样式
 const popupStyle = computed<any>(() => {
@@ -138,9 +141,6 @@ onMounted(() => {
     getContentHeight();
 });
 
-// 引用所有子组件(u-dropdown-item)的this，不能在data中声明变量，否则在微信小程序会造成循环引用而报错
-children.value = [];
-
 /**
  * 初始化所有子组件
  * 当某个子组件内容变化时，触发父组件的init，父组件再让每一个子组件重新初始化一遍
@@ -148,8 +148,11 @@ children.value = [];
  */
 function init() {
     menuList.value = [];
-    children.value.forEach(child => {
-        child.init && child.init();
+    children.forEach(child => {
+        menuList.value.push({
+            title: child?.getExposed()?.props.title ?? '',
+            disabled: child?.getExposed()?.props.disabled ?? false
+        });
     });
 }
 
@@ -165,7 +168,7 @@ function menuClick(index: number) {
         close();
         // 等动画结束后，再移除下拉菜单中的内容，否则直接移除，也就没有下拉菜单收起的效果了
         setTimeout(() => {
-            if (children.value[index]) children.value[index].active = false;
+            if (children[index]) children[index]?.getExposed()?.setActive(false);
         }, Number(props.duration));
         return;
     }
@@ -188,8 +191,8 @@ function open(index: number) {
     current.value = index;
     // 历遍所有的子元素，将索引匹配的项标记为激活状态，因为子元素是通过v-if控制切换的
     // 之所以不是因display: none，是因为nvue没有display这个属性
-    children.value.forEach((val, idx) => {
-        val.exposed.setActive && val.exposed.setActive(index == idx ? true : false);
+    children.forEach((child, idx) => {
+        child?.getExposed()?.setActive(index == idx ? true : false);
     });
     emit('open', current.value);
 }
@@ -241,8 +244,22 @@ function getContentHeight() {
     });
 }
 
+onMounted(() => {
+    nextTick(() => {
+        init();
+    });
+});
+
 // 暴露方法
-defineExpose({ init, close, open, highlight, getContentHeight, children, menuList });
+defineExpose({
+    init,
+    close,
+    open,
+    highlight,
+    getContentHeight,
+    children,
+    menuList
+});
 </script>
 
 <style scoped lang="scss">

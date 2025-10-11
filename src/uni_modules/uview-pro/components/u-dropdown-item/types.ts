@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { OptionType } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * u-dropdown-item 下拉菜单项 Props
@@ -12,6 +13,7 @@ import type { OptionType } from '../../types/global';
  */
 
 export const DropdownItemProps = {
+    ...baseProps,
     /** 当前选中项的value值 */
     modelValue: { type: [Number, String, Array] as PropType<number | string | any[]>, default: '' },
     /** 菜单项标题 */
