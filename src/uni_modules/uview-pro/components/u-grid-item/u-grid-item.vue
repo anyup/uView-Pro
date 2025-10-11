@@ -1,19 +1,18 @@
 <template>
     <view
         class="u-grid-item"
-        :hover-class="parentData.hoverClass"
+        :class="customClass"
+        :hover-class="hoverClass"
         :hover-stay-time="200"
         @tap="click"
-        :style="{
-            background: bgColor,
-            width: width
-        }"
+        :style="
+            $u.toStyle(customStyle, {
+                background: bgColor,
+                width: width
+            })
+        "
     >
-        <view
-            class="u-grid-item-box"
-            :style="[customStyle]"
-            :class="[parentData.border ? 'u-border-right u-border-bottom' : '']"
-        >
+        <view class="u-grid-item-box" :style="[customStyle]" :class="[border ? 'u-border-right u-border-bottom' : '']">
             <slot />
         </view>
     </view>
@@ -34,8 +33,8 @@ export default {
 
 <script setup lang="ts">
 import { GridItemProps } from './types';
-import { ref, computed, getCurrentInstance, onMounted } from 'vue';
-import { $u } from '../..';
+import { computed } from 'vue';
+import { $u, useChildren } from '../..';
 
 /**
  * gridItem 宫格项
@@ -48,54 +47,37 @@ import { $u } from '../..';
  * @example <u-grid-item></u-grid-item>
  */
 
-// props 定义，保留参数注释
 const props = defineProps(GridItemProps);
-
-// emits 定义
+const { parentExposed } = useChildren('u-grid-item', 'u-grid');
 const emit = defineEmits(['click']);
 
-const instance = getCurrentInstance();
+// 宫格按压时的样式类，"none"为无效果
+const hoverClass = computed(() => {
+    return parentExposed?.value?.props?.hoverClass ?? '';
+});
 
-// 父组件参数
-const parentData = ref({
-    hoverClass: '',
-    col: 3,
-    border: true
+// 是否显示边框
+const border = computed(() => {
+    return parentExposed?.value?.props?.border ?? true;
+});
+
+// 分成几列
+const col = computed(() => {
+    return parentExposed?.value?.props?.col ?? 3;
 });
 
 // 计算每个grid-item的宽度
-const width = computed(() => 100 / Number(parentData.value.col) + '%');
-
-// 获取父组件参数
-function updateParentData() {
-    if (!instance) return;
-    const parent = $u.parentData('u-grid', instance);
-    if (parent) {
-        parentData.value.hoverClass = parent.props.hoverClass;
-        parentData.value.col = parent.props.col;
-        parentData.value.border = parent.props.border;
-        // 注册到父组件children
-        if (Array.isArray(parent.children.value)) {
-            const exist = parent.children.value.find((val: any) => val === instance);
-            if (!exist) parent.children.value.push(instance);
-        }
-    }
-}
+const width = computed(() => 100 / Number(col.value) + '%');
 
 /**
  * 点击宫格
  */
 function click() {
     emit('click', props.index);
-    const parent = $u.parentData('u-grid', instance);
-    if (parent && typeof parent.click === 'function') parent.click(props.index);
+    parentExposed?.value?.click(props.index);
 }
 
-onMounted(() => {
-    updateParentData();
-});
-
-defineExpose({ updateParentData, click });
+defineExpose({ click });
 </script>
 
 <style scoped lang="scss">

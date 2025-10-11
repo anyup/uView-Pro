@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { InputAlign } from '../../types/global';
+import { baseProps } from '../common/props';
 
 /**
  * u-grid 组件 Props 类型定义
  * @description 宫格组件属性
  */
 export const GridProps = {
+    ...baseProps,
     /** 分成几列 */
     col: { type: [Number, String] as PropType<string | number>, default: 3 },
     /** 是否显示边框 */
