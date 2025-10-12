@@ -148,11 +148,8 @@ function init() {
  */
 function headClick() {
     if (props.disabled) return;
-
     // 通知父组件状态变化
-    if (parentExposed.value?.onChange) {
-        parentExposed.value.onChange(itemName.value);
-    }
+    parentExposed?.value?.onChange(itemName.value);
 }
 
 /**

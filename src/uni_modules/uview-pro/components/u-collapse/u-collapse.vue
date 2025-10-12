@@ -92,13 +92,17 @@ function onChange(name: string | number) {
     // 收集当前所有展开的项
     let currentActiveNames: (string | number)[] = [];
     if (props.accordion) {
-        currentActiveNames = activeName.value ? [activeName.value] : [];
+        currentActiveNames = activeName.value === 0 || activeName.value ? [activeName.value] : [];
     } else {
-        // 对于非手风琴模式，我们不知道所有项的状态，所以这里不处理
+        // 对于非手风琴模式，我们不知道所有项的状态
         currentActiveNames = [];
+        children.forEach(child => {
+            if (child.getExposed().isShow.value) {
+                currentActiveNames.push(child.getExposed().itemName);
+            }
+        });
     }
-
-    emit('change', props.accordion ? activeName.value || '' : currentActiveNames);
+    currentActiveNames.length > 0 && emit('change', props.accordion ? activeName.value || '' : currentActiveNames);
 }
 
 /**
