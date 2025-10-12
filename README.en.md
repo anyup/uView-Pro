@@ -48,10 +48,10 @@ You can scan the following QR codes with **WeChat** or **mobile browser** to vie
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_wx.jpg" width="200" height="200" ></td>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_alipay.png" width="200" height="200" ></td>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_h5.png" width="200" height="200" ></td>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="200" height="200" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_wx.jpg" width="150" height="150" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_alipay.png" width="150" height="150" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_h5.png" width="150" height="150" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="150" height="150" ></td>
     </tr>
     <tr>
         <td align="center"><strong>WeChat Mini Program</strong><br>(Scan with WeChat)</td>
@@ -85,7 +85,7 @@ uView Pro QQ Group: [Click to Join](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98
 
 <table class="table">
     <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1759853787761" width="250" height="345" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=1760233880982" width="250" height="345" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
     </tr>
     <tr>
