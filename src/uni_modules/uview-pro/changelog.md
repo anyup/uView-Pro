@@ -1,3 +1,32 @@
+## 0.3.0（2025-10-12）
+
+### 📝 Documentation | 文档
+
+- 更新开源捐赠图片 ([8eb0f00](https://github.com/anyup/uView-Pro/commit/8eb0f00ed5308cd1c3574b66dc752b050bbfcb70))
+- update readme ([c93cdcb](https://github.com/anyup/uView-Pro/commit/c93cdcb1278040b8c5b6232b0d7928edad22af5d))
+
+### ✨ Features | 新功能
+
+- **component-relation:** 添加组件关系管理 Hooks 工具，用于完全替换 provide/inject，全平台兼容 ([927be95](https://github.com/anyup/uView-Pro/commit/927be95e8b1c1bd5e05cf91c00888c314f6431e8))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **components:** 重构复选框checkbox和手风琴collapse组件，使用新版组件关系管理工具，优化兼容性 ([a6b2e86](https://github.com/anyup/uView-Pro/commit/a6b2e86394193a1ff5b58df045cba5518b322d38))
+- **u-radio:** 修复单选框组件，兼容微信、头条小程序 ([6c409dc](https://github.com/anyup/uView-Pro/commit/6c409dc2c0ed116abcdde23a366c7f575fd56a24))
+- **styles:** 优化 u-collapse-item 和 u-text 组件的样式合并逻辑 ([d4436c5](https://github.com/anyup/uView-Pro/commit/d4436c51dc2ddb27d70eeba4cad804504da40013))
+- **layout:** 优化布局组件兼容性 ([285b7a7](https://github.com/anyup/uView-Pro/commit/285b7a73fcd9f8a21521be0d7e7a83690495dc4b))
+- **u-form:** 重构表单组件的错误处理和样式，增强兼容性，支持多种小程序平台 ([587f87d](https://github.com/anyup/uView-Pro/commit/587f87d1b8d3dd6cd98e583b2640bef61bd8f119))
+- **components:** 所有组件允许接受外部样式，允许样式穿透 ([e736e90](https://github.com/anyup/uView-Pro/commit/e736e9014e36c995ba434a56a6ccfee01c56ad35))
+- **u-grid:** 重构宫格组件，支持自定义样式 ([d999ece](https://github.com/anyup/uView-Pro/commit/d999eceed2447ddc99a62a6bdcc57deaa1d1b515))
+- **component-relation:** 优化子组件挂载时连接父组件的逻辑 ([2d038f2](https://github.com/anyup/uView-Pro/commit/2d038f2721e91db2f1773079341473505f2f6836))
+- **u-dropdown:** 重构下拉菜单组件，兼容多平台 ([393caa5](https://github.com/anyup/uView-Pro/commit/393caa57910e9a63484e0c9e852c634fc15ef606))
+- **components:** 优化部分组件中的 customStyle 属性及样式处理 ([3506a5a](https://github.com/anyup/uView-Pro/commit/3506a5a055a7a106311351b4b8b90127b019a061))
+- **components:** 统一使用 customClass 和 customStyle 属性，统一处理组件样式和类名 ([d400997](https://github.com/anyup/uView-Pro/commit/d40099782b97011edc04c5040342b585b8f18fcd))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-collapse:** 修复手风琴模式和非手风琴模式的处理回调时，index错误的问题 ([a5882eb](https://github.com/anyup/uView-Pro/commit/a5882eb17d87fee4e06448ecc353bf4237f25d52))
+
 ## 0.2.4（2025-10-08）
 
 ### 🐛 Bug Fixes | Bug 修复
