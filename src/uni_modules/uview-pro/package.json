@@ -73,13 +73,13 @@
                     },
                     "mp": {
                         "weixin": "√",
-                        "alipay": "-",
-                        "toutiao": "-",
+                        "alipay": "√",
+                        "toutiao": "√",
                         "baidu": "-",
                         "kuaishou": "-",
                         "jd": "-",
                         "harmony": "-",
-                        "qq": "-",
+                        "qq": "√",
                         "lark": "-"
                     },
                     "quickapp": {
