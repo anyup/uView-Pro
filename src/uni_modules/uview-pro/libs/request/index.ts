@@ -88,23 +88,23 @@ export class Request {
         };
         // 让 options.meta 传递到拦截器
         options.meta = mergedMeta;
+        options.dataType = options.dataType || this.config.dataType;
+        options.responseType = options.responseType || this.config.responseType;
+        options.url = options.url || '';
+        options.params = options.params || {};
+        options.header = Object.assign({}, this.config.header || {}, options.header || {});
+        options.method = (options.method || this.config.method) as RequestOptions['method'];
+        // 保证 url 一定为 string
+        if (!options.url) options.url = '';
 
         if (this.interceptor.request && typeof this.interceptor.request === 'function') {
             const interceptorRequest = this.interceptor.request(options);
-            if (interceptorRequest === false) {
+            if (!interceptorRequest) {
                 // 返回一个处于pending状态中的Promise，来取消原promise，避免进入then()回调
                 return new Promise(() => {});
             }
             this.options = interceptorRequest;
         }
-        options.dataType = options.dataType || this.config.dataType;
-        options.responseType = options.responseType || this.config.responseType;
-        options.url = options.url || '';
-        options.params = options.params || {};
-        options.header = Object.assign({}, this.config.header, options.header);
-        options.method = (options.method || this.config.method) as RequestOptions['method'];
-        // 保证 url 一定为 string
-        if (!options.url) options.url = '';
 
         return new Promise<T>((resolve, reject) => {
             options.complete = (response: any) => {
