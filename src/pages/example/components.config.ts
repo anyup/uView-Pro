@@ -461,6 +461,12 @@ export default [
                 title_en: 'Link'
             },
             {
+                path: '/pages/componentsC/copy/index',
+                icon: 'copy',
+                title: 'Copy 复制',
+                title_en: 'Copy'
+            },
+            {
                 path: '/pages/componentsB/loading/index',
                 icon: 'loading',
                 title: 'Loading 加载动画',

@@ -91,6 +91,9 @@ declare module 'vue' {
         uWaterfall: (typeof import('../components/u-waterfall/u-waterfall.vue'))['default'];
         uText: (typeof import('../components/u-text/u-text.vue'))['default'];
         uRootPortal: (typeof import('../components/u-root-portal/u-root-portal.vue'))['default'];
+        uStatusBar: (typeof import('../components/u-status-bar/u-status-bar.vue'))['default'];
+        uSafeBottom: (typeof import('../components/u-safe-bottom/u-safe-bottom.vue'))['default'];
+        uCopy: (typeof import('../components/u-copy/u-copy.vue'))['default'];
     }
 }
 

@@ -46,6 +46,8 @@ import throttle from './function/throttle';
 import getRect from './function/getRect';
 // 获取父组件
 import { parentData, parent } from './function/parent';
+// 剪贴板
+import { clipboard } from './function/clipboard';
 // 配置信息
 import config from './config/config';
 // 各个需要fixed的地方的z-index配置文件
@@ -268,6 +270,7 @@ export {
     $parent,
     parent,
     parentData,
+    clipboard,
     dispatch,
     broadcast,
     config,
@@ -301,6 +304,7 @@ export const $u = {
     $parent,
     parent,
     parentData,
+    clipboard,
     addUnit,
     trim,
     type: ['primary', 'success', 'error', 'warning', 'info'],

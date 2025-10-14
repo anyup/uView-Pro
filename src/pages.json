@@ -216,6 +216,13 @@
                     "style": {
                         "navigationBarTitleText": "text-文本"
                     }
+                },
+                // copy复制
+                {
+                    "path": "copy/index",
+                    "style": {
+                        "navigationBarTitleText": "copy-复制"
+                    }
                 }
             ]
         },
