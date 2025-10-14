@@ -1,3 +1,13 @@
+## 0.3.1（2025-10-14）
+
+### 📝 Documentation | 文档
+
+- 更新 package.json 中的平台支持信息 ([c30da7c](https://github.com/anyup/uView-Pro/commit/c30da7cf32c8c97e740df75166d1d7dfa4016942))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **request:** 修复http request请求拦截器中config.header为undefined的问题 ([8da453a](https://github.com/anyup/uView-Pro/commit/8da453afe193338a53c9f320346acabdb8803a79))
+
 ## 0.3.0（2025-10-12）
 
 ### 📝 Documentation | 文档
