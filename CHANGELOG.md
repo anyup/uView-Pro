@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.1] - 2025-10-14
+## [0.3.1] - tag v0.3.1
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.3.1
+2025-10-14
 
 ### 📝 Documentation | 文档
 
@@ -15,7 +20,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **request:** 修复http request请求拦截器中config.header为undefined的问题 ([8da453a](https://github.com/anyup/uView-Pro/commit/8da453afe193338a53c9f320346acabdb8803a79))
 
-## [0.3.0] - 2025-10-12
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **release:** bump version to 0.3.1 ([4fc2902](https://github.com/anyup/uView-Pro/commit/4fc29028bdd360833c285857e8c588ad1dfd28f3))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.3.0] - tag v0.3.0
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.3.0
+2025-10-12
 
 ### 📝 Documentation | 文档
 
@@ -44,7 +62,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **u-collapse:** 修复手风琴模式和非手风琴模式的处理回调时，index错误的问题 ([a5882eb](https://github.com/anyup/uView-Pro/commit/a5882eb17d87fee4e06448ecc353bf4237f25d52))
 
-## [0.2.4] - 2025-10-08
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **release:** bump version to 0.3.0 ([959c6a7](https://github.com/anyup/uView-Pro/commit/959c6a7c191ddeacac5fdf86cf72ddb72fd736a7))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.2.4] - tag v0.2.4
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.2.4
+2025-10-08
 
 ### 🐛 Bug Fixes | Bug 修复
 
@@ -67,7 +98,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 更新微信交流群图片链接 ([e67588a](https://github.com/anyup/uView-Pro/commit/e67588ae392d5150ec4d271ce45e65fe32372460))
 
-## [0.2.3] - 2025-10-06
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **release:** bump version to 0.2.4 ([27e1624](https://github.com/anyup/uView-Pro/commit/27e1624619311de1ee10f4dfc0ef5ffbd6210898))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.2.3] - tag v0.2.3
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.2.3
+2025-10-06
 
 ### 🐛 Bug Fixes | Bug 修复
 
@@ -88,11 +132,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **readme:** 更新微信交流群二维码 ([cff3a3d](https://github.com/anyup/uView-Pro/commit/cff3a3dbb035ca365a1ab9839b14f300ef775c16))
 
-## [0.2.2] - 2025-09-30
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **release:** bump version to 0.2.3 ([f125c67](https://github.com/anyup/uView-Pro/commit/f125c67f3e9a6303cfa9a8e8718b66531c923ddb))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.2.2] - tag v0.2.2
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.2.2
+2025-09-30
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - 删除未使用的公共 API 和国际化文件 ([e73d3da](https://github.com/anyup/uView-Pro/commit/e73d3da7ede71584ec8b58a386307747b62f5e7a))
+- **release:** bump version to 0.2.2 ([c1932fe](https://github.com/anyup/uView-Pro/commit/c1932fe43b224109e49465b2a454c15965587a19))
 
 ### ♻️ Code Refactoring | 代码重构
 
@@ -108,11 +166,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 添加支付宝小程序二维码并更新微信群聊图片 ([1dc0db3](https://github.com/anyup/uView-Pro/commit/1dc0db340e34675f15a7e83c79c3ac5d453853a2))
 
-## [0.2.1] - 2025-09-29
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.2.1] - tag v0.2.1
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.2.1
+2025-09-29
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - 优化代码格式化和 ESLint 配置 ([771eacd](https://github.com/anyup/uView-Pro/commit/771eacd58d410e468a8aec4225bbe7b402480b2f))
+- **release:** bump version to 0.2.1 ([b835513](https://github.com/anyup/uView-Pro/commit/b8355133aa7bdb57344a662f4968e148f652ffb6))
 
 ### ⚡ Performance Improvements | 性能优化
 
@@ -130,7 +198,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **u-input:** 修复输入框禁用状态时清空按钮仍显示的问题 ([722715f](https://github.com/anyup/uView-Pro/commit/722715f7d6607584c0e158ba2de2342147e3be17))
 
-## [0.2.0] - 2025-09-28
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.2.0] - tag v0.2.0
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.2.0
+2025-09-28
 
 ### ♻️ Code Refactoring | 代码重构
 
@@ -165,7 +242,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **vscode:** 设置 Vue 文件默认格式化工具为 Prettier ([84d5259](https://github.com/anyup/uView-Pro/commit/84d52599f2632e814a137e8d553793fb3cdad1f1))
 
-## [0.1.1] - 2025-09-22
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **release:** bump version to 0.2.0 ([41a9319](https://github.com/anyup/uView-Pro/commit/41a93199896682b574f78f161b5a63b2268ae89a))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.1.1] - tag v0.1.1
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.1.1
+2025-09-22
 
 ### ♻️ Code Refactoring | 代码重构
 
@@ -183,7 +273,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **u-input:** 解决u-input组件在微信小程序端，开启clearable属性后，focus会自动清空输入问题 ([283551c](https://github.com/anyup/uView-Pro/commit/283551c54cd7006899a66b97afe7137b4bbb14b1))
 
-## [0.1.0] - 2025-09-21
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **release:** bump version to 0.1.1 ([7397b86](https://github.com/anyup/uView-Pro/commit/7397b86aa2670cb8c7a7d094a62a895ec1fb560d))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.1.0] - tag v0.1.0
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.1.0
+2025-09-21
 
 ### ♻️ Code Refactoring | 代码重构
 
@@ -210,7 +313,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 更新交流群图片 ([3b71cb0](https://github.com/anyup/uView-Pro/commit/3b71cb092efd4c5a89c36ee559028d0fe438a013))
 
-## [0.0.23] - 2025-09-15
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **release:** bump version to 0.1.0 ([2b3ef26](https://github.com/anyup/uView-Pro/commit/2b3ef26968f8c87bd3086877315efee8d11183fe))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.0.23] - tag v0.0.23
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.0.23
+2025-09-15
 
 ### 🐛 Bug Fixes | Bug 修复
 
@@ -221,16 +337,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - revert comments ([3eed330](https://github.com/anyup/uView-Pro/commit/3eed330c27a7026eb87cb9ef285d1ecbe6789552))
 - **docs:** 增加贡献者 ([8b9d44e](https://github.com/anyup/uView-Pro/commit/8b9d44e281c02f639079b77b7c32cc0a566b35a1))
 - **docs:** add contributors ([b4035da](https://github.com/anyup/uView-Pro/commit/b4035da5a39acc5ae9dcb13b06143cda6a73fec3))
+- **release:** bump version to 0.0.23 ([b230c3f](https://github.com/anyup/uView-Pro/commit/b230c3fb9436bf9ea8c51c20c9c0a0d8cb5bb34a))
 
 ### 📝 Documentation | 文档
 
 - 更新交流群二维码图片 ([00c0581](https://github.com/anyup/uView-Pro/commit/00c058159ea9d169219474728e8b31cdc892ab2c))
 
-## [0.0.22] - 2025-09-11
+### 👥 Contributors
+
+<a href="https://github.com/bin"><img src="https://github.com/bin.png?size=40" width="40" height="40" alt="Bin" title="Bin"/></a> <a href="https://github.com/fuwb"><img src="https://github.com/fuwb.png?size=40" width="40" height="40" alt="fuwb" title="fuwb"/></a> <a href="https://github.com/qianyuanji"><img src="https://github.com/qianyuanji.png?size=40" width="40" height="40" alt="qianyuanji" title="qianyuanji"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.0.22] - tag v0.0.22
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.0.22
+2025-09-11
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - 忽略 pnpm-lock.yaml 文件 ([28802d3](https://github.com/anyup/uView-Pro/commit/28802d308d3c1f2d0d6b583b3b27725b6b40b1a9))
+- **release:** bump version to 0.0.22 ([1b30faa](https://github.com/anyup/uView-Pro/commit/1b30faab76518af4799767204abd838a876d9fd0))
 
 ### 🐛 Bug Fixes | Bug 修复
 
@@ -243,7 +370,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **u-upload:** 调整上传组件默认值和功能 ([4808627](https://github.com/anyup/uView-Pro/commit/48086274f5fe16f4b3b7554a99038a76aa08e8c5))
 - **pages:** 在多个页面中添加功能说明的弹窗提示 ([5e59855](https://github.com/anyup/uView-Pro/commit/5e59855ff81f21c54cbfa44a3f4641b4b9f1f6bd))
 
-## [0.0.21] - 2025-09-09
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/bin"><img src="https://github.com/bin.png?size=40" width="40" height="40" alt="Bin" title="Bin"/></a> <a href="https://github.com/lonely-flyer"><img src="https://github.com/lonely-flyer.png?size=40" width="40" height="40" alt="Lonely-flyer" title="Lonely-flyer"/></a>
+
+## [0.0.21] - tag v0.0.21
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.0.21
+2025-09-09
 
 ### ⚡ Performance Improvements | 性能优化
 
@@ -270,6 +406,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - update project configuration and add prettier support ([9c0cc6a](https://github.com/anyup/uView-Pro/commit/9c0cc6ae3719b975d702b0283bd0c15ee4f3c374))
+- **release:** bump version to 0.0.21 ([7bbcbeb](https://github.com/anyup/uView-Pro/commit/7bbcbeb8fa98057e6ff94a9c3233fbc5fc13758d))
 
 ### ♻️ Code Refactoring | 代码重构
 
@@ -284,7 +421,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - mp-alipay 开启 component2 支持 ([430d248](https://github.com/anyup/uView-Pro/commit/430d248ef9e805365dcee0373f6a524bd7084a38))
 
-## [0.0.20] - 2025-09-08
+### 👥 Contributors
+
+<a href="https://github.com/bin"><img src="https://github.com/bin.png?size=40" width="40" height="40" alt="Bin" title="Bin"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.0.20] - tag v0.0.20
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.0.20
+2025-09-08
 
 ### ♻️ Code Refactoring | 代码重构
 
@@ -297,6 +443,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - update project configuration and add prettier support ([74a714d](https://github.com/anyup/uView-Pro/commit/74a714ddc30dc0c2c5a6389f254f1e2c922d905e))
+- **release:** bump version to 0.0.20 ([0b94520](https://github.com/anyup/uView-Pro/commit/0b945200d962e584b4c467fdd312e45f944f3f64))
 
 ### 🐛 Bug Fixes | Bug 修复
 
@@ -306,7 +453,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - update husky pre-commit ([dd04f9a](https://github.com/anyup/uView-Pro/commit/dd04f9a8f2ebdbec37a148e1cf2fa3280c1ab2cd))
 
-## [0.0.19] - 2025-09-04
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.0.19] - tag v0.0.19
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.0.19
+2025-09-04
 
 ### 🐛 Bug Fixes | Bug 修复
 
@@ -326,11 +482,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 增强 toast 工具函数的灵活性 ([2232054](https://github.com/anyup/uView-Pro/commit/22320540acee36c6c11688387431a4ddba93520f))
 - 添加 HTTP 请求拦截器和配置示例代码 ([aba7cf9](https://github.com/anyup/uView-Pro/commit/aba7cf97ed2424432da51be1841aa17a5a2d7932))
 
-## [0.0.18] - 2025-09-03
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **release:** bump version to 0.0.19 ([ac9f999](https://github.com/anyup/uView-Pro/commit/ac9f9990cab450e14ddcd14681004417a14846ac))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
+## [0.0.18] - tag v0.0.18
+
+Tagger: anyup <anyupxing@163.com>
+
+Release version 0.0.18
+2025-09-03
 
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - update release script for better version management ([b64f38f](https://github.com/anyup/uView-Pro/commit/b64f38fea28de39c99cdf84f7e767aa7ceac1344))
+- **release:** bump version to 0.0.18 ([ba61715](https://github.com/anyup/uView-Pro/commit/ba61715b4288f0c7beba5452f1c00a7dbfa3fb47))
 
 ### 🐛 Bug Fixes | Bug 修复
 
@@ -339,6 +509,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 👷 Continuous Integration | CI 配置
 
 - optimize changelog generation and spacing ([3103e7b](https://github.com/anyup/uView-Pro/commit/3103e7b56a0e2dd0392efdb6a85824b11ef6800c))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
 
 ## [0.0.17] - tag v0.0.17
 
@@ -370,6 +544,10 @@ Release version 0.0.17
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - **release:** bump version to 0.0.17 ([9fcbdd9](https://github.com/anyup/uView-Pro/commit/9fcbdd90a0a1764134c8d33a011223a5dda990be))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
 
 ## [0.0.15] - tag v0.0.15
 
@@ -410,6 +588,10 @@ Release version 0.0.15
 
 - update changelog script with correct github url ([7761721](https://github.com/anyup/uView-Pro/commit/7761721dbd580de37fa94ac48514aeb4d570bc77))
 
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.0.13] - tag v0.0.13
 
 Tagger: anyup <anyupxing@163.com>
@@ -428,6 +610,10 @@ Release version 0.0.13
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - **release:** bump version to 0.0.13 ([ea5c4df](https://github.com/anyup/uView-Pro/commit/ea5c4df6b77c4a7004fb0e4a9d538917e1ed4003))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
 
 ## [0.0.12] - tag v0.0.12
 
@@ -454,6 +640,10 @@ Release version 0.0.12
 
 - **release:** bump version to 0.0.12 ([f791252](https://github.com/anyup/uView-Pro/commit/f7912525316f493d925eef34fed01594eb6d7d61))
 
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.0.11] - tag v0.0.11
 
 Tagger: anyup <anyupxing@163.com>
@@ -479,6 +669,10 @@ Release version 0.0.11
 
 - **release:** bump version to 0.0.11 ([86f972a](https://github.com/anyup/uView-Pro/commit/86f972ab537120e86acac35441466ca710370b0b))
 
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.0.10] - tag v0.0.10
 
 Tagger: anyup <anyupxing@163.com>
@@ -503,6 +697,10 @@ Release version 0.0.10
 
 - **release:** bump version to 0.0.10 ([7914ffb](https://github.com/anyup/uView-Pro/commit/7914ffb5d13ddf192c8d489b85ce7c38804deda4))
 
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.0.9] - tag v0.0.9
 
 Tagger: anyup <anyupxing@163.com>
@@ -526,6 +724,10 @@ Release version 0.0.9
 
 - **release:** bump version to 0.0.9 ([e7cedb3](https://github.com/anyup/uView-Pro/commit/e7cedb37e2b1917f1bb66c43012e4d33662b5ec2))
 
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.0.8] - tag v0.0.8
 
 Tagger: anyup <anyupxing@163.com>
@@ -546,6 +748,10 @@ Release version 0.0.8
 ### 🚀 Chore | 构建/工程依赖/工具
 
 - **release:** bump version to 0.0.8 ([168fd72](https://github.com/anyup/uView-Pro/commit/168fd7298f89e886e44d418250297b487b573c93))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
 
 ## [0.0.7] - tag v0.0.7
 
@@ -644,6 +850,10 @@ Release version 0.0.7
 
 - 添加 referrer 策略 meta 标签 ([5f8961a](https://github.com/anyup/uView-Pro/commit/5f8961ab19cd166b06f7d42af204c84ed61f42b9))
 
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/wjp"><img src="https://github.com/wjp.png?size=40" width="40" height="40" alt="wjp" title="wjp"/></a> <a href="https://github.com/chouchouji"><img src="https://github.com/chouchouji.png?size=40" width="40" height="40" alt="chouchouji" title="chouchouji"/></a> <a href="https://github.com/yourname"><img src="https://github.com/yourname.png?size=40" width="40" height="40" alt="Your Name" title="Your Name"/></a>
+
 ## [0.0.3] - tag v0.0.3
 
 Tagger: anyup <anyupxing@163.com>
@@ -675,6 +885,10 @@ Tagger: anyup <anyupxing@163.com>
 ### 👷 Continuous Integration | CI 配置
 
 - **uview-pro:** 更新 Vue 版本兼容性并调整文档 ([82c3725](https://github.com/anyup/uView-Pro/commit/82c37255f42a0b7a26bf829552fb0d27f8a38a15))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
 
 ## [0.0.2] - tag v0.0.2
 
@@ -985,3 +1199,7 @@ Tagger: anyup <anyupxing@163.com>
 
 - **$parent:** 优化 $parent 函数以提升性能 ([b3b8d4a](https://github.com/anyup/uView-Pro/commit/b3b8d4a91372eac1399294e83e0569719cbc1012))
 - **u-sticky:** 优化内容观测者初始化 ([17111a0](https://github.com/anyup/uView-Pro/commit/17111a05622dc6738c7526e52cfaa20729444e7d))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>

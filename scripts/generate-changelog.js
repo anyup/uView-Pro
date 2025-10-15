@@ -2,6 +2,7 @@
 
 const { execSync } = require('child_process');
 const fs = require('fs');
+const path = require('path');
 
 // 解析命令行参数
 const args = process.argv.slice(2);
@@ -100,12 +101,12 @@ function buildSectionHeader({ version, date }) {
 
 function collectCommits(range) {
     const rangeArg = range ? ` ${range}` : '';
-    const lines = execSync(`git log${rangeArg} --pretty=format:"%H|%s" --reverse`, { encoding: 'utf8' })
+    const lines = execSync(`git log${rangeArg} --pretty=format:"%H|%s|%an|%ae" --reverse`, { encoding: 'utf8' })
         .split('\n')
         .filter(line => line.trim());
     return lines.map(line => {
-        const [hash, subject] = line.split('|');
-        return { hash, subject };
+        const [hash, subject, authorName, authorEmail] = line.split('|');
+        return { hash, subject, authorName, authorEmail };
     });
 }
 
@@ -128,7 +129,80 @@ function groupCommitsByType(commits) {
     return commitsByType;
 }
 
-function renderBodyFromGroups(commitsByType) {
+function collectContributors(commits) {
+    const contributorsMap = new Map();
+    const seenUsernames = new Set(); // 用于去重 GitHub 用户名
+
+    // 读取贡献者映射配置
+    let nameToGithub = {};
+    let ignoreList = [];
+    try {
+        const configPath = path.join(__dirname, 'contributors-map.json');
+        if (fs.existsSync(configPath)) {
+            const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+            nameToGithub = config.nameToGithub || {};
+            ignoreList = config.ignore || [];
+        }
+    } catch (e) {
+        // 忽略配置文件读取错误
+    }
+
+    commits.forEach(commit => {
+        if (!commit.authorName || !commit.authorEmail) return;
+
+        // 检查是否在忽略列表中
+        if (ignoreList.includes(commit.authorName)) {
+            return;
+        }
+
+        const key = `${commit.authorName}|${commit.authorEmail}`;
+        if (!contributorsMap.has(key)) {
+            let githubUsername = '';
+
+            // 1. 优先使用配置文件中的映射
+            if (nameToGithub[commit.authorName]) {
+                githubUsername = nameToGithub[commit.authorName];
+            } else {
+                // 2. 使用作者名称推断 GitHub 用户名
+                // 将作者名转换为小写并移除空格
+                githubUsername = commit.authorName.toLowerCase().replace(/\s+/g, '');
+            }
+
+            // 3. 检查 GitHub 用户名是否已存在，避免重复
+            if (!seenUsernames.has(githubUsername)) {
+                seenUsernames.add(githubUsername);
+                contributorsMap.set(key, {
+                    name: commit.authorName,
+                    email: commit.authorEmail,
+                    githubUsername: githubUsername
+                });
+            }
+        }
+    });
+
+    return Array.from(contributorsMap.values());
+}
+
+function renderContributors(contributors) {
+    if (!contributors || contributors.length === 0) return '';
+
+    let section = '### 👥 Contributors\n\n';
+
+    contributors.forEach(contributor => {
+        if (contributor.githubUsername) {
+            // 使用 GitHub 头像
+            section += `<a href="https://github.com/${contributor.githubUsername}"><img src="https://github.com/${contributor.githubUsername}.png?size=40" width="40" height="40" alt="${contributor.name}" title="${contributor.name}"/></a> `;
+        } else {
+            // 没有 GitHub 用户名，显示姓名
+            section += `**${contributor.name}** `;
+        }
+    });
+
+    section += '\n\n';
+    return section;
+}
+
+function renderBodyFromGroups(commitsByType, contributors = null) {
     let body = '';
     Object.keys(commitsByType).forEach(type => {
         if (commitsByType[type].length === 0) return;
@@ -141,6 +215,12 @@ function renderBodyFromGroups(commitsByType) {
         });
         body += '\n';
     });
+
+    // 添加 Contributors 部分
+    if (contributors && contributors.length > 0) {
+        body += renderContributors(contributors);
+    }
+
     return body;
 }
 
@@ -162,6 +242,9 @@ function generateChangelog() {
         const commits = collectCommits(range);
         const commitsByType = groupCommitsByType(commits);
 
+        // 收集贡献者信息
+        const contributors = collectContributors(commits);
+
         const hasExisting = fs.existsSync('CHANGELOG.md');
         const existingContent = hasExisting ? fs.readFileSync('CHANGELOG.md', 'utf8') : '';
 
@@ -169,7 +252,7 @@ function generateChangelog() {
         const baseHeader = `# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n\n`;
         const standardHeader = noUnreleased ? baseHeader : baseHeader + '## [Unreleased]\n\n';
 
-        let changelogBody = renderBodyFromGroups(commitsByType);
+        let changelogBody = renderBodyFromGroups(commitsByType, contributors);
 
         // 如果没有找到任何符合规范的提交，添加默认内容
         if (Object.keys(commitsByType).length === 0) {
@@ -190,7 +273,8 @@ function generateChangelog() {
                 const rangeExp = prev ? `${prev}..${tag}` : `${tag}`;
                 const tagCommits = collectCommits(rangeExp);
                 const groups = groupCommitsByType(tagCommits);
-                let body = renderBodyFromGroups(groups);
+                const tagContributors = collectContributors(tagCommits);
+                let body = renderBodyFromGroups(groups, tagContributors);
                 if (!body) body = renderFallbackBody();
                 const header = buildSectionHeader({ version: tag.replace(/^v/, ''), date: tagDate });
                 sections += `${header}\n\n${body}`;
@@ -356,7 +440,8 @@ function generateChangelog() {
                                 /### 👷 Continuous Integration \| CI 配置/,
                                 '### 👷 Continuous Integration | CI 配置'
                             )
-                            .replace(/### ⏪ Revert \| 回退/, '### ⏪ Revert | 回退');
+                            .replace(/### ⏪ Revert \| 回退/, '### ⏪ Revert | 回退')
+                            .replace(/### 👥 Contributors/, '### 👥 Contributors');
 
                         // 检查是否已经存在该版本
                         const versionExists = new RegExp(`## ${currentVersion}（`).test(componentContent);
