@@ -49,7 +49,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, reactive, computed, watch, onMounted, getCurrentInstance } from 'vue';
-import { $u } from '../..';
+import { $u, useParent } from '../..';
 import { IndexListProps } from './types';
 
 /**
@@ -84,8 +84,6 @@ const activeAnchorIndex = ref(0);
 const showSidebar = ref(true);
 const touchmove = ref(false);
 const touchmoveIndex = ref(0);
-// 孩子锚点组件
-const children = reactive<any[]>([]);
 const sidebar = reactive<{ height: number; top: number }>({ height: 0, top: 0 });
 const scrollToAnchorIndex = ref<number | null>(null);
 const timer = ref<any>(null);
@@ -101,8 +99,7 @@ const indexList = computed(() => props.indexList ?? getIndexList()).value;
 const zIndex = computed(() => props.zIndex).value;
 const activeColor = computed(() => props.activeColor).value;
 
-// 只能在created生命周期定义children，如果在data定义，会因为循环引用而报错
-children.length = 0;
+const { children, broadcast } = useParent('u-index-anchor');
 
 // 兼容 H5/非H5 stickyOffsetTop
 onMounted(() => {
@@ -146,11 +143,9 @@ function setRect() {
 function setAnchorsRect() {
     return Promise.all(
         children.map((anchor, index) => {
-            $u.getRect('.u-index-anchor-wrapper', anchor).then((rect: any) => {
-                Object.assign(anchor, {
-                    height: rect.height,
-                    top: rect.top
-                });
+            $u.getRect('.u-index-anchor-wrapper', anchor.getInstance()).then((rect: any) => {
+                broadcast('setTop', rect.top, anchor.id);
+                broadcast('setHeight', rect.height, anchor.id);
             });
         })
     );
@@ -182,9 +177,9 @@ function setSiderbarRect() {
 function getActiveAnchorIndex() {
     const sticky = props.sticky;
     for (let i = children.length - 1; i >= 0; i--) {
-        const preAnchorHeight = i > 0 ? children[i - 1].height : 0;
+        const preAnchorHeight = i > 0 ? children[i - 1].getExposed().height.value : 0;
         const reachTop = sticky ? preAnchorHeight : 0;
-        if (reachTop >= children[i].top) {
+        if (reachTop >= children[i].getExposed().top.value) {
             return i;
         }
     }
@@ -203,7 +198,7 @@ function onScroll() {
     if (sticky) {
         let isActiveAnchorSticky = false;
         if (active !== -1) {
-            isActiveAnchorSticky = children[active].top <= 0;
+            isActiveAnchorSticky = children[active].getExposed().top.value <= 0;
         }
         children.forEach((item, index) => {
             if (index === active) {
@@ -212,7 +207,7 @@ function onScroll() {
                     color: `${activeColor}`
                 };
                 if (isActiveAnchorSticky) {
-                    wrapperStyle = { height: `${children[index].height}px` };
+                    wrapperStyle = { height: `${children[index].getExposed().height.value}px` };
                     anchorStyle = {
                         position: 'fixed',
                         top: `${stickyOffsetTop.value}px`,
@@ -220,31 +215,30 @@ function onScroll() {
                         color: `${activeColor}`
                     };
                 }
-                item.active = active;
-                item.wrapperStyle = wrapperStyle;
-                item.anchorStyle = anchorStyle;
+                broadcast('setActive', active, item.id);
+                broadcast('setAnchorStyle', anchorStyle, item.id);
+                broadcast('setWrapperStyle', wrapperStyle, item.id);
             } else if (index === active - 1) {
                 const currentAnchor = children[index];
-                const currentOffsetTop = currentAnchor.top;
-                const targetOffsetTop = index === children.length - 1 ? top.value : children[index + 1].top;
+                const currentOffsetTop = currentAnchor.getExposed().top.value;
+                const targetOffsetTop =
+                    index === children.length - 1 ? top.value : children[index + 1].getExposed().top.value;
                 const parentOffsetHeight = targetOffsetTop - currentOffsetTop;
-                const translateY = parentOffsetHeight - currentAnchor.height;
+                const translateY = parentOffsetHeight - currentAnchor.getExposed().height.value;
                 const anchorStyle = {
                     position: 'relative',
                     transform: `translate3d(0, ${translateY}px, 0)`,
                     zIndex: `${zIndex ? zIndex : $u.zIndex.indexListSticky}`,
                     color: `${activeColor}`
                 };
-                item.active = active;
-                item.anchorStyle = anchorStyle;
+                broadcast('setActive', active, currentAnchor.id);
+                broadcast('setAnchorStyle', anchorStyle, currentAnchor.id);
+                broadcast('setWrapperStyle', '', item.id);
             } else {
-                item.active = false;
-                item.anchorStyle = '';
-                item.wrapperStyle = '';
+                broadcast('setActive', false, item.id);
+                broadcast('setAnchorStyle', '', item.id);
+                broadcast('setWrapperStyle', '', item.id);
             }
-            item.exposed.active = item.active;
-            item.exposed.anchorStyle = item.anchorStyle;
-            item.exposed.wrapperStyle = item.wrapperStyle;
         });
     }
 }
@@ -284,12 +278,12 @@ function scrollToAnchor(index: number) {
         return;
     }
     scrollToAnchorIndex.value = index;
-    const anchor = children.find(item => item.props.index === indexList[index]);
+    const anchor = children.find(item => item.getExposed().props.index === indexList[index]);
     if (anchor) {
-        emit('select', anchor.props.index);
+        emit('select', anchor.getExposed().props.index);
         uni.pageScrollTo({
             duration: 0,
-            scrollTop: anchor.top + Number(props.scrollTop)
+            scrollTop: anchor.getExposed().top.value + Number(props.scrollTop)
         });
     }
 }

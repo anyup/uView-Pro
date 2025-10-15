@@ -31,8 +31,8 @@ export default {
 
 <script setup lang="ts">
 import { IndexAnchorProps } from './types';
-import { ref, computed, onMounted, getCurrentInstance } from 'vue';
-import { $u } from '../..';
+import { ref, onMounted } from 'vue';
+import { $u, useChildren } from '../..';
 
 /**
  * indexAnchor 索引列表锚点
@@ -46,28 +46,54 @@ import { $u } from '../..';
  */
 
 const props = defineProps(IndexAnchorProps);
+const { parentExposed } = useChildren('u-index-anchor', 'u-index-list');
 
 // 响应式变量
 const active = ref(false);
 const wrapperStyle = ref<Record<string, any>>({});
 const anchorStyle = ref<Record<string, any>>({});
-let parent: any = null;
-
-const instance = getCurrentInstance();
+const top = ref(0);
+const height = ref(0);
 
 // 挂载时查找父组件并注册
 onMounted(() => {
-    parent = $u.$parent('u-index-list', instance);
-    if (parent) {
-        parent.exposed?.children.push(instance);
-        parent.exposed?.updateData();
+    if (parentExposed) {
+        parentExposed?.value?.updateData();
     }
 });
+
+function setTop(val) {
+    top.value = val;
+}
+
+function setHeight(val) {
+    height.value = val;
+}
+
+function setActive(val) {
+    active.value = val;
+}
+
+function setAnchorStyle(val) {
+    anchorStyle.value = val;
+}
+
+function setWrapperStyle(val) {
+    wrapperStyle.value = val;
+}
+
 defineExpose({
+    props,
+    top,
+    height,
     active,
     wrapperStyle,
     anchorStyle,
-    props
+    setTop,
+    setHeight,
+    setActive,
+    setAnchorStyle,
+    setWrapperStyle
 });
 </script>
 
