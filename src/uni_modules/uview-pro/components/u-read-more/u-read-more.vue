@@ -119,6 +119,10 @@ function init() {
         }
     });
 }
+// 显式暴露init方法
+defineExpose({
+    init
+});
 
 /**
  * 展开或者收起内容
