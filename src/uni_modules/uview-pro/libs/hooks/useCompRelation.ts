@@ -7,7 +7,7 @@ interface ParentContext {
     name: string;
     addChild: (child: ChildContext) => void;
     removeChild: (childId: string) => void;
-    broadcast: (event: string, data?: any) => void;
+    broadcast: (event: string, data?: any, childIds?: string | string[]) => void; // 修改：支持定向广播
     getChildren: () => ChildContext[];
     getExposed: () => Record<string, any>;
     getChildExposed: (childId: string) => Record<string, any>;
@@ -80,6 +80,33 @@ export function useParent(componentName?: string) {
     const children = reactive<ChildContext[]>([]);
     const childrenMap = new Map<string, ChildContext>();
 
+    // 修改：增强broadcast方法，支持定向广播
+    const broadcast = (event: string, data?: any, childIds?: string | string[]) => {
+        let targetChildren: ChildContext[] = [];
+
+        if (childIds) {
+            // 处理单个childId或childId数组
+            const ids = Array.isArray(childIds) ? childIds : [childIds];
+            targetChildren = ids.map(id => childrenMap.get(id)).filter(Boolean) as ChildContext[];
+        } else {
+            // 没有指定childIds，广播给所有子组件
+            targetChildren = Array.from(childrenMap.values());
+        }
+
+        logger.log(`Parent ${name} broadcasting event: ${event} to ${targetChildren.length} children`);
+
+        targetChildren.forEach(child => {
+            const exposed = child.getExposed();
+            if (exposed && typeof exposed[event] === 'function') {
+                try {
+                    exposed[event](data);
+                } catch (error) {
+                    logger.warn(`Error calling child method ${event} for child ${child.id}:`, error);
+                }
+            }
+        });
+    };
+
     // 父组件上下文
     const parentContext: ParentContext = {
         name,
@@ -104,19 +131,7 @@ export function useParent(componentName?: string) {
             }
         },
 
-        broadcast(event: string, data?: any) {
-            logger.log(`Parent ${name} broadcasting event: ${event} to ${childrenMap.size} children`);
-            childrenMap.forEach(child => {
-                const exposed = child.getExposed();
-                if (exposed && typeof exposed[event] === 'function') {
-                    try {
-                        exposed[event](data);
-                    } catch (error) {
-                        logger.warn(`Error calling child method ${event}:`, error);
-                    }
-                }
-            });
-        },
+        broadcast, // 使用新的broadcast方法
 
         getChildren() {
             return Array.from(childrenMap.values());
@@ -189,11 +204,12 @@ export function useChildren(componentName?: string, parentName?: string) {
 
     // 使用组件名称作为默认名称
     const name = componentName || instance.type.name || instance.type.__name;
-    if (!name) {
-        throw new Error('Component name is required for useChildren. Either provide a name or set component name.');
-    }
+    // 修改：移除强制要求组件名称的报错，允许匿名组件
+    // if (!name) {
+    //     throw new Error('Component name is required for useChildren. Either provide a name or set component name.');
+    // }
 
-    const instanceId = generateInstanceId(name);
+    const instanceId = generateInstanceId(name || 'anonymous');
     const parentRef = ref<ParentContext | null>(null);
     const parentExposed = ref<Record<string, any>>({});
 
@@ -238,9 +254,11 @@ export function useChildren(componentName?: string, parentName?: string) {
             parentRef.value = parent;
             parent.addChild(childContext);
             getParentExposed();
-            logger.log(`Child ${name} linked to parent ${parent.name}`);
+            logger.log(`Child ${name || 'anonymous'} linked to parent ${parent.name}`);
             return true;
         }
+        // 修改：找不到父组件时不报错，只是记录日志
+        logger.log(`Child ${name || 'anonymous'} no parent found, working in standalone mode`);
         return false;
     };
 
@@ -258,14 +276,15 @@ export function useChildren(componentName?: string, parentName?: string) {
                 logger.warn(`Parent method ${event} not found or not a function`);
             }
         } else {
-            logger.warn(`No parent found to emit event: ${event}`);
+            // 修改：父组件不存在时只记录调试日志，不报警告
+            logger.log(`No parent found to emit event: ${event}`);
         }
     };
 
     // 子组件上下文
     const childContext: ChildContext = {
         id: instanceId,
-        name,
+        name: name || 'anonymous',
         emitToParent,
         getParentExposed,
         getInstance() {
@@ -274,7 +293,7 @@ export function useChildren(componentName?: string, parentName?: string) {
         getExposed
     };
 
-    logger.log(`Child ${name} registered, looking for parent`);
+    logger.log(`Child ${name || 'anonymous'} registered, looking for parent`);
 
     onMounted(() => {
         // 立即尝试连接父组件
@@ -294,12 +313,12 @@ export function useChildren(componentName?: string, parentName?: string) {
         if (parentRef.value) {
             parentRef.value.removeChild(instanceId);
         }
-        logger.log(`Child ${name} unmounted`);
+        logger.log(`Child ${name || 'anonymous'} unmounted`);
     });
 
     return {
         childId: instanceId,
-        childName: name,
+        childName: name || 'anonymous',
         parent: parentRef,
         emitToParent,
         getParentExposed,
