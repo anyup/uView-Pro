@@ -1,3 +1,22 @@
+## 0.3.2（2025-10-15）
+
+### 📝 Documentation | 文档
+
+- **changelog:** 更新 CHANGELOG.md 生成配置 ([27a2609](https://github.com/anyup/uView-Pro/commit/27a26095b92cf8cbc6477c563a68b1557f9fb045))
+- 更新交流群图片链接 ([832815d](https://github.com/anyup/uView-Pro/commit/832815deb63f8b144f525591d16e3ccf900b8632))
+
+### ⚡ Performance Improvements | 性能优化
+
+- **component-relation:** 增强组件间通信功能；修改 broadcast 方法，支持定向广播；移除对子组件名称的强制要求，允许匿名组件 ([28ea814](https://github.com/anyup/uView-Pro/commit/28ea814810055aa4c99b53d676b16da337fdf7d5))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-index-list:** 重构索引锚点组件，兼容多端，修复IndexList索引列表在微信小程序没有吸顶效果 ([ce6a7a3](https://github.com/anyup/uView-Pro/commit/ce6a7a3c01b622cad268779098390c0d593f75bc))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## 0.3.1（2025-10-14）
 
 ### 📝 Documentation | 文档
