@@ -151,7 +151,9 @@ const waveActive = ref(false); // 激活水波纹
  */
 const getHoverClass = computed(() => {
     // 如果开启水波纹效果，则不启用hover-class效果
-    if (props.loading || props.disabled || props.ripple || props.hoverClass) return '';
+    if (props.loading || props.disabled || props.ripple) return '';
+    // 如果用户传了 hoverClass，优先使用用户的
+    if (props.hoverClass) return props.hoverClass;
     let hoverClass = '';
     hoverClass = props.plain ? 'u-' + props.type + '-plain-hover' : 'u-' + props.type + '-hover';
     return hoverClass;
