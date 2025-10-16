@@ -1,3 +1,21 @@
+## 0.3.3（2025-10-16）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-read-more:** 修复 init 方法无法在外部调用的问题 ([415d401](https://github.com/anyup/uView-Pro/commit/415d401883a3567653ab1f311b28b075b7bb5603))
+- **u-button:** 修复 hover-class 属性被忽略的问题 ([b919c58](https://github.com/anyup/uView-Pro/commit/b919c58cea048f9e559a6448cebe5abbf1490acf))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **component-relation:** 重构组件关系逻辑并添加新功能 ([85d0cd2](https://github.com/anyup/uView-Pro/commit/85d0cd20db839a61733887f82825d47de0a1b1a6))
+- **u-talbe:** 重构u-td和u-th组件，增强u-table的兼容性 ([3fbbc52](https://github.com/anyup/uView-Pro/commit/3fbbc5233bd41b91ca829f9a65cf95ee3b599e36))
+- 修改 uView Pro 日志配置 ([6b9bb68](https://github.com/anyup/uView-Pro/commit/6b9bb6852af3eb24f109207f864145771c3e9c79))
+- **clipboard:** add clipboard function ([efdaa58](https://github.com/anyup/uView-Pro/commit/efdaa58dda923b281d9b764a82a7492f36717ac4))
+
+### 👥 Contributors
+
+<a href="https://github.com/koboshi"><img src="https://github.com/koboshi.png?size=40" width="40" height="40" alt="koboshi" title="koboshi"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/lonelyflyer"><img src="https://github.com/lonelyflyer.png?size=40" width="40" height="40" alt="Lonelyflyer" title="Lonelyflyer"/></a> 
+
 ## 0.3.2（2025-10-15）
 
 ### 📝 Documentation | 文档
