@@ -105,13 +105,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, getCurrentInstance } from 'vue';
-import { $u } from '../..';
-import { dispatch } from '../../libs/util/emitter';
+import { ref, computed, watch } from 'vue';
+import { $u, useChildren } from '../..';
 import { InputProps } from './types';
 
 const props = defineProps(InputProps);
 const emit = defineEmits(['update:modelValue', 'blur', 'focus', 'confirm', 'click']);
+
+const { emitToParent } = useChildren('u-input', 'u-form-item');
 
 const defaultValue = ref(props.modelValue);
 const inputHeight = 70; // input的高度
@@ -158,10 +159,6 @@ const uSelectionStart = computed(() => String(props.selectionStart));
 // 光标结束位置
 const uSelectionEnd = computed(() => String(props.selectionEnd));
 
-const instance = getCurrentInstance();
-
-// 监听u-form-item发出的错误事件，将输入框边框变红色，失效了
-// uni.$on('on-form-item-error', onFormItemError);
 /**
  * change 事件
  * @param event
@@ -183,7 +180,7 @@ function handleInput(event: any) {
         lastValue.value = value;
         // #endif
         // 通过 emitter 派发事件
-        dispatch(instance, 'u-form-item', 'on-form-change', value);
+        emitToParent('onFormChange', value);
     }, 40);
 }
 
@@ -205,12 +202,11 @@ function handleBlur(event: any) {
         if ($u.trim(value) == lastValue.value) return;
         lastValue.value = value;
         // #endif
-        dispatch(instance, 'u-form-item', 'on-form-blur', value);
+        emitToParent('onFormBlur', value);
     }, 40);
 }
 
 function onFormItemError(status: boolean) {
-    console.log('onFormItemError', status);
     validateState.value = status;
 }
 
@@ -235,6 +231,10 @@ function onClear(event: any) {
 function inputClick() {
     emit('click');
 }
+
+defineExpose({
+    onFormItemError
+});
 </script>
 
 <style lang="scss" scoped>

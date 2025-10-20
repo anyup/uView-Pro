@@ -1,4 +1,3 @@
-// utils/useComponent.ts
 import {
     ref,
     reactive,
@@ -118,8 +117,8 @@ export function useParent(componentName?: string) {
     const broadcast = (event: string, data?: any, childIds?: string | string[]) => {
         const targetChildren = childIds
             ? ((Array.isArray(childIds) ? childIds : [childIds])
-                  .map(id => childrenMap.get(id))
-                  .filter(Boolean) as ChildContext[])
+                .map(id => childrenMap.get(id))
+                .filter(Boolean) as ChildContext[])
             : Array.from(childrenMap.values());
 
         logger.log(`Parent ${name} broadcasting event: ${event} to ${targetChildren.length} children`);
