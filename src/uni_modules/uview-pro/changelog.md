@@ -1,3 +1,19 @@
+## 0.3.4（2025-10-20）
+
+### ♻️ Code Refactoring | 代码重构
+
+- **components:** 移除不必要的父组件和事件总线相关代码，优化组件间通信 ([280c2f8](https://github.com/anyup/uView-Pro/commit/280c2f8acc75764a7706ec38c742cc16703c941a))
+- **u-safe-bottom:** 优化底部安全区组件 ([161f2d3](https://github.com/anyup/uView-Pro/commit/161f2d32ff6b9abbb6f8221a4dd99c438a606e94))
+- **u-status-bar:** 优化状态栏组件 ([53c50ab](https://github.com/anyup/uView-Pro/commit/53c50ab8b6314a7d702b90e6b48b79301a334090))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-subsection:** 优化列表和模式变化的监听逻辑，移除不必要的初始化调用 ([f77ee7c](https://github.com/anyup/uView-Pro/commit/f77ee7ccc7521ec2472f72dcf2fb47362ca0abd9))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.3.3（2025-10-16）
 
 ### 🐛 Bug Fixes | Bug 修复
