@@ -1,5 +1,9 @@
 <template>
-    <view class="u-safe-bottom" :style="style" :class="[!isNVue && 'safe-area-inset-bottom']"></view>
+    <view
+        class="u-safe-bottom"
+        :style="$u.toStyle(style, customStyle)"
+        :class="[!isNVue && 'safe-area-inset-bottom', customClass]"
+    ></view>
 </template>
 
 <script lang="ts">
@@ -16,11 +20,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, withDefaults, type CSSProperties } from 'vue';
-import { sys } from '../../libs/function/sys';
-import addUnit from '../../libs/function/addUnit';
-import deepMerge from '../../libs/function/deepMerge';
-import { mergeStyles } from '../../libs/function/styleUtils';
+import { ref, computed, onMounted, type CSSProperties } from 'vue';
+import { SafeBottomProps } from './props';
+import { $u } from '../../';
 
 /**
  * SafeBottom 底部安全区
@@ -28,24 +30,17 @@ import { mergeStyles } from '../../libs/function/styleUtils';
  * @property {String | Object} customStyle 自定义样式
  * @example <u-safe-bottom></u-safe-bottom>
  */
-const props = withDefaults(
-    defineProps<{
-        customStyle?: string | CSSProperties;
-    }>(),
-    {
-        customStyle: () => ({})
-    }
-);
+const props = defineProps(SafeBottomProps);
 
 const isNVue = ref(false);
 
 const style = computed(() => {
-    let r: CSSProperties = {};
+    let result: CSSProperties = {};
     // #ifdef APP-NVUE || MP-TOUTIAO
     // nvue下，高度使用js计算填充
-    r.height = addUnit(sys().safeAreaInsets.bottom, 'px');
+    result.height = $u.addUnit($u.sys().safeAreaInsets.bottom, 'px');
     // #endif
-    return deepMerge(r, mergeStyles(props.customStyle));
+    return result;
 });
 
 onMounted(() => {
