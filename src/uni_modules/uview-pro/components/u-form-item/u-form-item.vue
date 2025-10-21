@@ -88,14 +88,15 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, watch, getCurrentInstance, nextTick } from 'vue';
-import { $u, useChildren } from '../..';
-import { broadcast } from '../../libs/util/emitter';
+import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue';
+import { $u, useChildren, useParent } from '../..';
 // @ts-ignore
 import schema from '../../libs/util/async-validator';
 import { FormItemProps } from './types';
 // 去除警告信息
 schema.warning = function () {};
+
+const { broadcast } = useParent('u-form-item');
 
 /**
  * form-item 表单item
@@ -120,8 +121,6 @@ const props = defineProps(FormItemProps);
 
 const { parentExposed } = useChildren('u-form-item', 'u-form');
 
-const instance = getCurrentInstance();
-
 // 组件状态
 const initialValue = ref(''); // 存储初始值，用于重置
 const validateState = ref(''); // 校验状态 success/error/validating
@@ -134,6 +133,15 @@ const parentData = ref({
     labelPosition: 'left', // 父表单 label 位置
     labelStyle: {}, // 父表单 label 样式
     labelAlign: 'left' // 父表单 label 对齐
+});
+
+// 显示错误提示
+// errorType: ['message', 'toast', 'border-bottom', 'none']
+const showError = computed(() => (type: string) => {
+    // 如果errorType数组中含有none，或者toast提示类型
+    if (errorType.value.indexOf('none') >= 0) return false;
+    else if (errorType.value.indexOf(type) >= 0) return true;
+    else return false;
 });
 
 // 监听校验状态和父表单 errorType 变化
@@ -159,15 +167,6 @@ const uLabelWidth = computed(() => {
             ? 'auto'
             : $u.addUnit(elLabelWidth.value)
         : '100%';
-});
-
-// 显示错误提示
-// errorType: ['message', 'toast', 'border-bottom', 'none']
-const showError = computed(() => (type: string) => {
-    // 如果errorType数组中含有none，或者toast提示类型
-    if (errorType.value.indexOf('none') >= 0) return false;
-    else if (errorType.value.indexOf(type) >= 0) return true;
-    else return false;
 });
 
 // label的宽度
@@ -215,17 +214,8 @@ const elBorderBottom = computed(() => {
 
 // 事件派发/广播工具
 function broadcastInputError() {
-    // 子组件发出事件，第三个参数为true或者false，true代表有错误
-    if (instance) {
-        // 这里可用 emitter 工具库的 broadcast 方法
-        // 子组件发出事件，第三个参数为true或者false，true代表有错误
-        broadcast(
-            instance,
-            'u-input',
-            'on-form-item-error',
-            validateState.value === 'error' && showError.value('border')
-        );
-    }
+    // 子组件发出事件，参数为true或者false，true代表有错误
+    broadcast('onFormItemError', validateState.value === 'error' && showError.value('border'));
 }
 
 /**

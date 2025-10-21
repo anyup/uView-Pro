@@ -9,7 +9,7 @@ export function createApp() {
     const app = createSSRApp(App);
     app.use(i18n);
     // 引入uView Pro 主库
-    app.use(uViewPro, { theme, log: { debug: true, prefix: '[uViewPro]', showCallerInfo: true } });
+    app.use(uViewPro, { theme, log: { debug: false, prefix: '[uViewPro]', showCallerInfo: true } });
     // 引入uView Pro 的http插件
     app.use(httpPlugin, { interceptor: httpInterceptor, requestConfig: httpRequestConfig });
     return {

@@ -28,7 +28,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
+import { ref, computed, watch, getCurrentInstance, nextTick } from 'vue';
 import { $u } from '../..';
 import { SubsectionProps } from './types';
 
@@ -88,6 +88,33 @@ watch(
     { immediate: true }
 );
 
+watch(
+    () => props.list,
+    () => {
+        if (!props.list || !props.list.length) return;
+        initListInfo();
+        // 重新获取各个tab的宽度信息
+        nextTick(() => {
+            setTimeout(() => {
+                getTabsInfo();
+            }, 10);
+        });
+    },
+    { deep: true, immediate: true }
+);
+
+watch(
+    () => props.mode,
+    () => {
+        // 重新获取各个tab的宽度信息
+        nextTick(() => {
+            setTimeout(() => {
+                getTabsInfo();
+            }, 10);
+        });
+    }
+);
+
 // 初始化 listInfo
 function initListInfo() {
     // 将list的数据，传入listInfo数组，因为不能修改props传递的list值
@@ -100,14 +127,6 @@ function initListInfo() {
         }
     });
 }
-
-initListInfo();
-
-onMounted(() => {
-    setTimeout(() => {
-        getTabsInfo();
-    }, 10);
-});
 
 /**
  * 设置mode=subsection时，滑块特有的样式

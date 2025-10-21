@@ -44,13 +44,12 @@ import debounce from './function/debounce';
 import throttle from './function/throttle';
 // 获取元素的位置信息
 import getRect from './function/getRect';
-// 获取父组件
-import { parentData, parent } from './function/parent';
+// 剪贴板
+import { clipboard } from './function/clipboard';
 // 配置信息
 import config from './config/config';
 // 各个需要fixed的地方的z-index配置文件
 import zIndex from './config/zIndex';
-import { dispatch, broadcast } from './util/emitter';
 import { mitt } from './util/mitt';
 // http相关
 import httpPlugin, {
@@ -266,10 +265,7 @@ export {
     getRect,
     getParent,
     $parent,
-    parent,
-    parentData,
-    dispatch,
-    broadcast,
+    clipboard,
     config,
     zIndex,
     mitt
@@ -289,8 +285,6 @@ export const $u = {
     os,
     type2icon,
     randomArray,
-    dispatch,
-    broadcast,
     hexToRgb: colorGradients.hexToRgb,
     rgbToHex: colorGradients.rgbToHex,
     test,
@@ -299,8 +293,7 @@ export const $u = {
     deepMerge,
     getParent,
     $parent,
-    parent,
-    parentData,
+    clipboard,
     addUnit,
     trim,
     type: ['primary', 'success', 'error', 'warning', 'info'],

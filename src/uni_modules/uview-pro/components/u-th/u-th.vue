@@ -18,8 +18,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted, getCurrentInstance, watch } from 'vue';
-import { $u } from '../..';
+import { computed } from 'vue';
+import { $u, useChildren } from '../..';
 import { ThProps } from './types';
 
 /**
@@ -32,47 +32,18 @@ import { ThProps } from './types';
 
 const props = defineProps(ThProps);
 
-const thStyle = ref<Record<string, any>>({}); // 标题单元格样式
-let parent: any = null; // 父组件实例
+const { parentExposed } = useChildren('u-th', 'u-table');
 
-/**
- * 更新标题单元格样式
- */
-function updateStyle() {
-    if (!parent) return;
-
+const thStyle = computed(() => {
     const style: Record<string, any> = {};
     if (props.width && props.width !== 'auto') style.width = props.width;
     else style.flex = '1';
-    style.textAlign = parent.props.align;
-    style.padding = parent.props.padding;
-    style.borderBottom = `solid 1px ${parent.props.borderColor}`;
-    style.borderRight = `solid 1px ${parent.props.borderColor}`;
-    Object.assign(style, parent.props.thStyle);
-    thStyle.value = style;
-}
-
-/**
- * 组件挂载时查找父组件u-table并合并样式
- */
-onMounted(() => {
-    // 查找父组件u-table
-    const instance = getCurrentInstance();
-    if (instance) {
-        parent = $u.$parent('u-table');
-        if (parent) {
-            updateStyle();
-
-            // 监听父组件属性变化
-            watch(
-                () => parent.props,
-                () => {
-                    updateStyle();
-                },
-                { deep: true }
-            );
-        }
-    }
+    style.textAlign = parentExposed.value?.props?.align;
+    style.padding = parentExposed.value?.props?.padding;
+    style.borderBottom = `solid 1px ${parentExposed.value?.props?.borderColor}`;
+    style.borderRight = `solid 1px ${parentExposed.value?.props?.borderColor}`;
+    Object.assign(style, parentExposed.value?.props?.thStyle);
+    return style;
 });
 </script>
 

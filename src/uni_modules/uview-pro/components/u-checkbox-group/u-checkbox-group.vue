@@ -19,7 +19,7 @@ export default {
 
 <script setup lang="ts">
 import { getCurrentInstance, computed } from 'vue';
-import { $u, useParent } from '../..';
+import { $u, useParent, useChildren } from '../..';
 import { CheckboxGroupProps } from './types';
 
 /**
@@ -44,6 +44,7 @@ const emit = defineEmits(['update:modelValue', 'change']);
 
 // 使用父组件Hook
 const { children, broadcast } = useParent('u-checkbox-group');
+const { emitToParent } = useChildren('u-checkbox-group', 'u-form-item');
 
 /**
  * 派发 change 事件和表单校验
@@ -58,7 +59,7 @@ function emitEvent() {
     });
     emit('change', values);
     setTimeout(() => {
-        $u.dispatch(instance, 'u-form-item', 'on-form-change', values);
+        emitToParent('onFormChange', values);
     }, 60);
 }
 

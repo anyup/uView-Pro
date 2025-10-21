@@ -4,19 +4,18 @@
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
                 <u-subsection
-                    v-if="change"
                     :bold="bold"
                     :active-color="activeColor"
                     :current="current"
                     :mode="mode"
-                    :list="['代付款', '待收货', '待评价']"
+                    :list="list"
                 ></u-subsection>
             </view>
         </view>
         <view class="u-config-wrap">
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
-                <view class="u-item-title">模式选择(为满足演示需要，切换会有抖动，非性能问题)</view>
+                <view class="u-item-title">模式选择</view>
                 <u-subsection mode="button" :list="['button', 'subsection']" @change="modeChange"></u-subsection>
             </view>
             <view class="u-config-item">
@@ -40,16 +39,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, nextTick } from 'vue';
+import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import type { SubsectionMode } from '@/uni_modules/uview-pro/types/global';
+import type { SubsectionListItem, SubsectionMode } from '@/uni_modules/uview-pro/types/global';
 
 const mode = ref<SubsectionMode>('button');
 const current = ref(0);
 const activeColor = ref($u.color['warning']);
 const bold = ref(true);
-const change = ref(true);
-
+const list = ref<SubsectionListItem[]>([{ name: '待付款' }, { name: '待收货' }, { name: '选项三' }]);
 function modeChange(e: number) {
     switch (e) {
         case 0:
@@ -59,10 +57,6 @@ function modeChange(e: number) {
             mode.value = 'subsection';
             break;
     }
-    change.value = false;
-    nextTick(() => {
-        change.value = true;
-    });
 }
 
 function currentChange(e: number) {

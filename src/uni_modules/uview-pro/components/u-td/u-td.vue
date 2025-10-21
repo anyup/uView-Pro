@@ -18,8 +18,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted, getCurrentInstance, watch } from 'vue';
-import { $u } from '../..';
+import { computed } from 'vue';
+import { $u, useChildren } from '../..';
 import { TdProps } from './types';
 
 /**
@@ -32,52 +32,19 @@ import { TdProps } from './types';
 
 const props = defineProps(TdProps);
 
-/**
- * 组合式API变量声明
- * 保留所有说明注释
- */
-const tdStyle = ref<Record<string, any>>({}); // 单元格样式
-let parent: any = null; // 父组件实例
+const { parentExposed } = useChildren('u-td', 'u-table');
 
-/**
- * 更新单元格样式
- */
-function updateStyle() {
-    if (!parent) return;
-
+const tdStyle = computed(() => {
     const style: Record<string, any> = {};
     if (props.width && props.width !== 'auto') style.width = props.width;
     else style.flex = '1';
-    style.textAlign = parent.props.align;
-    style.fontSize = parent.props.fontSize + 'rpx';
-    style.padding = parent.props.padding;
-    style.borderBottom = `solid 1px ${parent.props.borderColor}`;
-    style.borderRight = `solid 1px ${parent.props.borderColor}`;
-    style.color = parent.props.color;
-    tdStyle.value = style;
-}
-
-/**
- * 组件挂载时查找父组件u-table并合并样式
- */
-onMounted(() => {
-    // 查找父组件u-table
-    const instance = getCurrentInstance();
-    if (instance) {
-        parent = $u.$parent('u-table');
-        if (parent) {
-            updateStyle();
-
-            // 监听父组件属性变化
-            watch(
-                () => parent.props,
-                () => {
-                    updateStyle();
-                },
-                { deep: true }
-            );
-        }
-    }
+    style.textAlign = parentExposed.value?.props?.align;
+    style.fontSize = parentExposed.value?.props?.fontSize + 'rpx';
+    style.padding = parentExposed.value?.props?.padding;
+    style.borderBottom = `solid 1px ${parentExposed.value?.props?.borderColor}`;
+    style.borderRight = `solid 1px ${parentExposed.value?.props?.borderColor}`;
+    style.color = parentExposed.value?.props?.color;
+    return style;
 });
 </script>
 

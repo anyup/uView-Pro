@@ -18,8 +18,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { getCurrentInstance } from 'vue';
-import { $u, useParent } from '../..';
+import { $u, useParent, useChildren } from '../..';
 import { RadioGroupProps } from './types';
 
 /**
@@ -42,6 +41,7 @@ const props = defineProps(RadioGroupProps);
 
 const emit = defineEmits(['update:modelValue', 'change']);
 
+const { emitToParent } = useChildren('u-radio-group', 'u-form-item');
 useParent('u-radio-group');
 
 /**
@@ -73,7 +73,7 @@ function setValue(val: string | number) {
     // 由于头条小程序执行迟钝，故需要用几十毫秒的延时
     setTimeout(() => {
         // 将当前的值发送到 u-form-item 进行校验
-        $u.dispatch(getCurrentInstance(), 'u-form-item', 'on-form-change', val);
+        emitToParent('onFormChange', val);
     }, 60);
 }
 

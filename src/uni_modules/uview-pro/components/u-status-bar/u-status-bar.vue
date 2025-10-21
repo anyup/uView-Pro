@@ -1,5 +1,8 @@
 <template>
-    <view :style="style" :class="['u-status-bar', { 'safe-area-inset-top': noBar }]">
+    <view
+        :style="$u.toStyle(style, customStyle)"
+        :class="['u-status-bar', { 'safe-area-inset-top': noBar }, customClass]"
+    >
         <slot />
     </view>
 </template>
@@ -18,11 +21,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, withDefaults, type CSSProperties } from 'vue';
-import { sys } from '../../libs/function/sys';
-import addUnit from '../../libs/function/addUnit';
-import deepMerge from '../../libs/function/deepMerge';
-import { mergeStyles } from '../../libs/function/styleUtils';
+import { ref, computed, onMounted, type CSSProperties } from 'vue';
+import { StatusBarProps } from './props';
+import { $u } from '../../';
 
 /**
  * StatusBar 状态栏
@@ -30,31 +31,20 @@ import { mergeStyles } from '../../libs/function/styleUtils';
  * @property {String} background 背景颜色
  * @example <u-status-bar></u-status-bar>
  */
-const props = withDefaults(
-    defineProps<{
-        background?: string;
-        customStyle?: string | CSSProperties;
-    }>(),
-    {
-        // 背景颜色
-        background: 'transparent',
-        customStyle: () => ({})
-    }
-);
-
+const props = defineProps(StatusBarProps);
 const noBar = ref(false);
 
 const style = computed(() => {
-    let r: CSSProperties = {
+    let result: CSSProperties = {
         background: props.background
     };
-    const sh = sys().statusBarHeight;
-    if (sh === 0) {
+    const statusBarHeight = $u.sys().statusBarHeight;
+    if (statusBarHeight === 0) {
         noBar.value = true;
     } else {
-        r.height = addUnit(sh, 'px');
+        result.height = $u.addUnit(statusBarHeight, 'px');
     }
-    return deepMerge(r, mergeStyles(props.customStyle));
+    return result;
 });
 
 onMounted(() => {

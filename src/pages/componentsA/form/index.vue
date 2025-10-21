@@ -169,7 +169,7 @@ const model = reactive<Model>({
     sex: '',
     likeFruit: '',
     intro: '',
-    payType: '支付宝',
+    payType: '',
     agreement: false,
     region: '',
     goodsType: '',
