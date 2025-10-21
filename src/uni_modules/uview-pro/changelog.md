@@ -1,3 +1,30 @@
+## 0.3.5（2025-10-21）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-input:** 修复input组件不支持input事件的问题 ([52d6a6a](https://github.com/anyup/uView-Pro/commit/52d6a6aaeec9ec78e4088234ff7ba056cc10fd9c))
+- **u-search:** 修复search组件不支持input事件的问题 ([603b96f](https://github.com/anyup/uView-Pro/commit/603b96f7eeb16d3e54c82b0be7dd03deb930aef5))
+- **u-popup:** 修复微信小程序环境下，u-popup 组件 mode=center 时，设置关闭图标位置无效的问题 ([f08197a](https://github.com/anyup/uView-Pro/commit/f08197aafdc3f874b1efcddf6cc6ff9c9edde954))
+- **u-line-progress:** type 属性设置后仍被 active-color 内联样式覆盖的问题 ([c6f29f9](https://github.com/anyup/uView-Pro/commit/c6f29f9dc8437035a0e698e869af2fd418d0bd65))
+
+### ✨ Features | 新功能
+
+- **useChildren:** 添加子组件索引功能 ([8ad744f](https://github.com/anyup/uView-Pro/commit/8ad744fd51df934cc20c099686cbdc5512b22c79))
+- **addUnit:** 增强 addUnit 函数支持多值空格分隔 ([6d89cd3](https://github.com/anyup/uView-Pro/commit/6d89cd3c5aacc0770f6f2684fd737d0f05a6e929))
+- **u-action-sheet:** 新增自定义 ActionSheet 组件 ([f709523](https://github.com/anyup/uView-Pro/commit/f709523cba5a089eed7c717cc36b9ab199ae24da))
+
+### 📝 Documentation | 文档
+
+- 移除issue模板中的提交格式参考 ([83799e8](https://github.com/anyup/uView-Pro/commit/83799e882f69b0e8787a014cfab9f16ab34ba57c))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **u-popup:** 移除弹窗组件中的冗余代码 ([40c5b64](https://github.com/anyup/uView-Pro/commit/40c5b641539fce56af4f9a4ad2440b9240464a89))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/sunjianwei"><img src="https://github.com/sunjianwei.png?size=40" width="40" height="40" alt="sunjianwei" title="sunjianwei"/></a> <a href="https://github.com/koboshi"><img src="https://github.com/koboshi.png?size=40" width="40" height="40" alt="koboshi" title="koboshi"/></a>
+
 ## 0.3.4（2025-10-20）
 
 ### ♻️ Code Refactoring | 代码重构
@@ -12,7 +39,7 @@
 
 ### 👥 Contributors
 
-<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
 
 ## 0.3.3（2025-10-16）
 
@@ -30,7 +57,7 @@
 
 ### 👥 Contributors
 
-<a href="https://github.com/koboshi"><img src="https://github.com/koboshi.png?size=40" width="40" height="40" alt="koboshi" title="koboshi"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/lonelyflyer"><img src="https://github.com/lonelyflyer.png?size=40" width="40" height="40" alt="Lonelyflyer" title="Lonelyflyer"/></a> 
+<a href="https://github.com/koboshi"><img src="https://github.com/koboshi.png?size=40" width="40" height="40" alt="koboshi" title="koboshi"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/lonelyflyer"><img src="https://github.com/lonelyflyer.png?size=40" width="40" height="40" alt="Lonelyflyer" title="Lonelyflyer"/></a>
 
 ## 0.3.2（2025-10-15）
 
