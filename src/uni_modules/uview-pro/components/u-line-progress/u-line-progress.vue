@@ -65,7 +65,7 @@ const slots = useSlots();
 const progressStyle = computed(() => {
     let style: Record<string, string> = {};
     style.width = props.percent + '%';
-    if (props.activeColor) style.backgroundColor = props.activeColor;
+    if (!props.type && props.activeColor) style.backgroundColor = props.activeColor;
     return style;
 });
 </script>
