@@ -6,18 +6,44 @@
                 <u-toast ref="uToastRef"></u-toast>
                 <u-button @click="showAction">唤起ActionSheet</u-button>
                 <u-action-sheet
-                    :cancel-btn="cancel"
-                    :mask-close-able="maskClick"
-                    :tips="tips"
-                    @click="click"
-                    :list="list"
                     v-model="show"
+                    :cancel-btn="cancel"
+                    :mask-close-able="maskCloseAble"
+                    :tips="tips"
                     :safe-area-inset-bottom="true"
-                ></u-action-sheet>
+                    @click="click"
+                >
+                    <block v-for="(item, index) in list" :key="index">
+                        <u-action-sheet-item
+                            v-if="index !== 3"
+                            :text="item.text"
+                            :sub-text="item.subText"
+                            :color="item.color"
+                            :font-size="item.fontSize"
+                            :disabled="item.disabled"
+                        />
+                        <u-action-sheet-item padding="0" :async-close="true" v-else>
+                            <u-text
+                                type="success"
+                                text="我是自定义的（微信能力）"
+                                size="32"
+                                openType="openSetting"
+                                :block="true"
+                                line-height="50px"
+                                align="center"
+                                @click="clickItem"
+                            ></u-text>
+                        </u-action-sheet-item>
+                    </block>
+                </u-action-sheet>
             </view>
         </view>
         <view class="u-config-wrap">
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
+            <view class="u-config-item">
+                <view class="u-item-title">显示标题</view>
+                <u-subsection :list="['是', '否']" @change="tipsChange"></u-subsection>
+            </view>
             <view class="u-config-item">
                 <view class="u-item-title">取消按钮</view>
                 <u-subsection :list="['是', '否']" @change="cancelChange"></u-subsection>
@@ -32,6 +58,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { $u } from '@/uni_modules/uview-pro';
 import type { ActionSheetTips, ActionSheetItem } from '@/uni_modules/uview-pro/types/global';
 
 const list = ref<ActionSheetItem[]>([
@@ -52,12 +79,14 @@ const list = ref<ActionSheetItem[]>([
 ]);
 
 const tips = ref<ActionSheetTips>({
-    text: ''
+    text: '请谨慎执行您的操作',
+    color: $u.color.tipsColor,
+    fontSize: '24rpx'
 });
 
 const show = ref(false);
 const cancel = ref(true);
-const maskClick = ref(true);
+const maskCloseAble = ref(true);
 const uToastRef = ref(null);
 
 function showAction() {
@@ -72,7 +101,7 @@ function click(index: number) {
 }
 
 function tipsChange(index: number) {
-    if (index == 0) show.value = true;
+    show.value = true;
     tips.value.text = index == 0 ? '请谨慎执行您的操作' : '';
 }
 
@@ -82,9 +111,18 @@ function cancelChange(index: number) {
 }
 
 function maskClickChange(index: number) {
-    if ((index = 1)) cancel.value = true;
+    if (index === 1) cancel.value = true;
     show.value = true;
-    maskClick.value = index === 0;
+    maskCloseAble.value = index === 0;
+}
+
+function clickItem() {
+    // #ifndef MP-WEIXIN
+    uni.$u.toast('请在微信小程序内查看效果');
+    // #endif
+    setTimeout(() => {
+        show.value = false;
+    }, 500);
 }
 </script>
 

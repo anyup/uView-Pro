@@ -15,7 +15,7 @@
         <view class="u-tips u-border-bottom" v-if="tips.text" :style="[tipsStyle]">
             {{ tips.text }}
         </view>
-        <block v-for="(item, index) in list" :key="index">
+        <block v-if="list && list.length > 0" v-for="(item, index) in list" :key="index">
             <view
                 @touchmove.stop.prevent
                 @tap="itemClick(index)"
@@ -28,10 +28,13 @@
                 <text class="u-action-sheet-item__subtext u-line-1" v-if="item.subText">{{ item.subText }}</text>
             </view>
         </block>
+        <template v-else>
+            <slot></slot>
+        </template>
         <view class="u-gab" v-if="cancelBtn"> </view>
         <view
             @touchmove.stop.prevent
-            class="u-actionsheet-cancel u-action-sheet-item"
+            class="u-action-sheet-cancel u-action-sheet-item"
             hover-class="u-hover-class"
             :hover-stay-time="150"
             v-if="cancelBtn"
@@ -57,7 +60,7 @@ export default {
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { $u } from '../..';
+import { $u, useParent } from '../..';
 import { ActionSheetProps } from './types';
 
 /**
@@ -82,6 +85,8 @@ const props = defineProps(ActionSheetProps);
 
 const emit = defineEmits(['update:modelValue', 'click', 'close']);
 
+useParent('u-action-sheet');
+
 const popupValue = computed({
     get: () => props.modelValue,
     set: (val: boolean) => emit('update:modelValue', val)
@@ -90,18 +95,18 @@ const popupValue = computed({
 // 顶部提示的样式
 const tipsStyle = computed(() => {
     let style: Record<string, string> = {};
-    if (props.tips.color) style.color = props.tips.color;
-    if (props.tips.fontSize) style.fontSize = props.tips.fontSize + 'rpx';
+    style.color = props.tips?.color || $u.color.tipsColor;
+    style.fontSize = $u.addUnit(props.tips?.fontSize || '26rpx');
     return style;
 });
 
 // 操作项目的样式
 const itemStyle = (index: number) => {
     let style: Record<string, string> = {};
-    if (props.list[index]?.color) style.color = props.list[index].color;
-    if (props.list[index]?.fontSize) style.fontSize = props.list[index].fontSize + 'rpx';
+    style.color = props.list[index]?.color || props.color;
+    style.fontSize = $u.addUnit(props.list[index]?.fontSize || props.fontSize);
     // 选项被禁用的样式
-    if (props.list[index]?.disabled) style.color = '#c0c4cc';
+    if (props.list[index]?.disabled) style.color = $u.color.lightColor;
     return style;
 };
 
@@ -136,8 +141,15 @@ function itemClick(index: number) {
     // disabled的项禁止点击
     if (props.list[index]?.disabled) return;
     emit('click', index);
+    if (props.asyncClose) return;
     emit('update:modelValue', false);
 }
+
+defineExpose({
+    props,
+    close,
+    itemClick
+});
 </script>
 
 <style lang="scss" scoped>
@@ -172,7 +184,7 @@ function itemClick(index: number) {
     background-color: rgb(234, 234, 236);
 }
 
-.u-actionsheet-cancel {
+.u-action-sheet-cancel {
     color: $u-main-color;
 }
 </style>

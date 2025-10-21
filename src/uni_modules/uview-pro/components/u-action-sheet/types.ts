@@ -1,6 +1,7 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { ActionSheetItem, ActionSheetTips } from '../../types/global';
 import { baseProps } from '../common/props';
+import { $u } from '../../';
 
 /**
  * actionSheet 操作菜单
@@ -8,7 +9,7 @@ import { baseProps } from '../common/props';
  */
 export const ActionSheetProps = {
     ...baseProps,
-    /** 点击遮罩是否可以关闭actionsheet */
+    /** 点击遮罩是否可以关闭actionSheet */
     maskCloseAble: { type: Boolean, default: true },
     /** 按钮的文字数组，可以自定义颜色和字体大小，字体单位为rpx */
     list: {
@@ -18,7 +19,7 @@ export const ActionSheetProps = {
     /** 顶部的提示文字 */
     tips: {
         type: Object as unknown as PropType<ActionSheetTips>,
-        default: () => ({ text: '', color: '', fontSize: '26' })
+        default: () => ({ text: '', color: $u.color.tipsColor, fontSize: '26rpx' })
     },
     /** 底部的取消按钮 */
     cancelBtn: { type: Boolean, default: true },
@@ -31,7 +32,13 @@ export const ActionSheetProps = {
     /** 弹出的z-index值 */
     zIndex: { type: [String, Number], default: 0 },
     /** 取消按钮的文字提示 */
-    cancelText: { type: String, default: '取消' }
+    cancelText: { type: String, default: '取消' },
+    /** 字体颜色 */
+    color: { type: String, default: $u.color.mainColor },
+    /** 字体大小 */
+    fontSize: { type: [String, Number], default: '32rpx' },
+    /** 是否异步关闭 */
+    asyncClose: { type: Boolean, default: false }
 };
 
 export type ActionSheetProps = ExtractPropTypes<typeof ActionSheetProps>;

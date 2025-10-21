@@ -1,7 +1,7 @@
 declare module 'vue' {
     export interface GlobalComponents {
-        // 基础组件
         uActionSheet: (typeof import('../components/u-action-sheet/u-action-sheet.vue'))['default'];
+        uActionSheetItem: (typeof import('../components/u-action-sheet-item/u-action-sheet-item.vue'))['default'];
         uAlertTips: (typeof import('../components/u-alert-tips/u-alert-tips.vue'))['default'];
         uAvatar: (typeof import('../components/u-avatar/u-avatar.vue'))['default'];
         uAvatarCropper: (typeof import('../components/u-avatar-cropper/u-avatar-cropper.vue'))['default'];
@@ -96,4 +96,4 @@ declare module 'vue' {
     }
 }
 
-export { };
+export {};
