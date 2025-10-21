@@ -110,7 +110,7 @@ import { $u, useChildren } from '../..';
 import { InputProps } from './types';
 
 const props = defineProps(InputProps);
-const emit = defineEmits(['update:modelValue', 'blur', 'focus', 'confirm', 'click']);
+const emit = defineEmits(['update:modelValue', 'input', 'blur', 'focus', 'confirm', 'click']);
 
 const { emitToParent } = useChildren('u-input', 'u-form-item');
 
@@ -168,6 +168,7 @@ function handleInput(event: any) {
     // 判断是否去除空格
     if (props.trim) value = $u.trim(value);
     emit('update:modelValue', value);
+    emit('input', value);
     // 当前model 赋值
     defaultValue.value = value;
     // 过一个生命周期再发送事件给u-form-item，否则this.$emit('update:modelValue')更新了父组件的值，但是微信小程序上

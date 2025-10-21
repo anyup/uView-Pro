@@ -72,6 +72,12 @@ export default [
                 title_en: 'Form'
             },
             {
+                path: '/pages/componentsA/input/index',
+                icon: 'input',
+                title: 'Input 输入框',
+                title_en: 'Input'
+            },
+            {
                 path: '/pages/componentsA/calendar/index',
                 icon: 'calendar',
                 title: 'Calendar 日历',
