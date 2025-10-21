@@ -114,7 +114,17 @@ import { $u } from '../..';
 
 const props = defineProps(SearchProps);
 
-const emit = defineEmits(['update:modelValue', 'change', 'search', 'custom', 'clear', 'focus', 'blur', 'click']);
+const emit = defineEmits([
+    'update:modelValue',
+    'input',
+    'change',
+    'search',
+    'custom',
+    'clear',
+    'focus',
+    'blur',
+    'click'
+]);
 
 // 绑定输入框的值
 const keyword = ref(props.modelValue);
@@ -134,6 +144,7 @@ watch(
 );
 watch(keyword, nVal => {
     emit('update:modelValue', nVal);
+    emit('input', nVal);
     emit('change', nVal);
 });
 
