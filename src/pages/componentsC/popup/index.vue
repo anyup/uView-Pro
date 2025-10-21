@@ -3,7 +3,6 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
                 <u-button @click="btnClick">唤起弹窗</u-button>
                 <u-popup
                     border-radius="10"
