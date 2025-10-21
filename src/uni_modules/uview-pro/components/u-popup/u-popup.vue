@@ -28,21 +28,16 @@
             :style="[style]"
         >
             <view
+                v-if="mode == 'center'"
                 class="u-mode-center-box"
                 @tap.stop.prevent
                 @touchmove.stop.prevent
-                v-if="mode == 'center'"
                 :style="[centerStyle]"
             >
-                <u-icon
-                    @click="close"
-                    v-if="closeable"
-                    class="u-close"
-                    :class="['u-close--' + closeIconPos]"
-                    :name="closeIcon"
-                    :color="closeIconColor"
-                    :size="closeIconSize"
-                ></u-icon>
+                <view v-if="closeable" @click="close" class="u-close" :class="['u-close--' + closeIconPos]">
+                    <u-icon :name="closeIcon" :color="closeIconColor" :size="closeIconSize"></u-icon>
+                </view>
+
                 <scroll-view class="u-drawer__scroll-view" scroll-y="true">
                     <slot />
                 </scroll-view>
@@ -50,13 +45,13 @@
             <scroll-view class="u-drawer__scroll-view" scroll-y="true" v-else>
                 <slot />
             </scroll-view>
-            <view @tap="close" class="u-close" :class="['u-close--' + closeIconPos]">
-                <u-icon
-                    v-if="mode != 'center' && closeable"
-                    :name="closeIcon"
-                    :color="closeIconColor"
-                    :size="closeIconSize"
-                ></u-icon>
+            <view
+                v-if="mode != 'center' && closeable"
+                @click="close"
+                class="u-close"
+                :class="['u-close--' + closeIconPos]"
+            >
+                <u-icon :name="closeIcon" :color="closeIconColor" :size="closeIconSize"></u-icon>
             </view>
         </view>
     </view>
