@@ -27,6 +27,7 @@ interface ParentContext {
 interface ChildContext {
     id: string;
     name: string;
+    getChildIndex: () => number;
     emitToParent: (event: string, data?: any) => void;
     getParentExposed: () => Record<string, any>;
     getInstance: () => any;
@@ -117,8 +118,8 @@ export function useParent(componentName?: string) {
     const broadcast = (event: string, data?: any, childIds?: string | string[]) => {
         const targetChildren = childIds
             ? ((Array.isArray(childIds) ? childIds : [childIds])
-                .map(id => childrenMap.get(id))
-                .filter(Boolean) as ChildContext[])
+                  .map(id => childrenMap.get(id))
+                  .filter(Boolean) as ChildContext[])
             : Array.from(childrenMap.values());
 
         logger.log(`Parent ${name} broadcasting event: ${event} to ${targetChildren.length} children`);
@@ -319,9 +320,20 @@ export function useChildren(componentName?: string, parentName?: string) {
         }
     };
 
+    const getChildIndex = () => {
+        if (!parentRef.value) return -1;
+        try {
+            const children = parentRef.value.getChildren();
+            return children.findIndex((child: ChildContext) => child.id === instanceId);
+        } catch (error) {
+            return -1;
+        }
+    };
+
     const childContext: ChildContext = {
         id: instanceId,
         name: name || 'anonymous',
+        getChildIndex,
         emitToParent,
         getParentExposed,
         getInstance: () => instance,
@@ -350,6 +362,7 @@ export function useChildren(componentName?: string, parentName?: string) {
     return {
         childId: instanceId,
         childName: name || 'anonymous',
+        childIndex: computed(getChildIndex),
         parent: parentRef,
         emitToParent,
         getParentExposed,
