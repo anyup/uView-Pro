@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TextAlign } from '../../types/global';
-import { baseProps } from '../common/props';
+import * as props from '../common/props';
+const { baseProps } = props;
 
 /**
  * u-collapse-item 手风琴Item Props

@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { IconLabelPosition, ImgMode } from '../../types/global';
-import { baseProps } from '../common/props';
+import * as props from '../common/props';
+const { baseProps } = props;
 
 /**
  * u-icon 组件 Props 类型定义

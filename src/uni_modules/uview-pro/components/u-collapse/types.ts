@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
+import * as props from '../common/props';
+const { baseProps } = props;
 
 /**
  * u-collapse 手风琴 Props
