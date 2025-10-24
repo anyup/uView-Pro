@@ -233,6 +233,8 @@ export type SelectListItem = {
 // Step 组件 mode
 export type StepsListItem = {
     name: string;
+    icon?: string;
+    desc?: string;
     [key: string]: any;
 };
 // Step 组件 mode

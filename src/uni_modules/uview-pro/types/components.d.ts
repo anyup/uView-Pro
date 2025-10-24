@@ -68,6 +68,7 @@ declare module 'vue' {
         uSelect: (typeof import('../components/u-select/u-select.vue'))['default'];
         uSkeleton: (typeof import('../components/u-skeleton/u-skeleton.vue'))['default'];
         uSlider: (typeof import('../components/u-slider/u-slider.vue'))['default'];
+        uStep: (typeof import('../components/u-steps/u-step.vue'))['default'];
         uSteps: (typeof import('../components/u-steps/u-steps.vue'))['default'];
         uSticky: (typeof import('../components/u-sticky/u-sticky.vue'))['default'];
         uSubsection: (typeof import('../components/u-subsection/u-subsection.vue'))['default'];
