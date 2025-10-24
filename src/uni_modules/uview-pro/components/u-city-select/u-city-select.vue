@@ -116,13 +116,13 @@ import { $u } from '../..';
  * u-city-select 城市选择器
  * @description 用于选择省、市、区三级行政区域，支持回显和自定义初始值。
  * @property {Boolean} modelValue 控制弹窗显示与隐藏（v-model）
- * @property {Array} defaultRegion 默认选中的省市区名称数组，如 ['广东省', '广州市', '天河区']
+ * @property {Array} defaultRegion 默认选中的省市区名称数组，如 ['山东省', '青岛市', '崂山区']
  * @property {Array} areaCode 默认选中的省市区编码数组，如 ['440000', '440100', '440106']
  * @property {Boolean} maskCloseAble 是否允许点击遮罩关闭弹窗（默认 true）
  * @property {String|Number} zIndex 弹窗层级（默认 0，自动适配）
  * @event update:modelValue v-model 绑定值变化时触发
  * @event city-change 选择省市区后触发，返回选中的省市区对象
- * @example <u-city-select v-model="show" :defaultRegion="['广东省','广州市','天河区']" @city-change="onChange"></u-city-select>
+ * @example <u-city-select v-model="show" :defaultRegion="['山东省', '青岛市', '崂山区']" @city-change="onChange"></u-city-select>
  */
 const props = defineProps(CitySelectProps);
 

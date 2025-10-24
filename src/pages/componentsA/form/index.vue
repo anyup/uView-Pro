@@ -116,7 +116,12 @@
         <u-button @click="submit">提交</u-button>
         <u-action-sheet :list="actionSheetList" v-model="actionSheetShow" @click="actionSheetCallback"></u-action-sheet>
         <u-select mode="single-column" :list="selectList" v-model="selectShow" @confirm="selectConfirm"></u-select>
-        <u-picker mode="region" v-model="pickerShow" @confirm="regionConfirm"></u-picker>
+        <u-picker
+            mode="region"
+            v-model="pickerShow"
+            :default-region="['山东省', '青岛市', '崂山区']"
+            @confirm="regionConfirm"
+        ></u-picker>
         <u-verification-code seconds="60" ref="uCodeRef" @change="codeChange"></u-verification-code>
         <view class="u-config-wrap">
             <view class="u-config-title u-border-bottom"> 参数配置 </view>

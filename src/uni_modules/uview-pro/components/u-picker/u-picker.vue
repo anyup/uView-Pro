@@ -553,7 +553,7 @@ function setSeconds() {
 function setProvinces() {
     // 判断是否需要province参数
     if (!props.params.province) return;
-    let tmp: any = '';
+    let tmp: any = 0;
     let useCode = false;
     // 如果同时配置了defaultRegion和areaCode，优先使用areaCode参数
     if (props.areaCode.length) {
@@ -579,7 +579,7 @@ function setProvinces() {
  */
 function setCitys() {
     if (!props.params.city) return;
-    let tmp: any = '';
+    let tmp: any = 0;
     let useCode = false;
     if (props.areaCode.length) {
         tmp = props.areaCode[1];
@@ -604,7 +604,7 @@ function setCitys() {
  */
 function setAreas() {
     if (!props.params.area) return;
-    let tmp: any = '';
+    let tmp: any = 0;
     let useCode = false;
     if (props.areaCode.length) {
         tmp = props.areaCode[2];

@@ -60,7 +60,7 @@ const rangKey = ref('name');
 const mode = ref<PickerMode>('selector');
 const defaultTime = ref('2019-12-11 20:15:35');
 const defaultSelector = ref([3]);
-const defaultRegion = ref(['广东省', '深圳市', '宝安区']);
+const defaultRegion = ref(['山东省', '青岛市', '崂山区']);
 const params = ref({
     year: true,
     month: true,
@@ -104,7 +104,7 @@ function defaultTimeChange(index: number) {
 }
 
 function defaultRegionChange(index: number) {
-    defaultRegion.value = index == 0 ? ['广东省', '深圳市', '宝安区'] : ['海南省', '三亚市', '海棠区'];
+    defaultRegion.value = index == 0 ? ['山东省', '青岛市', '崂山区'] : ['海南省', '三亚市', '海棠区'];
     mode.value = 'region';
     show.value = true;
 }
