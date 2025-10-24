@@ -60,6 +60,7 @@ import type {
     CalendarMode,
     ThemeType
 } from '@/uni_modules/uview-pro/types/global';
+import { $u } from '@/uni_modules/uview-pro';
 
 const isPage = ref(false);
 const show = ref(false);
@@ -69,9 +70,9 @@ const result = ref('请选择日期');
 const lunarResult = ref('');
 const startText = ref('开始');
 const endText = ref('结束');
-const rangeColor = ref('#2979ff');
+const rangeColor = ref($u.color.primary);
 const rangeBgColor = ref('rgba(41,121,255,0.13)');
-const activeBgColor = ref('#2979ff');
+const activeBgColor = ref($u.color.primary);
 const btnType = ref<ThemeType>('primary');
 
 const showMode = computed(() => {
@@ -111,7 +112,7 @@ function styleChange(index: number) {
     } else {
         startText.value = '开始';
         endText.value = '结束';
-        activeBgColor.value = '#2979ff';
+        activeBgColor.value = $u.color.primary;
     }
     show.value = true;
 }

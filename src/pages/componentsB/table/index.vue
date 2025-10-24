@@ -66,7 +66,7 @@ function modeChange(index: number): void {
 }
 
 function borderColorChange(index: number) {
-    borderColor.value = index === 0 ? '#e4e7ed' : index === 1 ? '#2979ff' : '#ff9900';
+    borderColor.value = index === 0 ? '#e4e7ed' : index === 1 ? $u.color.primary : '#ff9900';
 }
 
 function alignChange(index: number) {

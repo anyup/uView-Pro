@@ -43,6 +43,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
+import { $u } from '@/uni_modules/uview-pro';
 
 const scrollTop = ref(0);
 const mode = ref<Shape>('circle');
@@ -79,12 +80,12 @@ function styleChange(index: number) {
     if (index === 0) {
         icon.value = 'arrow-up';
         iconStyle.value = {
-            color: '#2979ff',
+            color: $u.color.primary,
             fontSize: '34rpx'
         };
         customStyle.value = {
             backgroundColor: '#a0cfff',
-            color: '#2979ff'
+            color: $u.color.primary
         };
         tips.value = '顶部';
     } else {

@@ -43,7 +43,7 @@
                 >
                     <template v-if="customBtn" #addBtn>
                         <view class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
-                            <u-icon name="photo" size="60" color="#2979ff"></u-icon>
+                            <u-icon name="photo" size="60" :color="$u.color.primary"></u-icon>
                         </view>
                     </template>
                 </u-upload>
@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { $u } from '@/uni_modules/uview-pro';
 
 // 上传文件项类型
 interface UploadFileItem {

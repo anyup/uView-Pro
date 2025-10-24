@@ -50,7 +50,7 @@ import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 
 const checked = ref(false);
-const activeColor = ref('#2979ff');
+const activeColor = ref($u.color.primary);
 const size = ref<number | string>(50);
 const loading = ref(false);
 const disabled = ref(false);

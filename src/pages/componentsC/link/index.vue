@@ -29,7 +29,7 @@ import { $u } from '@/uni_modules/uview-pro';
 const href = ref('https://uviewpro.cn/zh/');
 const underLine = ref(true);
 const fontSize = ref(28);
-const color = ref('#2979ff');
+const color = ref($u.color.primary);
 
 function underLineChange(index: number) {
     underLine.value = index === 0;

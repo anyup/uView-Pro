@@ -88,7 +88,7 @@ import { ModalProps } from './types';
  * @property {String} confirm-text 确认按钮的文字内容（默认"确认"）
  * @property {String} cancel-text 取消按钮的文字内容（默认"取消"）
  * @property {String} cancel-color 取消按钮的颜色（默认"#606266"）
- * @property {String} confirm-color 确认按钮的文字内容（默认"#2979ff"）
+ * @property {String} confirm-color 确认按钮的文字内容（默认主题色primary）
  * @property {String | Number} border-radius 模态框圆角值，单位rpx（默认16）
  * @property {Object} title-style 自定义标题样式，对象形式
  * @property {Object} content-style 自定义内容样式，对象形式

@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import { $u } from 'uview-pro';
+import { $u } from '@/uni_modules/uview-pro';
 import { onMounted, ref } from 'vue';
 
 interface Result {
