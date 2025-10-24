@@ -30,9 +30,7 @@
                     >
                         {{ cancelText }}
                     </view>
-                    <view class="u-select__header__title">
-                        {{ title }}
-                    </view>
+                    <view class="u-select__header__title u-line-1"> {{ title }}</view>
                     <view
                         class="u-select__header__confirm u-select__header__btn"
                         :style="{ color: moving ? cancelColor : confirmColor }"
@@ -51,7 +49,7 @@
                         :value="defaultSelector"
                         @pickstart="pickstart"
                         @pickend="pickend"
-                        v-if="modelValue"
+                        v-if="modelValue && readyToRender"
                     >
                         <picker-view-column v-for="(item, index) in columnData" :key="index">
                             <view
@@ -83,7 +81,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, nextTick } from 'vue';
 import { SelectProps } from './types';
 import type { SelectListItem } from '../../types/global';
 import { $u } from '../..';
@@ -117,6 +115,12 @@ const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'click']);
 const defaultSelector = ref<number[]>([0]);
 // picker-view的数据
 const columnData = ref<SelectListItem[][]>([]);
+// 控制 picker 是否渲染（等待初始化完成）
+const readyToRender = ref(false);
+// 保存用户上次确认的索引，如果用户未确认过，则为 null，首次打开会使用 props.defaultValue
+const savedSelector = ref<number[] | null>(
+    props.defaultValue && props.defaultValue.length ? props.defaultValue.slice() : null
+);
 // 每次队列发生变化时，保存选择的结果
 const selectValue = ref<SelectListItem[]>([]);
 // 上一次列变化时的index
@@ -135,8 +139,21 @@ const popupValue = computed({
 
 watch(
     () => props.modelValue,
-    val => {
-        if (val) setTimeout(() => init(), 10);
+    async val => {
+        if (val) {
+            // 等待一次 DOM 更新
+            await nextTick();
+            // 在 App（APP-PLUS）平台上，原生 picker 可能需要更长时间初始化
+            // 我们先执行 init，并在 init 完成后将 readyToRender 置为 true，保证 picker 在数据就绪后渲染
+            // #ifdef APP-PLUS
+            await new Promise(resolve => setTimeout(resolve, 20));
+            // #endif
+            init();
+            readyToRender.value = true;
+        } else {
+            // 关闭弹窗时复位
+            readyToRender.value = false;
+        }
     },
     { immediate: true }
 );
@@ -153,17 +170,31 @@ function pickend() {
 }
 
 function init() {
+    // 先计算列数
     setColumnNum();
+    // 根据 columnData 和 columnNum 设置默认选中
     setDefaultSelector();
+    // 准备列数据（部分模式需要依赖 defaultSelector 的值，但我们将先生成columnData的结构）
     setColumnData();
+    // 清空并设置 selectValue
+    selectValue.value = [];
     setSelectValue();
 }
 
 // 获取默认选中列下标
 function setDefaultSelector() {
-    // 如果没有传入默认选中的值，生成长度为columnNum，用0填充的数组
+    // 根据 preserveSelection 决定优先级：
+    // - 如果 preserveSelection 为 true（默认），优先使用用户已确认的选择 savedSelector（如果存在），否则使用 props.defaultValue
+    // - 如果 preserveSelection 为 false，则优先使用外部 props.defaultValue（如果存在），否则使用 savedSelector
+    let useDefault: number[] | null = null;
+    if (props.preserveSelection) {
+        useDefault = savedSelector.value && savedSelector.value.length ? savedSelector.value : props.defaultValue;
+    } else {
+        useDefault = props.defaultValue && props.defaultValue.length ? props.defaultValue : savedSelector.value;
+    }
+    // 如果没有传入默认选中的值，生成长度为 columnNum，用0填充的数组
     defaultSelector.value =
-        props.defaultValue.length == columnNum.value ? props.defaultValue : Array(columnNum.value).fill(0);
+        useDefault && useDefault.length == columnNum.value ? useDefault.slice() : Array(columnNum.value).fill(0);
     lastSelectIndex.value = [...defaultSelector.value];
 }
 // 计算列数
@@ -299,7 +330,7 @@ function columnChange(e: any) {
 function close() {
     emit('update:modelValue', false);
     // 重置default-value默认值
-    defaultSelector.value = [0];
+    // defaultSelector.value = [0];
 }
 // 点击确定或者取消
 function getResult(event: 'update:modelValue' | 'confirm' | 'cancel' | 'click' | null = null) {
@@ -308,6 +339,11 @@ function getResult(event: 'update:modelValue' | 'confirm' | 'cancel' | 'click' |
     // #endif
 
     if (event) emit(event, selectValue.value);
+    // 如果是用户确认，则保存已确认的索引，作为下次打开时的默认值
+    if (event === 'confirm') {
+        // deep copy
+        savedSelector.value = defaultSelector.value ? defaultSelector.value.slice() : null;
+    }
     close();
 }
 
@@ -344,12 +380,6 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
         }
     }
 
-    &__hader {
-        &__title {
-            color: $u-content-color;
-        }
-    }
-
     &--border {
         border-radius: 6rpx;
         border-radius: 4px;
@@ -361,7 +391,15 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
         align-items: center;
         justify-content: space-between;
         height: 80rpx;
-        padding: 0 40rpx;
+
+        &__title {
+            color: $u-content-color;
+        }
+
+        &__btn {
+            min-width: 150rpx;
+            padding: 20rpx 30rpx;
+        }
     }
 
     &__body {

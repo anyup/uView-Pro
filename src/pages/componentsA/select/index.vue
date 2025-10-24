@@ -65,7 +65,8 @@ const list1 = [
         label: '年'
     },
     {
-        value: '灯'
+        value: '灯',
+        label: '灯'
     }
 ];
 const list2 = [
@@ -104,54 +105,70 @@ const list3 = [
         value: '1',
         children: [
             {
-                label: '广西',
-                value: '2',
+                label: '山东',
+                value: '11',
                 children: [
                     {
-                        label: '南宁',
-                        value: '3'
+                        label: '青岛',
+                        value: '111'
                     },
                     {
-                        label: '梧州',
-                        value: '3'
+                        label: '济南',
+                        value: '112'
                     },
                     {
-                        label: '柳州',
-                        value: '3'
+                        label: '烟台',
+                        value: '113'
                     }
                 ]
             },
             {
                 label: '广东',
-                value: '2',
+                value: '12',
                 children: [
                     {
                         label: '深圳',
-                        value: '3'
+                        value: '121'
                     },
                     {
                         label: '惠州',
-                        value: '3'
+                        value: '122'
                     },
                     {
                         label: '清远',
-                        value: '3'
+                        value: '123'
                     }
                 ]
-            },
+            }
+        ]
+    },
+    {
+        label: '美国',
+        value: '2',
+        children: [
             {
-                label: '美国',
-                value: '1',
+                label: '纽约',
+                value: '21',
                 children: [
                     {
-                        label: '纽约',
-                        value: '2',
-                        children: [
-                            {
-                                label: '皇后街道',
-                                value: '3'
-                            }
-                        ]
+                        label: '布朗克斯区',
+                        value: '211'
+                    },
+                    {
+                        label: '布鲁克林区',
+                        value: '212'
+                    },
+                    {
+                        label: '曼哈顿',
+                        value: '213'
+                    },
+                    {
+                        label: '皇后区',
+                        value: '214'
+                    },
+                    {
+                        label: '斯塔滕岛',
+                        value: '215'
                     }
                 ]
             }

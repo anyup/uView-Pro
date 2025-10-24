@@ -26,6 +26,8 @@ export const SelectProps = {
     maskCloseAble: { type: Boolean, default: true },
     /** 提供的默认选中的下标 */
     defaultValue: { type: Array as PropType<number[]>, default: () => [0] },
+    /** 是否保留用户上次确认的选择（true：优先使用已保存的选择；false：优先使用外部传入的 defaultValue） */
+    preserveSelection: { type: Boolean, default: true },
     /** 模式选择，single-column-单列，mutil-column-多列，mutil-column-auto-多列联动 */
     mode: { type: String as PropType<SelectMode>, default: 'single-column' },
     /** 自定义value属性名 */
