@@ -1,3 +1,25 @@
+## 0.3.6（2025-10-24）
+
+### ✨ Features | 新功能
+
+- **u-select:** 优化选择器组件 u-select 默认值处理逻辑，添加 preserveSelection 属性，用于控制是否保留用户上次确认的选择 ([8493ff1](https://github.com/anyup/uView-Pro/commit/8493ff16d2eee42fabe926917d940a350b86abe0))
+- **u-picker:** 优化 picker 的初始化和渲染流程，实现多次打开 picker 时保留用户选择的逻辑，新增 preserveSelection 属性支持 ([974872e](https://github.com/anyup/uView-Pro/commit/974872ec944fbb28cdb3c40fda08c9039bf0b960))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **components:** 使用主题色替代硬编码颜色值，统一组件的颜色风格，便于未来主题颜色的调整和维护 ([ec348d4](https://github.com/anyup/uView-Pro/commit/ec348d4a8bff4dee62da78eadd23fc3a292ebdca))
+- **example:** 代码示例中使用主题色替换硬编码颜色值 ([3216497](https://github.com/anyup/uView-Pro/commit/32164973d54cfff3edcbe765a8ed27158f4bec7d))
+- **u-steps:** 新增u-step ([6b86eea](https://github.com/anyup/uView-Pro/commit/6b86eeaf7699eb13f739fc038d86efb4e3b48f8a))
+- **u-step:** 替换步骤条组件中的默认硬编码颜色值 ([f3408ef](https://github.com/anyup/uView-Pro/commit/f3408ef006991702895432e775f266fb196ddf12))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-picker:** 修复使用u-picker组件选择地区不设置默认值报错的问题 ([7941135](https://github.com/anyup/uView-Pro/commit/7941135a87a3511a562ed10e34573ef7f786fb57))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/lonelyflyer"><img src="https://github.com/lonelyflyer.png?size=40" width="40" height="40" alt="Lonelyflyer" title="Lonelyflyer"/></a>
+
 ## 0.3.5（2025-10-21）
 
 ### 🐛 Bug Fixes | Bug 修复
