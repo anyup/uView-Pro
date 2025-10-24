@@ -74,8 +74,8 @@ const parentData = computed(() => {
             list: [],
             type: 'primary',
             current: 0,
-            activeColor: '#2979ff',
-            unActiveColor: '#909399',
+            activeColor: $u.color.primary,
+            unActiveColor: $u.color.info,
             icon: 'checkmark',
             direction: 'row'
         }
