@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ThemeType } from '../../types/global';
-import { baseProps } from '../common/props';
+import * as props from '../common/props';
+const { baseProps } = props;
 
 export const TextProps = {
     ...baseProps,

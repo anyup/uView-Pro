@@ -1,6 +1,7 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { CalendarChangeDate, CalendarChangeRange, CalendarMode, ThemeType } from '../../types/global';
-import { baseProps } from '../common/props';
+import * as props from '../common/props';
+const { baseProps } = props;
 
 /**
  * calendar 日历类型定义
