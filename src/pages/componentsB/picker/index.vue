@@ -15,6 +15,7 @@
                     :defaultSelector="defaultSelector"
                     :range="range"
                     :range-key="rangKey"
+                    :preserve-selection="false"
                     @columnchange="columnchange"
                 ></u-picker>
             </view>
@@ -58,7 +59,7 @@ const range = ref<string[] | string[][]>(['一', '片', '冰', '心', '在', '�
 const rangKey = ref('name');
 const mode = ref<PickerMode>('selector');
 const defaultTime = ref('2019-12-11 20:15:35');
-const defaultSelector = ref([0]);
+const defaultSelector = ref([3]);
 const defaultRegion = ref(['广东省', '深圳市', '宝安区']);
 const params = ref({
     year: true,
@@ -83,7 +84,7 @@ function modeChange(index: number) {
     mode.value = ['selector', 'multiSelector', 'time', 'region'][index] as PickerMode;
     if (mode.value == 'selector') {
         range.value = ['一', '片', '冰', '心', '在', '玉', '壶'];
-        defaultSelector.value = [0];
+        defaultSelector.value = [3];
     }
     if (mode.value == 'multiSelector') {
         range.value = [
@@ -91,7 +92,7 @@ function modeChange(index: number) {
             ['中国', '日本'],
             ['北京', '上海', '广州']
         ];
-        defaultSelector.value = [0, 0, 0];
+        defaultSelector.value = [0, 0, 1];
     }
     show.value = true;
 }
@@ -115,6 +116,7 @@ function minSecChange(index: number) {
         params.value.second = true;
     }
     if (index === 1) {
+        defaultTime.value = '2020-02-05';
         params.value.hour = false;
         params.value.minute = false;
         params.value.second = false;

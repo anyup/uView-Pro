@@ -20,7 +20,7 @@
                 >
                     {{ cancelText }}
                 </view>
-                <view class="u-picker__title">{{ title }}</view>
+                <view class="u-picker__title u-line-1">{{ title }}</view>
                 <view
                     class="u-btn-picker u-btn-picker--primary"
                     :style="{ color: moving ? cancelColor : confirmColor }"
@@ -33,103 +33,105 @@
                 </view>
             </view>
             <view class="u-picker-body">
-                <picker-view
-                    v-if="mode == 'region'"
-                    :value="valueArr"
-                    @change="change"
-                    class="u-picker-view"
-                    @pickstart="pickstart"
-                    @pickend="pickend"
-                >
-                    <picker-view-column v-if="!reset && params.province">
-                        <view class="u-column-item" v-for="(item, index) in provinces" :key="index">
-                            <view class="u-line-1">{{ item.label }}</view>
-                        </view>
-                    </picker-view-column>
-                    <picker-view-column v-if="!reset && params.city">
-                        <view class="u-column-item" v-for="(item, index) in citysRef" :key="index">
-                            <view class="u-line-1">{{ item.label }}</view>
-                        </view>
-                    </picker-view-column>
-                    <picker-view-column v-if="!reset && params.area">
-                        <view class="u-column-item" v-for="(item, index) in areasRef" :key="index">
-                            <view class="u-line-1">{{ item.label }}</view>
-                        </view>
-                    </picker-view-column>
-                </picker-view>
-                <picker-view
-                    v-else-if="mode == 'time'"
-                    :value="valueArr"
-                    @change="change"
-                    class="u-picker-view"
-                    @pickstart="pickstart"
-                    @pickend="pickend"
-                >
-                    <picker-view-column v-if="!reset && params.year">
-                        <view class="u-column-item" v-for="(item, index) in years" :key="index">
-                            {{ item }}
-                            <text class="u-text" v-if="showTimeTag">年</text>
-                        </view>
-                    </picker-view-column>
-                    <picker-view-column v-if="!reset && params.month">
-                        <view class="u-column-item" v-for="(item, index) in months" :key="index">
-                            {{ formatNumber(item) }}
-                            <text class="u-text" v-if="showTimeTag">月</text>
-                        </view>
-                    </picker-view-column>
-                    <picker-view-column v-if="!reset && params.day">
-                        <view class="u-column-item" v-for="(item, index) in days" :key="index">
-                            {{ formatNumber(item) }}
-                            <text class="u-text" v-if="showTimeTag">日</text>
-                        </view>
-                    </picker-view-column>
-                    <picker-view-column v-if="!reset && params.hour">
-                        <view class="u-column-item" v-for="(item, index) in hours" :key="index">
-                            {{ formatNumber(item) }}
-                            <text class="u-text" v-if="showTimeTag">时</text>
-                        </view>
-                    </picker-view-column>
-                    <picker-view-column v-if="!reset && params.minute">
-                        <view class="u-column-item" v-for="(item, index) in minutes" :key="index">
-                            {{ formatNumber(item) }}
-                            <text class="u-text" v-if="showTimeTag">分</text>
-                        </view>
-                    </picker-view-column>
-                    <picker-view-column v-if="!reset && params.second">
-                        <view class="u-column-item" v-for="(item, index) in seconds" :key="index">
-                            {{ formatNumber(item) }}
-                            <text class="u-text" v-if="showTimeTag">秒</text>
-                        </view>
-                    </picker-view-column>
-                </picker-view>
-                <picker-view
-                    v-else-if="mode == 'selector'"
-                    :value="valueArr"
-                    @change="change"
-                    class="u-picker-view"
-                    @pickstart="pickstart"
-                    @pickend="pickend"
-                >
-                    <picker-view-column v-if="!reset">
-                        <view class="u-column-item" v-for="(item, index) in range" :key="index">
-                            <view class="u-line-1">{{ getItemValue(item, 'selector') }}</view>
-                        </view>
-                    </picker-view-column>
-                </picker-view>
-                <picker-view
-                    v-else-if="mode == 'multiSelector'"
-                    :value="valueArr"
-                    @change="change"
-                    class="u-picker-view"
-                    @pickstart="pickstart"
-                    @pickend="pickend"
-                >
-                    <picker-view-column v-if="!reset" v-for="(item, index) in range" :key="index">
-                        <view class="u-column-item" v-for="(item1, index1) in item" :key="index1">
-                            <view class="u-line-1">{{ getItemValue(item1, 'multiSelector') }}</view>
-                        </view>
-                    </picker-view-column>
-                </picker-view>
+                <template v-if="readyToRender">
+                    <picker-view
+                        v-if="mode == 'region'"
+                        :value="valueArr"
+                        @change="change"
+                        class="u-picker-view"
+                        @pickstart="pickstart"
+                        @pickend="pickend"
+                    >
+                        <picker-view-column v-if="params.province">
+                            <view class="u-column-item" v-for="(item, index) in provinces" :key="index">
+                                <view class="u-line-1">{{ item.label }}</view>
+                            </view>
+                        </picker-view-column>
+                        <picker-view-column v-if="params.city">
+                            <view class="u-column-item" v-for="(item, index) in citysRef" :key="index">
+                                <view class="u-line-1">{{ item.label }}</view>
+                            </view>
+                        </picker-view-column>
+                        <picker-view-column v-if="params.area">
+                            <view class="u-column-item" v-for="(item, index) in areasRef" :key="index">
+                                <view class="u-line-1">{{ item.label }}</view>
+                            </view>
+                        </picker-view-column>
+                    </picker-view>
+                    <picker-view
+                        v-else-if="mode == 'time'"
+                        :value="valueArr"
+                        @change="change"
+                        class="u-picker-view"
+                        @pickstart="pickstart"
+                        @pickend="pickend"
+                    >
+                        <picker-view-column v-if="params.year">
+                            <view class="u-column-item" v-for="(item, index) in years" :key="index">
+                                {{ item }}
+                                <text class="u-text" v-if="showTimeTag">年</text>
+                            </view>
+                        </picker-view-column>
+                        <picker-view-column v-if="params.month">
+                            <view class="u-column-item" v-for="(item, index) in months" :key="index">
+                                {{ formatNumber(item) }}
+                                <text class="u-text" v-if="showTimeTag">月</text>
+                            </view>
+                        </picker-view-column>
+                        <picker-view-column v-if="params.day">
+                            <view class="u-column-item" v-for="(item, index) in days" :key="index">
+                                {{ formatNumber(item) }}
+                                <text class="u-text" v-if="showTimeTag">日</text>
+                            </view>
+                        </picker-view-column>
+                        <picker-view-column v-if="params.hour">
+                            <view class="u-column-item" v-for="(item, index) in hours" :key="index">
+                                {{ formatNumber(item) }}
+                                <text class="u-text" v-if="showTimeTag">时</text>
+                            </view>
+                        </picker-view-column>
+                        <picker-view-column v-if="params.minute">
+                            <view class="u-column-item" v-for="(item, index) in minutes" :key="index">
+                                {{ formatNumber(item) }}
+                                <text class="u-text" v-if="showTimeTag">分</text>
+                            </view>
+                        </picker-view-column>
+                        <picker-view-column v-if="params.second">
+                            <view class="u-column-item" v-for="(item, index) in seconds" :key="index">
+                                {{ formatNumber(item) }}
+                                <text class="u-text" v-if="showTimeTag">秒</text>
+                            </view>
+                        </picker-view-column>
+                    </picker-view>
+                    <picker-view
+                        v-else-if="mode == 'selector'"
+                        :value="valueArr"
+                        @change="change"
+                        class="u-picker-view"
+                        @pickstart="pickstart"
+                        @pickend="pickend"
+                    >
+                        <picker-view-column>
+                            <view class="u-column-item" v-for="(item, index) in range" :key="index">
+                                <view class="u-line-1">{{ getItemValue(item, 'selector') }}</view>
+                            </view>
+                        </picker-view-column>
+                    </picker-view>
+                    <picker-view
+                        v-else-if="mode == 'multiSelector'"
+                        :value="valueArr"
+                        @change="change"
+                        class="u-picker-view"
+                        @pickstart="pickstart"
+                        @pickend="pickend"
+                    >
+                        <picker-view-column v-for="(item, index) in range" :key="index">
+                            <view class="u-column-item" v-for="(item1, index1) in item" :key="index1">
+                                <view class="u-line-1">{{ getItemValue(item1, 'multiSelector') }}</view>
+                            </view>
+                        </picker-view-column>
+                    </picker-view>
+                </template>
             </view>
         </view>
     </u-popup>
@@ -203,7 +205,6 @@ const day = ref<number>(0);
 const hour = ref<number>(0);
 const minute = ref<number>(0);
 const second = ref<number>(0);
-const reset = ref(false);
 const startDate = ref('');
 const endDate = ref('');
 const valueArr = ref<number[]>([]);
@@ -216,6 +217,51 @@ const area = ref<number>(0);
 // 列是否还在滑动中，微信小程序如果在滑动中就点确定，结果可能不准确
 const moving = ref(false);
 const multiSelectorValue = ref<number[]>([]);
+// 控制 picker-view 是否渲染（等待 init 完成以避免 APP-PLUS 首次渲染时获取不到默认值）
+const readyToRender = ref(false);
+
+// 保存用户上次确认的值（如果用户从未确认过，则为 null）
+const savedDefaultSelector = ref<number[] | null>(
+    props.defaultSelector && (props.defaultSelector as any[]).length ? (props.defaultSelector as any[]).slice() : null
+);
+const savedDefaultTime = ref<string | null>(props.defaultTime ? props.defaultTime : null);
+const savedDefaultRegion = ref<any[] | null>(
+    props.defaultRegion && props.defaultRegion.length ? props.defaultRegion.slice() : null
+);
+
+// Helper: get effective defaults according to preserveSelection
+function getEffectiveDefaultSelector(): number[] {
+    // 计算生效的 selector 默认值，并打印调试信息
+    let res: number[] = [];
+    if (props.preserveSelection) {
+        if (savedDefaultSelector && savedDefaultSelector.value && savedDefaultSelector.value.length)
+            res = savedDefaultSelector.value.slice();
+        else res = (props.defaultSelector as number[]) || [0];
+    } else {
+        if (props.defaultSelector && (props.defaultSelector as any[]).length) res = props.defaultSelector as number[];
+        else res = savedDefaultSelector.value ?? [0];
+    }
+    return res;
+}
+
+function getEffectiveDefaultTime(): string {
+    let res: string;
+    if (props.preserveSelection) res = savedDefaultTime.value ?? props.defaultTime ?? '';
+    else res = props.defaultTime ?? savedDefaultTime.value ?? '';
+    return res;
+}
+
+function getEffectiveDefaultRegion(): any[] {
+    let res: any[] = [];
+    if (props.preserveSelection) {
+        if (savedDefaultRegion.value && savedDefaultRegion.value.length) res = savedDefaultRegion.value.slice();
+        else res = props.defaultRegion || [];
+    } else {
+        if (props.defaultRegion && props.defaultRegion.length) res = props.defaultRegion.slice();
+        else res = savedDefaultRegion.value ?? [];
+    }
+    return res;
+}
 
 // 计算属性
 // 引用这几个变量，是为了监听其变化
@@ -230,11 +276,63 @@ const yearAndMonth = computed(() => `${year.value}-${month.value}`);
 // 如果用户有传递z-index值，优先使用
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : 1075));
 
-// 监听
-watch(propsChange, () => {
-    reset.value = true;
-    setTimeout(() => init(), 10);
-});
+// 当外部的默认值被动态修改时，如果 preserveSelection 为 false，应把外部值视为新的 saved 值并在打开时生效
+watch(
+    () => props.defaultSelector,
+    async n => {
+        if (!props.preserveSelection) {
+            savedDefaultSelector.value = n && (n as any[]).length ? (n as any[]).slice() : null;
+            if (props.modelValue) {
+                // reinit while open
+                readyToRender.value = false;
+                await nextTick();
+                // #ifdef APP-PLUS
+                await new Promise(resolve => setTimeout(resolve, 20));
+                // #endif
+                await init();
+                readyToRender.value = true;
+            }
+        }
+    },
+    { deep: true }
+);
+
+watch(
+    () => props.defaultTime,
+    async n => {
+        if (!props.preserveSelection) {
+            savedDefaultTime.value = n || null;
+            if (props.modelValue) {
+                readyToRender.value = false;
+                await nextTick();
+                // #ifdef APP-PLUS
+                await new Promise(resolve => setTimeout(resolve, 20));
+                // #endif
+                await init();
+                readyToRender.value = true;
+            }
+        }
+    }
+);
+
+watch(
+    () => props.defaultRegion,
+    async n => {
+        if (!props.preserveSelection) {
+            savedDefaultRegion.value = n && (n as any[]).length ? (n as any[]).slice() : null;
+            if (props.modelValue) {
+                readyToRender.value = false;
+                await nextTick();
+                // #ifdef APP-PLUS
+                await new Promise(resolve => setTimeout(resolve, 20));
+                // #endif
+                await init();
+                readyToRender.value = true;
+            }
+        }
+    },
+    { deep: true }
+);
 
 // 如果地区发生变化，为了让picker联动起来，必须重置this.citys和this.areas
 watch(regionChange, () => {
@@ -249,10 +347,20 @@ watch(yearAndMonth, () => {
 });
 watch(
     () => props.modelValue,
-    n => {
+    async n => {
         if (n) {
-            reset.value = true;
-            setTimeout(() => init(), 10);
+            // 等待一次 DOM 更新
+            await nextTick();
+            // APP-PLUS 原生控件可能需要更长的原生初始化时间，先短延迟以提高稳定性
+            // #ifdef APP-PLUS
+            await new Promise(resolve => setTimeout(resolve, 20));
+            // #endif
+            // 初始化数据并在完成后再渲染 picker-view
+            await init();
+            readyToRender.value = true;
+        } else {
+            // 关闭时隐藏 picker，保留已保存的值
+            readyToRender.value = false;
         }
     }
 );
@@ -316,7 +424,8 @@ function getIndex(arr: any[], val: any) {
  */
 function initTimeValue() {
     // 格式化时间，在IE浏览器(uni不存在此情况)，无法识别日期间的"-"间隔符号
-    let fdate = props.defaultTime.replace(/\-/g, '/');
+    const effectiveTime = getEffectiveDefaultTime() || '';
+    let fdate = effectiveTime.replace(/\-/g, '/');
     fdate = fdate && fdate.indexOf('/') == -1 ? `2020/01/01 ${fdate}` : fdate;
     let time: Date;
     if (fdate) time = new Date(fdate);
@@ -332,9 +441,8 @@ function initTimeValue() {
 /**
  * 初始化picker各列数据
  */
-function init() {
+async function init() {
     valueArr.value = [];
-    reset.value = false;
     if (props.mode == 'time') {
         initTimeValue();
         if (props.params.year) {
@@ -375,12 +483,14 @@ function init() {
             setAreas();
         }
     } else if (props.mode == 'selector') {
-        valueArr.value = props.defaultSelector as number[];
+        // use effective default selector according to preserveSelection
+        valueArr.value = getEffectiveDefaultSelector();
     } else if (props.mode == 'multiSelector') {
-        valueArr.value = props.defaultSelector as number[];
-        multiSelectorValue.value = props.defaultSelector as number[];
+        valueArr.value = getEffectiveDefaultSelector();
+        multiSelectorValue.value = getEffectiveDefaultSelector();
     }
-    nextTick(() => {});
+    // 等待 DOM 与 Vue 响应式更新完成，确保在原生组件挂载时数据已就绪
+    await nextTick();
 }
 /**
  * 设置年份列
@@ -449,8 +559,10 @@ function setProvinces() {
     if (props.areaCode.length) {
         tmp = props.areaCode[0];
         useCode = true;
-    } else if (props.defaultRegion.length) tmp = props.defaultRegion[0];
-    else tmp = 0;
+    } else {
+        const effRegion = getEffectiveDefaultRegion();
+        if (effRegion && effRegion.length) tmp = effRegion[0];
+    }
     // 历遍省份数组匹配
     provinces.map((v: any, k: number) => {
         if (useCode ? v.value == tmp : v.label == tmp) {
@@ -472,8 +584,10 @@ function setCitys() {
     if (props.areaCode.length) {
         tmp = props.areaCode[1];
         useCode = true;
-    } else if (props.defaultRegion.length) tmp = props.defaultRegion[1];
-    else tmp = 0;
+    } else {
+        const effRegion = getEffectiveDefaultRegion();
+        if (effRegion && effRegion.length) tmp = effRegion[1];
+    }
     // 历遍城市数组匹配
     citys[province.value].map((v: any, k: number) => {
         if (useCode ? v.value == tmp : v.label == tmp) {
@@ -495,8 +609,10 @@ function setAreas() {
     if (props.areaCode.length) {
         tmp = props.areaCode[2];
         useCode = true;
-    } else if (props.defaultRegion.length) tmp = props.defaultRegion[2];
-    else tmp = 0;
+    } else {
+        const effRegion = getEffectiveDefaultRegion();
+        if (effRegion && effRegion.length) tmp = effRegion[2];
+    }
     // 历遍区县数组匹配
     areas[province.value][city.value].map((v: any, k: number) => {
         if (useCode ? v.value == tmp : v.label == tmp) {
@@ -581,6 +697,40 @@ function getResult(event: string | null = null) {
         result = valueArr.value;
     }
     // 只允许 emit 已声明的事件类型
+    // 保存用户确认的选择为下次默认（如果用户点了确认）
+    if (event === 'confirm') {
+        // time 模式保存字符串
+        if (props.mode == 'time') {
+            // 构造时间字符串，按 year-month-day [hour:minute:second]
+            const pad = (n: number) => (n < 10 ? '0' + n : '' + n);
+            let timeStr = `${year.value}-${pad(month.value)}-${pad(day.value)}`;
+            if (props.params.hour)
+                timeStr +=
+                    ` ${pad(hour.value)}:${pad(minute.value)}` + (props.params.second ? `:${pad(second.value)}` : '');
+            savedDefaultTime.value = timeStr;
+        } else if (props.mode == 'region') {
+            // 保存为 label 数组，便于 later 使用 defaultRegion
+            const prov = provinces[province.value] ? provinces[province.value].label : undefined;
+            const cit =
+                citys[province.value] && citys[province.value][city.value]
+                    ? citys[province.value][city.value].label
+                    : undefined;
+            const are =
+                areas[province.value] &&
+                areas[province.value][city.value] &&
+                areas[province.value][city.value][area.value]
+                    ? areas[province.value][city.value][area.value].label
+                    : undefined;
+            const arr: any[] = [];
+            if (prov !== undefined) arr.push(prov);
+            if (cit !== undefined) arr.push(cit);
+            if (are !== undefined) arr.push(are);
+            savedDefaultRegion.value = arr;
+        } else if (props.mode == 'selector' || props.mode == 'multiSelector') {
+            savedDefaultSelector.value = valueArr.value ? valueArr.value.slice() : null;
+        }
+    }
+
     if (event && ['update:modelValue', 'confirm', 'cancel', 'columnchange'].includes(event))
         emit(event as 'update:modelValue' | 'confirm' | 'cancel' | 'columnchange', result);
     close();
@@ -618,7 +768,6 @@ onMounted(() => {
 .u-picker-header {
     width: 100%;
     height: 90rpx;
-    padding: 0 40rpx;
     @include vue-flex;
     justify-content: space-between;
     align-items: center;
@@ -665,7 +814,8 @@ onMounted(() => {
 }
 
 .u-btn-picker {
-    padding: 16rpx;
+    min-width: 150rpx;
+    padding: 20rpx 30rpx;
     box-sizing: border-box;
     text-align: center;
     text-decoration: none;

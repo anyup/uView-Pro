@@ -33,6 +33,11 @@ export const PickerProps = {
         type: Array as PropType<any[]>,
         default: () => [0]
     },
+    /** 是否保留用户上次确认的选择（true：优先使用已保存选择；false：优先使用外部传入的 defaultSelector/defaultTime/defaultRegion） */
+    preserveSelection: {
+        type: Boolean,
+        default: true
+    },
     /** 当 range 是一个 Array<Object> 时，通过 range-key 来指定 Object 中 key 的值作为选择器显示内容 */
     rangeKey: {
         type: String,
