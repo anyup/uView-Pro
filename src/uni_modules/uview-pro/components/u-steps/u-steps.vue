@@ -1,7 +1,16 @@
 <template>
     <view>
         <view class="u-steps" :class="customClass" :style="$u.toStyle(directionStyle, customStyle)">
-            <view
+            <slot>
+                <u-step
+                    :name="item.name"
+                    :desc="item.desc"
+                    :icon="item.icon"
+                    v-for="(item, index) in list"
+                    :key="index"
+                ></u-step>
+            </slot>
+            <!-- <view
                 class="u-steps__item"
                 :class="['u-steps__item--' + direction]"
                 v-for="(item, index) in list"
@@ -24,7 +33,7 @@
                 >
                     <u-line :direction="direction" length="100%" :hair-line="false" :color="unActiveColor"></u-line>
                 </view>
-            </view>
+            </view> -->
         </view>
     </view>
 </template>
@@ -43,9 +52,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, getCurrentInstance } from 'vue';
 import { StepsProps } from './types';
-import { $u } from '../..';
+import { $u, useParent } from '../..';
 
 /**
  * steps 步骤条
@@ -64,118 +73,20 @@ import { $u } from '../..';
 
 const props = defineProps(StepsProps);
 
-// 计算属性，计算当前步骤的索引值
-// 如果 current 是字符串，则转换为数字，否则直接使用数字
-const currentIndex = computed(() => (typeof props.current === 'string' ? Number(props.current) : props.current));
-
+const { children } = useParent('u-steps');
 // 计算方向样式
 const directionStyle = computed(() => ({ flexDirection: props.direction as 'row' | 'column' }));
 
-// 计算当前步骤的样式
-const numberStyle = (index: number) => ({
-    backgroundColor: currentIndex.value < index ? 'transparent' : props.activeColor,
-    borderColor: currentIndex.value < index ? props.unActiveColor : props.activeColor
-});
-
-// 计算当前步骤的样式
-const dotStyle = (index: number) => ({
-    backgroundColor: index <= currentIndex.value ? props.activeColor : props.unActiveColor
-});
-
-// 计算当前步骤的文字样式
-const textStyle = (index: number) => ({
-    color: index <= currentIndex.value ? props.activeColor : props.unActiveColor
+defineExpose({
+    props,
+    childLen: () => children.length
 });
 </script>
 
 <style lang="scss" scoped>
 @import '../../libs/css/style.components.scss';
 
-$u-steps-item-number-width: 44rpx;
-$u-steps-item-dot-width: 20rpx;
-
 .u-steps {
     @include vue-flex;
-
-    .u-steps__item {
-        flex: 1;
-        text-align: center;
-        position: relative;
-        min-width: 100rpx;
-        font-size: 26rpx;
-        color: #8799a3;
-        @include vue-flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-
-        &--row {
-            @include vue-flex;
-            flex-direction: column;
-
-            .u-steps__item__line {
-                position: absolute;
-                z-index: 0;
-                left: 75%;
-                width: 50%;
-
-                &--dot {
-                    top: calc(#{$u-steps-item-dot-width} / 2);
-                }
-
-                &--number {
-                    top: calc(#{$u-steps-item-number-width} / 2);
-                }
-            }
-        }
-
-        &--column {
-            @include vue-flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            min-height: 120rpx;
-
-            .u-steps__item__line {
-                position: absolute;
-                z-index: 0;
-                height: 50%;
-                top: 75%;
-
-                &--dot {
-                    left: calc(#{$u-steps-item-dot-width} / 2);
-                }
-
-                &--number {
-                    left: calc(#{$u-steps-item-number-width} / 2);
-                }
-            }
-        }
-
-        &__num {
-            @include vue-flex;
-            align-items: center;
-            justify-content: center;
-            width: $u-steps-item-number-width;
-            height: $u-steps-item-number-width;
-            border: 1px solid #8799a3;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        &__dot {
-            width: $u-steps-item-dot-width;
-            height: $u-steps-item-dot-width;
-            @include vue-flex;
-            border-radius: 50%;
-        }
-
-        &__text--row {
-            margin-top: 14rpx;
-        }
-
-        &__text--column {
-            margin-left: 14rpx;
-        }
-    }
 }
 </style>
