@@ -42,7 +42,7 @@ import { SwitchProps } from './types';
  * @property {Boolean} loading 是否处于加载中（默认false）
  * @property {Boolean} disabled 是否禁用（默认false）
  * @property {String|Number} size 开关尺寸，单位rpx（默认50）
- * @property {String} active-color 打开时的背景色（默认#2979ff）
+ * @property {String} active-color 打开时的背景色（默认主题色primary）
  * @property {String} inactive-color 关闭时的背景色（默认#ffffff）
  * @property {Boolean|Number|String} active-value 打开选择器时通过change事件发出的值（默认true）
  * @property {Boolean|Number|String} inactive-value 关闭选择器时通过change事件发出的值（默认false）
@@ -137,7 +137,7 @@ function onClick() {
 }
 
 .u-switch--on {
-    background-color: #1989fa;
+    background-color: $u-type-primary;
 }
 
 .u-switch--on .u-switch__node {

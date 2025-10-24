@@ -95,7 +95,7 @@ import { $u } from '../..';
  * @property {Boolean} v-model 布尔值变量，用于控制选择器的弹出与收起
  * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配(默认false)
  * @property {String} cancel-color 取消按钮的颜色（默认#606266）
- * @property {String} confirm-color 确认按钮的颜色(默认#2979ff)
+ * @property {String} confirm-color 确认按钮的颜色(默认主题色primary)
  * @property {String} confirm-text 确认按钮的文字
  * @property {String} cancel-text 取消按钮的文字
  * @property {String} default-value 提供的默认选中的下标，见官网说明

@@ -27,7 +27,7 @@ import { RadioGroupProps } from './types';
  * @tutorial https://uviewpro.cn/zh/components/radio.html
  * @property {Boolean} disabled 是否禁用所有radio（默认false）
  * @property {String|Number} size 组件整体的大小，单位rpx（默认40）
- * @property {String} active-color 选中时的颜色，应用到所有子Radio组件（默认#2979ff）
+ * @property {String} active-color 选中时的颜色，应用到所有子Radio组件（默认主题色primary）
  * @property {String|Number} icon-size 图标大小，单位rpx（默认20）
  * @property {String} shape 外观形状，shape-方形，circle-圆形(默认circle)
  * @property {Boolean} label-disabled 是否禁止点击文本操作checkbox(默认false)

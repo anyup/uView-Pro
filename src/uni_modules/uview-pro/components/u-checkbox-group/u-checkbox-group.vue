@@ -34,7 +34,7 @@ import { CheckboxGroupProps } from './types';
  * @property {String} width 宽度，需带单位
  * @property {String} shape 外观形状，shape-方形，circle-圆形(默认circle)
  * @property {Boolean} wrap 是否每个checkbox都换行（默认false）
- * @property {String} active-color 选中时的颜色，应用到所有子Checkbox组件（默认#2979ff）
+ * @property {String} active-color 选中时的颜色，应用到所有子Checkbox组件（默认主题色primary）
  * @event {Function} change 任一个checkbox状态发生变化时触发，回调为一个对象
  * @example <u-checkbox-group></u-checkbox-group>
  */

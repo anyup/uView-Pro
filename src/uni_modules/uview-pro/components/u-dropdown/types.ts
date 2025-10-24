@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
+import { $u } from '../../';
 
 /**
  * u-dropdown 下拉菜单 Props
@@ -8,9 +9,9 @@ import { baseProps } from '../common/props';
 export const DropdownProps = {
     ...baseProps,
     /** 菜单标题和选项的激活态颜色 */
-    activeColor: { type: String, default: '#2979ff' },
+    activeColor: { type: String, default: $u.color.primary },
     /** 菜单标题和选项的未激活态颜色 */
-    inactiveColor: { type: String, default: '#606266' },
+    inactiveColor: { type: String, default: $u.color.contentColor },
     /** 点击遮罩是否关闭菜单 */
     closeOnClickMask: { type: Boolean, default: true },
     /** 点击当前激活项标题是否关闭菜单 */

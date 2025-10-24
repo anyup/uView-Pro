@@ -250,8 +250,8 @@ function setRadioCheckedStatus() {
 
         &--checked {
             color: #fff;
-            background-color: #2979ff;
-            border-color: #2979ff;
+            background-color: $u-type-primary;
+            border-color: $u-type-primary;
         }
 
         &--disabled {

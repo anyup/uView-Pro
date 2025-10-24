@@ -1,6 +1,7 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { Shape } from '../../types/global';
 import { baseProps } from '../common/props';
+import { $u } from '../../';
 
 /**
  * checkbox-group 复选框组类型定义
@@ -20,7 +21,7 @@ export const CheckboxGroupProps = {
     /** 形状，square为方形，circle为原型 */
     shape: { type: String as PropType<Shape>, default: 'square' },
     /** 选中状态下的颜色 */
-    activeColor: { type: String, default: '#2979ff' },
+    activeColor: { type: String, default: $u.color.primary },
     /** 组件的整体大小 */
     size: { type: [String, Number], default: 34 },
     /** 每个checkbox占u-checkbox-group的宽度 */

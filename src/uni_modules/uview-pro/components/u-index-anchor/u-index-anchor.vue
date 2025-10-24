@@ -114,7 +114,7 @@ defineExpose({
 .u-index-anchor--active {
     right: 0;
     left: 0;
-    color: #2979ff;
+    color: $u-type-primary;
     background-color: #fff;
 }
 </style>

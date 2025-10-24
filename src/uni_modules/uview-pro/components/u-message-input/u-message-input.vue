@@ -99,7 +99,7 @@ import { MessageInputProps } from './types';
  * @property {Boolean} focus 是否自动获取焦点（默认false）
  * @property {Boolean} bold 字体和输入横线是否加粗（默认true）
  * @property {String|Number} font-size 字体大小，单位rpx（默认60）
- * @property {String} active-color 当前激活输入框的样式（默认#2979ff）
+ * @property {String} active-color 当前激活输入框的样式（默认主题色primary）
  * @property {String} inactive-color 非激活输入框的样式，文字颜色同此值（默认#606266）
  * @property {String|Number} width 输入框宽度，单位rpx，高等于宽（默认80）
  * @property {Boolean} disabled-keyboard 禁止点击输入框唤起系统键盘（默认false）

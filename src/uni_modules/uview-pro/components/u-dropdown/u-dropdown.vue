@@ -83,7 +83,7 @@ import { DropdownProps } from './types';
  * dropdown 下拉菜单
  * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景
  * @tutorial https://uviewpro.cn/zh/components/dropdown.html
- * @property {String} active-color 标题和选项卡选中的颜色（默认#2979ff）
+ * @property {String} active-color 标题和选项卡选中的颜色（默认主题色primary）
  * @property {String} inactive-color 标题和选项卡未选中的颜色（默认#606266）
  * @property {Boolean} close-on-click-mask 点击遮罩是否关闭菜单（默认true）
  * @property {Boolean} close-on-click-self 点击当前激活项标题是否关闭菜单（默认true）

@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { $u } from '../../';
 
 /**
  * u-modal 组件 props 类型定义
@@ -58,12 +59,12 @@ export const ModalProps = {
     /** 确认按钮颜色 */
     confirmColor: {
         type: String,
-        default: '#2979ff'
+        default: $u.color.primary
     },
     /** 取消文字颜色 */
     cancelColor: {
         type: String,
-        default: '#606266'
+        default: $u.color.contentColor
     },
     /** 圆角值 */
     borderRadius: {

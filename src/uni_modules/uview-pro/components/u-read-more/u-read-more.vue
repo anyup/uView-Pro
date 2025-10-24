@@ -66,7 +66,7 @@ import { ReadMoreProps } from './types';
  * @property {String|Number} fontSize 提示文字的大小，单位rpx（默认28）
  * @property {String} textIndent 段落首行缩进的字符个数（默认2em）
  * @property {String} openText 展开时的提示文字（默认“收起”）
- * @property {String} color 提示文字的颜色（默认#2979ff）
+ * @property {String} color 提示文字的颜色（默认主题色primary）
  * @property {Object} shadowStyle 是否显示阴影，样式对象
  * @property {String|Number} index open和close事件时，将此参数返回在回调参数中
  * @event open 展开时触发
