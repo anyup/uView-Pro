@@ -95,7 +95,7 @@ const stickyOffsetTop = ref(0);
 // 弹出toast的z-index值
 const alertZIndex = computed(() => $u.zIndex.toast).value;
 // indexList 响应式
-const indexList = computed(() => props.indexList ?? getIndexList()).value;
+const indexList = computed(() => props?.indexList ?? getIndexList());
 const zIndex = computed(() => props.zIndex).value;
 const activeColor = computed(() => props.activeColor).value;
 
@@ -278,7 +278,7 @@ function scrollToAnchor(index: number) {
         return;
     }
     scrollToAnchorIndex.value = index;
-    const anchor = children.find(item => item.getExposed().props.index === indexList[index]);
+    const anchor = children.find(item => item.getExposed().props.index === indexList.value[index]);
     if (anchor) {
         emit('select', anchor.getExposed().props.index);
         uni.pageScrollTo({
