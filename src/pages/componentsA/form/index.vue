@@ -25,6 +25,9 @@
             <u-form-item :label-position="labelPosition" label="简介" prop="intro">
                 <u-input type="textarea" :border="border" placeholder="请填写简介" v-model="model.intro" />
             </u-form-item>
+            <u-form-item :label-position="labelPosition" label="特长" prop="strong">
+                <u-textarea :border="border" v-model="model.strong" placeholder="请输入特长" count></u-textarea>
+            </u-form-item>
             <u-form-item :label-position="labelPosition" label="密码" prop="password">
                 <u-input
                     :password-icon="true"
@@ -156,6 +159,7 @@ interface Model {
     sex: string;
     likeFruit: string;
     intro: string;
+    strong: string;
     payType: string;
     agreement: boolean;
     region: string;
@@ -174,6 +178,7 @@ const model = reactive<Model>({
     sex: '',
     likeFruit: '',
     intro: '',
+    strong: '',
     payType: '',
     agreement: false,
     region: '',
@@ -245,18 +250,37 @@ const rules: FormRules = {
     intro: [
         {
             required: true,
-            message: '请填写简介'
+            message: '请填写简介',
+            trigger: ['change', 'blur']
         },
         {
             min: 5,
             message: '简介不能少于5个字',
-            trigger: 'change'
+            trigger: ['change', 'blur']
         },
         // 正则校验示例，此处用正则校验是否中文，此处仅为示例，因为uView有this.$u.test.chinese可以判断是否中文
         {
             pattern: /^[\u4e00-\u9fa5]+$/gi,
             message: '简介只能为中文',
-            trigger: 'change'
+            trigger: ['change', 'blur']
+        }
+    ],
+    strong: [
+        {
+            required: true,
+            message: '请填写特长',
+            trigger: ['change', 'blur']
+        },
+        {
+            min: 5,
+            message: '特长不能少于5个字',
+            trigger: ['change', 'blur']
+        },
+        // 正则校验示例，此处用正则校验是否中文，此处仅为示例，因为uView有this.$u.test.chinese可以判断是否中文
+        {
+            pattern: /^[\u4e00-\u9fa5]+$/gi,
+            message: '特长只能为中文',
+            trigger: ['change', 'blur']
         }
     ],
     likeFruit: [

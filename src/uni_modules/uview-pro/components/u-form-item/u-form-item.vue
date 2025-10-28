@@ -355,7 +355,7 @@ defineExpose({
     font-size: 28rpx;
     color: $u-main-color;
     box-sizing: border-box;
-    line-height: $u-form-item-height;
+    // line-height: $u-form-item-height;
     flex-direction: column;
 
     &__border-bottom--error:after {
