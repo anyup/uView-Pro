@@ -39,6 +39,11 @@ export const InputProps = {
         type: [Number, String] as PropType<number | string>,
         default: 140
     },
+    // 是否显示统计字数，仅textarea有效
+    count: {
+        type: Boolean,
+        default: false
+    },
     /** placeholder的样式，字符串形式，如"color: red;"(默认 "color: #c0c4cc;") */
     placeholderStyle: {
         type: String,

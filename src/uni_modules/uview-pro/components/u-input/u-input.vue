@@ -9,7 +9,7 @@
             customClass
         ]"
         :style="{
-            padding: `0 ${border ? 20 : 0}rpx`,
+            padding: type === 'textarea' ? (border ? '20rpx' : '0') : `0 ${border ? 20 : 0}rpx`,
             borderColor: borderColor,
             textAlign: inputAlign
         }"
@@ -88,6 +88,15 @@
                 <u-icon name="arrow-down-fill" size="26" color="#c0c4cc"></u-icon>
             </view>
         </view>
+        <text
+            class="u-input__count"
+            :style="{
+                'background-color': props.disabled ? 'transparent' : '#fff'
+            }"
+            v-if="props.type === 'textarea' && props.count"
+        >
+            {{ String(defaultValue).length }}/{{ props.maxlength }}
+        </text>
     </view>
 </template>
 
@@ -167,10 +176,10 @@ function handleInput(event: any) {
     let value = event.detail.value;
     // 判断是否去除空格
     if (props.trim) value = $u.trim(value);
-    emit('update:modelValue', value);
-    emit('input', value);
     // 当前model 赋值
     defaultValue.value = value;
+    emit('update:modelValue', value);
+    emit('input', value);
     // 过一个生命周期再发送事件给u-form-item，否则this.$emit('update:modelValue')更新了父组件的值，但是微信小程序上
     // 尚未更新到u-form-item，导致获取的值为空，从而校验混论
     // 这里不能延时时间太短，或者使用this.$nextTick，否则在头条上，会造成混乱
@@ -192,12 +201,12 @@ function handleInput(event: any) {
 function handleBlur(event: any) {
     // 最开始使用的是监听图标@touchstart事件，自从hx2.8.4后，此方法在微信小程序出错
     // 这里改为监听点击事件，手点击清除图标时，同时也发生了@blur事件，导致图标消失而无法点击，这里做一个延时
-    let value = event.detail.value;
     setTimeout(() => {
         focused.value = false;
     }, 100);
-    emit('blur', value);
     setTimeout(() => {
+        let value = String(defaultValue.value);
+        emit('blur', value);
         // 头条小程序由于自身bug，导致中文下，每按下一个键(尚未完成输入)，都会触发一次@input，导致错误，这里进行判断处理
         // #ifdef MP-TOUTIAO
         if ($u.trim(value) == lastValue.value) return;
@@ -226,7 +235,7 @@ function onClear(event: any) {
     } catch (e) {
         console.log(e);
     }
-    emit('update:modelValue', '');
+    handleInput({ detail: { value: '' } });
 }
 
 function inputClick() {
@@ -257,13 +266,24 @@ defineExpose({
         width: auto;
         font-size: 28rpx;
         color: $u-main-color;
-        padding: 10rpx 0;
+        // padding: 10rpx 0;
         line-height: normal;
         flex: 1;
     }
 
+    &__count {
+        position: absolute;
+        right: 1px;
+        bottom: 0;
+        font-size: 12px;
+        color: $u-tips-color;
+        background-color: #ffffff;
+        padding: 1px 4px;
+        border-radius: 10px;
+        line-height: 16px;
+    }
+
     &--border {
-        border-radius: 6rpx;
         border-radius: 4px;
         border: 1px solid $u-form-item-border-color;
     }
