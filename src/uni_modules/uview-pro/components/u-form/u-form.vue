@@ -19,7 +19,7 @@ export default {
 
 <script setup lang="ts">
 import { FormProps } from './types';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { $u, useParent } from '../..';
 
 /**
@@ -121,7 +121,7 @@ defineExpose({
     fields,
     rules,
     props,
-    model: props.model
+    model: computed(() => props.model)
 });
 </script>
 
