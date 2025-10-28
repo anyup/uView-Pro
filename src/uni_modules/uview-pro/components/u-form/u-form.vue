@@ -41,6 +41,11 @@ const props = defineProps(FormProps);
 
 useParent('u-form');
 
+interface ErrorItem {
+    prop: string;
+    message: string;
+}
+
 // 存储当前form下的所有u-form-item的实例
 const fields = ref<any[]>([]);
 
@@ -69,15 +74,15 @@ function resetFields() {
  * @param callback 校验回调
  * @returns Promise<boolean>
  */
-function validate(callback?: (valid: boolean) => void): Promise<boolean> {
+function validate(callback?: (valid: boolean, errorArr: ErrorItem[]) => void): Promise<boolean> {
     return new Promise(resolve => {
         // 对所有的u-form-item进行校验
         let valid = true; // 默认通过
         let count = 0; // 用于标记是否检查完毕
-        let errorArr: any[] = []; // 存放错误信息
+        let errorArr: ErrorItem[] = []; // 存放错误信息
         if (fields.value.length === 0) {
             resolve(true);
-            if (typeof callback === 'function') callback(true);
+            if (typeof callback === 'function') callback(true, []);
             return;
         }
         // 调用每一个u-form-item实例的validation的校验方法
@@ -87,7 +92,7 @@ function validate(callback?: (valid: boolean) => void): Promise<boolean> {
                 field.validation('', (error: any) => {
                     if (error) {
                         valid = false;
-                        errorArr.push(error);
+                        errorArr.push({ prop: field.prop, message: error });
                     }
                     // 当历遍了所有的u-form-item时，调用promise的then方法
                     if (++count === fields.value.length) {
@@ -96,12 +101,12 @@ function validate(callback?: (valid: boolean) => void): Promise<boolean> {
                         if (
                             props.errorType.indexOf('none') === -1 &&
                             props.errorType.indexOf('toast') >= 0 &&
-                            errorArr.length
+                            errorArr.length > 0
                         ) {
-                            $u.toast(errorArr[0]);
+                            errorArr[0].message && $u.toast(errorArr[0].message);
                         }
                         // 调用回调方法
-                        if (typeof callback === 'function') callback(valid);
+                        if (typeof callback === 'function') callback(valid, errorArr);
                     }
                 });
         });

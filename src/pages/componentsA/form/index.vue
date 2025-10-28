@@ -416,13 +416,13 @@ const borderCurrent = computed(() => (border.value ? 0 : 1));
 
 // 提交表单
 function handleSubmit() {
-    uFormRef.value?.validate((valid: boolean) => {
+    uFormRef.value?.validate((valid: boolean, errors: any[]) => {
         if (valid) {
             if (!model.agreement) return $u.toast('请勾选协议');
-            console.log('验证通过');
+            console.log('验证通过', errors);
         } else {
-            console.log(model);
-            console.log('验证失败');
+            console.log('表单信息', model);
+            console.log('验证失败', errors);
         }
     });
 }
