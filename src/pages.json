@@ -483,6 +483,12 @@
                         "navigationBarTitleText": "input-输入框"
                     }
                 },
+                {
+                    "path": "textarea/index",
+                    "style": {
+                        "navigationBarTitleText": "textarea-输入框"
+                    }
+                },
                 // backTop-返回顶部
                 {
                     "path": "backTop/index",

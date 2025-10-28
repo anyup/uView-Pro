@@ -94,6 +94,7 @@ declare module 'vue' {
         uRootPortal: (typeof import('../components/u-root-portal/u-root-portal.vue'))['default'];
         uStatusBar: (typeof import('../components/u-status-bar/u-status-bar.vue'))['default'];
         uSafeBottom: (typeof import('../components/u-safe-bottom/u-safe-bottom.vue'))['default'];
+        uTextarea: (typeof import('../components/u-textarea/u-textarea.vue'))['default'];
     }
 }
 

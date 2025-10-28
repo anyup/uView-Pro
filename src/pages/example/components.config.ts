@@ -78,6 +78,12 @@ export default [
                 title_en: 'Input'
             },
             {
+                path: '/pages/componentsA/textarea/index',
+                icon: 'textarea',
+                title: 'Textarea 输入框',
+                title_en: 'Textarea'
+            },
+            {
                 path: '/pages/componentsA/calendar/index',
                 icon: 'calendar',
                 title: 'Calendar 日历',
