@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.7] - 2025-10-28
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-index-list:** 修复 u-index-list 组件中 indexList 的响应式，确保数据正确对应，滚动到正确的锚点 ([536479b](https://github.com/anyup/uView-Pro/commit/536479b0c444f50892c789191265b373297ec0b5))
+- **u-form:** 优化 u-form-item 组件样式，修复微信小程序光标样式偏移问题 ([7e6694b](https://github.com/anyup/uView-Pro/commit/7e6694b5db11f654b081d10bb83d53c99437c730))
+- **u-form:** 优化 model 属性的响应式更新，修复 model 对象整体替换导致的表单校验失效问题 ([bc49b5b](https://github.com/anyup/uView-Pro/commit/bc49b5b2fa6f51c803d64252184f5eba93a0d3c1))
+- **u-form:** 修复 u-form 的重置表单方法 resetFields 失效问题 ([a31f800](https://github.com/anyup/uView-Pro/commit/a31f800e206fa9671bdd0d6a46ca7a4afba6aefd))
+- **u-checkbox:** 修复 u-checkbox 单独使用报错的问题 ([dad2832](https://github.com/anyup/uView-Pro/commit/dad2832a2e7219b0454ec97970c9cb8f4fac0625))
+
+### ✨ Features | 新功能
+
+- **u-textarea:** 新增 u-textarea 组件及演示示例，增强 textarea 功能，分离 u-input 的 textarea 模式 ([efbb75e](https://github.com/anyup/uView-Pro/commit/efbb75e21a044a664267930396ce496fd64d33fe))
+- **u-input:** 增强 u-input 的 textarea 字数统计功能 ([5e14354](https://github.com/anyup/uView-Pro/commit/5e14354a2e34768650cd2417f81b14cdbbced132))
+- **u-form:** 增强表单校验功能，发射校验错误，便于自定义提示 ([a553b53](https://github.com/anyup/uView-Pro/commit/a553b53581cc470938030c0f1f8d5f7671d8c25a))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **form:** 优化表单组件的提示文本 ([04b5fc7](https://github.com/anyup/uView-Pro/commit/04b5fc7a071835425786958c5f6de04e233c151c))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.3.6] - 2025-10-24
 
 ### ✨ Features | 新功能
