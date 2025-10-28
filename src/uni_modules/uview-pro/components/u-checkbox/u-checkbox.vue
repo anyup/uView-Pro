@@ -180,7 +180,7 @@ function setValue() {
         emitEvent();
         emit('update:modelValue', false);
     } else {
-        if (!parentExposed.value?.validateSelection()) {
+        if (parentExposed?.value?.validateSelection && !parentExposed?.value?.validateSelection()) {
             return;
         }
         emitEvent();
