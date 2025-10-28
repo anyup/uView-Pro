@@ -269,7 +269,7 @@ function getFilteredRule(triggerType = '') {
  */
 function validation(trigger: string, callback: (msg: string) => void = () => {}) {
     // 检验之前，先获取需要校验的值
-    fieldValue.value = parentExposed?.value?.model?.[props.prop];
+    fieldValue.value = parentExposed?.value?.model?.value[props.prop];
     // blur和change是否有当前方式的校验规则
     let rules = getFilteredRule(trigger);
     // 判断是否有验证规则，如果没有规则，也调用回调方法，否则父组件u-form会因为
@@ -295,11 +295,14 @@ function validation(trigger: string, callback: (msg: string) => void = () => {})
  * 清空当前的u-form-item
  */
 function resetField() {
-    if (parentExposed?.value?.model && props.prop) {
-        parentExposed.value.model[props.prop] = initialValue.value;
+    if (parentExposed?.value?.model?.value && props.prop) {
+        parentExposed.value.model.value[props.prop] = initialValue.value;
     }
     // 设置为`success`状态，只是为了清空错误标记
-    validateState.value = 'success';
+    // 延时50毫秒，如果立即清空状态，则无法清空错误标记
+    setTimeout(() => {
+        validateState.value = 'success';
+    }, 50);
 }
 
 // 组件挂载时注册到父表单
@@ -322,7 +325,7 @@ onMounted(() => {
                     });
                 errorType.value = parentExposed?.value?.errorType || errorType.value;
                 // 设置初始值
-                fieldValue.value = parentExposed?.value?.model?.[props.prop];
+                fieldValue.value = parentExposed?.value?.model?.value[props.prop];
                 // 设置初始值
                 initialValue.value = fieldValue.value;
             }

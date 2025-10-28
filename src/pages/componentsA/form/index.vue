@@ -116,7 +116,9 @@
             <u-checkbox v-model="check" @change="checkboxChange"></u-checkbox>
             <view class="agreement-text"> 勾选代表同意uView的版权协议 </view>
         </view>
-        <u-button @click="submit">提交</u-button>
+        <u-button type="primary" @click="handleSubmit" :throttle-time="0">提交</u-button>
+        <u-gap></u-gap>
+        <u-button @click="handleReset" :throttle-time="0">重置</u-button>
         <u-action-sheet :list="actionSheetList" v-model="actionSheetShow" @click="actionSheetCallback"></u-action-sheet>
         <u-select mode="single-column" :list="selectList" v-model="selectShow" @confirm="selectConfirm"></u-select>
         <u-picker
@@ -413,7 +415,7 @@ const uCodeRef = ref();
 const borderCurrent = computed(() => (border.value ? 0 : 1));
 
 // 提交表单
-function submit() {
+function handleSubmit() {
     uFormRef.value?.validate((valid: boolean) => {
         if (valid) {
             if (!model.agreement) return $u.toast('请勾选协议');
@@ -423,6 +425,12 @@ function submit() {
             console.log('验证失败');
         }
     });
+}
+
+// 重置表单
+function handleReset() {
+    uFormRef.value?.resetFields();
+    check.value = false;
 }
 // 点击actionSheet回调
 function actionSheetCallback(index: number) {
