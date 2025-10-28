@@ -23,7 +23,7 @@
                 ></u-input>
             </u-form-item>
             <u-form-item :label-position="labelPosition" label="简介" prop="intro">
-                <u-input type="textarea" :border="border" placeholder="请填写简介" v-model="model.intro" />
+                <u-input type="textarea" :border="border" placeholder="请输入简介" v-model="model.intro" />
             </u-form-item>
             <u-form-item :label-position="labelPosition" label="特长" prop="strong">
                 <u-textarea :border="border" v-model="model.strong" placeholder="请输入特长" count></u-textarea>
@@ -252,7 +252,7 @@ const rules: FormRules = {
     intro: [
         {
             required: true,
-            message: '请填写简介',
+            message: '请输入简介',
             trigger: ['change', 'blur']
         },
         {
@@ -270,7 +270,7 @@ const rules: FormRules = {
     strong: [
         {
             required: true,
-            message: '请填写特长',
+            message: '请输入特长',
             trigger: ['change', 'blur']
         },
         {
