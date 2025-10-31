@@ -47,14 +47,18 @@ const props = defineProps(FabProps);
 const emit = defineEmits(['trigger']);
 
 const sysInfo = $u.sys();
-const effectiveWindowHeight = ref(0);
+const effectiveWindowHeight = ref(sysInfo.windowHeight);
+
+// #ifdef H5
+effectiveWindowHeight.value = sysInfo.windowTop + sysInfo.windowHeight;
+// #endif
 
 const position = reactive({
     top: 0,
     left: 0
 });
 
-const dragging = ref(false);
+const dragging = ref(true);
 
 const fabStyle = computed(() => {
     return {
@@ -64,12 +68,17 @@ const fabStyle = computed(() => {
     };
 });
 
+const btnInfo = ref({
+    width: 56,
+    height: 56
+});
+
+initPosition();
+
 const start = reactive({
     x: 0,
     y: 0
 });
-
-const btnInfo = ref();
 
 function handleTouchstart(e: TouchEvent) {
     if (props.disabled || !props.draggable) return;
@@ -88,7 +97,7 @@ const expansion = ref(false);
 const direction = ref(props.direction);
 
 watch(
-    () => [props.direction, props.gap],
+    () => props.direction,
     () => {
         if (expansion.value) direction.value = calcDirection();
     }
@@ -178,20 +187,10 @@ function calcDirection() {
     return dir;
 }
 
-function initFab() {
+function initPosition() {
     position.top = effectiveWindowHeight.value - btnInfo.value.height - props.gap;
     position.left = sysInfo.windowWidth - btnInfo.value.width - props.gap;
-
-    minLeft.value = props.gap;
-    minTop.value = props.gap + sysInfo.windowTop;
-    maxLeft.value = position.left;
-    maxTop.value = position.top;
 }
-
-watch(
-    () => props.gap,
-    () => initFab()
-);
 
 const instance = getCurrentInstance();
 
@@ -199,11 +198,12 @@ onMounted(async () => {
     btnInfo.value = await $u.getRect('#trigger', instance);
     actions.value = await $u.getRect('#actions', instance);
 
-    effectiveWindowHeight.value = sysInfo.windowHeight;
-    // #ifdef H5
-    effectiveWindowHeight.value = sysInfo.windowTop + sysInfo.windowHeight;
-    // #endif
-    initFab();
+    initPosition();
+
+    minLeft.value = props.gap;
+    minTop.value = props.gap + sysInfo.windowTop;
+    maxLeft.value = position.left;
+    maxTop.value = position.top;
 });
 </script>
 

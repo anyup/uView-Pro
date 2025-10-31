@@ -1,6 +1,5 @@
-import { baseProps } from '@/uni_modules/uview-pro/components/common/props.ts';
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
+import type { ThemeType } from '../../types/global';
 
 /**
  * fab 悬浮按钮类型定义

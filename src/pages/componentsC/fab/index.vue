@@ -1,19 +1,5 @@
 <template>
     <view class="u-demo">
-        <u-fab
-            :type="type"
-            :disabled="disabled"
-            :draggable="draggable"
-            :direction="direction"
-            :gap="gap"
-            v-if="trigger"
-        >
-            <template #trigger>
-                <u-button type="primary" @click="btnClick">触发器</u-button>
-            </template>
-        </u-fab>
-        <u-fab :type="type" :disabled="disabled" :draggable="draggable" :direction="direction" :gap="gap" v-else>
-        </u-fab>
         <view class="u-config-wrap">
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
             <view class="u-config-item">
@@ -32,8 +18,12 @@
                 <u-subsection current="1" :list="['是', '否']" @change="draggableChange"></u-subsection>
             </view>
             <view class="u-config-item">
+                <view class="u-item-title">存在子项</view>
+                <u-switch v-model="child"></u-switch>
+            </view>
+            <view class="u-config-item">
                 <view class="u-item-title">弹出方向</view>
-                <u-subsection current="2" :list="['上', '下', '左', '右']" @change="directionChange"></u-subsection>
+                <u-subsection current="0" :list="['上', '下', '左', '右']" @change="directionChange"></u-subsection>
             </view>
             <view class="u-config-item">
                 <view class="u-item-title">间距</view>
@@ -44,19 +34,56 @@
                 <u-switch v-model="trigger"></u-switch>
             </view>
         </view>
+        <u-fab
+            :type="type"
+            :disabled="disabled"
+            :draggable="draggable"
+            :direction="direction"
+            :gap="gap"
+            v-if="trigger"
+        >
+            <template #trigger>
+                <u-button type="primary" @click="btnClick">触发器</u-button>
+            </template>
+        </u-fab>
+        <template v-else>
+            <u-fab
+                v-if="child"
+                :type="type"
+                :disabled="disabled"
+                :draggable="draggable"
+                :direction="direction"
+                :gap="gap"
+            >
+                <u-button style="margin: 16rpx">收藏</u-button>
+                <u-button style="margin: 16rpx">点赞</u-button>
+                <u-button style="margin: 16rpx">投币</u-button>
+            </u-fab>
+            <u-fab
+                v-else
+                :type="type"
+                :disabled="disabled"
+                :draggable="draggable"
+                @trigger="btnClick"
+                :direction="direction"
+                :gap="gap"
+            ></u-fab>
+        </template>
     </view>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
 
 // 主题选择
-const type = ref<'primary' | 'info' | 'error' | 'warning' | 'success'>('primary');
+const type = ref<ThemeType>('primary');
 const disabled = ref(false);
 const draggable = ref(false);
-const direction = ref('left');
+const direction = ref('top');
 const gap = ref(16);
 const trigger = ref(false);
+const child = ref(true);
 
 // 主题选择切换
 function typeChange(e: number) {
