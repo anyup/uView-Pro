@@ -216,6 +216,13 @@
                     "style": {
                         "navigationBarTitleText": "text-文本"
                     }
+                },
+                // fab悬浮按钮
+                {
+                    "path": "fab/index",
+                    "style": {
+                        "navigationBarTitleText": "fab-悬浮按钮"
+                    }
                 }
             ]
         },

@@ -57,6 +57,12 @@ export default [
                 icon: 'text',
                 title: 'Text 文本',
                 title_en: 'Text'
+            },
+            {
+                path: '/pages/componentsC/fab/index',
+                icon: 'fab',
+                title: 'Fab 悬浮按钮',
+                title_en: 'Fab'
             }
         ]
     },
