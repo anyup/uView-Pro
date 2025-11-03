@@ -14,6 +14,29 @@
         "
     >
         <!-- 支付宝小程序不支持canvas-id属性，必须用id属性 -->
+        <!-- #ifdef MP-WEIXIN || MP-TOUTIAO -->
+        <canvas
+            class="u-canvas-bg"
+            type="2d"
+            :canvas-id="elBgId"
+            :id="elBgId"
+            :style="{
+                width: widthPx + 'px',
+                height: widthPx + 'px'
+            }"
+        ></canvas>
+        <canvas
+            class="u-canvas"
+            type="2d"
+            :canvas-id="elId"
+            :id="elId"
+            :style="{
+                width: widthPx + 'px',
+                height: widthPx + 'px'
+            }"
+        ></canvas>
+        <!-- #endif -->
+        <!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
         <canvas
             class="u-canvas-bg"
             :canvas-id="elBgId"
@@ -32,6 +55,7 @@
                 height: widthPx + 'px'
             }"
         ></canvas>
+        <!-- #endif -->
         <slot></slot>
     </view>
 </template>
@@ -50,9 +74,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
+import { ref, computed, watch, onMounted, getCurrentInstance, onBeforeMount } from 'vue';
 import { $u } from '../..';
 import { CircleProgressProps } from './types';
+// #ifdef MP-WEIXIN || MP-TOUTIAO
+import { canvas2d } from '../../libs/util/canvas-2d';
+// #endif
 
 /**
  * circleProgress 环形进度条
@@ -72,11 +99,16 @@ const props = defineProps(CircleProgressProps);
 
 let elBgId = $u.guid(); // 非微信端的时候，需用动态的id，否则一个页面多个圆形进度条组件数据会混乱
 let elId = $u.guid();
-// #ifdef MP-WEIXIN
-elBgId = 'uCircleProgressBgId'; // 微信小程序中不能使用$u.guid()形式动态生成id值，否则会报错
-elId = 'uCircleProgressElId';
+// #ifdef MP-WEIXIN || MP-TOUTIAO
+// elBgId = 'uCircleProgressBgId'; // 微信小程序中不能使用$u.guid()形式动态生成id值，否则会报错
+// elId = 'uCircleProgressElId';
 // #endif
 const instance = getCurrentInstance();
+
+const pixelRatio = ref<number>(1); // 像素比
+
+// 存储 MP-WEIXIN 下通过 selectorQuery 获取到的 canvas node，方便在绘制前清空
+const canvasNodeMap = new Map<string, any>();
 
 const widthPx = computed(() =>
     typeof uni !== 'undefined' && uni.upx2px ? uni.upx2px(Number(props.width)) : Number(props.width)
@@ -97,6 +129,10 @@ const circleColor = computed(() => {
         return $u.color[props.type as keyof typeof $u.color] as string;
     }
     return props.activeColor;
+});
+
+onBeforeMount(() => {
+    pixelRatio.value = uni.getSystemInfoSync().pixelRatio;
 });
 
 // 监听percent变化，动态绘制进度
@@ -127,10 +163,54 @@ onMounted(() => {
 });
 
 /**
+ * 获取canvas上下文
+ */
+function getContext(canvasId) {
+    return new Promise<UniApp.CanvasContext>(resolve => {
+        let ctx = null;
+        // #ifndef MP-WEIXIN || MP-TOUTIAO
+        ctx = uni.createCanvasContext(canvasId, instance);
+        resolve(ctx);
+        // #endif
+        // #ifdef MP-WEIXIN || MP-TOUTIAO
+        uni.createSelectorQuery()
+            .in(instance?.proxy)
+            .select(`#${canvasId}`)
+            .node(res => {
+                if (res && res.node) {
+                    const canvas = res.node;
+                    ctx = canvas2d(canvas.getContext('2d') as CanvasRenderingContext2D);
+                    canvas.width = widthPx.value * pixelRatio.value;
+                    canvas.height = widthPx.value * pixelRatio.value;
+                    ctx.scale(pixelRatio.value, pixelRatio.value);
+                    // 存储 canvas node，后续绘制时用于清空画布
+                    canvasNodeMap.set(canvasId, canvas);
+                    resolve(ctx);
+                }
+            })
+            .exec();
+        // #endif
+    });
+}
+
+/**
  * 绘制底部灰色圆环
  */
-function drawProgressBg() {
-    const ctx = uni.createCanvasContext(elBgId, instance);
+async function drawProgressBg() {
+    const ctx = await getContext(elBgId);
+    // #ifdef MP-WEIXIN || MP-TOUTIAO
+    // 清空背景画布（如果可用）以确保绘制一致性
+    try {
+        if (typeof ctx.clearRect === 'function') {
+            const node = canvasNodeMap.get(elBgId);
+            const w = node ? node.width : widthPx.value * pixelRatio.value;
+            const h = node ? node.height : widthPx.value * pixelRatio.value;
+            ctx.clearRect(0, 0, w, h);
+        }
+    } catch (e) {
+        // ignore
+    }
+    // #endif
     ctx.setLineWidth(borderWidthPx.value); // 设置圆环宽度
     ctx.setStrokeStyle(props.inactiveColor); // 线条颜色
     ctx.beginPath(); // 开始描绘路径
@@ -144,13 +224,26 @@ function drawProgressBg() {
  * 绘制进度圆环
  * @param progress 当前进度
  */
-function drawCircleByProgress(progress: number) {
+async function drawCircleByProgress(progress: number) {
     // 第一次操作进度环时将上下文保存到了this.data中，直接使用即可
     let ctx = progressContext.value;
     if (!ctx) {
-        ctx = uni.createCanvasContext(elId, instance);
+        ctx = await getContext(elId);
         progressContext.value = ctx;
     }
+    // #ifdef MP-WEIXIN || MP-TOUTIAO
+    // 清空进度画布，避免旧的更大进度残留，导致无法降低的视觉错误
+    try {
+        if (typeof ctx.clearRect === 'function') {
+            const node = canvasNodeMap.get(elId);
+            const w = node ? node.width : widthPx.value * pixelRatio.value;
+            const h = node ? node.height : widthPx.value * pixelRatio.value;
+            ctx.clearRect(0, 0, w, h);
+        }
+    } catch (e) {
+        // ignore
+    }
+    // #endif
     // 表示进度的两端为圆形
     ctx.setLineCap('round');
     // 设置线条的宽度和颜色
