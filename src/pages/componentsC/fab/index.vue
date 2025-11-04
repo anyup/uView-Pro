@@ -113,7 +113,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import type { FabPosition, ThemeType } from '@/uni_modules/uview-pro/types/global';
+import type { FabDirection, FabPosition, ThemeType } from '@/uni_modules/uview-pro/types/global';
 import { $u } from '@/uni_modules/uview-pro';
 
 const uFabRef = ref<any>(null);
@@ -121,7 +121,7 @@ const uFabRef = ref<any>(null);
 const type = ref<ThemeType>('primary');
 const disabled = ref(false);
 const draggable = ref(true);
-const direction = ref('top');
+const direction = ref<FabDirection>('top');
 const position = ref<FabPosition>('right-bottom');
 // gap 现在支持四边配置
 const gap = ref(16);
