@@ -1,3 +1,28 @@
+## 0.3.8（2025-11-04）
+
+### 📦‍ Build System | 打包构建
+
+- 新增钉钉小程序运行和打包命令 ([a5b4ab3](https://github.com/anyup/uView-Pro/commit/a5b4ab3abab95b4c56bf02415f1785371f7f19ee))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-circle-progress:** 修复微信小程序 canvas 2d 环形进度条绘制问题,适配不同平台的 canvas 上下文 ([e7ab701](https://github.com/anyup/uView-Pro/commit/e7ab701bcbd83e7861aeb9a104269265c6b38a56))
+
+### ✨ Features | 新功能
+
+- **u-fab:** 新增悬浮按钮组件及演示示例 ([85848de](https://github.com/anyup/uView-Pro/commit/85848de6bae15d91942a633959459ae8e6ecb857))
+- **u-fab:** 优化悬浮组件功能和交互，新增预设定位position、拖动吸边autoStick属性 ([65a4bde](https://github.com/anyup/uView-Pro/commit/65a4bde2331c8b2a49933bb4c5d7e1f97a11c56a))
+- **u-text:** 新增 u-text 组件默认插槽支持 ([a7b6e59](https://github.com/anyup/uView-Pro/commit/a7b6e5944afbcd48920c25a58c07642544ff3d3e))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **fab:** 优化 fab 组件示例代码 ([ca71fa2](https://github.com/anyup/uView-Pro/commit/ca71fa28fa86baa53384eb366384d97a0b8d84b2))
+- **u-fab:** 重构 gap 属性以支持对象类型 ([bee34bf](https://github.com/anyup/uView-Pro/commit/bee34bffd6a7587e9a82fe3e35cc64c096d8d2b3))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/wjp980108"><img src="https://github.com/wjp980108.png?size=40" width="40" height="40" alt="wjp980108" title="wjp980108"/></a>
+
 ## 0.3.7（2025-10-28）
 
 ### 🐛 Bug Fixes | Bug 修复
