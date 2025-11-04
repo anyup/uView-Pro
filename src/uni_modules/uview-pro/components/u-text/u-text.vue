@@ -22,10 +22,12 @@
             :class="['u-text__price', props.type && `u-text__value--${props.type}`]"
             :style="textValueStyle"
         >
-            ￥{{ displayValue }}
+            <slot>￥{{ displayValue }}</slot>
         </text>
         <!-- link 模式 -->
-        <u-link v-else-if="props.mode === 'link'" :href="props.href" underLine>{{ displayValue }}</u-link>
+        <u-link v-else-if="props.mode === 'link'" :href="props.href" underLine>
+            <slot>{{ displayValue }}</slot>
+        </u-link>
         <template v-else-if="props.openType && isMp">
             <button
                 class="u-reset-button u-text__value"
@@ -46,7 +48,7 @@
                 :show-message-card="props.showMessageCard"
                 :app-parameter="props.appParameter"
             >
-                {{ displayValue }}
+                <slot>{{ displayValue }}</slot>
             </button>
         </template>
         <!-- 默认模式 -->
@@ -56,7 +58,7 @@
             :style="textValueStyle"
             :class="[props.type && `u-text__value--${props.type}`, props.lines ? `u-line-${props.lines}` : '']"
         >
-            {{ displayValue }}
+            <slot>{{ displayValue }}</slot>
         </text>
         <!-- 后缀图标 -->
         <view class="u-text__icon u-text__suffix-icon" v-if="props.suffixIcon">
