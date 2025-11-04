@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import type { ThemeType } from '../../types/global';
+import type { FabDirection, FabPosition, ThemeType } from '../../types/global';
 import { baseProps } from '../common/props';
 
 /**
@@ -15,17 +15,25 @@ export const FabProps = {
     disabled: { type: Boolean, default: false },
     /** 按钮能否可以拖动 */
     draggable: { type: Boolean, default: false },
-    /** 按钮与边缘的间距，单位 px */
-    gap: { type: Number, default: 16 },
+    /** 按钮与边缘的间距，单位 px。支持 number 或对象 {top,left,right,bottom}，优先级按键存在顺序 */
+    gap: {
+        type: [Number, Object] as PropType<number | Partial<Record<'top' | 'left' | 'right' | 'bottom', number>>>,
+        default: 16
+    },
+    /** 拖动结束时是否自动吸边（仅当 draggable 为 true 时生效） */
+    autoStick: { type: Boolean, default: true },
+    /** 预设定位：控制组件默认停靠位置 */
+    position: {
+        type: String as PropType<FabPosition>,
+        default: 'right-bottom'
+    },
     /** 菜单出现的方向 */
-    direction: { type: String as PropType<Direction>, default: 'top' },
+    direction: { type: String as PropType<FabDirection>, default: 'top' },
     /** 按钮自定义层级 */
     zIndex: { type: Number, default: 99 }
 };
 
 export type FabProps = ExtractPropTypes<typeof FabProps>;
-
-export type Direction = 'top' | 'bottom' | 'left' | 'right';
 
 interface DirectionConfig {
     opposite: keyof CSSProperties;
@@ -34,7 +42,7 @@ interface DirectionConfig {
     flexBase: 'row' | 'row-reverse' | 'column' | 'column-reverse';
 }
 
-export const directionConfig: Record<Direction, DirectionConfig> = {
+export const directionConfig: Record<FabDirection, DirectionConfig> = {
     top: {
         opposite: 'bottom',
         sizeKey: 'width',

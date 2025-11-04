@@ -290,6 +290,19 @@ export type TagSize = 'default' | 'mini' | 'medium';
 export type ToastPosition = 'top' | 'center' | 'bottom';
 export type UploadSizeType = 'original' | 'compressed';
 export type UploadSourceType = 'album' | 'camera';
+// fab 组件 position
+export type FabPosition =
+    | 'left-top'
+    | 'right-top'
+    | 'left-bottom'
+    | 'right-bottom'
+    | 'left-center'
+    | 'right-center'
+    | 'top-center'
+    | 'bottom-center';
+// fab 组件 direction
+export type FabDirection = 'top' | 'bottom' | 'left' | 'right';
+
 // 自定义主题色
 export type ThemeColor = Partial<{
     primary: string;

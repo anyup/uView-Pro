@@ -95,6 +95,7 @@ declare module 'vue' {
         uStatusBar: (typeof import('../components/u-status-bar/u-status-bar.vue'))['default'];
         uSafeBottom: (typeof import('../components/u-safe-bottom/u-safe-bottom.vue'))['default'];
         uTextarea: (typeof import('../components/u-textarea/u-textarea.vue'))['default'];
+        uFab: (typeof import('../components/u-fab/u-fab.vue'))['default'];
     }
 }
 
