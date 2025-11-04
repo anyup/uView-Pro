@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import type { FabDirection, FabPosition, ThemeType } from '../../types/global';
+import type { FabDirection, FabGap, FabPosition, ThemeType } from '../../types/global';
 import { baseProps } from '../common/props';
 
 /**
@@ -17,8 +17,13 @@ export const FabProps = {
     draggable: { type: Boolean, default: false },
     /** 按钮与边缘的间距，单位 px。支持 number 或对象 {top,left,right,bottom}，优先级按键存在顺序 */
     gap: {
-        type: [Number, Object] as PropType<number | Partial<Record<'top' | 'left' | 'right' | 'bottom', number>>>,
-        default: 16
+        type: Object as PropType<FabGap>,
+        default: () => ({
+            top: 16,
+            left: 16,
+            right: 16,
+            bottom: 16
+        })
     },
     /** 拖动结束时是否自动吸边（仅当 draggable 为 true 时生效） */
     autoStick: { type: Boolean, default: true },

@@ -302,6 +302,8 @@ export type FabPosition =
     | 'bottom-center';
 // fab 组件 direction
 export type FabDirection = 'top' | 'bottom' | 'left' | 'right';
+// fab 组件 gap
+export type FabGap = Partial<Record<'top' | 'left' | 'right' | 'bottom', number>>;
 
 // 自定义主题色
 export type ThemeColor = Partial<{

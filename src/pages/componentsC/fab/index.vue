@@ -10,7 +10,7 @@
             :autoStick="autoStick"
             :direction="direction"
             :position="position"
-            :gap="gap"
+            :gap="gapObj"
         >
             <template #trigger>
                 <u-button type="success" shape="circle" @click="handleShare" :disabled="disabled">
@@ -29,7 +29,7 @@
             :autoStick="autoStick"
             :direction="direction"
             :position="position"
-            :gap="gap"
+            :gap="gapObj"
         >
             <u-button shape="circle" size="mini" type="primary" custom-class="custom-button" @click="handleBtnClick">
                 <u-icon name="thumb-up" size="40"></u-icon>
@@ -54,7 +54,7 @@
             :autoStick="autoStick"
             :direction="direction"
             :position="position"
-            :gap="gap"
+            :gap="gapObj"
             @trigger="handleTrigger"
         ></u-fab>
         <view class="u-config-wrap">
@@ -112,8 +112,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import type { FabDirection, FabPosition, ThemeType } from '@/uni_modules/uview-pro/types/global';
+import { computed, ref } from 'vue';
+import type { FabDirection, FabGap, FabPosition, ThemeType } from '@/uni_modules/uview-pro/types/global';
 import { $u } from '@/uni_modules/uview-pro';
 
 const uFabRef = ref<any>(null);
@@ -128,6 +128,15 @@ const gap = ref(16);
 const trigger = ref(false);
 const child = ref(true);
 const autoStick = ref(true);
+
+const gapObj = computed<FabGap>(() => {
+    return {
+        top: gap.value,
+        right: gap.value,
+        bottom: gap.value,
+        left: gap.value
+    };
+});
 
 // 主题选择切换
 function typeChange(e: number) {
