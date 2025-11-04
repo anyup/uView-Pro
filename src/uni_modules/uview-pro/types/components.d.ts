@@ -44,7 +44,7 @@ declare module 'vue' {
         uLine: (typeof import('../components/u-line/u-line.vue'))['default'];
         uLineProgress: (typeof import('../components/u-line-progress/u-line-progress.vue'))['default'];
         uLink: (typeof import('../components/u-link/u-link.vue'))['default'];
-        uLoadMore: (typeof import('../components/u-loadmore/u-loadmore.vue'))['default'];
+        uLoadmore: (typeof import('../components/u-loadmore/u-loadmore.vue'))['default'];
         uLoading: (typeof import('../components/u-loading/u-loading.vue'))['default'];
         uLoadingPopup: (typeof import('../components/u-loading-popup/u-loading-popup.vue'))['default'];
         uMask: (typeof import('../components/u-mask/u-mask.vue'))['default'];
