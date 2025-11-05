@@ -1,4 +1,4 @@
-// 此自定义uView Pro主题生成于2025-09-19 09:38
+// 此自定义uView Pro主题生成于2025-11-05 13:18
 // 地址：https://uviewpro.cn/zh/guide/theme.html
 
 export default {
