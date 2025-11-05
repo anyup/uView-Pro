@@ -15,7 +15,7 @@ export const SwitchProps = {
     /** 开关尺寸，单位rpx */
     size: { type: [Number, String] as PropType<number | string>, default: 50 },
     /** 打开时的颜色 */
-    activeColor: { type: String, default: $u.color.primary },
+    activeColor: { type: String, default: () => $u.color.primary },
     /** 关闭时的颜色 */
     inactiveColor: { type: String, default: '#ffffff' },
     /** v-model 绑定值，是否选中 */

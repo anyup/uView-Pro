@@ -15,7 +15,7 @@ export const ActionSheetItemProps = {
     /** 边距 */
     padding: { type: [Number, String] as PropType<number | string>, default: '34rpx 0' },
     /** 字体颜色 */
-    color: { type: String, default: $u.color.mainColor },
+    color: { type: String, default: () => $u.color.mainColor },
     /** 字体大小 */
     fontSize: { type: [String, Number], default: '32rpx' },
     /** 是否禁用 */

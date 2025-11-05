@@ -12,6 +12,8 @@ import colorGradients from './function/colorGradient';
 import guid from './function/guid';
 // 主题相关颜色,info|success|warning|primary|default|error,此颜色已在uview.scss中定义,但是为js中也能使用,故也定义一份
 import color from './function/color';
+import { getColor } from './function/color';
+import type { ThemeColor } from '../types/global';
 // 根据type获取图标名称
 import type2icon from './function/type2icon';
 // 打乱数组的顺序
@@ -242,6 +244,25 @@ export function kebabCase(word: string): string {
     return newWord;
 }
 
+/**
+ * 运行时设置主题颜色（就地合并到 reactive 的 $u.color）
+ * @param theme Partial<ThemeColor>
+ */
+function setTheme(theme: Partial<ThemeColor> | undefined) {
+    if (!theme) return;
+    try {
+        const merged = deepMerge($u.color, theme);
+        Object.keys(merged).forEach(k => {
+            $u.color[k] = (merged as any)[k];
+        });
+    } catch (e) {
+        // 兜底：直接 assign
+        Object.keys(theme).forEach(k => {
+            $u.color[k] = (theme as any)[k];
+        });
+    }
+}
+
 export {
     queryParams,
     route,
@@ -249,6 +270,7 @@ export {
     timeFrom,
     guid,
     color,
+    getColor,
     sys,
     os,
     type2icon,
@@ -268,7 +290,8 @@ export {
     clipboard,
     config,
     zIndex,
-    mitt
+    mitt,
+    setTheme
 };
 
 export const $u = {
@@ -281,6 +304,7 @@ export const $u = {
     colorToRgba: colorGradients.colorToRgba,
     guid,
     color,
+    getColor,
     sys,
     os,
     type2icon,
@@ -309,7 +333,8 @@ export const $u = {
     formatName,
     addStyle,
     toStyle,
-    kebabCase
+    kebabCase,
+    setTheme
 };
 
 // 颜色相关方法单独导出

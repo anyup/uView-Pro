@@ -9,7 +9,7 @@ export const LinkProps = {
     /** 文字颜色 */
     color: {
         type: String,
-        default: $u.color.primary
+        default: () => $u.color.primary
     },
     /** 字体大小，单位rpx */
     fontSize: {

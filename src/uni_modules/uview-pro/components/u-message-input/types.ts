@@ -50,12 +50,12 @@ export const MessageInputProps = {
     /** 激活样式 */
     activeColor: {
         type: String,
-        default: $u.color.primary
+        default: () => $u.color.primary
     },
     /** 未激活的样式 */
     inactiveColor: {
         type: String,
-        default: $u.color.contentColor
+        default: () => $u.color.contentColor
     },
     /** 输入框的大小，单位rpx，宽等于高 */
     width: {

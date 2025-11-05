@@ -15,9 +15,9 @@ declare const uni: {
 const install = (app: any, options?: UViewProOptions): void => {
     uni.$u = $u;
     if (options) {
-        // 配置主题
+        // 配置主题：使用 $u.setTheme 以就地更新 reactive $u.color
         if (options.theme) {
-            $u.color = $u.deepMerge($u.color, options.theme);
+            $u.setTheme?.(options.theme);
         }
         // 设置调试模式
         logger

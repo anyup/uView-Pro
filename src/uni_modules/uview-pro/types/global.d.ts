@@ -305,35 +305,36 @@ export type FabDirection = 'top' | 'bottom' | 'left' | 'right';
 // fab 组件 gap
 export type FabGap = Partial<Record<'top' | 'left' | 'right' | 'bottom', number>>;
 
+export type ColorType =
+    | 'primary'
+    | 'primaryDark'
+    | 'primaryDisabled'
+    | 'primaryLight'
+    | 'bgColor'
+    | 'info'
+    | 'infoDark'
+    | 'infoDisabled'
+    | 'infoLight'
+    | 'warning'
+    | 'warningDark'
+    | 'warningDisabled'
+    | 'warningLight'
+    | 'error'
+    | 'errorDark'
+    | 'errorDisabled'
+    | 'errorLight'
+    | 'success'
+    | 'successDark'
+    | 'successDisabled'
+    | 'successLight'
+    | 'mainColor'
+    | 'contentColor'
+    | 'tipsColor'
+    | 'lightColor'
+    | 'borderColor';
+
 // 自定义主题色
-export type ThemeColor = Partial<{
-    primary: string;
-    primaryDark: string;
-    primaryDisabled: string;
-    primaryLight: string;
-    bgColor: string;
-    info: string;
-    infoDark: string;
-    infoDisabled: string;
-    infoLight: string;
-    warning: string;
-    warningDark: string;
-    warningDisabled: string;
-    warningLight: string;
-    error: string;
-    errorDark: string;
-    errorDisabled: string;
-    errorLight: string;
-    success: string;
-    successDark: string;
-    successDisabled: string;
-    successLight: string;
-    mainColor: string;
-    contentColor: string;
-    tipsColor: string;
-    lightColor: string;
-    borderColor: string;
-}>;
+export type ThemeColor = Partial<Record<ColorType, string>>;
 
 export type LogConfig = Partial<{
     debug?: boolean;

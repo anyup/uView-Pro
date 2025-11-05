@@ -14,7 +14,7 @@ export const RadioGroupProps = {
     /** 匹配某一个radio组件，如果某个radio的name值等于此值，那么这个radio就被会选中 */
     modelValue: { type: [String, Number] as PropType<string | number>, default: '' },
     /** 选中状态下的颜色 */
-    activeColor: { type: String, default: $u.color.primary },
+    activeColor: { type: String, default: () => $u.color.primary },
     /** 组件的整体大小 */
     size: { type: [String, Number] as PropType<number | string>, default: 34 },
     /** 是否禁止点击提示语选中复选框 */

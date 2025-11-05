@@ -1,6 +1,8 @@
-import type { ThemeColor } from '../../types/global';
+import type { ColorType, ThemeColor } from '../../types/global';
+import { reactive } from 'vue';
 
-const color: ThemeColor = {
+// 使用 reactive 包装颜色对象，使其在运行时可被响应式读取与更新
+const color: ThemeColor = reactive({
     primary: '#2979ff',
     primaryDark: '#2b85e4',
     primaryDisabled: '#a0cfff',
@@ -32,6 +34,10 @@ const color: ThemeColor = {
     tipsColor: '#909399',
     lightColor: '#c0c4cc',
     borderColor: '#e4e7ed'
-};
+});
+
+export function getColor(name: ColorType) {
+    return (color as any)[name] || '';
+}
 
 export default color;

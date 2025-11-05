@@ -16,9 +16,9 @@ export const SelectProps = {
     /** 通过双向绑定控制组件的弹出与收起 */
     modelValue: { type: Boolean, default: false },
     /** "取消"按钮的颜色 */
-    cancelColor: { type: String, default: $u.color.contentColor },
+    cancelColor: { type: String, default: () => $u.color.contentColor },
     /** "确定"按钮的颜色 */
-    confirmColor: { type: String, default: $u.color.primary },
+    confirmColor: { type: String, default: () => $u.color.primary },
     /** 弹出的z-index值 */
     zIndex: { type: [String, Number] as PropType<string | number>, default: 0 },
     /** 是否开启底部安全区适配 */

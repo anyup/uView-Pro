@@ -34,7 +34,7 @@ export const ActionSheetProps = {
     /** 取消按钮的文字提示 */
     cancelText: { type: String, default: '取消' },
     /** 字体颜色 */
-    color: { type: String, default: $u.color.mainColor },
+    color: { type: String, default: () => $u.color.mainColor },
     /** 字体大小 */
     fontSize: { type: [String, Number], default: '32rpx' },
     /** 是否异步关闭 */

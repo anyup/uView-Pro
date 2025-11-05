@@ -59,12 +59,12 @@ export const ModalProps = {
     /** 确认按钮颜色 */
     confirmColor: {
         type: String,
-        default: $u.color.primary
+        default: () => $u.color.primary
     },
     /** 取消文字颜色 */
     cancelColor: {
         type: String,
-        default: $u.color.contentColor
+        default: () => $u.color.contentColor
     },
     /** 圆角值 */
     borderRadius: {

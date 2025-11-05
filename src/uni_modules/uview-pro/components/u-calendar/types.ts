@@ -40,13 +40,13 @@ export const CalendarProps = {
     /** 默认日期字体颜色 */
     color: { type: String, default: '#303133' },
     /** 选中|起始结束日期背景色 */
-    activeBgColor: { type: String, default: $u.color.primary },
+    activeBgColor: { type: String, default: () => $u.color.primary },
     /** 选中|起始结束日期字体颜色 */
     activeColor: { type: String, default: '#ffffff' },
     /** 范围内日期背景色 */
     rangeBgColor: { type: String, default: 'rgba(41,121,255,0.13)' },
     /** 范围内日期字体颜色 */
-    rangeColor: { type: String, default: $u.color.primary },
+    rangeColor: { type: String, default: () => $u.color.primary },
     /** mode=range时生效，起始日期自定义文案 */
     startText: { type: String, default: '开始' },
     /** mode=range时生效，结束日期自定义文案 */

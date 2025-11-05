@@ -15,9 +15,9 @@ export const StepProps = {
     /** 主题类型, primary|success|info|warning|error */
     type: { type: String as PropType<ThemeType>, default: 'primary' },
     /** 激活步骤的颜色 */
-    activeColor: { type: String, default: $u.color.primary },
+    activeColor: { type: String, default: () => $u.color.primary },
     /** 未激活的颜色 */
-    unActiveColor: { type: String, default: $u.color.info },
+    unActiveColor: { type: String, default: () => $u.color.info },
     /** 自定义图标 */
     icon: { type: String, default: 'checkmark' },
     /** 标题 */
