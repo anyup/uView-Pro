@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.9] - 2025-11-05
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **types:** 修正组件声明文件中uLoadmore的命名大小写问题 ([eb69b18](https://github.com/anyup/uView-Pro/commit/eb69b18d969dac13a75375501018edc4f3097e33))
+- **loadmore:** 修复 u-loadmore 组件使用类型声明报错问题 ([92facfd](https://github.com/anyup/uView-Pro/commit/92facfdb5b2b57bcd634d93412c90661c5f6e59d))
+
+### ✨ Features | 新功能
+
+- **theme:** 新增本地主题文件支持 ([a989314](https://github.com/anyup/uView-Pro/commit/a989314a7b691e94ed81e524100e70d6e9a22a12))
+- **theme:** 实现运行时主题变更功能，新增 setTheme 函数 ([12765d0](https://github.com/anyup/uView-Pro/commit/12765d07244a9d6ca49c4dd34d81f66a61c87c6d))
+
+### 👥 Contributors
+
+<a href="https://github.com/liujiayii"><img src="https://github.com/liujiayii.png?size=40" width="40" height="40" alt="liujiayii" title="liujiayii"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.3.8] - 2025-11-04
 
 ### 📦‍ Build System | 打包构建
