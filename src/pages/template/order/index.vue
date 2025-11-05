@@ -191,6 +191,7 @@
 <script setup lang="ts">
 import { ref, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+import type { LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
 
 // 商品信息类型
 interface GoodsItem {
@@ -342,7 +343,7 @@ const tabsHeight = ref<number>(0);
 // swiper 滑动距离
 const dx = ref<number>(0);
 // 各 tab 加载状态
-const loadStatus = ref<string[]>(['loadmore', 'loadmore', 'loadmore', 'loadmore']);
+const loadStatus = ref<LoadmoreStatus[]>(['loadmore', 'loadmore', 'loadmore', 'loadmore']);
 
 // 获取当前实例（用于 $refs）
 const { proxy } = getCurrentInstance() as any;

@@ -56,14 +56,15 @@
 </template>
 
 <script lang="ts" setup>
+import type { ButtonSize, ButtonType, Shape } from '@/uni_modules/uview-pro/types/global';
 import { ref } from 'vue';
 
 // 主题选择
-const type = ref<'default' | 'primary' | 'error' | 'warning' | 'success'>('default');
+const type = ref<ButtonType>('default');
 // 尺寸大小
-const size = ref<'default' | 'medium' | 'mini'>('default');
+const size = ref<ButtonSize>('default');
 // 形状
-const shape = ref<'square' | 'circle'>('square');
+const shape = ref<Shape>('square');
 // 镂空
 const plain = ref<boolean>(false);
 // 水波纹

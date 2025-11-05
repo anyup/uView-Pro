@@ -22,9 +22,10 @@
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
+import type { LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
 
 const list = ref([]);
-const status = ref('loadmore');
+const status = ref<LoadmoreStatus>('loadmore');
 const data = ref([
     {
         src: 'https://gtd.alicdn.com/sns_logo/i1/TB124_3NXXXXXasXVXXSutbFXXX.jpg_240x240xz.jpg'

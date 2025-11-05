@@ -40,11 +40,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import type { LoadmoreIconType, LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
+import { ref } from 'vue';
 
 const uToastRef = ref();
-const status = ref('loadmore');
-const iconType = ref('circle');
+const status = ref<LoadmoreStatus>('loadmore');
+const iconType = ref<LoadmoreIconType>('circle');
 const isDot = ref(false);
 const loadText = ref({
     loadmore: '点击或上拉加载更多',

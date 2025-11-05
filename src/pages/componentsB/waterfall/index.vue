@@ -38,9 +38,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, getCurrentInstance } from 'vue';
+import { ref } from 'vue';
 import { onLoad, onReachBottom } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
+import type { LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
 
 // 商品项类型声明
 interface FlowItem {
@@ -52,7 +53,7 @@ interface FlowItem {
 }
 
 // loadmore 状态类型
-const loadStatus = ref<'loadmore' | 'loading' | 'nomore'>('loadmore');
+const loadStatus = ref<LoadmoreStatus>('loadmore');
 // 瀑布流数据
 const flowList = ref<FlowItem[]>([]);
 // 商品原始列表
