@@ -49,7 +49,8 @@ export default {
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { type PaginationDirection, type PaginationEmits, PaginationProps } from './types.ts';
+import { type PaginationEmits, PaginationProps } from './types.ts';
+import type { PaginationDirection } from '../../types/global';
 
 const props = defineProps(PaginationProps);
 const emit = defineEmits<PaginationEmits>();
