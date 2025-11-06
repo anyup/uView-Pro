@@ -19,6 +19,9 @@
                         {{ props.backText }}
                     </view>
                 </view>
+                <view class="u-slot-left">
+                    <slot name="left"></slot>
+                </view>
                 <view class="u-navbar-content-title" v-if="props.title" :style="titleStyle">
                     <view
                         class="u-title u-line-1"
