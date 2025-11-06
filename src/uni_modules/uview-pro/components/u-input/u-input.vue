@@ -220,9 +220,9 @@ function onFormItemError(status: boolean) {
     validateState.value = status;
 }
 
-function onFocus(event: any) {
+function onFocus(e: any) {
     focused.value = true;
-    emit('focus');
+    emit('focus', e.detail.value);
 }
 
 function onConfirm(e: any) {
