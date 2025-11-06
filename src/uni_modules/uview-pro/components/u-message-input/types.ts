@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { MessageInputMode } from '../../types/global';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * u-message-input 组件 props 类型定义
@@ -50,12 +50,12 @@ export const MessageInputProps = {
     /** 激活样式 */
     activeColor: {
         type: String,
-        default: () => $u.color.primary
+        default: () => getColor('primary')
     },
     /** 未激活的样式 */
     inactiveColor: {
         type: String,
-        default: () => $u.color.contentColor
+        default: () => getColor('contentColor')
     },
     /** 输入框的大小，单位rpx，宽等于高 */
     width: {

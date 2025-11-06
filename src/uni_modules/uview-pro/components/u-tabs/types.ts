@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TabsItem } from '../../types/global';
 import { baseProps } from '../common/props';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * TabsProps tabs标签 props 类型定义
@@ -22,9 +22,9 @@ export const TabsProps = {
     /** 过渡动画时长, 单位s */
     duration: { type: [String, Number] as PropType<number | string>, default: 0.5 },
     /** 选中项的主题颜色 */
-    activeColor: { type: String, default: () => $u.color.primary },
+    activeColor: { type: String, default: () => getColor('primary') },
     /** 未选中项的颜色 */
-    inactiveColor: { type: String, default: () => $u.color.mainColor },
+    inactiveColor: { type: String, default: () => getColor('mainColor') },
     /** 菜单底部移动的bar的宽度，单位rpx */
     barWidth: { type: [String, Number] as PropType<number | string>, default: 40 },
     /** 移动bar的高度 */

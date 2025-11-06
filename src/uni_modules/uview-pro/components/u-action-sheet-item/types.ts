@@ -1,6 +1,6 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import { baseProps } from '../common/props';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * actionSheet 操作菜单
@@ -15,7 +15,7 @@ export const ActionSheetItemProps = {
     /** 边距 */
     padding: { type: [Number, String] as PropType<number | string>, default: '34rpx 0' },
     /** 字体颜色 */
-    color: { type: String, default: () => $u.color.mainColor },
+    color: { type: String, default: () => getColor('mainColor') },
     /** 字体大小 */
     fontSize: { type: [String, Number], default: '32rpx' },
     /** 是否禁用 */

@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * ReadMoreProps 阅读更多 props 类型定义
@@ -17,7 +17,7 @@ export const ReadMoreProps = {
     /** 展开时的提示文字 */
     openText: { type: String, default: '收起' },
     /** 提示的文字颜色 */
-    color: { type: String, default: () => $u.color.primary },
+    color: { type: String, default: () => getColor('primary') },
     /** 提示文字的大小 */
     fontSize: { type: [String, Number] as PropType<number | string>, default: 28 },
     /** 是否显示阴影 */

@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SelectListItem, SelectMode } from '../../types/global';
 import { baseProps } from '../common/props';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * SelectProps 列选择器 props 类型定义
@@ -16,9 +16,9 @@ export const SelectProps = {
     /** 通过双向绑定控制组件的弹出与收起 */
     modelValue: { type: Boolean, default: false },
     /** "取消"按钮的颜色 */
-    cancelColor: { type: String, default: () => $u.color.contentColor },
+    cancelColor: { type: String, default: () => getColor('contentColor') },
     /** "确定"按钮的颜色 */
-    confirmColor: { type: String, default: () => $u.color.primary },
+    confirmColor: { type: String, default: () => getColor('primary') },
     /** 弹出的z-index值 */
     zIndex: { type: [String, Number] as PropType<string | number>, default: 0 },
     /** 是否开启底部安全区适配 */

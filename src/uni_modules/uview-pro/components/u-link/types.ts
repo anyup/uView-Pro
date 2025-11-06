@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * u-link 组件 props 类型定义
@@ -9,7 +9,7 @@ export const LinkProps = {
     /** 文字颜色 */
     color: {
         type: String,
-        default: () => $u.color.primary
+        default: () => getColor('primary')
     },
     /** 字体大小，单位rpx */
     fontSize: {

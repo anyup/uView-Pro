@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * u-index-list 组件 props 类型定义
@@ -34,7 +34,7 @@ export const IndexListProps = {
     /** 锚点和右边索引字符高亮颜色 */
     activeColor: {
         type: String,
-        default: () => $u.color.primary
+        default: () => getColor('primary')
     }
 };
 

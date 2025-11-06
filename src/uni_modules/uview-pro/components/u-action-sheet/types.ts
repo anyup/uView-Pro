@@ -1,7 +1,7 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { ActionSheetItem, ActionSheetTips } from '../../types/global';
 import { baseProps } from '../common/props';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * actionSheet 操作菜单
@@ -19,7 +19,7 @@ export const ActionSheetProps = {
     /** 顶部的提示文字 */
     tips: {
         type: Object as unknown as PropType<ActionSheetTips>,
-        default: () => ({ text: '', color: $u.color.tipsColor, fontSize: '26rpx' })
+        default: () => ({ text: '', color: getColor('tipsColor'), fontSize: '26rpx' })
     },
     /** 底部的取消按钮 */
     cancelBtn: { type: Boolean, default: true },
@@ -34,7 +34,7 @@ export const ActionSheetProps = {
     /** 取消按钮的文字提示 */
     cancelText: { type: String, default: '取消' },
     /** 字体颜色 */
-    color: { type: String, default: () => $u.color.mainColor },
+    color: { type: String, default: () => getColor('mainColor') },
     /** 字体大小 */
     fontSize: { type: [String, Number], default: '32rpx' },
     /** 是否异步关闭 */

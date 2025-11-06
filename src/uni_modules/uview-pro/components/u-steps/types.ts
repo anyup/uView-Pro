@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { StepDirection, StepMode, StepsListItem, ThemeType } from '../../types/global';
 import { baseProps } from '../common/props';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * StepsProps 步骤条 props 类型定义
@@ -19,9 +19,9 @@ export const StepsProps = {
     /** 当前哪一步是激活的 */
     current: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 激活步骤的颜色 */
-    activeColor: { type: String, default: () => $u.color.primary },
+    activeColor: { type: String, default: () => getColor('primary') },
     /** 未激活的颜色 */
-    unActiveColor: { type: String, default: () => $u.color.info },
+    unActiveColor: { type: String, default: () => getColor('info') },
     /** 自定义图标 */
     icon: { type: String, default: 'checkmark' },
     /** step的排列方向，row-横向，column-竖向 */

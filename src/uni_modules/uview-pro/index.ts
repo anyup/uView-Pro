@@ -13,7 +13,6 @@ declare const uni: {
 
 // $u挂载到uni对象上
 const install = (app: any, options?: UViewProOptions): void => {
-    uni.$u = $u;
     if (options) {
         // 配置主题：使用 $u.setTheme 以就地更新 reactive $u.color
         if (options.theme) {
@@ -25,6 +24,7 @@ const install = (app: any, options?: UViewProOptions): void => {
             .setPrefix(options?.log?.prefix)
             .setShowCallerInfo(options?.log?.showCallerInfo ?? true);
     }
+    uni.$u = $u;
     // 可扩展更多配置项
     app.config.globalProperties.$u = $u;
 };

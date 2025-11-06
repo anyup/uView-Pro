@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TabsSwiperAutoCenterMode, TabsSwiperListItem } from '../../types/global';
 import { baseProps } from '../common/props';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 /**
  * TabsSwiperProps 全屏选项卡 props 类型定义
@@ -22,9 +22,9 @@ export const TabsSwiperProps = {
     /** tabs组件外部swiper的宽度，单位rpx */
     swiperWidth: { type: [String, Number] as PropType<number | string>, default: 750 },
     /** 滑块和激活tab文字的颜色 */
-    activeColor: { type: String, default: () => $u.color.primary },
+    activeColor: { type: String, default: () => getColor('primary') },
     /** tabs文字颜色 */
-    inactiveColor: { type: String, default: () => $u.color.mainColor },
+    inactiveColor: { type: String, default: () => getColor('mainColor') },
     /** 滑块宽度，单位rpx */
     barWidth: { type: [Number, String] as PropType<number | string>, default: 40 },
     /** 滑块高度，单位rpx */

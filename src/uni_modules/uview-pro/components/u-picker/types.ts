@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { PickerMode, PickerParams } from '../../types/global';
-import { $u } from '../../';
+import { getColor } from '../../';
 
 const defaultParams: PickerParams = {
     year: true,
@@ -62,12 +62,12 @@ export const PickerProps = {
     /** "取消"按钮的颜色 */
     cancelColor: {
         type: String,
-        default: () => $u.color.contentColor
+        default: () => getColor('contentColor')
     },
     /** "确定"按钮的颜色 */
     confirmColor: {
         type: String,
-        default: () => $u.color.primary
+        default: () => getColor('primary')
     },
     /** 默认显示的时间，2025-07-02 || 2025-07-02 13:01:00 || 2025/07/02 */
     defaultTime: {
