@@ -252,6 +252,7 @@ onMounted(() => {
 
 // 暴露方法
 defineExpose({
+    props,
     init,
     close,
     open,

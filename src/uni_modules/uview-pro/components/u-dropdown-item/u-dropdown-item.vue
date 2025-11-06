@@ -79,9 +79,9 @@ const { parentExposed, emitToParent } = useChildren('u-dropdown-item', 'u-dropdo
 // 当前项是否处于展开状态
 const active = ref(false);
 // 激活时左边文字和右边对勾图标的颜色
-const activeColor = computed(() => parentExposed.value?.activeColor || $u.color.primary);
+const activeColor = computed(() => parentExposed.value?.props?.activeColor || $u.color.primary);
 // 未激活时左边文字和右边对勾图标的颜色
-const inactiveColor = computed(() => parentExposed.value?.inactiveColor || $u.color.contentColor);
+const inactiveColor = computed(() => parentExposed.value?.props?.inactiveColor || $u.color.contentColor);
 
 // 监听props变化，通知父组件重新初始化
 const propsChange = computed(() => `${props.title}-${props.disabled}`);
