@@ -347,3 +347,12 @@ export interface UViewProOptions {
     log?: LogConfig;
     // 可扩展更多配置项
 }
+
+// pagination 组件，分页方向
+export type PaginationDirection = 'prev' | 'next';
+
+// pagination 组件，change 参数
+export type PaginationChangePayload = {
+    type: PaginationDirection;
+    current: number;
+};

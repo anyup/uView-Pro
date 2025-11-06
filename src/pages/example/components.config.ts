@@ -422,6 +422,12 @@ export default [
                 icon: 'section',
                 title: 'Section 查看更多',
                 title_en: 'Section'
+            },
+            {
+                path: '/pages/componentsC/pagination/index',
+                icon: 'pagination',
+                title: 'Pagination 分页',
+                title_en: 'Pagination'
             }
         ]
     },

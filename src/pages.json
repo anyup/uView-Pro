@@ -223,6 +223,13 @@
                     "style": {
                         "navigationBarTitleText": "fab-悬浮按钮"
                     }
+                },
+                // pagination分页
+                {
+                    "path": "pagination/index",
+                    "style": {
+                        "navigationBarTitleText": "pagination-分页"
+                    }
                 }
             ]
         },
