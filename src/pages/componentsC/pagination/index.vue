@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import type { PaginationChangePayload } from '@/uni_modules/uview-pro/components/u-pagination/types.ts';
+import type { PaginationChangePayload } from '@/uni_modules/uview-pro/types/global';
 
 const current = ref(1);
 const current1 = ref(2);

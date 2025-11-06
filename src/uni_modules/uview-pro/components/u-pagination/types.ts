@@ -1,4 +1,5 @@
 import { baseProps } from '../common/props';
+import type { PaginationChangePayload } from '../../types/global';
 
 /**
  * pagination 分页类型定义
@@ -21,13 +22,6 @@ export const PaginationProps = {
     prevIcon: { type: String, default: 'arrow-left' },
     /** 右侧按钮图标，仅支持内置图标 */
     nextIcon: { type: String, default: 'arrow-right' }
-};
-
-export type PaginationDirection = 'prev' | 'next';
-
-export type PaginationChangePayload = {
-    type: PaginationDirection;
-    current: number;
 };
 
 export type PaginationEmits = {
