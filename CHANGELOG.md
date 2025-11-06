@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.10] - 2025-11-06
+
+### ♻️ Code Refactoring | 代码重构
+
+- **theme:** 优化动态颜色获取方式 ([26f44dd](https://github.com/anyup/uView-Pro/commit/26f44dd0d03b9cb93a2bc6b94ab6eb15a7b2261e))
+- **types:** 优化类型导入并修复 u-pagination 类型定义 ([c6cbe61](https://github.com/anyup/uView-Pro/commit/c6cbe61242492ddae896ad44482f130da90033dc))
+
+### ✨ Features | 新功能
+
+- **u-pagination:** 新增分页组件及演示示例 ([3915064](https://github.com/anyup/uView-Pro/commit/39150648e599e818ce5c3648b3829f30754e2706))
+- **u-navbar:** 新增左侧插槽 left ([4474e3b](https://github.com/anyup/uView-Pro/commit/4474e3b07d44126dbbcb85957bf1026c602301e7))
+- **u-input:** 新增 focus 发射当前输入值 ([d8082ec](https://github.com/anyup/uView-Pro/commit/d8082ec2d30ae143a2cb223b6a933e5b58e1826b))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **demo:** 修复 u-navbar 演示示例中，因 ref('toast') 和组件名重复问题 ([2bd32a3](https://github.com/anyup/uView-Pro/commit/2bd32a3906fa3dd7ae2a91c8e0382aef7089bba7))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/wjp980108"><img src="https://github.com/wjp980108.png?size=40" width="40" height="40" alt="wjp980108" title="wjp980108"/></a> <a href="https://github.com/wjp"><img src="https://github.com/wjp.png?size=40" width="40" height="40" alt="wjp" title="wjp"/></a>
+
 ## [0.3.9] - 2025-11-05
 
 ### 🐛 Bug Fixes | Bug 修复
