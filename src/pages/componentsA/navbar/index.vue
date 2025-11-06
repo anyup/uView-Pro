@@ -55,7 +55,7 @@
             <view class="u-demo-wrap">
                 <view class="u-demo-title">演示效果</view>
                 <view class="u-demo-area">
-                    <u-toast ref="uToast"></u-toast>
+                    <u-toast ref="uToastRef"></u-toast>
                     <view class="u-no-demo-here">查看顶部导航栏效果</view>
                 </view>
             </view>
@@ -131,7 +131,7 @@ rightSlot.value = true;
 // #endif
 
 const customBack = ref<(() => void) | null>(null);
-const uToast = ref<any>(null);
+const uToastRef = ref<any>(null);
 
 const slotRightCurrent = computed(() => {
     return rightSlot.value ? 0 : 1;
@@ -140,7 +140,7 @@ const slotRightCurrent = computed(() => {
 function customBackChange(index: number): void {
     if (index == 0) {
         customBack.value = () => {
-            uToast.value.show({
+            uToastRef.value.show({
                 title: '自定义返回逻辑',
                 type: 'success'
             });
