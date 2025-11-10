@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.12] - 2025-11-10
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-dropdown:** 修复下拉菜单激活颜色不正确的问题 ([d3cc1e8](https://github.com/anyup/uView-Pro/commit/d3cc1e87ff0951c5385da5e667a528d30b7fd1cf))
+
+### 📦‍ Build System | 打包构建
+
+- **app-harmony:** 新增 HarmonyOS 构建配置 ([c18a537](https://github.com/anyup/uView-Pro/commit/c18a537d9bf4edcbe626290642225363486cfb1e))
+- 更新项目版本号 ([8eaee77](https://github.com/anyup/uView-Pro/commit/8eaee7784fb348c5637b55b037f62ba51409a4f2))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.3.10] - 2025-11-06
 
 ### ♻️ Code Refactoring | 代码重构

@@ -2,7 +2,7 @@
     "id": "uview-pro",
     "name": "uview-pro",
     "displayName": "【支持鸿蒙】uView Pro｜基于Vue3+TS全面重构的80+精选UI组件库",
-    "version": "0.3.11",
+    "version": "0.3.12",
     "description": "uView Pro，是全面支持Vue3的uni-app生态框架，80+精选组件已使用TypeScript重构，已全面支持uni-app Vue3.0",
     "main": "index.ts",
     "module": "index.ts",
