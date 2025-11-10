@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.11] - 2025-11-10
+
+### ✨ Features | 新功能
+
+- Initial project setup with commitizen, cz-git, and conventional changelog
+
+### 🐛 Bug Fixes | Bug 修复
+
+### 📝 Documentation | 文档
+
+### 💄 Styles | 风格
+
+### ♻️ Code Refactoring | 代码重构
+
+### ⚡ Performance Improvements | 性能优化
+
+### ✅ Tests | 测试
+
+### 📦‍ Build System | 打包构建
+
+### 👷 Continuous Integration | CI 配置
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+### ⏪ Revert | 回退
+
 ## [0.3.10] - 2025-11-06
 
 ### ♻️ Code Refactoring | 代码重构
