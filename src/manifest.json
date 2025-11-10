@@ -128,5 +128,29 @@
     "uniStatistics": {
         "enable": false
     },
-    "vueVersion": "3"
+    "vueVersion": "3",
+    "app-harmony": {
+        "distribute": {
+            "bundleName": "cn.anyup.uviewpro",
+            "icons": {
+                "foreground": "unpackage/res/icons/1024x1024.png",
+                "background": "unpackage/res/icons/1024x1024.png"
+            },
+            "splashScreens": {
+                "startWindowBackground": "#FFFFFF",
+                "startWindowIcon": "unpackage/res/icons/1024x1024.png"
+            },
+            "signingConfigs": {
+                "release": {
+                    "certpath": "D:/workspace/anyup/uView-Pro/docs/uviewpro.cer",
+                    "keyAlias": "uviewpro",
+                    "keyPassword": "0000001E6691C890BDB30353B4C0D59375D5FFB9C11A3ED0CA390CAA12302677A354AB61C7795AD6D2BCD04DBBC6",
+                    "profile": "D:/workspace/anyup/uView-Pro/docs/uviewpro_prodRelease.p7b",
+                    "signAlg": "SHA256withECDSA",
+                    "storeFile": "D:/workspace/anyup/uView-Pro/docs/uviewpro.p12",
+                    "storePassword": "0000001E0E5E7477F66639990B845220FC4082AAEA6D6837F481E2E9A13ECA4F3376D378019C37B059E1A410F512"
+                }
+            }
+        }
+    }
 }

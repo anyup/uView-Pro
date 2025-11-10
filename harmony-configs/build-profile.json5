@@ -1,0 +1,80 @@
+{
+    app: {
+        signingConfigs: [
+            {
+                name: 'default',
+                type: 'HarmonyOS',
+                material: {
+                    certpath: 'D:/workspace/anyup/uView-Pro/docs/uviewpro.cer',
+                    keyAlias: 'uviewpro',
+                    keyPassword: '0000001E03BC9F744DDA1E65DB718ABE646E0C96802C4E604F7BB8E641FE1E6C0BB5F6CF2CC8F93E9DD5970C60D9',
+                    profile: 'D:/workspace/anyup/uView-Pro/docs/uviewpro_prodRelease.p7b',
+                    signAlg: 'SHA256withECDSA',
+                    storeFile: 'D:/workspace/anyup/uView-Pro/docs/uviewpro.p12',
+                    storePassword: '0000001EC410E2814F8ECF2C93D41DBCA86EF1381EBB4F9244F19A773307924FD9277EDD4D41DFDCE9D7E5D64F0A'
+                }
+            },
+            {
+                name: 'release',
+                type: 'HarmonyOS',
+                material: {
+                    storeFile: 'D:/workspace/anyup/uView-Pro/docs/uviewpro.p12',
+                    storePassword: '0000001E30C002F824A24AAE774D27FD6C08E3A1C204051D8AE3B98CD212AAB3063E2E585F3E8DA111351F1C45E9',
+                    keyAlias: 'uviewpro',
+                    keyPassword: '0000001E22D0A4589545854C7766D101B721B0238D57AC30E5368E43F61A08656442D948EF5DC4D3E47AC40AABE7',
+                    signAlg: 'SHA256withECDSA',
+                    profile: 'D:/workspace/anyup/uView-Pro/docs/uviewpro_prodRelease.p7b',
+                    certpath: 'D:/workspace/anyup/uView-Pro/docs/uviewpro.cer'
+                }
+            }
+        ],
+        products: [
+            {
+                name: 'default',
+                signingConfig: 'default',
+                targetSdkVersion: '6.0.0(20)',
+                compatibleSdkVersion: '6.0.0(20)',
+                runtimeOS: 'HarmonyOS',
+                buildOption: {
+                    strictMode: {
+                        caseSensitiveCheck: true,
+                        useNormalizedOHMUrl: true
+                    }
+                }
+            },
+            {
+                name: 'release',
+                signingConfig: 'release',
+                targetSdkVersion: '6.0.0(20)',
+                compatibleSdkVersion: '6.0.0(20)',
+                runtimeOS: 'HarmonyOS',
+                buildOption: {
+                    strictMode: {
+                        caseSensitiveCheck: true,
+                        useNormalizedOHMUrl: true
+                    }
+                }
+            }
+        ],
+        buildModeSet: [
+            {
+                name: 'debug'
+            },
+            {
+                name: 'release'
+            }
+        ]
+    },
+    modules: [
+        {
+            name: 'entry',
+            srcPath: './entry',
+            targets: [
+                {
+                    name: 'default',
+                    applyToProducts: ['default']
+                }
+            ]
+        }
+    ]
+}
