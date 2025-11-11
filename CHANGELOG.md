@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.13] - 2025-11-11
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-root-portal:** 修复根节点传送组件运行时报错问题 ([3c24a75](https://github.com/anyup/uView-Pro/commit/3c24a75de00982bbdc1388a413721377de4f1e3d))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.3.12] - 2025-11-10
 
 ### 🐛 Bug Fixes | Bug 修复
