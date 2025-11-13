@@ -5,18 +5,24 @@
             <view class="u-demo-area">
                 <u-toast ref="uToastRef"></u-toast>
                 <u-message-input
+                    :type="type"
                     :mode="mode"
                     :maxlength="maxlength"
                     :value="value"
                     :breathe="breathe"
                     :bold="bold"
-                    @finish="finish"
                     :dot-fill="dotFill"
+                    :focus="true"
+                    @finish="finish"
                 ></u-message-input>
             </view>
         </view>
         <view class="u-config-wrap">
             <view class="u-config-title u-border-bottom"> 参数配置 </view>
+            <view class="u-config-item">
+                <view class="u-item-title">模式选择</view>
+                <u-subsection :list="['number', 'text']" @change="typeChange"></u-subsection>
+            </view>
             <view class="u-config-item">
                 <view class="u-item-title">模式选择</view>
                 <u-subsection :list="['方框', '下划线', '中划线']" @change="modeChange"></u-subsection>
@@ -52,8 +58,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import type { MessageInputMode } from '@/uni_modules/uview-pro/types/global';
+import type { InputType, MessageInputMode } from '@/uni_modules/uview-pro/types/global';
 
+const type = ref<InputType>('number');
 const mode = ref<MessageInputMode>('box');
 const maxlength = ref(4);
 const value = ref('');
@@ -61,6 +68,10 @@ const bold = ref(true);
 const breathe = ref(true);
 const dotFill = ref(false);
 const uToastRef = ref(null);
+
+function typeChange(index: number) {
+    type.value = index === 0 ? 'number' : 'text';
+}
 
 function modeChange(index: number) {
     mode.value = index === 0 ? 'box' : index === 1 ? 'bottomLine' : 'middleLine';

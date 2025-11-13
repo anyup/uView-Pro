@@ -1,12 +1,19 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { MessageInputMode } from '../../types/global';
+import type { InputType, MessageInputMode } from '../../types/global';
 import { getColor } from '../../';
+import { baseProps } from '../common/props';
 
 /**
  * u-message-input 组件 props 类型定义
  * @description 验证码/短信输入框，支持多种样式
  */
 export const MessageInputProps = {
+    ...baseProps,
+    /** 输入框的类型，textarea，text，number */
+    type: {
+        type: String as PropType<InputType>,
+        default: 'number'
+    },
     /** 最大输入长度 */
     maxlength: {
         type: [Number, String] as PropType<number | string>,

@@ -1,10 +1,10 @@
 <template>
-    <view class="u-char-box">
+    <view class="u-char-box" :class="customClass" :style="$u.toStyle(customStyle)">
         <view class="u-char-flex">
             <input
                 :disabled="props.disabledKeyboard"
                 :value="valueModel"
-                type="number"
+                :type="type"
                 :focus="props.focus"
                 :maxlength="props.maxlength"
                 class="u-input"
@@ -86,6 +86,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { MessageInputProps } from './types';
+import { $u } from '../../';
 
 /**
  * messageInput 验证码输入框
