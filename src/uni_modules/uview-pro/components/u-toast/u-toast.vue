@@ -5,7 +5,13 @@
         :style="$u.toStyle({ zIndex: uZIndex }, customStyle)"
     >
         <view class="u-icon-wrap">
-            <u-icon v-if="tmpConfig.icon" class="u-icon" :name="iconName" :size="30" :color="tmpConfig.type"></u-icon>
+            <u-icon
+                v-if="tmpConfig.icon"
+                custom-class="u-toast_icon"
+                :name="iconName"
+                :size="30"
+                :color="tmpConfig.type"
+            ></u-icon>
         </view>
         <text class="u-text">{{ tmpConfig.title }}</text>
     </view>
@@ -175,8 +181,14 @@ defineExpose<ToastExpose>({
     opacity: 1;
 }
 
-.u-icon {
-    margin-right: 10rpx;
+.u-icon-wrap {
+    /* #ifdef H5 */
+    padding-top: 6rpx;
+    /* #endif */
+}
+
+:deep(.u-toast_icon) {
+    margin-right: 8rpx;
     @include vue-flex;
     align-items: center;
     line-height: normal;

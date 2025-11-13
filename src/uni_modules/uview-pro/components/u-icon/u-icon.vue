@@ -1,10 +1,10 @@
 <template>
-    <view :style="[customStyle]" class="u-icon" @click="onClick" :class="['u-icon--' + labelPos]">
+    <view :style="[customStyle]" class="u-icon" @click="onClick" :class="['u-icon--' + labelPos, customClass]">
         <image class="u-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="[imgStyle]" />
         <text
             v-else
             class="u-icon__icon"
-            :class="customClass"
+            :class="iconClass"
             :style="[iconStyle]"
             :hover-class="hoverClass"
             @touchstart="onTouchstart"
@@ -83,7 +83,7 @@ const props = defineProps(IconProps);
  * 计算图标的类名集合
  * @returns {string[]}
  */
-const customClass = computed(() => {
+const iconClass = computed(() => {
     let classes: string[] | string = [];
     classes.push(props.customPrefix + '-' + props.name);
     // uView的自定义图标类名为u-iconfont
