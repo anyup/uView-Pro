@@ -1,11 +1,8 @@
 <template>
     <view class="about-page">
-        <view
-            class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30"
-            @click="preview('https://ik.imagekit.io/anyup/images/social/weixin-person.png')"
-        >
+        <view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30" @click="preview('weixin-person')">
             <view class="u-m-r-10">
-                <u-avatar :src="pic" size="140"></u-avatar>
+                <u-avatar :src="getImageUrl('uview-pro')" size="140"></u-avatar>
             </view>
             <view class="u-flex-1">
                 <view class="u-font-18 u-p-b-20">uView Pro</view>
@@ -37,7 +34,7 @@
                     <template #icon>
                         <u-image
                             style="margin-right: 10rpx"
-                            :src="item.icon"
+                            :src="getImageUrl(item.icon)"
                             :width="50"
                             :height="50"
                             mode="aspectFill"
@@ -59,7 +56,7 @@
                     <template #icon>
                         <u-image
                             style="margin-right: 10rpx"
-                            :src="item.icon"
+                            :src="getImageUrl(item.icon)"
                             :width="50"
                             :height="50"
                             mode="aspectFill"
@@ -69,6 +66,7 @@
             </u-cell-group>
         </view>
         <u-gap height="70"></u-gap>
+        <u-toast ref="uToastRef" />
     </view>
 </template>
 
@@ -76,13 +74,12 @@
 import { onShareAppMessage } from '@dcloudio/uni-app';
 import { ref } from 'vue';
 
-// 头像图片
-const pic = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo.png');
+const uToastRef = ref();
 
 // 其他信息列表
 const infoList = ref([
     {
-        icon: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
+        icon: 'uview-pro',
         title: '官网文档',
         label: 'https://uviewpro.cn',
         click: () => {
@@ -90,15 +87,15 @@ const infoList = ref([
         }
     },
     {
-        icon: 'https://ik.imagekit.io/anyup/images/social/weixin_public.png',
+        icon: 'weixin_public',
         title: '关注公众号',
         label: '致力于分享各种前端技术最佳解决方案',
         click: () => {
-            preview('https://ik.imagekit.io/anyup/images/social/qr_wx_public.jpg');
+            preview('qr_weixin_public2');
         }
     },
     {
-        icon: 'https://ik.imagekit.io/anyup/images/social/juejin.png',
+        icon: 'juejin',
         title: '关注掘金',
         label: '掘金优秀创作者',
         click: () => {
@@ -106,7 +103,7 @@ const infoList = ref([
         }
     },
     {
-        icon: 'https://ik.imagekit.io/anyup/images/social/csdn.png',
+        icon: 'csdn',
         title: '关注CSDN',
         label: 'CSDN博客专家',
         click: () => {
@@ -114,11 +111,11 @@ const infoList = ref([
         }
     },
     {
-        icon: 'https://ik.imagekit.io/anyup/images/social/donate.png',
+        icon: 'donate',
         title: '捐赠',
         label: '每一份捐赠都是您对我的鼓励',
         click: () => {
-            preview('https://ik.imagekit.io/anyup/images/social/wechat-pay.png');
+            preview('wechat-pay');
         }
     }
 ]);
@@ -126,14 +123,33 @@ const infoList = ref([
 // 交流群列表
 const chatList = ref([
     {
-        icon: 'https://ik.imagekit.io/anyup/images/social/wxpublic.png',
+        icon: 'wxpublic',
         title: '微信交流群',
         label: '点击后长按二维码图片加入群聊，共同交流 uView Pro 相关问题',
         click: () => {
+            // #ifdef APP-HARMONY
+            preview('weixin-chat-cl');
+            // #endif
+            // #ifndef APP-HARMONY
             preview(`https://ik.imagekit.io/anyup/images/social/weixin-chat.png?updatedAt=${new Date().getTime()}`);
+            // #endif
         }
     }
 ]);
+
+// 获取图片地址
+function getImageUrl(name: string, force: boolean = false) {
+    let url = `https://ik.imagekit.io/anyup/images/social/${name}.png`;
+    // #ifdef APP-HARMONY
+    url = `/static/app/${name}.png`;
+    // #endif
+    // #ifdef APP-HARMONY
+    if (force) {
+        url = `${url}?updatedAt=${new Date().getTime()}`;
+    }
+    // #endif
+    return url;
+}
 
 /**
  * 列表项点击事件
@@ -146,9 +162,13 @@ function itemClick(item: any) {
  * 图片预览
  */
 function preview(url: string) {
+    if (!url) return;
+    if (!url.includes('http')) {
+        url = getImageUrl(url, true);
+    }
     uni.previewImage({
         urls: [url],
-        current: 0
+        current: url
     });
 }
 
@@ -163,13 +183,19 @@ function copyLink(url: string) {
     uni.setClipboardData({
         data: url,
         success: () => {
-            uni.showToast({
-                title: '链接已复制，请到浏览器中打开',
-                icon: 'none'
-            });
+            showToast('链接已复制，请打开浏览器粘贴访问');
         }
     });
     // #endif
+}
+
+// 显示Toast
+function showToast(title: string) {
+    // 通过ref调用uToast组件的show方法
+    uToastRef.value?.show({
+        title: title,
+        type: 'success'
+    });
 }
 
 /**
