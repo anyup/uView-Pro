@@ -3,7 +3,7 @@
 ### ✨ Features | 新功能
 
 - **u-dropdown:** u-dropdown中的u-dropdown-item中新增控制显示隐藏属性 ([e4ee28f](https://github.com/anyup/uView-Pro/commit/e4ee28fd0a66ceb6bbed07b7969862e936e5e573))
-- 支持嵌套属性验证(a.b.c格式) ([1bbead8](https://github.com/anyup/uView-Pro/commit/1bbead8be764491844a7d3909480a360ff2dc4d4))
+- **u-form:** 支持嵌套属性验证(a.b.c格式) ([1bbead8](https://github.com/anyup/uView-Pro/commit/1bbead8be764491844a7d3909480a360ff2dc4d4))
 - **form:** 添加表单字段的嵌套校验演示示例 ([73b4abe](https://github.com/anyup/uView-Pro/commit/73b4abe98047ac5193b56b71cdacb05957760e93))
 
 ### 🚀 Chore | 构建/工程依赖/工具
@@ -16,7 +16,7 @@
 
 ### 👥 Contributors
 
-<a href="https://github.com/xiaozuoovo"><img src="https://github.com/xiaozuoovo.png?size=40" width="40" height="40" alt="XiaoZuoOvO" title="XiaoZuoOvO"/></a> <a href="https://github.com/不爱说话郭德纲"><img src="https://github.com/不爱说话郭德纲.png?size=40" width="40" height="40" alt="不爱说话郭德纲" title="不爱说话郭德纲"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+<a href="https://github.com/zuo-wentao"><img src="https://github.com/zuo-wentao.png?size=40" width="40" height="40" alt="zuo-wentao" title="zuo-wentao"/></a> <a href="https://github.com/elkelkelkelkelk"><img src="https://github.com/elkelkelkelkelk.png?size=40" width="40" height="40" alt="elkelkelkelkelk" title="elkelkelkelkelk"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
 
 ## 0.3.14（2025-11-14）
 

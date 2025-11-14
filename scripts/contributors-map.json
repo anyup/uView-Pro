@@ -1,6 +1,8 @@
 {
     "nameToGithub": {
-        "前端梦工厂": "anyup"
+        "前端梦工厂": "anyup",
+        "不爱说话郭德纲": "elkelkelkelkelk",
+        "xiaozuoovo": "zuo-wentao"
     },
     "ignore": ["前端梦工厂"],
     "note": "此文件用于将作者名映射到 GitHub 用户名。如果自动推断的用户名头像不显示，可以在此配置。ignore 数组中的作者名将不会显示头像。"
