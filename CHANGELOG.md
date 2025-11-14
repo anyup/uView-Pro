@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.15] - 2025-11-14
+
+### ✨ Features | 新功能
+
+- **u-dropdown:** u-dropdown中的u-dropdown-item中新增控制显示隐藏属性 ([e4ee28f](https://github.com/anyup/uView-Pro/commit/e4ee28fd0a66ceb6bbed07b7969862e936e5e573))
+- 支持嵌套属性验证(a.b.c格式) ([1bbead8](https://github.com/anyup/uView-Pro/commit/1bbead8be764491844a7d3909480a360ff2dc4d4))
+- **form:** 添加表单字段的嵌套校验演示示例 ([73b4abe](https://github.com/anyup/uView-Pro/commit/73b4abe98047ac5193b56b71cdacb05957760e93))
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- 更新应用 logo 和图标 ([38d52e4](https://github.com/anyup/uView-Pro/commit/38d52e4a9e8656bcae89892a5f94a5201a1af7b2))
+
+### ♻️ Code Refactoring | 代码重构
+
+- 更新 logo 图片地址 ([c0fe3d1](https://github.com/anyup/uView-Pro/commit/c0fe3d15d6f4498229feaba860ff78e43a5297e6))
+
+### 👥 Contributors
+
+<a href="https://github.com/xiaozuoovo"><img src="https://github.com/xiaozuoovo.png?size=40" width="40" height="40" alt="XiaoZuoOvO" title="XiaoZuoOvO"/></a> <a href="https://github.com/不爱说话郭德纲"><img src="https://github.com/不爱说话郭德纲.png?size=40" width="40" height="40" alt="不爱说话郭德纲" title="不爱说话郭德纲"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.3.14] - 2025-11-14
 
 ### ✨ Features | 新功能
