@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.14] - 2025-11-14
+
+### ✨ Features | 新功能
+
+- **app-harmony:** 更新应用信息并添加鸿蒙签名配置，鸿蒙应用打包差异性编译 ([81a33c1](https://github.com/anyup/uView-Pro/commit/81a33c13a471721848033cc5f7ac1e3b3b30abc6))
+- **u-message-input:** 新增输入框类型prop，支持number，text等模式 ([68a865a](https://github.com/anyup/uView-Pro/commit/68a865a12b7e0b20db458ea403579d28a227aaeb))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **components:** 优化 u-icon 和 u-toast 组件样式和结构 ([3cfb01d](https://github.com/anyup/uView-Pro/commit/3cfb01ddb8612e274e1bccd43fca0b5bb4e0a405))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.3.13] - 2025-11-11
 
 ### 🐛 Bug Fixes | Bug 修复
