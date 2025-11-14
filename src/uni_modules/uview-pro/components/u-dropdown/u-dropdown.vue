@@ -149,9 +149,14 @@ onMounted(() => {
 function init() {
     menuList.value = [];
     children.forEach(child => {
+        // 过滤不显示的项
+        const show = child?.getExposed()?.props.show !== false;
+        if (!show) return;
+
         menuList.value.push({
             title: child?.getExposed()?.props.title ?? '',
-            disabled: child?.getExposed()?.props.disabled ?? false
+            disabled: child?.getExposed()?.props.disabled ?? false,
+            childIndex: children.indexOf(child)
         });
     });
 }
@@ -167,8 +172,11 @@ function menuClick(index: number) {
     if (index === current.value && props.closeOnClickSelf) {
         close();
         // 等动画结束后，再移除下拉菜单中的内容，否则直接移除，也就没有下拉菜单收起的效果了
+        const childIndex = menuList.value[index]?.childIndex; //避免访问到show为false的项
         setTimeout(() => {
-            if (children[index]) children[index]?.getExposed()?.setActive(false);
+            if (childIndex !== undefined && children[childIndex]) {
+                children[childIndex]?.getExposed()?.setActive(false);
+            }
         }, Number(props.duration));
         return;
     }
@@ -191,8 +199,9 @@ function open(index: number) {
     current.value = index;
     // 历遍所有的子元素，将索引匹配的项标记为激活状态，因为子元素是通过v-if控制切换的
     // 之所以不是因display: none，是因为nvue没有display这个属性
+    const childIndex = menuList.value[index]?.childIndex; //避免访问到show为false的项
     children.forEach((child, idx) => {
-        child?.getExposed()?.setActive(index == idx ? true : false);
+        child?.getExposed()?.setActive(childIndex === idx ? true : false);
     });
     emit('open', current.value);
 }

@@ -1,6 +1,6 @@
 <template>
     <view
-        v-if="active"
+        v-if="show && active"
         class="u-dropdown-item"
         :class="customClass"
         :style="$u.toStyle(customStyle)"
@@ -62,6 +62,7 @@ import { DropdownItemProps } from './types';
  * @property {Boolean} disabled 是否禁用此选项卡（默认false）
  * @property {String | Number} duration 选项卡展开和收起的过渡时间，单位ms（默认300）
  * @property {String | Number} height 弹窗下拉内容的高度(内容超出将会滚动)（默认auto）
+ * @property {Boolean} show 控制是否显示菜单项（默认true）
  * @example <u-dropdown-item title="标题"></u-dropdown-item>
  */
 
@@ -84,7 +85,7 @@ const activeColor = computed(() => parentExposed.value?.props?.activeColor || $u
 const inactiveColor = computed(() => parentExposed.value?.props?.inactiveColor || $u.color.contentColor);
 
 // 监听props变化，通知父组件重新初始化
-const propsChange = computed(() => `${props.title}-${props.disabled}`);
+const propsChange = computed(() => `${props.title}-${props.disabled}-${props.show}`);
 
 // 监听propsChange变化，通知父组件重新init
 watch(propsChange, () => {
