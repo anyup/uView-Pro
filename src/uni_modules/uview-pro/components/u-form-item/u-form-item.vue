@@ -219,6 +219,31 @@ function broadcastInputError() {
 }
 
 /**
+ * 根据路径获取对象的值（支持嵌套路径，如 'a.b.c'）
+ * @param obj 对象
+ * @param path 路径字符串
+ */
+function getPropByPath(obj: any, path: string) {
+    if (!obj || !path) return { o: obj, k: '', v: undefined };
+
+    const paths = path.split('.');
+    let current = obj;
+    let key = '';
+
+    for (let i = 0; i < paths.length; i++) {
+        key = paths[i];
+        if (!current) break;
+
+        if (i === paths.length - 1) {
+            return { o: current, k: key, v: current[key] };
+        }
+        current = current[key];
+    }
+
+    return { o: current, k: key, v: undefined };
+}
+
+/**
  * 获取当前u-form-item的校验规则
  */
 function getRules() {
@@ -268,8 +293,10 @@ function getFilteredRule(triggerType = '') {
  * @param callback 校验回调
  */
 function validation(trigger: string, callback: (msg: string) => void = () => {}) {
-    // 检验之前，先获取需要校验的值
-    fieldValue.value = parentExposed?.value?.model?.value[props.prop];
+    // 检验之前，先获取需要校验的值（支持嵌套路径）
+    const propPath = getPropByPath(parentExposed?.value?.model?.value, props.prop);
+    fieldValue.value = propPath.v;
+
     // blur和change是否有当前方式的校验规则
     let rules = getFilteredRule(trigger);
     // 判断是否有验证规则，如果没有规则，也调用回调方法，否则父组件u-form会因为
@@ -282,7 +309,7 @@ function validation(trigger: string, callback: (msg: string) => void = () => {})
     validateState.value = 'validating';
     // 调用async-validator的方法
     let validator = new schema({ [props.prop]: rules });
-    validator.validate({ [props.prop]: fieldValue.value }, { firstFields: true }, (errors: any, fields: any) => {
+    validator.validate({ [props.prop]: fieldValue.value }, { firstFields: true }, (errors: any) => {
         // 记录状态和报错信息
         validateState.value = !errors ? 'success' : 'error';
         validateMessage.value = errors ? errors[0].message : '';
@@ -296,7 +323,11 @@ function validation(trigger: string, callback: (msg: string) => void = () => {})
  */
 function resetField() {
     if (parentExposed?.value?.model?.value && props.prop) {
-        parentExposed.value.model.value[props.prop] = initialValue.value;
+        // 支持嵌套路径的重置
+        const propPath = getPropByPath(parentExposed.value.model.value, props.prop);
+        if (propPath.o && propPath.k) {
+            propPath.o[propPath.k] = initialValue.value;
+        }
     }
     // 设置为`success`状态，只是为了清空错误标记
     // 延时50毫秒，如果立即清空状态，则无法清空错误标记
@@ -324,8 +355,9 @@ onMounted(() => {
                         prop: props.prop
                     });
                 errorType.value = parentExposed?.value?.errorType || errorType.value;
-                // 设置初始值
-                fieldValue.value = parentExposed?.value?.model?.value[props.prop];
+                // 设置初始值（支持嵌套路径）
+                const propPath = getPropByPath(parentExposed?.value?.model?.value, props.prop);
+                fieldValue.value = propPath.v;
                 // 设置初始值
                 initialValue.value = fieldValue.value;
             }
