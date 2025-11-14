@@ -10,6 +10,7 @@ import { baseProps } from '../common/props';
  * @property {OptionType[]} options 选项数据，如果传入了默认slot，此参数无效
  * @property {Boolean} disabled 是否禁用此选项卡（默认false）
  * @property {String|Number} height 弹窗下拉内容的高度(内容超出将会滚动)（默认auto）
+ * @property {Boolean} show 控制是否显示菜单项（默认true）
  */
 
 export const DropdownItemProps = {
@@ -23,7 +24,9 @@ export const DropdownItemProps = {
     /** 是否禁用此菜单项 */
     disabled: { type: Boolean, default: false },
     /** 下拉弹窗的高度 */
-    height: { type: [Number, String] as PropType<number | string>, default: 'auto' }
+    height: { type: [Number, String] as PropType<number | string>, default: 'auto' },
+    /** 控制是否显示菜单项 */
+    show: { type: Boolean, default: true }
 };
 
 export type DropdownItemProps = ExtractPropTypes<typeof DropdownItemProps>;
