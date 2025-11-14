@@ -25,8 +25,13 @@
             <u-form-item :label-position="labelPosition" label="简介" prop="intro">
                 <u-input type="textarea" :border="border" placeholder="请输入简介" v-model="model.intro" />
             </u-form-item>
-            <u-form-item :label-position="labelPosition" label="特长" prop="strong">
-                <u-textarea :border="border" v-model="model.strong" placeholder="请输入特长" count></u-textarea>
+            <u-form-item :label-position="labelPosition" label="特长" prop="extra.strong">
+                <u-textarea
+                    :border="border"
+                    v-model="model.extra.strong"
+                    placeholder="请输入特长，这是一个嵌套校验，a.b.c"
+                    count
+                ></u-textarea>
             </u-form-item>
             <u-form-item :label-position="labelPosition" label="密码" prop="password">
                 <u-input
@@ -172,6 +177,7 @@ interface Model {
     rePassword: string;
     remember: boolean;
     photo: string;
+    extra: { strong: string };
 }
 
 // 表单模型
@@ -190,7 +196,10 @@ const model = reactive<Model>({
     password: '',
     rePassword: '',
     remember: false,
-    photo: ''
+    photo: '',
+    extra: {
+        strong: ''
+    }
 });
 
 // 选择器列表
@@ -267,7 +276,7 @@ const rules: FormRules = {
             trigger: ['change', 'blur']
         }
     ],
-    strong: [
+    'extra.strong': [
         {
             required: true,
             message: '请输入特长',
