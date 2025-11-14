@@ -90,7 +90,7 @@ const uUploadRef = ref();
 // const fileList = ref<UploadFileItem[]>([]);
 const fileList = ref<UploadFileItem[]>([
     {
-        url: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
+        url: 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png',
         error: false,
         progress: 100
     }

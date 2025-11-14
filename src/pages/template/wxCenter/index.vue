@@ -50,7 +50,7 @@
 import { ref, onMounted } from 'vue';
 
 // 用户头像图片地址
-const pic = ref<string>('https://ik.imagekit.io/anyup/uview-pro/common/logo.png');
+const pic = ref<string>('https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png');
 // 控制页面显示（如后续有弹窗、遮罩等可用）
 const show = ref<boolean>(true);
 

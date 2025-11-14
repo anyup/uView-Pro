@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-    <img alt="logo" src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png" width="120" height="120" style="margin-bottom: 10px;">
+    <img alt="logo" src="https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png" width="120" height="120" style="margin-bottom: 10px;">
 </p>
 <h3 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">uView Pro</h3>
 <h3 align="center">uni-app Vue3 多平台快速开发的 UI 框架</h3>

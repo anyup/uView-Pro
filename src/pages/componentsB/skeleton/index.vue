@@ -52,7 +52,7 @@ import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
 
 const userInfo = ref({
-    avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png',
+    avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png',
     nickName: 'uView'
 });
 const lists = ref([

@@ -1,7 +1,11 @@
 <template>
     <view class="nav-wrap">
         <view class="nav-title">
-            <image class="logo" src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png" mode="widthFix"></image>
+            <image
+                class="logo"
+                src="https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png"
+                mode="widthFix"
+            ></image>
             <view class="nav-info">
                 <view class="nav-title__text">
                     <text class="nav-info__title__text">uView Pro</text>

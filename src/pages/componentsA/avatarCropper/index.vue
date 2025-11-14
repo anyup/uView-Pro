@@ -30,7 +30,7 @@
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 
-const avatar = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo.png');
+const avatar = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png');
 
 const chooseAvatar = () => {
     $u.route({

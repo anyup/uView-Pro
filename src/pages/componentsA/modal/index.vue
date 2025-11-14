@@ -19,7 +19,7 @@
                         <view class="warp" style="margin: 30rpx">
                             <image
                                 class="logo"
-                                src="https://ik.imagekit.io/anyup/uview-pro/common/logo.png"
+                                src="https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png"
                                 style="width: 220rpx"
                                 mode="widthFix"
                             ></image>

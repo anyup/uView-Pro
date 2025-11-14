@@ -57,7 +57,7 @@ import { ref } from 'vue';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
 
 // 定义响应式数据
-const src = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo.png');
+const src = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png');
 const width = ref('200');
 const height = ref('200');
 const loadingSlot = ref(false);
@@ -96,7 +96,7 @@ const shapeChange = (index: number) => {
 
 const srcChange = (index: number) => {
     if (index == 0) {
-        src.value = 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png';
+        src.value = 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png';
     } else {
         src.value = '/static/logo.png';
     }

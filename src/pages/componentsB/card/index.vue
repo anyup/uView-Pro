@@ -62,13 +62,13 @@ import { ref } from 'vue';
 
 const title = ref('素胚勾勒出青花，笔锋浓转淡');
 const subTitle = ref('2020-05-15');
-const thumb = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo.png');
+const thumb = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png');
 const padding = ref(20);
 const bottomSlot = ref(true);
 const border = ref(true);
 
 function thumbChange(index: number) {
-    thumb.value = index === 0 ? 'https://ik.imagekit.io/anyup/uview-pro/common/logo.png' : '';
+    thumb.value = index === 0 ? 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png' : '';
 }
 
 function paddingChange(index: number) {
