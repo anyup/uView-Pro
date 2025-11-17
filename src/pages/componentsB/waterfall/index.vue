@@ -2,7 +2,7 @@
     <view class="wrap">
         <u-waterfall v-model="flowList" ref="uWaterfallRef">
             <template v-slot:left="{ leftList }">
-                <view class="demo-warter" v-for="(item, index) in leftList" :key="index">
+                <view class="demo-warter" v-for="(item, index) in leftList" :key="item.id">
                     <!-- 微信小程序需要hx2.8.11版本才支持在template中引入其他组件，比如下方的u-lazy-load组件 -->
                     <u-lazy-load threshold="-450" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
                     <view class="demo-title">{{ item.title }}</view>
@@ -18,7 +18,7 @@
                 </view>
             </template>
             <template v-slot:right="{ rightList }">
-                <view class="demo-warter" v-for="(item, index) in rightList" :key="index">
+                <view class="demo-warter" v-for="(item, index) in rightList" :key="item.id">
                     <u-lazy-load threshold="-450" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
                     <view class="demo-title">{{ item.title }}</view>
                     <view class="demo-price">{{ item.price }}元</view>

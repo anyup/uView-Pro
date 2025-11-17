@@ -23,9 +23,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
-import { $u } from '../..';
+import { ref, computed, watch, onMounted } from 'vue';
 import { WaterfallProps } from './types';
+import { useRect, $u } from '../../';
+
+const { getRect } = useRect();
 
 /**
  * waterfall 瀑布流
@@ -43,7 +45,6 @@ const props = defineProps(WaterfallProps);
 const leftList = ref<any[]>([]);
 const rightList = ref<any[]>([]);
 const tempList = ref<any[]>([]);
-const instance = getCurrentInstance();
 
 /**
  * 破坏 flowList 变量的引用，否则 watch 的结果新旧值是一样的
@@ -67,7 +68,7 @@ onMounted(() => {
  * 复制而不是引用对象和数组
  */
 function cloneData(data: any) {
-    return JSON.parse(JSON.stringify(data));
+    return $u.deepClone(data);
 }
 
 /**
@@ -75,8 +76,8 @@ function cloneData(data: any) {
  */
 async function splitData() {
     if (!tempList.value.length) return;
-    const leftRect = await $u.getRect('#u-left-column', instance);
-    const rightRect = await $u.getRect('#u-right-column', instance);
+    const leftRect = await getRect('#u-left-column');
+    const rightRect = await getRect('#u-right-column');
     // 如果左边小于或等于右边，就添加到左边，否则添加到右边
     const item = tempList.value[0];
     // 解决多次快速上拉后，可能数据会乱的问题，因为经过上面的两个await节点查询阻塞一定时间，加上后面的定时器干扰
