@@ -12,5 +12,6 @@ onHide(() => {
 </script>
 <style lang="scss">
 @import '@/uni_modules/uview-pro/index.scss';
+@import '@/common/iconfont.css';
 @import '@/common/demo.scss';
 </style>

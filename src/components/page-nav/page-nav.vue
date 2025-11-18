@@ -18,7 +18,7 @@
         <view class="nav-desc">
             {{ desc }}
         </view>
-        <!-- #ifndef APP-PLUS -->
+        <!-- #ifndef APP -->
         <view class="lang" @tap="switchLang">
             <u-icon size="46" color="warning" :name="lang"></u-icon>
         </view>
@@ -27,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import { useTitle } from '@/common/util';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -35,13 +36,15 @@ import { useI18n } from 'vue-i18n';
  * @description 顶部logo、标题、描述、语言切换
  */
 
-defineProps<{
+const props = defineProps<{
     desc?: string;
     title?: string;
+    index: number;
 }>();
 
 // 国际化钩子
 const { t, locale } = useI18n();
+const { setTitle } = useTitle(props.index);
 
 /**
  * 当前语言标识
@@ -57,6 +60,8 @@ function switchLang() {
     const nextLocale = locale.value === 'zh-Hans' ? 'en' : 'zh-Hans';
     uni.setLocale(nextLocale);
     locale.value = nextLocale;
+    // 设置标题
+    setTitle();
 }
 </script>
 

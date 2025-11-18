@@ -1,6 +1,6 @@
 <template>
     <view class="wrap">
-        <page-nav :desc="desc" title="nav.components"></page-nav>
+        <page-nav :desc="desc" title="nav.components" :index="0"></page-nav>
         <view class="list-wrap">
             <u-collapse :item-style="itemStyle" event-type="close" :arrow="true" :accordion="false">
                 <u-collapse-item :index="index" v-for="(item, index) in list" :key="index" :open="true">
@@ -9,7 +9,7 @@
                             <!-- #ifndef MP-WEIXIN -->
                             <image style="width: 30rpx" :src="getIcon(item.icon)" mode="widthFix"></image>
                             <!-- #endif -->
-                            <text>{{ getGroupTitle(item) }}（{{ item.list.length }}）</text>
+                            <text>{{ getTitle('groupName', item) }}（{{ item.list.length }}）</text>
                         </view>
                     </template>
                     <demo-card :list="item.list" />
@@ -17,14 +17,16 @@
             </u-collapse>
         </view>
         <u-gap height="70"></u-gap>
+        <u-back-top :scroll-top="scrollTop" mode="square" />
     </view>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import rawList from './components.config';
-import { onShareAppMessage } from '@dcloudio/uni-app';
+import { onPageScroll, onShareAppMessage, onShow } from '@dcloudio/uni-app';
+import { useTitle } from '@/common/util';
 
 // 组件数据
 const itemStyle = {
@@ -34,9 +36,10 @@ const itemStyle = {
     borderRadius: '8px'
 };
 const list = ref<any[]>(Array.isArray(rawList) ? rawList : []); // 明确类型 any[]
-
+const scrollTop = ref(0);
 // 国际化
 const { t, locale } = useI18n();
+const { setTitle, getTitle } = useTitle(0);
 
 // 获取图标地址
 const getIcon = (path: string) => {
@@ -45,13 +48,6 @@ const getIcon = (path: string) => {
 
 // 组件描述
 const desc = computed(() => t('components.desc'));
-
-// 设置导航栏标题
-onMounted(() => {
-    uni.setNavigationBarTitle({
-        title: t('nav.components')
-    });
-});
 
 /**
  * 路由跳转
@@ -62,13 +58,6 @@ function openPage(path: string) {
 }
 
 /**
- * 获取分组标题（中英文）
- */
-function getGroupTitle(item: any) {
-    return locale.value === 'zh-Hans' ? item.groupName : item.groupName_en;
-}
-
-/**
  * 分享
  */
 onShareAppMessage(res => {
@@ -76,6 +65,16 @@ onShareAppMessage(res => {
         title: 'uView Pro - 组件示例',
         path: '/pages/example/components'
     };
+});
+
+// 页面滚动事件处理
+onPageScroll(e => {
+    scrollTop.value = e.scrollTop;
+});
+
+// 设置标题
+onShow(() => {
+    setTitle();
 });
 </script>
 

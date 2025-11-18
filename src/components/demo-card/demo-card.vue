@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import { getRandomColor } from '@/common/util';
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -42,24 +43,6 @@ const { t, locale } = useI18n();
 
 // 存储每个item的随机背景色
 const navColors = ref<Record<string, string>>({});
-/**
- * 生成随机浅色背景
- */
-function getRandomColor() {
-    const colors = [
-        '#39b54a',
-        '#f39c12',
-        '#3498db',
-        '#e74c3c',
-        '#9b59b6',
-        '#16a085',
-        '#e67e22',
-        '#2ecc71',
-        '#1abc9c',
-        '#34495e'
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
 /**
  * 获取分组标题（中英文）
  */

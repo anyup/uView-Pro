@@ -1,20 +1,22 @@
 {
     "components": {
-        "desc": "uView Pro is a uni-app ecosystem framework with full support for Vue3.0 TypeScript. Comprehensive components and convenient tools will make you feel at your ease"
+        "desc": "uView Pro is a high-quality, cross-platform UI component library for multiple platforms. It includes 80+ built-in components and a rich utility library to help efficiently develop Mini Programs, H5, Apps, HarmonyOS, and more."
     },
     "js": {
-        "desc": "Numerous intimate gadgets are a weapon that you can call upon during the development process, allowing you to dart in your hand and pierce the Yang with a hundred steps"
+        "desc": "Numerous intimate gadgets are a weapon that you can call upon during the development process, allowing you to dart in your hand and pierce the Yang with a hundred steps."
     },
     "template": {
-        "desc": "Collection of many commonly used pages and layouts, reducing the repetitive work of developers, allowing you to focus on logic and get twice the result with half the effort"
+        "desc": "Collection of many commonly used pages and layouts, reducing the repetitive work of developers, allowing you to focus on logic and get twice the result with half the effort."
     },
     "nav": {
         "components": "Components",
-        "js": "JS",
-        "template": "Template"
+        "js": "Tools",
+        "template": "Template",
+        "about": "About"
     },
     "common": {
         "intro": "UI framework for rapid development of multiple platforms",
-        "title": "uView UI"
+        "title": "uView Pro",
+        "tryit": "Try-it"
     }
 }

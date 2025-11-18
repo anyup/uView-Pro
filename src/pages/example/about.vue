@@ -71,11 +71,15 @@
 </template>
 
 <script setup lang="ts">
-import { onShareAppMessage } from '@dcloudio/uni-app';
+import { useTitle } from '@/common/util';
+import { onShareAppMessage, onShow } from '@dcloudio/uni-app';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const uToastRef = ref();
-
+// 国际化
+const { t, locale } = useI18n();
+const { setTitle } = useTitle(3);
 // 其他信息列表
 const infoList = ref([
     {
@@ -206,6 +210,11 @@ onShareAppMessage(res => {
         title: 'uView Pro - 组件示例',
         path: '/pages/example/components'
     };
+});
+
+// 设置标题
+onShow(() => {
+    setTitle();
 });
 </script>
 
