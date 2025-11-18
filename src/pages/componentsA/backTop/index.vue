@@ -44,6 +44,7 @@
 import { ref } from 'vue';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
 import { $u } from '@/uni_modules/uview-pro';
+import { onPageScroll } from '@dcloudio/uni-app';
 
 const scrollTop = ref(0);
 const mode = ref<Shape>('circle');
@@ -94,8 +95,15 @@ function styleChange(index: number) {
             color: '#909399',
             fontSize: '38rpx'
         };
+        customStyle.value = {
+            backgroundColor: '#e1e1e1'
+        };
+        tips.value = '';
     }
 }
+onPageScroll(e => {
+    scrollTop.value = e.scrollTop;
+});
 </script>
 
 <style lang="scss" scoped>
