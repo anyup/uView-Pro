@@ -2,11 +2,6 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
 import { getColor } from '../../';
 
-try {
-    console.log(getColor('primary'));
-} catch (e) {
-    console.log('get color error');
-}
 /**
  * u-dropdown 下拉菜单 Props
  * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景
