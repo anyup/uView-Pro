@@ -119,7 +119,6 @@ function initObserver() {
     // #ifndef H5
     stickyTop.value = Number(props.offsetTop) !== 0 ? uni.upx2px(Number(props.offsetTop)) : 0;
     // #endif
-    console.log('stickyTop.value', stickyTop.value);
     disconnectObserver('contentObserver');
     $u.getRect('.' + elClass.value, instance).then((res: any) => {
         height.value = res.height;

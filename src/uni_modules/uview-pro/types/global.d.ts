@@ -271,6 +271,7 @@ export type TabsItem = {
     [key: string]: any;
     name?: string | number;
     count?: string | number;
+    hidden?: boolean;
 };
 // tabs-swiper 组件 list item
 export type TabsSwiperListItem = {

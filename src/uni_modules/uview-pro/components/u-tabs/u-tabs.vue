@@ -6,6 +6,7 @@
                 <view class="u-scroll-box" :id="id" :class="{ 'u-tabs-scroll-flex': !isScroll }">
                     <view
                         class="u-tab-item u-line-1"
+                        :class="[item.hidden ? 'u-tab-item-hidden' : '']"
                         :id="'u-tab-item-' + index"
                         v-for="(item, index) in list"
                         :key="index"
@@ -288,6 +289,10 @@ scroll-view ::v-deep ::-webkit-scrollbar {
     /* #endif */
     text-align: center;
     transition-property: background-color, color;
+}
+
+.u-tab-item-hidden {
+    display: none;
 }
 
 .u-tab-bar {
