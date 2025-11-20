@@ -43,12 +43,17 @@ import { LinkProps } from './types';
  * @example <u-link href="https://uviewpro.cn">蜀道难，难于上青天</u-link>
  */
 const props = defineProps(LinkProps);
+const emit = defineEmits(['click']);
 
 /**
  * 打开链接方法
  * 不同平台有不同表现形式
  */
 function openLink() {
+    if (!props.defaultClick) {
+        emit('click', props.href);
+        return;
+    }
     // #ifdef APP-PLUS
     if (typeof plus !== 'undefined' && plus.runtime) {
         plus.runtime.openURL(props.href);

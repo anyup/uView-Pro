@@ -35,6 +35,11 @@ export const LinkProps = {
     lineColor: {
         type: String,
         default: ''
+    },
+    /** 是否默认点击跳转 */
+    defaultClick: {
+        type: Boolean,
+        default: true
     }
 };
 
