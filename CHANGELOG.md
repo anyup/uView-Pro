@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.16] - 2025-11-21
+
+### 📝 Documentation | 文档
+
+- 更新贡献者信息 ([a6d52dc](https://github.com/anyup/uView-Pro/commit/a6d52dc6db9d56ccdf5c5ad4230e32c716e36241))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **u-waterfall:** 优化瀑布流组件性能和代码结构 ([841c465](https://github.com/anyup/uView-Pro/commit/841c465de4f1a1efc43e05248794b566e0051bd8))
+- **pages:** 重构工具和模板页面，优化i18n国际化功能 ([6cfda7f](https://github.com/anyup/uView-Pro/commit/6cfda7f2ecfd6dd60501201d8797fe702b29df4d))
+- **u-dropdown:** 删除无用的测试代码 ([7c06f1f](https://github.com/anyup/uView-Pro/commit/7c06f1f3f0d1dcd5ae2bbd3420a4124c5faec004))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **backTop:** 修复回到顶部组件示例无效的问题 ([5a9b736](https://github.com/anyup/uView-Pro/commit/5a9b7366f5916627815488039327669f424dd0ce))
+- **u-text:** 修复 u-text 组件单行省略号显示无效的问题 ([041ee36](https://github.com/anyup/uView-Pro/commit/041ee36fb60d5a082fbdde7e9334ae42b386944c))
+
+### ✨ Features | 新功能
+
+- **u-link:** 添加自定义点击跳转功能 ([8a521f3](https://github.com/anyup/uView-Pro/commit/8a521f36a9f417aa90263cdcf7978ce48d6ed01e))
+- **u-tabs:** 增强 u-tabs 组件，支持隐藏 tab 项的功能配置 ([9a58964](https://github.com/anyup/uView-Pro/commit/9a58964061a7d18510624fb4c6d009568bd3974c))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+
 ## [0.3.15] - 2025-11-14
 
 ### ✨ Features | 新功能
