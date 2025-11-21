@@ -1,6 +1,6 @@
 import { createSSRApp } from 'vue';
 import App from './App.vue';
-import theme from '@/common/uview-pro.theme';
+import theme from '@/uview-pro.theme';
 import uViewPro, { httpPlugin } from '@/uni_modules/uview-pro';
 import { httpInterceptor, httpRequestConfig } from './common/http.interceptor';
 import i18n from '@/locales';

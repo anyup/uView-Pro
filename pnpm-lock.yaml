@@ -84,6 +84,9 @@ importers:
       '@dcloudio/vite-plugin-uni':
         specifier: 3.0.0-4060620250520001
         version: 3.0.0-4060620250520001(postcss@8.5.6)(rollup@4.46.4)(vite@5.2.8(@types/node@24.3.0)(sass@1.63.2)(terser@5.43.1))(vue@3.5.18(typescript@5.9.2))
+      '@uni-ku/root':
+        specifier: ^1.4.1
+        version: 1.4.1(vite@5.2.8(@types/node@24.3.0)(sass@1.63.2)(terser@5.43.1))
       '@vue/runtime-core':
         specifier: 3.4.21
         version: 3.4.21
@@ -1496,6 +1499,11 @@ packages:
 
   '@types/yargs@16.0.9':
     resolution: {integrity: sha512-tHhzvkFXZQeTECenFoRljLBYPZJ7jAVxqqtEI0qTLOmuultnFp4I9yKE17vTuhf7BkhCu7I4XuemPgikDVuYqA==}
+
+  '@uni-ku/root@1.4.1':
+    resolution: {integrity: sha512-DI9LLbWmPXjqJVwZTC84GuvSz9vzOgSUjbFrOE1y3kivttEReNVqwWM3n/kzFoNuS3KKm/DissOph4rFs912Zw==}
+    peerDependencies:
+      vite: ^5.0.0
 
   '@vitejs/plugin-legacy@5.3.2':
     resolution: {integrity: sha512-8moCOrIMaZ/Rjln0Q6GsH6s8fAt1JOI3k8nmfX4tXUxE5KAExVctSyOBk+A25GClsdSWqIk2yaUthH3KJ2X4tg==}
@@ -6442,6 +6450,13 @@ snapshots:
   '@types/yargs@16.0.9':
     dependencies:
       '@types/yargs-parser': 21.0.3
+
+  '@uni-ku/root@1.4.1(vite@5.2.8(@types/node@24.3.0)(sass@1.63.2)(terser@5.43.1))':
+    dependencies:
+      '@vue/compiler-sfc': 3.4.21
+      chokidar: 3.6.0
+      jsonc-parser: 3.3.1
+      vite: 5.2.8(@types/node@24.3.0)(sass@1.63.2)(terser@5.43.1)
 
   '@vitejs/plugin-legacy@5.3.2(terser@5.43.1)(vite@5.2.8(@types/node@24.3.0)(sass@1.63.2)(terser@5.43.1))':
     dependencies:

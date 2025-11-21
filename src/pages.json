@@ -54,15 +54,6 @@
         {
             "root": "pages/componentsC",
             "pages": [
-                // test-测试
-                {
-                    "path": "test/index",
-                    "style": {
-                        "navigationBarTitleText": "Test"
-                        // "navigationStyle": "custom" ,// 隐藏系统导航栏
-                        // "navigationBarTextStyle": "white" // 状态栏字体为白色
-                    }
-                },
                 // gap-间隔槽
                 {
                     "path": "gap/index",
