@@ -7,7 +7,7 @@ export const StatusBarProps = {
     background: {
         type: String,
         default: 'transparent'
-    },
+    }
 };
 
 export type StatusBarProps = ExtractPropTypes<typeof StatusBarProps>;

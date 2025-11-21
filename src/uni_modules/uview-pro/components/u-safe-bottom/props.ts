@@ -5,7 +5,7 @@ import { baseProps } from '../common/props';
  * SafeBottomProps SafeBottom 底部安全区
  */
 export const SafeBottomProps = {
-    ...baseProps,
+    ...baseProps
 };
 
 export type SafeBottomProps = ExtractPropTypes<typeof SafeBottomProps>;

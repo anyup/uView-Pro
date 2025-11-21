@@ -5,7 +5,7 @@
         :class="[
             props.bold ? 'u-text--bold' : '',
             props.block ? 'u-text--block' : 'u-text--inline',
-            props.lines ? 'u-text--ellipsis' : '',
+            props.lines ? 'u-text--ellipsis u-text--block' : '',
             `u-text--align-${props.align}`,
             customClass
         ]"
@@ -206,8 +206,12 @@ const textValueStyle = computed(() => {
             : undefined
     };
     if (props.lines) {
-        style['display'] = '-webkit-box';
-        style['-webkit-box-orient'] = 'vertical';
+        if (props.lines == 1) {
+            style['display'] = 'block';
+        } else {
+            style['display'] = '-webkit-box';
+            style['-webkit-box-orient'] = 'vertical';
+        }
     }
     if (!props.type) style.color = props.color;
     if (isNvue.value && props.lines) style.lines = props.lines;
