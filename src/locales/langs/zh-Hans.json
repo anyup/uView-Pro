@@ -1,5 +1,12 @@
 {
     "components": {
+        "find": "找到",
+        "matchingComponent": "个匹配组件",
+        "clear": "清空",
+        "searchComponent": "搜索组件...",
+        "search": "搜索",
+        "notFound": "未找到匹配的组件",
+        "theme": "切换主题",
         "desc": "uView Pro 是一套高质量、跨平台的多端 UI 组件库，内置 80+ 组件与丰富工具库，助力高效开发小程序、H5、App、HarmonyOS 等应用！"
     },
     "js": {

@@ -1,5 +1,12 @@
 {
     "components": {
+        "find": "Found",
+        "matchingComponent": "matching components",
+        "clear": "Clear",
+        "searchComponent": "Search components...",
+        "search": "Search",
+        "notFound": "No matching component was found.",
+        "theme": "Switch Theme",
         "desc": "uView Pro is a high-quality, cross-platform UI component library for multiple platforms. It includes 80+ built-in components and a rich utility library to help efficiently develop Mini Programs, H5, Apps, HarmonyOS, and more."
     },
     "js": {
