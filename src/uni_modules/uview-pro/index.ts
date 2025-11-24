@@ -1,6 +1,7 @@
 import { $u, type RequestOptions } from './libs';
 import type { UViewProOptions } from './types/global';
 import { logger } from './libs/util/logger';
+import configProvider from './libs/util/config-provider';
 
 declare const uni: {
     [key: string]: any;
@@ -16,7 +17,10 @@ const install = (app: any, options?: UViewProOptions): void => {
     if (options) {
         // 配置主题：使用 $u.setTheme 以就地更新 reactive $u.color
         if (options.theme) {
-            $u.setTheme?.(options.theme);
+            $u.setColor?.(options.theme);
+        }
+        if (options.themes) {
+            configProvider.init(options.themes);
         }
         // 设置调试模式
         logger
