@@ -1,56 +1,64 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">u-loading-popup 原生用法</view>
-            <view class="u-demo-area">
-                <button type="primary" @click="openLoading">显示 Loading Popup</button>
-                <!-- v-model:modelValue 控制弹窗显示，支持所有原生 props -->
-                <u-loading-popup
-                    ref="uLoadingPopupRef"
-                    v-model="show"
-                    :text="text"
-                    :cancelTime="cancelTime"
-                    :duration="duration"
-                    :direction="direction"
-                    :color="color"
-                    :size="size"
-                    @cancel="onCancel"
-                />
+    <demo-page title="LoadingPopup 加载弹窗" desc="用于显示加载弹窗，支持自定义文案、时长和方向。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">u-loading-popup 原生用法</view>
+                    <view class="u-demo-area">
+                        <button type="primary" @click="openLoading">显示 Loading Popup</button>
+                        <!-- v-model:modelValue 控制弹窗显示，支持所有原生 props -->
+                        <u-loading-popup
+                            ref="uLoadingPopupRef"
+                            v-model="show"
+                            :text="text"
+                            :cancelTime="cancelTime"
+                            :duration="duration"
+                            :direction="direction"
+                            :color="color"
+                            :size="size"
+                            @cancel="onCancel"
+                        />
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom">参数配置</view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">方向</view>
+                        <u-subsection :list="['vertical', 'horizontal']" @change="directionChange" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">颜色</view>
+                        <u-subsection
+                            :list="['#c7c7c7', 'primary', 'error', 'warning', 'success']"
+                            @change="colorChange"
+                        />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">尺寸(单位rpx)</view>
+                        <u-subsection current="1" :list="['32', '48', '64']" @change="sizeChange" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">文案</view>
+                        <input class="u-input" v-model="text" placeholder="请输入 loading 文案" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自动关闭(ms)-0为不自动关闭</view>
+                        <input class="u-input" type="number" v-model.number="duration" placeholder="0=不自动关闭" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">遮罩可关闭延时(ms)</view>
+                        <input class="u-input" type="number" v-model.number="cancelTime" placeholder="默认10000" />
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">方向</view>
-                <u-subsection :list="['vertical', 'horizontal']" @change="directionChange" />
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">颜色</view>
-                <u-subsection :list="['#c7c7c7', 'primary', 'error', 'warning', 'success']" @change="colorChange" />
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">尺寸(单位rpx)</view>
-                <u-subsection current="1" :list="['32', '48', '64']" @change="sizeChange" />
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">文案</view>
-                <input class="u-input" v-model="text" placeholder="请输入 loading 文案" />
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自动关闭(ms)-0为不自动关闭</view>
-                <input class="u-input" type="number" v-model.number="duration" placeholder="0=不自动关闭" />
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">遮罩可关闭延时(ms)</view>
-                <input class="u-input" type="number" v-model.number="cancelTime" placeholder="默认10000" />
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 // 是否显示 loading popup
 const show = ref(false);

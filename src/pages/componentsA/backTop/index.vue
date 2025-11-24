@@ -1,43 +1,46 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="u-no-demo-here">滚动页面即可在右下角看到返回顶部的按钮</view>
+    <demo-page title="BackTop 返回顶部" desc="用于快速返回页面顶部，支持自定义样式、位置和图标。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <view class="u-no-demo-here">滚动页面即可在右下角看到返回顶部的按钮</view>
+                    </view>
+                    <u-back-top
+                        :scrollTop="scrollTop"
+                        :mode="mode"
+                        :bottom="bottom"
+                        :right="right"
+                        :top="top"
+                        :icon="icon"
+                        :custom-style="customStyle"
+                        :icon-style="iconStyle"
+                        :tips="tips"
+                    />
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式</view>
+                        <u-subsection :list="['圆形', '方形']" @change="modeChange" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">组件位置</view>
+                        <u-subsection :list="['默认', '自定义']" @change="positionChange" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">显示组件的滚动条距离</view>
+                        <u-subsection current="1" :list="['200', '400', '600']" @change="scrollTopChange" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义样式</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="styleChange" />
+                    </view>
+                </view>
             </view>
-            <u-back-top
-                :scrollTop="scrollTop"
-                :mode="mode"
-                :bottom="bottom"
-                :right="right"
-                :top="top"
-                :icon="icon"
-                :custom-style="customStyle"
-                :icon-style="iconStyle"
-                :tips="tips"
-            >
-            </u-back-top>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式</view>
-                <u-subsection :list="['圆形', '方形']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">组件位置</view>
-                <u-subsection :list="['默认', '自定义']" @change="positionChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">显示组件的滚动条距离</view>
-                <u-subsection current="1" :list="['200', '400', '600']" @change="scrollTopChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义样式</view>
-                <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
@@ -45,6 +48,7 @@ import { ref } from 'vue';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
 import { $u } from '@/uni_modules/uview-pro';
 import { onPageScroll } from '@dcloudio/uni-app';
+import { apis } from './config';
 
 const scrollTop = ref(0);
 const mode = ref<Shape>('circle');

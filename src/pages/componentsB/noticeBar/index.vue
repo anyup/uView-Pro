@@ -1,65 +1,70 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast :type="type" ref="uToastRef"></u-toast>
-                <u-notice-bar
-                    :autoplay="autoplay"
-                    :playState="playState"
-                    :speed="speed"
-                    @getMore="getMore"
-                    :mode="mode"
-                    @end="end"
-                    @close="close"
-                    @click="click"
-                    :show="show"
-                    :type="type"
-                    :list="list"
-                    :moreIcon="moreIcon"
-                    :volumeIcon="volumeIcon"
-                    :duration="duration"
-                    :isCircular="isCircular"
-                ></u-notice-bar>
+    <demo-page title="NoticeBar 通知栏" desc="用于展示通知消息，支持水平和竖直滚动、自定义颜色和速度。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast :type="type" ref="uToastRef"></u-toast>
+                        <u-notice-bar
+                            :autoplay="autoplay"
+                            :playState="playState"
+                            :speed="speed"
+                            @getMore="getMore"
+                            :mode="mode"
+                            @end="end"
+                            @close="close"
+                            @click="click"
+                            :show="show"
+                            :type="type"
+                            :list="list"
+                            :moreIcon="moreIcon"
+                            :volumeIcon="volumeIcon"
+                            :duration="duration"
+                            :isCircular="isCircular"
+                        ></u-notice-bar>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">主题</view>
+                        <u-subsection
+                            :current="3"
+                            :list="['primary', 'success', 'error', 'warning', 'none']"
+                            @change="typeChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">滚动模式</view>
+                        <u-subsection :current="current" :list="['水平', '垂直']" @change="modeChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">是否衔接(水平模式有效)</view>
+                        <u-subsection :list="['是', '否']" @change="isCircularChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">状态</view>
+                        <u-subsection :list="['播放', '暂停']" @change="playStateChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">速度</view>
+                        <u-subsection :current="1" :list="['慢', '正常', '快']" @change="speedChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">图标</view>
+                        <u-subsection :list="['显示', '隐藏']" @change="iconChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">主题</view>
-                <u-subsection
-                    :current="3"
-                    :list="['primary', 'success', 'error', 'warning', 'none']"
-                    @change="typeChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">滚动模式</view>
-                <u-subsection :current="current" :list="['水平', '垂直']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">是否衔接(水平模式有效)</view>
-                <u-subsection :list="['是', '否']" @change="isCircularChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-subsection :list="['播放', '暂停']" @change="playStateChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">速度</view>
-                <u-subsection :current="1" :list="['慢', '正常', '快']" @change="speedChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">图标</view>
-                <u-subsection :list="['显示', '隐藏']" @change="iconChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { Direction, PlayState, ThemeType } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const show = ref(true);
 const autoplay = ref(false);

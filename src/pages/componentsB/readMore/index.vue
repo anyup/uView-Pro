@@ -1,34 +1,49 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-read-more @open="open" @close="close" :toggle="toggle" :show-height="showHeight" ref="uReadMoreRef">
-                    <!-- u-parse组件在微信小程序渲染慢，支付宝小程序rich-text不支持nodes属性 -->
-                    <!-- #ifdef MP-ALIPAY -->
-                    <!-- #endif -->
-                    <!-- #ifndef MP-ALIPAY -->
-                    <rich-text :nodes="content"></rich-text>
-                    <!-- #endif -->
-                </u-read-more>
+    <demo-page title="ReadMore 展开更多" desc="用于展示可收缩的长文本内容，支持自定义高度和展开关闭功能。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-read-more
+                            @open="open"
+                            @close="close"
+                            :toggle="toggle"
+                            :show-height="showHeight"
+                            ref="uReadMoreRef"
+                        >
+                            <!-- u-parse组件在微信小程序渲染慢，支付宝小程序rich-text不支持nodes属性 -->
+                            <!-- #ifdef MP-ALIPAY -->
+                            <!-- #endif -->
+                            <!-- #ifndef MP-ALIPAY -->
+                            <rich-text :nodes="content"></rich-text>
+                            <!-- #endif -->
+                        </u-read-more>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">超出高度隐藏</view>
+                        <u-subsection
+                            current="1"
+                            :list="['100', '200', '400']"
+                            @change="showHeightChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">展开后可关闭</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="toggleChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">超出高度隐藏</view>
-                <u-subsection current="1" :list="['100', '200', '400']" @change="showHeightChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">展开后可关闭</view>
-                <u-subsection current="1" :list="['是', '否']" @change="toggleChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { apis } from './config';
 
 const content = ref(`浔阳江头夜送客，枫叶荻花秋瑟瑟。主人下马客在船，举酒欲饮无管弦。醉不成欢惨将别，别时茫茫江浸月。
 					忽闻水上琵琶声，主人忘归客不发。寻声暗问弹者谁，琵琶声停欲语迟。移船相近邀相见，添酒回灯重开宴。千呼万唤始出来，犹抱琵琶半遮面。转轴拨弦三两声，未成曲调先有情。弦弦掩抑声声思，似诉平生不得志。低眉信手续续弹，说尽心中无限事。轻拢慢捻抹复挑，初为《霓裳》后《六幺》。大弦嘈嘈如急雨，小弦切切如私语。嘈嘈切切错杂弹，大珠小珠落玉盘。间关莺语花底滑，幽咽泉流冰下难。冰泉冷涩弦凝绝，凝绝不通声暂歇。别有幽愁暗恨生，此时无声胜有声。银瓶乍破水浆迸，铁骑突出刀枪鸣。曲终收拨当心画，四弦一声如裂帛。东船西舫悄无言，唯见江心秋月白。

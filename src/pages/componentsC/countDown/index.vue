@@ -1,54 +1,59 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
-                <u-count-down
-                    class="count-down-demo"
-                    :timestamp="timestamp"
-                    :separator="separator"
-                    :showBorder="showBorder"
-                    :separator-color="separatorColor"
-                    :showDays="showDays"
-                    :fontSize="fontSize"
-                    @change="change"
-                    ref="uCountDownRef"
-                    :border-color="borderColor"
-                    :color="color"
-                    @end="end"
-                    bg-color="rgb(250, 250, 250)"
-                ></u-count-down>
+    <demo-page title="CountDown 倒计时" desc="以数字和分隔符的形式展示倒计时，精确到毫秒级别。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToastRef"></u-toast>
+                        <u-count-down
+                            class="count-down-demo"
+                            :timestamp="timestamp"
+                            :separator="separator"
+                            :showBorder="showBorder"
+                            :separator-color="separatorColor"
+                            :showDays="showDays"
+                            :fontSize="fontSize"
+                            @change="change"
+                            ref="uCountDownRef"
+                            :border-color="borderColor"
+                            :color="color"
+                            @end="end"
+                            bg-color="rgb(250, 250, 250)"
+                        ></u-count-down>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">调整时间</view>
+                        <u-subsection :list="['60', '86400', '983272']" @change="timestampChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">分隔符</view>
+                        <u-subsection :list="['英文冒号', '中文名称']" @change="separatorChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义样式</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">显示天</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="showDaysChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">字体大小</view>
+                        <u-subsection current="1" :list="['26', '30', '34']" @change="fontSizeChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">调整时间</view>
-                <u-subsection :list="['60', '86400', '983272']" @change="timestampChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">分隔符</view>
-                <u-subsection :list="['英文冒号', '中文名称']" @change="separatorChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义样式</view>
-                <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">显示天</view>
-                <u-subsection current="1" :list="['是', '否']" @change="showDaysChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">字体大小</view>
-                <u-subsection current="1" :list="['26', '30', '34']" @change="fontSizeChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { apis } from './config';
 import { $u } from '@/uni_modules/uview-pro';
 
 const uToastRef = ref(null);

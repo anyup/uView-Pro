@@ -1,57 +1,65 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="u-demo-result-line">{{ input ? input : 'Picker值' }}</view>
-                <u-picker
-                    :mode="mode"
-                    :defaultTime="defaultTime"
-                    v-model="show"
-                    :defaultRegion="defaultRegion"
-                    :params="params"
-                    end-year="2030"
-                    @confirm="confirm"
-                    :defaultSelector="defaultSelector"
-                    :range="range"
-                    :range-key="rangKey"
-                    :preserve-selection="false"
-                    @columnchange="columnchange"
-                ></u-picker>
+    <demo-page title="Picker 选择器" desc="用于展示选择器，支持单选、多选、日期、地区等多种模式。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <view class="u-demo-result-line">{{ input ? input : 'Picker值' }}</view>
+                        <u-picker
+                            :mode="mode"
+                            :defaultTime="defaultTime"
+                            v-model="show"
+                            :defaultRegion="defaultRegion"
+                            :params="params"
+                            end-year="2030"
+                            @confirm="confirm"
+                            :defaultSelector="defaultSelector"
+                            :range="range"
+                            :range-key="rangKey"
+                            :preserve-selection="false"
+                            @columnchange="columnchange"
+                        ></u-picker>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom">参数配置</view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">Picker开关</view>
+                        <u-subsection :current="status" :list="['显示', '隐藏']" @change="statusChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式选择</view>
+                        <u-subsection :list="['单列', '多列', '时间', '地区']" @change="modeChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">默认时间</view>
+                        <u-subsection
+                            :list="['2019-12-11 20:15:35', '2020-02-05 13:09:42']"
+                            @change="defaultTimeChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">显示时分秒</view>
+                        <u-subsection :list="['显示', '隐藏']" @change="minSecChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">默认地区</view>
+                        <u-subsection
+                            :list="['广东-深圳-宝安', '海南-三亚-海棠']"
+                            @change="defaultRegionChange"
+                        ></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">Picker开关</view>
-                <u-subsection :current="status" :list="['显示', '隐藏']" @change="statusChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式选择</view>
-                <u-subsection :list="['单列', '多列', '时间', '地区']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">默认时间</view>
-                <u-subsection
-                    :list="['2019-12-11 20:15:35', '2020-02-05 13:09:42']"
-                    @change="defaultTimeChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">显示时分秒</view>
-                <u-subsection :list="['显示', '隐藏']" @change="minSecChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">默认地区</view>
-                <u-subsection :list="['广东-深圳-宝安', '海南-三亚-海棠']" @change="defaultRegionChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import type { PickerMode } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const show = ref(false);
 const input = ref<string | string[]>('');

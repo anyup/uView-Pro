@@ -1,40 +1,47 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
-                <u-verification-code
-                    :keep-running="true"
-                    :seconds="seconds"
-                    @end="end"
-                    @start="start"
-                    ref="uCodeRef"
-                    @change="codeChange"
-                    :startText="startText"
-                    :changeText="changeText"
-                    :endText="endText"
-                ></u-verification-code>
-                <u-button @click="getCode">{{ tips }}</u-button>
-                <u-button :custom-style="{ marginTop: '30rpx' }" @tap="reset" style="margin-top: 30rpx">重置</u-button>
+    <demo-page title="VerificationCode 验证码" desc="用于发送和倒计时验证码，支持自定义时长和文案。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToastRef"></u-toast>
+                        <u-verification-code
+                            :keep-running="true"
+                            :seconds="seconds"
+                            @end="end"
+                            @start="start"
+                            ref="uCodeRef"
+                            @change="codeChange"
+                            :startText="startText"
+                            :changeText="changeText"
+                            :endText="endText"
+                        ></u-verification-code>
+                        <u-button @click="getCode">{{ tips }}</u-button>
+                        <u-button :custom-style="{ marginTop: '30rpx' }" @tap="reset" style="margin-top: 30rpx"
+                            >重置</u-button
+                        >
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">倒计时间</view>
+                        <u-subsection :current="0" :list="['60s', '10s', '5s']" @change="secondsChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义提示语</view>
+                        <u-subsection :current="1" :list="['是', '否']" @change="textChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">倒计时间</view>
-                <u-subsection :current="0" :list="['60s', '10s', '5s']" @change="secondsChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义提示语</view>
-                <u-subsection :current="1" :list="['是', '否']" @change="textChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { apis } from './config';
 
 const tips = ref('');
 const seconds = ref(60);

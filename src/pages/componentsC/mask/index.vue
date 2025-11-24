@@ -1,41 +1,46 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
-                <view class="u-no-demo-here"> 请点击弹出遮罩查看效果 </view>
-                <u-mask :show="show" @click="show = false" :zoom="zoom" :duration="duration">
-                    <view class="warp" v-if="content">
-                        <view class="rect" @tap.stop></view>
+    <demo-page title="Mask 遮罩层" desc="用于展示遮罩层，可用于模态对话框背景或其他遮挡效果。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToastRef"></u-toast>
+                        <view class="u-no-demo-here"> 请点击弹出遮罩查看效果 </view>
+                        <u-mask :show="show" @click="show = false" :zoom="zoom" :duration="duration">
+                            <view class="warp" v-if="content">
+                                <view class="rect" @tap.stop></view>
+                            </view>
+                        </u-mask>
                     </view>
-                </u-mask>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">状态</view>
+                        <u-subsection :current="current" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">缩放效果</view>
+                        <u-subsection :list="['是', '否']" @change="zoomChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">内容填充</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="contentChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">动画时长(ms)</view>
+                        <u-subsection current="1" :list="['100', '300', '800']" @change="durationChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-subsection :current="current" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">缩放效果</view>
-                <u-subsection :list="['是', '否']" @change="zoomChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">内容填充</view>
-                <u-subsection current="1" :list="['是', '否']" @change="contentChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">动画时长(ms)</view>
-                <u-subsection current="1" :list="['100', '300', '800']" @change="durationChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
+import { apis } from './config';
 
 const uToastRef = ref();
 const show = ref(false);

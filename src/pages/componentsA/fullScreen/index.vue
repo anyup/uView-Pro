@@ -1,22 +1,26 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="u-no-demo-here">
-                    通过压窗屏打开的模态框，可以遮盖顶部原生的导航栏和底部tabbar栏。
-                    注意：压窗屏只对APP有效，其他端无效。
+    <demo-page title="FullScreen 压窗屏" desc="用于APP端模态弹窗遮盖全屏，支持压窗效果，适合特殊场景。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <view class="u-no-demo-here">
+                            通过压窗屏打开的模态框，可以遮盖顶部原生的导航栏和底部tabbar栏。
+                            注意：压窗屏只对APP有效，其他端无效。
+                        </view>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">状态</view>
+                        <u-subsection :current="current" :list="['打开', '关闭']" @change="openModal" />
+                    </view>
                 </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-subsection :current="current" :list="['打开', '关闭']" @change="openModal"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <!--<script>-->
@@ -47,6 +51,7 @@
 import { ref } from 'vue';
 import { onShow } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 const current = ref(1);
 

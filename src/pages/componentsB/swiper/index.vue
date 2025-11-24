@@ -1,52 +1,57 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToast"></u-toast>
-                <u-swiper
-                    @change="change"
-                    :height="250"
-                    :list="list"
-                    :title="title"
-                    :effect3d="effect3d"
-                    :indicator-pos="indicatorPos"
-                    :mode="mode"
-                    :interval="3000"
-                    @click="click"
-                ></u-swiper>
+    <demo-page title="Swiper 轮播" desc="用于图片或内容轮播展示，支持多种指示器模式和自动播放。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToast"></u-toast>
+                        <u-swiper
+                            @change="change"
+                            :height="250"
+                            :list="list"
+                            :title="title"
+                            :effect3d="effect3d"
+                            :indicator-pos="indicatorPos"
+                            :mode="mode"
+                            :interval="3000"
+                            @click="click"
+                        ></u-swiper>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">指示器模式</view>
+                        <u-subsection :list="['round', 'rect', 'number', 'none']" @change="modeChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">标题</view>
+                        <u-subsection current="1" :list="['显示', '隐藏']" @change="titleChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">指示器位置</view>
+                        <u-subsection
+                            current="3"
+                            :list="['上左', '上右', '下左', '下中', '下右']"
+                            @change="indicatorPosChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">3D效果</view>
+                        <u-subsection current="1" :list="['开启', '关闭']" @change="effect3dChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">指示器模式</view>
-                <u-subsection :list="['round', 'rect', 'number', 'none']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">标题</view>
-                <u-subsection current="1" :list="['显示', '隐藏']" @change="titleChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">指示器位置</view>
-                <u-subsection
-                    current="3"
-                    :list="['上左', '上右', '下左', '下中', '下右']"
-                    @change="indicatorPosChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">3D效果</view>
-                <u-subsection current="1" :list="['开启', '关闭']" @change="effect3dChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { SwiperIndicatorPosition, SwiperMode } from '@/uni_modules/uview-pro/types/global';
 import { img1, img2, img3 } from './image';
+import { apis } from './config';
 
 const uToastRef = ref(null);
 

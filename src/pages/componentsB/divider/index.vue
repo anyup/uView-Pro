@@ -1,48 +1,53 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-divider
-                    :type="type"
-                    :borderColor="borderColor"
-                    :bg-color="bgColor"
-                    @click="click"
-                    :half-width="halfWidth"
-                    :color="color"
-                    :font-size="fontSize"
-                >
-                    {{ text }}
-                </u-divider>
+    <demo-page title="Divider 分割线" desc="用于分割不同内容区域，支持自定义颜色、宽度、边距等样式。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-divider
+                            :type="type"
+                            :borderColor="borderColor"
+                            :bg-color="bgColor"
+                            @click="click"
+                            :half-width="halfWidth"
+                            :color="color"
+                            :font-size="fontSize"
+                        >
+                            {{ text }}
+                        </u-divider>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">提示内容</view>
+                        <u-subsection :list="['没有更多了', '到底了']" @change="textChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">单边线宽</view>
+                        <u-subsection current="1" :list="['50', '150', '250']" @change="halfWidthChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">横线颜色</view>
+                        <u-subsection
+                            :list="['#dcdfe6', 'primary', 'error', 'warning', 'success']"
+                            @change="borderColorChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">内容样式</view>
+                        <u-subsection :list="['默认', '自定义']" @change="contentChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">提示内容</view>
-                <u-subsection :list="['没有更多了', '到底了']" @change="textChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">单边线宽</view>
-                <u-subsection current="1" :list="['50', '150', '250']" @change="halfWidthChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">横线颜色</view>
-                <u-subsection
-                    :list="['#dcdfe6', 'primary', 'error', 'warning', 'success']"
-                    @change="borderColorChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">内容样式</view>
-                <u-subsection :list="['默认', '自定义']" @change="contentChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 import { ref } from 'vue';
 import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
 

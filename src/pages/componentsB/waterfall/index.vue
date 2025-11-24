@@ -1,40 +1,64 @@
 <template>
-    <view class="wrap">
-        <u-waterfall v-model="flowList" ref="uWaterfallRef">
-            <template v-slot:left="{ leftList }">
-                <view class="demo-warter" v-for="(item, index) in leftList" :key="item.id">
-                    <!-- 微信小程序需要hx2.8.11版本才支持在template中引入其他组件，比如下方的u-lazy-load组件 -->
-                    <u-lazy-load threshold="-450" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
-                    <view class="demo-title">{{ item.title }}</view>
-                    <view class="demo-price">{{ item.price }}元</view>
-                    <view class="demo-tag">
-                        <view class="demo-tag-owner">自营</view>
-                        <view class="demo-tag-text">放心购</view>
-                    </view>
-                    <view class="demo-shop">{{ item.shop }}</view>
-                    <view class="u-close">
-                        <u-icon name="close-circle-fill" color="#fa3534" size="34" @click="remove(item.id)"></u-icon>
-                    </view>
-                </view>
-            </template>
-            <template v-slot:right="{ rightList }">
-                <view class="demo-warter" v-for="(item, index) in rightList" :key="item.id">
-                    <u-lazy-load threshold="-450" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
-                    <view class="demo-title">{{ item.title }}</view>
-                    <view class="demo-price">{{ item.price }}元</view>
-                    <view class="demo-tag">
-                        <view class="demo-tag-owner">自营</view>
-                        <view class="demo-tag-text">放心购</view>
-                    </view>
-                    <view class="demo-shop">{{ item.shop }}</view>
-                    <view class="u-close">
-                        <u-icon name="close-circle-fill" color="#fa3534" size="34" @click="remove(item.id)"></u-icon>
-                    </view>
-                </view>
-            </template>
-        </u-waterfall>
-        <u-loadmore bg-color="rgb(240, 240, 240)" :status="loadStatus" @loadmore="addRandomData"></u-loadmore>
-    </view>
+    <demo-page title="Waterfall 瀑布流" desc="用于展示瀑布流布局，支持商品卡片展示和删除操作。" :apis="apis">
+        <template #default>
+            <view class="wrap">
+                <u-waterfall v-model="flowList" ref="uWaterfallRef">
+                    <template v-slot:left="{ leftList }">
+                        <view class="demo-warter" v-for="(item, index) in leftList" :key="item.id">
+                            <!-- 微信小程序需要hx2.8.11版本才支持在template中引入其他组件，比如下方的u-lazy-load组件 -->
+                            <u-lazy-load
+                                threshold="-450"
+                                border-radius="10"
+                                :image="item.image"
+                                :index="index"
+                            ></u-lazy-load>
+                            <view class="demo-title">{{ item.title }}</view>
+                            <view class="demo-price">{{ item.price }}元</view>
+                            <view class="demo-tag">
+                                <view class="demo-tag-owner">自营</view>
+                                <view class="demo-tag-text">放心购</view>
+                            </view>
+                            <view class="demo-shop">{{ item.shop }}</view>
+                            <view class="u-close">
+                                <u-icon
+                                    name="close-circle-fill"
+                                    color="#fa3534"
+                                    size="34"
+                                    @click="remove(item.id)"
+                                ></u-icon>
+                            </view>
+                        </view>
+                    </template>
+                    <template v-slot:right="{ rightList }">
+                        <view class="demo-warter" v-for="(item, index) in rightList" :key="item.id">
+                            <u-lazy-load
+                                threshold="-450"
+                                border-radius="10"
+                                :image="item.image"
+                                :index="index"
+                            ></u-lazy-load>
+                            <view class="demo-title">{{ item.title }}</view>
+                            <view class="demo-price">{{ item.price }}元</view>
+                            <view class="demo-tag">
+                                <view class="demo-tag-owner">自营</view>
+                                <view class="demo-tag-text">放心购</view>
+                            </view>
+                            <view class="demo-shop">{{ item.shop }}</view>
+                            <view class="u-close">
+                                <u-icon
+                                    name="close-circle-fill"
+                                    color="#fa3534"
+                                    size="34"
+                                    @click="remove(item.id)"
+                                ></u-icon>
+                            </view>
+                        </view>
+                    </template>
+                </u-waterfall>
+                <u-loadmore bg-color="rgb(240, 240, 240)" :status="loadStatus" @loadmore="addRandomData"></u-loadmore>
+            </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
@@ -42,6 +66,7 @@ import { ref } from 'vue';
 import { onLoad, onReachBottom } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
 import type { LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 // 商品项类型声明
 interface FlowItem {

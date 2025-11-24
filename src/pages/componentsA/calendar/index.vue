@@ -1,55 +1,61 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap" style="background-color: #ffffff">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-calendar
-                    v-model="show"
-                    ref="calendar"
-                    @change="change"
-                    :is-page="isPage"
-                    :mode="mode"
-                    :show-lunar="showLunar"
-                    :start-text="startText"
-                    :end-text="endText"
-                    :range-color="rangeColor"
-                    :range-bg-color="rangeBgColor"
-                    :active-bg-color="activeBgColor"
-                    :btn-type="btnType"
-                >
-                </u-calendar>
-                <view class="u-demo-result-line">
-                    {{ result }}
+    <demo-page
+        title="Calendar 日历 "
+        desc="此组件用于单个选择日期，范围选择日期等，日历被包裹在底部弹起的容器中。"
+        :apis="apis"
+    >
+        <view class="u-demo">
+            <view class="u-demo-wrap" style="background-color: #ffffff">
+                <view class="u-demo-title">演示效果</view>
+                <view class="u-demo-area">
+                    <u-calendar
+                        v-model="show"
+                        ref="calendar"
+                        @change="change"
+                        :is-page="isPage"
+                        :mode="mode"
+                        :show-lunar="showLunar"
+                        :start-text="startText"
+                        :end-text="endText"
+                        :range-color="rangeColor"
+                        :range-bg-color="rangeBgColor"
+                        :active-bg-color="activeBgColor"
+                        :btn-type="btnType"
+                    >
+                    </u-calendar>
+                    <view class="u-demo-result-line">
+                        {{ result }}
+                    </view>
+                    <view v-if="showLunar && lunarResult">
+                        {{ lunarResult }}
+                    </view>
                 </view>
-                <view v-if="showLunar && lunarResult">
-                    {{ lunarResult }}
+            </view>
+            <view class="u-config-wrap">
+                <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">显示方式</view>
+                    <u-subsection :current="showMode" :list="['弹窗', '页面']" @change="showModeChange"></u-subsection>
+                </view>
+                <view v-if="!isPage" class="u-config-item">
+                    <view class="u-item-title">状态</view>
+                    <u-subsection :current="showBtnStatus" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">模式</view>
+                    <u-subsection current="0" :list="['单个日期', '日期范围']" @change="modeChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">农历</view>
+                    <u-subsection current="1" :list="['显示', '隐藏']" @change="lunarChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">自定义样式</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
                 </view>
             </view>
         </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">显示方式</view>
-                <u-subsection :current="showMode" :list="['弹窗', '页面']" @change="showModeChange"></u-subsection>
-            </view>
-            <view v-if="!isPage" class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-subsection :current="showBtnStatus" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式</view>
-                <u-subsection current="0" :list="['单个日期', '日期范围']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">农历</view>
-                <u-subsection current="1" :list="['显示', '隐藏']" @change="lunarChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义样式</view>
-                <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
@@ -61,6 +67,7 @@ import type {
     ThemeType
 } from '@/uni_modules/uview-pro/types/global';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 const isPage = ref(false);
 const show = ref(false);

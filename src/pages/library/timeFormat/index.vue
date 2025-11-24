@@ -1,31 +1,36 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="u-no-demo-here">输入时间：{{ timestamp }}</view>
-                <view class="u-demo-result-line">
-                    {{ result }}
+    <demo-page title="TimeFormat 时间格式化" desc="用于将时间戳格式化为指定格式的时间字符串。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <view class="u-no-demo-here">输入时间：{{ timestamp }}</view>
+                        <view class="u-demo-result-line">
+                            {{ result }}
+                        </view>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">格式</view>
+                        <u-subsection :list="['yyyy-mm-dd', 'yyyy年-mm月-dd日']" @change="format1Change"></u-subsection>
+                        <view style="margin-top: 50rpx">
+                            <u-subsection :list="['mm-dd', 'yyyy-mm-dd hh:MM']" @change="format2Change"></u-subsection>
+                        </view>
+                    </view>
                 </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">格式</view>
-                <u-subsection :list="['yyyy-mm-dd', 'yyyy年-mm月-dd日']" @change="format1Change"></u-subsection>
-                <view style="margin-top: 50rpx">
-                    <u-subsection :list="['mm-dd', 'yyyy-mm-dd hh:MM']" @change="format2Change"></u-subsection>
-                </view>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 // 响应式状态
 const timestamp = ref<string>('2020-11-02T02:59:24.732Z');

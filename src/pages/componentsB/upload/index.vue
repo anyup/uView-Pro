@@ -1,82 +1,91 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToast"></u-toast>
-                <view class="pre-box" v-if="!showUploadList">
-                    <view class="pre-item" v-for="(item, index) in lists" :key="index">
-                        <image class="pre-item-image" :src="item.url" mode="aspectFill"></image>
-                        <view class="u-delete-icon" @tap.stop="deleteItem(index)">
-                            <u-icon name="close" size="20" color="#ffffff"></u-icon>
+    <demo-page title="Upload 上传" desc="用于文件上传，支持多个文件、进度显示和自定义样式。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToast"></u-toast>
+                        <view class="pre-box" v-if="!showUploadList">
+                            <view class="pre-item" v-for="(item, index) in lists" :key="index">
+                                <image class="pre-item-image" :src="item.url" mode="aspectFill"></image>
+                                <view class="u-delete-icon" @tap.stop="deleteItem(index)">
+                                    <u-icon name="close" size="20" color="#ffffff"></u-icon>
+                                </view>
+                                <u-line-progress
+                                    v-if="(item.progress ?? 0) > 0 && !item.error"
+                                    :show-percent="false"
+                                    height="16"
+                                    class="u-progress"
+                                    :percent="item.progress ?? 0"
+                                ></u-line-progress>
+                            </view>
                         </view>
-                        <u-line-progress
-                            v-if="(item.progress ?? 0) > 0 && !item.error"
-                            :show-percent="false"
-                            height="16"
-                            class="u-progress"
-                            :percent="item.progress ?? 0"
-                        ></u-line-progress>
+                        <u-upload
+                            ref="uUploadRef"
+                            :before-remove="beforeRemove"
+                            :custom-btn="customBtn"
+                            :show-upload-list="showUploadList"
+                            :action="action"
+                            :auto-upload="autoUpload"
+                            :file-list="fileList"
+                            :show-progress="showProgress"
+                            :deletable="deletable"
+                            :max-count="maxCount"
+                            @on-choose-fail="onChooseFail"
+                            @on-choose-complete="onChooseComplete"
+                            @on-error="onError"
+                            @on-change="onChange"
+                            @on-success="onSuccess"
+                            @on-list-change="onListChange"
+                            @on-uploaded="onUploaded"
+                            @on-progress="onProgress"
+                            @on-remove="onRemove"
+                            @on-preview="onPreview"
+                        >
+                            <template v-if="customBtn" #addBtn>
+                                <view class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
+                                    <u-icon name="photo" size="60" :color="$u.color.primary"></u-icon>
+                                </view>
+                            </template>
+                        </u-upload>
+                        <u-button :custom-style="{ marginTop: '20rpx' }" @click="upload">上传</u-button>
+                        <u-button :custom-style="{ marginTop: '40rpx' }" @click="clear">清空列表</u-button>
+                        <!-- <u-button :custom-style="{ marginTop: '40rpx' }" @click="reUpload">重新上传</u-button> -->
                     </view>
                 </view>
-                <u-upload
-                    ref="uUploadRef"
-                    :before-remove="beforeRemove"
-                    :custom-btn="customBtn"
-                    :show-upload-list="showUploadList"
-                    :action="action"
-                    :auto-upload="autoUpload"
-                    :file-list="fileList"
-                    :show-progress="showProgress"
-                    :deletable="deletable"
-                    :max-count="maxCount"
-                    @on-choose-fail="onChooseFail"
-                    @on-choose-complete="onChooseComplete"
-                    @on-error="onError"
-                    @on-change="onChange"
-                    @on-success="onSuccess"
-                    @on-list-change="onListChange"
-                    @on-uploaded="onUploaded"
-                    @on-progress="onProgress"
-                    @on-remove="onRemove"
-                    @on-preview="onPreview"
-                >
-                    <template v-if="customBtn" #addBtn>
-                        <view class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
-                            <u-icon name="photo" size="60" :color="$u.color.primary"></u-icon>
-                        </view>
-                    </template>
-                </u-upload>
-                <u-button :custom-style="{ marginTop: '20rpx' }" @click="upload">上传</u-button>
-                <u-button :custom-style="{ marginTop: '40rpx' }" @click="clear">清空列表</u-button>
-                <!-- <u-button :custom-style="{ marginTop: '40rpx' }" @click="reUpload">重新上传</u-button> -->
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">上传方式</view>
+                        <u-subsection
+                            current="1"
+                            :list="['自动上传', '手动上传']"
+                            @change="autoUploadChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义控件(进度条和删除按钮)</view>
+                        <u-subsection :list="['显示', '隐藏']" @change="controlChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">最大上传数量</view>
+                        <u-subsection current="1" :list="['1', '2', '4']" @change="maxCountChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义样式(预览区域和上传按钮)</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="customStyleChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">上传方式</view>
-                <u-subsection current="1" :list="['自动上传', '手动上传']" @change="autoUploadChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义控件(进度条和删除按钮)</view>
-                <u-subsection :list="['显示', '隐藏']" @change="controlChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">最大上传数量</view>
-                <u-subsection current="1" :list="['1', '2', '4']" @change="maxCountChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义样式(预览区域和上传按钮)</view>
-                <u-subsection current="1" :list="['是', '否']" @change="customStyleChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 // 上传文件项类型
 interface UploadFileItem {

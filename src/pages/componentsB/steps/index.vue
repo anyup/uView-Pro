@@ -1,61 +1,76 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="title"> list传入 </view>
-                <u-steps :direction="direction" :current="current" :list="steps" :mode="mode" :icon="icon"></u-steps>
-                <view class="title"> slot </view>
-                <u-steps :direction="direction" :current="current" :mode="mode" :icon="icon">
-                    <u-step name="预约">
-                        <template #desc>
-                            <text v-show="current < 0">自定义描述</text>
-                            <text v-show="current >= 0" class="custom-desc">自定义描述</text>
-                        </template>
-                    </u-step>
-                    <u-step desc="10:30">
-                        <template #name>
-                            <text v-show="current < 1">名额确认</text>
-                            <text v-show="current >= 1" class="custom-name">名额不足</text>
-                        </template>
-                    </u-step>
-                    <u-step desc="11:00">
-                        <template #name>
-                            <text v-show="current < 2">预约成功</text>
-                            <text v-show="current >= 2" class="custom-error-name">预约失败</text>
-                        </template>
-                        <template #icon>
-                            <u-icon size="32" color="red" name="close"></u-icon>
-                        </template>
-                    </u-step>
-                </u-steps>
+    <demo-page title="Steps 步骤条" desc="用于展示步骤流程，支持不同模式和方向设置。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <view class="title"> list传入 </view>
+                        <u-steps
+                            :direction="direction"
+                            :current="current"
+                            :list="steps"
+                            :mode="mode"
+                            :icon="icon"
+                        ></u-steps>
+                        <view class="title"> slot </view>
+                        <u-steps :direction="direction" :current="current" :mode="mode" :icon="icon">
+                            <u-step name="预约">
+                                <template #desc>
+                                    <text v-show="current < 0">自定义描述</text>
+                                    <text v-show="current >= 0" class="custom-desc">自定义描述</text>
+                                </template>
+                            </u-step>
+                            <u-step desc="10:30">
+                                <template #name>
+                                    <text v-show="current < 1">名额确认</text>
+                                    <text v-show="current >= 1" class="custom-name">名额不足</text>
+                                </template>
+                            </u-step>
+                            <u-step desc="11:00">
+                                <template #name>
+                                    <text v-show="current < 2">预约成功</text>
+                                    <text v-show="current >= 2" class="custom-error-name">预约失败</text>
+                                </template>
+                                <template #icon>
+                                    <u-icon size="32" color="red" name="close"></u-icon>
+                                </template>
+                            </u-step>
+                        </u-steps>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式</view>
+                        <u-subsection :list="['number', 'dot']" @change="modeChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">方向</view>
+                        <u-subsection :list="['横向', '竖向']" @change="directionChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义图标</view>
+                        <u-subsection :list="['否', '是']" @change="iconChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">当前步值</view>
+                        <u-subsection
+                            :current="1"
+                            :list="['0', '1', '2', '3', '4']"
+                            @change="stepChange"
+                        ></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式</view>
-                <u-subsection :list="['number', 'dot']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">方向</view>
-                <u-subsection :list="['横向', '竖向']" @change="directionChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义图标</view>
-                <u-subsection :list="['否', '是']" @change="iconChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">当前步值</view>
-                <u-subsection :current="1" :list="['0', '1', '2', '3', '4']" @change="stepChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import type { StepDirection, StepMode } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const steps = computed(() => {
     if (direction.value === 'row') {

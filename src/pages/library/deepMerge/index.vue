@@ -1,32 +1,37 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="u-no-demo-here">
-                    源对象1为："{info: {name: 'mary'}}"
-                    <view> </view>
-                    源对象2为："{info: {age: '22'}}"
+    <demo-page title="DeepMerge 深合并" desc="用于实现对象的深度合并，递归合并嵌套的对象属性。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <view class="u-no-demo-here">
+                            源对象1为："{info: {name: 'mary'}}"
+                            <view> </view>
+                            源对象2为："{info: {age: '22'}}"
+                        </view>
+                        <view class="u-demo-result-line">
+                            {{ reslutValue }}
+                        </view>
+                    </view>
                 </view>
-                <view class="u-demo-result-line">
-                    {{ reslutValue }}
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式</view>
+                        <u-subsection :list="['浅拷贝', '深拷贝']" @change="modeChange"></u-subsection>
+                    </view>
                 </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式</view>
-                <u-subsection :list="['浅拷贝', '深拷贝']" @change="modeChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 type InfoType = {
     name?: string;

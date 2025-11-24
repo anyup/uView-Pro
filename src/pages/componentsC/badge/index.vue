@@ -1,62 +1,73 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="u-badge-wrap">
-                    <u-badge
-                        :is-center="isCenter"
-                        :type="type"
-                        :count="count"
-                        :is-dot="isDot"
-                        :offset="offset"
-                        :size="size"
-                    >
-                    </u-badge>
+    <demo-page
+        title="Badge 徽标数"
+        desc="该组件一般用于图标右上角显示未读的消息数量，提示用户点击，有圆点和圆包含文字两种形式。"
+        :apis="apis"
+    >
+        <view class="u-demo">
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">演示效果</view>
+                <view class="u-demo-area">
+                    <view class="u-badge-wrap">
+                        <u-badge
+                            :is-center="isCenter"
+                            :type="type"
+                            :count="count"
+                            :is-dot="isDot"
+                            :offset="offset"
+                            :size="size"
+                        >
+                        </u-badge>
+                    </view>
+                </view>
+            </view>
+            <view class="u-config-wrap">
+                <view class="u-config-title u-border-bottom">参数配置</view>
+                <view class="u-config-item">
+                    <view class="u-item-title">数值显示</view>
+                    <u-subsection
+                        current="1"
+                        :list="['0', '8', '15', '106', '209']"
+                        @change="countChange"
+                    ></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">主题选择</view>
+                    <u-subsection
+                        current="2"
+                        :list="['primary', 'success', 'error', 'warning', 'info']"
+                        @change="typeChange"
+                    ></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">显示点</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="isDotChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">尺寸</view>
+                    <u-subsection :list="['default', 'mini']" @change="sizeChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">位置偏移</view>
+                    <u-subsection
+                        current="1"
+                        :list="['[20, 20]', '[-8, -8]', '[-20, -20]']"
+                        @change="offsetChange"
+                    ></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">中心点与父右上角重合</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="isCenterChange"></u-subsection>
                 </view>
             </view>
         </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">数值显示</view>
-                <u-subsection current="1" :list="['0', '8', '15', '106', '209']" @change="countChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">主题选择</view>
-                <u-subsection
-                    current="2"
-                    :list="['primary', 'success', 'error', 'warning', 'info']"
-                    @change="typeChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">显示点</view>
-                <u-subsection current="1" :list="['是', '否']" @change="isDotChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">尺寸</view>
-                <u-subsection :list="['default', 'mini']" @change="sizeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">位置偏移</view>
-                <u-subsection
-                    current="1"
-                    :list="['[20, 20]', '[-8, -8]', '[-20, -20]']"
-                    @change="offsetChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">中心点与父右上角重合</view>
-                <u-subsection current="1" :list="['是', '否']" @change="isCenterChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { ThemeType, BadgeSize } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const count = ref(8);
 const type = ref<ThemeType>('error');

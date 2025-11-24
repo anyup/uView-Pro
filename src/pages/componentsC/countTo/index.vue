@@ -1,58 +1,69 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
-                <view class="u-no-demo-here">如果使用text-align: center对齐，数字滚动期间可能会抖动，见文档说明</view>
-                <view class="count-to-demo">
-                    <u-count-to
-                        class="count-to"
-                        :useEasing="useEasing"
-                        ref="uCountToRef"
-                        :autoplay="autoplay"
-                        :startVal="startVal"
-                        :endVal="endVal"
-                        :duration="duration"
-                        :decimals="decimals"
-                        :bold="bold"
-                        @end="end"
-                    ></u-count-to>
+    <demo-page title="CountTo 数字滚动" desc="以动画形式展示数字从起始值滚动到目标值的过程。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToastRef"></u-toast>
+                        <view class="u-no-demo-here"
+                            >如果使用text-align: center对齐，数字滚动期间可能会抖动，见文档说明</view
+                        >
+                        <view class="count-to-demo">
+                            <u-count-to
+                                class="count-to"
+                                :useEasing="useEasing"
+                                ref="uCountToRef"
+                                :autoplay="autoplay"
+                                :startVal="startVal"
+                                :endVal="endVal"
+                                :duration="duration"
+                                :decimals="decimals"
+                                :bold="bold"
+                                @end="end"
+                            ></u-count-to>
+                        </view>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom">参数配置</view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">状态</view>
+                        <u-subsection
+                            :current="current"
+                            :list="['启动', '暂停', '继续', '重置']"
+                            @change="statusChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">目标值</view>
+                        <u-subsection :list="['608', '5604', '45617']" @change="endValChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">滚动时间</view>
+                        <u-subsection
+                            current="1"
+                            :list="['1000', '2000', '3000']"
+                            @change="durationChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">显示小数</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="decimalsChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">字体加粗</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="boldChange"></u-subsection>
+                    </view>
                 </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-subsection
-                    :current="current"
-                    :list="['启动', '暂停', '继续', '重置']"
-                    @change="statusChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">目标值</view>
-                <u-subsection :list="['608', '5604', '45617']" @change="endValChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">滚动时间</view>
-                <u-subsection current="1" :list="['1000', '2000', '3000']" @change="durationChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">显示小数</view>
-                <u-subsection current="1" :list="['是', '否']" @change="decimalsChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">字体加粗</view>
-                <u-subsection current="1" :list="['是', '否']" @change="boldChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref, nextTick } from 'vue';
+import { apis } from './config';
 
 const uToastRef = ref(null);
 const uCountToRef = ref(null);

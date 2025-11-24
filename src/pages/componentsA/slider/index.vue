@@ -1,66 +1,74 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToast"></u-toast>
-                <u-slider
-                    :step="step"
-                    :height="height"
-                    :block-width="blockWidth"
-                    :active-color="activeColor"
-                    :value="30"
-                    :use-slot="useSlot"
-                    v-model="value"
-                    :min="min"
-                    :max="max"
-                    @end="end"
-                    @moving="moving"
-                >
-                    <!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
-                    <template v-if="useSlot" #default>
-                        <view>
-                            <view class="badge-button">
-                                {{ value }}
-                            </view>
-                        </view>
-                    </template>
+    <demo-page title="Slider 滑块" desc="用于数值范围选择，支持自定义步进、颜色、尺寸等参数。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToast"></u-toast>
+                        <u-slider
+                            :step="step"
+                            :height="height"
+                            :block-width="blockWidth"
+                            :active-color="activeColor"
+                            :value="30"
+                            :use-slot="useSlot"
+                            v-model="value"
+                            :min="min"
+                            :max="max"
+                            @end="end"
+                            @moving="moving"
+                        >
+                            <!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
+                            <template v-if="useSlot" #default>
+                                <view>
+                                    <view class="badge-button">
+                                        {{ value }}
+                                    </view>
+                                </view>
+                            </template>
+                            <!-- #endif -->
+                        </u-slider>
+                        <view class="u-demo-result-line"> 滑块值：{{ value }} </view>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom">参数配置</view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义颜色</view>
+                        <u-subsection
+                            :list="['primary', 'warning', 'error', 'success']"
+                            @change="typeChange"
+                        ></u-subsection>
+                    </view>
+                    <!-- #ifndef MP-WEIXIN -->
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义传入内容</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="slotChange"></u-subsection>
+                    </view>
                     <!-- #endif -->
-                </u-slider>
-                <view class="u-demo-result-line"> 滑块值：{{ value }} </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义尺寸</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="sizeChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">步进值</view>
+                        <u-subsection :list="['1', '10', '20']" @change="stepChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">最大最小值</view>
+                        <u-subsection :list="['0-100', '40-80']" @change="minMaxchange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义颜色</view>
-                <u-subsection :list="['primary', 'warning', 'error', 'success']" @change="typeChange"></u-subsection>
-            </view>
-            <!-- #ifndef MP-WEIXIN -->
-            <view class="u-config-item">
-                <view class="u-item-title">自定义传入内容</view>
-                <u-subsection current="1" :list="['是', '否']" @change="slotChange"></u-subsection>
-            </view>
-            <!-- #endif -->
-            <view class="u-config-item">
-                <view class="u-item-title">自定义尺寸</view>
-                <u-subsection current="1" :list="['是', '否']" @change="sizeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">步进值</view>
-                <u-subsection :list="['1', '10', '20']" @change="stepChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">最大最小值</view>
-                <u-subsection :list="['0-100', '40-80']" @change="minMaxchange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { computed, ref } from 'vue';
+import { apis } from './config';
 
 const value = ref(30);
 const useSlot = ref(false);

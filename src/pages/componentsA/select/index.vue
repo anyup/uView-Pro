@@ -1,38 +1,47 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-select
-                    @click="show = true"
-                    :default-value="defaultValue"
-                    :mode="mode"
-                    v-model="show"
-                    :list="list"
-                    @confirm="confirm"
-                    @cancel="cancel"
-                ></u-select>
-                <view class="u-demo-result-line">select值：{{ result }}</view>
+    <demo-page
+        title="Select 选择器"
+        desc="用于单列、多列独立、多列联动等多种选择场景，支持灵活数据结构和交互。"
+        :apis="apis"
+    >
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-select
+                            @click="show = true"
+                            :default-value="defaultValue"
+                            :mode="mode"
+                            v-model="show"
+                            :list="list"
+                            @confirm="confirm"
+                            @cancel="cancel"
+                        ></u-select>
+                        <view class="u-demo-result-line">select值：{{ result }}</view>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom">参数配置</view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">状态</view>
+                        <u-subsection :current="current" :list="['打开', '收起']" @change="statusChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式</view>
+                        <u-subsection :list="['单列', '多列独立', '多列联动']" @change="modeChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-subsection :current="current" :list="['打开', '收起']" @change="statusChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式</view>
-                <u-subsection :list="['单列', '多列独立', '多列联动']" @change="modeChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import type { SelectMode } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const show = ref(false);
 const result = ref('尚未选择');

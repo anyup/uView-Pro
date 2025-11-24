@@ -1,48 +1,51 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-row :justify="justify" @click="rowClick" :gutter="gutter">
-                    <u-col :span="span" :offset="offset" @click="click" stop>
-                        <view class="demo-layout bg-purple-dark"> </view>
-                    </u-col>
-                    <u-col :span="span" :offset="offset">
-                        <view class="demo-layout bg-purple-dark"> </view>
-                    </u-col>
-                    <u-col :span="span" :offset="offset">
-                        <view class="demo-layout bg-purple-dark"> </view>
-                    </u-col>
-                </u-row>
+    <demo-page title="Layout 布局" desc="通过基础的 12 分栏，迅速简便地创建布局 " :apis="apis">
+        <view class="u-demo">
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">演示效果</view>
+                <view class="u-demo-area">
+                    <u-row :justify="justify" @click="rowClick" :gutter="gutter">
+                        <u-col :span="span" :offset="offset" @click="click" stop>
+                            <view class="demo-layout bg-purple-dark"> </view>
+                        </u-col>
+                        <u-col :span="span" :offset="offset">
+                            <view class="demo-layout bg-purple-dark"> </view>
+                        </u-col>
+                        <u-col :span="span" :offset="offset">
+                            <view class="demo-layout bg-purple-dark"> </view>
+                        </u-col>
+                    </u-row>
+                </view>
+            </view>
+            <view class="u-config-wrap">
+                <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">每个栅格占用栏数(演示共3个栅格)</view>
+                    <u-subsection :current="2" :list="['1', '2', '3', '4', '5']" @change="spanChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">分栏间隔</view>
+                    <u-subsection :list="['10', '20', '30', '40']" @change="gutterChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">分栏偏移</view>
+                    <u-subsection :list="['0', '1', '2', '3', '4']" @change="offsetChange"></u-subsection>
+                </view>
+                <!-- #ifndef MP -->
+                <view class="u-config-item">
+                    <view class="u-item-title">水平排列方式(微信小程序无效)</view>
+                    <u-subsection :list="['start', 'end', 'around', 'between']" @change="justifyChange"></u-subsection>
+                </view>
+                <!-- #endif -->
             </view>
         </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">每个栅格占用栏数(演示共3个栅格)</view>
-                <u-subsection :current="2" :list="['1', '2', '3', '4', '5']" @change="spanChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">分栏间隔</view>
-                <u-subsection :list="['10', '20', '30', '40']" @change="gutterChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">分栏偏移</view>
-                <u-subsection :list="['0', '1', '2', '3', '4']" @change="offsetChange"></u-subsection>
-            </view>
-            <!-- #ifndef MP -->
-            <view class="u-config-item">
-                <view class="u-item-title">水平排列方式(微信小程序无效)</view>
-                <u-subsection :list="['start', 'end', 'around', 'between']" @change="justifyChange"></u-subsection>
-            </view>
-            <!-- #endif -->
-        </view>
-    </view>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { RowJustify } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const gutter = ref(10);
 const span = ref(3);

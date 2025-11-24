@@ -1,35 +1,40 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title"> 演示效果 </view>
-            <view class="u-demo-area">
-                <view class="no-mode-here"> 请求结果为： </view>
-                <view class="u-demo-result-line">
-                    {{ JSON.stringify(result) }}
+    <demo-page title="Http HTTP请求" desc="用于发送HTTP请求，支持GET、POST等多种方法和拦截器。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title"> 演示效果 </view>
+                    <view class="u-demo-area">
+                        <view class="no-mode-here"> 请求结果为： </view>
+                        <view class="u-demo-result-line">
+                            {{ JSON.stringify(result) }}
+                        </view>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title"> 请求方式 </view>
+                        <u-subsection :list="['get', 'post']" @change="changeMethod" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title"> 请求 Loading </view>
+                        <u-subsection :list="['显示', '隐藏']" @change="changeLoading" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title"> 请求错误时显示 Toast </view>
+                        <u-subsection :list="['显示', '隐藏']" @change="changeToast" />
+                    </view>
                 </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title"> 请求方式 </view>
-                <u-subsection :list="['get', 'post']" @change="changeMethod" />
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title"> 请求 Loading </view>
-                <u-subsection :list="['显示', '隐藏']" @change="changeLoading" />
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title"> 请求错误时显示 Toast </view>
-                <u-subsection :list="['显示', '隐藏']" @change="changeToast" />
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { $u } from '@/uni_modules/uview-pro';
 import { onMounted, ref } from 'vue';
+import { apis } from './config';
 
 interface Result {
     code: number;

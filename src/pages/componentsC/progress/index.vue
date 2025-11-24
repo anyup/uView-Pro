@@ -1,48 +1,58 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-line-progress
-                    v-if="mode == 'line'"
-                    :percent="percent"
-                    :active-color="activeColor"
-                    :striped="striped"
-                    :stripedActive="stripedActive"
-                ></u-line-progress>
-                <u-circle-progress v-else :percent="percent" :active-color="activeColor" bg-color="rgb(250, 250, 250)">
-                    <view class="u-progress-content">
-                        <view class="u-progress-dot"></view>
-                        <text class="u-progress-info">查找中</text>
+    <demo-page title="Progress 进度条" desc="用于展示进度，可配置颜色和尺寸。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-line-progress
+                            v-if="mode == 'line'"
+                            :percent="percent"
+                            :active-color="activeColor"
+                            :striped="striped"
+                            :stripedActive="stripedActive"
+                        ></u-line-progress>
+                        <u-circle-progress
+                            v-else
+                            :percent="percent"
+                            :active-color="activeColor"
+                            bg-color="rgb(250, 250, 250)"
+                        >
+                            <view class="u-progress-content">
+                                <view class="u-progress-dot"></view>
+                                <text class="u-progress-info">查找中</text>
+                            </view>
+                        </u-circle-progress>
                     </view>
-                </u-circle-progress>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式选择</view>
+                        <u-subsection :current="current" :list="['线型', '圆型']" @change="modeChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">增减</view>
+                        <u-subsection :list="['减少30%', '增加30%']" @change="calcChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义样式(线型时有效)</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">动态条纹(线型时有效)</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="stripedChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式选择</view>
-                <u-subsection :current="current" :list="['线型', '圆型']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">增减</view>
-                <u-subsection :list="['减少30%', '增加30%']" @change="calcChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义样式(线型时有效)</view>
-                <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">动态条纹(线型时有效)</view>
-                <u-subsection current="1" :list="['是', '否']" @change="stripedChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 const percent = ref(50);
 const mode = ref('line');

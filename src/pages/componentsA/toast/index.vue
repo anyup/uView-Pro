@@ -1,40 +1,49 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast :type="type" ref="uToastRef"></u-toast>
-                <text class="no-mode-here">弹出toast</text>
+    <demo-page title="Toast 提示框" desc="用于显示轻提示信息，支持多种主题、位置和自动跳转。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast :type="type" ref="uToastRef"></u-toast>
+                        <text class="no-mode-here">弹出toast</text>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">主题</view>
+                        <u-subsection
+                            :current="4"
+                            :list="['primary', 'success', 'error', 'warning', 'default']"
+                            @change="typeChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">结束后自动跳转</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="urlChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">位置</view>
+                        <u-subsection
+                            current="1"
+                            :list="['顶部', '中部', '底部']"
+                            @change="positionChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">显示图标</view>
+                        <u-subsection :list="['是', '否']" @change="iconChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">主题</view>
-                <u-subsection
-                    :current="4"
-                    :list="['primary', 'success', 'error', 'warning', 'default']"
-                    @change="typeChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">结束后自动跳转</view>
-                <u-subsection current="1" :list="['是', '否']" @change="urlChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">位置</view>
-                <u-subsection current="1" :list="['顶部', '中部', '底部']" @change="positionChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">显示图标</view>
-                <u-subsection :list="['是', '否']" @change="iconChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { apis } from './config';
 
 /**
  * 演示 u-toast 组件的使用

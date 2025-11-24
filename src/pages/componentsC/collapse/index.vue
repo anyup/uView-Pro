@@ -1,50 +1,55 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap" style="background-color: #ffffff">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
-                <u-collapse
-                    v-if="key"
-                    :item-style="itemStyle"
-                    event-type="close"
-                    :arrow="arrow"
-                    @change="change"
-                    :accordion="accordion"
-                >
-                    <u-collapse-item
-                        :index="index"
-                        @change="itemChange"
-                        :title="item.head"
-                        v-for="(item, index) in itemList"
-                        :key="index"
-                        :open="item.open"
-                    >
-                        {{ item.body }}
-                    </u-collapse-item>
-                </u-collapse>
+    <demo-page title="Collapse 折叠框" desc="将内容折叠起来，节省空间，用户可以点击展开查看详情。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap" style="background-color: #ffffff">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToastRef"></u-toast>
+                        <u-collapse
+                            v-if="key"
+                            :item-style="itemStyle"
+                            event-type="close"
+                            :arrow="arrow"
+                            @change="change"
+                            :accordion="accordion"
+                        >
+                            <u-collapse-item
+                                :index="index"
+                                @change="itemChange"
+                                :title="item.head"
+                                v-for="(item, index) in itemList"
+                                :key="index"
+                                :open="item.open"
+                            >
+                                {{ item.body }}
+                            </u-collapse-item>
+                        </u-collapse>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">手风琴模式</view>
+                        <u-subsection :list="['否', '是']" @change="accordionChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">右侧箭头</view>
+                        <u-subsection :list="['显示', '隐藏']" @change="arrowChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义样式</view>
+                        <u-subsection :list="['否', '是']" @change="styleChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">手风琴模式</view>
-                <u-subsection :list="['否', '是']" @change="accordionChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">右侧箭头</view>
-                <u-subsection :list="['显示', '隐藏']" @change="arrowChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义样式</view>
-                <u-subsection :list="['否', '是']" @change="styleChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref, nextTick } from 'vue';
+import { apis } from './config';
 
 const uToastRef = ref(null);
 const itemList = ref([

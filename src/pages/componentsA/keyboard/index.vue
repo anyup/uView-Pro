@@ -1,63 +1,73 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="input-wrap">
-                    <input class="input" disabled type="text" :value="input" placeholder="来自键盘的输入内容" />
-                    <u-button :custom-style="{ height: '32px' }" :hairLine="false" class="clear-btn" @click="clear()">
-                        清空
-                    </u-button>
+    <demo-page
+        title="Keyboard 虚拟键盘"
+        desc="用于数字、身份证、车牌号等多种输入场景，支持自定义键盘类型和交互。"
+        :apis="apis"
+    >
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <view class="input-wrap">
+                            <input class="input" disabled type="text" :value="input" placeholder="来自键盘的输入内容" />
+                            <u-button
+                                :custom-style="{ height: '32px' }"
+                                :hairLine="false"
+                                class="clear-btn"
+                                @click="clear()"
+                            >
+                                清空
+                            </u-button>
+                        </view>
+                        <u-keyboard
+                            :mask="mask"
+                            ref="uKeyboard"
+                            safe-area-inset-bottom
+                            @confirm="confirm"
+                            :random="random"
+                            :dotEnable="false"
+                            :mode="mode"
+                            :confirmBtn="true"
+                            :cancelBtn="true"
+                            :tooltip="tooltip"
+                            v-model="show"
+                            @change="change"
+                            @backspace="backspace"
+                        />
+                    </view>
                 </view>
-                <u-keyboard
-                    :mask="mask"
-                    ref="uKeyboard"
-                    safe-area-inset-bottom
-                    @confirm="confirm"
-                    :random="random"
-                    :dotEnable="false"
-                    :mode="mode"
-                    :confirmBtn="true"
-                    :cancelBtn="true"
-                    :tooltip="tooltip"
-                    v-model="show"
-                    @change="change"
-                    @backspace="backspace"
-                ></u-keyboard>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">键盘开关</view>
+                        <u-subsection :current="show == true ? 0 : 1" :list="['开', '关']" @change="statusChange" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">键盘类型</view>
+                        <u-subsection :list="['数字键盘', '身份证键盘', '车牌号键盘']" @change="modeChange" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">打乱顺序</view>
+                        <u-subsection :current="1" :list="['是', '否']" @change="randomChange" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">上方工具条</view>
+                        <u-subsection :list="['显示', '隐藏']" @change="tooltipChange" />
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">是否显示遮罩</view>
+                        <u-subsection :list="['显示', '隐藏']" @change="maskChange" />
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">键盘开关</view>
-                <u-subsection
-                    :current="show == true ? 0 : 1"
-                    :list="['开', '关']"
-                    @change="statusChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">键盘类型</view>
-                <u-subsection :list="['数字键盘', '身份证键盘', '车牌号键盘']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">打乱顺序</view>
-                <u-subsection :current="1" :list="['是', '否']" @change="randomChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">上方工具条</view>
-                <u-subsection :list="['显示', '隐藏']" @change="tooltipChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">是否显示遮罩</view>
-                <u-subsection :list="['显示', '隐藏']" @change="maskChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { apis } from './config';
 
 const show = ref(false);
 const input = ref('');

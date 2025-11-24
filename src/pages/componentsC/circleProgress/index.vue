@@ -1,27 +1,32 @@
 <template>
-    <view class="wrap">
-        <view class="item">
-            <u-circle-progress type="warning" :percent="percent">
-                <view class="u-progress-content">
-                    <view class="u-progress-dot"></view>
-                    <text class="u-progress-info">查找中</text>
+    <demo-page title="CircleProgress 圆形进度条" desc="圆形的进度条，用于展示进度，可自定义样式和颜色。" :apis="apis">
+        <template #default>
+            <view class="wrap">
+                <view class="item">
+                    <u-circle-progress type="warning" :percent="percent">
+                        <view class="u-progress-content">
+                            <view class="u-progress-dot"></view>
+                            <text class="u-progress-info">查找中</text>
+                        </view>
+                    </u-circle-progress>
+                    <u-circle-progress type="warning" :width="150" :percent="percent">
+                        <view class="u-progress-content">
+                            <view class="u-progress-dot"></view>
+                            <text class="u-progress-info">查找中</text>
+                        </view>
+                    </u-circle-progress>
                 </view>
-            </u-circle-progress>
-            <u-circle-progress type="warning" :width="150" :percent="percent">
-                <view class="u-progress-content">
-                    <view class="u-progress-dot"></view>
-                    <text class="u-progress-info">查找中</text>
+                <view class="item">
+                    <u-line-progress></u-line-progress>
                 </view>
-            </u-circle-progress>
-        </view>
-        <view class="item">
-            <u-line-progress></u-line-progress>
-        </view>
-    </view>
+            </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
+import { apis } from './config';
 
 const percent = ref(33);
 

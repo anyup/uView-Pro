@@ -1,53 +1,61 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-switch
-                    v-model="checked"
-                    :loading="loading"
-                    :size="size"
-                    @change="change"
-                    :active-color="activeColor"
-                    :disabled="disabled"
-                    :activeValue="100"
-                    :inactiveValue="1"
-                ></u-switch>
+    <demo-page title="Switch 开关" desc="用于开关切换，支持自定义颜色、大小和异步操作。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-switch
+                            v-model="checked"
+                            :loading="loading"
+                            :size="size"
+                            @change="change"
+                            :active-color="activeColor"
+                            :disabled="disabled"
+                            :activeValue="100"
+                            :inactiveValue="1"
+                        ></u-switch>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">状态</view>
+                        <u-subsection :list="['关闭', '打开']" @change="modelChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">颜色</view>
+                        <u-subsection
+                            :list="['primary', 'error', 'warning', 'success']"
+                            @change="colorChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">尺寸(单位rpx)</view>
+                        <u-subsection current="1" :list="['40', '60', '80']" @change="sizeChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">加载中</view>
+                        <u-subsection :list="['否', '是']" @change="loadingChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">禁用</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">异步控制</view>
+                        <u-subsection :list="['关闭', '打开']" @change="asyncChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-subsection :list="['关闭', '打开']" @change="modelChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">颜色</view>
-                <u-subsection :list="['primary', 'error', 'warning', 'success']" @change="colorChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">尺寸(单位rpx)</view>
-                <u-subsection current="1" :list="['40', '60', '80']" @change="sizeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">加载中</view>
-                <u-subsection :list="['否', '是']" @change="loadingChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">禁用</view>
-                <u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">异步控制</view>
-                <u-subsection :list="['关闭', '打开']" @change="asyncChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 const checked = ref(false);
 const activeColor = ref($u.color.primary);

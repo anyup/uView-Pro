@@ -1,65 +1,70 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
-                <u-button @click="showAction">唤起ActionSheet</u-button>
-                <u-action-sheet
-                    v-model="show"
-                    :cancel-btn="cancel"
-                    :mask-close-able="maskCloseAble"
-                    :tips="tips"
-                    :safe-area-inset-bottom="true"
-                    @click="click"
-                >
-                    <block v-for="(item, index) in list" :key="index">
-                        <u-action-sheet-item
-                            v-if="index !== 3"
-                            :text="item.text"
-                            :sub-text="item.subText"
-                            :color="item.color"
-                            :font-size="item.fontSize"
-                            :disabled="item.disabled"
-                        />
-                        <u-action-sheet-item padding="0" :async-close="true" v-else>
-                            <u-text
-                                type="success"
-                                text="我是自定义的（微信能力）"
-                                size="32"
-                                openType="openSetting"
-                                :block="true"
-                                line-height="50px"
-                                align="center"
-                                @click="clickItem"
-                            ></u-text>
-                        </u-action-sheet-item>
-                    </block>
-                </u-action-sheet>
+    <demo-page title="ActionSheet 动作菜单" desc="从下方弹出的菜单列表，提供用户选择操作。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToastRef"></u-toast>
+                        <u-button @click="showAction">唤起ActionSheet</u-button>
+                        <u-action-sheet
+                            v-model="show"
+                            :cancel-btn="cancel"
+                            :mask-close-able="maskCloseAble"
+                            :tips="tips"
+                            :safe-area-inset-bottom="true"
+                            @click="click"
+                        >
+                            <block v-for="(item, index) in list" :key="index">
+                                <u-action-sheet-item
+                                    v-if="index !== 3"
+                                    :text="item.text"
+                                    :sub-text="item.subText"
+                                    :color="item.color"
+                                    :font-size="item.fontSize"
+                                    :disabled="item.disabled"
+                                />
+                                <u-action-sheet-item padding="0" :async-close="true" v-else>
+                                    <u-text
+                                        type="success"
+                                        text="我是自定义的（微信能力）"
+                                        size="32"
+                                        openType="openSetting"
+                                        :block="true"
+                                        line-height="50px"
+                                        align="center"
+                                        @click="clickItem"
+                                    ></u-text>
+                                </u-action-sheet-item>
+                            </block>
+                        </u-action-sheet>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">显示标题</view>
+                        <u-subsection :list="['是', '否']" @change="tipsChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">取消按钮</view>
+                        <u-subsection :list="['是', '否']" @change="cancelChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">点击遮罩关闭</view>
+                        <u-subsection :list="['是', '否']" @change="maskClickChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">显示标题</view>
-                <u-subsection :list="['是', '否']" @change="tipsChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">取消按钮</view>
-                <u-subsection :list="['是', '否']" @change="cancelChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">点击遮罩关闭</view>
-                <u-subsection :list="['是', '否']" @change="maskClickChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import type { ActionSheetTips, ActionSheetItem } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const list = ref<ActionSheetItem[]>([
     {

@@ -1,28 +1,36 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="u-no-demo-here"> 源字符串：{{ `"${string}"` }} </view>
-                <view class="u-demo-result-line">
-                    {{ `"${result}"` }}
+    <demo-page title="Trim 字符串裁剪" desc="用于移除字符串两端的空格、特定字符或多种空白字符。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <view class="u-no-demo-here"> 源字符串：{{ `"${string}"` }} </view>
+                        <view class="u-demo-result-line">
+                            {{ `"${result}"` }}
+                        </view>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式选择</view>
+                        <u-subsection
+                            :list="['左空格', '全部空格', '两边空格', '右空格']"
+                            @change="modeChange"
+                        ></u-subsection>
+                    </view>
                 </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式选择</view>
-                <u-subsection :list="['左空格', '全部空格', '两边空格', '右空格']" @change="modeChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 type TrimPosition = 'left' | 'all' | 'both' | 'right';
 

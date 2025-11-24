@@ -1,21 +1,33 @@
 <template>
-    <view class="wrap">
-        <view class="u-border-left u-border-top inner-wrap">
-            <view
-                @tap="selectIcon(item.name)"
-                class="u-icon-item u-border-bottom u-border-right"
-                v-for="(item, index) in iconList"
-                :key="index"
-            >
-                <u-icon :name="item.name" size="40" color="#909399"></u-icon>
-                <text class="u-icon-name">{{ item.name }}</text>
+    <demo-page
+        title="Icon 图标"
+        desc="基于字体的图标集，包含了大多数常见场景的图标。"
+        :apis="apis"
+        :extras="['自定义图标']"
+    >
+        <view class="wrap">
+            <view class="u-border-left u-border-top inner-wrap">
+                <view
+                    @tap="selectIcon(item.name)"
+                    class="u-icon-item u-border-bottom u-border-right"
+                    v-for="(item, index) in iconList"
+                    :key="index"
+                >
+                    <u-icon :name="item.name" size="40" color="#909399"></u-icon>
+                    <text class="u-icon-name">{{ item.name }}</text>
+                </view>
             </view>
         </view>
-    </view>
+        <template #extra1>
+            <zero-markdown-view :markdown="apis2" :themeColor="$u.getColor('primary')"></zero-markdown-view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { apis, apis2 } from './config';
+import { $u } from 'uview-pro';
 
 const iconList = ref([
     {

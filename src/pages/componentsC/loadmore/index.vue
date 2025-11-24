@@ -1,47 +1,52 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef" />
-                <u-loadmore
-                    :status="status"
-                    :loadText="loadText"
-                    :icon-type="iconType"
-                    :is-dot="isDot"
-                    @loadmore="loadmore"
-                />
+    <demo-page title="Loadmore 加载更多" desc="用于列表加载更多内容的提示组件。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToastRef" />
+                        <u-loadmore
+                            :status="status"
+                            :loadText="loadText"
+                            :icon-type="iconType"
+                            :is-dot="isDot"
+                            @loadmore="loadmore"
+                        />
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式选择</view>
+                        <u-subsection
+                            :current="current"
+                            :list="['加载前', '加载中', '加载后', '没有更多']"
+                            @change="statusChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义提示语</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="loadTextChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">加载中图标样式</view>
+                        <u-subsection :list="['circle', 'flower']" @change="styleChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">没有更多时用点替代</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="isDotChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式选择</view>
-                <u-subsection
-                    :current="current"
-                    :list="['加载前', '加载中', '加载后', '没有更多']"
-                    @change="statusChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义提示语</view>
-                <u-subsection current="1" :list="['是', '否']" @change="loadTextChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">加载中图标样式</view>
-                <u-subsection :list="['circle', 'flower']" @change="styleChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">没有更多时用点替代</view>
-                <u-subsection current="1" :list="['是', '否']" @change="isDotChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import type { LoadmoreIconType, LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
 import { ref } from 'vue';
+import { apis } from './config';
 
 const uToastRef = ref();
 const status = ref<LoadmoreStatus>('loadmore');
@@ -100,8 +105,3 @@ function onReachBottom() {
     // 在此请求下一页
 }
 </script>
-
-<style lang="scss" scoped>
-.u-demo {
-}
-</style>

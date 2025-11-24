@@ -1,39 +1,44 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-loading :mode="mode" :show="show" :color="color" :size="size"></u-loading>
+    <demo-page title="Loading 加载" desc="用于显示加载动画，支持圆圈和花朵两种模式。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-loading :mode="mode" :show="show" :color="color" :size="size"></u-loading>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式</view>
+                        <u-subsection :list="['圆圈', '花朵']" @change="modeChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">颜色(只对圆圈模式有效)</view>
+                        <u-subsection
+                            :list="['default', 'primary', 'error', 'warning', 'success']"
+                            @change="colorChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">尺寸(单位rpx)</view>
+                        <u-subsection current="1" :list="['28', '34', '40']" @change="sizeChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">是否显示</view>
+                        <u-subsection current="1" :list="['否', '是']" @change="showChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式</view>
-                <u-subsection :list="['圆圈', '花朵']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">颜色(只对圆圈模式有效)</view>
-                <u-subsection
-                    :list="['default', 'primary', 'error', 'warning', 'success']"
-                    @change="colorChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">尺寸(单位rpx)</view>
-                <u-subsection current="1" :list="['28', '34', '40']" @change="sizeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">是否显示</view>
-                <u-subsection current="1" :list="['否', '是']" @change="showChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 // 加载模式
 const mode = ref<'circle' | 'flower'>('circle');

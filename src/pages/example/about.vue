@@ -2,7 +2,7 @@
     <view class="about-page">
         <view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30" @click="preview('weixin-person')">
             <view class="u-m-r-10">
-                <u-avatar :src="getImageUrl('uview-pro')" size="140"></u-avatar>
+                <u-avatar src="/static/logo.png" size="140"></u-avatar>
             </view>
             <view class="u-flex-1">
                 <view class="u-font-18 u-p-b-20">uView Pro</view>

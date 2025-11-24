@@ -1,30 +1,35 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
-                <u-sticky :offset-top="offsetTop" :enable="enable" @fixed="fixed" @unfixed="unfixed">
-                    <view class="sticky"> 宝剑锋从磨砺出,梅花香自苦寒来 </view>
-                </u-sticky>
+    <demo-page title="Sticky 吸顶" desc="用于吸顶功能，支持自定义吸顶高度和启用禁用。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToastRef"></u-toast>
+                        <u-sticky :offset-top="offsetTop" :enable="enable" @fixed="fixed" @unfixed="unfixed">
+                            <view class="sticky"> 宝剑锋从磨砺出,梅花香自苦寒来 </view>
+                        </u-sticky>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">吸顶高度</view>
+                        <u-subsection :list="['0', '120', '200']" @change="offsetTopChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">状态</view>
+                        <u-subsection :list="['允许吸顶', '禁止吸顶']" @change="enableChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">吸顶高度</view>
-                <u-subsection :list="['0', '120', '200']" @change="offsetTopChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-subsection :list="['允许吸顶', '禁止吸顶']" @change="enableChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { apis } from './config';
 
 const offsetTop = ref(0);
 const enable = ref(true);

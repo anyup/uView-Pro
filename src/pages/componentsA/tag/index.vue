@@ -1,62 +1,65 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
-                <u-tag
-                    :text="text"
-                    :type="type"
-                    :shape="shape"
-                    :closeable="closeable"
-                    :mode="mode"
-                    @close="close"
-                    @click="click"
-                    :show="show"
-                    :size="size"
-                />
+    <demo-page title="Tag 标签" desc="该组件一般用于标记和选择" :apis="apis">
+        <view class="u-demo">
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">演示效果</view>
+                <view class="u-demo-area">
+                    <u-toast ref="uToastRef"></u-toast>
+                    <u-tag
+                        :text="text"
+                        :type="type"
+                        :shape="shape"
+                        :closeable="closeable"
+                        :mode="mode"
+                        @close="close"
+                        @click="click"
+                        :show="show"
+                        :size="size"
+                    />
+                </view>
+            </view>
+            <view class="u-config-wrap">
+                <view class="u-config-title u-border-bottom">参数配置</view>
+                <view class="u-config-item">
+                    <view class="u-item-title">模式选择</view>
+                    <u-subsection :list="['light', 'dark', 'plain']" @change="modeChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">显示内容</view>
+                    <u-subsection :list="['蒹葭苍苍', '白露为霜', '在水一方']" @change="textChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">主题选择</view>
+                    <u-subsection
+                        current="2"
+                        :list="['primary', 'success', 'error', 'warning', 'info']"
+                        @change="typeChange"
+                    ></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">形状</view>
+                    <u-subsection
+                        :list="['square', 'circle', 'circleLeft', 'circleRight']"
+                        @change="shapeChange"
+                    ></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">尺寸</view>
+                    <u-subsection :list="['default', 'mini']" @change="sizeChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">关闭图标</view>
+                    <u-subsection :list="['是', '否']" @change="closeableChange"></u-subsection>
+                </view>
             </view>
         </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式选择</view>
-                <u-subsection :list="['light', 'dark', 'plain']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">显示内容</view>
-                <u-subsection :list="['蒹葭苍苍', '白露为霜', '在水一方']" @change="textChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">主题选择</view>
-                <u-subsection
-                    current="2"
-                    :list="['primary', 'success', 'error', 'warning', 'info']"
-                    @change="typeChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">形状</view>
-                <u-subsection
-                    :list="['square', 'circle', 'circleLeft', 'circleRight']"
-                    @change="shapeChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">尺寸</view>
-                <u-subsection :list="['default', 'mini']" @change="sizeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">关闭图标</view>
-                <u-subsection :list="['是', '否']" @change="closeableChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { TagMode, TagShape, TagSize, ThemeType } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const text = ref('蒹葭苍苍');
 const mode = ref<TagMode>('light');

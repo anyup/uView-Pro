@@ -1,55 +1,64 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToast"></u-toast>
-                <view class="container u-skeleton">
-                    <view class="userinfo">
-                        <!--u-skeleton-circle 绘制圆形-->
-                        <image class="userinfo-avatar u-skeleton-circle" :src="userInfo.avatarUrl"></image>
-                        <!--u-skeleton-fillet 绘制圆角矩形-->
-                        <text class="u-skeleton-fillet">{{ userInfo.nickName }}</text>
-                    </view>
-                    <view style="margin: 20px 0">
-                        <!--u-skeleton-rect 绘制矩形-->
-                        <view class="u-skeleton-rect lists" v-for="(item, index) in lists" :key="index">
-                            <text>{{ item }}</text>
+    <demo-page title="Skeleton 骨架屏" desc="用于加载占位显示，支持动画效果和自定义样式。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToast"></u-toast>
+                        <view class="container u-skeleton">
+                            <view class="userinfo">
+                                <!--u-skeleton-circle 绘制圆形-->
+                                <image class="userinfo-avatar u-skeleton-circle" :src="userInfo.avatarUrl"></image>
+                                <!--u-skeleton-fillet 绘制圆角矩形-->
+                                <text class="u-skeleton-fillet">{{ userInfo.nickName }}</text>
+                            </view>
+                            <view style="margin: 20px 0">
+                                <!--u-skeleton-rect 绘制矩形-->
+                                <view class="u-skeleton-rect lists" v-for="(item, index) in lists" :key="index">
+                                    <text>{{ item }}</text>
+                                </view>
+                            </view>
                         </view>
+                        <!--引用组件-->
+                        <u-skeleton
+                            bg-color="rgb(250, 250, 250)"
+                            :loading="loading"
+                            :animation="animation"
+                            :el-color="elColor"
+                            :border-radius="borderRadius"
+                        ></u-skeleton>
                     </view>
                 </view>
-                <!--引用组件-->
-                <u-skeleton
-                    bg-color="rgb(250, 250, 250)"
-                    :loading="loading"
-                    :animation="animation"
-                    :el-color="elColor"
-                    :border-radius="borderRadius"
-                ></u-skeleton>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">加载状态</view>
+                        <u-subsection
+                            :current="current"
+                            :list="['请求中', '请求结束']"
+                            @change="loadingChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">骨架动画</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="animationChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义样式</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">加载状态</view>
-                <u-subsection :current="current" :list="['请求中', '请求结束']" @change="loadingChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">骨架动画</view>
-                <u-subsection current="1" :list="['是', '否']" @change="animationChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义样式</view>
-                <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
+import { apis } from './config';
 
 const userInfo = ref({
     avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png',

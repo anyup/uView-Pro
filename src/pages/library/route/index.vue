@@ -1,32 +1,40 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-button @click="openPage">点击跳转</u-button>
+    <demo-page title="Route 路由" desc="用于页面路由导航，支持参数传递和页面返回。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-button @click="openPage">点击跳转</u-button>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">类型</view>
+                        <u-subsection
+                            :list="['navigateTo', 'switchTab', 'navigateBack']"
+                            @change="typeChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">携带参数(针对type=navigateTo)</view>
+                        <u-subsection :list="['是', '否']" @change="paramsChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">窗口动画(App且type=navigateTo||navigateBack时有效)</view>
+                        <u-subsection :list="['是', '否']" @change="animateChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">类型</view>
-                <u-subsection :list="['navigateTo', 'switchTab', 'navigateBack']" @change="typeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">携带参数(针对type=navigateTo)</view>
-                <u-subsection :list="['是', '否']" @change="paramsChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">窗口动画(App且type=navigateTo||navigateBack时有效)</view>
-                <u-subsection :list="['是', '否']" @change="animateChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { computed, ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 type RouteType = 'to' | 'tab' | 'back';
 type AnimationType = string;

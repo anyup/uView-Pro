@@ -1,64 +1,69 @@
 <template>
-    <view>
-        <view class="u-card-wrap">
-            <u-card
-                @click="click"
-                @head-click="headClick"
-                :title="title"
-                :sub-title="subTitle"
-                :thumb="thumb"
-                :padding="padding"
-                :border="border"
-            >
-                <template #body>
-                    <view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
-                        <view class="u-body-item-title u-line-2">
-                            瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半
-                        </view>
-                        <image
-                            src="https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg"
-                            mode="aspectFill"
-                        ></image>
+    <demo-page title="Card 卡片" desc="用于展示卡片组件，支持阴影、边框和自定义样式。" :apis="apis">
+        <template #default>
+            <view>
+                <view class="u-card-wrap">
+                    <u-card
+                        @click="click"
+                        @head-click="headClick"
+                        :title="title"
+                        :sub-title="subTitle"
+                        :thumb="thumb"
+                        :padding="padding"
+                        :border="border"
+                    >
+                        <template #body>
+                            <view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
+                                <view class="u-body-item-title u-line-2">
+                                    瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半
+                                </view>
+                                <image
+                                    src="https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg"
+                                    mode="aspectFill"
+                                ></image>
+                            </view>
+                            <view class="u-body-item u-flex u-row-between u-p-b-0">
+                                <view class="u-body-item-title u-line-2">
+                                    釉色渲染仕女图韵味被私藏，而你嫣然的一笑如含苞待放
+                                </view>
+                                <image
+                                    src="https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg"
+                                    mode="aspectFill"
+                                ></image>
+                            </view>
+                        </template>
+                        <template #foot>
+                            <u-icon v-if="bottomSlot" name="chat-fill" size="34" label="30评论"></u-icon>
+                        </template>
+                    </u-card>
+                </view>
+                <view class="u-config-wrap u-demo">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">左上角图标</view>
+                        <u-subsection :list="['显示', '隐藏']" @change="thumbChange"></u-subsection>
                     </view>
-                    <view class="u-body-item u-flex u-row-between u-p-b-0">
-                        <view class="u-body-item-title u-line-2">
-                            釉色渲染仕女图韵味被私藏，而你嫣然的一笑如含苞待放
-                        </view>
-                        <image
-                            src="https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg"
-                            mode="aspectFill"
-                        ></image>
+                    <view class="u-config-item">
+                        <view class="u-item-title">内边距</view>
+                        <u-subsection current="1" :list="['20', '30', '40']" @change="paddingChange"></u-subsection>
                     </view>
-                </template>
-                <template #foot>
-                    <u-icon v-if="bottomSlot" name="chat-fill" size="34" label="30评论"></u-icon>
-                </template>
-            </u-card>
-        </view>
-        <view class="u-config-wrap u-demo">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">左上角图标</view>
-                <u-subsection :list="['显示', '隐藏']" @change="thumbChange"></u-subsection>
+                    <view class="u-config-item">
+                        <view class="u-item-title">底部</view>
+                        <u-subsection :list="['显示', '隐藏']" @change="bottomChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">外边框</view>
+                        <u-subsection :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-            <view class="u-config-item">
-                <view class="u-item-title">内边距</view>
-                <u-subsection current="1" :list="['20', '30', '40']" @change="paddingChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">底部</view>
-                <u-subsection :list="['显示', '隐藏']" @change="bottomChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">外边框</view>
-                <u-subsection :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { apis } from './config';
 
 const title = ref('素胚勾勒出青花，笔锋浓转淡');
 const subTitle = ref('2020-05-15');

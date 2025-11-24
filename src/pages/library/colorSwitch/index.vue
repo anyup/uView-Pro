@@ -1,38 +1,43 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="u-demo-result-line">
-                    {{ result }}
+    <demo-page title="ColorSwitch 色系切换" desc="用于切换应用主题色，支持亮色和暗黑两种模式切换。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <view class="u-demo-result-line">
+                            {{ result }}
+                        </view>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">GRB转HEX</view>
+                        <u-subsection
+                            :list="['rgb(12,57,231)', 'rgb(15,148,32)', 'rgb(91,52,210)']"
+                            @change="rgbToHexChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">HEX转GRB</view>
+                        <u-subsection :list="['#0edc8a', '#d0a73c', '#3308dd']" @change="hexToRgbChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">颜色渐变(rgb(21,21,21)-rgb(56,56,56)，分10份)</view>
+                        <u-button @click="colorGradientChange">执行</u-button>
+                    </view>
                 </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">GRB转HEX</view>
-                <u-subsection
-                    :list="['rgb(12,57,231)', 'rgb(15,148,32)', 'rgb(91,52,210)']"
-                    @change="rgbToHexChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">HEX转GRB</view>
-                <u-subsection :list="['#0edc8a', '#d0a73c', '#3308dd']" @change="hexToRgbChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">颜色渐变(rgb(21,21,21)-rgb(56,56,56)，分10份)</view>
-                <u-button @click="colorGradientChange">执行</u-button>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 
 const result = ref<string>('');
 

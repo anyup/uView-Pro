@@ -1,50 +1,55 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToastRef"></u-toast>
-                <u-alert-tips
-                    @close="close"
-                    :closeAble="closeAble"
-                    :show="show"
-                    @click="click"
-                    :type="type"
-                    :title="title"
-                    :description="description"
-                    :showIcon="showIcon"
-                ></u-alert-tips>
+    <demo-page title="AlertTips 警告提示" desc="用于页面中向用户展示重要信息提示。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToastRef"></u-toast>
+                        <u-alert-tips
+                            @close="close"
+                            :closeAble="closeAble"
+                            :show="show"
+                            @click="click"
+                            :type="type"
+                            :title="title"
+                            :description="description"
+                            :showIcon="showIcon"
+                        ></u-alert-tips>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">左侧图标</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="showIconChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">关闭图标</view>
+                        <u-subsection current="1" :list="['显示', '隐藏']" @change="closeAbleChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">主题</view>
+                        <u-subsection
+                            current="3"
+                            :list="['primary', 'success', 'error', 'warning', 'info']"
+                            @change="typeChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">状态</view>
+                        <u-subsection :current="current" :list="['开启', '关闭']" @change="showChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">左侧图标</view>
-                <u-subsection current="1" :list="['是', '否']" @change="showIconChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">关闭图标</view>
-                <u-subsection current="1" :list="['显示', '隐藏']" @change="closeAbleChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">主题</view>
-                <u-subsection
-                    current="3"
-                    :list="['primary', 'success', 'error', 'warning', 'info']"
-                    @change="typeChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-subsection :current="current" :list="['开启', '关闭']" @change="showChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const title = ref('大漠孤烟直，长河落日圆');
 const description = ref(

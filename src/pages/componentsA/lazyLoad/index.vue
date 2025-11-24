@@ -1,21 +1,29 @@
 <template>
-    <view class="wrap">
-        <view class="item-warp">
-            <view class="item" v-for="(item, index) in list" :key="index">
-                <u-lazy-load
-                    threshold="-450"
-                    height="400"
-                    img-mode="aspectFill"
-                    border-radius="10"
-                    :image="item.src"
-                    :index="index"
-                    @statusChange="statusChange"
-                    @clickImg="clickImg"
-                ></u-lazy-load>
+    <demo-page
+        title="LazyLoad 图片懒加载"
+        desc="用于长列表、图片流等场景的图片懒加载，提升页面性能和体验。"
+        :apis="apis"
+    >
+        <template #default>
+            <view class="wrap">
+                <view class="item-warp">
+                    <view class="item" v-for="(item, index) in list" :key="index">
+                        <u-lazy-load
+                            threshold="-450"
+                            height="400"
+                            img-mode="aspectFill"
+                            border-radius="10"
+                            :image="item.src"
+                            :index="index"
+                            @statusChange="statusChange"
+                            @clickImg="clickImg"
+                        />
+                    </view>
+                </view>
+                <u-loadmore :status="status" @loadmore="getData" />
             </view>
-        </view>
-        <u-loadmore :status="status" @loadmore="getData"></u-loadmore>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
@@ -23,6 +31,7 @@ import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
 import type { LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
+import { apis } from './config';
 
 const list = ref([]);
 const status = ref<LoadmoreStatus>('loadmore');

@@ -1,73 +1,76 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-cell-group title="读万卷书">
-                    <u-cell-item
-                        center
-                        :is-link="true"
-                        :label="label"
-                        value="铁马冰河入梦来"
-                        index="index"
-                        @click="click"
-                        :hover-class="hoverClass"
-                        :arrow="arrow"
-                        :title="title"
-                        :icon="icon"
-                    >
-                        <template v-if="rightSlot === 'badge'" #right-icon>
-                            <u-badge :absolute="false" count="105"></u-badge>
-                        </template>
-                        <template v-if="rightSlot === 'switch'" #right-icon>
-                            <u-switch v-model="checked"></u-switch>
-                        </template>
-                    </u-cell-item>
-                    <u-cell-item :border-bottom="false" title="铁马冰河入梦来" value="行万里路" :arrow="false">
-                        <template #icon>
-                            <u-icon size="34" name="calendar" style="margin-right: 5px"></u-icon>
-                        </template>
-                        <template #right-icon>
-                            <u-icon size="34" name="calendar"></u-icon>
-                        </template>
-                        <template #value>
-                            <u-field></u-field>
-                        </template>
-                    </u-cell-item>
-                </u-cell-group>
+    <demo-page title="Cell 单元格" desc="cell单元格一般用于一组列表的情况，比如个人中心页，设置页等。" :apis="apis">
+        <view class="u-demo">
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">演示效果</view>
+                <view class="u-demo-area">
+                    <u-cell-group title="读万卷书">
+                        <u-cell-item
+                            center
+                            :is-link="true"
+                            :label="label"
+                            value="铁马冰河入梦来"
+                            index="index"
+                            @click="click"
+                            :hover-class="hoverClass"
+                            :arrow="arrow"
+                            :title="title"
+                            :icon="icon"
+                        >
+                            <template v-if="rightSlot === 'badge'" #right-icon>
+                                <u-badge :absolute="false" count="105"></u-badge>
+                            </template>
+                            <template v-if="rightSlot === 'switch'" #right-icon>
+                                <u-switch v-model="checked"></u-switch>
+                            </template>
+                        </u-cell-item>
+                        <u-cell-item :border-bottom="false" title="铁马冰河入梦来" value="行万里路" :arrow="false">
+                            <template #icon>
+                                <u-icon size="34" name="calendar" style="margin-right: 5px"></u-icon>
+                            </template>
+                            <template #right-icon>
+                                <u-icon size="34" name="calendar"></u-icon>
+                            </template>
+                            <template #value>
+                                <u-field></u-field>
+                            </template>
+                        </u-cell-item>
+                    </u-cell-group>
+                </view>
+            </view>
+            <view class="u-config-wrap">
+                <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">更换图标</view>
+                    <u-subsection :list="['是', '否']" @change="iconChange"></u-subsection>
+                </view>
+                <!-- 小程序无法动态切换slot -->
+                <!-- #ifndef MP -->
+                <view class="u-config-item">
+                    <view class="u-item-title">自定义右侧内容</view>
+                    <u-subsection :list="['文字', 'Switch组件', 'Badge组件']" @change="rightSlotChange"></u-subsection>
+                </view>
+                <!-- #endif -->
+                <view class="u-config-item">
+                    <view class="u-item-title">描述信息</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="labelChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">更换标题</view>
+                    <u-subsection :list="['是', '否']" @change="titleChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">右侧箭头</view>
+                    <u-subsection :list="['是', '否']" @change="arrowChange"></u-subsection>
+                </view>
             </view>
         </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">更换图标</view>
-                <u-subsection :list="['是', '否']" @change="iconChange"></u-subsection>
-            </view>
-            <!-- 小程序无法动态切换slot -->
-            <!-- #ifndef MP -->
-            <view class="u-config-item">
-                <view class="u-item-title">自定义右侧内容</view>
-                <u-subsection :list="['文字', 'Switch组件', 'Badge组件']" @change="rightSlotChange"></u-subsection>
-            </view>
-            <!-- #endif -->
-            <view class="u-config-item">
-                <view class="u-item-title">描述信息</view>
-                <u-subsection current="1" :list="['是', '否']" @change="labelChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">更换标题</view>
-                <u-subsection :list="['是', '否']" @change="titleChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">右侧箭头</view>
-                <u-subsection :list="['是', '否']" @change="arrowChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
+import { apis } from './config';
 
 const icon = ref('setting');
 const arrow = ref(true);

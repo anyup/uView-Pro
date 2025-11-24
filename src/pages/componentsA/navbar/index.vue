@@ -14,98 +14,100 @@
         >
             <view class="slot-wrap" v-if="useSlot">
                 <view class="search-wrap" v-if="search">
-                    <!-- 如果使用u-search组件，必须要给v-model绑定一个变量 -->
                     <u-search
                         v-model="keyword"
                         :show-action="showAction"
                         height="56"
                         :action-style="{ color: '#fff' }"
-                    ></u-search>
+                    />
                 </view>
                 <view class="navbar-right" v-if="rightSlot">
                     <view class="message-box right-item">
-                        <u-icon name="chat" size="38"></u-icon>
-                        <u-badge count="18" size="mini" :offset="[-15, -15]"></u-badge>
+                        <u-icon name="chat" size="38" />
+                        <u-badge count="18" size="mini" :offset="[-15, -15]" />
                     </view>
                     <view class="dot-box right-item">
-                        <u-icon name="calendar-fill" size="38"></u-icon>
-                        <u-badge size="mini" :is-dot="true" :offset="[-6, -6]"></u-badge>
+                        <u-icon name="calendar-fill" size="38" />
+                        <u-badge size="mini" :is-dot="true" :offset="[-6, -6]" />
                     </view>
                 </view>
                 <view class="map-wrap" v-if="custom">
-                    <u-icon name="map" color="#ffffff" size="24"></u-icon>
+                    <u-icon name="map" color="#ffffff" size="24" />
                     <text class="map-wrap-text">轻舟已过万重山</text>
-                    <u-icon name="arrow-down-fill" color="#ffffff" size="22"></u-icon>
+                    <u-icon name="arrow-down-fill" color="#ffffff" size="22" />
                 </view>
             </view>
             <template #right v-if="rightSlot">
                 <view class="navbar-right">
                     <view class="message-box right-item">
-                        <u-icon name="chat" size="38"></u-icon>
-                        <u-badge count="18" size="mini" :offset="[-15, -15]"></u-badge>
+                        <u-icon name="chat" size="38" />
+                        <u-badge count="18" size="mini" :offset="[-15, -15]" />
                     </view>
                     <view class="dot-box right-item">
-                        <u-icon name="calendar-fill" size="38"></u-icon>
-                        <u-badge size="mini" :is-dot="true" :offset="[-6, -6]"></u-badge>
+                        <u-icon name="calendar-fill" size="38" />
+                        <u-badge size="mini" :is-dot="true" :offset="[-6, -6]" />
                     </view>
                 </view>
             </template>
         </u-navbar>
-        <view class="u-demo">
-            <view class="u-demo-wrap">
-                <view class="u-demo-title">演示效果</view>
-                <view class="u-demo-area">
-                    <u-toast ref="uToastRef"></u-toast>
-                    <view class="u-no-demo-here">查看顶部导航栏效果</view>
+        <demo-page
+            title="Navbar 导航栏"
+            desc="用于页面顶部导航，支持自定义内容、返回事件、渐变背景等丰富场景。"
+            :apis="apis"
+        >
+            <template #default>
+                <view class="u-demo">
+                    <view class="u-demo-wrap">
+                        <view class="u-demo-title">演示效果</view>
+                        <view class="u-demo-area">
+                            <u-toast ref="uToastRef" />
+                            <view class="u-no-demo-here">查看顶部导航栏效果</view>
+                        </view>
+                    </view>
+                    <view class="u-config-wrap">
+                        <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">标题长度</view>
+                            <u-subsection :list="['短', '中', '长']" @change="titleChange" />
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">隐藏左侧返回区域</view>
+                            <u-subsection current="1" :list="['是', '否']" @change="backChange" />
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">自定义左侧内容</view>
+                            <u-subsection current="1" :list="['是', '否']" @change="leftChange" />
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">自定义右侧内容</view>
+                            <u-subsection :current="slotRightCurrent" :list="['是', '否']" @change="rightChange" />
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">传入整体slot</view>
+                            <u-subsection :list="['无', '搜索框', '搜索+按钮', '搜索+图标']" @change="searchChange" />
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">完全自定义传入内容</view>
+                            <u-subsection current="1" :list="['是', '否']" @change="customChange" />
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">背景色</view>
+                            <u-subsection :list="['渐变', '#39CCCC', '#B471CC', '#001f3f']" @change="bgColorChange" />
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">自定义返回事件</view>
+                            <u-subsection current="1" :list="['是', '否']" @change="customBackChange" />
+                        </view>
+                    </view>
                 </view>
-            </view>
-            <view class="u-config-wrap">
-                <view class="u-config-title u-border-bottom"> 参数配置 </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">标题长度</view>
-                    <u-subsection :list="['短', '中', '长']" @change="titleChange"></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">隐藏左侧返回区域</view>
-                    <u-subsection current="1" :list="['是', '否']" @change="backChange"></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">自定义左侧内容</view>
-                    <u-subsection current="1" :list="['是', '否']" @change="leftChange"></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">自定义右侧内容</view>
-                    <u-subsection :current="slotRightCurrent" :list="['是', '否']" @change="rightChange"></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">传入整体slot</view>
-                    <u-subsection
-                        :list="['无', '搜索框', '搜索+按钮', '搜索+图标']"
-                        @change="searchChange"
-                    ></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">完全自定义传入内容</view>
-                    <u-subsection current="1" :list="['是', '否']" @change="customChange"></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">背景色</view>
-                    <u-subsection
-                        :list="['渐变', '#39CCCC', '#B471CC', '#001f3f']"
-                        @change="bgColorChange"
-                    ></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">自定义返回事件</view>
-                    <u-subsection current="1" :list="['是', '否']" @change="customBackChange"></u-subsection>
-                </view>
-            </view>
-        </view>
+            </template>
+        </demo-page>
     </view>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { apis } from './config';
 
 const title = ref<string | null>('新闻');
 const backText = ref<string>('返回');

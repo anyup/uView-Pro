@@ -1,59 +1,64 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-rate
-                    v-model="value"
-                    :count="count"
-                    @change="change"
-                    :active-color="activeColor"
-                    :inaction-color="inactiveColor"
-                    :active-icon="activeIcon"
-                    :inactive-icon="inactiveIcon"
-                    :disabled="disabled"
-                    :colors="colors"
-                    :icons="icons"
-                ></u-rate>
+    <demo-page title="Rate 评分" desc="用于评分展示和交互，支持自定义大小、颜色和图标。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-rate
+                            v-model="value"
+                            :count="count"
+                            @change="change"
+                            :active-color="activeColor"
+                            :inaction-color="inactiveColor"
+                            :active-icon="activeIcon"
+                            :inactive-icon="inactiveIcon"
+                            :disabled="disabled"
+                            :colors="colors"
+                            :icons="icons"
+                        ></u-rate>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">初始值</view>
+                        <u-subsection :list="['1', '2', '3', '4']" @change="currentChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">镂空状态</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="plainChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义样式</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">自定义图标</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="iconChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">是否分层</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="decimalChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">是否禁用</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">星星数量</view>
+                        <u-subsection current="1" :list="['4', '5', '6']" @change="countChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">初始值</view>
-                <u-subsection :list="['1', '2', '3', '4']" @change="currentChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">镂空状态</view>
-                <u-subsection current="1" :list="['是', '否']" @change="plainChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义样式</view>
-                <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">自定义图标</view>
-                <u-subsection current="1" :list="['是', '否']" @change="iconChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">是否分层</view>
-                <u-subsection current="1" :list="['是', '否']" @change="decimalChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">是否禁用</view>
-                <u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">星星数量</view>
-                <u-subsection current="1" :list="['4', '5', '6']" @change="countChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { ref, computed, watch } from 'vue';
+import { apis } from './config';
 
 const activeColor = ref('#FA3534');
 const inactiveColor = ref('#b2b2b2');

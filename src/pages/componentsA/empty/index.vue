@@ -1,95 +1,124 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-empty :mode="mode">
-                    <template v-if="slot" #bottom>
-                        <u-button size="medium"> slot按钮 </u-button>
-                    </template>
-                </u-empty>
+    <demo-page
+        title="Empty 空状态"
+        desc="用于页面、列表、数据等内容为空时的友好占位提示，支持多种内置场景和自定义插槽。"
+        :apis="apis"
+    >
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-empty :mode="mode">
+                            <template v-if="slot" #bottom>
+                                <u-button size="medium"> slot按钮 </u-button>
+                            </template>
+                        </u-empty>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式选择</view>
+                        <u-table>
+                            <u-tr class="u-tr">
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('car')"
+                                        >购物车为空</u-button
+                                    >
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('page')"
+                                        >页面不存在</u-button
+                                    >
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('search')">
+                                        没有搜索结果
+                                    </u-button>
+                                </u-td>
+                            </u-tr>
+                            <u-tr class="u-tr">
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('address')">
+                                        没有收货地址
+                                    </u-button>
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('wifi')"
+                                        >没有WiFi</u-button
+                                    >
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('order')"
+                                        >订单为空</u-button
+                                    >
+                                </u-td>
+                            </u-tr>
+                            <u-tr class="u-tr">
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('coupon')"
+                                        >没有优惠券</u-button
+                                    >
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('favor')"
+                                        >没有收藏</u-button
+                                    >
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('permission')"
+                                        >无权限</u-button
+                                    >
+                                </u-td>
+                            </u-tr>
+                            <u-tr class="u-tr">
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('history')">
+                                        无历史记录
+                                    </u-button>
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('news')"
+                                        >无新闻列表</u-button
+                                    >
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('message')">
+                                        消息列表为空
+                                    </u-button>
+                                </u-td>
+                            </u-tr>
+                            <u-tr class="u-tr">
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('list')"
+                                        >列表为空</u-button
+                                    >
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini" @click="modeChange('data')"
+                                        >数据为空</u-button
+                                    >
+                                </u-td>
+                                <u-td class="u-td">
+                                    <u-button :hair-line="false" size="mini">待扩展</u-button>
+                                </u-td>
+                            </u-tr>
+                        </u-table>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">传入slot</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="slotChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式选择</view>
-                <u-table>
-                    <u-tr class="u-tr">
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('car')">购物车为空</u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('page')">页面不存在</u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('search')">
-                                没有搜索结果
-                            </u-button>
-                        </u-td>
-                    </u-tr>
-                    <u-tr class="u-tr">
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('address')">
-                                没有收货地址
-                            </u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('wifi')">没有WiFi</u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('order')">订单为空</u-button>
-                        </u-td>
-                    </u-tr>
-                    <u-tr class="u-tr">
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('coupon')">没有优惠券</u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('favor')">没有收藏</u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('permission')">无权限</u-button>
-                        </u-td>
-                    </u-tr>
-                    <u-tr class="u-tr">
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('history')">
-                                无历史记录
-                            </u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('news')">无新闻列表</u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('message')">
-                                消息列表为空
-                            </u-button>
-                        </u-td>
-                    </u-tr>
-                    <u-tr class="u-tr">
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('list')">列表为空</u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini" @click="modeChange('data')">数据为空</u-button>
-                        </u-td>
-                        <u-td class="u-td">
-                            <u-button :hair-line="false" size="mini">待扩展</u-button>
-                        </u-td>
-                    </u-tr>
-                </u-table>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">传入slot</view>
-                <u-subsection current="1" :list="['是', '否']" @change="slotChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { apis } from './config';
 
 const mode = ref('data');
 const slot = ref(false);

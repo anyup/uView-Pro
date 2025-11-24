@@ -1,20 +1,22 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-city-select v-model="value" @city-change="cityChange"></u-city-select>
-                <view class="u-demo-result-line">{{ input ? input : 'Picker值' }}</view>
+    <demo-page title="CitySelect 省市区选择" desc="省市区选择示例">
+        <view class="u-demo">
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">演示效果</view>
+                <view class="u-demo-area">
+                    <u-city-select v-model="value" @city-change="cityChange"></u-city-select>
+                    <view class="u-demo-result-line">{{ input ? input : 'Picker值' }}</view>
+                </view>
+            </view>
+            <view class="u-config-wrap">
+                <view class="u-config-title u-border-bottom">参数配置</view>
+                <view class="u-config-item">
+                    <view class="u-item-title">状态</view>
+                    <u-button @click="value = true">打开Picker</u-button>
+                </view>
             </view>
         </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态</view>
-                <u-button @click="value = true">打开Picker</u-button>
-            </view>
-        </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">

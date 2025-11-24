@@ -1,65 +1,73 @@
 <template>
-    <view>
-        <view class="u-m-p-50">
-            <view class="u-demo-area u-flex u-row-center">
-                <u-dropdown
-                    :close-on-click-mask="mask"
-                    ref="uDropdownRef"
-                    :activeColor="activeColor"
-                    :borderBottom="borderBottom"
-                >
-                    <u-dropdown-item
-                        @change="change"
-                        v-model="value1"
-                        title="距离"
-                        :options="options1"
-                    ></u-dropdown-item>
-                    <u-dropdown-item
-                        @change="change"
-                        v-model="value2"
-                        title="温度"
-                        :options="options2"
-                    ></u-dropdown-item>
-                    <u-dropdown-item title="属性">
-                        <view class="slot-content">
-                            <view class="item-box">
-                                <view
-                                    class="item"
-                                    :class="[item.active ? 'active' : '']"
-                                    @tap="tagClick(index)"
-                                    v-for="(item, index) in list"
-                                    :key="index"
-                                >
-                                    {{ item.label }}
+    <demo-page title="Dropdown 下拉菜单" desc="用于展示下拉菜单，支持单选、多选、自定义样式等功能。" :apis="apis">
+        <template #default>
+            <view>
+                <view class="u-m-p-50">
+                    <view class="u-demo-area u-flex u-row-center">
+                        <u-dropdown
+                            :close-on-click-mask="mask"
+                            ref="uDropdownRef"
+                            :activeColor="activeColor"
+                            :borderBottom="borderBottom"
+                        >
+                            <u-dropdown-item
+                                @change="change"
+                                v-model="value1"
+                                title="距离"
+                                :options="options1"
+                            ></u-dropdown-item>
+                            <u-dropdown-item
+                                @change="change"
+                                v-model="value2"
+                                title="温度"
+                                :options="options2"
+                            ></u-dropdown-item>
+                            <u-dropdown-item title="属性">
+                                <view class="slot-content">
+                                    <view class="item-box">
+                                        <view
+                                            class="item"
+                                            :class="[item.active ? 'active' : '']"
+                                            @tap="tagClick(index)"
+                                            v-for="(item, index) in list"
+                                            :key="index"
+                                        >
+                                            {{ item.label }}
+                                        </view>
+                                    </view>
+                                    <u-button type="primary" @click="closeDropdown">确定</u-button>
                                 </view>
-                            </view>
-                            <u-button type="primary" @click="closeDropdown">确定</u-button>
-                        </view>
-                    </u-dropdown-item>
-                </u-dropdown>
+                            </u-dropdown-item>
+                        </u-dropdown>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">下边框</view>
+                        <u-subsection current="1" :list="['有', '无']" @change="borderChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">激活颜色</view>
+                        <u-subsection
+                            :list="['#2979ff', '#ff9900', '#19be6b']"
+                            @change="activeColorChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">遮罩是否可点击</view>
+                        <u-subsection :list="['是', '否']" @change="maskChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">下边框</view>
-                <u-subsection current="1" :list="['有', '无']" @change="borderChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">激活颜色</view>
-                <u-subsection :list="['#2979ff', '#ff9900', '#19be6b']" @change="activeColorChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">遮罩是否可点击</view>
-                <u-subsection :list="['是', '否']" @change="maskChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { ref } from 'vue';
+import { apis } from './config';
 
 const value1 = ref('');
 const value2 = ref(2);

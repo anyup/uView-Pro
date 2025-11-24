@@ -1,44 +1,43 @@
-<!--
- * @Desc: ---   ----
- * @Date: 2020-04-22 12:29:21
- * @LastEditors: 王
- * @LastEditTime: 2020-04-22 18:33:28
- -->
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-gap
-                    :bg-color="bgColor"
-                    :height="height"
-                    :margin-top="marginTop"
-                    :margin-bottom="marginBottom"
-                ></u-gap>
+    <demo-page title="Gap 间距" desc="用于创建固定的间距，可以是垂直或水平方向。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-gap
+                            :bg-color="bgColor"
+                            :height="height"
+                            :margin-top="marginTop"
+                            :margin-bottom="marginBottom"
+                        ></u-gap>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom">参数配置</view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">背景颜色</view>
+                        <u-subsection
+                            :list="['default', 'primary', 'error', 'warning', 'success']"
+                            @change="bgColorChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">高度</view>
+                        <u-subsection :list="['30', '50', '70']" @change="heightChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">上下外边距</view>
+                        <u-subsection :list="['30', '50', '70']" @change="marginChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">背景颜色</view>
-                <u-subsection
-                    :list="['default', 'primary', 'error', 'warning', 'success']"
-                    @change="bgColorChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">高度</view>
-                <u-subsection :list="['30', '50', '70']" @change="heightChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">上下外边距</view>
-                <u-subsection :list="['30', '50', '70']" @change="marginChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
+import { apis } from './config';
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 

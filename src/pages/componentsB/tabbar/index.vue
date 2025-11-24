@@ -1,45 +1,50 @@
 <template>
-    <view>
-        <view class="u-demo">
-            <view class="u-config-wrap">
-                <view class="u-config-title u-border-bottom"> 参数配置 </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">状态</view>
-                    <u-subsection :list="['显示', '隐藏']" @change="showChange"></u-subsection>
+    <demo-page title="Tabbar 标签栏" desc="用于展示应用底部导航栏，支持自定义颜色、中间按钮和徽标。" :apis="apis">
+        <template #default>
+            <view>
+                <view class="u-demo">
+                    <view class="u-config-wrap">
+                        <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">状态</view>
+                            <u-subsection :list="['显示', '隐藏']" @change="showChange"></u-subsection>
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">凸起按钮</view>
+                            <u-subsection :list="['显示', '隐藏']" @change="minButtonChange"></u-subsection>
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">背景色</view>
+                            <u-subsection :list="['#ffffff', '#1f1f1d']" @change="bgColorChange"></u-subsection>
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">顶部边框</view>
+                            <u-subsection :list="['显示', '隐藏']" @change="borderTopChange"></u-subsection>
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">提示角标</view>
+                            <u-subsection :list="['显示', '隐藏']" @change="badgeChange"></u-subsection>
+                        </view>
+                    </view>
                 </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">凸起按钮</view>
-                    <u-subsection :list="['显示', '隐藏']" @change="minButtonChange"></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">背景色</view>
-                    <u-subsection :list="['#ffffff', '#1f1f1d']" @change="bgColorChange"></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">顶部边框</view>
-                    <u-subsection :list="['显示', '隐藏']" @change="borderTopChange"></u-subsection>
-                </view>
-                <view class="u-config-item">
-                    <view class="u-item-title">提示角标</view>
-                    <u-subsection :list="['显示', '隐藏']" @change="badgeChange"></u-subsection>
-                </view>
+                <u-tabbar
+                    v-model="current"
+                    :show="show"
+                    :bg-color="bgColor"
+                    :border-top="borderTop"
+                    :list="list"
+                    :mid-button="midButton"
+                    :inactive-color="inactiveColor"
+                    :activeColor="activeColor"
+                ></u-tabbar>
             </view>
-        </view>
-        <u-tabbar
-            v-model="current"
-            :show="show"
-            :bg-color="bgColor"
-            :border-top="borderTop"
-            :list="list"
-            :mid-button="midButton"
-            :inactive-color="inactiveColor"
-            :activeColor="activeColor"
-        ></u-tabbar>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { apis } from './config';
 
 const current = ref(0);
 const show = ref(true);

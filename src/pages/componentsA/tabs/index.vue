@@ -1,52 +1,61 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-toast ref="uToast"></u-toast>
-                <u-tabs
-                    v-if="control"
-                    bg-color="#fafafa"
-                    :bold="bold"
-                    :active-color="activeColor"
-                    :list="list"
-                    @change="change"
-                    :current="current"
-                    :is-scroll="isScroll"
-                    :offset="offset"
-                ></u-tabs>
+    <demo-page title="Tabs 标签页" desc="用于多内容区域切换展示，支持滚动、自定义颜色、字体加粗等。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-toast ref="uToast"></u-toast>
+                        <u-tabs
+                            v-if="control"
+                            bg-color="#fafafa"
+                            :bold="bold"
+                            :active-color="activeColor"
+                            :list="list"
+                            @change="change"
+                            :current="current"
+                            :is-scroll="isScroll"
+                            :offset="offset"
+                        ></u-tabs>
+                    </view>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">模式选择</view>
+                        <u-subsection
+                            :current="sectionCurrent"
+                            :list="['滚动', '非滚动']"
+                            @change="modeChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">标签个数(非滚动模式)</view>
+                        <u-subsection :list="['2', '3', '4']" @change="countChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">活动选项字颜色</view>
+                        <u-subsection
+                            mode="button"
+                            :list="['primary', 'success', 'error', 'warning']"
+                            @change="colorChange"
+                        ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">字体加粗</view>
+                        <u-subsection mode="button" :list="['是', '否']" @change="boldChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">模式选择</view>
-                <u-subsection :current="sectionCurrent" :list="['滚动', '非滚动']" @change="modeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">标签个数(非滚动模式)</view>
-                <u-subsection :list="['2', '3', '4']" @change="countChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">活动选项字颜色</view>
-                <u-subsection
-                    mode="button"
-                    :list="['primary', 'success', 'error', 'warning']"
-                    @change="colorChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">字体加粗</view>
-                <u-subsection mode="button" :list="['是', '否']" @change="boldChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
 import { ref } from 'vue';
+import { apis } from './config';
 
 const list = ref([]);
 const data = ref([

@@ -1,50 +1,55 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <u-swipe-action
-                    bg-color="rgb(250, 250, 250)"
-                    @open="open"
-                    :disabled="disabled"
-                    :index="index"
-                    v-for="(item, index) in list"
-                    :key="item.id"
-                    :show="item.show"
-                    @click="click"
-                    :btn-width="btnWidth"
-                    @close="close"
-                    :options="options"
-                    @content-click="contentClick"
-                >
-                    <view class="item u-border-bottom">
-                        <image mode="aspectFill" :src="item.images" />
-                        <!-- 此层wrap在此为必写的，否则可能会出现标题定位错误 -->
-                        <view class="title-wrap">
-                            <text class="title u-line-2">{{ item.title }}</text>
-                        </view>
+    <demo-page title="SwipeAction 滑动操作" desc="用于滑动展示隐藏的操作按钮，支持自定义宽度和操作。" :apis="apis">
+        <template #default>
+            <view class="u-demo">
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-area">
+                        <u-swipe-action
+                            bg-color="rgb(250, 250, 250)"
+                            @open="open"
+                            :disabled="disabled"
+                            :index="index"
+                            v-for="(item, index) in list"
+                            :key="item.id"
+                            :show="item.show"
+                            @click="click"
+                            :btn-width="btnWidth"
+                            @close="close"
+                            :options="options"
+                            @content-click="contentClick"
+                        >
+                            <view class="item u-border-bottom">
+                                <image mode="aspectFill" :src="item.images" />
+                                <!-- 此层wrap在此为必写的，否则可能会出现标题定位错误 -->
+                                <view class="title-wrap">
+                                    <text class="title u-line-2">{{ item.title }}</text>
+                                </view>
+                            </view>
+                        </u-swipe-action>
                     </view>
-                </u-swipe-action>
+                </view>
+                <view class="u-config-wrap">
+                    <view class="u-config-title u-border-bottom">参数配置</view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">状态(操作第一个)</view>
+                        <u-subsection :current="1" :list="['打开', '关闭']" @change="showChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">禁止滑动</view>
+                        <u-subsection :current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
+                    </view>
+                </view>
             </view>
-        </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom">参数配置</view>
-            <view class="u-config-item">
-                <view class="u-item-title">状态(操作第一个)</view>
-                <u-subsection :current="1" :list="['打开', '关闭']" @change="showChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">禁止滑动</view>
-                <u-subsection :current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+        </template>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { onLoad } from '@dcloudio/uni-app';
 import { ref, nextTick } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+import { apis } from './config';
 defineOptions({ name: 'SwipeActionDemo' });
 
 /**
