@@ -248,7 +248,7 @@ export function kebabCase(word: string): string {
  * 运行时设置主题颜色（就地合并到 reactive 的 $u.color）
  * @param theme Partial<ThemeColor>
  */
-function setTheme(theme: Partial<ThemeColor> | undefined) {
+function setColor(theme: Partial<ThemeColor> | undefined) {
     if (!theme) return;
     try {
         const merged = deepMerge($u.color, theme);
@@ -291,7 +291,7 @@ export {
     config,
     zIndex,
     mitt,
-    setTheme
+    setColor
 };
 
 export const $u = {
@@ -334,7 +334,7 @@ export const $u = {
     addStyle,
     toStyle,
     kebabCase,
-    setTheme
+    setColor
 };
 
 // 颜色相关方法单独导出
@@ -353,3 +353,4 @@ export {
 export * from './hooks';
 
 export * from './util/logger';
+export * from './util/config-provider';

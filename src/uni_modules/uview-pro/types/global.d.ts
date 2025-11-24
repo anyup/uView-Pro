@@ -332,10 +332,18 @@ export type ColorType =
     | 'contentColor'
     | 'tipsColor'
     | 'lightColor'
-    | 'borderColor';
+    | 'borderColor'
+    | 'formItemBorderColor';
 
 // 自定义主题色
 export type ThemeColor = Partial<Record<ColorType, string>>;
+
+export type Theme = {
+    name: string;
+    label?: string;
+    description?: string;
+    color: Partial<ThemeColor>;
+};
 
 export type LogConfig = Partial<{
     debug?: boolean;
@@ -345,6 +353,7 @@ export type LogConfig = Partial<{
 
 export interface UViewProOptions {
     theme?: ThemeColor;
+    themes?: Theme[];
     log?: LogConfig;
     // 可扩展更多配置项
 }

@@ -6,7 +6,8 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"],
-            "uview-pro": ["./src/uni_modules/uview-pro"]
+            "uview-pro": ["./src/uni_modules/uview-pro"],
+            "uview-pro/*": ["./src/uni_modules/uview-pro/*"]
         },
         "lib": ["esnext", "dom"],
         "types": ["@dcloudio/types"],
