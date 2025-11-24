@@ -18,9 +18,11 @@
                 </view>
             </view>
         </view>
+        <!-- #ifdef APP -->
         <template #extra1>
             <zero-markdown-view :markdown="apis2" :themeColor="$u.getColor('primary')"></zero-markdown-view>
         </template>
+        <!-- #endif -->
     </demo-page>
 </template>
 

@@ -13,7 +13,9 @@
         <view class="demo-page_api" v-show="tabIndex === 1">
             <slot name="api">
                 <view v-if="apis">
+                    <!-- #ifdef APP -->
                     <zero-markdown-view :themeColor="$u.getColor('primary')" :markdown="apis"></zero-markdown-view>
+                    <!-- #endif -->
                 </view>
                 <view v-else>暂无API文档</view>
             </slot>
@@ -157,14 +159,18 @@ const slots = defineSlots();
 const tabList = computed(() => {
     const result = [
         { name: '基础演示' },
+        // #ifdef APP
         { name: 'API文档', hidden: props.apis ? false : true },
         { name: '应用场景', hidden: props.scenes || slots.scene ? false : true },
         { name: '常见问题', hidden: props.faqs || slots.faq ? false : true },
         { name: '体验任务', hidden: props.tasks || slots.task ? false : true }
+        // #endif
     ];
+    // #ifdef APP
     if (props.extras && props.extras.length) {
         result.push(...props.extras.map(item => ({ name: item })));
     }
+    // #endif
     return result;
 });
 const tabIndex = ref(0);
