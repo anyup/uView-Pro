@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Search 搜索" desc="用于搜索输入，支持不同形状、清除按钮和自定义样式。" :apis="apis">
+    <demo-page title="Search 搜索" desc="用于搜索输入，支持不同形状、清除按钮和自定义样式。" :apis="'search'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -51,7 +51,6 @@
 import { ref, watch } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import type { SearchShape, InputAlign } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const value = ref('');
 const shape = ref<SearchShape>('round');

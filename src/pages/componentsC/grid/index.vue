@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Grid 栅格" desc="12列栅格系统，用于响应式布局。" :apis="apis">
+    <demo-page title="Grid 栅格" desc="12列栅格系统，用于响应式布局。" :apis="'grid'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -118,7 +118,6 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { apis } from './config';
 
 const ToastRef = ref(null);
 

@@ -2,7 +2,7 @@
     <demo-page
         title="LazyLoad 图片懒加载"
         desc="用于长列表、图片流等场景的图片懒加载，提升页面性能和体验。"
-        :apis="apis"
+        :apis="'lazyLoad'"
     >
         <template #default>
             <view class="wrap">
@@ -31,7 +31,6 @@ import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
 import type { LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const list = ref([]);
 const status = ref<LoadmoreStatus>('loadmore');

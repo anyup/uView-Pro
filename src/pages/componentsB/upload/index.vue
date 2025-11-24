@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Upload 上传" desc="用于文件上传，支持多个文件、进度显示和自定义样式。" :apis="apis">
+    <demo-page title="Upload 上传" desc="用于文件上传，支持多个文件、进度显示和自定义样式。" :apis="'upload'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -85,7 +85,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 // 上传文件项类型
 interface UploadFileItem {

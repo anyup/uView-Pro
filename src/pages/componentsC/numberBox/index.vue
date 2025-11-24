@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="NumberBox 数字输入" desc="用于输入数字，可以通过按钮增减。" :apis="apis">
+    <demo-page title="NumberBox 数字输入" desc="用于输入数字，可以通过按钮增减。" :apis="'numberBox'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -43,7 +43,6 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { apis } from './config';
 
 const value = ref(1);
 const bgColor = ref('#F2F3F5');

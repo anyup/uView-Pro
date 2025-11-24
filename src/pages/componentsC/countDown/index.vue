@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="CountDown 倒计时" desc="以数字和分隔符的形式展示倒计时，精确到毫秒级别。" :apis="apis">
+    <demo-page title="CountDown 倒计时" desc="以数字和分隔符的形式展示倒计时，精确到毫秒级别。" :apis="'countDown'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -53,7 +53,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { apis } from './config';
+
 import { $u } from '@/uni_modules/uview-pro';
 
 const uToastRef = ref(null);

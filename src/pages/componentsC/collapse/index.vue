@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Collapse 折叠框" desc="将内容折叠起来，节省空间，用户可以点击展开查看详情。" :apis="apis">
+    <demo-page title="Collapse 折叠框" desc="将内容折叠起来，节省空间，用户可以点击展开查看详情。" :apis="'collapse'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap" style="background-color: #ffffff">
@@ -49,7 +49,6 @@
 
 <script lang="ts" setup>
 import { ref, nextTick } from 'vue';
-import { apis } from './config';
 
 const uToastRef = ref(null);
 const itemList = ref([

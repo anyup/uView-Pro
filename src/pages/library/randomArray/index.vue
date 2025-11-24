@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="RandomArray 随机数组" desc="用于从数组中随机选取指定数量的元素，不重复。" :apis="apis">
+    <demo-page title="RandomArray 随机数组" desc="用于从数组中随机选取指定数量的元素，不重复。" :apis="'randomArray'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -27,7 +27,6 @@
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const orginArray = ref([1, 2, 3, 4, 5]);
 const result = ref<number[]>([]);

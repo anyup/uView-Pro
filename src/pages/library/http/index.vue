@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Http HTTP请求" desc="用于发送HTTP请求，支持GET、POST等多种方法和拦截器。" :apis="apis">
+    <demo-page title="Http HTTP请求" desc="用于发送HTTP请求，支持GET、POST等多种方法和拦截器。" :apis="'http'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -34,7 +34,6 @@
 <script lang="ts" setup>
 import { $u } from '@/uni_modules/uview-pro';
 import { onMounted, ref } from 'vue';
-import { apis } from './config';
 
 interface Result {
     code: number;

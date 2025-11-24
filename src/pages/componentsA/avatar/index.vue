@@ -2,9 +2,7 @@
     <demo-page
         title="Avatar 头像"
         desc="用于展示用户头像、等级、性别等信息，支持多种形态和自定义内容。"
-        :scenes="scenes"
-        :faqs="faqs"
-        :apis="apis"
+        :apis="'avatar'"
     >
         <template #default>
             <view class="u-demo">
@@ -58,7 +56,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { Sex, Shape } from '@/uni_modules/uview-pro/types/global';
-import { apis, faqs, scenes } from './config';
 
 const mode = ref<Shape>('circle');
 const src = ref('/static/logo.png');

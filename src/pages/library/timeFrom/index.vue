@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="TimeFrom 时间转换" desc="用于将时间戳转换为相对时间，如几分钟前、几小时前等。" :apis="apis">
+    <demo-page title="TimeFrom 时间转换" desc="用于将时间戳转换为相对时间，如几分钟前、几小时前等。" :apis="'timeFrom'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -36,7 +36,6 @@
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const uToastRef = ref();
 

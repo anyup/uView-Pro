@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="NoticeBar 通知栏" desc="用于展示通知消息，支持水平和竖直滚动、自定义颜色和速度。" :apis="apis">
+    <demo-page
+        title="NoticeBar 通知栏"
+        desc="用于展示通知消息，支持水平和竖直滚动、自定义颜色和速度。"
+        :apis="'noticeBar'"
+    >
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -64,7 +68,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { Direction, PlayState, ThemeType } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const show = ref(true);
 const autoplay = ref(false);

@@ -5,6 +5,7 @@ build
 coverage
 *.min.js
 *.map
+*.md
 pnpm-lock.yaml
 async-validator.js
 calendar.js

@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="AlertTips 警告提示" desc="用于页面中向用户展示重要信息提示。" :apis="apis">
+    <demo-page title="AlertTips 警告提示" desc="用于页面中向用户展示重要信息提示。" :apis="'alertTips'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -49,7 +49,6 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const title = ref('大漠孤烟直，长河落日圆');
 const description = ref(

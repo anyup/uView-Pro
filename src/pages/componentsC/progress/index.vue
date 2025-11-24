@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Progress 进度条" desc="用于展示进度，可配置颜色和尺寸。" :apis="apis">
+    <demo-page title="Progress 进度条" desc="用于展示进度，可配置颜色和尺寸。" :apis="'progress'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -52,7 +52,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const percent = ref(50);
 const mode = ref('line');

@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Tabbar 标签栏" desc="用于展示应用底部导航栏，支持自定义颜色、中间按钮和徽标。" :apis="apis">
+    <demo-page title="Tabbar 标签栏" desc="用于展示应用底部导航栏，支持自定义颜色、中间按钮和徽标。" :apis="'tabbar'">
         <template #default>
             <view>
                 <view class="u-demo">
@@ -44,7 +44,6 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { apis } from './config';
 
 const current = ref(0);
 const show = ref(true);

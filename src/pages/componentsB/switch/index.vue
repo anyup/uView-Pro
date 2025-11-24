@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Switch 开关" desc="用于开关切换，支持自定义颜色、大小和异步操作。" :apis="apis">
+    <demo-page title="Switch 开关" desc="用于开关切换，支持自定义颜色、大小和异步操作。" :apis="'switch'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -55,7 +55,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const checked = ref(false);
 const activeColor = ref($u.color.primary);

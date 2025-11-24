@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="TimeFormat 时间格式化" desc="用于将时间戳格式化为指定格式的时间字符串。" :apis="apis">
+    <demo-page title="TimeFormat 时间格式化" desc="用于将时间戳格式化为指定格式的时间字符串。" :apis="'timeFormat'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -30,7 +30,6 @@
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 // 响应式状态
 const timestamp = ref<string>('2020-11-02T02:59:24.732Z');

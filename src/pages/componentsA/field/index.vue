@@ -2,7 +2,7 @@
     <demo-page
         title="Field 输入框"
         desc="用于表单、登录、注册等场景的多样化输入，支持多种类型、校验和自定义内容。"
-        :apis="apis"
+        :apis="'field'"
     >
         <template #default>
             <view class="u-demo">
@@ -62,7 +62,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { InputType } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const mobile = ref('');
 const code = ref('');

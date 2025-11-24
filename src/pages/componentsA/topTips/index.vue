@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="TopTips 顶部提示" desc="用于页面顶部消息提示，支持多种主题和自定义时长。" :apis="apis">
+    <demo-page title="TopTips 顶部提示" desc="用于页面顶部消息提示，支持多种主题和自定义时长。" :apis="'topTips'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -31,7 +31,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const duration = ref(2000);
 const title = ref('忽如一夜春风来，千树万树梨花开');

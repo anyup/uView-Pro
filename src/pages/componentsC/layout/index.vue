@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Layout 布局" desc="通过基础的 12 分栏，迅速简便地创建布局 " :apis="apis">
+    <demo-page title="Layout 布局" desc="通过基础的 12 分栏，迅速简便地创建布局 " :apis="'layout'">
         <view class="u-demo">
             <view class="u-demo-wrap">
                 <view class="u-demo-title">演示效果</view>
@@ -45,7 +45,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { RowJustify } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const gutter = ref(10);
 const span = ref(3);

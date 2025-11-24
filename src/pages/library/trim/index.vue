@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Trim 字符串裁剪" desc="用于移除字符串两端的空格、特定字符或多种空白字符。" :apis="apis">
+    <demo-page title="Trim 字符串裁剪" desc="用于移除字符串两端的空格、特定字符或多种空白字符。" :apis="'trim'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -30,7 +30,6 @@
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 type TrimPosition = 'left' | 'all' | 'both' | 'right';
 

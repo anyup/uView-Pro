@@ -2,7 +2,7 @@
     <demo-page
         title="Image 图片"
         desc="此组件为 uni-app 的`image`组件的加强版，在继承了原有功能外，还支持淡入动画、加载中、加载失败提示、圆角值和形状等。"
-        :apis="apis"
+        :apis="'image'"
     >
         <view class="u-demo">
             <view class="u-demo-wrap">
@@ -61,7 +61,6 @@
 import { type ImageInstance } from '@/uni_modules/uview-pro/components/u-image/types';
 import { ref } from 'vue';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 // 定义响应式数据
 const src = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png');

@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="LoadingPopup 加载弹窗" desc="用于显示加载弹窗，支持自定义文案、时长和方向。" :apis="apis">
+    <demo-page
+        title="LoadingPopup 加载弹窗"
+        desc="用于显示加载弹窗，支持自定义文案、时长和方向。"
+        :apis="'loadingPopup'"
+    >
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -58,7 +62,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 // 是否显示 loading popup
 const show = ref(false);

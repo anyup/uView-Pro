@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Swiper 轮播" desc="用于图片或内容轮播展示，支持多种指示器模式和自动播放。" :apis="apis">
+    <demo-page title="Swiper 轮播" desc="用于图片或内容轮播展示，支持多种指示器模式和自动播放。" :apis="'swiper'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -51,7 +51,6 @@
 import { ref } from 'vue';
 import type { SwiperIndicatorPosition, SwiperMode } from '@/uni_modules/uview-pro/types/global';
 import { img1, img2, img3 } from './image';
-import { apis } from './config';
 
 const uToastRef = ref(null);
 

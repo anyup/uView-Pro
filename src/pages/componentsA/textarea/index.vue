@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="Textarea 多行文本" desc="用于多行文本输入，支持字数统计、自动增高、禁用等功能。" :apis="apis">
+    <demo-page
+        title="Textarea 多行文本"
+        desc="用于多行文本输入，支持字数统计、自动增高、禁用等功能。"
+        :apis="'Textarea'"
+    >
         <template #default>
             <view class="u-page">
                 <view class="u-demo-block">
@@ -39,7 +43,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { apis } from './config';
 
 // 页面示例中的 v-model 数据
 const value1 = ref<string>('');

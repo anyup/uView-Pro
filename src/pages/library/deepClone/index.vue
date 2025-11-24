@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="DeepClone 深拷贝" desc="用于实现对象和数组的深度克隆，完全独立于原对象。" :apis="apis">
+    <demo-page title="DeepClone 深拷贝" desc="用于实现对象和数组的深度克隆，完全独立于原对象。" :apis="'deepClone'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -20,7 +20,6 @@
 import { ref, computed } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const obj = ref({
     info: {

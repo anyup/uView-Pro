@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="QueryParams URL参数" desc="用于解析和操作URL查询参数，支持参数提取和拼接。" :apis="apis">
+    <demo-page title="QueryParams URL参数" desc="用于解析和操作URL查询参数，支持参数提取和拼接。" :apis="'queryParams'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -27,7 +27,6 @@
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 interface ParamsType {
     name: string;

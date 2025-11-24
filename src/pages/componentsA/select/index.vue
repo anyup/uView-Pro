@@ -2,7 +2,7 @@
     <demo-page
         title="Select 选择器"
         desc="用于单列、多列独立、多列联动等多种选择场景，支持灵活数据结构和交互。"
-        :apis="apis"
+        :apis="'select'"
     >
         <template #default>
             <view class="u-demo">
@@ -41,7 +41,6 @@
 import { computed, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import type { SelectMode } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const show = ref(false);
 const result = ref('尚未选择');

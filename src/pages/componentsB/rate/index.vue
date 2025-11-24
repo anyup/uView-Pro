@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Rate 评分" desc="用于评分展示和交互，支持自定义大小、颜色和图标。" :apis="apis">
+    <demo-page title="Rate 评分" desc="用于评分展示和交互，支持自定义大小、颜色和图标。" :apis="'rate'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -58,7 +58,6 @@
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { ref, computed, watch } from 'vue';
-import { apis } from './config';
 
 const activeColor = ref('#FA3534');
 const inactiveColor = ref('#b2b2b2');

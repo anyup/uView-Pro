@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Picker 选择器" desc="用于展示选择器，支持单选、多选、日期、地区等多种模式。" :apis="apis">
+    <demo-page title="Picker 选择器" desc="用于展示选择器，支持单选、多选、日期、地区等多种模式。" :apis="'picker'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -59,7 +59,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import type { PickerMode } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const show = ref(false);
 const input = ref<string | string[]>('');

@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="Debounce 防抖" desc="用于防止函数频繁执行，延迟函数执行直到调用停止后的指定时间。" :apis="apis">
+    <demo-page
+        title="Debounce 防抖"
+        desc="用于防止函数频繁执行，延迟函数执行直到调用停止后的指定时间。"
+        :apis="'debounce'"
+    >
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -41,7 +45,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 type ModeType = 'throttle' | 'debouncd';
 

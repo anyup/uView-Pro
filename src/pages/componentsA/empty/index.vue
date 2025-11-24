@@ -2,7 +2,7 @@
     <demo-page
         title="Empty 空状态"
         desc="用于页面、列表、数据等内容为空时的友好占位提示，支持多种内置场景和自定义插槽。"
-        :apis="apis"
+        :apis="'empty'"
     >
         <template #default>
             <view class="u-demo">
@@ -118,7 +118,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { apis } from './config';
 
 const mode = ref('data');
 const slot = ref(false);

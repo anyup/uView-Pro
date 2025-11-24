@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Line 线条" desc="用于展示线条，支持不同方向、样式和颜色设置。" :apis="apis">
+    <demo-page title="Line 线条" desc="用于展示线条，支持不同方向、样式和颜色设置。" :apis="'line'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -50,7 +50,6 @@
 import { $u } from '@/uni_modules/uview-pro';
 import { ref } from 'vue';
 import type { LineBorderStyle, LineDirection } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const direction = ref<LineDirection>('row');
 const hairLine = ref(true);

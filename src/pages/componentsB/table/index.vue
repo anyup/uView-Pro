@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Table 表格" desc="用于展示表格数据，支持自定义对齐方式和边框颜色。" :apis="apis">
+    <demo-page title="Table 表格" desc="用于展示表格数据，支持自定义对齐方式和边框颜色。" :apis="'table'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -54,7 +54,6 @@
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import type { TextAlign } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const mode = ref(false);
 const borderColor = ref('#e4e7ed');

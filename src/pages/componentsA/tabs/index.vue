@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Tabs 标签页" desc="用于多内容区域切换展示，支持滚动、自定义颜色、字体加粗等。" :apis="apis">
+    <demo-page title="Tabs 标签页" desc="用于多内容区域切换展示，支持滚动、自定义颜色、字体加粗等。" :apis="'tabs'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -55,7 +55,6 @@
 import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
 import { ref } from 'vue';
-import { apis } from './config';
 
 const list = ref([]);
 const data = ref([

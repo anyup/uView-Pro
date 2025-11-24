@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Gap 间距" desc="用于创建固定的间距，可以是垂直或水平方向。" :apis="apis">
+    <demo-page title="Gap 间距" desc="用于创建固定的间距，可以是垂直或水平方向。" :apis="'gap'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -37,7 +37,6 @@
 </template>
 
 <script lang="ts" setup>
-import { apis } from './config';
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 

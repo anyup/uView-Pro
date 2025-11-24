@@ -2,7 +2,7 @@
     <demo-page
         title="Badge 徽标数"
         desc="该组件一般用于图标右上角显示未读的消息数量，提示用户点击，有圆点和圆包含文字两种形式。"
-        :apis="apis"
+        :apis="'badge'"
     >
         <view class="u-demo">
             <view class="u-demo-wrap">
@@ -67,7 +67,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { ThemeType, BadgeSize } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const count = ref(8);
 const type = ref<ThemeType>('error');

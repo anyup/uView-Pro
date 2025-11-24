@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="Form 表单" desc="此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。">
+    <demo-page
+        title="Form 表单"
+        desc="此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。"
+        :apis="'form'"
+    >
         <view class="wrap">
             <wx-tips />
             <u-form :model="model" :rules="rules" ref="uFormRef" :errorType="errorType">
@@ -110,7 +114,7 @@
                 <u-form-item :label-position="labelPosition" label="验证码" prop="code" label-width="150">
                     <u-input :border="border" placeholder="请输入验证码" v-model="model.code" type="text"></u-input>
                     <template #right>
-                        <u-button type="success" size="mini" @click="getCode">{{ codeTips }}</u-button>
+                        <u-button type="primary" size="mini" @click="getCode">{{ codeTips }}</u-button>
                     </template>
                 </u-form-item>
                 <!-- 此处switch的slot为right，如果不填写slot名，也即<u-switch v-model="model.remember"></u-switch>，将会左对齐 -->
@@ -174,7 +178,6 @@
 import { ref, reactive, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import type { FormErrorType, FormRules } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 // 表单模型类型声明
 interface Model {

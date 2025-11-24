@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Guid 唯一值" desc="用于生成全局唯一标识符GUID，每次生成都不相同。" :apis="apis">
+    <demo-page title="Guid 唯一值" desc="用于生成全局唯一标识符GUID，每次生成都不相同。" :apis="'guid'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -42,7 +42,6 @@
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const length = ref(32);
 const firstU = ref(true);

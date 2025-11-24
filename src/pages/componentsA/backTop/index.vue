@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="BackTop 返回顶部" desc="用于快速返回页面顶部，支持自定义样式、位置和图标。" :apis="apis">
+    <demo-page title="BackTop 返回顶部" desc="用于快速返回页面顶部，支持自定义样式、位置和图标。" :apis="'backTop'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -48,7 +48,6 @@ import { ref } from 'vue';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
 import { $u } from '@/uni_modules/uview-pro';
 import { onPageScroll } from '@dcloudio/uni-app';
-import { apis } from './config';
 
 const scrollTop = ref(0);
 const mode = ref<Shape>('circle');

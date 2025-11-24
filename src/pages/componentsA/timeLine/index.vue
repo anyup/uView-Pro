@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="TimeLine 时间线" desc="用于展示时间流、订单物流等场景，支持自定义节点和样式。" :apis="apis">
+    <demo-page title="TimeLine 时间线" desc="用于展示时间流、订单物流等场景，支持自定义节点和样式。" :apis="'timeLine'">
         <template #default>
             <view class="wrap">
                 <u-time-line>
@@ -106,10 +106,6 @@
         </template>
     </demo-page>
 </template>
-
-<script setup lang="ts">
-import { apis } from './config';
-</script>
 
 <style lang="scss" scoped>
 .wrap {

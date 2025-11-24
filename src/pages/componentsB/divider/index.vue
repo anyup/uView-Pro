@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Divider 分割线" desc="用于分割不同内容区域，支持自定义颜色、宽度、边距等样式。" :apis="apis">
+    <demo-page title="Divider 分割线" desc="用于分割不同内容区域，支持自定义颜色、宽度、边距等样式。" :apis="'divider'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -47,7 +47,6 @@
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 import { ref } from 'vue';
 import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
 

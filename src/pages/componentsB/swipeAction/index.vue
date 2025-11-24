@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="SwipeAction 滑动操作" desc="用于滑动展示隐藏的操作按钮，支持自定义宽度和操作。" :apis="apis">
+    <demo-page
+        title="SwipeAction 滑动操作"
+        desc="用于滑动展示隐藏的操作按钮，支持自定义宽度和操作。"
+        :apis="'swipeAction'"
+    >
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -49,7 +53,7 @@
 import { onLoad } from '@dcloudio/uni-app';
 import { ref, nextTick } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
+
 defineOptions({ name: 'SwipeActionDemo' });
 
 /**

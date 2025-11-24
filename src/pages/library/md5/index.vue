@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Md5 MD5加密" desc="用于对字符串进行MD5加密，生成不可逆的128位哈希值。" :apis="apis">
+    <demo-page title="Md5 MD5加密" desc="用于对字符串进行MD5加密，生成不可逆的128位哈希值。" :apis="'md5'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -26,7 +26,6 @@
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import md5Libs from '@/uni_modules/uview-pro/libs/function/md5';
-import { apis } from './config';
 
 const result = ref(null);
 const string = ref('Take me');

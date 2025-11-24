@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Test 表单校验" desc="用于测试表单组件的综合使用，包括输入、选择、单选、复选等。" :apis="apis">
+    <demo-page title="Test 表单校验" desc="用于测试表单组件的综合使用，包括输入、选择、单选、复选等。" :apis="'test'">
         <template #default>
             <u-form :model="form" ref="uForm">
                 <u-form-item label="姓名">
@@ -47,7 +47,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { apis } from './config';
 
 const form = ref({
     name: '',

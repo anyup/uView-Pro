@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="Subsection 分段选择器" desc="用于在多个选项间进行选择，可切换按钮或分段样式。" :apis="apis">
+    <demo-page
+        title="Subsection 分段选择器"
+        desc="用于在多个选项间进行选择，可切换按钮或分段样式。"
+        :apis="'subsection'"
+    >
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -50,7 +54,6 @@
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import type { SubsectionListItem, SubsectionMode } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const mode = ref<SubsectionMode>('button');
 const current = ref(0);

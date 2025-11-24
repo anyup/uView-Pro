@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Slider 滑块" desc="用于数值范围选择，支持自定义步进、颜色、尺寸等参数。" :apis="apis">
+    <demo-page title="Slider 滑块" desc="用于数值范围选择，支持自定义步进、颜色、尺寸等参数。" :apis="'slider'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -68,7 +68,6 @@
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { computed, ref } from 'vue';
-import { apis } from './config';
 
 const value = ref(30);
 const useSlot = ref(false);

@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="DeepMerge 深合并" desc="用于实现对象的深度合并，递归合并嵌套的对象属性。" :apis="apis">
+    <demo-page title="DeepMerge 深合并" desc="用于实现对象的深度合并，递归合并嵌套的对象属性。" :apis="'deepMerge'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -31,7 +31,6 @@
 import { ref, computed } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 type InfoType = {
     name?: string;

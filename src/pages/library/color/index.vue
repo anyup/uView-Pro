@@ -2,7 +2,7 @@
     <demo-page
         title="Color 颜色"
         desc="用于获取和展示颜色对象，包含主题色、成功、警告、错误等多种预定义颜色。"
-        :apis="apis"
+        :apis="'color'"
     >
         <template #default>
             <view class="u-demo">
@@ -42,7 +42,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const color = ref($u.color['primary']);
 

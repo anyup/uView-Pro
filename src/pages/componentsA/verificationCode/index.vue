@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="VerificationCode 验证码" desc="用于发送和倒计时验证码，支持自定义时长和文案。" :apis="apis">
+    <demo-page
+        title="VerificationCode 验证码"
+        desc="用于发送和倒计时验证码，支持自定义时长和文案。"
+        :apis="'verificationCode'"
+    >
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -41,7 +45,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { apis } from './config';
 
 const tips = ref('');
 const seconds = ref(60);

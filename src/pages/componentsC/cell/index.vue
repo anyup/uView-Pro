@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Cell 单元格" desc="cell单元格一般用于一组列表的情况，比如个人中心页，设置页等。" :apis="apis">
+    <demo-page title="Cell 单元格" desc="cell单元格一般用于一组列表的情况，比如个人中心页，设置页等。" :apis="'cell'">
         <view class="u-demo">
             <view class="u-demo-wrap">
                 <view class="u-demo-title">演示效果</view>
@@ -70,7 +70,6 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { apis } from './config';
 
 const icon = ref('setting');
 const arrow = ref(true);

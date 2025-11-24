@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Loadmore 加载更多" desc="用于列表加载更多内容的提示组件。" :apis="apis">
+    <demo-page title="Loadmore 加载更多" desc="用于列表加载更多内容的提示组件。" :apis="'loadmore'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -46,7 +46,6 @@
 <script lang="ts" setup>
 import type { LoadmoreIconType, LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
 import { ref } from 'vue';
-import { apis } from './config';
 
 const uToastRef = ref();
 const status = ref<LoadmoreStatus>('loadmore');

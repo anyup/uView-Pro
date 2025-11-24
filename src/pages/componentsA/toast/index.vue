@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Toast 提示框" desc="用于显示轻提示信息，支持多种主题、位置和自动跳转。" :apis="apis">
+    <demo-page title="Toast 提示框" desc="用于显示轻提示信息，支持多种主题、位置和自动跳转。" :apis="'toast'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -43,7 +43,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { apis } from './config';
 
 /**
  * 演示 u-toast 组件的使用

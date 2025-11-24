@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Popup 弹出框" desc="用于展示弹出框内容，可以从上下左右展开。" :apis="apis">
+    <demo-page title="Popup 弹出框" desc="用于展示弹出框内容，可以从上下左右展开。" :apis="'popup'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -67,7 +67,6 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
 import type { PopupMode, PopupCloseIconPos } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const show = ref(false);
 const mode = ref<PopupMode>('left');

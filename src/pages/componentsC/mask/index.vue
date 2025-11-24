@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Mask 遮罩层" desc="用于展示遮罩层，可用于模态对话框背景或其他遮挡效果。" :apis="apis">
+    <demo-page title="Mask 遮罩层" desc="用于展示遮罩层，可用于模态对话框背景或其他遮挡效果。" :apis="'mask'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -40,7 +40,6 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { apis } from './config';
 
 const uToastRef = ref();
 const show = ref(false);

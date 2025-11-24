@@ -2,7 +2,7 @@
     <demo-page
         title="Input 输入框"
         desc="此组件为一个输入框，默认没有边框和样式，是专门为配合表单组件u-form而设计的，利用它可以快速实现表单验证，输入内容，下拉选择等功能。"
-        :apis="apis"
+        :apis="'input'"
     >
         <view class="u-demo">
             <view class="u-demo-wrap" style="background-color: #fff">
@@ -83,7 +83,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { InputType, InputAlign } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const username = ref('');
 const password = ref('');

@@ -2,7 +2,7 @@
     <demo-page
         title="Keyboard 虚拟键盘"
         desc="用于数字、身份证、车牌号等多种输入场景，支持自定义键盘类型和交互。"
-        :apis="apis"
+        :apis="'keyboard'"
     >
         <template #default>
             <view class="u-demo">
@@ -67,7 +67,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { apis } from './config';
 
 const show = ref(false);
 const input = ref('');

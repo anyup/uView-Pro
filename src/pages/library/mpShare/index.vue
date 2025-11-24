@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="MpShare 小程序分享" desc="用于小程序的分享功能，支持分享到朋友圈、群聊等。" :apis="apis">
+    <demo-page title="MpShare 小程序分享" desc="用于小程序的分享功能，支持分享到朋友圈、群聊等。" :apis="'mpShare'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -15,7 +15,6 @@
 
 <script setup lang="ts">
 import { onShareAppMessage } from '@dcloudio/uni-app';
-import { apis } from './config';
 
 onShareAppMessage(res => {
     return {

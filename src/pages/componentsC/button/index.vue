@@ -2,7 +2,7 @@
     <demo-page
         title="Button 按钮"
         desc="该组件内部实现以uni-app`button`组件为基础，进行二次封装，有更多的主题颜色，有可选的按钮点击水波纹效果"
-        :apis="apis"
+        :apis="'button'"
     >
         <view class="u-demo">
             <view class="u-demo-wrap">
@@ -64,7 +64,6 @@
 <script lang="ts" setup>
 import type { ButtonSize, ButtonType, Shape } from '@/uni_modules/uview-pro/types/global';
 import { ref } from 'vue';
-import { apis } from './config';
 
 // 主题选择
 const type = ref<ButtonType>('default');

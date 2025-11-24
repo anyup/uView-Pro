@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Sticky 吸顶" desc="用于吸顶功能，支持自定义吸顶高度和启用禁用。" :apis="apis">
+    <demo-page title="Sticky 吸顶" desc="用于吸顶功能，支持自定义吸顶高度和启用禁用。" :apis="'sticky'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -29,7 +29,6 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { apis } from './config';
 
 const offsetTop = ref(0);
 const enable = ref(true);

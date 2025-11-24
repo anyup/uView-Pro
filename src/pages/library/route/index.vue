@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Route 路由" desc="用于页面路由导航，支持参数传递和页面返回。" :apis="apis">
+    <demo-page title="Route 路由" desc="用于页面路由导航，支持参数传递和页面返回。" :apis="'route'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -34,7 +34,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 type RouteType = 'to' | 'tab' | 'back';
 type AnimationType = string;

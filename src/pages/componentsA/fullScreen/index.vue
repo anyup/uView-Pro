@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="FullScreen 压窗屏" desc="用于APP端模态弹窗遮盖全屏，支持压窗效果，适合特殊场景。" :apis="apis">
+    <demo-page
+        title="FullScreen 压窗屏"
+        desc="用于APP端模态弹窗遮盖全屏，支持压窗效果，适合特殊场景。"
+        :apis="'fullScreen'"
+    >
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -51,7 +55,6 @@
 import { ref } from 'vue';
 import { onShow } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const current = ref(1);
 

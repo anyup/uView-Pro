@@ -2,7 +2,7 @@
     <demo-page
         title="Calendar 日历 "
         desc="此组件用于单个选择日期，范围选择日期等，日历被包裹在底部弹起的容器中。"
-        :apis="apis"
+        :apis="'calendar'"
     >
         <view class="u-demo">
             <view class="u-demo-wrap" style="background-color: #ffffff">
@@ -67,7 +67,6 @@ import type {
     ThemeType
 } from '@/uni_modules/uview-pro/types/global';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const isPage = ref(false);
 const show = ref(false);

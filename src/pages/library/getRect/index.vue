@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="GetRect 获取位置尺寸" desc="用于获取DOM元素的位置和尺寸信息，支持跨平台应用。" :apis="apis">
+    <demo-page title="GetRect 获取位置尺寸" desc="用于获取DOM元素的位置和尺寸信息，支持跨平台应用。" :apis="'getRect'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -48,7 +48,6 @@ import { computed, ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import { getCurrentInstance, onMounted } from 'vue';
 import { onPageScroll } from '@dcloudio/uni-app';
-import { apis } from './config';
 
 const instance = getCurrentInstance();
 const result = ref('');

@@ -2,7 +2,7 @@
     <demo-page
         title="Modal 弹窗"
         desc="用于消息提示、操作确认等场景的模态弹窗，支持自定义内容和异步关闭。"
-        :apis="apis"
+        :apis="'modal'"
     >
         <template #default>
             <view class="u-demo">
@@ -63,7 +63,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { apis } from './config';
 
 const show = ref<boolean>(false);
 const zoom = ref<boolean>(false);

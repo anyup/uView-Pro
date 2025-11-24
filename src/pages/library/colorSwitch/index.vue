@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="ColorSwitch 色系切换" desc="用于切换应用主题色，支持亮色和暗黑两种模式切换。" :apis="apis">
+    <demo-page
+        title="ColorSwitch 色系切换"
+        desc="用于切换应用主题色，支持亮色和暗黑两种模式切换。"
+        :apis="'colorSwitch'"
+    >
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -37,7 +41,6 @@
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const result = ref<string>('');
 

@@ -4,6 +4,10 @@ export function getJson(id: string) {
     return loadJSON(`/${id}.json`);
 }
 
+export function getMarkdown(id: string) {
+    return loadJSON(`/markdown/${id}.md`);
+}
+
 function loadJSON(path: string) {
     // 动态读取本地 json 文件，path 需以 /app/ 开头
     // #ifdef APP-HARMONY
@@ -17,8 +21,9 @@ function loadJSON(path: string) {
                 try {
                     // res.data 可能为 string 或 ArrayBuffer
                     const data = typeof res.data === 'string' ? res.data : '';
-                    resolve(JSON.parse(data));
+                    resolve(data);
                 } catch (e) {
+                    console.error(e);
                     reject(e);
                 }
             },

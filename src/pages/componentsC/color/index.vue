@@ -2,8 +2,7 @@
     <demo-page
         title="Color 色彩"
         desc="uView经过大量调试和研究，得出一套专有的调色板，在各个组件内部，使用统一的配色，为您的产品带来统一又鲜明的视觉效果。"
-        :apis="apis"
-        :extras="['自定义主题']"
+        apis="color"
     >
         <view class="wrap">
             <view class="item">
@@ -163,17 +162,11 @@
                 </view>
             </view>
         </view>
-        <!-- #ifdef APP -->
-        <template #extra1>
-            <zero-markdown-view :markdown="apis2" :themeColor="$u.getColor('primary')"></zero-markdown-view>
-        </template>
-        <!-- #endif -->
     </demo-page>
 </template>
 
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import { apis, apis2 } from './config';
 import { $u } from 'uview-pro';
 
 onMounted(() => {});

@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="MessageInput 消息输入" desc="用于快速输入消息，常用于聊天界面。" :apis="apis">
+    <demo-page title="MessageInput 消息输入" desc="用于快速输入消息，常用于聊天界面。" :apis="'messageInput'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -63,7 +63,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { InputType, MessageInputMode } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const type = ref<InputType>('number');
 const mode = ref<MessageInputMode>('box');

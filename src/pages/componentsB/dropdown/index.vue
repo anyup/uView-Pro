@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Dropdown 下拉菜单" desc="用于展示下拉菜单，支持单选、多选、自定义样式等功能。" :apis="apis">
+    <demo-page title="Dropdown 下拉菜单" desc="用于展示下拉菜单，支持单选、多选、自定义样式等功能。" :apis="'dropdown'">
         <template #default>
             <view>
                 <view class="u-m-p-50">
@@ -67,7 +67,6 @@
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { ref } from 'vue';
-import { apis } from './config';
 
 const value1 = ref('');
 const value2 = ref(2);

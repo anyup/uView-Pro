@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="ActionSheet 动作菜单" desc="从下方弹出的菜单列表，提供用户选择操作。" :apis="apis">
+    <demo-page title="ActionSheet 动作菜单" desc="从下方弹出的菜单列表，提供用户选择操作。" :apis="'actionSheet'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -64,7 +64,6 @@
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import type { ActionSheetTips, ActionSheetItem } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const list = ref<ActionSheetItem[]>([
     {

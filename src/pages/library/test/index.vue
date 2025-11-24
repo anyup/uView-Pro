@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Test 规则校验" desc="用于测试和验证工具库的各种函数功能。" :apis="apis">
+    <demo-page title="Test 规则校验" desc="用于测试和验证工具库的各种函数功能。" :apis="'test'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -63,7 +63,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const uToastRef = ref();
 

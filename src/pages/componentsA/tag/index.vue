@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Tag 标签" desc="该组件一般用于标记和选择" :apis="apis">
+    <demo-page title="Tag 标签" desc="该组件一般用于标记和选择" :apis="'tag'">
         <view class="u-demo">
             <view class="u-demo-wrap">
                 <view class="u-demo-title">演示效果</view>
@@ -59,7 +59,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { TagMode, TagShape, TagSize, ThemeType } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const text = ref('蒹葭苍苍');
 const mode = ref<TagMode>('light');

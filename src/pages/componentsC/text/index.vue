@@ -2,7 +2,7 @@
     <demo-page
         title="Text 文本"
         desc="此组件集成了文本类在项目中的常用功能，包括状态，拨打电话，格式化日期，*替换，超链接...等功能。您大可不必在使用特殊文本时自己定义，text组件几乎涵盖您能使用的大部分场景。"
-        :apis="apis"
+        :apis="'text'"
     >
         <view class="u-page">
             <view class="u-demo-block">
@@ -125,8 +125,6 @@
 </template>
 
 <script>
-import { apis } from './config';
-
 export default {
     onLoad() {},
     data() {

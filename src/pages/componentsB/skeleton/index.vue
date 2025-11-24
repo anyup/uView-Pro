@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Skeleton 骨架屏" desc="用于加载占位显示，支持动画效果和自定义样式。" :apis="apis">
+    <demo-page title="Skeleton 骨架屏" desc="用于加载占位显示，支持动画效果和自定义样式。" :apis="'skeleton'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -58,7 +58,6 @@
 import { ref, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
-import { apis } from './config';
 
 const userInfo = ref({
     avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png',

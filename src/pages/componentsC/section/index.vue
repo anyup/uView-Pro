@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Section 分段" desc="用于分段显示内容，常用于对内容进行分组。" :apis="apis">
+    <demo-page title="Section 分段" desc="用于分段显示内容，常用于对内容进行分组。" :apis="'section'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -45,7 +45,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const title = ref('红豆生南国');
 const bold = ref(true);

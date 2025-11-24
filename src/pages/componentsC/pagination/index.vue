@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Pagination 分页" desc="用于展示分页控件，支持多种配置方式。" :apis="apis">
+    <demo-page title="Pagination 分页" desc="用于展示分页控件，支持多种配置方式。" :apis="'pagination'">
         <template #default>
             <view class="u-demo pagination-demo">
                 <view class="u-config-wrap">
@@ -35,7 +35,6 @@
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import type { PaginationChangePayload } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const current = ref(1);
 const current1 = ref(2);

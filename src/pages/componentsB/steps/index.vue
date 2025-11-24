@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Steps 步骤条" desc="用于展示步骤流程，支持不同模式和方向设置。" :apis="apis">
+    <demo-page title="Steps 步骤条" desc="用于展示步骤流程，支持不同模式和方向设置。" :apis="'steps'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -70,7 +70,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import type { StepDirection, StepMode } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 const steps = computed(() => {
     if (direction.value === 'row') {

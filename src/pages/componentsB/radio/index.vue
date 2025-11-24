@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Radio 单选框" desc="用于单项选择，支持自定义颜色、大小、禁用等功能。" :apis="apis">
+    <demo-page title="Radio 单选框" desc="用于单项选择，支持自定义颜色、大小、禁用等功能。" :apis="'radio'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -74,7 +74,6 @@
 import { $u } from '@/uni_modules/uview-pro';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
 import { ref } from 'vue';
-import { apis } from './config';
 
 const list = [
     {

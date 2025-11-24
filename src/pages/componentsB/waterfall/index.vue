@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Waterfall 瀑布流" desc="用于展示瀑布流布局，支持商品卡片展示和删除操作。" :apis="apis">
+    <demo-page title="Waterfall 瀑布流" desc="用于展示瀑布流布局，支持商品卡片展示和删除操作。" :apis="'waterfall'">
         <template #default>
             <view class="wrap">
                 <u-waterfall v-model="flowList" ref="uWaterfallRef">
@@ -66,7 +66,6 @@ import { ref } from 'vue';
 import { onLoad, onReachBottom } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
 import type { LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
-import { apis } from './config';
 
 // 商品项类型声明
 interface FlowItem {

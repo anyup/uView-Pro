@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Random 随机数" desc="用于生成指定范围内的随机数或随机小数。" :apis="apis">
+    <demo-page title="Random 随机数" desc="用于生成指定范围内的随机数或随机小数。" :apis="'random'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -32,7 +32,6 @@
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const min = ref<number>(0);
 const max = ref<number>(5);

@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="CountTo 数字滚动" desc="以动画形式展示数字从起始值滚动到目标值的过程。" :apis="apis">
+    <demo-page title="CountTo 数字滚动" desc="以动画形式展示数字从起始值滚动到目标值的过程。" :apis="'countTo'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -63,7 +63,6 @@
 
 <script lang="ts" setup>
 import { ref, nextTick } from 'vue';
-import { apis } from './config';
 
 const uToastRef = ref(null);
 const uCountToRef = ref(null);

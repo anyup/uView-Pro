@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Loading 加载" desc="用于显示加载动画，支持圆圈和花朵两种模式。" :apis="apis">
+    <demo-page title="Loading 加载" desc="用于显示加载动画，支持圆圈和花朵两种模式。" :apis="'loading'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -38,7 +38,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 // 加载模式
 const mode = ref<'circle' | 'flower'>('circle');

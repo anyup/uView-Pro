@@ -1,5 +1,9 @@
 <template>
-    <demo-page title="CircleProgress 圆形进度条" desc="圆形的进度条，用于展示进度，可自定义样式和颜色。" :apis="apis">
+    <demo-page
+        title="CircleProgress 圆形进度条"
+        desc="圆形的进度条，用于展示进度，可自定义样式和颜色。"
+        :apis="'circleProgress'"
+    >
         <template #default>
             <view class="wrap">
                 <view class="item">
@@ -26,7 +30,6 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
-import { apis } from './config';
 
 const percent = ref(33);
 

@@ -2,7 +2,7 @@
     <demo-page
         title="Fab 悬浮按钮"
         desc="悬浮按钮（Floating Action Button）用于在页面右下角或指定位置提供常用快捷操作入口，支持拖拽、展开子操作项、以及多种布局策略。本文件按组件文档规范提供示例与 API 说明，包含平台差异与常见问题说明。"
-        :apis="apis"
+        :apis="'fab'"
     >
         <view class="u-demo fab-demo">
             <!-- 示例：自定义触发器 -->
@@ -133,7 +133,6 @@
 import { computed, ref } from 'vue';
 import type { FabDirection, FabGap, FabPosition, ThemeType } from '@/uni_modules/uview-pro/types/global';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const uFabRef = ref<any>(null);
 // 主题选择

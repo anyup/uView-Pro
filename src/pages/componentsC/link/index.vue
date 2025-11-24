@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Link 链接" desc="用于展示链接，支持不同样式和功能。" :apis="apis">
+    <demo-page title="Link 链接" desc="用于展示链接，支持不同样式和功能。" :apis="'link'">
         <template #default>
             <view class="u-demo">
                 <view class="u-demo-wrap">
@@ -29,7 +29,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import { apis } from './config';
 
 const href = ref('https://uviewpro.cn/zh/');
 const underLine = ref(true);

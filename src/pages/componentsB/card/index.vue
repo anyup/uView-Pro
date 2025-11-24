@@ -1,5 +1,5 @@
 <template>
-    <demo-page title="Card 卡片" desc="用于展示卡片组件，支持阴影、边框和自定义样式。" :apis="apis">
+    <demo-page title="Card 卡片" desc="用于展示卡片组件，支持阴影、边框和自定义样式。" :apis="'card'">
         <template #default>
             <view>
                 <view class="u-card-wrap">
@@ -63,7 +63,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { apis } from './config';
 
 const title = ref('素胚勾勒出青花，笔锋浓转淡');
 const subTitle = ref('2020-05-15');

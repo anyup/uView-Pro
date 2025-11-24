@@ -53,7 +53,7 @@
         <demo-page
             title="Navbar 导航栏"
             desc="用于页面顶部导航，支持自定义内容、返回事件、渐变背景等丰富场景。"
-            :apis="apis"
+            :apis="'navbar'"
         >
             <template #default>
                 <view class="u-demo">
@@ -107,7 +107,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { apis } from './config';
 
 const title = ref<string | null>('新闻');
 const backText = ref<string>('返回');

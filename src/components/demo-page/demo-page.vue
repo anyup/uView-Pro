@@ -5,16 +5,25 @@
             <view class="demo-page_desc" v-if="desc">{{ desc }}</view>
         </view>
         <u-sticky>
-            <u-tabs :list="tabList" :current="tabIndex" :is-scroll="false" @change="change" />
+            <u-tabs
+                v-show="tabList.length > 1"
+                :list="tabList"
+                :current="tabIndex"
+                :is-scroll="false"
+                @change="change"
+            />
         </u-sticky>
         <view class="demo-page-default" v-show="tabIndex === 0">
             <slot />
         </view>
         <view class="demo-page_api" v-show="tabIndex === 1">
             <slot name="api">
-                <view v-if="apis">
-                    <!-- #ifdef APP -->
-                    <zero-markdown-view :themeColor="$u.getColor('primary')" :markdown="apis"></zero-markdown-view>
+                <view v-if="apiContent">
+                    <!-- #ifndef MP -->
+                    <zero-markdown-view
+                        :themeColor="$u.getColor('primary')"
+                        :markdown="apiContent"
+                    ></zero-markdown-view>
                     <!-- #endif -->
                 </view>
                 <view v-else>暂无API文档</view>
@@ -59,12 +68,6 @@
                 </view>
                 <view v-else>暂无体验任务</view>
             </slot>
-        </view>
-        <view v-if="tabIndex === 5">
-            <slot name="extra1"></slot>
-        </view>
-        <view v-if="tabIndex === 6">
-            <slot name="extra2"></slot>
         </view>
         <view class="demo-page_feedback">
             <u-fab
@@ -125,6 +128,7 @@
 <script setup lang="ts">
 import { $u } from 'uview-pro';
 import { ref, computed, onMounted } from 'vue';
+import { getMarkdown } from '@/api';
 
 interface SceneItem {
     title: string;
@@ -144,7 +148,7 @@ const props = defineProps<{
     title?: string;
     desc?: string;
     scenes?: SceneItem[];
-    apis?: string | string[];
+    apis?: string;
     faqs?: FaqItem[];
     tasks?: TaskItem[];
     extras?: string[];
@@ -155,28 +159,24 @@ const show = ref(false);
 const modalContent = ref('');
 const link = ref('');
 const slots = defineSlots();
+const apiContent = ref<String>('');
 
 const tabList = computed(() => {
     const result = [
         { name: '基础演示' },
-        // #ifdef APP
-        { name: 'API文档', hidden: props.apis ? false : true },
-        { name: '应用场景', hidden: props.scenes || slots.scene ? false : true },
-        { name: '常见问题', hidden: props.faqs || slots.faq ? false : true },
-        { name: '体验任务', hidden: props.tasks || slots.task ? false : true }
+        // #ifndef MP || H5
+        { name: 'API文档', hidden: props.apis ? false : true }
         // #endif
+        // { name: '应用场景', hidden: props.scenes || slots.scene ? false : true },
+        // { name: '常见问题', hidden: props.faqs || slots.faq ? false : true },
+        // { name: '体验任务', hidden: props.tasks || slots.task ? false : true }
     ];
-    // #ifdef APP
-    if (props.extras && props.extras.length) {
-        result.push(...props.extras.map(item => ({ name: item })));
-    }
-    // #endif
     return result;
 });
 const tabIndex = ref(0);
 
 const scenes = computed<SceneItem[]>(() => props.scenes ?? []);
-const apis = computed<string | string[]>(() => props.apis ?? '');
+const apis = computed<string>(() => props.apis ?? '');
 const faqs = computed<FaqItem[]>(() => props.faqs ?? []);
 const tasks = computed<TaskItem[]>(() => props.tasks ?? []);
 
@@ -202,7 +202,15 @@ function handleBtnClick(value: string) {
 function clickHref(link: string) {
     $u.clipboard(link, { showToast: true });
 }
-onMounted(() => {});
+onMounted(() => {
+    // #ifndef MP || H5
+    if (apis.value) {
+        getMarkdown(apis.value).then((res: any) => {
+            apiContent.value = res;
+        });
+    }
+    // #endif
+});
 </script>
 
 <style lang="scss" scoped>
