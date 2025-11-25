@@ -18,7 +18,7 @@ export const LoadingPopupProps = {
     /** 动画的类型 */
     mode: { type: String as PropType<LoadingMode>, default: 'circle' },
     /** 动画的颜色 */
-    color: { type: String, default: '#c7c7c7' },
+    color: { type: String, default: 'var(--u-light-color)' },
     /** 加载图标的大小，单位rpx */
     size: { type: [String, Number] as PropType<string | number>, default: '48' }
 };

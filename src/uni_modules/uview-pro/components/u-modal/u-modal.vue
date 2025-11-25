@@ -87,7 +87,7 @@ import { ModalProps } from './types';
  * @property {Boolean} mask-close-able 是否允许点击遮罩关闭modal（默认false）
  * @property {String} confirm-text 确认按钮的文字内容（默认"确认"）
  * @property {String} cancel-text 取消按钮的文字内容（默认"取消"）
- * @property {String} cancel-color 取消按钮的颜色（默认"#606266"）
+ * @property {String} cancel-color 取消按钮的颜色（默认"var(--u-content-color)"）
  * @property {String} confirm-color 确认按钮的文字内容（默认主题色primary）
  * @property {String | Number} border-radius 模态框圆角值，单位rpx（默认16）
  * @property {Object} title-style 自定义标题样式，对象形式
@@ -180,7 +180,7 @@ defineExpose({
     height: auto;
     overflow: hidden;
     font-size: 32rpx;
-    background-color: #fff;
+    background-color: var(--u-white-color);
 
     &__btn--hover {
         background-color: rgb(230, 230, 230);

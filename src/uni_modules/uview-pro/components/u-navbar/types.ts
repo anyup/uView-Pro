@@ -13,7 +13,7 @@ export const NavbarProps = {
     /** 返回箭头的颜色 */
     backIconColor: {
         type: String,
-        default: '#606266'
+        default: 'var(--u-content-color)'
     },
     /** 左边返回的图标 */
     backIconName: {
@@ -33,7 +33,7 @@ export const NavbarProps = {
     /** 返回的文字的 样式 */
     backTextStyle: {
         type: Object as PropType<Record<string, any>>,
-        default: () => ({ color: '#606266' })
+        default: () => ({ color: 'var(--u-content-color)' })
     },
     /** 导航栏标题 */
     title: {
@@ -48,7 +48,7 @@ export const NavbarProps = {
     /** 标题的颜色 */
     titleColor: {
         type: String,
-        default: '#606266'
+        default: 'var(--u-content-color)'
     },
     /** 标题字体是否加粗 */
     titleBold: {
@@ -68,7 +68,7 @@ export const NavbarProps = {
     /** 导航栏背景设置 */
     background: {
         type: Object as PropType<Record<string, any>>,
-        default: () => ({ background: '#ffffff' })
+        default: () => ({ background: 'var(--u-white-color)' })
     },
     /** 导航栏是否固定在顶部 */
     isFixed: {

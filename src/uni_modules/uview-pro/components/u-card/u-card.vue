@@ -101,10 +101,10 @@ import { $u } from '../..';
  * @tutorial https://uviewpro.cn/zh/components/card.html
  * @property {Boolean} full 卡片与屏幕两侧是否留空隙（默认false）
  * @property {String} title 头部左边的标题
- * @property {String} title-color 标题颜色（默认#303133）
+ * @property {String} title-color 标题颜色（默认var(--u-main-color)）
  * @property {String | Number} title-size 标题字体大小，单位rpx（默认30）
  * @property {String} sub-title 头部右边的副标题
- * @property {String} sub-title-color 副标题颜色（默认#909399）
+ * @property {String} sub-title-color 副标题颜色（默认var(--u-tips-color)）
  * @property {String | Number} sub-title-size 副标题字体大小（默认26）
  * @property {Boolean} border 是否显示边框（默认true）
  * @property {String | Number} index 用于标识点击了第几个卡片
@@ -165,7 +165,7 @@ function onFootClick() {
     position: relative;
     overflow: hidden;
     font-size: 28rpx;
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
     box-sizing: border-box;
 
     &-full {

@@ -57,7 +57,7 @@ import { $u } from '../..';
  * @property {Boolean} show-zero 当数值为 0 时，是否展示 Badge（默认false）
  * @property {String} size Badge的尺寸，设为mini会得到小一号的Badge（默认default）
  * @property {Array} offset 设置badge的位置偏移，格式为 [x, y]，也即设置的为top和right的值，单位rpx。absolute为true时有效（默认[20, 20]）
- * @property {String} color 字体颜色（默认#ffffff）
+ * @property {String} color 字体颜色（默认var(--u-white-color)）
  * @property {String} bgColor 背景颜色，优先级比type高，如设置，type参数会失效
  * @property {Boolean} is-center 组件中心点是否和父组件右上角重合，优先级比offset高，如设置，offset参数会失效（默认false）
  * @example <u-badge type="error" count="7"></u-badge>
@@ -153,31 +153,31 @@ const show = computed(() => {
 
 // .u-primary {
 // 	background: $u-type-primary;
-// 	color: #fff;
+// 	color: var(--u-white-color);
 // }
 
 // .u-error {
 // 	background: $u-type-error;
-// 	color: #fff;
+// 	color: var(--u-white-color);
 // }
 
 // .u-warning {
 // 	background: $u-type-warning;
-// 	color: #fff;
+// 	color: var(--u-white-color);
 // }
 
 // .u-success {
 // 	background: $u-type-success;
-// 	color: #fff;
+// 	color: var(--u-white-color);
 // }
 
 // .u-black {
-// 	background: #585858;
-// 	color: #fff;
+// 	background: var(--u-content-color);
+// 	color: var(--u-white-color);
 // }
 
 .u-info {
     background-color: $u-type-info;
-    color: #fff;
+    color: var(--u-white-color);
 }
 </style>

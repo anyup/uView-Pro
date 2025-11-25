@@ -30,7 +30,7 @@ import { LoadingProps } from './types';
  * @description 此组件为一个小动画，目前用在uView的loadmore加载更多和switch开关等组件的正在加载状态场景。
  * @tutorial https://uviewpro.cn/zh/components/loading.html
  * @property {String} mode 模式选择，见官网说明（默认circle）
- * @property {String} color 动画活动区域的颜色，只对 mode = flower 模式有效（默认#c7c7c7）
+ * @property {String} color 动画活动区域的颜色，只对 mode = flower 模式有效（默认var(--u-light-color)）
  * @property {String|Number} size 加载图标的大小，单位rpx（默认34）
  * @property {Boolean} show 是否显示动画（默认true）
  * @example <u-loading mode="circle"></u-loading>
@@ -47,7 +47,7 @@ const cricleStyle = computed(() => {
     style.height = props.size + 'rpx';
     // 只对圆圈模式生效
     if (props.mode === 'circle') {
-        style.borderColor = `#e4e4e4 #e4e4e4 #e4e4e4 ${props.color ? props.color : '#c7c7c7'}`;
+        style.borderColor = `var(--u-divider-color) var(--u-divider-color) var(--u-divider-color) ${props.color ? props.color : 'var(--u-light-color)'}`;
     }
     return style;
 });
@@ -66,7 +66,7 @@ const cricleStyle = computed(() => {
     background: 0 0;
     border-radius: 50%;
     border: 2px solid;
-    border-color: #e5e5e5 #e5e5e5 #e5e5e5 #8f8d8e;
+    border-color: var(--u-divider-color) var(--u-divider-color) var(--u-divider-color) var(--u-tips-color);
     animation: u-circle 1s linear infinite;
 }
 

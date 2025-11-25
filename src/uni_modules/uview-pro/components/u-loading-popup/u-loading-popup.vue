@@ -215,7 +215,7 @@ defineExpose({
     transform: translate(-50%, -50%);
     z-index: 9999;
     font-size: 30rpx;
-    color: #fff;
+    color: var(--u-white-color);
     background: rgba(0, 0, 0, 0.7);
     border-radius: 7px;
 
@@ -223,7 +223,7 @@ defineExpose({
         position: absolute;
         top: 4rpx;
         right: 2rpx;
-        color: #ffffff;
+        color: var(--u-white-color);
         opacity: 0.8;
     }
 

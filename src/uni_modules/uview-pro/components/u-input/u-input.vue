@@ -65,7 +65,7 @@
                 class="u-input__right-icon__clear u-input__right-icon__item"
                 v-if="clearable && modelValue != '' && !disabled"
             >
-                <u-icon size="32" name="close-circle-fill" color="#c0c4cc" @click="onClear" />
+                <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" @click="onClear" />
             </view>
             <view
                 class="u-input__right-icon__clear u-input__right-icon__item"
@@ -74,7 +74,7 @@
                 <u-icon
                     size="32"
                     :name="!showPassword ? 'eye' : 'eye-fill'"
-                    color="#c0c4cc"
+                    color="var(--u-light-color)"
                     @click="showPassword = !showPassword"
                 />
             </view>
@@ -85,13 +85,13 @@
                     'u-input__right-icon--select--reverse': selectOpen
                 }"
             >
-                <u-icon name="arrow-down-fill" size="26" color="#c0c4cc"></u-icon>
+                <u-icon name="arrow-down-fill" size="26" color="var(--u-light-color)"></u-icon>
             </view>
         </view>
         <text
             class="u-input__count"
             :style="{
-                'background-color': props.disabled ? 'transparent' : '#fff'
+                'background-color': props.disabled ? 'transparent' : 'var(--u-white-color)'
             }"
             v-if="props.type === 'textarea' && props.count"
         >
@@ -277,7 +277,7 @@ defineExpose({
         bottom: 0;
         font-size: 12px;
         color: $u-tips-color;
-        background-color: #ffffff;
+        background-color: var(--u-white-color);
         padding: 1px 4px;
         border-radius: 10px;
         line-height: 16px;

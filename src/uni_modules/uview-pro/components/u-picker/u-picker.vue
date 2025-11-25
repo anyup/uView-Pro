@@ -167,7 +167,7 @@ import { PickerProps } from './types';
  * @property {String Number} end-year 可选的结束年份，mode=time时有效（默认2050）
  * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配（默认false）
  * @property {Boolean} show-time-tag 时间模式时，是否显示后面的年月日中文提示
- * @property {String} cancel-color 取消按钮的颜色（默认#606266）
+ * @property {String} cancel-color 取消按钮的颜色（默认var(--u-content-color)）
  * @property {String} confirm-color 确认按钮的颜色（默认主题色primary）
  * @property {String} default-time 默认选中的时间，mode=time时有效
  * @property {String} confirm-text 确认按钮的文字
@@ -773,14 +773,14 @@ onMounted(() => {
     align-items: center;
     box-sizing: border-box;
     font-size: 30rpx;
-    background: #fff;
+    background: var(--u-white-color);
     position: relative;
 }
 
 .u-picker-header::after {
     content: '';
     position: absolute;
-    border-bottom: 1rpx solid #eaeef1;
+    border-bottom: 1rpx solid var(--u-bg-surface-color);
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
     bottom: 0;
@@ -796,7 +796,7 @@ onMounted(() => {
     width: 100%;
     height: 500rpx;
     overflow: hidden;
-    background-color: #fff;
+    background-color: var(--u-white-color);
 }
 
 .u-column-item {

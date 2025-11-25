@@ -8,7 +8,7 @@
         :mask="true"
         :closeable="true"
         :safe-area-inset-bottom="true"
-        close-icon-color="#ffffff"
+        close-icon-color="var(--u-white-color)"
         :z-index="uZIndex"
         :maskCloseAble="props.maskCloseAble"
         @close="close"

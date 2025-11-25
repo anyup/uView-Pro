@@ -350,65 +350,65 @@ function agreeprivacyauthorization(event: any) {
     transition: all 0.15s;
 
     &--bold-border {
-        border: 1px solid #ffffff;
+        border: 1px solid var(--u-white-color);
     }
 
     &--default {
         color: $u-content-color;
-        border-color: #c0c4cc;
-        background-color: #ffffff;
+        border-color: var(--u-light-color);
+        background-color: var(--u-white-color);
     }
 
     &--primary {
-        color: #ffffff;
+        color: var(--u-white-color);
         border-color: $u-type-primary;
         background-color: $u-type-primary;
     }
 
     &--success {
-        color: #ffffff;
+        color: var(--u-white-color);
         border-color: $u-type-success;
         background-color: $u-type-success;
     }
 
     &--error {
-        color: #ffffff;
+        color: var(--u-white-color);
         border-color: $u-type-error;
         background-color: $u-type-error;
     }
 
     &--warning {
-        color: #ffffff;
+        color: var(--u-white-color);
         border-color: $u-type-warning;
         background-color: $u-type-warning;
     }
 
     &--default--disabled {
-        color: #ffffff;
-        border-color: #e4e7ed;
-        background-color: #ffffff;
+        color: var(--u-white-color);
+        border-color: var(--u-border-color);
+        background-color: var(--u-white-color);
     }
 
     &--primary--disabled {
-        color: #ffffff !important;
+        color: var(--u-white-color) !important;
         border-color: $u-type-primary-disabled !important;
         background-color: $u-type-primary-disabled !important;
     }
 
     &--success--disabled {
-        color: #ffffff !important;
+        color: var(--u-white-color) !important;
         border-color: $u-type-success-disabled !important;
         background-color: $u-type-success-disabled !important;
     }
 
     &--error--disabled {
-        color: #ffffff !important;
+        color: var(--u-white-color) !important;
         border-color: $u-type-error-disabled !important;
         background-color: $u-type-error-disabled !important;
     }
 
     &--warning--disabled {
-        color: #ffffff !important;
+        color: var(--u-white-color) !important;
         border-color: $u-type-warning-disabled !important;
         background-color: $u-type-warning-disabled !important;
     }
@@ -519,7 +519,7 @@ function agreeprivacyauthorization(event: any) {
 }
 
 .u-primary-plain-hover {
-    color: #ffffff !important;
+    color: var(--u-white-color) !important;
     background: $u-type-primary-dark !important;
 }
 
@@ -529,22 +529,22 @@ function agreeprivacyauthorization(event: any) {
 }
 
 .u-success-plain-hover {
-    color: #ffffff !important;
+    color: var(--u-white-color) !important;
     background: $u-type-success-dark !important;
 }
 
 .u-warning-plain-hover {
-    color: #ffffff !important;
+    color: var(--u-white-color) !important;
     background: $u-type-warning-dark !important;
 }
 
 .u-error-plain-hover {
-    color: #ffffff !important;
+    color: var(--u-white-color) !important;
     background: $u-type-error-dark !important;
 }
 
 .u-info-plain-hover {
-    color: #ffffff !important;
+    color: var(--u-white-color) !important;
     background: $u-type-info-dark !important;
 }
 
@@ -556,26 +556,26 @@ function agreeprivacyauthorization(event: any) {
 
 .u-primary-hover {
     background: $u-type-primary-dark !important;
-    color: #fff;
+    color: var(--u-white-color);
 }
 
 .u-success-hover {
     background: $u-type-success-dark !important;
-    color: #fff;
+    color: var(--u-white-color);
 }
 
 .u-info-hover {
     background: $u-type-info-dark !important;
-    color: #fff;
+    color: var(--u-white-color);
 }
 
 .u-warning-hover {
     background: $u-type-warning-dark !important;
-    color: #fff;
+    color: var(--u-white-color);
 }
 
 .u-error-hover {
     background: $u-type-error-dark !important;
-    color: #fff;
+    color: var(--u-white-color);
 }
 </style>

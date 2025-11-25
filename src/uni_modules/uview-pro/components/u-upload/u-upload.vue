@@ -553,7 +553,7 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
 }
 
 .u-error-btn {
-    color: #ffffff;
+    color: var(--u-white-color);
     background-color: $u-type-error;
     font-size: 20rpx;
     padding: 4px 0;

@@ -8,7 +8,7 @@ import { baseProps } from '../common/props';
 export const GridItemProps = {
     ...baseProps,
     /** 背景颜色 */
-    bgColor: { type: String, default: '#ffffff' },
+    bgColor: { type: String, default: 'var(--u-white-color)' },
     /** 点击时返回的index */
     index: { type: [Number, String] as PropType<string | number>, default: '' }
 };

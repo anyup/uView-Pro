@@ -16,7 +16,7 @@
                         class="u-dropdown__menu__item__text"
                         :style="{
                             color: item.disabled
-                                ? '#c0c4cc'
+                                ? 'var(--u-light-color)'
                                 : index === current || highlightIndex == index
                                   ? activeColor
                                   : inactiveColor,
@@ -34,7 +34,7 @@
                             :custom-style="{ display: 'flex' }"
                             :name="menuIcon"
                             :size="$u.addUnit(menuIconSize)"
-                            :color="index === current || highlightIndex == index ? activeColor : '#c0c4cc'"
+                            :color="index === current || highlightIndex == index ? activeColor : 'var(--u-light-color)'"
                         ></u-icon>
                     </view>
                 </view>
@@ -84,7 +84,7 @@ import { DropdownProps } from './types';
  * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景
  * @tutorial https://uviewpro.cn/zh/components/dropdown.html
  * @property {String} active-color 标题和选项卡选中的颜色（默认主题色primary）
- * @property {String} inactive-color 标题和选项卡未选中的颜色（默认#606266）
+ * @property {String} inactive-color 标题和选项卡未选中的颜色（默认var(--u-content-color)）
  * @property {Boolean} close-on-click-mask 点击遮罩是否关闭菜单（默认true）
  * @property {Boolean} close-on-click-self 点击当前激活项标题是否关闭菜单（默认true）
  * @property {String | Number} duration 选项卡展开和收起的过渡时间，单位ms（默认300）

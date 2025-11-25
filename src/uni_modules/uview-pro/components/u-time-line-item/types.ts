@@ -8,7 +8,7 @@ import { baseProps } from '../common/props';
 export const TimeLineItemProps = {
     ...baseProps,
     /** 节点的背景颜色 */
-    bgColor: { type: String, default: '#ffffff' },
+    bgColor: { type: String, default: 'var(--u-white-color)' },
     /** 节点左边图标绝对定位的top值，单位rpx */
     nodeTop: { type: [String, Number] as PropType<string | number>, default: '' }
 };

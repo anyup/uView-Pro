@@ -46,7 +46,7 @@ import { $u } from '../../';
  * @property {String | Number} decimals 要显示的小数位数，见官网说明（默认0）
  * @property {Boolean} use-easing 滚动结束时，是否缓动结尾，见官网说明（默认true）
  * @property {String} separator 千位分隔符，见官网说明
- * @property {String} color 字体颜色（默认#303133）
+ * @property {String} color 字体颜色（默认var(--u-main-color)）
  * @property {String | Number} font-size 字体大小，单位rpx（默认50）
  * @property {Boolean} bold 字体是否加粗（默认false）
  * @event {Function} end 数值滚动到目标值时触发

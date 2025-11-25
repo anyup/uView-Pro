@@ -60,17 +60,17 @@ import { $u } from '../../';
  * @description 区隔内容的分割线，一般用于页面底部"没有更多"的提示。
  * @tutorial https://uviewpro.cn/zh/components/divider.html
  * @property {String Number} half-width 文字左或右边线条宽度，数值或百分比，数值时单位为rpx
- * @property {String} border-color 线条颜色，优先级高于type（默认#dcdfe6）
- * @property {String} color 文字颜色（默认#909399）
+ * @property {String} border-color 线条颜色，优先级高于type（默认var(--u-form-item-border-color)）
+ * @property {String} color 文字颜色（默认var(--u-tips-color)）
  * @property {String Number} fontSize 字体大小，单位rpx（默认26）
- * @property {String} bg-color 整个divider的背景颜色（默认呢#ffffff）
+ * @property {String} bg-color 整个divider的背景颜色（默认呢var(--u-white-color)）
  * @property {String Number} height 整个divider的高度，单位rpx（默认40）
  * @property {String} type 将线条设置主题色（默认primary）
  * @property {Boolean} useSlot 是否使用slot传入内容，如果不传入，中间不会有空隙（默认true）
  * @property {String Number} margin-top 与前一个组件的距离，单位rpx（默认0）
  * @property {String Number} margin-bottom 与后一个组件的距离，单位rpx（0）
  * @event {Function} click divider组件被点击时触发
- * @example <u-divider color="#fa3534">长河落日圆</u-divider>
+ * @example <u-divider color="var(--u-type-error)">长河落日圆</u-divider>
  */
 const props = defineProps(DividerProps);
 

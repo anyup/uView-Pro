@@ -28,15 +28,15 @@ export const FieldProps = {
     labelAlign: { type: String as PropType<InputAlign>, default: 'left' },
     /** 输入框内容对齐方式（默认left） */
     inputAlign: { type: String as PropType<InputAlign>, default: 'left' },
-    /** 左边通过icon配置的图标的颜色（默认#606266） */
-    iconColor: { type: String, default: '#606266' },
+    /** 左边通过icon配置的图标的颜色（默认var(--u-content-color)） */
+    iconColor: { type: String, default: 'var(--u-content-color)' },
     /** 是否自动增高输入区域，type为textarea时有效（默认true） */
     autoHeight: { type: Boolean, default: true },
     /** 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息 */
     errorMessage: { type: [String, Boolean] as PropType<string | boolean>, default: '' },
     /** 输入框的提示文字 */
     placeholder: String,
-    /** placeholder的样式(内联样式，字符串)，如"color: #ddd" */
+    /** placeholder的样式(内联样式，字符串)，如"color: var(--u-divider-color)" */
     placeholderStyle: String,
     /** 是否自动获得焦点（默认false） */
     focus: Boolean,

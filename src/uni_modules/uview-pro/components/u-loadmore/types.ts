@@ -25,7 +25,7 @@ export const LoadmoreProps = {
     /** 字体颜色 */
     color: {
         type: String,
-        default: '#606266'
+        default: 'var(--u-content-color)'
     },
     /** 组件状态，loadmore-加载前，loading-加载中，nomore-没有更多 */
     status: {
@@ -54,7 +54,7 @@ export const LoadmoreProps = {
     /** 加载中显示圆圈动画时，动画的颜色 */
     iconColor: {
         type: String,
-        default: '#b7b7b7'
+        default: 'var(--u-light-color)'
     },
     /** 上边距 */
     marginTop: {

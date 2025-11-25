@@ -14,7 +14,7 @@
                 <view v-else class="u-steps__item__num--circle">
                     <slot name="icon">
                         <view class="u-steps__item__num--icon" :style="numberStyle(childIndex)">
-                            <u-icon size="22" color="#ffffff" :name="iconName"></u-icon>
+                            <u-icon size="22" color="var(--u-white-color)" :name="iconName"></u-icon>
                         </view>
                     </slot>
                 </view>
@@ -119,7 +119,7 @@ const iconName = computed(() => {
 
 // 计算当前步骤的样式
 const numberStyle = (index: number) => ({
-    backgroundColor: currentIndex.value < index ? '#fff' : activeColor.value,
+    backgroundColor: currentIndex.value < index ? 'var(--u-white-color)' : activeColor.value,
     borderColor: currentIndex.value < index ? unActiveColor.value : activeColor.value
 });
 
@@ -149,7 +149,7 @@ $u-steps-item-dot-width: 20rpx;
     position: relative;
     min-width: 100rpx;
     font-size: 26rpx;
-    color: #8799a3;
+    color: var(--u-tips-color);
     @include vue-flex;
     flex-direction: column;
 
@@ -222,7 +222,7 @@ $u-steps-item-dot-width: 20rpx;
         }
         &--text,
         &--icon {
-            border: 1px solid #8799a3;
+            border: 1px solid var(--u-tips-color);
             border-radius: 50%;
         }
     }

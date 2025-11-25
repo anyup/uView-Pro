@@ -67,7 +67,7 @@ import { $u } from '../..';
  * @property {Boolean} fade 是否需要淡入效果（默认 true）
  * @property {Boolean} webp 只支持网络资源，只对微信小程序有效（默认 false）
  * @property {String | Number} duration 搭配fade参数的过渡时间，单位ms（默认 500）
- * @property {String} bg-color 背景颜色，用于深色页面加载图片时，为了和背景色融合（默认 #f3f4f6）
+ * @property {String} bg-color 背景颜色，用于深色页面加载图片时，为了和背景色融合（默认 var(--u-bg-color)）
  * @event {Function} click 点击图片时触发
  * @event {Function} error 图片加载失败时触发
  * @event {Function} load 图片加载成功时触发

@@ -92,7 +92,7 @@ import { PopupProps } from './types';
  * @property {Boolean} closeable 是否显示关闭图标（默认false）
  * @property {String} close-icon 关闭图标的名称，只能uView的内置图标
  * @property {String} close-icon-pos 自定义关闭图标位置（默认top-right）
- * @property {String} close-icon-color 关闭图标的颜色（默认#909399）
+ * @property {String} close-icon-color 关闭图标的颜色（默认var(--u-tips-color)）
  * @property {Number | String} close-icon-size 关闭图标的大小，单位rpx（默认30）
  * @event {Function} open 弹出层打开
  * @event {Function} close 弹出层收起
@@ -293,28 +293,28 @@ function change(param1: 'showDrawer' | 'visibleSync', param2: 'visibleSync' | 's
     top: 0;
     bottom: 0;
     left: 0;
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
 }
 
 .u-drawer-right {
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
 }
 
 .u-drawer-top {
     top: 0;
     left: 0;
     right: 0;
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
 }
 
 .u-drawer-bottom {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
 }
 
 .u-drawer-center {
@@ -337,7 +337,7 @@ function change(param1: 'showDrawer' | 'visibleSync', param2: 'visibleSync' | 's
     display: block;
     /* #endif */
     position: relative;
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
 }
 
 .u-drawer-content-visible.u-drawer-center {

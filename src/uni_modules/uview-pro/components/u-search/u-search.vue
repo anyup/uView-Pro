@@ -47,7 +47,7 @@
                 ]"
             />
             <view class="u-close-wrap" v-if="keyword && clearabled && focused" @tap="clear">
-                <u-icon class="u-clear-icon" name="close-circle-fill" size="34" color="#c0c4cc"></u-icon>
+                <u-icon class="u-clear-icon" name="close-circle-fill" size="34" color="var(--u-light-color)"></u-icon>
             </view>
         </view>
         <view
@@ -84,7 +84,7 @@ import { $u } from '../..';
  * @description 搜索组件，集成了常见搜索框所需功能，用户可以一键引入，开箱即用。
  * @tutorial https://uviewpro.cn/zh/components/search.html
  * @property {String} shape 搜索框形状，round-圆形，square-方形（默认round）
- * @property {String} bg-color 搜索框背景颜色（默认#f2f2f2）
+ * @property {String} bg-color 搜索框背景颜色（默认var(--u-bg-surface-color)）
  * @property {String} border-color 边框颜色，配置了颜色，才会有边框
  * @property {String} placeholder 占位文字内容（默认“请输入关键字”）
  * @property {Boolean} clearabled 是否启用清除控件（默认true）
@@ -96,8 +96,8 @@ import { $u } from '../..';
  * @property {Object} input-style 自定义输入框样式，对象形式
  * @property {Boolean} disabled 是否启用输入框（默认false）
  * @property {String} search-icon-color 搜索图标的颜色，默认同输入框字体颜色
- * @property {String} color 输入框字体颜色（默认#606266）
- * @property {String} placeholder-color placeholder的颜色（默认#909399）
+ * @property {String} color 输入框字体颜色（默认var(--u-content-color)）
+ * @property {String} placeholder-color placeholder的颜色（默认var(--u-tips-color)）
  * @property {String} search-icon 输入框左边的图标，可以为uView图标名称或图片路径
  * @property {String} margin 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"
  * @property {Boolean} animation 是否开启动画，见上方说明（默认false）

@@ -9,7 +9,7 @@ export const LineProps = {
     /** 线条的颜色 */
     color: {
         type: String,
-        default: '#e4e7ed'
+        default: 'var(--u-border-color)'
     },
     /** 长度，竖向时表现为高度，横向时表现为长度，可以为百分比，带rpx单位的值等 */
     length: {

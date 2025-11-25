@@ -51,7 +51,7 @@ import { IconProps } from './types';
  * @property {String | Number} label-size label字体大小，单位rpx（默认28）
  * @property {String} label 图标右侧的label文字（默认28）
  * @property {String} label-pos label文字相对于图标的位置，只能right或bottom（默认right）
- * @property {String} label-color label字体颜色（默认#606266）
+ * @property {String} label-color label字体颜色（默认var(--u-content-color)）
  * @property {Object} custom-style icon的样式，对象形式
  * @property {String} custom-prefix 自定义字体图标库时，需要写上此值
  * @property {String | Number} margin-left label在右侧时与图标的距离，单位rpx（默认6）
@@ -69,7 +69,7 @@ import { IconProps } from './types';
  * @property {String | Number} percent 显示的百分比，仅Decimal时有效
  * @event {Function} click 点击图标时触发
  * @event {Function} touchstart 图标触摸时触发
- * @example <u-icon name="photo" color="#2979ff" size="28"></u-icon>
+ * @example <u-icon name="photo" color="var(--u-type-primary)" size="28"></u-icon>
  */
 
 const emit = defineEmits<{

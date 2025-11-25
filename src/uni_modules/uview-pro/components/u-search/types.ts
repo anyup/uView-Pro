@@ -10,8 +10,8 @@ export const SearchProps = {
     ...baseProps,
     /** 搜索框形状，round-圆形，square-方形 */
     shape: { type: String as PropType<SearchShape>, default: 'round' },
-    /** 搜索框背景色，默认值#f2f2f2 */
-    bgColor: { type: String, default: '#f2f2f2' },
+    /** 搜索框背景色，默认值var(--u-bg-surface-color) */
+    bgColor: { type: String, default: 'var(--u-bg-surface-color)' },
     /** 占位提示文字 */
     placeholder: { type: String, default: '请输入关键字' },
     /** 是否启用清除控件 */
@@ -43,9 +43,9 @@ export const SearchProps = {
     /** 搜索图标的颜色，默认同输入框字体颜色 */
     searchIconColor: { type: String, default: '' },
     /** 输入框字体颜色 */
-    color: { type: String, default: '#606266' },
+    color: { type: String, default: 'var(--u-content-color)' },
     /** placeholder的颜色 */
-    placeholderColor: { type: String, default: '#909399' },
+    placeholderColor: { type: String, default: 'var(--u-tips-color)' },
     /** 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"、"30rpx 20rpx"等写法 */
     margin: { type: String, default: '0' },
     /** 左边输入框的图标，可以为uView图标名称或图片路径 */

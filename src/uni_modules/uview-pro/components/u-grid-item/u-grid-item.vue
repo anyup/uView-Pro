@@ -43,7 +43,7 @@ import { $u, useChildren } from '../..';
  * gridItem 宫格项
  * @description 宫格组件一般用于同时展示多个同类项目的场景，可以给宫格的项目设置徽标组件(badge)，或者图标等，也可以扩展为左右滑动的轮播形式。搭配u-grid使用
  * @tutorial https://uviewpro.cn/zh/components/grid.html
- * @property {String} bg-color 宫格的背景颜色（默认#ffffff）
+ * @property {String} bg-color 宫格的背景颜色（默认var(--u-white-color)）
  * @property {String|Number} index 点击宫格时，返回的值
  * @property {Object} custom-style 自定义样式，对象形式
  * @event {Function} click 点击宫格触发
@@ -88,7 +88,7 @@ defineExpose({ click });
 
 .u-grid-item {
     box-sizing: border-box;
-    background: #fff;
+    background: var(--u-white-color);
     @include vue-flex;
     align-items: center;
     justify-content: center;
@@ -102,7 +102,7 @@ defineExpose({ click });
 }
 
 .u-grid-item-hover {
-    background: #f7f7f7 !important;
+    background: var(--u-bg-surface-color) !important;
 }
 
 .u-grid-marker-box {

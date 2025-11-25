@@ -20,7 +20,7 @@
                     <text v-if="currentIndex < index" :style="textStyle(index)">
                         {{ index + 1 }}
                     </text>
-                    <u-icon v-else size="22" color="#ffffff" :name="icon"></u-icon>
+                    <u-icon v-else size="22" color="var(--u-white-color)" :name="icon"></u-icon>
                 </view>
                 <view class="u-steps__item__dot" v-if="mode == 'dot'" :style="dotStyle(index)"></view>
                 <text class="u-line-1" :style="textStyle(index)" :class="['u-steps__item__text--' + direction]">
@@ -66,9 +66,9 @@ import { $u, useParent } from '../..';
  * @property {String} direction row-横向，column-竖向（默认row）
  * @property {Number|String} current 设置当前处于第几步
  * @property {String} activeColor 已完成步骤的激活颜色，如设置，type值会失效
- * @property {String} unActiveColor 未激活的颜色，用于表示未完成步骤的颜色（默认#606266）
+ * @property {String} unActiveColor 未激活的颜色，用于表示未完成步骤的颜色（默认var(--u-content-color)）
  * @property {String} icon 自定义图标
- * @example <u-steps :list="numList" active-color="#fa3534"></u-steps>
+ * @example <u-steps :list="numList" active-color="var(--u-type-error)"></u-steps>
  */
 
 const props = defineProps(StepsProps);

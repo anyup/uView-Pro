@@ -12,7 +12,7 @@ export const TabbarProps = {
     /** v-model绑定当前激活项的值 */
     modelValue: { type: [String, Number] as PropType<string | number>, default: 0 },
     /** tabbar背景色 */
-    bgColor: { type: String, default: '#ffffff' },
+    bgColor: { type: String, default: 'var(--u-white-color)' },
     /** tabbar高度，单位任意，数值默认rpx */
     height: { type: [String, Number] as PropType<string | number>, default: '50px' },
     /** 非凸起图标的大小，单位任意，数值默认rpx */
@@ -20,9 +20,9 @@ export const TabbarProps = {
     /** 凸起图标的大小，单位任意，数值默认rpx */
     midButtonSize: { type: [String, Number] as PropType<string | number>, default: 90 },
     /** 激活时的颜色 */
-    activeColor: { type: String, default: '#303133' },
+    activeColor: { type: String, default: 'var(--u-main-color)' },
     /** 未激活时的颜色 */
-    inactiveColor: { type: String, default: '#606266' },
+    inactiveColor: { type: String, default: 'var(--u-content-color)' },
     /** 是否显示中部凸起按钮 */
     midButton: { type: Boolean, default: false },
     /** tabbar配置项数组 */

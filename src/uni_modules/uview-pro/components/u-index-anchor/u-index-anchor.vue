@@ -103,7 +103,7 @@ defineExpose({
 .u-index-anchor {
     box-sizing: border-box;
     padding: 14rpx 24rpx;
-    color: #606266;
+    color: var(--u-content-color);
     width: 100%;
     font-weight: 500;
     font-size: 28rpx;
@@ -115,6 +115,6 @@ defineExpose({
     right: 0;
     left: 0;
     color: $u-type-primary;
-    background-color: #fff;
+    background-color: var(--u-white-color);
 }
 </style>

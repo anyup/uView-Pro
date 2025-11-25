@@ -21,11 +21,11 @@ export const UploadProps = {
     /** 是否显示上传进度 */
     showProgress: { type: Boolean, default: true },
     /** 删除按钮背景色 */
-    delBgColor: { type: String, default: '#f56c6c' },
+    delBgColor: { type: String, default: 'var(--u-type-error)' },
     /** 删除按钮图标 */
     delIcon: { type: String, default: 'close' },
     /** 删除按钮颜色 */
-    delColor: { type: String, default: '#fff' },
+    delColor: { type: String, default: 'var(--u-white-color)' },
     /** 图片裁剪模式 */
     imageMode: { type: String as PropType<ImgMode>, default: 'aspectFill' },
     /** 是否自定义上传按钮 */

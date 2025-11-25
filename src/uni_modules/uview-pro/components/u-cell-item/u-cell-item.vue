@@ -132,7 +132,7 @@ function onClick() {
     font-size: 28rpx;
     line-height: 54rpx;
     color: $u-content-color;
-    background-color: #fff;
+    background-color: var(--u-white-color);
     text-align: left;
 }
 
@@ -147,7 +147,7 @@ function onClick() {
 
 .u-cell__right-icon-wrap {
     margin-left: 10rpx;
-    color: #969799;
+    color: var(--u-tips-color);
     font-size: 28rpx;
 }
 

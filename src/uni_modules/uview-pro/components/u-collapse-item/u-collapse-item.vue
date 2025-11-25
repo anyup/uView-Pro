@@ -132,7 +132,7 @@ function init() {
     if (parentExposed.value?.props) {
         headStyle.value = parentExposed.value.props.headStyle || {};
         bodyStyle.value = parentExposed.value.props.bodyStyle || {};
-        arrowColor.value = parentExposed.value.props.arrowColor || '#909399';
+        arrowColor.value = parentExposed.value.props.arrowColor || 'var(--u-tips-color)';
         hoverClass.value = parentExposed.value.props.hoverClass || 'u-hover-class';
         itemStyle.value = parentExposed.value.props.itemStyle || {};
     }

@@ -39,7 +39,7 @@ export const SwiperProps = {
     /** 轮播项对象的图片字段名 */
     name: { type: String, default: 'image' },
     /** 轮播背景色 */
-    bgColor: { type: String, default: '#f3f4f6' },
+    bgColor: { type: String, default: 'var(--u-bg-color)' },
     /** 当前激活项索引 */
     current: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 标题样式对象 */

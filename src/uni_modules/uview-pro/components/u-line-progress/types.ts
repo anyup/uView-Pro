@@ -18,12 +18,12 @@ export const LineProgressProps = {
     /** 激活部分的颜色 */
     activeColor: {
         type: String,
-        default: '#19be6b'
+        default: 'var(--u-type-success)'
     },
     /** 进度条的底色 */
     inactiveColor: {
         type: String,
-        default: '#ececec'
+        default: 'var(--u-divider-color)'
     },
     /** 进度百分比，数值 */
     percent: {

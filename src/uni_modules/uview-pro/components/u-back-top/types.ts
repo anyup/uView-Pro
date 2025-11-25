@@ -27,7 +27,7 @@ export const BackTopProps = {
     iconStyle: {
         type: Object as PropType<Record<string, any>>,
         default: () => ({
-            color: '#909399',
+            color: 'var(--u-tips-color)',
             fontSize: '38rpx'
         })
     }

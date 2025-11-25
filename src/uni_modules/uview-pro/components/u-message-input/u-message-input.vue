@@ -101,7 +101,7 @@ import { $u } from '../../';
  * @property {Boolean} bold 字体和输入横线是否加粗（默认true）
  * @property {String|Number} font-size 字体大小，单位rpx（默认60）
  * @property {String} active-color 当前激活输入框的样式（默认主题色primary）
- * @property {String} inactive-color 非激活输入框的样式，文字颜色同此值（默认#606266）
+ * @property {String} inactive-color 非激活输入框的样式，文字颜色同此值（默认var(--u-content-color)）
  * @property {String|Number} width 输入框宽度，单位rpx，高等于宽（默认80）
  * @property {Boolean} disabled-keyboard 禁止点击输入框唤起系统键盘（默认false）
  * @event {Function} change 输入内容发生改变时触发，具体见官网说明
@@ -210,7 +210,7 @@ function getVal(e: { detail: { value: string } }) {
 
 .u-box {
     box-sizing: border-box;
-    border: 2rpx solid #cccccc;
+    border: 2rpx solid var(--u-light-color);
     border-radius: 6rpx;
 }
 
@@ -241,7 +241,7 @@ function getVal(e: { detail: { value: string } }) {
     transform: translate(-50%, -50%);
     width: 2rpx;
     height: 40rpx;
-    background: #333333;
+    background: var(--u-main-color);
     animation: twinkling 1.5s infinite ease;
 }
 
@@ -256,7 +256,7 @@ function getVal(e: { detail: { value: string } }) {
 
 .u-middle-line {
     height: 4px;
-    background: #000000;
+    background: var(--u-black-color);
     width: 80%;
     position: absolute;
     border-radius: 2px;
@@ -271,7 +271,7 @@ function getVal(e: { detail: { value: string } }) {
 
 .u-bottom-line {
     height: 4px;
-    background: #000000;
+    background: var(--u-black-color);
     width: 80%;
     position: absolute;
     border-radius: 2px;

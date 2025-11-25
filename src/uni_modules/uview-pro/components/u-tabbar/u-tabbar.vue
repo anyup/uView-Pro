@@ -250,7 +250,7 @@ function getMidButtonLeft() {
             top: -48rpx;
             position: absolute;
             z-index: 4;
-            background-color: #ffffff;
+            background-color: var(--u-white-color);
             // 由于安卓的无能，导致只有3个tabbar item时，此css计算方式有误差
             // 故使用js计算的形式来定位，此处不注释，是因为js计算有延后，避免出现位置闪动
             left: 50%;
@@ -303,7 +303,7 @@ function getMidButtonLeft() {
                 justify-content: center;
                 align-items: center;
                 position: absolute;
-                background-color: #ffffff;
+                background-color: var(--u-white-color);
                 top: -40rpx;
                 left: 50%;
                 z-index: 6;

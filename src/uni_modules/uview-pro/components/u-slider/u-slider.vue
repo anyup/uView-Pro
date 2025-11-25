@@ -65,9 +65,9 @@ import { SliderProps } from './types';
  * @property {Number | String} step 步长（默认1）
  * @property {Number | String} blockWidth 滑块宽度，高等于宽（30）
  * @property {Number | String} height 滑块条高度，单位rpx（默认6）
- * @property {String} inactiveColor 底部条背景颜色（默认#c0c4cc）
+ * @property {String} inactiveColor 底部条背景颜色（默认var(--u-light-color)）
  * @property {String} activeColor 底部选择部分的背景颜色（默认主题色primary）
- * @property {String} blockColor 滑块颜色（默认#ffffff）
+ * @property {String} blockColor 滑块颜色（默认var(--u-white-color)）
  * @property {Object} blockStyle 给滑块自定义样式，对象形式
  * @property {Boolean} disabled 是否禁用滑块(默认为false)
  * @event start 滑动触发
@@ -213,7 +213,7 @@ function onClick(event: any) {
 .u-slider {
     position: relative;
     border-radius: 999px;
-    background-color: #ebedf0;
+    background-color: var(--u-bg-surface-color);
 }
 
 .u-slider:before {
@@ -238,7 +238,7 @@ function onClick(event: any) {
     height: 24px;
     border-radius: 50%;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    background-color: #fff;
+    background-color: var(--u-white-color);
     cursor: pointer;
 }
 

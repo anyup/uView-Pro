@@ -6,7 +6,7 @@
 		<view class="u-select__action__icon" :class="{
 			'u-select__action__icon--reverse': value == true
 		}">
-			<u-icon name="arrow-down-fill" size="26" color="#c0c4cc"></u-icon>
+			<u-icon name="arrow-down-fill" size="26" color="var(--u-light-color)"></u-icon>
 		</view>
 	</view> -->
         <u-popup
@@ -94,7 +94,7 @@ import { $u } from '../..';
  * @property {Array} list 列数据，数组形式，见官网说明
  * @property {Boolean} v-model 布尔值变量，用于控制选择器的弹出与收起
  * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配(默认false)
- * @property {String} cancel-color 取消按钮的颜色（默认#606266）
+ * @property {String} cancel-color 取消按钮的颜色（默认var(--u-content-color)）
  * @property {String} confirm-color 确认按钮的颜色(默认主题色primary)
  * @property {String} confirm-text 确认按钮的文字
  * @property {String} cancel-text 取消按钮的文字
@@ -406,7 +406,7 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
         width: 100%;
         height: 500rpx;
         overflow: hidden;
-        background-color: #fff;
+        background-color: var(--u-white-color);
 
         &__picker-view {
             height: 100%;

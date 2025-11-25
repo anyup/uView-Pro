@@ -96,7 +96,7 @@ const iconStyle = computed(() => {
     if (props.size === 'mini') style.fontSize = '20rpx';
     else style.fontSize = '22rpx';
     if (props.mode === 'plain' || props.mode === 'light') style.color = props.type;
-    else if (props.mode === 'dark') style.color = '#ffffff';
+    else if (props.mode === 'dark') style.color = 'var(--u-white-color)';
     if (props.closeColor) style.color = props.closeColor;
     return style;
 });
@@ -110,7 +110,7 @@ const closeIconColor = computed(() => {
     // 最后如果上面的三者都不合适，就返回type值给图标获取颜色
     if (props.closeColor) return props.closeColor;
     else if (props.color) return props.color;
-    else if (props.mode === 'dark') return '#ffffff';
+    else if (props.mode === 'dark') return 'var(--u-white-color)';
     else return props.type;
 });
 
@@ -186,55 +186,55 @@ function close() {
 
 .u-mode-dark-primary {
     background-color: $u-type-primary;
-    color: #ffffff;
+    color: var(--u-white-color);
 }
 
 .u-mode-dark-success {
     background-color: $u-type-success;
-    color: #ffffff;
+    color: var(--u-white-color);
 }
 
 .u-mode-dark-error {
     background-color: $u-type-error;
-    color: #ffffff;
+    color: var(--u-white-color);
 }
 
 .u-mode-dark-warning {
     background-color: $u-type-warning;
-    color: #ffffff;
+    color: var(--u-white-color);
 }
 
 .u-mode-dark-info {
     background-color: $u-type-info;
-    color: #ffffff;
+    color: var(--u-white-color);
 }
 
 .u-mode-plain-primary {
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
     color: $u-type-primary;
     border: 1px solid $u-type-primary;
 }
 
 .u-mode-plain-success {
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
     color: $u-type-success;
     border: 1px solid $u-type-success;
 }
 
 .u-mode-plain-error {
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
     color: $u-type-error;
     border: 1px solid $u-type-error;
 }
 
 .u-mode-plain-warning {
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
     color: $u-type-warning;
     border: 1px solid $u-type-warning;
 }
 
 .u-mode-plain-info {
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
     color: $u-type-info;
     border: 1px solid $u-type-info;
 }

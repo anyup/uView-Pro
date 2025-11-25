@@ -86,14 +86,14 @@ import { canvas2d } from '../../libs/util/canvas-2d';
  * @description 展示操作或任务的当前进度，比如上传文件，是一个圆形的进度条。注意：此组件的percent值只能动态增加，不能动态减少。
  * @tutorial https://uviewpro.cn/zh/components/circleProgress.html
  * @property {String Number} percent 圆环进度百分比值，为数值类型，0-100
- * @property {String} inactive-color 圆环的底色，默认为灰色(该值无法动态变更)（默认#ececec）
- * @property {String} active-color 圆环激活部分的颜色(该值无法动态变更)（默认#19be6b）
+ * @property {String} inactive-color 圆环的底色，默认为灰色(该值无法动态变更)（默认var(--u-divider-color)）
+ * @property {String} active-color 圆环激活部分的颜色(该值无法动态变更)（默认var(--u-type-success)）
  * @property {String Number} width 整个圆环组件的宽度，高度默认等于宽度值，单位rpx（默认200）
  * @property {String Number} border-width 圆环的边框宽度，单位rpx（默认14）
  * @property {String Number} duration 整个圆环执行一圈的时间，单位ms（默认呢1500）
  * @property {String} type 如设置，active-color值将会失效
  * @property {String} bg-color 整个组件背景颜色，默认为白色
- * @example <u-circle-progress active-color="#2979ff" :percent="80"></u-circle-progress>
+ * @example <u-circle-progress active-color="var(--u-type-primary)" :percent="80"></u-circle-progress>
  */
 const props = defineProps(CircleProgressProps);
 

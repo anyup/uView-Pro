@@ -47,7 +47,7 @@ const itemStyle = computed(() => {
     style.color = props.color || parentExposed?.value?.props?.color;
     style.fontSize = $u.addUnit(props.fontSize || parentExposed?.value?.props?.fontSize);
     style.padding = $u.addUnit(props.padding);
-    if (props.disabled) style.color = '#c0c4cc';
+    if (props.disabled) style.color = 'var(--u-light-color)';
     return style;
 });
 

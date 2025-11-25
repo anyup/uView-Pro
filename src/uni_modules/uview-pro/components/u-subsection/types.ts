@@ -14,9 +14,9 @@ export const SubsectionProps = {
     /** 当前活动的tab的index */
     current: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 激活的颜色 */
-    activeColor: { type: String, default: '#303133' },
+    activeColor: { type: String, default: 'var(--u-main-color)' },
     /** 未激活的颜色 */
-    inactiveColor: { type: String, default: '#606266' },
+    inactiveColor: { type: String, default: 'var(--u-content-color)' },
     /** 模式选择，mode=button为按钮形式，mode=subsection时为分段模式 */
     mode: { type: String as PropType<SubsectionMode>, default: 'button' },
     /** 字体大小，单位rpx */
@@ -28,9 +28,9 @@ export const SubsectionProps = {
     /** 激活tab的字体是否加粗 */
     bold: { type: Boolean, default: true },
     /** mode=button时，组件背景颜色 */
-    bgColor: { type: String, default: '#eeeeef' },
+    bgColor: { type: String, default: 'var(--u-divider-color)' },
     /** mode = button时，滑块背景颜色 */
-    buttonColor: { type: String, default: '#ffffff' },
+    buttonColor: { type: String, default: 'var(--u-white-color)' },
     /** 在切换分段器的时候，是否让设备震一下 */
     vibrateShort: { type: Boolean, default: false }
 };

@@ -34,15 +34,15 @@ export const CalendarProps = {
     /** 弹窗顶部左右两边的圆角值 */
     borderRadius: { type: [String, Number], default: 20 },
     /** 月份切换按钮箭头颜色 */
-    monthArrowColor: { type: String, default: '#606266' },
+    monthArrowColor: { type: String, default: 'var(--u-content-color)' },
     /** 年份切换按钮箭头颜色 */
-    yearArrowColor: { type: String, default: '#909399' },
+    yearArrowColor: { type: String, default: 'var(--u-tips-color)' },
     /** 默认日期字体颜色 */
-    color: { type: String, default: '#303133' },
+    color: { type: String, default: 'var(--u-main-color)' },
     /** 选中|起始结束日期背景色 */
     activeBgColor: { type: String, default: () => getColor('primary') },
     /** 选中|起始结束日期字体颜色 */
-    activeColor: { type: String, default: '#ffffff' },
+    activeColor: { type: String, default: 'var(--u-white-color)' },
     /** 范围内日期背景色 */
     rangeBgColor: { type: String, default: 'rgba(41,121,255,0.13)' },
     /** 范围内日期字体颜色 */

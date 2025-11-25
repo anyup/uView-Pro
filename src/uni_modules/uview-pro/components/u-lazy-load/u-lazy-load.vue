@@ -229,7 +229,7 @@ onMounted(() => {
 @import '../../libs/css/style.components.scss';
 
 .u-wrap {
-    background-color: #eee;
+    background-color: var(--u-divider-color);
     overflow: hidden;
 }
 

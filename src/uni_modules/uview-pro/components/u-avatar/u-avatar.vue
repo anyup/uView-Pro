@@ -44,7 +44,7 @@ let base64Avatar =
  * avatar 头像
  * @description 本组件一般用于展示头像的地方，如个人中心，或者评论列表页的用户头像展示等场所。
  * @tutorial https://uviewpro.cn/zh/components/avatar.html
- * @property {String} bg-color 背景颜色，一般显示文字时用（默认#ffffff）
+ * @property {String} bg-color 背景颜色，一般显示文字时用（默认var(--u-white-color)）
  * @property {String} src 头像路径，如加载失败，将会显示默认头像
  * @property {String Number} size 头像尺寸，可以为指定字符串(large, default, mini)，或者数值，单位rpx（默认default）
  * @property {String} mode 显示类型，见上方说明（默认circle）
@@ -174,7 +174,7 @@ function onClick() {
     &__sex {
         position: absolute;
         width: 32rpx;
-        color: #ffffff;
+        color: var(--u-white-color);
         height: 32rpx;
         @include vue-flex;
         justify-content: center;
@@ -183,7 +183,7 @@ function onClick() {
         top: 5%;
         z-index: 1;
         right: -7%;
-        border: 1px #ffffff solid;
+        border: 1px var(--u-white-color) solid;
 
         &--man {
             background-color: $u-type-primary;
@@ -201,7 +201,7 @@ function onClick() {
     &__level {
         position: absolute;
         width: 32rpx;
-        color: #ffffff;
+        color: var(--u-white-color);
         height: 32rpx;
         @include vue-flex;
         justify-content: center;
@@ -210,7 +210,7 @@ function onClick() {
         bottom: 5%;
         z-index: 1;
         right: -7%;
-        border: 1px #ffffff solid;
+        border: 1px var(--u-white-color) solid;
         background-color: $u-type-warning;
     }
 }

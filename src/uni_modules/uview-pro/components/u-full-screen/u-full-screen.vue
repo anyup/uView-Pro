@@ -91,7 +91,7 @@ function closeModal() {
 @import '../../libs/css/style.components.scss';
 
 .u-full-content {
-    background-color: #00c777;
+    background-color: var(--u-type-success);
 }
 
 .u-update-content {

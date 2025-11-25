@@ -145,7 +145,7 @@ function backspace() {
 }
 
 .u-tooltip-item {
-    color: #333333;
+    color: var(--u-main-color);
     flex: 0 0 33.333333%;
     text-align: center;
     padding: 20rpx 10rpx;
@@ -165,7 +165,7 @@ function backspace() {
     flex-grow: 1;
     flex-wrap: 0;
     padding-left: 40rpx;
-    color: #888888;
+    color: var(--u-tips-color);
 }
 
 .u-tooltips-submit-hover {
@@ -173,6 +173,6 @@ function backspace() {
 }
 
 .u-tooltip-cancel-hover {
-    color: #333333;
+    color: var(--u-main-color);
 }
 </style>

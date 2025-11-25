@@ -165,9 +165,9 @@ defineExpose<ToastExpose>({
     z-index: -1;
     transition: opacity 0.3s;
     text-align: center;
-    color: #fff;
+    color: var(--u-white-color);
     border-radius: 8rpx;
-    background: #585858;
+    background: var(--u-content-color);
     @include vue-flex;
     align-items: center;
     justify-content: center;
@@ -224,29 +224,29 @@ defineExpose<ToastExpose>({
 .u-type-success {
     color: $u-type-success;
     background-color: $u-type-success-light;
-    border: 1px solid #bef5c8;
+    border: 1px solid var(--u-type-success-light);
 }
 
 .u-type-error {
     color: $u-type-error;
     background-color: $u-type-error-light;
-    border: 1px solid #fde2e2;
+    border: 1px solid var(--u-type-error-light);
 }
 
 .u-type-warning {
     color: $u-type-warning;
     background-color: $u-type-warning-light;
-    border: 1px solid #faecd8;
+    border: 1px solid var(--u-type-warning-light);
 }
 
 .u-type-info {
     color: $u-type-info;
     background-color: $u-type-info-light;
-    border: 1px solid #ebeef5;
+    border: 1px solid var(--u-bg-surface-color);
 }
 
 .u-type-default {
-    color: #fff;
-    background-color: #585858;
+    color: var(--u-white-color);
+    background-color: var(--u-content-color);
 }
 </style>

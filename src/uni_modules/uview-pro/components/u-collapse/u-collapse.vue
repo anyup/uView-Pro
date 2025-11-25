@@ -28,7 +28,7 @@ import { $u, useParent } from '../../';
  * @tutorial https://uviewpro.cn/zh/components/collapse.html
  * @property {Boolean} accordion 是否手风琴模式（默认true）
  * @property {Boolean} arrow 是否显示标题右侧的箭头（默认true）
- * @property {String} arrow-color 标题右侧箭头的颜色（默认#909399）
+ * @property {String} arrow-color 标题右侧箭头的颜色（默认var(--u-tips-color)）
  * @property {Object} head-style 标题自定义样式，对象形式
  * @property {Object} body-style 主体自定义样式，对象形式
  * @property {String} hover-class 样式类名，按下时有效（默认u-hover-class）

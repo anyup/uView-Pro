@@ -11,15 +11,15 @@ export const DividerProps = {
     /** 单一边divider横线的宽度(数值)，单位rpx。或者百分比 */
     halfWidth: { type: [Number, String] as PropType<number | string>, default: 150 },
     /** divider横线的颜色，如设置 */
-    borderColor: { type: String, default: '#dcdfe6' },
+    borderColor: { type: String, default: 'var(--u-form-item-border-color)' },
     /** 主题色，可以是primary|info|success|warning|error之一值 */
     type: { type: String as PropType<ThemeType>, default: 'primary' },
     /** 文字颜色 */
-    color: { type: String, default: '#909399' },
+    color: { type: String, default: 'var(--u-tips-color)' },
     /** 文字大小，单位rpx */
     fontSize: { type: [Number, String] as PropType<number | string>, default: 26 },
     /** 整个divider的背景颜色 */
-    bgColor: { type: String, default: '#ffffff' },
+    bgColor: { type: String, default: 'var(--u-white-color)' },
     /** 整个divider的高度单位rpx */
     height: { type: [Number, String] as PropType<number | string>, default: 'auto' },
     /** 上边距 */

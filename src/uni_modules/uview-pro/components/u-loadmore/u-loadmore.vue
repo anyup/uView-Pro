@@ -8,7 +8,7 @@
             height: $u.addUnit(props.height)
         }"
     >
-        <u-line color="#d4d4d4" length="50"></u-line>
+        <u-line color="var(--u-divider-color)" length="50"></u-line>
         <!-- 加载中和没有更多的状态才显示两边的横线 -->
         <view :class="props.status == 'loadmore' || props.status == 'nomore' ? 'u-more' : ''" class="u-load-more-inner">
             <view class="u-loadmore-icon-wrap">
@@ -29,7 +29,7 @@
                 {{ showText }}
             </view>
         </view>
-        <u-line color="#d4d4d4" length="50"></u-line>
+        <u-line color="var(--u-divider-color)" length="50"></u-line>
     </view>
 </template>
 
@@ -56,12 +56,12 @@ import { LoadmoreProps } from './types';
  * @description 此组件一般用于标识页面底部加载数据时的状态。
  * @tutorial https://uviewpro.cn/zh/components/loadMore.html
  * @property {String} status 组件状态（默认loadmore）
- * @property {String} bg-color 组件背景颜色，在页面是非白色时会用到（默认#ffffff）
+ * @property {String} bg-color 组件背景颜色，在页面是非白色时会用到（默认var(--u-white-color)）
  * @property {Boolean} icon 加载中时是否显示图标（默认true）
  * @property {String} icon-type 加载中时的图标类型（默认circle）
- * @property {String} icon-color icon-type为circle时有效，加载中的动画图标的颜色（默认#b7b7b7）
+ * @property {String} icon-color icon-type为circle时有效，加载中的动画图标的颜色（默认var(--u-light-color)）
  * @property {Boolean} is-dot status为nomore时，内容显示为一个"●"（默认false）
- * @property {String} color 字体颜色（默认#606266）
+ * @property {String} color 字体颜色（默认var(--u-content-color)）
  * @property {String|Number} margin-top 到上一个相邻元素的距离
  * @property {String|Number} margin-bottom 到下一个相邻元素的距离
  * @property {Object} load-text 自定义显示的文字，见上方说明示例
@@ -89,7 +89,7 @@ const loadTextStyle = computed(() => {
 // 加载中圆圈动画的样式
 const cricleStyle = computed(() => {
     return {
-        borderColor: `#e5e5e5 #e5e5e5 #e5e5e5 ${props.iconColor}`
+        borderColor: `var(--u-divider-color) var(--u-divider-color) var(--u-divider-color) ${props.iconColor}`
     };
 });
 

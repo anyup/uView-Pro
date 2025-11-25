@@ -1131,7 +1131,7 @@ function cut(this: any) {
     self.setBoundStyle = function (ref: any) {
         if (ref === void 0) ref = {};
         var color = ref.color;
-        if (color === void 0) color = '#04b00f';
+        if (color === void 0) color = 'var(--u-type-success-dark)';
         var mask = ref.mask;
         if (mask === void 0) mask = 'rgba(0, 0, 0, 0.3)';
         var lineWidth = ref.lineWidth;

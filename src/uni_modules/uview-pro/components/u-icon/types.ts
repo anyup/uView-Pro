@@ -28,7 +28,7 @@ export const IconProps = {
     /** label的大小，单位rpx（默认28） */
     labelSize: { type: [String, Number] as PropType<string | number>, default: '28' },
     /** label的颜色 */
-    labelColor: { type: String, default: '#606266' },
+    labelColor: { type: String, default: 'var(--u-content-color)' },
     /** label与图标的距离(横向排列)，单位rpx（默认6） */
     marginLeft: { type: [String, Number] as PropType<string | number>, default: '6' },
     /** label与图标的距离(竖向排列)，单位rpx（默认6） */
@@ -50,7 +50,7 @@ export const IconProps = {
     /** 是否为DecimalIcon */
     showDecimalIcon: { type: Boolean, default: false },
     /** 背景颜色，可接受主题色，仅Decimal时有效 */
-    inactiveColor: { type: String, default: '#ececec' },
+    inactiveColor: { type: String, default: 'var(--u-divider-color)' },
     /** 显示的百分比，仅Decimal时有效 */
     percent: { type: [Number, String] as PropType<string | number>, default: '50' }
 };

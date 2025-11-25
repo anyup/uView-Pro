@@ -33,8 +33,8 @@ export const ImageProps = {
     webp: { type: Boolean, default: false },
     /** 搭配fade参数的过渡时间，单位ms（默认 500） */
     duration: { type: [String, Number], default: 500 },
-    /** 背景颜色，用于深色页面加载图片时，为了和背景色融合（默认 #f3f4f6） */
-    bgColor: { type: String, default: '#f3f4f6' },
+    /** 背景颜色，用于深色页面加载图片时，为了和背景色融合（默认 var(--u-bg-color)） */
+    bgColor: { type: String, default: 'var(--u-bg-color)' },
     /** 使用插槽名称对象，用于自定义插槽，默认 undefined，当动态切换slot隐藏时，需要使用useSlots使用，兼容头条小程序 */
     useSlots: { type: Object as PropType<Record<string, boolean>>, default: undefined }
 };

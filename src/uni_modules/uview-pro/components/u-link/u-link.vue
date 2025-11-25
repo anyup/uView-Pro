@@ -34,7 +34,7 @@ import { LinkProps } from './types';
  * link 超链接
  * @description 该组件为超链接组件，在不同平台有不同表现形式：在APP平台会通过plus环境打开内置浏览器，在小程序中把链接复制到粘贴板，同时提示信息，在H5中通过window.open打开链接。
  * @tutorial https://uviewpro.cn/zh/components/link.html
- * @property {String} color 文字颜色（默认#606266）
+ * @property {String} color 文字颜色（默认var(--u-content-color)）
  * @property {String Number} font-size 字体大小，单位rpx（默认28）
  * @property {Boolean} under-line 是否显示下划线（默认false）
  * @property {String} href 跳转的链接，要带上http(s)

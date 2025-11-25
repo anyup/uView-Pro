@@ -120,7 +120,7 @@ function backToTop() {
     @include vue-flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #e1e1e1;
+    background-color: var(--u-divider-color);
     color: $u-content-color;
     align-items: center;
     transition: opacity 0.4s;

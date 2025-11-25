@@ -8,9 +8,9 @@ import { baseProps } from '../common/props';
 export const SkeletonProps = {
     ...baseProps,
     /** 骨架块状元素的背景颜色 */
-    elColor: { type: String, default: '#e5e5e5' },
+    elColor: { type: String, default: 'var(--u-divider-color)' },
     /** 整个骨架屏页面的背景颜色 */
-    bgColor: { type: String, default: '#ffffff' },
+    bgColor: { type: String, default: 'var(--u-white-color)' },
     /** 是否显示加载动画 */
     animation: { type: Boolean, default: false },
     /** 圆角值，只对类名为u-skeleton-fillet的元素生效 */

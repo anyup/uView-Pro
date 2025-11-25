@@ -267,12 +267,12 @@ import Calendar from '../../libs/util/calendar';
  * @property {String Number} max-date 最大可选日期(默认当前日期)
  * @property {String Number} 弹窗顶部左右两边的圆角值，单位rpx(默认20)
  * @property {Boolean} mask-close-able 是否允许通过点击遮罩关闭日历(默认true)
- * @property {String} month-arrow-color 月份切换按钮箭头颜色(默认#606266)
- * @property {String} year-arrow-color 年份切换按钮箭头颜色(默认#909399)
- * @property {String} color 日期字体的默认颜色(默认#303133)
+ * @property {String} month-arrow-color 月份切换按钮箭头颜色(默认var(--u-content-color))
+ * @property {String} year-arrow-color 年份切换按钮箭头颜色(默认var(--u-tips-color))
+ * @property {String} color 日期字体的默认颜色(默认var(--u-main-color))
  * @property {String} active-bg-color 起始/结束日期按钮的背景色(默认主题色primary)
  * @property {String Number} z-index 弹出时的z-index值(默认10075)
- * @property {String} active-color 起始/结束日期按钮的字体颜色(默认#ffffff)
+ * @property {String} active-color 起始/结束日期按钮的字体颜色(默认var(--u-white-color))
  * @property {String} range-bg-color 起始/结束日期之间的区域的背景颜色(默认rgba(41,121,255,0.13))
  * @property {String} range-color 选择范围内字体颜色(默认主题色primary)
  * @property {String} start-text 起始日期底部的提示文字(默认 '开始')
@@ -650,7 +650,7 @@ function btnFix(show: boolean) {
         width: 100%;
         box-sizing: border-box;
         font-size: 30rpx;
-        background-color: #fff;
+        background-color: var(--u-white-color);
         color: $u-main-color;
 
         &__text {
@@ -697,7 +697,7 @@ function btnFix(show: boolean) {
         flex-wrap: wrap;
         padding: 6px 0;
         box-sizing: border-box;
-        background-color: #fff;
+        background-color: var(--u-white-color);
         position: relative;
 
         &--end-date {
@@ -764,7 +764,7 @@ function btnFix(show: boolean) {
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            color: #e4e7ed;
+            color: var(--u-border-color);
             z-index: 1;
         }
     }
@@ -775,7 +775,7 @@ function btnFix(show: boolean) {
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        background-color: #fff;
+        background-color: var(--u-white-color);
         padding: 0 40rpx 30rpx;
         box-sizing: border-box;
         font-size: 24rpx;

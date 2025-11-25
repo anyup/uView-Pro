@@ -55,14 +55,14 @@ import { $u } from '../..';
  * @property {String|Number} font-size tab文字大小，单位rpx（默认30）
  * @property {String|Number} swiper-width tabs组件外部swiper的宽度，默认为屏幕宽度，单位rpx（默认750）
  * @property {String} active-color 滑块和激活tab文字的颜色（默认主题色primary）
- * @property {String} inactive-color tabs文字颜色（默认#303133）
+ * @property {String} inactive-color tabs文字颜色（默认var(--u-main-color)）
  * @property {String|Number} bar-width 滑块宽度，单位rpx（默认40）
  * @property {String|Number} bar-height 滑块高度，单位rpx（默认6）
  * @property {Object} bar-style 底部滑块的样式，对象形式
  * @property {Object} active-item-style 活动tabs item的样式，对象形式
  * @property {Boolean} show-bar 是否显示底部的滑块（默认true）
  * @property {String|Number} gutter 单个tab标签的左右内边距之和，单位rpx（默认40）
- * @property {String} bg-color tabs导航栏的背景颜色（默认#ffffff）
+ * @property {String} bg-color tabs导航栏的背景颜色（默认var(--u-white-color)）
  * @property {String} name 组件内部读取的list参数中的属性名，见官网说明（默认name）
  * @property {String} count 组件内部读取的list参数中的属性名（badge徽标数），同name属性的使用，见官网说明（默认count）
  * @property {Array} offset 设置badge徽标数的位置偏移，格式为 [x, y]，也即设置的为top和right的值，单位rpx（默认[5, 20]）

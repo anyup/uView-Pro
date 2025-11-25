@@ -28,7 +28,7 @@ export const BadgeProps = {
     /** 字体大小 */
     fontSize: { type: [String, Number], default: '24' },
     /** 字体颜色 */
-    color: { type: String, default: '#ffffff' },
+    color: { type: String, default: 'var(--u-white-color)' },
     /** badge的背景颜色 */
     bgColor: { type: String, default: '' },
     /** 是否让badge组件的中心点和父组件右上角重合，配置的话，offset将会失效 */

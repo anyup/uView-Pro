@@ -17,7 +17,7 @@ export const SwitchProps = {
     /** 打开时的颜色 */
     activeColor: { type: String, default: () => getColor('primary') },
     /** 关闭时的颜色 */
-    inactiveColor: { type: String, default: '#ffffff' },
+    inactiveColor: { type: String, default: 'var(--u-white-color)' },
     /** v-model 绑定值，是否选中 */
     modelValue: { type: Boolean, default: false },
     /** 是否开启轻微震动反馈 */

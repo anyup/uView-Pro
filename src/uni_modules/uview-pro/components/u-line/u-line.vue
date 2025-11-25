@@ -24,7 +24,7 @@ import { LineProps } from './types';
  * line 线条
  * @description 此组件一般用于显示一根线条，用于分隔内容块，有横向和竖向两种模式，且能设置0.5px线条，使用也很简单
  * @tutorial https://uviewpro.cn/zh/components/line.html
- * @property {String} color 线条的颜色(默认#e4e7ed)
+ * @property {String} color 线条的颜色(默认var(--u-border-color))
  * @property {String} length 长度，竖向时表现为高度，横向时表现为长度，可以为百分比，带rpx单位的值等
  * @property {String} direction 线条的方向，row-横向，col-竖向(默认row)
  * @property {String} border-style 线条的类型，solid-实线，dashed-方形虚线，dotted-圆点虚线(默认solid)

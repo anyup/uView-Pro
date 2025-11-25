@@ -166,7 +166,7 @@ function keyboardClick(val: string | number) {
     flex: 0 0 33.3333333333%;
     text-align: center;
     font-size: 50rpx;
-    color: #333;
+    color: var(--u-main-color);
     @include vue-flex;
     align-items: center;
     justify-content: center;
@@ -183,6 +183,6 @@ function keyboardClick(val: string | number) {
 }
 
 .u-keyboard-hover {
-    background-color: #e7e6eb;
+    background-color: var(--u-divider-color);
 }
 </style>

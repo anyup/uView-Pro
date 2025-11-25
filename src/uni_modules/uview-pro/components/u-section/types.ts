@@ -20,9 +20,9 @@ export const SectionProps = {
     /** 主标题是否加粗 */
     bold: { type: Boolean, default: true },
     /** 主标题的颜色 */
-    color: { type: String, default: '#303133' },
+    color: { type: String, default: 'var(--u-main-color)' },
     /** 右边副标题的颜色 */
-    subColor: { type: String, default: '#909399' },
+    subColor: { type: String, default: 'var(--u-tips-color)' },
     /** 是否显示左边的竖条 */
     showLine: { type: Boolean, default: true },
     /** 左边竖线的颜色 */

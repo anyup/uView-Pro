@@ -22,7 +22,7 @@ export const CountToProps = {
     /** 十进制分割符号 */
     decimal: { type: [Number, String] as PropType<number | string>, default: '.' },
     /** 字体颜色 */
-    color: { type: String, default: '#303133' },
+    color: { type: String, default: 'var(--u-main-color)' },
     /** 字体大小 */
     fontSize: { type: [Number, String] as PropType<number | string>, default: 50 },
     /** 是否加粗字体 */

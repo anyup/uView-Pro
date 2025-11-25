@@ -18,9 +18,9 @@ export const RateProps = {
     /** 星星的大小，单位rpx */
     size: { type: [Number, String] as PropType<number | string>, default: 32 },
     /** 未选中时的颜色 */
-    inactiveColor: { type: String, default: '#b2b2b2' },
+    inactiveColor: { type: String, default: 'var(--u-light-color)' },
     /** 选中的颜色 */
-    activeColor: { type: String, default: '#FA3534' },
+    activeColor: { type: String, default: 'var(--u-type-error)' },
     /** 星星之间的间距，单位rpx */
     gutter: { type: [Number, String] as PropType<number | string>, default: 10 },
     /** 最少能选择的星星个数 */

@@ -103,7 +103,7 @@ const iconStyle = computed(() => {
 
 // checkbox内部的勾选图标，如果选中状态，为白色，否则为透明色即可
 const iconColor = computed(() => {
-    return props.modelValue ? '#ffffff' : 'transparent';
+    return props.modelValue ? 'var(--u-white-color)' : 'transparent';
 });
 
 const iconClass = computed(() => {
@@ -234,7 +234,7 @@ defineExpose({
         text-align: center;
         transition-property: color, border-color, background-color;
         font-size: 20px;
-        border: 1px solid #c8c9cc;
+        border: 1px solid var(--u-info-disabled);
         transition-duration: 0.2s;
 
         /* #ifdef MP-TOUTIAO */
@@ -252,18 +252,18 @@ defineExpose({
         }
 
         &--checked {
-            color: #fff;
+            color: var(--u-white-color);
             background-color: $u-type-primary;
             border-color: $u-type-primary;
         }
 
         &--disabled {
-            background-color: #ebedf0;
-            border-color: #c8c9cc;
+            background-color: var(--u-bg-surface-color);
+            border-color: var(--u-info-disabled);
         }
 
         &--disabled--checked {
-            color: #c8c9cc !important;
+            color: var(--u-info-disabled) !important;
         }
     }
 
@@ -275,7 +275,7 @@ defineExpose({
         font-size: 30rpx;
 
         &--disabled {
-            color: #c8c9cc;
+            color: var(--u-info-disabled);
         }
     }
 }

@@ -96,7 +96,7 @@ view {
     position: fixed;
     z-index: 1;
     padding: 20rpx 30rpx;
-    color: #ffffff;
+    color: var(--u-white-color);
     font-size: 28rpx;
     left: 0;
     right: 0;

@@ -15,7 +15,7 @@ export const LoadingProps = {
     /** 动画的颜色 */
     color: {
         type: String,
-        default: '#c7c7c7'
+        default: 'var(--u-light-color)'
     },
     /** 加载图标的大小，单位rpx */
     size: {

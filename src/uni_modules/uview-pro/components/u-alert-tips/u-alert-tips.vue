@@ -42,7 +42,7 @@
                 v-if="closeAble && !closeText"
                 hoverClass="u-type-error-hover-color"
                 name="close"
-                color="#c0c4cc"
+                color="var(--u-light-color)"
                 :size="22"
                 class="u-close-icon"
                 :style="{
@@ -154,7 +154,7 @@ function onClose() {
     border-radius: 8rpx;
     position: relative;
     transition: all 0.3s linear;
-    border: 1px solid #fff;
+    border: 1px solid var(--u-white-color);
 
     &--bg--primary-light {
         background-color: $u-type-primary-light;

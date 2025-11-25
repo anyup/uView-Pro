@@ -57,7 +57,7 @@ import { SwipeActionProps } from './types';
  * swipeAction 左滑单元格
  * @description 该组件一般用于左滑唤出操作菜单的场景，用的最多的是左滑删除操作。
  * @tutorial https://uviewpro.cn/zh/components/swipeAction.html
- * @property {String} bg-color 整个组件背景颜色（默认#ffffff）
+ * @property {String} bg-color 整个组件背景颜色（默认var(--u-white-color)）
  * @property {Array} options 数组形式，可以配置背景颜色和文字
  * @property {String|Number} index 标识符，点击时候用于区分点击了哪一个，用v-for循环时的index即可
  * @property {String|Number} btn-width 按钮宽度，单位rpx（默认180）
@@ -264,7 +264,7 @@ function contentClick() {
 .u-swipe-del {
     position: relative;
     font-size: 30rpx;
-    color: #ffffff;
+    color: var(--u-white-color);
 }
 
 .u-btn-text {

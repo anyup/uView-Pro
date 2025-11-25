@@ -79,8 +79,8 @@ import { $u } from '../..';
  * @property {Boolean} arrow 是否显示右边箭头（默认true）
  * @property {String|Number} fontSize 主标题的字体大小（默认28）
  * @property {Boolean} bold 主标题是否加粗（默认true）
- * @property {String} color 主标题颜色（默认#303133）
- * @property {String} subColor 右边副标题颜色（默认#909399）
+ * @property {String} color 主标题颜色（默认var(--u-main-color)）
+ * @property {String} subColor 右边副标题颜色（默认var(--u-tips-color)）
  * @property {String} lineColor 左边竖线的颜色
  * @event click 组件右侧的内容被点击时触发，用于跳转"更多"
  * @example <u-section title="今日热门" :right="false"></u-section>

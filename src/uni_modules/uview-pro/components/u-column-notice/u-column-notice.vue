@@ -110,7 +110,7 @@ const emit = defineEmits<{
 const computeColor = computed(() => {
     if (props.color) return props.color;
     // 如果是无主题，就默认使用content-color
-    else if (props.type === 'none') return '#606266';
+    else if (props.type === 'none') return 'var(--u-content-color)';
     else return props.type;
 });
 
@@ -120,7 +120,7 @@ const computeColor = computed(() => {
 const textStyle = computed(() => {
     const style: Record<string, any> = {};
     if (props.color) style.color = props.color;
-    else if (props.type === 'none') style.color = '#606266';
+    else if (props.type === 'none') style.color = 'var(--u-content-color)';
     style.fontSize = props.fontSize + 'rpx';
     return style;
 });

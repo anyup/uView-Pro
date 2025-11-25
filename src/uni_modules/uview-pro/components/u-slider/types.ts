@@ -27,7 +27,7 @@ export const SliderProps = {
     /** 进度条的背景颜色 */
     inactiveColor: { type: String, default: () => getColor('lightColor') },
     /** 滑块的背景颜色 */
-    blockColor: { type: String, default: '#ffffff' },
+    blockColor: { type: String, default: 'var(--u-white-color)' },
     /** 用户对滑块的自定义颜色 */
     blockStyle: { type: Object as PropType<Record<string, any>>, default: () => ({}) }
 };

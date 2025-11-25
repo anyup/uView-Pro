@@ -250,7 +250,7 @@ defineExpose({
 @import '../../libs/css/style.components.scss';
 
 .u-no-network {
-    background-color: #fff;
+    background-color: var(--u-white-color);
     position: fixed;
     top: 0;
     left: 0;
@@ -297,7 +297,7 @@ defineExpose({
 }
 
 .u-retry-hover {
-    color: #fff;
+    color: var(--u-white-color);
     background-color: $u-tips-color;
 }
 </style>

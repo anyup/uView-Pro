@@ -11,9 +11,9 @@ export const EmptyProps = {
     /** 提示文字 */
     text: { type: String, default: '' },
     /** 文字颜色 */
-    color: { type: String, default: '#c0c4cc' },
+    color: { type: String, default: 'var(--u-light-color)' },
     /** 图标的颜色 */
-    iconColor: { type: String, default: '#c0c4cc' },
+    iconColor: { type: String, default: 'var(--u-light-color)' },
     /** 图标的大小 */
     iconSize: { type: [String, Number] as PropType<string | number>, default: 120 },
     /** 文字大小，单位rpx */

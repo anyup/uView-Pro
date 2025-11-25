@@ -38,18 +38,18 @@ import { SubsectionProps } from './types';
  * @tutorial https://uviewpro.cn/zh/components/subsection.html
  * @property {Array} list 选项的数组，形式见上方"基本使用"
  * @property {String | Number} current 初始化时默认选中的选项索引值（默认0）
- * @property {String} activeColor 激活时的颜色，mode为subsection时固定为白色（默认#303133）
- * @property {String} inactiveColor 未激活时字体的颜色，mode为subsection时无效（默认#606266）
+ * @property {String} activeColor 激活时的颜色，mode为subsection时固定为白色（默认var(--u-main-color)）
+ * @property {String} inactiveColor 未激活时字体的颜色，mode为subsection时无效（默认var(--u-content-color)）
  * @property {String} mode 模式选择，见官网"模式选择"说明（默认button）
  * @property {String | Number} fontSize 字体大小，单位rpx（默认28）
  * @property {String | Number} height 组件高度，单位rpx（默认70）
  * @property {Boolean} animation 是否开启动画效果，见上方说明（默认true）
  * @property {Boolean} bold 激活选项的字体是否加粗（默认true）
- * @property {String} bgColor 组件背景颜色，mode为button时有效（默认#eeeeef）
- * @property {String} buttonColor 按钮背景颜色，mode为button时有效（默认#ffffff）
+ * @property {String} bgColor 组件背景颜色，mode为button时有效（默认var(--u-divider-color)）
+ * @property {String} buttonColor 按钮背景颜色，mode为button时有效（默认var(--u-white-color)）
  * @property {Boolean} vibrateShort 在切换分段器的时候，是否让设备震一下（默认false）
  * @event {Function} change 分段器选项发生改变时触发
- * @example <u-subsection active-color="#ff9900"></u-subsection>
+ * @example <u-subsection active-color="var(--u-type-warning)"></u-subsection>
  */
 
 interface ListItem {
@@ -67,7 +67,7 @@ const listInfo = ref<ListItem[]>([]);
 const itemBgStyle = ref<{ [key: string]: any }>({
     width: 0,
     left: 0,
-    backgroundColor: '#ffffff',
+    backgroundColor: 'var(--u-white-color)',
     height: '100%',
     transition: ''
 });
@@ -152,7 +152,7 @@ const textStyle = computed<(index: number) => Record<string, any>>(() => {
         const style: Record<string, any> = {};
         // 设置字体颜色
         if (props.mode === 'subsection') {
-            style.color = index === currentIndex.value ? '#ffffff' : props.activeColor;
+            style.color = index === currentIndex.value ? 'var(--u-white-color)' : props.activeColor;
         } else {
             style.color = index === currentIndex.value ? props.activeColor : props.inactiveColor;
         }

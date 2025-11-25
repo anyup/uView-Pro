@@ -16,19 +16,19 @@ export const CountDownProps = {
     /** 分隔符的大小，单位rpx */
     separatorSize: { type: [Number, String] as PropType<number | string>, default: 30 },
     /** 分隔符颜色 */
-    separatorColor: { type: String, default: '#303133' },
+    separatorColor: { type: String, default: 'var(--u-main-color)' },
     /** 字体颜色 */
-    color: { type: String, default: '#303133' },
+    color: { type: String, default: 'var(--u-main-color)' },
     /** 字体大小，单位rpx */
     fontSize: { type: [Number, String] as PropType<number | string>, default: 30 },
     /** 背景颜色 */
-    bgColor: { type: String, default: '#fff' },
+    bgColor: { type: String, default: 'var(--u-white-color)' },
     /** 数字框高度，单位rpx */
     height: { type: [Number, String] as PropType<number | string>, default: 'auto' },
     /** 是否显示数字框 */
     showBorder: { type: Boolean, default: false },
     /** 边框颜色 */
-    borderColor: { type: String, default: '#303133' },
+    borderColor: { type: String, default: 'var(--u-main-color)' },
     /** 是否显示秒 */
     showSeconds: { type: Boolean, default: true },
     /** 是否显示分钟 */

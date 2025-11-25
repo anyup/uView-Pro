@@ -44,10 +44,10 @@ export const InputProps = {
         type: Boolean,
         default: false
     },
-    /** placeholder的样式，字符串形式，如"color: red;"(默认 "color: #c0c4cc;") */
+    /** placeholder的样式，字符串形式，如"color: red;"(默认 "color: var(--u-light-color);") */
     placeholderStyle: {
         type: String,
-        default: 'color: #c0c4cc;'
+        default: 'color: var(--u-light-color);'
     },
     /** 设置键盘右下角按钮的文字，仅在type为text时生效(默认done) */
     confirmType: {
@@ -74,10 +74,10 @@ export const InputProps = {
         type: Boolean,
         default: false
     },
-    /** 输入框的边框颜色(默认#dcdfe6) */
+    /** 输入框的边框颜色(默认var(--u-form-item-border-color)) */
     borderColor: {
         type: String,
-        default: '#dcdfe6'
+        default: 'var(--u-form-item-border-color)'
     },
     /** 是否自动增高输入区域，type为textarea时有效(默认true) */
     autoHeight: {

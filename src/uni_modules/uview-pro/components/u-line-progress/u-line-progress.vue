@@ -48,8 +48,8 @@ import { LineProgressProps } from './types';
  * @property {String Number} percent 进度条百分比值，为数值类型，0-100
  * @property {Boolean} round 进度条两端是否为半圆（默认true）
  * @property {String} type 如设置，active-color值将会失效
- * @property {String} active-color 进度条激活部分的颜色（默认#19be6b）
- * @property {String} inactive-color 进度条的底色（默认#ececec）
+ * @property {String} active-color 进度条激活部分的颜色（默认var(--u-type-success)）
+ * @property {String} inactive-color 进度条的底色（默认var(--u-divider-color)）
  * @property {Boolean} show-percent 是否在进度条内部显示当前的百分比值数值（默认true）
  * @property {String Number} height 进度条的高度，单位rpx（默认28）
  * @property {Boolean} striped 是否显示进度条激活部分的条纹（默认false）
@@ -92,7 +92,7 @@ const progressStyle = computed(() => {
     justify-items: flex-end;
     justify-content: space-around;
     font-size: 20rpx;
-    color: #ffffff;
+    color: var(--u-white-color);
     transition: all 0.4s ease;
 }
 

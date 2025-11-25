@@ -102,7 +102,7 @@ import { $u } from '../../';
  * @property {Boolean} 					bold		是否粗体，默认normal（默认 false ）
  * @property {Boolean} 					block		是否块状（默认 false ）
  * @property {String | Number} 			lines		文本显示的行数，如果设置，超出此行数，将会显示省略号
- * @property {String} 					color		文本颜色（默认 '#303133' ）
+ * @property {String} 					color		文本颜色（默认 'var(--u-main-color)' ）
  * @property {String | Number} 			size		字体大小（默认 15 ）
  * @property {Object | String} 			iconStyle	图标的样式 （默认 {fontSize: '15px'} ）
  * @property {String} 					decoration	文字装饰，下划线，中划线等，可选值 none|underline|line-through（默认 'none' ）

@@ -15,13 +15,13 @@ export const CardProps = {
     /** 标题 */
     title: { type: String, default: '' },
     /** 标题颜色 */
-    titleColor: { type: String, default: '#303133' },
+    titleColor: { type: String, default: 'var(--u-main-color)' },
     /** 标题字体大小，单位rpx */
     titleSize: { type: [Number, String], default: '30' },
     /** 副标题 */
     subTitle: { type: String, default: '' },
     /** 副标题颜色 */
-    subTitleColor: { type: String, default: '#909399' },
+    subTitleColor: { type: String, default: 'var(--u-tips-color)' },
     /** 副标题字体大小，单位rpx */
     subTitleSize: { type: [Number, String], default: '26' },
     /** 是否显示外部边框，只对full=false时有效(卡片与边框有空隙时) */

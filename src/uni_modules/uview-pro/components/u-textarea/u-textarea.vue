@@ -42,7 +42,7 @@
         <text
             class="u-textarea__count"
             :style="{
-                'background-color': props.disabled ? 'transparent' : '#fff'
+                'background-color': props.disabled ? 'transparent' : 'var(--u-white-color)'
             }"
             v-if="props.count"
         >
@@ -54,7 +54,7 @@
                 class="u-textarea__right-icon__clear u-textarea__right-icon__item"
                 v-if="clearable && modelValue != '' && !disabled"
             >
-                <u-icon size="32" name="close-circle-fill" color="#c0c4cc" @click="onClear" />
+                <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" @click="onClear" />
             </view>
         </view>
     </view>
@@ -285,7 +285,7 @@ defineExpose({
 
 .u-textarea {
     border-radius: 4px;
-    background-color: #fff;
+    background-color: var(--u-white-color);
     position: relative;
     @include flex;
     flex: 1;
@@ -308,7 +308,7 @@ defineExpose({
     }
 
     &--disabled {
-        background-color: #f5f7fa;
+        background-color: $u-bg-disabled-color;
     }
 
     &__field {
@@ -324,7 +324,7 @@ defineExpose({
         bottom: 0;
         font-size: 12px;
         color: $u-tips-color;
-        background-color: #ffffff;
+        background-color: var(--u-white-color);
         padding: 1px 4px;
         border-radius: 10px;
         line-height: 16px;

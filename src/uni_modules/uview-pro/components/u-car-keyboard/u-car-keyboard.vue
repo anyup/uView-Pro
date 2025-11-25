@@ -197,10 +197,10 @@ function clearTimer() {
     font-size: 36rpx;
     text-align: center;
     line-height: 80rpx;
-    background-color: #fff;
+    background-color: var(--u-white-color);
     margin: 8rpx 5rpx;
     border-radius: 8rpx;
-    box-shadow: 0 2rpx 0rpx #888992;
+    box-shadow: 0 2rpx 0rpx var(--u-tips-color);
     font-weight: 500;
     justify-content: center;
 }
@@ -220,19 +220,19 @@ function clearTimer() {
     align-items: center;
     border-radius: 8rpx;
     justify-content: center;
-    box-shadow: 0 2rpx 0rpx #888992;
+    box-shadow: 0 2rpx 0rpx var(--u-tips-color);
 }
 
 .u-keyboard-change {
     font-size: 24rpx;
-    box-shadow: 0 2rpx 0rpx #888992;
+    box-shadow: 0 2rpx 0rpx var(--u-tips-color);
     position: absolute;
     width: 96rpx;
     left: 22rpx;
     line-height: 1;
     bottom: 32rpx;
     height: 80rpx;
-    background-color: #ffffff;
+    background-color: var(--u-white-color);
     @include vue-flex;
     align-items: center;
     border-radius: 8rpx;

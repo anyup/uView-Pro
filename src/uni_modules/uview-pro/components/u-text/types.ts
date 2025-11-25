@@ -31,7 +31,7 @@ export const TextProps = {
     /** 显示行数，超出省略号 */
     lines: { type: [String, Number] as PropType<string | number>, default: '' },
     /** 文本颜色 */
-    color: { type: String, default: '#303133' },
+    color: { type: String, default: 'var(--u-main-color)' },
     /** 字体大小 */
     size: { type: [String, Number] as PropType<string | number>, default: 28 },
     /** 图标样式 */

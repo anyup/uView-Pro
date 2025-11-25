@@ -74,19 +74,19 @@ import { NavbarProps } from './types';
  * @description 此组件一般用于在特殊情况下，需要自定义导航栏的时候用到，一般建议使用uniapp自带的导航栏。
  * @tutorial https://uviewpro.cn/zh/components/navbar.html
  * @property {String|Number} height 导航栏高度(不包括状态栏高度在内，内部自动加上)，注意这里的单位是px（默认44）
- * @property {String} back-icon-color 左边返回图标的颜色（默认#606266）
+ * @property {String} back-icon-color 左边返回图标的颜色（默认var(--u-content-color)）
  * @property {String} back-icon-name 左边返回图标的名称，只能为uView自带的图标（默认arrow-left）
  * @property {String|Number} back-icon-size 左边返回图标的大小，单位rpx（默认30）
  * @property {String} back-text 返回图标右边的辅助提示文字
- * @property {Object} back-text-style 返回图标右边的辅助提示文字的样式，对象形式（默认{ color: '#606266' }）
+ * @property {Object} back-text-style 返回图标右边的辅助提示文字的样式，对象形式（默认{ color: 'var(--u-content-color)' }）
  * @property {String} title 导航栏标题，如设置为空字符，将会隐藏标题占位区域
  * @property {String|Number} title-width 导航栏标题的最大宽度，内容超出会以省略号隐藏，单位rpx（默认250）
- * @property {String} title-color 标题的颜色（默认#606266）
+ * @property {String} title-color 标题的颜色（默认var(--u-content-color)）
  * @property {String|Number} title-size 导航栏标题字体大小，单位rpx（默认32）
  * @property {Function} custom-back 自定义返回逻辑方法
  * @property {String|Number} z-index 固定在顶部时的z-index值（默认980）
  * @property {Boolean} is-back 是否显示导航栏左边返回图标和辅助文字（默认true）
- * @property {Object} background 导航栏背景设置，见官网说明（默认{ background: '#ffffff' }）
+ * @property {Object} background 导航栏背景设置，见官网说明（默认{ background: 'var(--u-white-color)' }）
  * @property {Boolean} is-fixed 导航栏是否固定在顶部（默认true）
  * @property {Boolean} immersive 沉浸式，允许fixed定位后导航栏塌陷，仅fixed定位下生效（默认false）
  * @property {Boolean} border-bottom 导航栏底部是否显示下边框，如定义了较深的背景颜色，可取消此值（默认true）

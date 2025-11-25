@@ -331,7 +331,7 @@ defineExpose({
     margin-top: -60rpx;
     border-radius: 24rpx;
     font-size: 50rpx;
-    color: #fff;
+    color: var(--u-white-color);
     background-color: rgba(0, 0, 0, 0.65);
     @include vue-flex;
     justify-content: center;

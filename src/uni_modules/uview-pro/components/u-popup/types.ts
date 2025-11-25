@@ -41,7 +41,7 @@ export const PopupProps = {
     /** 自定义关闭图标位置，top-left为左上角，top-right为右上角，bottom-left为左下角，bottom-right为右下角 */
     closeIconPos: { type: String as PropType<PopupCloseIconPos>, default: 'top-right' },
     /** 关闭图标的颜色 */
-    closeIconColor: { type: String, default: '#909399' },
+    closeIconColor: { type: String, default: 'var(--u-tips-color)' },
     /** 关闭图标的大小，单位rpx */
     closeIconSize: { type: [String, Number] as PropType<number | string>, default: '30' },
     /** 弹窗宽度 */

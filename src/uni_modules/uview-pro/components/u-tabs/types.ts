@@ -32,7 +32,7 @@ export const TabsProps = {
     /** 单个tab的左右内边距之和，单位rpx */
     gutter: { type: [String, Number] as PropType<number | string>, default: 30 },
     /** 导航栏的背景颜色 */
-    bgColor: { type: String, default: '#ffffff' },
+    bgColor: { type: String, default: 'var(--u-white-color)' },
     /** 读取传入的数组对象的属性(tab名称) */
     name: { type: String, default: 'name' },
     /** 读取传入的数组对象的属性(徽标数) */

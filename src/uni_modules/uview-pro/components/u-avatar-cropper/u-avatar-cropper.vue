@@ -129,8 +129,8 @@ onMounted(() => {
 
     // 设置导航栏样式，以免用户在page.json中没有设置为黑色背景
     uni.setNavigationBarColor({
-        frontColor: '#ffffff',
-        backgroundColor: '#000000'
+        frontColor: 'var(--u-white-color)',
+        backgroundColor: 'var(--u-black-color)'
     });
 
     // 初始化 cropper 实例
@@ -253,8 +253,8 @@ function uploadTap() {
 }
 
 .cropper-buttons {
-    background-color: #000000;
-    color: #eee;
+    background-color: var(--u-black-color);
+    color: var(--u-divider-color);
 }
 
 .cropper-wrapper {
@@ -264,7 +264,7 @@ function uploadTap() {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: #000;
+    background-color: var(--u-black-color);
 }
 
 .cropper-buttons {

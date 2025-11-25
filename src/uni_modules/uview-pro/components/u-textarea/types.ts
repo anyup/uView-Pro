@@ -5,7 +5,7 @@ const textarea = {
     value: '',
     placeholder: '',
     placeholderClass: 'input-placeholder',
-    placeholderStyle: 'color: #c0c4cc',
+    placeholderStyle: 'color: var(--u-light-color)',
     height: '100rpx',
     confirmType: 'done',
     disabled: false,

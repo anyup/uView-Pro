@@ -17,12 +17,12 @@ export const CircleProgressProps = {
     /** 底部圆环的颜色（灰色的圆环） */
     inactiveColor: {
         type: String,
-        default: '#ececec'
+        default: 'var(--u-divider-color)'
     },
     /** 圆环激活部分的颜色 */
     activeColor: {
         type: String,
-        default: '#19be6b'
+        default: 'var(--u-type-success)'
     },
     /** 圆环线条的宽度，单位rpx */
     borderWidth: {
@@ -47,7 +47,7 @@ export const CircleProgressProps = {
     /** 整个圆环进度区域的背景色 */
     bgColor: {
         type: String,
-        default: '#ffffff'
+        default: 'var(--u-white-color)'
     }
 };
 

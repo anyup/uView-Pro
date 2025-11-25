@@ -74,7 +74,7 @@
                     :size="props.clearSize"
                     v-if="props.clearable && props.modelValue != '' && focused"
                     name="close-circle-fill"
-                    color="#c0c4cc"
+                    color="var(--u-light-color)"
                     class="u-clear-icon"
                     @click="onClear"
                 />
@@ -83,7 +83,7 @@
                     v-if="props.rightIcon"
                     @click="rightIconClick"
                     :name="props.rightIcon"
-                    color="#c0c4cc"
+                    color="var(--u-light-color)"
                     :style="[rightIconStyle]"
                     size="26"
                     class="u-arror-right"
@@ -138,11 +138,11 @@ import { $u } from '../..';
  * @property {String} input-align 输入框内容对齐方式（默认left）
  * @property {Boolean} border-bottom 是否显示field的下边框（默认true）
  * @property {Boolean} border-top 是否显示field的上边框（默认false）
- * @property {String} icon-color 左边通过icon配置的图标的颜色（默认#606266）
+ * @property {String} icon-color 左边通过icon配置的图标的颜色（默认var(--u-content-color)）
  * @property {Boolean} auto-height 是否自动增高输入区域，type为textarea时有效（默认true）
  * @property {String Boolean} error-message 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
  * @property {String} placeholder 输入框的提示文字
- * @property {String} placeholder-style placeholder的样式(内联样式，字符串)，如"color: #ddd"
+ * @property {String} placeholder-style placeholder的样式(内联样式，字符串)，如"color: var(--u-divider-color)"
  * @property {Boolean} focus 是否自动获得焦点（默认false）
  * @property {Boolean} fixed 如果type为textarea，且在一个"position:fixed"的区域，需要指明为true（默认false）
  * @property {Boolean} disabled 是否不可输入（默认false）
@@ -171,11 +171,11 @@ const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'confirm', 'righ
  * @property {number|string} labelWidth label的宽度，单位rpx（默认130）
  * @property {string} labelAlign label的文字对齐方式（默认left）
  * @property {string} inputAlign 输入框内容对齐方式（默认left）
- * @property {string} iconColor 左边通过icon配置的图标的颜色（默认#606266）
+ * @property {string} iconColor 左边通过icon配置的图标的颜色（默认var(--u-content-color)）
  * @property {boolean} autoHeight 是否自动增高输入区域，type为textarea时有效（默认true）
  * @property {string|boolean} errorMessage 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
  * @property {string} placeholder 输入框的提示文字
- * @property {string} placeholderStyle placeholder的样式(内联样式，字符串)，如"color: #ddd"
+ * @property {string} placeholderStyle placeholder的样式(内联样式，字符串)，如"color: var(--u-divider-color)"
  * @property {boolean} focus 是否自动获得焦点（默认false）
  * @property {boolean} fixed 如果type为textarea，且在一个"position:fixed"的区域，需要指明为true（默认false）
  * @property {boolean} disabled 是否不可输入（默认false）

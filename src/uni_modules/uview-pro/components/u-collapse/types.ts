@@ -9,7 +9,7 @@ import { baseProps } from '../common/props';
  * @property {Object} bodyStyle 主体自定义样式，对象形式
  * @property {Object} itemStyle 每一个item的样式，对象形式
  * @property {Boolean} arrow 是否显示标题右侧的箭头（默认true）
- * @property {String} arrowColor 标题右侧箭头的颜色（默认#909399）
+ * @property {String} arrowColor 标题右侧箭头的颜色（默认var(--u-tips-color)）
  * @property {String} hoverClass 样式类名，按下时有效（默认u-hover-class）
  */
 export const CollapseProps = {
@@ -25,7 +25,7 @@ export const CollapseProps = {
     /** 是否显示右侧的箭头 */
     arrow: { type: Boolean, default: true },
     /** 箭头的颜色 */
-    arrowColor: { type: String, default: '#909399' },
+    arrowColor: { type: String, default: 'var(--u-tips-color)' },
     /** 标题部分按压时的样式类，"none"为无效果 */
     hoverClass: { type: String, default: 'u-hover-class' }
 };
