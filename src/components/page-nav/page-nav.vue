@@ -14,19 +14,34 @@
         <view class="nav-desc">
             {{ desc }}
         </view>
-        <!-- #ifndef APP -->
-        <view class="lang" @tap="switchLang">
-            <u-icon size="46" color="warning" :name="lang"></u-icon>
+        <view class="lang">
+            <u-icon
+                custom-prefix="custom-icon"
+                :name="darkMode === 'dark' ? 'sun' : 'moon'"
+                size="46"
+                :color="darkMode === 'dark' ? 'warning' : 'primary'"
+                custom-style="margin-right:10rpx"
+                @click="switchTheme"
+            ></u-icon>
+            <u-icon
+                size="46"
+                :color="darkMode === 'dark' ? 'warning' : 'primary'"
+                :name="lang"
+                @click="switchLang"
+            ></u-icon>
         </view>
-        <!-- #endif -->
     </view>
 </template>
 
 <script setup lang="ts">
 import { useTitle } from '@/common/util';
+import { useTheme } from 'uview-pro';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+const { getDarkMode, toggleDarkMode } = useTheme();
+
+const darkMode = computed(() => getDarkMode());
 /**
  * 页面导航栏组件
  * @description 顶部logo、标题、描述、语言切换
@@ -58,6 +73,11 @@ function switchLang() {
     locale.value = nextLocale;
     // 设置标题
     setTitle();
+}
+
+function switchTheme() {
+    // 切换主题
+    toggleDarkMode();
 }
 </script>
 

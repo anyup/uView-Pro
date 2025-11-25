@@ -3,28 +3,102 @@
 // 全局配置类：管理 Theme 的初始化、切换、持久化
 
 import { ref } from 'vue';
-import type { Theme } from '../../types/global';
+import type { Theme, ThemeColor } from '../../types/global';
+import { config, setColor } from '..';
+import { defaultThemes } from '../config/theme-tokens';
+import { color as reactiveColor } from '../function/color';
+
+declare const uni: any;
 
 const THEME_STORAGE_KEY = 'uview-pro-theme';
+const DARK_MODE_STORAGE_KEY = 'uview-pro-dark-mode';
+const DEFAULT_LIGHT_TOKENS = (defaultThemes[0]?.color || {}) as Partial<ThemeColor>;
+const DEFAULT_DARK_TOKENS = (defaultThemes[0]?.darkColor || {}) as Partial<ThemeColor>;
+const STRUCTURAL_TOKENS = new Set([
+    'bgColor',
+    'borderColor',
+    'formItemBorderColor',
+    'lightColor',
+    'mainColor',
+    'contentColor',
+    'tipsColor'
+]);
 
 /**
  * ConfigProvider: 管理全局主题
  * - init(themes, defaultName): 初始化主题系统
  * - setTheme(name): 切换主题并持久化
  * - getThemes/getCurrentTheme: 读取当前数据
- *
- * 实现细节：
- * - 尝试调用 `uni.$u.setColor` 更新运行时主题（如果存在）
- * - 将 CSS 变量写入 `document.documentElement`（H5）以支持 `var(--u-type-*)` 使用
+ * - setDarkMode/getDarkMode: 管理暗黑模式
  */
 export class ConfigProvider {
     // 响应式状态，供外部直接引用
     public themesRef = ref<Theme[]>([]);
     public currentThemeRef = ref<Theme | null>(null);
-    private debug: boolean = false;
+    public darkModeRef = ref<'auto' | 'light' | 'dark'>('auto');
+    public cssVarsRef = ref<Record<string, string>>({});
+    private baseColorTokens: Partial<ThemeColor> = DEFAULT_LIGHT_TOKENS;
+    private baseDarkColorTokens: Partial<ThemeColor> = DEFAULT_DARK_TOKENS;
+    private debug: boolean = true;
+    private systemDarkModeMediaQuery: MediaQueryList | null = null;
+    private lastAppliedCssKeys: string[] = [];
 
     constructor() {
         // 默认不自动初始化，调用 init 以传入主题列表
+        this.initSystemDarkModeListener();
+    }
+
+    /**
+     * 初始化系统暗黑模式监听器
+     * 支持 H5、App、小程序等平台
+     */
+    private initSystemDarkModeListener() {
+        // H5 平台：使用 matchMedia API
+        try {
+            if (typeof window !== 'undefined' && window.matchMedia) {
+                this.systemDarkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                const listener = () => {
+                    if (this.darkModeRef.value === 'auto') {
+                        this.applyTheme(this.currentThemeRef.value);
+                    }
+                };
+                if (this.systemDarkModeMediaQuery.addEventListener) {
+                    this.systemDarkModeMediaQuery.addEventListener('change', listener);
+                } else if (this.systemDarkModeMediaQuery.addListener) {
+                    this.systemDarkModeMediaQuery.addListener(listener);
+                }
+            }
+        } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] H5 system dark mode listener failed', e);
+        }
+
+        // uni-app 平台：使用 uni.onThemeChange API
+        try {
+            if (typeof uni !== 'undefined' && typeof uni.onThemeChange === 'function') {
+                uni.onThemeChange((res: { theme: string }) => {
+                    if (this.darkModeRef.value === 'auto') {
+                        // 系统主题变化时，重新应用主题
+                        this.applyTheme(this.currentThemeRef.value);
+                    }
+                });
+            }
+        } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] uni-app system dark mode listener failed', e);
+        }
+    }
+
+    /**
+     * 检测当前是否应该使用暗黑模式
+     */
+    private isSystemDarkMode(): boolean {
+        try {
+            if (this.systemDarkModeMediaQuery) {
+                return this.systemDarkModeMediaQuery.matches;
+            }
+            return false;
+        } catch (e) {
+            return false;
+        }
     }
 
     /**
@@ -32,31 +106,32 @@ export class ConfigProvider {
      * @param themes 可用主题数组
      * @param defaultThemeName 可选默认主题名
      */
-    init(themes: Theme[], defaultThemeName?: string) {
-        if (!Array.isArray(themes) || themes.length === 0) {
+    init(themes?: Theme[], defaultThemeName?: string) {
+        const normalizedThemes = this.normalizeThemes(themes);
+        if (!normalizedThemes.length) {
             console.warn('[ConfigProvider] init called with empty themes');
             return;
         }
 
-        this.themesRef.value = themes.slice();
+        this.themesRef.value = normalizedThemes.slice();
 
         // 先尝试从 Storage 读取已保存主题名
-        let saved: string | null = null;
-        try {
-            saved = uni.getStorageSync(THEME_STORAGE_KEY) || null;
-        } catch (e) {
-            console.warn('[ConfigProvider] failed to read storage', e);
-        }
+        const saved = this.readStorage<string>(THEME_STORAGE_KEY);
 
         let initialName = saved || defaultThemeName || this.themesRef.value[0].name;
         const found = this.themesRef.value.find(t => t.name === initialName) || this.themesRef.value[0];
 
         this.currentThemeRef.value = found;
 
+        // 尝试从 Storage 读取暗黑模式设置
+        const savedDarkMode = this.readStorage<'auto' | 'light' | 'dark'>(DARK_MODE_STORAGE_KEY);
+        this.darkModeRef.value = savedDarkMode || 'auto';
+
         // 应用主题
         this.applyTheme(found);
 
-        if (this.debug) console.log('[ConfigProvider] initialized, theme=', found.name);
+        if (this.debug)
+            console.log('[ConfigProvider] initialized, theme=', found.name, 'darkMode=', this.darkModeRef.value);
 
         return this;
     }
@@ -96,60 +171,381 @@ export class ConfigProvider {
         this.applyTheme(theme);
 
         // 持久化
-        try {
-            uni.setStorageSync(THEME_STORAGE_KEY, themeName);
-        } catch (e) {
-            console.warn('[ConfigProvider] failed to save theme to storage', e);
-        }
+        this.writeStorage(THEME_STORAGE_KEY, themeName);
 
         if (this.debug) console.log('[ConfigProvider] setTheme ->', themeName);
+    }
+
+    /**
+     * 获取当前暗黑模式设置
+     */
+    getDarkMode(): 'auto' | 'light' | 'dark' {
+        return this.darkModeRef.value;
+    }
+
+    /**
+     * 设置暗黑模式
+     * @param mode 'auto' (跟随系统) | 'light' (强制亮色) | 'dark' (强制暗黑)
+     */
+    setDarkMode(mode: 'auto' | 'light' | 'dark') {
+        this.darkModeRef.value = mode;
+        // 持久化
+        this.writeStorage(DARK_MODE_STORAGE_KEY, mode);
+
+        // 重新应用主题
+        this.applyTheme(this.currentThemeRef.value);
+
+        if (this.debug) console.log('[ConfigProvider] setDarkMode ->', mode);
+    }
+
+    /**
+     * 检查当前是否处于暗黑模式
+     */
+    isInDarkMode(): boolean {
+        const mode = this.darkModeRef.value;
+        if (mode === 'dark') return true;
+        if (mode === 'light') return false;
+        // auto 模式下检查系统设置
+        return this.isSystemDarkMode();
+    }
+
+    /**
+     * 归一化主题配置，保证始终至少有一个默认主题
+     */
+    private normalizeThemes(themes?: Theme[]): Theme[] {
+        if (Array.isArray(themes) && themes.length) {
+            return this.mergeThemes(defaultThemes, themes);
+        }
+        return defaultThemes.slice();
+    }
+
+    private mergeThemes(...lists: Array<Theme[] | undefined>): Theme[] {
+        const map = new Map<string, Theme>();
+        lists
+            .filter((list): list is Theme[] => Array.isArray(list) && list.length > 0)
+            .forEach(list => {
+                list.forEach(theme => {
+                    const normalized = this.ensureDarkVariant({
+                        ...theme,
+                        color: this.applyColorFallbacks(theme.color),
+                        darkColor: theme.darkColor ? this.applyDarkFallbacks(theme.darkColor) : undefined,
+                        css: theme.css ? { ...theme.css } : undefined,
+                        darkCss: theme.darkCss ? { ...theme.darkCss } : undefined
+                    });
+                    map.set(normalized.name, normalized);
+                });
+            });
+        return Array.from(map.values());
+    }
+
+    private ensureDarkVariant(theme: Theme): Theme {
+        if (theme.darkColor && Object.keys(theme.darkColor).length > 0) {
+            return {
+                ...theme,
+                darkColor: this.applyDarkFallbacks(theme.darkColor)
+            };
+        }
+        const generated = this.generateDarkPalette(theme.color || {});
+        return {
+            ...theme,
+            darkColor: {
+                ...this.applyDarkFallbacks(),
+                ...generated
+            }
+        };
+    }
+
+    /**
+     * 应用亮色主题
+     */
+    private applyColorFallbacks(color?: Partial<ThemeColor>): Partial<ThemeColor> {
+        return {
+            ...(this.baseColorTokens || {}),
+            ...(color || {})
+        };
+    }
+
+    /**
+     * 应用暗黑主题
+     */
+    private applyDarkFallbacks(color?: Partial<ThemeColor>): Partial<ThemeColor> {
+        return {
+            ...(this.baseDarkColorTokens || {}),
+            ...(color || {})
+        };
+    }
+
+    private generateDarkPalette(palette: Partial<ThemeColor>): Partial<ThemeColor> {
+        const result: Partial<ThemeColor> = {};
+        Object.entries(palette).forEach(([key, value]) => {
+            if (typeof value !== 'string') {
+                (result as any)[key] = value;
+                return;
+            }
+            (result as any)[key] = this.createDarkToken(key, value);
+        });
+        return result;
+    }
+
+    private createDarkToken(token: string, color: string): string {
+        const normalizedHex = this.normalizeHex(color);
+        if (!normalizedHex) {
+            const fallback = (this.baseDarkColorTokens as any)?.[token];
+            return fallback || color;
+        }
+
+        if (this.isStructuralToken(token)) {
+            const fallback = (this.baseDarkColorTokens as any)?.[token];
+            if (fallback) return fallback;
+        }
+
+        const lower = token.toLowerCase();
+        const isBackground = lower.includes('bg') || lower.includes('background');
+        const isBorder = lower.includes('border') || lower.includes('form');
+        const isLightVariant = lower.includes('light') || lower.includes('disabled');
+        const isText = lower.includes('maincolor') || lower.includes('contentcolor') || lower.includes('tipscolor');
+
+        if (isBackground) {
+            return this.mixHex(normalizedHex, '#0b0e13', 0.65);
+        }
+        if (isBorder) {
+            return this.mixHex(normalizedHex, '#1f2430', 0.55);
+        }
+        if (isLightVariant) {
+            return this.mixHex(normalizedHex, '#ffffff', 0.4);
+        }
+        if (isText) {
+            return this.mixHex(normalizedHex, '#ffffff', 0.35);
+        }
+        return this.mixHex(normalizedHex, '#ffffff', 0.2);
+    }
+
+    private normalizeHex(color: string): string | null {
+        if (!color) return null;
+        const hex = color.trim();
+        if (/^#([0-9a-fA-F]{6})$/.test(hex)) return hex.toLowerCase();
+        return null;
+    }
+
+    private mixHex(color: string, target: string, ratio: number): string {
+        const from = this.hexToRgb(color);
+        const to = this.hexToRgb(target);
+        if (!from || !to) return color;
+        const clamp = (val: number) => Math.min(255, Math.max(0, Math.round(val)));
+        const r = clamp(from.r * (1 - ratio) + to.r * ratio);
+        const g = clamp(from.g * (1 - ratio) + to.g * ratio);
+        const b = clamp(from.b * (1 - ratio) + to.b * ratio);
+        return this.rgbToHex(r, g, b);
+    }
+
+    private hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+        const match = /^#([0-9a-fA-F]{6})$/.exec(hex);
+        if (!match) return null;
+        return {
+            r: parseInt(match[1].slice(0, 2), 16),
+            g: parseInt(match[1].slice(2, 4), 16),
+            b: parseInt(match[1].slice(4, 6), 16)
+        };
+    }
+
+    private rgbToHex(r: number, g: number, b: number): string {
+        const toHex = (val: number) => val.toString(16).padStart(2, '0');
+        return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
+
+    private isStructuralToken(token: string): boolean {
+        return STRUCTURAL_TOKENS.has(token);
+    }
+
+    /**
+     * 运行时同步主题颜色（$u.color）
+     * 更新响应式 color 对象，确保所有使用 $u.color 的地方都能响应式更新
+     */
+    private syncRuntimeTheme(palette: Partial<ThemeColor>) {
+        try {
+            // 合并默认值，确保所有颜色都有值
+            const defaultPalette = this.getActiveMode() === 'dark' ? this.baseDarkColorTokens : this.baseColorTokens;
+
+            const mergedPalette = {
+                ...defaultPalette,
+                ...palette
+            };
+
+            // 更新响应式 color 对象
+            Object.keys(mergedPalette).forEach(key => {
+                const value = (mergedPalette as any)[key];
+                if (value != null) {
+                    (reactiveColor as any)[key] = value;
+                }
+            });
+
+            // 同步到 uni.$u.color（如果存在）
+            if (typeof uni !== 'undefined' && uni?.$u?.setColor) {
+                uni.$u.setColor(mergedPalette);
+            } else {
+                setColor(mergedPalette);
+            }
+        } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] sync runtime theme failed', e);
+        }
+    }
+
+    /**
+     * 获取当前激活的模式
+     */
+    private getActiveMode(): 'light' | 'dark' {
+        return this.isInDarkMode() ? 'dark' : 'light';
+    }
+
+    /**
+     * 获取当前主题的配色方案
+     */
+    private getPaletteForMode(theme: Theme, mode: 'light' | 'dark') {
+        if (mode === 'dark') {
+            return theme.darkColor && Object.keys(theme.darkColor).length ? theme.darkColor : theme.color || {};
+        }
+        return theme.color || {};
+    }
+
+    /**
+     * 获取当前主题的CSS变量覆盖
+     */
+    private getCssOverrides(theme: Theme, mode: 'light' | 'dark') {
+        if (mode === 'dark') {
+            return (theme.darkCss && Object.keys(theme.darkCss).length ? theme.darkCss : theme.css) || {};
+        }
+        return theme.css || {};
+    }
+
+    /**
+     * 读取Storage key
+     */
+    private readStorage<T>(key: string): T | null {
+        try {
+            if (typeof uni === 'undefined' || typeof uni.getStorageSync !== 'function') return null;
+            const value = uni.getStorageSync(key);
+            return (value ?? null) as T | null;
+        } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] failed to read storage', e);
+            return null;
+        }
+    }
+
+    /**
+     * 写入Storage key value
+     */
+    private writeStorage(key: string, value: any) {
+        try {
+            if (typeof uni === 'undefined' || typeof uni.setStorageSync !== 'function') return;
+            uni.setStorageSync(key, value);
+        } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] failed to write storage', e);
+        }
+    }
+
+    /**
+     * 更新文档主题模式 H5
+     */
+    private updateDocumentMode(mode: 'light' | 'dark') {
+        if (typeof document === 'undefined' || !document.documentElement) return;
+        const root = document.documentElement;
+        root.dataset.uThemeMode = mode;
+        root.classList.remove('u-theme-light', 'u-theme-dark');
+        root.classList.add(`u-theme-${mode}`);
+    }
+
+    /**
+     * 转换为 CSS 变量名称
+     */
+    private toCssVarName(key: string, prefix: string = '--u'): string {
+        const types = config.type;
+        if (types.some(type => key.startsWith(type))) {
+            prefix += '-type';
+        }
+        const kebab = key
+            .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+            .replace(/[\s_]+/g, '-')
+            .toLowerCase();
+        return `${prefix}-${kebab}`;
+    }
+
+    /**
+     * 添加 RGB 值
+     */
+    private attachRgbVar(target: Record<string, string>, varName: string, value: string) {
+        if (typeof value !== 'string') return;
+        const hex = value.startsWith('#') ? value.slice(1) : '';
+        if (!/^[0-9a-fA-F]{6}$/.test(hex)) return;
+        const r = parseInt(hex.slice(0, 2), 16);
+        const g = parseInt(hex.slice(2, 4), 16);
+        const b = parseInt(hex.slice(4, 6), 16);
+        target[`${varName}-rgb`] = `${r}, ${g}, ${b}`;
+    }
+
+    /**
+     * 构建 CSS 变量映射表
+     * 生成格式：
+     */
+    private buildCssVarMap(theme: Theme, mode: 'light' | 'dark'): Record<string, string> {
+        const map: Record<string, string> = {
+            '--u-theme-mode': mode
+        };
+        const palette = this.getPaletteForMode(theme, mode);
+        const cssOverrides = this.getCssOverrides(theme, mode);
+
+        const applyEntry = (key: string, value: string | number | undefined | null) => {
+            if (value == null) return;
+            const strValue = String(value);
+            if (key.startsWith('--')) {
+                map[key] = strValue;
+                this.attachRgbVar(map, key, strValue);
+                return;
+            }
+            const cssVarName = this.toCssVarName(key);
+            // const typeVarName = this.toCssVarName(key, '--u-type');
+            map[cssVarName] = strValue;
+            // map[typeVarName] = strValue;
+            this.attachRgbVar(map, cssVarName, strValue);
+            // this.attachRgbVar(map, typeVarName, strValue);
+        };
+
+        Object.entries(palette || {}).forEach(([key, value]) => applyEntry(key, value as any));
+        Object.entries(cssOverrides || {}).forEach(([key, value]) => applyEntry(key, value as any));
+
+        return map;
+    }
+
+    /**
+     * 刷新 CSS 变量 H5
+     */
+    private flushCssVars(vars: Record<string, string>) {
+        if (typeof document === 'undefined' || !document.documentElement) return;
+        const root = document.documentElement;
+        this.lastAppliedCssKeys.forEach(key => {
+            root.style.removeProperty(key);
+        });
+        Object.entries(vars).forEach(([key, value]) => {
+            root.style.setProperty(key, value);
+        });
+        this.lastAppliedCssKeys = Object.keys(vars);
     }
 
     /**
      * 将主题应用到运行时：
      * - 1) 调用 uni.$u.setColor(theme.color) 如果存在
      * - 2) 在 H5 环境中，将 css map 注入到 document.documentElement 的 CSS 变量中
+     * - 3) 支持暗黑模式：根据 darkColor 或 color 应用相应的颜色
      */
-    private applyTheme(theme: Theme) {
+    private applyTheme(theme: Theme | null) {
         if (!theme) return;
+        const mode = this.getActiveMode();
+        const palette = this.getPaletteForMode(theme, mode);
+        this.syncRuntimeTheme(palette);
 
-        // 1) 更新 uView $u 主题（如果存在）
-        try {
-            if (typeof uni !== 'undefined' && uni.$u && uni.$u.setColor) {
-                try {
-                    uni.$u.setColor(theme.color || {});
-                } catch (e) {
-                    if (this.debug) console.warn('[ConfigProvider] uni.$u.setColor error', e);
-                }
-            }
-        } catch (e) {
-            // ignore
-        }
-
-        // 2) 注入 CSS 变量（H5）
-        try {
-            if (typeof document !== 'undefined' && document.documentElement) {
-                const root = document.documentElement;
-                const cssMap = (theme as any).color || (theme as any).css || ({} as Record<string, string>);
-                Object.entries(cssMap).forEach(([key, value]) => {
-                    const cssVarName = key.startsWith('--') ? key : `--u-type-${key}`;
-                    root.style.setProperty(cssVarName, String(value));
-
-                    // 生成 rgb 版本，供 rgba(var(--u-type-xxx-rgb), 0.5) 使用
-                    if (typeof value === 'string' && value.startsWith('#')) {
-                        const hex = value.replace('#', '');
-                        if (/^[0-9a-fA-F]{6}$/.test(hex)) {
-                            const r = parseInt(hex.slice(0, 2), 16);
-                            const g = parseInt(hex.slice(2, 4), 16);
-                            const b = parseInt(hex.slice(4, 6), 16);
-                            root.style.setProperty(`${cssVarName}-rgb`, `${r}, ${g}, ${b}`);
-                        }
-                    }
-                });
-            }
-        } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] apply CSS variables failed', e);
-        }
+        const cssVarMap = this.buildCssVarMap(theme, mode);
+        this.cssVarsRef.value = cssVarMap;
+        this.flushCssVars(cssVarMap);
+        this.updateDocumentMode(mode);
     }
 }
 

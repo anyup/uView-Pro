@@ -7,6 +7,8 @@
     "transformPx": false,
     /* 5+App特有相关 */
     "app-plus": {
+        "darkmode": true,
+        "themeLocation": "theme.json",
         "usingComponents": true,
         "nvueStyleCompiler": "uni-app",
         "compilerVersion": 3,
@@ -90,6 +92,14 @@
                     }
                 }
             }
+        },
+        "safearea": {
+            //iOS平台的安全区域
+            "background": "#ffffff",
+            "backgroundDark": "#2f0508",
+            "bottom": {
+                "offset": "none"
+            }
         }
     },
     /* 快应用特有相关 */
@@ -100,7 +110,9 @@
         "setting": {
             "urlCheck": false
         },
-        "usingComponents": true
+        "usingComponents": true,
+        "darkmode": true,
+        "themeLocation": "theme.json"
     },
     "mp-alipay": {
         "appid": "2021005198657329",
@@ -123,13 +135,24 @@
             "treeShaking": {
                 "enable": true
             }
-        }
+        },
+        "darkmode": true,
+        "themeLocation": "theme.json"
     },
     "uniStatistics": {
         "enable": false
     },
     "vueVersion": "3",
     "app-harmony": {
+        "darkmode": true,
+        "themeLocation": "theme.json",
+        "safearea": {
+            "background": "#ffffff",
+            "backgroundDark": "#2f0508",
+            "bottom": {
+                "offset": "none"
+            }
+        },
         "distribute": {
             "bundleName": "cn.anyup.uviewpro",
             "icons": {

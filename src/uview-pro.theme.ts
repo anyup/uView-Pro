@@ -30,39 +30,12 @@ export const theme: ThemeColor = {
     lightColor: '#c0c4cc',
     borderColor: '#e4e7ed',
     bgColor: '#f3f4f6',
+    bgPageColor: '#ffffff',
     formItemBorderColor: '#dcdfe6'
 };
 
 export const themes: Theme[] = [
-    // 主题 1: 蓝色（默认，uView Pro 官方配色）
-    {
-        name: 'blue',
-        label: '晴空蓝',
-        color: {
-            primary: '#2979ff',
-            error: '#fa3534',
-            warning: '#ff9900',
-            success: '#19be6b',
-            info: '#909399',
-            primaryLight: '#ecf5ff',
-            errorLight: '#fef0f0',
-            warningLight: '#fdf6ec',
-            successLight: '#dbf1e1',
-            infoLight: '#f4f4f5',
-            primaryDark: '#2b85e4',
-            errorDark: '#dd6161',
-            warningDark: '#f29100',
-            successDark: '#18b566',
-            infoDark: '#82848a',
-            primaryDisabled: '#a0cfff',
-            errorDisabled: '#fab6b6',
-            warningDisabled: '#fcbd71',
-            successDisabled: '#71d5a1',
-            infoDisabled: '#c8c9cc'
-        }
-    },
-
-    // 主题 2: 紫色
+    // 主题 1: 紫色
     {
         name: 'purple',
         label: '霞光紫',
@@ -90,7 +63,7 @@ export const themes: Theme[] = [
         }
     },
 
-    // 主题 3: 绿色
+    // 主题 2: 绿色
     {
         name: 'green',
         label: '清翠绿',
@@ -118,7 +91,7 @@ export const themes: Theme[] = [
         }
     },
 
-    // 主题 4: 橙色
+    // 主题 3: 橙色
     {
         name: 'orange',
         label: '暖阳橙',
@@ -146,7 +119,7 @@ export const themes: Theme[] = [
         }
     },
 
-    // 主题 5: 深色
+    // 主题 4: 深色
     {
         name: 'dark',
         label: '午夜蓝',

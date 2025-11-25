@@ -312,6 +312,9 @@ export type ColorType =
     | 'primaryDisabled'
     | 'primaryLight'
     | 'bgColor'
+    | 'bgPageColor'
+    | 'bgSurfaceColor'
+    | 'bgOverlayColor'
     | 'info'
     | 'infoDark'
     | 'infoDisabled'
@@ -333,7 +336,12 @@ export type ColorType =
     | 'tipsColor'
     | 'lightColor'
     | 'borderColor'
-    | 'formItemBorderColor';
+    | 'formItemBorderColor'
+    | 'whiteColor'
+    | 'blackColor'
+    | 'dividerColor'
+    | 'maskColor'
+    | 'shadowColor';
 
 // 自定义主题色
 export type ThemeColor = Partial<Record<ColorType, string>>;
@@ -342,7 +350,22 @@ export type Theme = {
     name: string;
     label?: string;
     description?: string;
+    /**
+     * 亮色模式下的令牌（会同步到 $u.color 和 CSS 变量）
+     */
     color: Partial<ThemeColor>;
+    /**
+     * 暗黑模式下的令牌，未提供时回退到 color
+     */
+    darkColor?: Partial<ThemeColor>;
+    /**
+     * 需要直接注入的 CSS 变量（亮色）
+     */
+    css?: Record<string, string>;
+    /**
+     * 需要直接注入的 CSS 变量（暗黑）
+     */
+    darkCss?: Record<string, string>;
 };
 
 export type LogConfig = Partial<{

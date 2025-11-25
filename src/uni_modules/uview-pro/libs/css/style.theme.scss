@@ -1,0 +1,31 @@
+:root {
+    color-scheme: light;
+}
+
+:root.u-theme-dark,
+:root[data-u-theme-mode='dark'] {
+    color-scheme: dark;
+}
+
+page {
+    color: $u-main-color;
+    background-color: $u-bg-color;
+    font-size: 28rpx;
+}
+
+page.u-theme-dark,
+:root.u-theme-dark page,
+:root[data-u-theme-mode='dark'] page {
+    background-color: $u-bg-color;
+    color: $u-main-color;
+}
+
+.u-config-provider {
+    color: $u-main-color;
+    background-color: var(--u-background, #ffffff);
+}
+
+.u-config-provider.u-theme-dark {
+    background-color: var(--u-background, #0f1115);
+    color: $u-main-color;
+}
