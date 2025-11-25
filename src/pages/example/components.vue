@@ -32,7 +32,7 @@
                         :show-action="false"
                         :action-text="t('components.search')"
                         shape="round"
-                        bg-color="#f2f2f2"
+                        :bg-color="searchBgColor"
                     ></u-search>
                 </view>
             </u-sticky>
@@ -115,6 +115,7 @@ const itemStyle = {
 const list = ref<any[]>(Array.isArray(rawList) ? rawList : []); // 明确类型 any[]
 const scrollTop = ref(0);
 const searchText = ref('');
+const searchBgColor = computed(() => $u.getColor('bgColor'));
 
 // 国际化
 const { t, locale } = useI18n();
@@ -215,10 +216,18 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .wrap {
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebf3ff 40%, #e7f7ff 100%);
+    background-color: $u-bg-color;
+    background-image: linear-gradient(
+        135deg,
+        rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.04) 0%,
+        rgba(var(--u-type-success-rgb, 25, 190, 107), 0.04) 40%,
+        rgba(var(--u-type-warning-rgb, 255, 153, 0), 0.04) 100%
+    );
     min-height: 100vh;
     padding-bottom: 30rpx;
     -webkit-font-smoothing: antialiased;
+    color: $u-main-color;
+    transition: background 0.3s ease;
 }
 
 // 主题切换器
@@ -229,7 +238,7 @@ onShow(() => {
     .theme-label {
         font-size: 24rpx;
         font-weight: 600;
-        color: #333;
+        color: $u-main-color;
         margin-bottom: 16rpx;
     }
 
@@ -245,18 +254,18 @@ onShow(() => {
         align-items: center;
         gap: 8rpx;
         padding: 12rpx 20rpx;
-        background: #ffffff;
-        border: 2rpx solid #e4e7ed;
+        background: $u-bg-color;
+        border: 2rpx solid $u-border-color;
         border-radius: 10rpx;
         transition: all 0.28s cubic-bezier(0.2, 0.9, 0.2, 1);
         cursor: pointer;
-        box-shadow: 0 4rpx 12rpx rgba(100, 100, 120, 0.04);
+        box-shadow: 0 4rpx 14rpx rgba(var(--u-main-color-rgb, 48, 49, 51), 0.08);
 
         &:active,
         &.active {
-            border-color: #2979ff;
-            background: linear-gradient(135deg, rgba(41, 121, 255, 0.05), rgba(103, 126, 255, 0.05));
-            box-shadow: 0 8rpx 24rpx rgba(41, 121, 255, 0.12);
+            border-color: $u-type-primary;
+            background: rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.08);
+            box-shadow: 0 8rpx 24rpx rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.2);
             transform: scale(1.02);
         }
 
@@ -264,18 +273,18 @@ onShow(() => {
             width: 32rpx;
             height: 32rpx;
             border-radius: 50%;
-            box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
-            border: 2rpx solid #ffffff;
+            box-shadow: 0 2rpx 8rpx rgba(var(--u-main-color-rgb, 48, 49, 51), 0.12);
+            border: 2rpx solid $u-bg-color;
         }
 
         .theme-name {
             font-size: 22rpx;
-            color: #606266;
+            color: $u-content-color;
             font-weight: 500;
         }
 
         &.active .theme-name {
-            color: #2979ff;
+            color: $u-type-primary;
             font-weight: 700;
         }
     }
@@ -307,10 +316,10 @@ onShow(() => {
     align-items: center;
     justify-content: space-between;
     padding: 12rpx 20rpx;
-    background: rgba(100, 200, 255, 0.1);
+    background: rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.08);
     border-radius: 8rpx;
     font-size: 24rpx;
-    color: #666;
+    color: $u-content-color;
     border-left: 4rpx solid $u-type-primary;
 
     .count {
@@ -323,12 +332,12 @@ onShow(() => {
         color: $u-type-primary;
         font-size: 22rpx;
         padding: 8rpx 16rpx;
-        background: rgba(0, 122, 255, 0.1);
+        background: rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.12);
         border-radius: 6rpx;
         transition: all 0.3s ease;
 
         &:active {
-            background: rgba(0, 122, 255, 0.2);
+            background: rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.22);
             transform: scale(0.95);
         }
     }
@@ -364,12 +373,12 @@ onShow(() => {
 
 .card {
     width: calc((100% - 3 * 18rpx) / 4);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 254, 255, 0.98));
+    background: $u-bg-page-color;
     border-radius: 14rpx;
     padding: 22rpx 18rpx;
     display: flex;
     align-items: center;
-    box-shadow: 0 12rpx 30rpx $u-type-primary-light;
+    box-shadow: 0 12rpx 30rpx rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.08);
     transition:
         transform 0.18s cubic-bezier(0.2, 0.9, 0.2, 1),
         box-shadow 0.18s ease,
@@ -383,7 +392,7 @@ onShow(() => {
 
 .card:hover {
     transform: translateY(-8rpx) scale(1.01);
-    box-shadow: 0 26rpx 60rpx $u-type-primary-light;
+    box-shadow: 0 26rpx 60rpx rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.16);
     filter: saturate(1.02);
 }
 
@@ -403,13 +412,13 @@ onShow(() => {
 .card-title {
     font-size: 30rpx;
     font-weight: 700;
-    color: #222;
+    color: $u-main-color;
     margin-bottom: 16rpx;
 }
 
 .card-desc {
     font-size: 26rpx;
-    color: #666;
+    color: $u-content-color;
     line-height: 32rpx;
     max-height: 64rpx;
     overflow: hidden;
@@ -453,12 +462,30 @@ onShow(() => {
     .card {
         width: calc((100% - 18rpx) / 2);
     }
+    .card-title {
+        font-size: 26rpx;
+    }
+
+    .card-desc {
+        font-size: 22rpx;
+        line-height: 30rpx;
+        max-height: 60rpx;
+    }
 }
 
 /* 更小屏 1 列 */
 @media (max-width: 420px) {
     .card {
         width: 100%;
+    }
+    .card-title {
+        font-size: 30rpx;
+    }
+
+    .card-desc {
+        font-size: 24rpx;
+        line-height: 32rpx;
+        max-height: 64rpx;
     }
 }
 
@@ -468,7 +495,7 @@ onShow(() => {
     align-items: center;
     font-size: 28rpx;
     font-weight: 600;
-    color: #333;
+    color: $u-main-color;
     height: 60rpx;
     position: relative;
 
@@ -488,7 +515,7 @@ onShow(() => {
 
     .group-count {
         background: linear-gradient(135deg, $u-type-primary 0%, $u-type-primary-dark 100%);
-        color: white;
+        color: #ffffff;
         padding: 6rpx 16rpx;
         border-radius: 20rpx;
         font-size: 22rpx;

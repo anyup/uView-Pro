@@ -220,10 +220,12 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .about-page {
-    background-color: #ededed;
+    background-color: $u-bg-color;
+    min-height: 100vh;
 }
 
 .user-box {
-    background-color: #fff;
+    background-color: $u-bg-color;
+    border-bottom: 1rpx solid $u-border-color;
 }
 </style>

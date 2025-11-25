@@ -5,7 +5,7 @@
         :apis="'input'"
     >
         <view class="u-demo">
-            <view class="u-demo-wrap" style="background-color: #fff">
+            <view class="u-demo-wrap">
                 <view class="u-demo-title">演示效果</view>
                 <view class="u-demo-area">
                     <u-input

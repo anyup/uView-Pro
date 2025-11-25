@@ -260,7 +260,7 @@ function onChooseComplete(listsArg: UploadFileItem[], index: number) {
 
 <style lang="scss">
 .u-demo-wrap {
-    background-color: #ffffff;
+    background-color: $u-bg-color;
     padding: 40rpx 8rpx;
     margin-left: -14rpx;
     margin-right: -14rpx;

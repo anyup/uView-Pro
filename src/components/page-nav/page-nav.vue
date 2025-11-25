@@ -17,8 +17,8 @@
         <view class="lang">
             <u-icon
                 custom-prefix="custom-icon"
-                :name="darkMode === 'dark' ? 'sun' : 'moon'"
-                size="46"
+                :name="darkModeIcon"
+                size="42"
                 :color="darkMode === 'dark' ? 'warning' : 'primary'"
                 custom-style="margin-right:10rpx"
                 @click="switchTheme"
@@ -39,9 +39,21 @@ import { useTheme } from 'uview-pro';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const { getDarkMode, toggleDarkMode } = useTheme();
+const { darkMode, getDarkMode, setDarkMode } = useTheme();
 
-const darkMode = computed(() => getDarkMode());
+const darkModeIcon = computed(() => {
+    switch (darkMode.value) {
+        case 'light':
+            return 'sun';
+        case 'dark':
+            return 'moon';
+        case 'auto':
+            return 'auto';
+        default:
+            return 'sun';
+    }
+});
+
 /**
  * 页面导航栏组件
  * @description 顶部logo、标题、描述、语言切换
@@ -76,8 +88,20 @@ function switchLang() {
 }
 
 function switchTheme() {
-    // 切换主题
-    toggleDarkMode();
+    switch (getDarkMode()) {
+        case 'light':
+            setDarkMode('dark');
+            break;
+        case 'dark':
+            setDarkMode('auto');
+            break;
+        case 'auto':
+            setDarkMode('light');
+            break;
+        default:
+            setDarkMode('dark');
+            break;
+    }
 }
 </script>
 

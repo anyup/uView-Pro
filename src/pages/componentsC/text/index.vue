@@ -128,9 +128,7 @@
 export default {
     onLoad() {},
     data() {
-        return {
-            apis
-        };
+        return {};
     },
     methods: {
         clickHandler() {

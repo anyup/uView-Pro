@@ -61,7 +61,7 @@ import { onLoad } from '@dcloudio/uni-app';
 
 const userInfo = ref({
     avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png',
-    nickName: 'uView'
+    nickName: 'uView Pro'
 });
 const lists = ref([
     '君不见，黄河之水天上来，奔流到海不复回。君不见，高堂明镜悲白发，朝如青丝暮成雪。',

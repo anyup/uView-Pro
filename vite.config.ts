@@ -9,7 +9,8 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': path.join(process.cwd(), './src'),
-            'uview-pro': path.join(process.cwd(), './src/uni_modules/uview-pro')
+            'uview-pro': path.join(process.cwd(), './src/uni_modules/uview-pro'),
+            'uview-pro/': path.join(process.cwd(), './src/uni_modules/uview-pro/')
         }
     },
     define: {

@@ -112,7 +112,7 @@ onShow(() => {
 .tpl-group-title {
     font-size: 28rpx;
     font-weight: 500;
-    color: #333;
+    color: $u-main-color;
     margin: 24rpx 0 18rpx 0;
 }
 
@@ -124,15 +124,16 @@ onShow(() => {
 
 .tpl-card {
     width: 47%;
-    background: #fff;
+    background: $u-bg-color;
     border-radius: 12rpx;
     margin-bottom: 24rpx;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12rpx 28rpx rgba(var(--u-type-primary-rgb), 0.08);
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 26rpx 16rpx 14rpx 16rpx;
+    border: 1rpx solid $u-border-color;
 }
 
 .tpl-info {
@@ -144,13 +145,13 @@ onShow(() => {
 
 .tpl-name {
     font-size: 26rpx;
-    color: #222;
+    color: $u-main-color;
     font-weight: 500;
 }
 
 .tpl-desc {
     font-size: 22rpx;
-    color: #888;
+    color: $u-content-color;
     margin-top: 10rpx;
     word-break: break-all;
 }

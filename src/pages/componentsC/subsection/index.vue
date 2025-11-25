@@ -57,7 +57,7 @@ import type { SubsectionListItem, SubsectionMode } from '@/uni_modules/uview-pro
 
 const mode = ref<SubsectionMode>('button');
 const current = ref(0);
-const activeColor = ref($u.color['warning']);
+const activeColor = ref($u.color['primary']);
 const bold = ref(true);
 const list = ref<SubsectionListItem[]>([{ name: '待付款' }, { name: '待收货' }, { name: '选项三' }]);
 function modeChange(e: number) {

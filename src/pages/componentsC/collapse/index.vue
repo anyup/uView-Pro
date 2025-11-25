@@ -2,7 +2,7 @@
     <demo-page title="Collapse 折叠框" desc="将内容折叠起来，节省空间，用户可以点击展开查看详情。" :apis="'collapse'">
         <template #default>
             <view class="u-demo">
-                <view class="u-demo-wrap" style="background-color: #ffffff">
+                <view class="u-demo-wrap">
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
                         <u-toast ref="uToastRef"></u-toast>

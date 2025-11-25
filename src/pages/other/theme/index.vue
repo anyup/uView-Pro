@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { DarkMode } from 'uview-pro/types/global';
 import { useTheme, $u } from 'uview-pro';
 import { ref, computed, onMounted } from 'vue';
 
@@ -63,7 +64,7 @@ const handleThemeChange = (themeName: string) => {
     showThemePanel.value = false;
 };
 
-const handleDarkModeChange = (mode: 'auto' | 'light' | 'dark') => {
+const handleDarkModeChange = (mode: DarkMode) => {
     setDarkMode(mode);
     showDarkModePanel.value = false;
 };

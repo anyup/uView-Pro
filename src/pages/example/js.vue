@@ -103,11 +103,12 @@ onShow(() => {
 }
 
 .tool-group-card {
-    background: #fff;
+    background: $u-bg-color;
     border-radius: 12rpx;
     margin-bottom: 32rpx;
-    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+    box-shadow: 0 12rpx 30rpx rgba(var(--u-type-primary-rgb), 0.08);
     padding: 24rpx 20rpx 12rpx 20rpx;
+    border: 1rpx solid $u-border-color;
 }
 
 .tool-group-header {
@@ -119,7 +120,7 @@ onShow(() => {
 .group-title {
     font-size: 36rpx;
     font-weight: 500;
-    color: #333;
+    color: $u-main-color;
     margin-left: 10rpx;
 }
 
@@ -127,8 +128,8 @@ onShow(() => {
     display: flex;
     align-items: center;
     width: 100%;
-    background: #f8f9fa;
-    border-radius: 8rpx;
+    background: rgba(var(--u-type-primary-rgb), 0.05);
+    border-radius: 12rpx;
     margin-bottom: 14rpx;
     padding: 30rpx 26rpx;
 }
@@ -143,13 +144,13 @@ onShow(() => {
 
 .tool-name {
     font-size: 30rpx;
-    color: #222;
+    color: $u-main-color;
     font-weight: 500;
 }
 
 .tool-desc {
     font-size: 24rpx;
-    color: #888;
+    color: $u-content-color;
     margin-top: 10rpx;
 }
 </style>

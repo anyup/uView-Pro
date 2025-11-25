@@ -63,7 +63,7 @@ import { ref } from 'vue';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
 
 // 定义响应式数据
-const src = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png');
+const src = ref('https://ik.imagekit.io/anyup/uview-pro/logo/removebg-new.png');
 const width = ref('200');
 const height = ref('200');
 const loadingSlot = ref(false);

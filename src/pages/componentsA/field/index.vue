@@ -6,7 +6,7 @@
     >
         <template #default>
             <view class="u-demo">
-                <view class="u-demo-wrap" style="background-color: #ffffff">
+                <view class="u-demo-wrap">
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
                         <u-field
