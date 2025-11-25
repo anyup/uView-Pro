@@ -3,7 +3,7 @@
 // 全局配置类：管理 Theme 的初始化、切换、持久化
 
 import { ref } from 'vue';
-import type { Theme, ThemeColor } from '../../types/global';
+import type { DarkMode, Theme, ThemeColor } from '../../types/global';
 import { config, setColor } from '..';
 import { defaultThemes } from '../config/theme-tokens';
 import { color as reactiveColor } from '../function/color';
@@ -16,12 +16,20 @@ const DEFAULT_LIGHT_TOKENS = (defaultThemes[0]?.color || {}) as Partial<ThemeCol
 const DEFAULT_DARK_TOKENS = (defaultThemes[0]?.darkColor || {}) as Partial<ThemeColor>;
 const STRUCTURAL_TOKENS = new Set([
     'bgColor',
+    'bgPageColor',
+    'bgSurfaceColor',
+    'bgOverlayColor',
     'borderColor',
     'formItemBorderColor',
     'lightColor',
     'mainColor',
     'contentColor',
-    'tipsColor'
+    'tipsColor',
+    'whiteColor',
+    'blackColor',
+    'dividerColor',
+    'maskColor',
+    'shadowColor'
 ]);
 
 /**
@@ -35,7 +43,7 @@ export class ConfigProvider {
     // 响应式状态，供外部直接引用
     public themesRef = ref<Theme[]>([]);
     public currentThemeRef = ref<Theme | null>(null);
-    public darkModeRef = ref<'auto' | 'light' | 'dark'>('auto');
+    public darkModeRef = ref<DarkMode>('auto');
     public cssVarsRef = ref<Record<string, string>>({});
     private baseColorTokens: Partial<ThemeColor> = DEFAULT_LIGHT_TOKENS;
     private baseDarkColorTokens: Partial<ThemeColor> = DEFAULT_DARK_TOKENS;
@@ -124,7 +132,7 @@ export class ConfigProvider {
         this.currentThemeRef.value = found;
 
         // 尝试从 Storage 读取暗黑模式设置
-        const savedDarkMode = this.readStorage<'auto' | 'light' | 'dark'>(DARK_MODE_STORAGE_KEY);
+        const savedDarkMode = this.readStorage<DarkMode>(DARK_MODE_STORAGE_KEY);
         this.darkModeRef.value = savedDarkMode || 'auto';
 
         // 应用主题
@@ -179,7 +187,7 @@ export class ConfigProvider {
     /**
      * 获取当前暗黑模式设置
      */
-    getDarkMode(): 'auto' | 'light' | 'dark' {
+    getDarkMode(): DarkMode {
         return this.darkModeRef.value;
     }
 
@@ -187,7 +195,7 @@ export class ConfigProvider {
      * 设置暗黑模式
      * @param mode 'auto' (跟随系统) | 'light' (强制亮色) | 'dark' (强制暗黑)
      */
-    setDarkMode(mode: 'auto' | 'light' | 'dark') {
+    setDarkMode(mode: DarkMode) {
         this.darkModeRef.value = mode;
         // 持久化
         this.writeStorage(DARK_MODE_STORAGE_KEY, mode);
@@ -245,13 +253,10 @@ export class ConfigProvider {
                 darkColor: this.applyDarkFallbacks(theme.darkColor)
             };
         }
-        const generated = this.generateDarkPalette(theme.color || {});
+        const nonStructural = this.filterNonStructuralTokens(theme.color || {});
         return {
             ...theme,
-            darkColor: {
-                ...this.applyDarkFallbacks(),
-                ...generated
-            }
+            darkColor: this.applyDarkFallbacks(nonStructural)
         };
     }
 
@@ -275,82 +280,14 @@ export class ConfigProvider {
         };
     }
 
-    private generateDarkPalette(palette: Partial<ThemeColor>): Partial<ThemeColor> {
+    private filterNonStructuralTokens(palette: Partial<ThemeColor>): Partial<ThemeColor> {
         const result: Partial<ThemeColor> = {};
-        Object.entries(palette).forEach(([key, value]) => {
-            if (typeof value !== 'string') {
+        Object.entries(palette || {}).forEach(([key, value]) => {
+            if (!this.isStructuralToken(key)) {
                 (result as any)[key] = value;
-                return;
             }
-            (result as any)[key] = this.createDarkToken(key, value);
         });
         return result;
-    }
-
-    private createDarkToken(token: string, color: string): string {
-        const normalizedHex = this.normalizeHex(color);
-        if (!normalizedHex) {
-            const fallback = (this.baseDarkColorTokens as any)?.[token];
-            return fallback || color;
-        }
-
-        if (this.isStructuralToken(token)) {
-            const fallback = (this.baseDarkColorTokens as any)?.[token];
-            if (fallback) return fallback;
-        }
-
-        const lower = token.toLowerCase();
-        const isBackground = lower.includes('bg') || lower.includes('background');
-        const isBorder = lower.includes('border') || lower.includes('form');
-        const isLightVariant = lower.includes('light') || lower.includes('disabled');
-        const isText = lower.includes('maincolor') || lower.includes('contentcolor') || lower.includes('tipscolor');
-
-        if (isBackground) {
-            return this.mixHex(normalizedHex, '#0b0e13', 0.65);
-        }
-        if (isBorder) {
-            return this.mixHex(normalizedHex, '#1f2430', 0.55);
-        }
-        if (isLightVariant) {
-            return this.mixHex(normalizedHex, '#ffffff', 0.4);
-        }
-        if (isText) {
-            return this.mixHex(normalizedHex, '#ffffff', 0.35);
-        }
-        return this.mixHex(normalizedHex, '#ffffff', 0.2);
-    }
-
-    private normalizeHex(color: string): string | null {
-        if (!color) return null;
-        const hex = color.trim();
-        if (/^#([0-9a-fA-F]{6})$/.test(hex)) return hex.toLowerCase();
-        return null;
-    }
-
-    private mixHex(color: string, target: string, ratio: number): string {
-        const from = this.hexToRgb(color);
-        const to = this.hexToRgb(target);
-        if (!from || !to) return color;
-        const clamp = (val: number) => Math.min(255, Math.max(0, Math.round(val)));
-        const r = clamp(from.r * (1 - ratio) + to.r * ratio);
-        const g = clamp(from.g * (1 - ratio) + to.g * ratio);
-        const b = clamp(from.b * (1 - ratio) + to.b * ratio);
-        return this.rgbToHex(r, g, b);
-    }
-
-    private hexToRgb(hex: string): { r: number; g: number; b: number } | null {
-        const match = /^#([0-9a-fA-F]{6})$/.exec(hex);
-        if (!match) return null;
-        return {
-            r: parseInt(match[1].slice(0, 2), 16),
-            g: parseInt(match[1].slice(2, 4), 16),
-            b: parseInt(match[1].slice(4, 6), 16)
-        };
-    }
-
-    private rgbToHex(r: number, g: number, b: number): string {
-        const toHex = (val: number) => val.toString(16).padStart(2, '0');
-        return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
     }
 
     private isStructuralToken(token: string): boolean {

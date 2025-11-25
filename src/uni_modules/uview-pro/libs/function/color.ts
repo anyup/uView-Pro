@@ -1,6 +1,5 @@
 import { reactive } from 'vue';
 import type { ColorType, ThemeColor } from '../../types/global';
-import configProvider from '../util/config-provider';
 
 // 默认颜色值（作为初始值）
 const defaultColor: ThemeColor = {
@@ -52,19 +51,19 @@ export const color = reactive<ThemeColor>({ ...defaultColor });
  * @returns 颜色值
  */
 export function getColor(name: ColorType): string {
-    // 优先从 configProvider 获取当前主题颜色
-    const currentTheme = configProvider.getCurrentTheme();
-    if (currentTheme) {
-        const isDark = configProvider.isInDarkMode();
-        const palette =
-            isDark && currentTheme.darkColor && Object.keys(currentTheme.darkColor).length
-                ? currentTheme.darkColor
-                : currentTheme.color || {};
+    // // 优先从 configProvider 获取当前主题颜色
+    // const currentTheme = configProvider.getCurrentTheme();
+    // if (currentTheme) {
+    //     const isDark = configProvider.isInDarkMode();
+    //     const palette =
+    //         isDark && currentTheme.darkColor && Object.keys(currentTheme.darkColor).length
+    //             ? currentTheme.darkColor
+    //             : currentTheme.color || {};
 
-        if (palette[name]) {
-            return palette[name] as string;
-        }
-    }
+    //     if (palette[name]) {
+    //         return palette[name] as string;
+    //     }
+    // }
 
     // 从响应式 color 对象获取（会被 configProvider 更新）
     if (color[name]) {

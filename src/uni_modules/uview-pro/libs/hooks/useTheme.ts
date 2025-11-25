@@ -6,7 +6,7 @@
  * const { currentTheme, themes, setTheme, getDarkMode, setDarkMode, isInDarkMode, getAvailableThemes, initTheme } = useTheme()
  */
 
-import type { Theme } from '../../types/global';
+import type { DarkMode, Theme } from '../../types/global';
 import configProvider from '../util/config-provider';
 import { defaultThemes } from '../config/theme-tokens';
 
@@ -30,7 +30,7 @@ function saveThemeToStorage(themeName: string) {
 /**
  * 保存暗黑模式设置到 Storage
  */
-function saveDarkModeToStorage(mode: 'auto' | 'light' | 'dark') {
+function saveDarkModeToStorage(mode: DarkMode) {
     try {
         uni.setStorageSync(DARK_MODE_STORAGE_KEY, mode);
     } catch (e) {
@@ -105,7 +105,7 @@ export function initTheme(themes?: any[], defaultThemeName?: string) {
 /**
  * 获取当前暗黑模式设置
  */
-export function getDarkMode(): 'auto' | 'light' | 'dark' {
+export function getDarkMode(): DarkMode {
     return configProvider.getDarkMode();
 }
 
@@ -113,7 +113,7 @@ export function getDarkMode(): 'auto' | 'light' | 'dark' {
  * 设置暗黑模式
  * @param mode 'auto' (跟随系统) | 'light' (强制亮色) | 'dark' (强制暗黑)
  */
-export function setDarkMode(mode: 'auto' | 'light' | 'dark') {
+export function setDarkMode(mode: DarkMode) {
     configProvider.setDarkMode(mode);
     darkModeRef.value = mode;
     saveDarkModeToStorage(mode);

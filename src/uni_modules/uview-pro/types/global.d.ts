@@ -313,6 +313,7 @@ export type ColorType =
     | 'primaryLight'
     | 'bgColor'
     | 'bgPageColor'
+    | 'bgDisabledColor'
     | 'bgSurfaceColor'
     | 'bgOverlayColor'
     | 'info'
@@ -345,6 +346,8 @@ export type ColorType =
 
 // 自定义主题色
 export type ThemeColor = Partial<Record<ColorType, string>>;
+
+export type DarkMode = 'auto' | 'light' | 'dark';
 
 export type Theme = {
     name: string;
