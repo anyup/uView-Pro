@@ -48,7 +48,6 @@ function H5Copy(text: string, config: TClipboardOptions) {
 
 function UniCopy(text: string, config: TClipboardOptions) {
     const opt = Object.assign({ data: text }, config);
-    console.log(opt);
     uni.setClipboardData(opt);
 }
 
@@ -56,17 +55,13 @@ type TClipboardOptions = Omit<UniNamespace.SetClipboardDataOptions, 'data'>;
 
 export function clipboard(content: string, options?: TClipboardOptions) {
     const text = String(content);
-    const showToast = typeof options.showToast === 'boolean' ? options.showToast : true;
-    const copySuccessCb = typeof options.success === 'function' ? options.success : () => {};
-    const copyFailCb = typeof options.success === 'function' ? options.fail : () => {};
-    const copyCompleteCb = typeof options.complete === 'function' ? options.complete : () => {};
-
-    let config: TClipboardOptions = {
-        showToast,
-        success: copySuccessCb,
-        fail: copyFailCb,
-        complete: copyCompleteCb
+    const defaultOpt = {
+        showToast: true,
+        success: () => {},
+        fail: () => {},
+        complete: () => {}
     };
+    const config = Object.assign(defaultOpt, options);
 
     // #ifdef H5
     H5Copy(text, config);
