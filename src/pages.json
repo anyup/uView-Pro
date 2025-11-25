@@ -831,6 +831,17 @@
                     }
                 }
             ]
+        },
+        {
+            "root": "pages/other",
+            "pages": [
+                {
+                    "path": "theme/index",
+                    "style": {
+                        "navigationBarTitleText": "theme-主题管理"
+                    }
+                }
+            ]
         }
     ],
     "preloadRule": {
@@ -840,16 +851,20 @@
         }
     },
     "globalStyle": {
-        "navigationBarTextStyle": "black",
+        "backgroundColor": "@bgColor",
+        "backgroundColorBottom": "@bgColorBottom",
+        "backgroundColorTop": "@bgColorTop",
+        "backgroundTextStyle": "@bgTxtStyle",
+        "navigationBarBackgroundColor": "@navBgColor",
+        "navigationBarTextStyle": "@navTxtStyle",
         "navigationBarTitleText": "uView Pro",
-        "navigationBarBackgroundColor": "#FFFFFF",
-        "backgroundColor": "#FFFFFF"
+        "navigationStyle": "default"
     },
     "tabBar": {
-        "color": "#909399",
-        "selectedColor": "#303133",
-        "backgroundColor": "#FFFFFF",
-        "borderStyle": "black",
+        "color": "@tabFontColor",
+        "selectedColor": "@tabSelectedColor",
+        "backgroundColor": "@tabBgColor",
+        "borderStyle": "@tabBorderStyle",
         "list": [
             {
                 "pagePath": "pages/example/components",

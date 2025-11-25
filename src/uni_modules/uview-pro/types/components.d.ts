@@ -97,6 +97,7 @@ declare module 'vue' {
         uTextarea: (typeof import('../components/u-textarea/u-textarea.vue'))['default'];
         uFab: (typeof import('../components/u-fab/u-fab.vue'))['default'];
         uPagination: (typeof import('../components/u-pagination/u-pagination.vue'))['default'];
+        uConfigProvider: (typeof import('../components/u-config-provider/u-config-provider.vue'))['default'];
     }
 }
 

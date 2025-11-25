@@ -1,5 +1,5 @@
 <template>
-    <view :class="['u-config-provider', `u-theme-${themeMode}`, customClass]" :style="mergedThemeStyle">
+    <view :class="['u-config-provider', `u-theme-${darkMode}`, customClass]" :style="mergedThemeStyle">
         <slot />
     </view>
 </template>
@@ -9,10 +9,14 @@
  * u-config-provider
  *
  * 说明（简要）：
- * - 初始化场景（推荐在应用入口执行）：使用 `configProvider` 进行一次性初始化与全局设置（例如在 `main.ts` 或插件 `install` 中）。
- * - 组件/页面场景（推荐）：使用 `useTheme()` 组合式函数在组件内部读取响应式 `currentTheme`、`themes` 并通过 `setTheme()` 切换主题。
+ * - 初始化场景（推荐在应用入口执行）：使用 `useTheme().initTheme(themes)` 进行一次性初始化与全局设置（例如在 `main.ts` 或 `App.vue` 中）。
+ * - 组件/页面场景（推荐）：使用 `useTheme()` 组合式函数在组件内部读取响应式 `currentTheme`、`themes`、`darkMode` 并通过 `setTheme()` 和 `setDarkMode()` 切换主题/模式。
  *
- * 该组件的行为：如果在挂载时传入 `themes`，会调用 `configProvider.init(themes)`；如果传入 `currentTheme`，会优先设置当前主题。
+ * 该组件的行为：
+ * - 如果在挂载时传入 `themes`，会调用 `configProvider.init(themes)`
+ * - 如果传入 `currentTheme`，会优先设置当前主题
+ * - 如果传入 `darkMode`，会设置当前的暗黑模式状态，同时在 document 上添加 `u-theme-dark` 或 `u-theme-light` 类名
+ *
  * 详尽说明请参考：`docs/config-provider-usage.md`
  */
 export default {
@@ -28,9 +32,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch, onMounted } from 'vue';
+import { computed, watch, onMounted } from 'vue';
 import { ConfigProviderProps } from './types';
 import { $u, configProvider } from '../../libs';
+import { useTheme } from '../../libs/hooks/useTheme';
 
 const props = defineProps(ConfigProviderProps);
 
@@ -39,30 +44,72 @@ const emit = defineEmits<{
     'mode-change': [mode: 'light' | 'dark'];
 }>();
 
-// 主题模式，优先使用 props，其次由外部通过 configProvider 管理
-const themeMode = ref<'light' | 'dark'>(props.themeMode || 'light');
+// 计算当前的主题模式（亮色/暗黑）
+const darkMode = computed(() => (configProvider.isInDarkMode() ? 'dark' : 'light'));
+
+const bootstrapTheme = () => {
+    // 如果已经初始化过主题，不再重复初始化，只更新 props 相关配置
+    const existingThemes = configProvider.getThemes();
+    if (existingThemes.length > 0) {
+        // 已初始化，只更新当前主题和暗黑模式
+        if (props.currentTheme) {
+            configProvider.setTheme(props.currentTheme as string);
+        }
+        if (props.darkMode) {
+            configProvider.setDarkMode(props.darkMode);
+        }
+        return;
+    }
+
+    // 未初始化，进行初始化
+    if (props.themes && props.themes.length) {
+        configProvider.init(props.themes, props.currentTheme as any);
+    } else {
+        // 使用 useTheme 的 initTheme，它会处理默认主题
+        const { initTheme } = useTheme();
+        initTheme(undefined, props.currentTheme as any);
+    }
+
+    if (props.currentTheme) {
+        configProvider.setTheme(props.currentTheme as string);
+    }
+    if (props.darkMode) {
+        configProvider.setDarkMode(props.darkMode);
+    }
+};
 
 // 当传入自定义 themes 时，初始化全局 configProvider（覆盖已有）
 onMounted(() => {
-    if (props.themes && props.themes.length) {
-        configProvider.init(props.themes, props.currentTheme as any);
-    }
-    // 如果传入了 currentTheme，优先设置
-    if (props.currentTheme) {
-        try {
-            configProvider.setTheme(props.currentTheme as string);
-        } catch (e) {
-            // noop
-        }
-    }
+    bootstrapTheme();
 });
 
 // 监听外部 props 变化（如果上层修改 prop）
 watch(
-    () => props.themeMode,
+    () => props.themes,
     val => {
-        if (val) themeMode.value = val;
-        emit('mode-change', themeMode.value);
+        if (val && val.length) {
+            configProvider.init(val, props.currentTheme as any);
+        }
+    },
+    { deep: true }
+);
+
+watch(
+    () => props.currentTheme,
+    val => {
+        if (val) {
+            configProvider.setTheme(val);
+        }
+    }
+);
+
+watch(
+    () => props.darkMode,
+    val => {
+        if (val && val !== configProvider.getDarkMode()) {
+            configProvider.setDarkMode(val);
+            emit('mode-change', darkMode.value);
+        }
     }
 );
 
@@ -77,30 +124,17 @@ watch(
     { immediate: true }
 );
 
+// 监听暗黑模式变更并触发事件
+watch(
+    () => configProvider.darkModeRef.value,
+    () => {
+        emit('mode-change', darkMode.value);
+    }
+);
+
 // 计算合并样式（作为局部 fallback），configProvider 已经会把变量注入到 document 上
 const mergedThemeStyle = computed(() => {
-    const style: Record<string, string> = {};
-    const theme = configProvider.currentThemeRef.value;
-    if (!theme) return $u.toStyle(style, props.customStyle);
-
-    const cssMap = (theme as any).css || (theme as any).color || {};
-    Object.entries(cssMap).forEach(([key, value]) => {
-        const cssVarName = String(key).startsWith('--') ? String(key) : `--u-type-${$u.kebabCase(String(key))}`;
-        style[cssVarName] = String(value);
-
-        // 生成 rgb 变量备用
-        if (typeof value === 'string' && value.startsWith('#')) {
-            const hex = value.replace('#', '');
-            if (/^[0-9a-fA-F]{6}$/.test(hex)) {
-                const r = parseInt(hex.slice(0, 2), 16);
-                const g = parseInt(hex.slice(2, 4), 16);
-                const b = parseInt(hex.slice(4, 6), 16);
-                style[`${cssVarName}-rgb`] = `${r}, ${g}, ${b}`;
-            }
-        }
-    });
-
-    return $u.toStyle(style, props.customStyle);
+    return $u.toStyle(configProvider.cssVarsRef.value, props.customStyle);
 });
 </script>
 
