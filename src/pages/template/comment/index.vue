@@ -110,7 +110,7 @@ function getComment() {
             url: '../../../static/logo.png',
             replyList: [
                 {
-                    name: 'uview',
+                    name: 'uView Pro',
                     contentStr: 'uview-pro是基于uniapp的一个UI框架，代码优美简洁，宇宙超级无敌彩虹旋转好用，用它！'
                 },
                 {
