@@ -46,7 +46,7 @@
         <view
             class="u-navbar-placeholder"
             v-if="props.isFixed && !props.immersive"
-            :style="{ width: '100%', height: Number(navbarHeight) + Number(statusBarHeight) + 'px' }"
+            :style="{ width: '100%', height: `${Number(navbarPlaceholderHeight)}px` }"
         ></view>
     </view>
 </template>
@@ -86,7 +86,7 @@ import { NavbarProps } from './types';
  * @property {Function} custom-back 自定义返回逻辑方法
  * @property {String|Number} z-index 固定在顶部时的z-index值（默认980）
  * @property {Boolean} is-back 是否显示导航栏左边返回图标和辅助文字（默认true）
- * @property {Object} background 导航栏背景设置，见官网说明（默认{ background: 'var(--u-white-color)' }）
+ * @property {Object} background 导航栏背景设置，见官网说明（默认{ background: 'var(--u-bg-white)' }）
  * @property {Boolean} is-fixed 导航栏是否固定在顶部（默认true）
  * @property {Boolean} immersive 沉浸式，允许fixed定位后导航栏塌陷，仅fixed定位下生效（默认false）
  * @property {Boolean} border-bottom 导航栏底部是否显示下边框，如定义了较深的背景颜色，可取消此值（默认true）
@@ -95,6 +95,8 @@ import { NavbarProps } from './types';
 const props = defineProps(NavbarProps);
 // 获取系统状态栏的高度
 const systemInfo = uni.getSystemInfoSync();
+const windowInfo = uni.getWindowInfo();
+
 let menuButtonInfo: any = {};
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
 // #ifdef MP-WEIXIN || MP-BAIDU || MP-TOUTIAO || MP-QQ
@@ -102,7 +104,26 @@ menuButtonInfo = uni.getMenuButtonBoundingClientRect();
 // #endif
 
 // 状态栏高度
-const statusBarHeight = ref(systemInfo.statusBarHeight);
+const statusBarHeight = ref(windowInfo.statusBarHeight);
+
+// 转换字符数值为真正的数值
+const navbarHeight = computed(() => {
+    // #ifdef APP || H5
+    return props.height ? props.height : 44;
+    // #endif
+    // #ifdef MP
+    // 小程序特别处理，让导航栏高度 = 胶囊高度 + 两倍胶囊顶部与状态栏底部的距离之差(相当于同时获得了导航栏底部与胶囊底部的距离)
+    // 此方法有缺陷，暂不用(会导致少了几个px)，采用直接固定值的方式
+    // return menuButtonInfo.height + (menuButtonInfo.top - this.statusBarHeight) * 2;//导航高度
+    let height = systemInfo.platform == 'ios' ? 44 : 48;
+    return props.height ? props.height : height;
+    // #endif
+});
+
+// 导航栏高度加上状态栏高度
+const navbarPlaceholderHeight = computed(() => {
+    return Number(navbarHeight.value) + Number(statusBarHeight.value);
+});
 
 // 导航栏内部盒子的样式
 const navbarInnerStyle = computed(() => {
@@ -145,20 +166,6 @@ const titleStyle = computed(() => {
     // #endif
     style.width = uni.upx2px(Number(props.titleWidth)) + 'px';
     return style;
-});
-
-// 转换字符数值为真正的数值
-const navbarHeight = computed(() => {
-    // #ifdef APP-PLUS || H5
-    return props.height ? props.height : 44;
-    // #endif
-    // #ifdef MP
-    // 小程序特别处理，让导航栏高度 = 胶囊高度 + 两倍胶囊顶部与状态栏底部的距离之差(相当于同时获得了导航栏底部与胶囊底部的距离)
-    // 此方法有缺陷，暂不用(会导致少了几个px)，采用直接固定值的方式
-    // return menuButtonInfo.height + (menuButtonInfo.top - this.statusBarHeight) * 2;//导航高度
-    let height = systemInfo.platform == 'ios' ? 44 : 48;
-    return props.height ? props.height : height;
-    // #endif
 });
 
 /**

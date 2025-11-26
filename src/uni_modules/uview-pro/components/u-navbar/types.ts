@@ -68,7 +68,7 @@ export const NavbarProps = {
     /** 导航栏背景设置 */
     background: {
         type: Object as PropType<Record<string, any>>,
-        default: () => ({ background: 'var(--u-white-color)' })
+        default: () => ({ background: 'var(--u-bg-white)' })
     },
     /** 导航栏是否固定在顶部 */
     isFixed: {
