@@ -7,6 +7,7 @@ import type { DarkMode, Theme, ThemeColor } from '../../types/global';
 import { config, setColor } from '..';
 import { defaultThemes } from '../config/theme-tokens';
 import { color as reactiveColor } from '../function/color';
+import { getSystemDarkMode as getNativeSystemDarkMode } from './system-theme';
 
 declare const uni: any;
 
@@ -103,8 +104,13 @@ export class ConfigProvider {
             if (this.systemDarkModeMediaQuery) {
                 return this.systemDarkModeMediaQuery.matches;
             }
-            return false;
         } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] matchMedia check failed', e);
+        }
+        try {
+            return getNativeSystemDarkMode() === 'dark';
+        } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] native system theme check failed', e);
             return false;
         }
     }
