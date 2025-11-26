@@ -1,23 +1,37 @@
 <template>
-    <view>
-        <page-nav :desc="desc" title="nav.template" :index="2"></page-nav>
-        <view class="u-p-10">
-            <u-swiper :list="bannerList" :effect3d="true" mode="none" autoplay title @click="swiperClick"></u-swiper>
-        </view>
-        <view class="tpl-group-list">
-            <view class="tpl-group-title">{{ t('nav.template') }}</view>
-            <view class="tpl-grid">
-                <view class="tpl-card" v-for="tpl in flatList" :key="tpl.name" @click="openPage(tpl.path)">
-                    <u-icon custom-prefix="custom-icon" :name="tpl.icon" :size="70" :color="getRandomColor()"></u-icon>
-                    <view class="tpl-info">
-                        <text class="tpl-name">{{ getTitle('title', tpl) }}</text>
-                        <text class="tpl-desc">{{ getTitle('desc', tpl) }}</text>
+    <demo-page :nav-title="t('nav.template')" :nav-back="false" :tabbar="true">
+        <view>
+            <page-nav :desc="desc" title="nav.template" :index="2"></page-nav>
+            <view class="u-p-10">
+                <u-swiper
+                    :list="bannerList"
+                    :effect3d="true"
+                    mode="none"
+                    autoplay
+                    title
+                    @click="swiperClick"
+                ></u-swiper>
+            </view>
+            <view class="tpl-group-list">
+                <view class="tpl-group-title">{{ t('nav.template') }}</view>
+                <view class="tpl-grid">
+                    <view class="tpl-card" v-for="tpl in flatList" :key="tpl.name" @click="openPage(tpl.path)">
+                        <u-icon
+                            custom-prefix="custom-icon"
+                            :name="tpl.icon"
+                            :size="70"
+                            :color="getRandomColor()"
+                        ></u-icon>
+                        <view class="tpl-info">
+                            <text class="tpl-name">{{ getTitle('title', tpl) }}</text>
+                            <text class="tpl-desc">{{ getTitle('desc', tpl) }}</text>
+                        </view>
                     </view>
                 </view>
             </view>
+            <u-gap height="70"></u-gap>
         </view>
-        <u-gap height="70"></u-gap>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">

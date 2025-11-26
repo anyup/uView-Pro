@@ -15,7 +15,7 @@
                         v-if="!comment.isLike"
                         name="thumb-up"
                         class="like"
-                        color="#9a9a9a"
+                        color="$u-tips-color"
                         :size="30"
                         @click="getLike"
                     ></u-icon>
@@ -49,7 +49,7 @@
                                 name="thumb-up"
                                 class="like"
                                 :size="30"
-                                color="#9a9a9a"
+                                color="$u-tips-color"
                                 @click="getLike(index)"
                             ></u-icon>
                             <u-icon
@@ -176,12 +176,12 @@ onMounted(getReply);
 
 <style lang="scss" scoped>
 page {
-    background-color: #f2f2f2;
+    background-color: $u-bg-color;
 }
 .comment {
     padding: 30rpx;
     font-size: 32rpx;
-    background-color: #ffffff;
+    background-color: $u-bg-white;
     .top {
         display: flex;
         justify-content: space-between;
@@ -193,13 +193,13 @@ page {
                 width: 64rpx;
                 height: 64rpx;
                 border-radius: 50%;
-                background-color: #f2f2f2;
+                background-color: $u-bg-color;
             }
         }
         .user-info {
             margin-left: 10rpx;
             .name {
-                color: #5677fc;
+                color: $u-type-primary;
                 font-size: 28rpx;
                 margin-bottom: 4rpx;
             }
@@ -213,30 +213,30 @@ page {
         display: flex;
         font-size: 20rpx;
         align-items: center;
-        color: #9a9a9a;
+        color: $u-tips-color;
         .like {
             margin-left: 6rpx;
         }
         .num {
             font-size: 26rpx;
-            color: #9a9a9a;
+            color: $u-tips-color;
         }
     }
     .highlight {
-        color: #5677fc;
+        color: $u-type-primary;
         .num {
-            color: #5677fc;
+            color: $u-type-primary;
         }
     }
 }
 .all-reply {
     margin-top: 10rpx;
     padding-top: 20rpx;
-    background-color: #ffffff;
+    background-color: $u-bg-white;
     .all-reply-top {
         margin-left: 20rpx;
         padding-left: 20rpx;
-        border-left: solid 4rpx #5677fc;
+        border-left: solid 4rpx $u-type-primary;
         font-size: 30rpx;
         font-weight: bold;
     }
@@ -245,12 +245,12 @@ page {
     }
     .reply {
         padding: 20rpx;
-        background-color: rgb(242, 242, 242);
+        background-color: $u-bg-color;
         border-radius: 12rpx;
         margin: 10rpx 0;
         .username {
             font-size: 24rpx;
-            color: #7a7a7a;
+            color: $u-content-color;
         }
     }
 }

@@ -16,14 +16,6 @@
         </view>
         <view class="lang">
             <u-icon
-                custom-prefix="custom-icon"
-                :name="darkModeIcon"
-                size="42"
-                :color="darkMode === 'dark' ? 'warning' : 'primary'"
-                custom-style="margin-right:10rpx"
-                @click="switchTheme"
-            ></u-icon>
-            <u-icon
                 size="46"
                 :color="darkMode === 'dark' ? 'warning' : 'primary'"
                 :name="lang"

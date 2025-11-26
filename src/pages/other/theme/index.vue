@@ -71,150 +71,152 @@ const handleDarkModeChange = (mode: DarkMode) => {
 </script>
 
 <template>
-    <view class="theme-selector-example">
-        <!-- 标题 -->
-        <view class="header">
-            <text class="title">主题管理示例</text>
-            <text class="subtitle">useTheme() Hook 完整演示</text>
-        </view>
+    <demo-page nav-title="主题管理">
+        <view class="theme-selector-example">
+            <!-- 标题 -->
+            <view class="header">
+                <text class="title">主题管理</text>
+                <text class="subtitle">useTheme() Hook 完整演示</text>
+            </view>
 
-        <!-- 当前主题信息展示 -->
-        <view class="info-card">
-            <view class="info-row">
-                <text class="label">当前主题：</text>
-                <text class="value">{{ currentTheme?.label || currentTheme?.name || '未初始化' }}</text>
+            <!-- 当前主题信息展示 -->
+            <view class="info-card">
+                <view class="info-row">
+                    <text class="label">当前主题：</text>
+                    <text class="value">{{ currentTheme?.label || currentTheme?.name || '未初始化' }}</text>
+                </view>
+                <view class="info-row">
+                    <text class="label">暗黑模式：</text>
+                    <text class="value">{{ darkModeLabel }}</text>
+                </view>
+                <view class="info-row">
+                    <text class="label">实际模式：</text>
+                    <text class="value" :style="{ color: isDarkModeActive ? '#666' : '#333' }">
+                        {{ isDarkModeActive ? '暗黑模式' : '亮色模式' }}
+                    </text>
+                </view>
+                <view class="info-row">
+                    <text class="label">可用主题数：</text>
+                    <text class="value">{{ themes.length }}</text>
+                </view>
             </view>
-            <view class="info-row">
-                <text class="label">暗黑模式：</text>
-                <text class="value">{{ darkModeLabel }}</text>
-            </view>
-            <view class="info-row">
-                <text class="label">实际模式：</text>
-                <text class="value" :style="{ color: isDarkModeActive ? '#666' : '#333' }">
-                    {{ isDarkModeActive ? '暗黑模式' : '亮色模式' }}
-                </text>
-            </view>
-            <view class="info-row">
-                <text class="label">可用主题数：</text>
-                <text class="value">{{ themes.length }}</text>
-            </view>
-        </view>
 
-        <!-- 主题切换面板 -->
-        <view class="panel">
-            <view class="panel-header" @click="showThemePanel = !showThemePanel">
-                <text class="panel-title">主题选择</text>
-                <text class="toggle-icon">{{ showThemePanel ? '▼' : '▶' }}</text>
-            </view>
-            <view v-if="showThemePanel" class="panel-content">
-                <view class="theme-grid">
-                    <view
-                        v-for="theme in themes"
-                        :key="theme.name"
-                        class="theme-item"
-                        :class="{ active: currentTheme?.name === theme.name }"
-                        @click="handleThemeChange(theme.name)"
-                    >
+            <!-- 主题切换面板 -->
+            <view class="panel">
+                <view class="panel-header" @click="showThemePanel = !showThemePanel">
+                    <text class="panel-title">主题选择</text>
+                    <text class="toggle-icon">{{ showThemePanel ? '▼' : '▶' }}</text>
+                </view>
+                <view v-if="showThemePanel" class="panel-content">
+                    <view class="theme-grid">
                         <view
-                            class="theme-color"
-                            :style="{
-                                backgroundColor: theme.color.primary
-                            }"
-                        ></view>
-                        <text class="theme-name">{{ theme.label || theme.name }}</text>
-                        <text class="theme-desc">{{ theme.description || theme.name }}</text>
+                            v-for="theme in themes"
+                            :key="theme.name"
+                            class="theme-item"
+                            :class="{ active: currentTheme?.name === theme.name }"
+                            @click="handleThemeChange(theme.name)"
+                        >
+                            <view
+                                class="theme-color"
+                                :style="{
+                                    backgroundColor: theme.color.primary
+                                }"
+                            ></view>
+                            <text class="theme-name">{{ theme.label || theme.name }}</text>
+                            <text class="theme-desc">{{ theme.description || theme.name }}</text>
+                        </view>
                     </view>
                 </view>
             </view>
-        </view>
 
-        <!-- 暗黑模式面板 -->
-        <view class="panel">
-            <view class="panel-header" @click="showDarkModePanel = !showDarkModePanel">
-                <text class="panel-title">暗黑模式</text>
-                <text class="toggle-icon">{{ showDarkModePanel ? '▼' : '▶' }}</text>
-            </view>
-            <view v-if="showDarkModePanel" class="panel-content">
-                <view class="dark-mode-grid">
-                    <view
-                        class="mode-item"
-                        :class="{ active: darkMode === 'auto' }"
-                        @click="handleDarkModeChange('auto')"
-                    >
-                        <text class="mode-icon">🔄</text>
-                        <text class="mode-name">自动</text>
-                        <text class="mode-desc">跟随系统设置</text>
+            <!-- 暗黑模式面板 -->
+            <view class="panel">
+                <view class="panel-header" @click="showDarkModePanel = !showDarkModePanel">
+                    <text class="panel-title">暗黑模式</text>
+                    <text class="toggle-icon">{{ showDarkModePanel ? '▼' : '▶' }}</text>
+                </view>
+                <view v-if="showDarkModePanel" class="panel-content">
+                    <view class="dark-mode-grid">
+                        <view
+                            class="mode-item"
+                            :class="{ active: darkMode === 'auto' }"
+                            @click="handleDarkModeChange('auto')"
+                        >
+                            <text class="mode-icon">🔄</text>
+                            <text class="mode-name">自动</text>
+                            <text class="mode-desc">跟随系统设置</text>
+                        </view>
+                        <view
+                            class="mode-item"
+                            :class="{ active: darkMode === 'light' }"
+                            @click="handleDarkModeChange('light')"
+                        >
+                            <text class="mode-icon">☀️</text>
+                            <text class="mode-name">亮色</text>
+                            <text class="mode-desc">强制亮色模式</text>
+                        </view>
+                        <view
+                            class="mode-item"
+                            :class="{ active: darkMode === 'dark' }"
+                            @click="handleDarkModeChange('dark')"
+                        >
+                            <text class="mode-icon">🌙</text>
+                            <text class="mode-name">暗黑</text>
+                            <text class="mode-desc">强制暗黑模式</text>
+                        </view>
                     </view>
-                    <view
-                        class="mode-item"
-                        :class="{ active: darkMode === 'light' }"
-                        @click="handleDarkModeChange('light')"
-                    >
-                        <text class="mode-icon">☀️</text>
-                        <text class="mode-name">亮色</text>
-                        <text class="mode-desc">强制亮色模式</text>
-                    </view>
-                    <view
-                        class="mode-item"
-                        :class="{ active: darkMode === 'dark' }"
-                        @click="handleDarkModeChange('dark')"
-                    >
-                        <text class="mode-icon">🌙</text>
-                        <text class="mode-name">暗黑</text>
-                        <text class="mode-desc">强制暗黑模式</text>
+                    <view class="action-buttons">
+                        <button class="quick-toggle" @click="toggleDarkMode">快速切换暗黑模式</button>
                     </view>
                 </view>
-                <view class="action-buttons">
-                    <button class="quick-toggle" @click="toggleDarkMode">快速切换暗黑模式</button>
-                </view>
             </view>
-        </view>
 
-        <!-- 使用示例 -->
-        <view class="example-section">
-            <text class="section-title">使用示例代码</text>
-            <view class="code-block">
-                <text class="code-text">
-                    // 初始化主题 <br />const { initTheme, setTheme, setDarkMode, isInDarkMode, useTheme } = useTheme()
-                    <br />initTheme(themes, 'purple') <br />// 切换主题 <br />setTheme('green') <br />// 管理暗黑模式
-                    <br />setDarkMode('dark') // 强制暗黑 <br />setDarkMode('light') // 强制亮色
-                    <br />setDarkMode('auto') // 跟随系统 <br />// 检查状态 <br />if (isInDarkMode()) {
-                    <br />console.log('当前处于暗黑模式') <br />}
-                </text>
+            <!-- 使用示例 -->
+            <view class="example-section">
+                <text class="section-title">使用示例代码</text>
+                <view class="code-block">
+                    <text class="code-text">
+                        // 初始化主题 <br />const { initTheme, setTheme, setDarkMode, isInDarkMode, useTheme } =
+                        useTheme() <br />initTheme(themes, 'purple') <br />// 切换主题 <br />setTheme('green') <br />//
+                        管理暗黑模式 <br />setDarkMode('dark') // 强制暗黑 <br />setDarkMode('light') // 强制亮色
+                        <br />setDarkMode('auto') // 跟随系统 <br />// 检查状态 <br />if (isInDarkMode()) {
+                        <br />console.log('当前处于暗黑模式') <br />}
+                    </text>
+                </view>
             </view>
-        </view>
 
-        <!-- 颜色演示 -->
-        <view class="color-demo">
-            <text class="section-title">主题颜色演示</text>
-            <view class="color-grid">
-                <view class="color-item">
-                    <view class="color-box" :style="{ backgroundColor: $u.getColor('primary') }">
-                        {{ $u.getColor('primary') }}
+            <!-- 颜色演示 -->
+            <view class="color-demo">
+                <text class="section-title">主题颜色演示</text>
+                <view class="color-grid">
+                    <view class="color-item">
+                        <view class="color-box" :style="{ backgroundColor: $u.getColor('primary') }">
+                            {{ $u.getColor('primary') }}
+                        </view>
+                        <text>primary</text>
                     </view>
-                    <text>primary</text>
-                </view>
-                <view class="color-item">
-                    <view class="color-box" :style="{ backgroundColor: $u.getColor('success') }">
-                        {{ $u.getColor('success') }}
+                    <view class="color-item">
+                        <view class="color-box" :style="{ backgroundColor: $u.getColor('success') }">
+                            {{ $u.getColor('success') }}
+                        </view>
+                        <text>success</text>
                     </view>
-                    <text>success</text>
-                </view>
-                <view class="color-item">
-                    <view class="color-box" :style="{ backgroundColor: $u.getColor('error') }">
-                        {{ $u.getColor('error') }}
+                    <view class="color-item">
+                        <view class="color-box" :style="{ backgroundColor: $u.getColor('error') }">
+                            {{ $u.getColor('error') }}
+                        </view>
+                        <text>error</text>
                     </view>
-                    <text>error</text>
-                </view>
-                <view class="color-item">
-                    <view class="color-box" :style="{ backgroundColor: $u.getColor('warning') }">
-                        {{ $u.getColor('warning') }}
+                    <view class="color-item">
+                        <view class="color-box" :style="{ backgroundColor: $u.getColor('warning') }">
+                            {{ $u.getColor('warning') }}
+                        </view>
+                        <text>warning</text>
                     </view>
-                    <text>warning</text>
                 </view>
             </view>
         </view>
-    </view>
+    </demo-page>
 </template>
 
 <style lang="scss" scoped>

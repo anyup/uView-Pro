@@ -1,92 +1,94 @@
 <template>
-    <view class="wrap">
-        <page-nav :desc="desc" title="nav.components" :index="0"></page-nav>
+    <demo-page :nav-title="t('nav.components')" :nav-back="false" :tabbar="true">
+        <view class="wrap">
+            <page-nav :desc="desc" title="nav.components" :index="0"></page-nav>
 
-        <!-- 主题切换按钮区域 -->
-        <view class="theme-switcher">
-            <view class="theme-label">{{ t('components.theme') || '主题' }}</view>
-            <view class="theme-buttons">
-                <view
-                    v-for="theme in themes"
-                    :key="theme.name"
-                    class="theme-btn"
-                    :class="{ active: currentTheme.name === theme.name }"
-                    @click="switchTheme(theme.name)"
-                    :title="theme.description"
-                >
-                    <view class="theme-color" :style="{ backgroundColor: theme.color.primary }"></view>
-                    <view class="theme-name">{{ theme.label }}</view>
-                </view>
-            </view>
-        </view>
-
-        <!-- 搜索区域 -->
-        <view class="search-container">
-            <u-sticky bg-color="transparent">
-                <view class="search-box">
-                    <u-search
-                        v-model="searchText"
-                        @search="handleSearch"
-                        @custom="handleSearch"
-                        :placeholder="`${t('components.searchComponent')}`"
-                        :show-action="false"
-                        :action-text="t('components.search')"
-                        shape="round"
-                        :bg-color="searchBgColor"
-                    ></u-search>
-                </view>
-            </u-sticky>
-
-            <view v-if="searchText" class="search-tips">
-                {{ t('components.find') }} <text class="count">{{ filteredList.length }}</text>
-                {{ t('components.matchingComponent') }}
-                <text class="clear-btn" @click="clearSearch">{{ t('components.clear') }}</text>
-            </view>
-        </view>
-
-        <!-- 无搜索结果 -->
-        <view v-if="searchText && filteredList.length === 0" class="empty-state">
-            <u-empty mode="search" :text="t('components.notFound')" :show-empty="true"></u-empty>
-        </view>
-
-        <!-- 组件列表：流式卡片展示 -->
-        <view v-else class="list-wrap">
-            <view v-for="(group, gIndex) in filteredList" :key="gIndex" class="group-section">
-                <view class="group-title">
-                    <image style="width: 50rpx" :src="getIcon(group.icon)" mode="widthFix"></image>
-                    <text class="group-name">{{ getTitle('groupName', group) }}</text>
-                    <view class="group-count">{{ group.list.length }}</view>
-                </view>
-
-                <view class="cards">
+            <!-- 主题切换按钮区域 -->
+            <view class="theme-switcher">
+                <view class="theme-label">{{ t('components.theme') || '主题' }}</view>
+                <view class="theme-buttons">
                     <view
-                        class="card"
-                        v-for="(item, idx) in group.list"
-                        :key="idx"
-                        @click="handleCardClick(item.path)"
-                        :style="{ animationDelay: gIndex * 120 + idx * 60 + 'ms' }"
+                        v-for="theme in themes"
+                        :key="theme.name"
+                        class="theme-btn"
+                        :class="{ active: currentTheme.name === theme.name }"
+                        @click="switchTheme(theme.name)"
+                        :title="theme.description"
                     >
-                        <!-- 图像小预览 -->
-                        <image class="card-img" :src="getIcon(item.icon || item.path)" mode="widthFix"></image>
-                        <view class="card-body">
-                            <view class="card-title">{{ getTitle('title', item) }}</view>
-                            <view class="card-desc">{{ getTitle('desc', item) }}</view>
-                        </view>
-                        <view class="card-arrow">›</view>
+                        <view class="theme-color" :style="{ backgroundColor: theme.color.primary }"></view>
+                        <view class="theme-name">{{ theme.label }}</view>
                     </view>
                 </view>
             </view>
+
+            <!-- 搜索区域 -->
+            <view class="search-container">
+                <u-sticky bg-color="transparent">
+                    <view class="search-box">
+                        <u-search
+                            v-model="searchText"
+                            @search="handleSearch"
+                            @custom="handleSearch"
+                            :placeholder="`${t('components.searchComponent')}`"
+                            :show-action="false"
+                            :action-text="t('components.search')"
+                            shape="round"
+                            :bg-color="searchBgColor"
+                        ></u-search>
+                    </view>
+                </u-sticky>
+
+                <view v-if="searchText" class="search-tips">
+                    {{ t('components.find') }} <text class="count">{{ filteredList.length }}</text>
+                    {{ t('components.matchingComponent') }}
+                    <text class="clear-btn" @click="clearSearch">{{ t('components.clear') }}</text>
+                </view>
+            </view>
+
+            <!-- 无搜索结果 -->
+            <view v-if="searchText && filteredList.length === 0" class="empty-state">
+                <u-empty mode="search" :text="t('components.notFound')" :show-empty="true"></u-empty>
+            </view>
+
+            <!-- 组件列表：流式卡片展示 -->
+            <view v-else class="list-wrap">
+                <view v-for="(group, gIndex) in filteredList" :key="gIndex" class="group-section">
+                    <view class="group-title">
+                        <image style="width: 50rpx" :src="getIcon(group.icon)" mode="widthFix"></image>
+                        <text class="group-name">{{ getTitle('groupName', group) }}</text>
+                        <view class="group-count">{{ group.list.length }}</view>
+                    </view>
+
+                    <view class="cards">
+                        <view
+                            class="card"
+                            v-for="(item, idx) in group.list"
+                            :key="idx"
+                            @click="handleCardClick(item.path)"
+                            :style="{ animationDelay: gIndex * 120 + idx * 60 + 'ms' }"
+                        >
+                            <!-- 图像小预览 -->
+                            <image class="card-img" :src="getIcon(item.icon || item.path)" mode="widthFix"></image>
+                            <view class="card-body">
+                                <view class="card-title">{{ getTitle('title', item) }}</view>
+                                <view class="card-desc">{{ getTitle('desc', item) }}</view>
+                            </view>
+                            <view class="card-arrow">›</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <u-gap height="70"></u-gap>
+            <u-back-top
+                mode="circle"
+                :scroll-top="scrollTop"
+                :bottom="220"
+                :custom-style="{ backgroundColor: $u.getColor('primaryLight') }"
+            >
+                <u-icon custom-prefix="custom-icon" name="rocket" size="50" :color="$u.getColor('primary')"></u-icon>
+            </u-back-top>
         </view>
-        <u-gap height="70"></u-gap>
-        <u-back-top
-            mode="circle"
-            :scroll-top="scrollTop"
-            :bottom="120"
-            :custom-style="{ backgroundColor: $u.getColor('primaryLight') }"
-        >
-            <u-icon custom-prefix="custom-icon" name="rocket" size="50" :color="$u.getColor('primary')"></u-icon>
-        </u-back-top>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
@@ -215,21 +217,6 @@ onShow(() => {
 </script>
 
 <style lang="scss" scoped>
-.wrap {
-    background-color: $u-bg-color;
-    background-image: linear-gradient(
-        135deg,
-        rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.04) 0%,
-        rgba(var(--u-type-success-rgb, 25, 190, 107), 0.04) 40%,
-        rgba(var(--u-type-warning-rgb, 255, 153, 0), 0.04) 100%
-    );
-    min-height: 100vh;
-    padding-bottom: 30rpx;
-    -webkit-font-smoothing: antialiased;
-    color: $u-main-color;
-    transition: background 0.3s ease;
-}
-
 // 主题切换器
 .theme-switcher {
     padding: 24rpx 30rpx;
@@ -373,7 +360,7 @@ onShow(() => {
 
 .card {
     width: calc((100% - 3 * 18rpx) / 4);
-    background: $u-bg-page-color;
+    background: $u-bg-white;
     border-radius: 14rpx;
     padding: 22rpx 18rpx;
     display: flex;

@@ -1,78 +1,80 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view>
-                    <u-checkbox-group
-                        ref="uCheckboxGroupRef"
-                        :size="size"
-                        :width="width"
-                        :wrap="wrap"
-                        :max="max"
-                        @change="checkboxGroupChange"
-                        :activeColor="activeColor"
-                    >
-                        <u-checkbox
-                            @change="checkboxChange"
-                            v-model="item.checked"
-                            v-for="(item, index) in list"
-                            :key="index"
-                            :name="item.name"
-                            :shape="shape"
-                            :disabled="item.disabled"
-                            >{{ item.name }}</u-checkbox
+    <demo-page title="Checkbox 复选框" desc="用于选择一个或者多个选项。" :apis="'checkbox'">
+        <view class="u-demo">
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">演示效果</view>
+                <view class="u-demo-area">
+                    <view>
+                        <u-checkbox-group
+                            ref="uCheckboxGroupRef"
+                            :size="size"
+                            :width="width"
+                            :wrap="wrap"
+                            :max="max"
+                            @change="checkboxGroupChange"
+                            :activeColor="activeColor"
                         >
-                    </u-checkbox-group>
+                            <u-checkbox
+                                @change="checkboxChange"
+                                v-model="item.checked"
+                                v-for="(item, index) in list"
+                                :key="index"
+                                :name="item.name"
+                                :shape="shape"
+                                :disabled="item.disabled"
+                                >{{ item.name }}</u-checkbox
+                            >
+                        </u-checkbox-group>
+                    </view>
+                    <view class="u-demo-result-line">
+                        {{ result.length ? `选中了"${getResult}"` : '请选择' }}
+                    </view>
                 </view>
-                <view class="u-demo-result-line">
-                    {{ result.length ? `选中了"${getResult}"` : '请选择' }}
+            </view>
+            <view class="u-config-wrap">
+                <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">批量操作</view>
+                    <u-subsection :list="['全不选', '全选']" @change="checkedAllChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">形状</view>
+                    <u-subsection :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">整体大小(单位rpx)</view>
+                    <u-subsection current="1" :list="['30', '40', '50']" @change="sizeChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">激活颜色</view>
+                    <u-subsection
+                        :list="['primary', 'error', 'warning', 'success', 'info']"
+                        @change="activeColorChange"
+                    ></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">默认选中第一个</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="defaultChooseChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">每个占一行</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="wrapChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">每个宽度50%</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="widthChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">最大选择数量</view>
+                    <u-subsection current="2" :list="['1', '2', '3']" @change="maxChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">禁用第一个</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
                 </view>
             </view>
         </view>
-        <view class="u-config-wrap">
-            <view class="u-config-title u-border-bottom"> 参数配置 </view>
-            <view class="u-config-item">
-                <view class="u-item-title">批量操作</view>
-                <u-subsection :list="['全不选', '全选']" @change="checkedAllChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">形状</view>
-                <u-subsection :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">整体大小(单位rpx)</view>
-                <u-subsection current="1" :list="['30', '40', '50']" @change="sizeChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">激活颜色</view>
-                <u-subsection
-                    :list="['primary', 'error', 'warning', 'success', 'info']"
-                    @change="activeColorChange"
-                ></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">默认选中第一个</view>
-                <u-subsection current="1" :list="['是', '否']" @change="defaultChooseChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">每个占一行</view>
-                <u-subsection current="1" :list="['是', '否']" @change="wrapChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">每个宽度50%</view>
-                <u-subsection current="1" :list="['是', '否']" @change="widthChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">最大选择数量</view>
-                <u-subsection current="2" :list="['1', '2', '3']" @change="maxChange"></u-subsection>
-            </view>
-            <view class="u-config-item">
-                <view class="u-item-title">禁用第一个</view>
-                <u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
-            </view>
-        </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">

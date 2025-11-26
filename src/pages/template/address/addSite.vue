@@ -90,9 +90,9 @@ function confirm(e: any) {
     font-size: 28rpx;
 }
 .wrap {
-    background-color: #f2f2f2;
+    background-color: $u-bg-color;
     .top {
-        background-color: #ffffff;
+        background-color: $u-bg-white;
         border-top: solid 2rpx $u-border-color;
         padding: 22rpx;
         .item {
@@ -114,7 +114,7 @@ function confirm(e: any) {
             textarea {
                 // width: 100%;
                 height: 150rpx;
-                background-color: #f7f7f7;
+                background-color: $u-bg-color;
                 line-height: 60rpx;
                 margin: 40rpx auto;
                 padding: 20rpx;
@@ -125,7 +125,7 @@ function confirm(e: any) {
             textarea {
                 // width: 100%;
                 height: 150rpx;
-                background-color: #f7f7f7;
+                background-color: $u-bg-color;
                 line-height: 60rpx;
                 margin: 40rpx auto;
                 padding: 20rpx;
@@ -148,7 +148,7 @@ function confirm(e: any) {
         margin-top: 20rpx;
         padding: 40rpx;
         padding-right: 0;
-        background-color: #ffffff;
+        background-color: $u-bg-white;
         font-size: 28rpx;
         .tag {
             display: flex;
@@ -186,7 +186,7 @@ function confirm(e: any) {
         }
     }
     .option {
-        background-color: #ffffff;
+        background-color: $u-bg-white;
         padding: 40rpx;
     }
 }

@@ -72,6 +72,6 @@ page {
     }
 }
 .user-box {
-    background-color: #fff;
+    background-color: $u-bg-white;
 }
 </style>

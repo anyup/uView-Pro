@@ -112,16 +112,16 @@ function onUseCoupon() {
 <style lang="scss" scoped>
 page {
     height: 100%;
-    background-color: rgb(244, 244, 244);
+    background-color: $u-bg-color;
 }
 .u-wrap {
     padding: 24rpx;
-    background-color: rgb(244, 244, 244);
+    background-color: $u-bg-color;
 }
 
 .meituan {
     margin: 30rpx auto;
-    background-color: #ffffff;
+    background-color: $u-bg-white;
     width: 700rpx;
     // border: 10rpx;
     color: $u-type-warning;
@@ -131,7 +131,7 @@ page {
         align-items: center;
         padding: 80rpx 20rpx;
         border: 10rpx;
-        background-color: #fff5f4;
+        background-color: $u-bg-color;
         .left {
             .sum {
                 font-size: 32rpx;
@@ -180,7 +180,7 @@ page {
             position: absolute;
             height: 36rpx;
             width: 18rpx;
-            background-color: #f2f2f2;
+            background-color: $u-bg-color;
         }
 
         .circle-right {
@@ -210,14 +210,14 @@ page {
     margin-top: 40rpx;
     width: 700rpx;
     height: auto;
-    background-color: #ffffff;
+    background-color: $u-bg-white;
     display: flex;
     .left {
         padding: 0 30rpx;
-        background-color: rgb(95, 148, 224); //rgb(94, 152, 225);
+        background-color: $u-type-primary; //rgb(94, 152, 225);
         text-align: center;
         font-size: 28rpx;
-        color: #ffffff;
+        color: $u-white-color;
         .sum {
             margin-top: 50rpx;
             font-weight: bold;
@@ -242,9 +242,9 @@ page {
                 line-height: 40rpx;
                 .tag {
                     padding: 4rpx 20rpx;
-                    background-color: rgb(73, 154, 201);
+                    background-color: $u-type-primary;
                     border-radius: 20rpx;
-                    color: #ffffff;
+                    color: $u-white-color;
                     font-weight: bold;
                     font-size: 24rpx;
                     margin-right: 10rpx;
@@ -266,8 +266,8 @@ page {
                     font-size: 24rpx;
                     border-radius: 40rpx;
                     line-height: 40rpx;
-                    color: rgb(117, 142, 165);
-                    border: 2rpx solid rgb(117, 142, 165);
+                    color: $u-type-primary-disabled;
+                    border: 2rpx solid $u-type-primary-disabled;
                 }
             }
         }
@@ -301,7 +301,7 @@ page {
 .taobao {
     margin-top: 40rpx;
     width: 700rpx;
-    background-color: white;
+    background-color: $u-bg-white;
     padding: 30rpx 20rpx 20rpx;
     border-radius: 20rpx;
     .title {
@@ -337,9 +337,9 @@ page {
         .left {
             width: 70%;
             padding: 30rpx 20rpx;
-            background-color: rgb(255, 245, 244);
+            background-color: $u-bg-white;
             border-radius: 20rpx;
-            border-right: dashed 2rpx rgb(224, 215, 211);
+            border-right: dashed 2rpx $u-white-color;
             display: flex;
             .picture {
                 width: 172rpx;
@@ -371,7 +371,7 @@ page {
         .right {
             width: 30%;
             padding: 40rpx 20rpx;
-            background-color: rgb(255, 245, 244);
+            background-color: $u-bg-white;
             border-radius: 20rpx;
             display: flex;
             align-items: center;
@@ -380,10 +380,10 @@ page {
                 padding: 0 20rpx;
                 font-size: 24rpx;
                 border-radius: 40rpx;
-                color: #ffffff !important;
+                color: $u-white-color !important;
                 background-color: $u-type-warning !important;
                 line-height: 40rpx;
-                color: rgb(117, 142, 165);
+                color: $u-type-primary-light;
                 margin-left: 20rpx;
             }
         }

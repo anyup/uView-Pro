@@ -9,7 +9,7 @@
                 <view class="u-demo-wrap">
                     <view class="u-demo-title">u-loading-popup 原生用法</view>
                     <view class="u-demo-area">
-                        <button type="primary" @click="openLoading">显示 Loading Popup</button>
+                        <u-button type="primary" @click="openLoading">显示 Loading Popup</u-button>
                         <!-- v-model:modelValue 控制弹窗显示，支持所有原生 props -->
                         <u-loading-popup
                             ref="uLoadingPopupRef"

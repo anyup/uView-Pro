@@ -1,43 +1,50 @@
 <template>
-    <view>
-        <page-nav :desc="desc" title="nav.js" :index="1"></page-nav>
-        <view class="u-p-10">
-            <u-swiper
-                :list="recommendList"
-                :effect3d="false"
-                autoplay
-                mode="none"
-                :title="true"
-                @click="swiperClick"
-            ></u-swiper>
-        </view>
-        <view class="tool-group-list">
-            <view class="tool-group-card" v-for="(item, index) in list" :key="index">
-                <view class="tool-group-header">
-                    <u-icon :name="item.icon" custom-prefix="custom-icon" :size="50" :color="getRandomColor()"></u-icon>
-                    <text class="group-title">{{ getTitle('groupName', item) }}</text>
-                </view>
-                <view class="tool-list">
-                    <view class="tool-card" v-for="tool in item.list" :key="tool.name">
+    <demo-page :nav-title="t('nav.js')" :nav-back="false" :tabbar="true">
+        <view>
+            <page-nav :desc="desc" title="nav.js" :index="1"></page-nav>
+            <view class="u-p-10">
+                <u-swiper
+                    :list="recommendList"
+                    :effect3d="false"
+                    autoplay
+                    mode="none"
+                    :title="true"
+                    @click="swiperClick"
+                ></u-swiper>
+            </view>
+            <view class="tool-group-list">
+                <view class="tool-group-card" v-for="(item, index) in list" :key="index">
+                    <view class="tool-group-header">
                         <u-icon
+                            :name="item.icon"
                             custom-prefix="custom-icon"
-                            :name="tool.icon"
                             :size="50"
                             :color="getRandomColor()"
                         ></u-icon>
-                        <view class="tool-info">
-                            <text class="tool-name">{{ getTitle('title', tool) }}</text>
-                            <text class="tool-desc">{{ getTitle('desc', tool) }}</text>
+                        <text class="group-title">{{ getTitle('groupName', item) }}</text>
+                    </view>
+                    <view class="tool-list">
+                        <view class="tool-card" v-for="tool in item.list" :key="tool.name">
+                            <u-icon
+                                custom-prefix="custom-icon"
+                                :name="tool.icon"
+                                :size="50"
+                                :color="getRandomColor()"
+                            ></u-icon>
+                            <view class="tool-info">
+                                <text class="tool-name">{{ getTitle('title', tool) }}</text>
+                                <text class="tool-desc">{{ getTitle('desc', tool) }}</text>
+                            </view>
+                            <u-button size="mini" type="primary" @click="openPage(tool.path)">{{
+                                t('common.tryit')
+                            }}</u-button>
                         </view>
-                        <u-button size="mini" type="primary" @click="openPage(tool.path)">{{
-                            t('common.tryit')
-                        }}</u-button>
                     </view>
                 </view>
             </view>
+            <u-gap height="70"></u-gap>
         </view>
-        <u-gap height="70"></u-gap>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">

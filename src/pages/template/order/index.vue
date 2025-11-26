@@ -446,19 +446,10 @@ function reachBottom() {
 }
 </script>
 
-<style>
-/* #ifndef H5 */
-page {
-    height: 100%;
-    background-color: #f2f2f2;
-}
-/* #endif */
-</style>
-
 <style lang="scss" scoped>
 .order {
     width: 710rpx;
-    background-color: #ffffff;
+    background-color: $u-bg-white;
     margin: 20rpx auto;
     border-radius: 20rpx;
     box-sizing: border-box;
@@ -502,7 +493,7 @@ page {
                 color: $u-tips-color;
             }
             .delivery-time {
-                color: #e5d001;
+                color: $u-type-warning;
                 font-size: 24rpx;
             }
         }
@@ -561,7 +552,7 @@ page {
     }
     .tips {
         font-size: 24rpx;
-        color: #999999;
+        color: $u-tips-color;
         margin-top: 20rpx;
     }
     .btn {
@@ -569,9 +560,9 @@ page {
         width: 200rpx;
         border-radius: 32rpx;
         line-height: 64rpx;
-        color: #ffffff;
+        color: $u-white-color;
         font-size: 26rpx;
-        background: linear-gradient(270deg, rgba(249, 116, 90, 1) 0%, rgba(255, 158, 1, 1) 100%);
+        background: linear-gradient(270deg, var(--u-type-warning-dark) 0%, var(--u-type-warning) 100%);
     }
 }
 .wrap {

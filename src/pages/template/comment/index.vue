@@ -145,7 +145,7 @@ onMounted(getComment);
             width: 64rpx;
             height: 64rpx;
             border-radius: 50%;
-            background-color: #f2f2f2;
+            background-color: $u-bg-color;
         }
     }
     .right {
@@ -158,22 +158,22 @@ onMounted(getComment);
             align-items: center;
             margin-bottom: 10rpx;
             .name {
-                color: #5677fc;
+                color: $u-type-primary;
             }
             .like {
                 display: flex;
                 align-items: center;
-                color: #9a9a9a;
+                color: $u-tips-color;
                 font-size: 26rpx;
                 .num {
                     margin-right: 4rpx;
-                    color: #9a9a9a;
+                    color: $u-tips-color;
                 }
             }
             .highlight {
-                color: #5677fc;
+                color: $u-type-primary;
                 .num {
-                    color: #5677fc;
+                    color: $u-type-primary;
                 }
             }
         }
@@ -181,20 +181,20 @@ onMounted(getComment);
             margin-bottom: 10rpx;
         }
         .reply-box {
-            background-color: rgb(242, 242, 242);
+            background-color: $u-bg-color;
             border-radius: 12rpx;
             .item {
                 padding: 20rpx;
                 border-bottom: solid 2rpx $u-border-color;
                 .username {
                     font-size: 24rpx;
-                    color: #999999;
+                    color: $u-tips-color;
                 }
             }
             .all-reply {
                 padding: 20rpx;
                 display: flex;
-                color: #5677fc;
+                color: $u-type-primary;
                 align-items: center;
                 .more {
                     margin-left: 6rpx;
@@ -205,9 +205,9 @@ onMounted(getComment);
             margin-top: 20rpx;
             display: flex;
             font-size: 24rpx;
-            color: #9a9a9a;
+            color: $u-tips-color;
             .reply {
-                color: #5677fc;
+                color: $u-type-primary;
                 margin-left: 10rpx;
             }
         }

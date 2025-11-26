@@ -1,73 +1,74 @@
 <template>
-    <view class="about-page">
-        <view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30" @click="preview('weixin-person')">
-            <view class="u-m-r-10">
-                <u-avatar src="/static/logo.png" size="140"></u-avatar>
+    <demo-page :nav-title="t('nav.about')" :nav-back="false" :tabbar="true">
+        <view class="about-page">
+            <view class="u-flex user-box u-p-30" @click="preview('weixin-person')">
+                <view class="u-m-r-10">
+                    <u-avatar src="/static/logo.png" size="140"></u-avatar>
+                </view>
+                <view class="u-flex-1">
+                    <view class="u-font-18 u-p-b-20">uView Pro</view>
+                    <view class="u-font-14 u-tips-color">微信号：anyupxing</view>
+                </view>
+                <view class="u-m-l-10 u-p-10">
+                    <u-icon name="arrow-right" color="#969799" size="28"></u-icon>
+                </view>
             </view>
-            <view class="u-flex-1">
-                <view class="u-font-18 u-p-b-20">uView Pro</view>
-                <view class="u-font-14 u-tips-color">微信号：anyupxing</view>
+
+            <view>
+                <u-cell-group title="关于我">
+                    <u-cell-item
+                        title="我是“前端梦工厂”，一名前端开发工程师，致力于分享各种前端技术最佳解决方案。关注我，让我们一起逐梦前端！"
+                        :arrow="false"
+                    ></u-cell-item>
+                </u-cell-group>
             </view>
-            <view class="u-m-l-10 u-p-10">
-                <u-icon name="arrow-right" color="#969799" size="28"></u-icon>
+
+            <view>
+                <u-cell-group title="交流群">
+                    <u-cell-item
+                        v-for="(item, index) in chatList"
+                        :key="index"
+                        :title="item.title"
+                        :label="item.label"
+                        @click="itemClick(item)"
+                    >
+                        <template #icon>
+                            <u-image
+                                style="margin-right: 10rpx"
+                                :src="getImageUrl(item.icon)"
+                                :width="50"
+                                :height="50"
+                                mode="aspectFill"
+                            ></u-image>
+                        </template>
+                    </u-cell-item>
+                </u-cell-group>
             </view>
-        </view>
 
-        <view>
-            <u-cell-group title="关于我">
-                <u-cell-item
-                    title="我是“前端梦工厂”，一名前端开发工程师，致力于分享各种前端技术最佳解决方案。关注我，让我们一起逐梦前端！"
-                    :arrow="false"
-                ></u-cell-item>
-            </u-cell-group>
+            <view>
+                <u-cell-group title="其他信息">
+                    <u-cell-item
+                        v-for="(item, index) in infoList"
+                        :key="index"
+                        :title="item.title"
+                        :label="item.label"
+                        @click="itemClick(item)"
+                    >
+                        <template #icon>
+                            <u-image
+                                style="margin-right: 10rpx"
+                                :src="getImageUrl(item.icon)"
+                                :width="50"
+                                :height="50"
+                                mode="aspectFill"
+                            ></u-image>
+                        </template>
+                    </u-cell-item>
+                </u-cell-group>
+            </view>
+            <u-toast ref="uToastRef" />
         </view>
-
-        <view>
-            <u-cell-group title="交流群">
-                <u-cell-item
-                    v-for="(item, index) in chatList"
-                    :key="index"
-                    :title="item.title"
-                    :label="item.label"
-                    @click="itemClick(item)"
-                >
-                    <template #icon>
-                        <u-image
-                            style="margin-right: 10rpx"
-                            :src="getImageUrl(item.icon)"
-                            :width="50"
-                            :height="50"
-                            mode="aspectFill"
-                        ></u-image>
-                    </template>
-                </u-cell-item>
-            </u-cell-group>
-        </view>
-
-        <view>
-            <u-cell-group title="其他信息">
-                <u-cell-item
-                    v-for="(item, index) in infoList"
-                    :key="index"
-                    :title="item.title"
-                    :label="item.label"
-                    @click="itemClick(item)"
-                >
-                    <template #icon>
-                        <u-image
-                            style="margin-right: 10rpx"
-                            :src="getImageUrl(item.icon)"
-                            :width="50"
-                            :height="50"
-                            mode="aspectFill"
-                        ></u-image>
-                    </template>
-                </u-cell-item>
-            </u-cell-group>
-        </view>
-        <u-gap height="70"></u-gap>
-        <u-toast ref="uToastRef" />
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
@@ -219,11 +220,6 @@ onShow(() => {
 </script>
 
 <style lang="scss" scoped>
-.about-page {
-    background-color: $u-bg-color;
-    min-height: 100vh;
-}
-
 .user-box {
     background-color: $u-bg-color;
     border-bottom: 1rpx solid $u-border-color;

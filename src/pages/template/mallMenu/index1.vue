@@ -1,10 +1,7 @@
 <template>
     <view class="u-wrap">
         <view class="u-search-box">
-            <view class="u-search-inner">
-                <u-icon name="search" color="#909399" :size="28"></u-icon>
-                <text class="u-search-text">搜索uView</text>
-            </view>
+            <u-search shape="round"></u-search>
         </view>
         <view class="u-menu-wrap">
             <scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop">
@@ -136,20 +133,6 @@ function getElRect(elClass: string, dataVal: 'menuHeight' | 'menuItemHeight'): P
     overflow: hidden;
 }
 
-.u-search-inner {
-    background-color: rgb(234, 234, 234);
-    border-radius: 100rpx;
-    display: flex;
-    align-items: center;
-    padding: 10rpx 16rpx;
-}
-
-.u-search-text {
-    font-size: 26rpx;
-    color: $u-tips-color;
-    margin-left: 10rpx;
-}
-
 .u-tab-view {
     width: 200rpx;
     height: 100%;
@@ -157,23 +140,23 @@ function getElRect(elClass: string, dataVal: 'menuHeight' | 'menuItemHeight'): P
 
 .u-tab-item {
     height: 110rpx;
-    background: #f6f6f6;
+    background: $u-bg-color;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 26rpx;
-    color: #444;
+    color: $u-main-color;
     font-weight: 400;
     line-height: 1;
 }
 
 .u-tab-item-active {
     position: relative;
-    color: #000;
+    color: $u-black-color;
     font-size: 30rpx;
     font-weight: 600;
-    background: #fff;
+    background-color: $u-bg-white;
 }
 
 .u-tab-item-active::before {
@@ -190,7 +173,7 @@ function getElRect(elClass: string, dataVal: 'menuHeight' | 'menuItemHeight'): P
 }
 
 .right-box {
-    background-color: rgb(250, 250, 250);
+    background-color: $u-bg-white;
 }
 
 .page-view {
@@ -199,7 +182,7 @@ function getElRect(elClass: string, dataVal: 'menuHeight' | 'menuItemHeight'): P
 
 .class-item {
     margin-bottom: 30rpx;
-    background-color: #fff;
+    background-color: $u-bg-white;
     padding: 16rpx;
     border-radius: 8rpx;
 }

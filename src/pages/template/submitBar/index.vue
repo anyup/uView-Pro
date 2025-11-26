@@ -32,8 +32,8 @@ import { $u } from '@/uni_modules/uview-pro';
 <style lang="scss" scoped>
 .navigation {
     display: flex;
-    border: solid 2rpx #f2f2f2;
-    background-color: #ffffff;
+    border: solid 1px $u-border-color;
+    background-color: $u-bg-white;
     padding: 16rpx 0;
     position: fixed;
     width: 100%;
@@ -62,14 +62,14 @@ import { $u } from '@/uni_modules/uview-pro';
             line-height: 66rpx;
             padding: 0 30rpx;
             border-radius: 36rpx;
-            color: #ffffff;
+            color: $u-white-color;
         }
         .cart {
-            background-color: #ed3f14;
+            background-color: $u-type-error;
             margin-right: 30rpx;
         }
         .buy {
-            background-color: #ff7900;
+            background-color: $u-type-warning;
         }
     }
 }

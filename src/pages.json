@@ -1,7 +1,6 @@
 {
     "easycom": {
         "autoscan": true,
-        // 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
         "custom": {
             "^u-(.*)": "@/uni_modules/uview-pro/components/u-$1/u-$1.vue"
         }
@@ -239,97 +238,103 @@
                 {
                     "path": "keyboardPay/index",
                     "style": {
-                        "navigationBarTitleText": "keyboardPay 自定义键盘支付"
+                        "navigationBarTitleText": "keyboardPay 自定义键盘支付",
+                        "navigationStyle": "default"
                     }
                 },
-                // douyin 仿抖音
-                // {
-                // 	"path": "douyin/index",
-                // 	"style": {
-                // 		"navigationBarTitleText": "douyin 仿抖音"
-                // 	}
-                // },
                 // mallMenu商城分类
                 {
                     "path": "mallMenu/index2",
                     "style": {
-                        "navigationBarTitleText": "mallMenu-商城分类"
+                        "navigationBarTitleText": "mallMenu-商城分类",
+                        "navigationStyle": "default"
                     }
                 },
                 // mallMenu商城分类
                 {
                     "path": "mallMenu/index1",
                     "style": {
-                        "navigationBarTitleText": "mallMenu-商城分类"
+                        "navigationBarTitleText": "mallMenu-商城分类",
+                        "navigationStyle": "default"
                     }
                 },
                 // coupon优惠券
                 {
                     "path": "coupon/index",
                     "style": {
-                        "navigationBarTitleText": "coupon-优惠券"
+                        "navigationBarTitleText": "coupon-优惠券",
+                        "navigationStyle": "default"
                     }
                 },
                 {
                     "path": "login/index",
                     "style": {
-                        "navigationBarTitleText": "美团登录"
+                        "navigationBarTitleText": "美团登录",
+                        "navigationStyle": "default"
                     }
                 },
                 // 城市选择
                 {
                     "path": "citySelect/index",
                     "style": {
-                        "navigationBarTitleText": "城市选择"
+                        "navigationBarTitleText": "城市选择",
+                        "navigationStyle": "custom"
                     }
                 },
                 // SubmitBar提交订单栏
                 {
                     "path": "submitBar/index",
                     "style": {
-                        "navigationBarTitleText": "提交订单栏"
+                        "navigationBarTitleText": "提交订单栏",
+                        "navigationStyle": "default"
                     }
                 },
                 // comment评论
                 {
                     "path": "comment/index",
                     "style": {
-                        "navigationBarTitleText": "评论"
+                        "navigationBarTitleText": "评论",
+                        "navigationStyle": "default"
                     }
                 },
                 // comment评论详情
                 {
                     "path": "comment/reply",
                     "style": {
-                        "navigationBarTitleText": "评论详情"
+                        "navigationBarTitleText": "评论详情",
+                        "navigationStyle": "default"
                     }
                 },
                 // order订单
                 {
                     "path": "order/index",
                     "style": {
-                        "navigationBarTitleText": "订单"
+                        "navigationBarTitleText": "订单",
+                        "navigationStyle": "default"
                     }
                 },
                 // login登录获取验证码
                 {
                     "path": "login/code",
                     "style": {
-                        "navigationBarTitleText": "登录获取验证码"
+                        "navigationBarTitleText": "登录获取验证码",
+                        "navigationStyle": "default"
                     }
                 },
                 // address用户地址
                 {
                     "path": "address/index",
                     "style": {
-                        "navigationBarTitleText": "用户地址"
+                        "navigationBarTitleText": "用户地址",
+                        "navigationStyle": "default"
                     }
                 },
                 // address添加用户地址
                 {
                     "path": "address/addSite",
                     "style": {
-                        "navigationBarTitleText": "添加用户地址"
+                        "navigationBarTitleText": "添加用户地址",
+                        "navigationStyle": "default"
                     }
                 }
             ]
@@ -858,7 +863,7 @@
         "navigationBarBackgroundColor": "@navBgColor",
         "navigationBarTextStyle": "@navTxtStyle",
         "navigationBarTitleText": "uView Pro",
-        "navigationStyle": "default"
+        "navigationStyle": "custom"
     },
     "tabBar": {
         "color": "@tabFontColor",
@@ -867,28 +872,16 @@
         "borderStyle": "@tabBorderStyle",
         "list": [
             {
-                "pagePath": "pages/example/components",
-                "iconPath": "static/uview/example/component.png",
-                "selectedIconPath": "static/uview/example/component_select.png",
-                "text": "组件"
+                "pagePath": "pages/example/components"
             },
             {
-                "pagePath": "pages/example/js",
-                "iconPath": "static/uview/example/js.png",
-                "selectedIconPath": "static/uview/example/js_select.png",
-                "text": "工具"
+                "pagePath": "pages/example/js"
             },
             {
-                "pagePath": "pages/example/template",
-                "iconPath": "static/uview/example/template.png",
-                "selectedIconPath": "static/uview/example/template_select.png",
-                "text": "模板"
+                "pagePath": "pages/example/template"
             },
             {
-                "pagePath": "pages/example/about",
-                "iconPath": "static/uview/example/about.png",
-                "selectedIconPath": "static/uview/example/about_select.png",
-                "text": "关于"
+                "pagePath": "pages/example/about"
             }
         ]
     }

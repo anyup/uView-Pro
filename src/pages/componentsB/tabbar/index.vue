@@ -43,13 +43,14 @@
 </template>
 
 <script lang="ts" setup>
+import type { TabbarItem } from '@/uni_modules/uview-pro/types/global';
 import { ref } from 'vue';
 
 const current = ref(0);
 const show = ref(true);
 const bgColor = ref('#ffffff');
 const borderTop = ref(true);
-const list = ref([
+const list = ref<TabbarItem[]>([
     {
         iconPath: 'home',
         selectedIconPath: 'home-fill',

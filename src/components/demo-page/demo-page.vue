@@ -1,12 +1,58 @@
 <template>
     <view class="demo-page">
-        <view class="demo-page_header">
+        <u-navbar
+            :is-back="navBack"
+            :title="navTitle || title"
+            :background="background"
+            :is-fixed="true"
+            :immersive="false"
+            back-icon-name="arrow-leftward"
+            title-width="350"
+            title-color="#ffffff"
+            back-icon-color="#ffffff"
+        >
+            <template #left>
+                <view v-if="tabbar" class="u-m-l-20">
+                    <!-- #ifdef MP -->
+                    <u-icon
+                        custom-prefix="custom-icon"
+                        name="theme-fill"
+                        size="46"
+                        color="#ffffff"
+                        custom-style="margin-right:10px"
+                        @click="$u.route('/pages/other/theme/index')"
+                    ></u-icon>
+                    <!-- #endif -->
+                    <u-icon
+                        custom-prefix="custom-icon"
+                        :name="darkModeIcon"
+                        size="46"
+                        color="#ffffff"
+                        @click="switchTheme"
+                    ></u-icon>
+                </view>
+            </template>
+            <!-- #ifndef MP -->
+            <template #right>
+                <view v-if="tabbar" class="u-m-r-20">
+                    <u-icon
+                        custom-prefix="custom-icon"
+                        name="theme-fill"
+                        size="46"
+                        color="#ffffff"
+                        @click="$u.route('/pages/other/theme/index')"
+                    ></u-icon>
+                </view>
+            </template>
+            <!-- #endif -->
+        </u-navbar>
+        <view v-if="title || desc" class="demo-page_header">
             <view class="demo-page_title">{{ title }}</view>
             <view class="demo-page_desc" v-if="desc">{{ desc }}</view>
         </view>
         <u-sticky>
             <u-tabs
-                v-show="tabList.length > 1"
+                v-if="!tabbar && tabList.length > 1"
                 :list="tabList"
                 :current="tabIndex"
                 :is-scroll="false"
@@ -122,13 +168,61 @@
             <u-line direction="column" color="#ffffff" length="40rpx" margin="0 6px 0 5px"></u-line>
             <u-icon custom-prefix="custom-icon" name="github" size="40"></u-icon>
         </u-divider>
+        <u-tabbar v-if="tabbar" v-model="current" :list="tabbarList" :active-color="$u.color.primary"></u-tabbar>
     </view>
 </template>
 
 <script setup lang="ts">
-import { $u } from 'uview-pro';
-import { ref, computed, onMounted } from 'vue';
+import { $u, useTheme } from 'uview-pro';
+import { ref, computed, onMounted, reactive, type PropType } from 'vue';
 import { getMarkdown } from '@/api';
+import type { TabbarItem } from '@/uni_modules/uview-pro/types/global';
+import { useI18n } from 'vue-i18n';
+
+const { darkMode, getDarkMode, setDarkMode } = useTheme();
+
+const props = defineProps({
+    navTitle: {
+        type: String,
+        default: ''
+    },
+    navBack: {
+        type: Boolean,
+        default: true
+    },
+    tabbar: {
+        type: Boolean,
+        default: false
+    },
+    title: {
+        type: String,
+        default: ''
+    },
+    desc: {
+        type: String,
+        default: ''
+    },
+    scenes: {
+        type: Array as PropType<SceneItem[]>,
+        default: () => []
+    },
+    apis: {
+        type: String as PropType<string>,
+        default: ''
+    },
+    faqs: {
+        type: Array as PropType<FaqItem[]>,
+        default: () => []
+    },
+    tasks: {
+        type: Array as PropType<TaskItem[]>,
+        default: () => []
+    },
+    extras: {
+        type: Array,
+        default: () => []
+    }
+});
 
 interface SceneItem {
     title: string;
@@ -144,15 +238,62 @@ interface TaskItem {
     desc: string;
 }
 
-const props = defineProps<{
-    title?: string;
-    desc?: string;
-    scenes?: SceneItem[];
-    apis?: string;
-    faqs?: FaqItem[];
-    tasks?: TaskItem[];
-    extras?: string[];
-}>();
+const background = reactive({
+    backgroundColor: 'var(--u-type-primary)',
+    // 渐变色
+    backgroundImage: 'linear-gradient(90deg, var(--u-type-primary-dark), var(--u-type-primary-disabled))'
+});
+
+const { t } = useI18n();
+
+const darkModeIcon = computed(() => {
+    switch (darkMode.value) {
+        case 'light':
+            return 'sun';
+        case 'dark':
+            return 'moon';
+        case 'auto':
+            return 'auto';
+        default:
+            return 'sun';
+    }
+});
+
+// 定义响应式数据
+const tabbarList = computed<TabbarItem[]>(() => {
+    return [
+        {
+            text: t('nav.components'),
+            iconPath: 'component',
+            selectedIconPath: 'component-fill',
+            pagePath: '/pages/example/components',
+            customIcon: true
+        },
+        {
+            text: t('nav.js'),
+            iconPath: 'tool',
+            selectedIconPath: 'tool-fill',
+            pagePath: '/pages/example/js',
+            customIcon: true
+        },
+        {
+            text: t('nav.template'),
+            iconPath: 'template',
+            selectedIconPath: 'template-fill',
+            pagePath: '/pages/example/template',
+            customIcon: true
+        },
+        {
+            text: t('nav.about'),
+            iconPath: 'about',
+            selectedIconPath: 'about-fill',
+            pagePath: '/pages/example/about',
+            customIcon: true
+        }
+    ];
+});
+
+const current = ref<number>(0);
 
 const uFabRef = ref();
 const show = ref(false);
@@ -180,6 +321,22 @@ const apis = computed<string>(() => props.apis ?? '');
 const faqs = computed<FaqItem[]>(() => props.faqs ?? []);
 const tasks = computed<TaskItem[]>(() => props.tasks ?? []);
 
+function switchTheme() {
+    switch (getDarkMode()) {
+        case 'light':
+            setDarkMode('dark');
+            break;
+        case 'dark':
+            setDarkMode('auto');
+            break;
+        case 'auto':
+            setDarkMode('light');
+            break;
+        default:
+            setDarkMode('dark');
+            break;
+    }
+}
 // 定义change事件回调函数
 const change = (index: number) => {
     tabIndex.value = index;
@@ -215,6 +372,21 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .demo-page {
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 30rpx;
+    overflow-y: auto;
+    background-color: $u-bg-white;
+    background-image: linear-gradient(
+        135deg,
+        rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.04) 0%,
+        rgba(var(--u-type-success-rgb, 25, 190, 107), 0.04) 40%,
+        rgba(var(--u-type-warning-rgb, 255, 153, 0), 0.04) 100%
+    );
+    -webkit-font-smoothing: antialiased;
+    color: $u-main-color;
+    transition: background 0.3s ease;
+
     &_api,
     &_scene,
     &_fap,
@@ -237,7 +409,6 @@ onMounted(() => {
         margin-top: 8rpx;
     }
     &_feedback {
-        margin-top: 32rpx;
         text-align: center;
         :deep(.custom-button) {
             min-width: auto !important;
