@@ -52,7 +52,7 @@
         </view>
         <u-sticky>
             <u-tabs
-                v-if="!tabbar && tabList.length > 1"
+                v-if="!tabbar && !hideTabs && tabList.length > 1"
                 :list="tabList"
                 :current="tabIndex"
                 :is-scroll="false"
@@ -191,6 +191,10 @@ const props = defineProps({
         default: true
     },
     tabbar: {
+        type: Boolean,
+        default: false
+    },
+    hideTabs: {
         type: Boolean,
         default: false
     },

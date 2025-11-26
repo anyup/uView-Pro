@@ -34,7 +34,7 @@
                     >
                         <template #icon>
                             <u-image
-                                style="margin-right: 10rpx"
+                                custom-style="margin-right: 10rpx"
                                 :src="getImageUrl(item.icon)"
                                 :width="50"
                                 :height="50"
@@ -56,8 +56,8 @@
                     >
                         <template #icon>
                             <u-image
-                                style="margin-right: 10rpx"
-                                :src="getImageUrl(item.icon)"
+                                style="margin-right: 16rpx"
+                                :src="getImageUrl(item.icon, true)"
                                 :width="50"
                                 :height="50"
                                 mode="aspectFill"
@@ -148,7 +148,7 @@ function getImageUrl(name: string, force: boolean = false) {
     // #ifdef APP-HARMONY
     url = `/static/app/${name}.png`;
     // #endif
-    // #ifdef APP-HARMONY
+    // #ifndef APP-HARMONY
     if (force) {
         url = `${url}?updatedAt=${new Date().getTime()}`;
     }
@@ -221,7 +221,7 @@ onShow(() => {
 
 <style lang="scss" scoped>
 .user-box {
-    background-color: $u-bg-color;
+    background-color: $u-bg-white;
     border-bottom: 1rpx solid $u-border-color;
 }
 </style>

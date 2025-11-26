@@ -2,8 +2,8 @@
     "name": "uViewPro(跨平台UI组件库)",
     "appid": "__UNI__9E7D9A9",
     "description": "uView Pro 是一套高质量、跨平台的多端 UI 组件库，内置 80+ 组件与丰富工具库，助力高效开发小程序、H5、App、HarmonyOS 等应用。",
-    "versionName": "1.0.3",
-    "versionCode": 6,
+    "versionName": "1.0.4",
+    "versionCode": 7,
     "transformPx": false,
     /* 5+App特有相关 */
     "app-plus": {

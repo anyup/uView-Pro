@@ -126,28 +126,28 @@ export const themes: Theme[] = [
         }
     },
 
-    // 主题 4: 深色
+    // 主题 4: 深蓝 / 黑蓝色系
     {
         name: 'dark',
         label: '午夜蓝',
         color: {
-            primary: '#3b82f6',
+            primary: '#0b3d91',
             error: '#ef5350',
             warning: '#ffa726',
             success: '#66bb6a',
-            info: '#29b6f6',
-            primaryLight: '#1e3a8a',
+            info: '#2196f3',
+            primaryLight: '#081a33',
             errorLight: '#5e1914',
             warningLight: '#663c00',
             successLight: '#1b3a1b',
             infoLight: '#003d66',
-            primaryDark: '#2563eb',
+            primaryDark: '#062a57',
             errorDark: '#c62828',
             warningDark: '#e65100',
             successDark: '#2e7d32',
             infoDark: '#01579b',
-            primaryDisabled: '#64b5f6',
-            errorDisabled: '#ef5350',
+            primaryDisabled: '#274a7a',
+            errorDisabled: '#ef9a9a',
             warningDisabled: '#ffb74d',
             successDisabled: '#81c784',
             infoDisabled: '#4fc3f7'

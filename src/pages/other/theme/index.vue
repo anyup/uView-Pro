@@ -71,7 +71,7 @@ const handleDarkModeChange = (mode: DarkMode) => {
 </script>
 
 <template>
-    <demo-page nav-title="主题管理">
+    <demo-page nav-title="主题管理" hideTabs>
         <view class="theme-selector-example">
             <!-- 标题 -->
             <view class="header">
@@ -176,11 +176,10 @@ const handleDarkModeChange = (mode: DarkMode) => {
                 <text class="section-title">使用示例代码</text>
                 <view class="code-block">
                     <text class="code-text">
-                        // 初始化主题 <br />const { initTheme, setTheme, setDarkMode, isInDarkMode, useTheme } =
-                        useTheme() <br />initTheme(themes, 'purple') <br />// 切换主题 <br />setTheme('green') <br />//
-                        管理暗黑模式 <br />setDarkMode('dark') // 强制暗黑 <br />setDarkMode('light') // 强制亮色
-                        <br />setDarkMode('auto') // 跟随系统 <br />// 检查状态 <br />if (isInDarkMode()) {
-                        <br />console.log('当前处于暗黑模式') <br />}
+                        // 初始化主题 \nconst { initTheme, setTheme, setDarkMode, isInDarkMode, useTheme } = useTheme()
+                        \ninitTheme(themes, 'purple') \n// 切换主题 \nsetTheme('green') \n// 管理暗黑模式
+                        \nsetDarkMode('dark') // 强制暗黑 \nsetDarkMode('light') // 强制亮色 \nsetDarkMode('auto') //
+                        跟随系统 \n// 检查状态 \nif (isInDarkMode()) { \nconsole.log('当前处于暗黑模式') \n}
                     </text>
                 </view>
             </view>
