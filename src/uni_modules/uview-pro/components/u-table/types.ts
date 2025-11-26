@@ -21,7 +21,7 @@ export const TableProps = {
     /** th单元格的样式，对象形式(将th所需参数放在table组件，是为了避免每一个th组件要写一遍） */
     thStyle: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
     /** 表格的背景颜色 */
-    bgColor: { type: String, default: 'var(--u-white-color)' }
+    bgColor: { type: String, default: 'var(--u-bg-white)' }
 };
 
 export type TableProps = ExtractPropTypes<typeof TableProps>;

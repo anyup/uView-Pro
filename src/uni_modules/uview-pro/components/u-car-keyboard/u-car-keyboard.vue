@@ -197,7 +197,7 @@ function clearTimer() {
     font-size: 36rpx;
     text-align: center;
     line-height: 80rpx;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     margin: 8rpx 5rpx;
     border-radius: 8rpx;
     box-shadow: 0 2rpx 0rpx var(--u-tips-color);
@@ -232,7 +232,7 @@ function clearTimer() {
     line-height: 1;
     bottom: 32rpx;
     height: 80rpx;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     @include vue-flex;
     align-items: center;
     border-radius: 8rpx;

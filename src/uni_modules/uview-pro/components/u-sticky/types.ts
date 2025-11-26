@@ -16,7 +16,7 @@ export const StickyProps = {
     /** h5顶部导航栏的高度 */
     h5NavHeight: { type: [Number, String] as PropType<number | string>, default: 44 },
     /** 吸顶区域的背景颜色 */
-    bgColor: { type: String, default: 'var(--u-white-color)' },
+    bgColor: { type: String, default: 'var(--u-bg-white)' },
     /** z-index值 */
     zIndex: { type: [Number, String] as PropType<number | string>, default: '' }
 };

@@ -60,7 +60,7 @@ import { TabsProps } from './types';
  * @property {String|Number} bar-height 滑块高度，单位rpx（默认6）
  * @property {String|Number} item-width 标签的宽度（默认auto）
  * @property {String|Number} gutter 单个tab标签的左右内边距之和，单位rpx（默认40）
- * @property {String} bg-color tabs导航栏的背景颜色（默认var(--u-white-color)）
+ * @property {String} bg-color tabs导航栏的背景颜色（默认var(--u-bg-white)）
  * @property {String} name 组件内部读取的list参数中的属性名（tab名称），见官网说明（默认name）
  * @property {String} count 组件内部读取的list参数中的属性名（badge徽标数），同name属性的使用，见官网说明（默认count）
  * @property {Array} offset 设置badge徽标数的位置偏移，格式为 [x, y]，也即设置的为top和right的值，单位rpx（默认[5, 20]）

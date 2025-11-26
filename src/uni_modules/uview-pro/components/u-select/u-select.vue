@@ -363,8 +363,8 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
 .u-select {
     &__action {
         position: relative;
-        line-height: $u-form-item-height;
-        height: $u-form-item-height;
+        line-height: 70rpx;
+        height: 70rpx;
 
         &__icon {
             position: absolute;
@@ -383,7 +383,7 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
     &--border {
         border-radius: 6rpx;
         border-radius: 4px;
-        border: 1px solid $u-form-item-border-color;
+        border: 1px solid $u-border-color;
     }
 
     &__header {
@@ -406,7 +406,7 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
         width: 100%;
         height: 500rpx;
         overflow: hidden;
-        background-color: var(--u-white-color);
+        background-color: var(--u-bg-white);
 
         &__picker-view {
             height: 100%;

@@ -115,6 +115,6 @@ defineExpose({
     right: 0;
     left: 0;
     color: $u-type-primary;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
 }
 </style>

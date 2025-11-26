@@ -43,7 +43,7 @@ import { SwitchProps } from './types';
  * @property {Boolean} disabled 是否禁用（默认false）
  * @property {String|Number} size 开关尺寸，单位rpx（默认50）
  * @property {String} active-color 打开时的背景色（默认主题色primary）
- * @property {String} inactive-color 关闭时的背景色（默认var(--u-white-color)）
+ * @property {String} inactive-color 关闭时的背景色（默认var(--u-bg-white)）
  * @property {Boolean|Number|String} active-value 打开选择器时通过change事件发出的值（默认true）
  * @property {Boolean|Number|String} inactive-value 关闭选择器时通过change事件发出的值（默认false）
  * @event {Function} change 在switch打开或关闭时触发
@@ -96,7 +96,7 @@ function onClick() {
     box-sizing: initial;
     width: 2em;
     height: 1em;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1em;
     transition: background-color 0.3s;
@@ -112,8 +112,8 @@ function onClick() {
     left: 0;
     border-radius: 100%;
     z-index: 1;
-    background-color: var(--u-white-color);
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
+    background-color: var(--u-bg-white);
     box-shadow:
         0 3px 1px 0 rgba(0, 0, 0, 0.05),
         0 2px 2px 0 rgba(0, 0, 0, 0.1),

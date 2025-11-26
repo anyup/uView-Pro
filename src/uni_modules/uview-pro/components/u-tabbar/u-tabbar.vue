@@ -74,7 +74,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, getCurrentInstance } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { $u } from '../..';
 import { TabbarProps } from './types';
 
@@ -250,7 +250,7 @@ function getMidButtonLeft() {
             top: -48rpx;
             position: absolute;
             z-index: 4;
-            background-color: var(--u-white-color);
+            background-color: var(--u-bg-white);
             // 由于安卓的无能，导致只有3个tabbar item时，此css计算方式有误差
             // 故使用js计算的形式来定位，此处不注释，是因为js计算有延后，避免出现位置闪动
             left: 50%;
@@ -270,7 +270,7 @@ function getMidButtonLeft() {
             position: relative;
             &__button {
                 position: absolute;
-                top: 14rpx;
+                top: 8rpx;
                 left: 50%;
                 transform: translateX(-50%);
             }
@@ -279,7 +279,7 @@ function getMidButtonLeft() {
                 font-size: 26rpx;
                 line-height: 28rpx;
                 position: absolute;
-                bottom: 14rpx;
+                bottom: 8rpx;
                 left: 50%;
                 transform: translateX(-50%);
                 width: 100%;
@@ -303,7 +303,7 @@ function getMidButtonLeft() {
                 justify-content: center;
                 align-items: center;
                 position: absolute;
-                background-color: var(--u-white-color);
+                background-color: var(--u-bg-white);
                 top: -40rpx;
                 left: 50%;
                 z-index: 6;

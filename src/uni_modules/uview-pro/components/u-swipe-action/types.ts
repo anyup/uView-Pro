@@ -32,7 +32,7 @@ export const SwipeActionProps = {
     /** 组件背景颜色 */
     bgColor: {
         type: String,
-        default: 'var(--u-white-color)'
+        default: 'var(--u-bg-white)'
     },
     /** 是否使手机发生短促震动，目前只在iOS的微信小程序有效(2020-05-06) */
     vibrateShort: {

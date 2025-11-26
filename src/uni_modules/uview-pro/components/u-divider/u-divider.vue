@@ -60,10 +60,10 @@ import { $u } from '../../';
  * @description 区隔内容的分割线，一般用于页面底部"没有更多"的提示。
  * @tutorial https://uviewpro.cn/zh/components/divider.html
  * @property {String Number} half-width 文字左或右边线条宽度，数值或百分比，数值时单位为rpx
- * @property {String} border-color 线条颜色，优先级高于type（默认var(--u-form-item-border-color)）
+ * @property {String} border-color 线条颜色，优先级高于type（默认var(--u-border-color)）
  * @property {String} color 文字颜色（默认var(--u-tips-color)）
  * @property {String Number} fontSize 字体大小，单位rpx（默认26）
- * @property {String} bg-color 整个divider的背景颜色（默认呢var(--u-white-color)）
+ * @property {String} bg-color 整个divider的背景颜色（默认呢var(--u-bg-white)）
  * @property {String Number} height 整个divider的高度，单位rpx（默认40）
  * @property {String} type 将线条设置主题色（默认primary）
  * @property {Boolean} useSlot 是否使用slot传入内容，如果不传入，中间不会有空隙（默认true）

@@ -27,7 +27,7 @@ import { $u } from '../..';
  * @description 表格组件一般用于展示大量结构化数据的场景
  * @tutorial https://uviewpro.cn/zh/components/table.html
  * @property {String} border-color 表格边框的颜色（默认var(--u-border-color)）
- * @property {String} bg-color 表格的背景颜色（默认var(--u-white-color)）
+ * @property {String} bg-color 表格的背景颜色（默认var(--u-bg-white)）
  * @property {String} align 单元格的内容对齐方式，作用类似css的text-align（默认center）
  * @property {String} padding 单元格的内边距，同css的padding写法（默认10rpx 0）
  * @property {String | Number} font-size 单元格字体大小，单位rpx（默认28）

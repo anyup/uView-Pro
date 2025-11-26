@@ -7,8 +7,8 @@ import type { ExtractPropTypes, PropType } from 'vue';
 export const NumberBoxProps = {
     /** 输入框初始值（默认1） */
     modelValue: { type: Number, default: 1 },
-    /** 输入框和按钮的背景颜色（默认var(--u-bg-surface-color)） */
-    bgColor: { type: String, default: 'var(--u-bg-surface-color)' },
+    /** 输入框和按钮的背景颜色（默认var(--u-bg-gray-light)） */
+    bgColor: { type: String, default: 'var(--u-bg-gray-light)' },
     /** 用户可输入的最小值（默认0） */
     min: { type: Number, default: 0 },
     /** 用户可输入的最大值（默认99999） */

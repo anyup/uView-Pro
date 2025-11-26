@@ -293,28 +293,28 @@ function change(param1: 'showDrawer' | 'visibleSync', param2: 'visibleSync' | 's
     top: 0;
     bottom: 0;
     left: 0;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
 }
 
 .u-drawer-right {
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
 }
 
 .u-drawer-top {
     top: 0;
     left: 0;
     right: 0;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
 }
 
 .u-drawer-bottom {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
 }
 
 .u-drawer-center {
@@ -337,7 +337,7 @@ function change(param1: 'showDrawer' | 'visibleSync', param2: 'visibleSync' | 's
     display: block;
     /* #endif */
     position: relative;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
 }
 
 .u-drawer-content-visible.u-drawer-center {

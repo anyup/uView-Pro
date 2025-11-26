@@ -10,8 +10,8 @@ export const SearchProps = {
     ...baseProps,
     /** 搜索框形状，round-圆形，square-方形 */
     shape: { type: String as PropType<SearchShape>, default: 'round' },
-    /** 搜索框背景色，默认值var(--u-bg-surface-color) */
-    bgColor: { type: String, default: 'var(--u-bg-surface-color)' },
+    /** 搜索框背景色，默认值var(--u-bg-gray-light) */
+    bgColor: { type: String, default: 'var(--u-bg-gray-light)' },
     /** 占位提示文字 */
     placeholder: { type: String, default: '请输入关键字' },
     /** 是否启用清除控件 */

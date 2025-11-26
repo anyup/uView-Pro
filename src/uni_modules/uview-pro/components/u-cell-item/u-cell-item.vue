@@ -132,7 +132,7 @@ function onClick() {
     font-size: 28rpx;
     line-height: 54rpx;
     color: $u-content-color;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     text-align: left;
 }
 

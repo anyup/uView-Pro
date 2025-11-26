@@ -356,7 +356,7 @@ function agreeprivacyauthorization(event: any) {
     &--default {
         color: $u-content-color;
         border-color: var(--u-light-color);
-        background-color: var(--u-white-color);
+        background-color: var(--u-bg-white);
     }
 
     &--primary {
@@ -386,7 +386,7 @@ function agreeprivacyauthorization(event: any) {
     &--default--disabled {
         color: var(--u-white-color);
         border-color: var(--u-border-color);
-        background-color: var(--u-white-color);
+        background-color: var(--u-bg-white);
     }
 
     &--primary--disabled {

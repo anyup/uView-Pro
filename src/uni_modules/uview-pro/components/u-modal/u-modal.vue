@@ -180,7 +180,7 @@ defineExpose({
     height: auto;
     overflow: hidden;
     font-size: 32rpx;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
 
     &__btn--hover {
         background-color: rgb(230, 230, 230);

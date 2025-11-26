@@ -150,34 +150,4 @@ const show = computed(() => {
     transform: scale(0.8);
     transform-origin: center center;
 }
-
-// .u-primary {
-// 	background: $u-type-primary;
-// 	color: var(--u-white-color);
-// }
-
-// .u-error {
-// 	background: $u-type-error;
-// 	color: var(--u-white-color);
-// }
-
-// .u-warning {
-// 	background: $u-type-warning;
-// 	color: var(--u-white-color);
-// }
-
-// .u-success {
-// 	background: $u-type-success;
-// 	color: var(--u-white-color);
-// }
-
-// .u-black {
-// 	background: var(--u-content-color);
-// 	color: var(--u-white-color);
-// }
-
-.u-info {
-    background-color: $u-type-info;
-    color: var(--u-white-color);
-}
 </style>

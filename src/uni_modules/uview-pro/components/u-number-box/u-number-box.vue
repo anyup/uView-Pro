@@ -68,7 +68,7 @@ import { NumberBoxProps } from './types';
  * @description 该组件一般用于商城购物选择物品数量的场景。注意：该输入框只能输入大于或等于0的整数，不支持小数输入
  * @tutorial https://uviewpro.cn/zh/components/numberBox.html
  * @property {Number} modelValue 输入框初始值（默认1）
- * @property {String} bg-color 输入框和按钮的背景颜色（默认var(--u-bg-surface-color)）
+ * @property {String} bg-color 输入框和按钮的背景颜色（默认var(--u-bg-gray-light)）
  * @property {Number} min 用户可输入的最小值（默认0）
  * @property {Number} max 用户可输入的最大值（默认99999）
  * @property {Number} step 步长，每次加或减的值（默认1）
@@ -310,12 +310,12 @@ function handleChange(value: number, type: 'update:modelValue' | 'change' | 'blu
 }
 
 .u-icon-disabled {
-    color: var(--u-info-disabled) !important;
-    background: var(--u-bg-surface-color) !important;
+    color: var(--u-bg-gray-light) !important;
+    background: var(--u-bg-gray-light) !important;
 }
 
 .u-input-disabled {
-    color: var(--u-info-disabled) !important;
-    background-color: var(--u-bg-surface-color) !important;
+    color: var(--u-bg-gray-light) !important;
+    background-color: var(--u-bg-gray-light) !important;
 }
 </style>

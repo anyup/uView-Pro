@@ -34,7 +34,7 @@ export const TabsSwiperProps = {
     /** z-index 层级 */
     zIndex: { type: [Number, String] as PropType<number | string>, default: 1 },
     /** tabs导航栏的背景颜色 */
-    bgColor: { type: String, default: 'var(--u-white-color)' },
+    bgColor: { type: String, default: 'var(--u-bg-white)' },
     /** 居中模式，window/组件宽度 */
     autoCenterMode: { type: String as unknown as PropType<TabsSwiperAutoCenterMode>, default: 'window' },
     /** 组件内部读取的list参数中的属性名（tab名称） */

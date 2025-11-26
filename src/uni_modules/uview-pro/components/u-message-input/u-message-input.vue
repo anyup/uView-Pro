@@ -256,7 +256,7 @@ function getVal(e: { detail: { value: string } }) {
 
 .u-middle-line {
     height: 4px;
-    background: var(--u-black-color);
+    background: var(--u-bg-black);
     width: 80%;
     position: absolute;
     border-radius: 2px;
@@ -271,7 +271,7 @@ function getVal(e: { detail: { value: string } }) {
 
 .u-bottom-line {
     height: 4px;
-    background: var(--u-black-color);
+    background: var(--u-bg-black);
     width: 80%;
     position: absolute;
     border-radius: 2px;

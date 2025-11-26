@@ -42,7 +42,7 @@
         <text
             class="u-textarea__count"
             :style="{
-                'background-color': props.disabled ? 'transparent' : 'var(--u-white-color)'
+                'background-color': props.disabled ? 'transparent' : 'var(--u-bg-white)'
             }"
             v-if="props.count"
         >
@@ -285,14 +285,14 @@ defineExpose({
 
 .u-textarea {
     border-radius: 4px;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     position: relative;
     @include flex;
     flex: 1;
 
     &--border {
         border-radius: 4px;
-        border: 1px solid $u-form-item-border-color;
+        border: 1px solid $u-border-color;
     }
 
     &--error {
@@ -308,7 +308,7 @@ defineExpose({
     }
 
     &--disabled {
-        background-color: $u-bg-disabled-color;
+        background-color: $u-bg-gray-light;
     }
 
     &__field {
@@ -324,7 +324,7 @@ defineExpose({
         bottom: 0;
         font-size: 12px;
         color: $u-tips-color;
-        background-color: var(--u-white-color);
+        background-color: var(--u-bg-white);
         padding: 1px 4px;
         border-radius: 10px;
         line-height: 16px;

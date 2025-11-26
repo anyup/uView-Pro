@@ -210,31 +210,31 @@ function close() {
 }
 
 .u-mode-plain-primary {
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     color: $u-type-primary;
     border: 1px solid $u-type-primary;
 }
 
 .u-mode-plain-success {
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     color: $u-type-success;
     border: 1px solid $u-type-success;
 }
 
 .u-mode-plain-error {
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     color: $u-type-error;
     border: 1px solid $u-type-error;
 }
 
 .u-mode-plain-warning {
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     color: $u-type-warning;
     border: 1px solid $u-type-warning;
 }
 
 .u-mode-plain-info {
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     color: $u-type-info;
     border: 1px solid $u-type-info;
 }

@@ -30,7 +30,7 @@ export const SubsectionProps = {
     /** mode=button时，组件背景颜色 */
     bgColor: { type: String, default: 'var(--u-divider-color)' },
     /** mode = button时，滑块背景颜色 */
-    buttonColor: { type: String, default: 'var(--u-white-color)' },
+    buttonColor: { type: String, default: 'var(--u-bg-white)' },
     /** 在切换分段器的时候，是否让设备震一下 */
     vibrateShort: { type: Boolean, default: false }
 };

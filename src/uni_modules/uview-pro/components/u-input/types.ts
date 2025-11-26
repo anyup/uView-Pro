@@ -74,10 +74,10 @@ export const InputProps = {
         type: Boolean,
         default: false
     },
-    /** 输入框的边框颜色(默认var(--u-form-item-border-color)) */
+    /** 输入框的边框颜色(默认var(--u-border-color)) */
     borderColor: {
         type: String,
-        default: 'var(--u-form-item-border-color)'
+        default: 'var(--u-border-color)'
     },
     /** 是否自动增高输入区域，type为textarea时有效(默认true) */
     autoHeight: {

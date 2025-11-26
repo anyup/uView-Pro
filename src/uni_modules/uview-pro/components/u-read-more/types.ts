@@ -24,7 +24,7 @@ export const ReadMoreProps = {
     shadowStyle: {
         type: Object as PropType<Record<string, any>>,
         default: () => ({
-            backgroundImage: 'linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, var(--u-white-color) 80%)',
+            backgroundImage: 'linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, var(--u-bg-white) 80%)',
             paddingTop: '300rpx',
             marginTop: '-300rpx'
         })

@@ -84,7 +84,7 @@ import { $u } from '../..';
  * @description 搜索组件，集成了常见搜索框所需功能，用户可以一键引入，开箱即用。
  * @tutorial https://uviewpro.cn/zh/components/search.html
  * @property {String} shape 搜索框形状，round-圆形，square-方形（默认round）
- * @property {String} bg-color 搜索框背景颜色（默认var(--u-bg-surface-color)）
+ * @property {String} bg-color 搜索框背景颜色（默认var(--u-bg-gray-light)）
  * @property {String} border-color 边框颜色，配置了颜色，才会有边框
  * @property {String} placeholder 占位文字内容（默认“请输入关键字”）
  * @property {Boolean} clearabled 是否启用清除控件（默认true）

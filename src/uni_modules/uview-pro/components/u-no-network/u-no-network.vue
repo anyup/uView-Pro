@@ -250,7 +250,7 @@ defineExpose({
 @import '../../libs/css/style.components.scss';
 
 .u-no-network {
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     position: fixed;
     top: 0;
     left: 0;

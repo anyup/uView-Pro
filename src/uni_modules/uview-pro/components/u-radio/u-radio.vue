@@ -230,7 +230,7 @@ function setRadioCheckedStatus() {
         text-align: center;
         transition-property: color, border-color, background-color;
         font-size: 20px;
-        border: 1px solid var(--u-info-disabled);
+        border: 1px solid var(--u-border-color);
         transition-duration: 0.2s;
 
         /* #ifdef MP-TOUTIAO */
@@ -255,12 +255,12 @@ function setRadioCheckedStatus() {
         }
 
         &--disabled {
-            background-color: var(--u-bg-surface-color);
-            border-color: var(--u-info-disabled);
+            background-color: var(--u-bg-gray-light);
+            border-color: var(--u-border-color);
         }
 
         &--disabled--checked {
-            color: var(--u-info-disabled) !important;
+            color: var(--u-bg-gray-light) !important;
         }
     }
 
@@ -272,7 +272,7 @@ function setRadioCheckedStatus() {
         font-size: 30rpx;
 
         &--disabled {
-            color: var(--u-info-disabled);
+            color: var(--u-bg-gray-light);
         }
     }
 }

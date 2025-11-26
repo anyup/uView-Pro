@@ -54,7 +54,7 @@ import { StickyProps } from './types';
  * @property {String|Number} offsetTop 吸顶时与顶部的距离，单位rpx（默认0）
  * @property {String|Number} index 自定义标识，用于区分是哪一个组件
  * @property {Boolean} enable 是否开启吸顶功能（默认true）
- * @property {String} bgColor 组件背景颜色（默认var(--u-white-color)）
+ * @property {String} bgColor 组件背景颜色（默认var(--u-bg-white)）
  * @property {String|Number} zIndex 吸顶时的z-index值（默认970）
  * @property {String|Number} h5NavHeight 导航栏高度，自定义导航栏时(无导航栏时需设置为0)，需要传入此值，单位px（默认44）
  * @event fixed 组件吸顶时触发

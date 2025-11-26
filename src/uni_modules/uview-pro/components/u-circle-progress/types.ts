@@ -47,7 +47,7 @@ export const CircleProgressProps = {
     /** 整个圆环进度区域的背景色 */
     bgColor: {
         type: String,
-        default: 'var(--u-white-color)'
+        default: 'var(--u-bg-white)'
     }
 };
 

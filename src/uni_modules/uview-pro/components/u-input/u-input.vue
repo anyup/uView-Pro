@@ -91,7 +91,7 @@
         <text
             class="u-input__count"
             :style="{
-                'background-color': props.disabled ? 'transparent' : 'var(--u-white-color)'
+                'background-color': props.disabled ? 'transparent' : 'var(--u-bg-white)'
             }"
             v-if="props.type === 'textarea' && props.count"
         >
@@ -256,7 +256,7 @@ defineExpose({
     @include vue-flex;
 
     &__input {
-        //height: $u-form-item-height;
+        //height: 70rpx;
         font-size: 28rpx;
         color: $u-main-color;
         flex: 1;
@@ -277,7 +277,7 @@ defineExpose({
         bottom: 0;
         font-size: 12px;
         color: $u-tips-color;
-        background-color: var(--u-white-color);
+        background-color: var(--u-bg-white);
         padding: 1px 4px;
         border-radius: 10px;
         line-height: 16px;
@@ -285,7 +285,7 @@ defineExpose({
 
     &--border {
         border-radius: 4px;
-        border: 1px solid $u-form-item-border-color;
+        border: 1px solid $u-border-color;
     }
 
     &--error {

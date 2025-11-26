@@ -46,7 +46,7 @@ import { SubsectionProps } from './types';
  * @property {Boolean} animation 是否开启动画效果，见上方说明（默认true）
  * @property {Boolean} bold 激活选项的字体是否加粗（默认true）
  * @property {String} bgColor 组件背景颜色，mode为button时有效（默认var(--u-divider-color)）
- * @property {String} buttonColor 按钮背景颜色，mode为button时有效（默认var(--u-white-color)）
+ * @property {String} buttonColor 按钮背景颜色，mode为button时有效（默认var(--u-bg-white)）
  * @property {Boolean} vibrateShort 在切换分段器的时候，是否让设备震一下（默认false）
  * @event {Function} change 分段器选项发生改变时触发
  * @example <u-subsection active-color="var(--u-type-warning)"></u-subsection>
@@ -67,7 +67,7 @@ const listInfo = ref<ListItem[]>([]);
 const itemBgStyle = ref<{ [key: string]: any }>({
     width: 0,
     left: 0,
-    backgroundColor: 'var(--u-white-color)',
+    backgroundColor: 'var(--u-bg-white)',
     height: '100%',
     transition: ''
 });

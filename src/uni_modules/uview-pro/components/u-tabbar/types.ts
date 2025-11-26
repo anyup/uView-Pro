@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
+import type { TabbarItem } from '../../types/global';
 
 /**
  * TabbarProps 底部导航栏 props 类型定义
@@ -12,7 +13,7 @@ export const TabbarProps = {
     /** v-model绑定当前激活项的值 */
     modelValue: { type: [String, Number] as PropType<string | number>, default: 0 },
     /** tabbar背景色 */
-    bgColor: { type: String, default: 'var(--u-white-color)' },
+    bgColor: { type: String, default: 'var(--u-bg-white)' },
     /** tabbar高度，单位任意，数值默认rpx */
     height: { type: [String, Number] as PropType<string | number>, default: '50px' },
     /** 非凸起图标的大小，单位任意，数值默认rpx */
@@ -26,7 +27,7 @@ export const TabbarProps = {
     /** 是否显示中部凸起按钮 */
     midButton: { type: Boolean, default: false },
     /** tabbar配置项数组 */
-    list: { type: Array as PropType<any[]>, default: () => [] },
+    list: { type: Array as PropType<TabbarItem[]>, default: () => [] },
     /** 切换前回调，返回true或Promise */
     beforeSwitch: { type: Function as PropType<((index: number) => boolean | Promise<any>) | null>, default: null },
     /** 是否显示顶部横线 */

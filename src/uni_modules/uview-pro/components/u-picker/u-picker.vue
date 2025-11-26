@@ -773,14 +773,14 @@ onMounted(() => {
     align-items: center;
     box-sizing: border-box;
     font-size: 30rpx;
-    background: var(--u-white-color);
+    background-color: var(--u-bg-white);
     position: relative;
 }
 
 .u-picker-header::after {
     content: '';
     position: absolute;
-    border-bottom: 1rpx solid var(--u-bg-surface-color);
+    border-bottom: 1rpx solid var(--u-bg-gray-light);
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
     bottom: 0;
@@ -796,7 +796,7 @@ onMounted(() => {
     width: 100%;
     height: 500rpx;
     overflow: hidden;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
 }
 
 .u-column-item {

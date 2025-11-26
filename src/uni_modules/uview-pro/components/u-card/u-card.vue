@@ -165,7 +165,7 @@ function onFootClick() {
     position: relative;
     overflow: hidden;
     font-size: 28rpx;
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     box-sizing: border-box;
 
     &-full {

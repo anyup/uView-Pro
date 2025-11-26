@@ -56,7 +56,7 @@ import { LoadmoreProps } from './types';
  * @description 此组件一般用于标识页面底部加载数据时的状态。
  * @tutorial https://uviewpro.cn/zh/components/loadMore.html
  * @property {String} status 组件状态（默认loadmore）
- * @property {String} bg-color 组件背景颜色，在页面是非白色时会用到（默认var(--u-white-color)）
+ * @property {String} bg-color 组件背景颜色，在页面是非白色时会用到（默认var(--u-bg-white)）
  * @property {Boolean} icon 加载中时是否显示图标（默认true）
  * @property {String} icon-type 加载中时的图标类型（默认circle）
  * @property {String} icon-color icon-type为circle时有效，加载中的动画图标的颜色（默认var(--u-light-color)）

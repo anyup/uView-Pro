@@ -98,7 +98,7 @@ import { $u } from '../../';
  * @property {Boolean} show-border 是否显示倒计时数字的边框（默认false）
  * @property {Boolean} hide-zero-day 当"天"的部分为0时，隐藏该字段 （默认true）
  * @property {String} border-color 数字边框的颜色（默认var(--u-main-color)）
- * @property {String} bg-color 倒计时数字的背景颜色（默认var(--u-white-color)）
+ * @property {String} bg-color 倒计时数字的背景颜色（默认var(--u-bg-white)）
  * @property {String} color 倒计时数字的颜色（默认var(--u-main-color)）
  * @property {String | Number} height 数字高度值(宽度等同此值)，设置边框时看情况是否需要设置此值，单位rpx（默认auto）
  * @property {Boolean} show-days 是否显示倒计时的"天"部分（默认true）

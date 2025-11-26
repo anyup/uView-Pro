@@ -650,7 +650,7 @@ function btnFix(show: boolean) {
         width: 100%;
         box-sizing: border-box;
         font-size: 30rpx;
-        background-color: var(--u-white-color);
+        background-color: var(--u-bg-white);
         color: $u-main-color;
 
         &__text {
@@ -697,7 +697,7 @@ function btnFix(show: boolean) {
         flex-wrap: wrap;
         padding: 6px 0;
         box-sizing: border-box;
-        background-color: var(--u-white-color);
+        background-color: var(--u-bg-white);
         position: relative;
 
         &--end-date {
@@ -775,7 +775,7 @@ function btnFix(show: boolean) {
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        background-color: var(--u-white-color);
+        background-color: var(--u-bg-white);
         padding: 0 40rpx 30rpx;
         box-sizing: border-box;
         font-size: 24rpx;

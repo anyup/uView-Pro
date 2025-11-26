@@ -242,7 +242,7 @@ defineExpose<ToastExpose>({
 .u-type-info {
     color: $u-type-info;
     background-color: $u-type-info-light;
-    border: 1px solid var(--u-bg-surface-color);
+    border: 1px solid var(--u-bg-gray-light);
 }
 
 .u-type-default {

@@ -22,7 +22,7 @@ export const CountDownProps = {
     /** 字体大小，单位rpx */
     fontSize: { type: [Number, String] as PropType<number | string>, default: 30 },
     /** 背景颜色 */
-    bgColor: { type: String, default: 'var(--u-white-color)' },
+    bgColor: { type: String, default: 'var(--u-bg-white)' },
     /** 数字框高度，单位rpx */
     height: { type: [Number, String] as PropType<number | string>, default: 'auto' },
     /** 是否显示数字框 */

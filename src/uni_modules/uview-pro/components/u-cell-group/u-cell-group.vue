@@ -54,7 +54,7 @@ defineProps(CellGroupProps);
 }
 
 .u-cell-item-box {
-    background-color: var(--u-white-color);
+    background-color: var(--u-bg-white);
     flex-direction: row;
 }
 </style>
