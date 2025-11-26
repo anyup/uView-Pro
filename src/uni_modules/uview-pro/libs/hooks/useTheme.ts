@@ -41,7 +41,7 @@ function saveDarkModeToStorage(mode: DarkMode) {
 /**
  * 设置主题
  */
-export function setTheme(themeName: string) {
+function setTheme(themeName: string) {
     configProvider.setTheme(themeName);
     currentTheme.value = configProvider.getCurrentTheme();
     saveThemeToStorage(themeName);
@@ -50,14 +50,14 @@ export function setTheme(themeName: string) {
 /**
  * 获取当前主题
  */
-export function getCurrentTheme(): Theme | null {
+function getCurrentTheme(): Theme | null {
     return currentTheme.value || configProvider.getCurrentTheme();
 }
 
 /**
  * 获取所有可用主题
  */
-export function getAvailableThemes() {
+function getAvailableThemes() {
     return configProvider.getThemes();
 }
 
@@ -105,7 +105,7 @@ export function initTheme(themes?: any[], defaultThemeName?: string) {
 /**
  * 获取当前暗黑模式设置
  */
-export function getDarkMode(): DarkMode {
+function getDarkMode(): DarkMode {
     return configProvider.getDarkMode();
 }
 
@@ -113,7 +113,7 @@ export function getDarkMode(): DarkMode {
  * 设置暗黑模式
  * @param mode 'auto' (跟随系统) | 'light' (强制亮色) | 'dark' (强制暗黑)
  */
-export function setDarkMode(mode: DarkMode) {
+function setDarkMode(mode: DarkMode) {
     configProvider.setDarkMode(mode);
     darkModeRef.value = mode;
     saveDarkModeToStorage(mode);
@@ -122,14 +122,14 @@ export function setDarkMode(mode: DarkMode) {
 /**
  * 检查当前是否处于暗黑模式
  */
-export function isInDarkMode(): boolean {
+function isInDarkMode(): boolean {
     return configProvider.isInDarkMode();
 }
 
 /**
  * 切换暗黑模式（在当前模式的基础上切换）
  */
-export function toggleDarkMode() {
+function toggleDarkMode() {
     const current = getDarkMode();
     const nextMode = current === 'dark' ? 'light' : 'dark';
     setDarkMode(nextMode);

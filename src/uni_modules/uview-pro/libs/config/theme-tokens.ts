@@ -21,22 +21,21 @@ const lightPalette: ThemeColor = {
     infoDark: '#82848a',
     infoDisabled: '#c8c9cc',
     infoLight: '#f4f4f5',
+    whiteColor: '#ffffff',
+    blackColor: '#000000',
     mainColor: '#303133',
     contentColor: '#606266',
     tipsColor: '#909399',
     lightColor: '#c0c4cc',
-    borderColor: '#e4e7ed',
-    bgColor: '#f3f4f6',
-    bgPageColor: '#ffffff',
-    bgDisabledColor: '#f5f7fa',
-    bgSurfaceColor: '#f7f8fa',
-    bgOverlayColor: 'rgba(0, 0, 0, 0.5)',
-    formItemBorderColor: '#dcdfe6',
-    whiteColor: '#ffffff',
-    blackColor: '#000000',
+    borderColor: '#dcdfe6',
     dividerColor: '#e4e7ed',
     maskColor: 'rgba(0, 0, 0, 0.4)',
-    shadowColor: 'rgba(0, 0, 0, 0.1)'
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    bgColor: '#f3f4f6',
+    bgWhite: '#ffffff',
+    bgGrayLight: '#f5f7fa',
+    bgGrayDark: '#2f343c',
+    bgBlack: '#000000'
 };
 
 const darkPalette: ThemeColor = {
@@ -60,22 +59,21 @@ const darkPalette: ThemeColor = {
     infoDark: '#7c8394',
     infoDisabled: '#3b3f4c',
     infoLight: '#1d2029',
+    whiteColor: '#f5f6f7',
+    blackColor: '#f5f6f7',
     mainColor: '#f5f6f7',
     contentColor: '#cfd3dc',
     tipsColor: '#9aa1af',
     lightColor: '#6b7082',
     borderColor: '#3a4251',
-    bgColor: '#111827',
-    bgPageColor: '#0f1115',
-    bgSurfaceColor: '#1c2233',
-    bgDisabledColor: '#1c2233',
-    bgOverlayColor: 'rgba(0, 0, 0, 0.7)',
-    formItemBorderColor: '#3a4251',
-    whiteColor: '#000000',
-    blackColor: '#ffffff',
     dividerColor: '#3a4251',
     maskColor: 'rgba(0, 0, 0, 0.6)',
-    shadowColor: 'rgba(0, 0, 0, 0.3)'
+    shadowColor: 'rgba(0, 0, 0, 0.3)',
+    bgColor: '#111827',
+    bgWhite: '#000000',
+    bgGrayLight: '#1a1a1a',
+    bgGrayDark: '#f5f7fa',
+    bgBlack: '#ffffff'
 };
 
 const lightCss: Record<string, string> = {

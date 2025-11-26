@@ -16,11 +16,11 @@ const DEFAULT_LIGHT_TOKENS = (defaultThemes[0]?.color || {}) as Partial<ThemeCol
 const DEFAULT_DARK_TOKENS = (defaultThemes[0]?.darkColor || {}) as Partial<ThemeColor>;
 const STRUCTURAL_TOKENS = new Set([
     'bgColor',
-    'bgPageColor',
-    'bgSurfaceColor',
-    'bgOverlayColor',
+    'bgWhite',
+    'bgGrayLight',
+    'bgGrayDark',
+    'bgBlack',
     'borderColor',
-    'formItemBorderColor',
     'lightColor',
     'mainColor',
     'contentColor',
@@ -47,7 +47,7 @@ export class ConfigProvider {
     public cssVarsRef = ref<Record<string, string>>({});
     private baseColorTokens: Partial<ThemeColor> = DEFAULT_LIGHT_TOKENS;
     private baseDarkColorTokens: Partial<ThemeColor> = DEFAULT_DARK_TOKENS;
-    private debug: boolean = true;
+    private debug: boolean = false;
     private systemDarkModeMediaQuery: MediaQueryList | null = null;
     private lastAppliedCssKeys: string[] = [];
 

@@ -312,10 +312,10 @@ export type ColorType =
     | 'primaryDisabled'
     | 'primaryLight'
     | 'bgColor'
-    | 'bgPageColor'
-    | 'bgDisabledColor'
-    | 'bgSurfaceColor'
-    | 'bgOverlayColor'
+    | 'bgWhite'
+    | 'bgGrayLight'
+    | 'bgGrayDark'
+    | 'bgBlack'
     | 'info'
     | 'infoDark'
     | 'infoDisabled'
@@ -337,7 +337,6 @@ export type ColorType =
     | 'tipsColor'
     | 'lightColor'
     | 'borderColor'
-    | 'formItemBorderColor'
     | 'whiteColor'
     | 'blackColor'
     | 'dividerColor'
@@ -391,4 +390,16 @@ export type PaginationDirection = 'prev' | 'next';
 export type PaginationChangePayload = {
     type: PaginationDirection;
     current: number;
+};
+
+// tabbar 组件 Item
+export type TabbarItem = {
+    text?: string;
+    pagePath?: string;
+    iconPath?: string;
+    selectedIconPath?: string;
+    count?: number;
+    isDot?: boolean;
+    customIcon?: boolean;
+    midButton?: boolean;
 };

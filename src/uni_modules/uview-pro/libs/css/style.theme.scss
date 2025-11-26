@@ -22,10 +22,10 @@ page.u-theme-dark,
 
 .u-config-provider {
     color: $u-main-color;
-    background-color: var(--u-bg-page-color, #ffffff);
+    background-color: var(--u-bg-white, #ffffff);
 }
 
 .u-config-provider.u-theme-dark {
-    background-color: var(--u-bg-page-color, #0f1115);
+    background-color: var(--u-bg-white, #0f1115);
     color: $u-main-color;
 }
