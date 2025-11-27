@@ -177,19 +177,27 @@ const showHairLineBorder = computed(() => {
  * @emits click
  */
 function click(e: any) {
-    $u.throttle(() => {
-        // 如果按钮时disabled和loading状态，不触发水波纹效果
-        if (props.loading === true || props.disabled === true) return;
-        // 是否开启水波纹效果
-        if (props.ripple) {
-            // 每次点击时，移除上一次的类，再次添加，才能触发动画效果
-            waveActive.value = false;
-            nextTick(() => {
-                getWaveQuery(e);
-            });
-        }
-        emit('click', e);
-    }, Number(props.throttleTime));
+    if (Number(props.throttleTime)) {
+        $u.throttle(() => {
+            clickAction(e);
+        }, Number(props.throttleTime));
+    } else {
+        clickAction(e);
+    }
+}
+
+function clickAction(e: any) {
+    // 如果按钮时disabled和loading状态，不触发水波纹效果
+    if (props.loading === true || props.disabled === true) return;
+    // 是否开启水波纹效果
+    if (props.ripple) {
+        // 每次点击时，移除上一次的类，再次添加，才能触发动画效果
+        waveActive.value = false;
+        nextTick(() => {
+            getWaveQuery(e);
+        });
+    }
+    emit('click', e);
 }
 
 /**

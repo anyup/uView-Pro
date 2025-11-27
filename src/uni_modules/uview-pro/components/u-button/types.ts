@@ -56,7 +56,7 @@ export const ButtonProps = {
     /** 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取 */
     dataName: { type: String, default: '' },
     /** 节流，一定时间内只能触发一次 */
-    throttleTime: { type: [String, Number], default: 1000 },
+    throttleTime: { type: [String, Number], default: 0 },
     /** 按住后多久出现点击态，单位毫秒 */
     hoverStartTime: { type: [String, Number], default: 20 },
     /** 手指松开后点击态保留时间，单位毫秒 */
