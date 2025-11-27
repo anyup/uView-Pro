@@ -242,7 +242,7 @@ export class ConfigProvider {
                     const normalized = this.ensureDarkVariant({
                         ...theme,
                         color: this.applyColorFallbacks(theme.color),
-                        darkColor: theme.darkColor ? this.applyDarkFallbacks(theme.darkColor) : undefined,
+                        darkColor: theme.darkColor ? { ...theme.darkColor } : undefined,
                         css: theme.css ? { ...theme.css } : undefined,
                         darkCss: theme.darkCss ? { ...theme.darkCss } : undefined
                     });
@@ -253,16 +253,19 @@ export class ConfigProvider {
     }
 
     private ensureDarkVariant(theme: Theme): Theme {
-        if (theme.darkColor && Object.keys(theme.darkColor).length > 0) {
-            return {
-                ...theme,
-                darkColor: this.applyDarkFallbacks(theme.darkColor)
-            };
-        }
-        const nonStructural = this.filterNonStructuralTokens(theme.color || {});
+        const finalDark = this.buildDarkPalette(theme);
         return {
             ...theme,
-            darkColor: this.applyDarkFallbacks(nonStructural)
+            darkColor: this.applyDarkFallbacks(finalDark)
+        };
+    }
+
+    private buildDarkPalette(theme: Theme): Partial<ThemeColor> {
+        const provided = theme.darkColor || {};
+        const generated = this.generateDarkFromLight(theme.color || {}, provided);
+        return {
+            ...generated,
+            ...provided
         };
     }
 
@@ -294,6 +297,63 @@ export class ConfigProvider {
             }
         });
         return result;
+    }
+
+    private generateDarkFromLight(palette: Partial<ThemeColor>, provided: Partial<ThemeColor>): Partial<ThemeColor> {
+        const result: Partial<ThemeColor> = {};
+        const nonStructural = this.filterNonStructuralTokens(palette);
+        Object.entries(nonStructural).forEach(([key, value]) => {
+            if (typeof value !== 'string') return;
+            if (provided && Object.prototype.hasOwnProperty.call(provided, key)) {
+                return;
+            }
+            const fallback = (this.baseDarkColorTokens as any)?.[key];
+            (result as any)[key] = this.createDarkVariantFromLight(value, fallback);
+        });
+        return result;
+    }
+
+    private createDarkVariantFromLight(color: string, fallback?: string): string {
+        const normalized = this.normalizeHex(color);
+        const fallbackHex = fallback ? this.normalizeHex(fallback) : null;
+        if (normalized && fallbackHex) {
+            return this.mixHex(normalized, fallbackHex, 0.6);
+        }
+        if (fallbackHex) return fallbackHex;
+        return normalized || color;
+    }
+
+    private normalizeHex(color: string): string | null {
+        if (!color) return null;
+        const hex = color.trim();
+        if (/^#([0-9a-fA-F]{6})$/.test(hex)) return hex.toLowerCase();
+        return null;
+    }
+
+    private mixHex(fromHex: string, toHex: string, ratio: number): string {
+        const from = this.hexToRgb(fromHex);
+        const to = this.hexToRgb(toHex);
+        if (!from || !to) return toHex;
+        const clamp = (val: number) => Math.min(255, Math.max(0, Math.round(val)));
+        const r = clamp(from.r * (1 - ratio) + to.r * ratio);
+        const g = clamp(from.g * (1 - ratio) + to.g * ratio);
+        const b = clamp(from.b * (1 - ratio) + to.b * ratio);
+        return this.rgbToHex(r, g, b);
+    }
+
+    private hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+        const match = /^#([0-9a-fA-F]{6})$/.exec(hex);
+        if (!match) return null;
+        return {
+            r: parseInt(match[1].slice(0, 2), 16),
+            g: parseInt(match[1].slice(2, 4), 16),
+            b: parseInt(match[1].slice(4, 6), 16)
+        };
+    }
+
+    private rgbToHex(r: number, g: number, b: number): string {
+        const toHex = (val: number) => val.toString(16).padStart(2, '0');
+        return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
     }
 
     private isStructuralToken(token: string): boolean {
