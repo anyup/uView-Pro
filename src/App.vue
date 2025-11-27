@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onLaunch, onShow, onHide } from '@dcloudio/uni-app';
+import { onLaunch, onShow, onHide, onThemeChange } from '@dcloudio/uni-app';
 onLaunch(() => {
     console.log('App Launch');
 });
@@ -8,6 +8,9 @@ onShow(() => {
 });
 onHide(() => {
     console.log('App Hide');
+});
+onThemeChange(res => {
+    console.log('[App.vue] system theme changed', res);
 });
 </script>
 <style lang="scss">

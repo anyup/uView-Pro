@@ -85,6 +85,7 @@ export class ConfigProvider {
         try {
             if (typeof uni !== 'undefined' && typeof uni.onThemeChange === 'function') {
                 uni.onThemeChange((res: { theme: string }) => {
+                    console.log('[ConfigProvider] system theme changed', res);
                     if (this.darkModeRef.value === 'auto') {
                         // 系统主题变化时，重新应用主题
                         this.applyTheme(this.currentThemeRef.value);
