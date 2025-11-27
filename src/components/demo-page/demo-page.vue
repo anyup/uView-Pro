@@ -1,5 +1,5 @@
 <template>
-    <view class="demo-page">
+    <view class="demo-page" :style="$u.toStyle(customStyle)">
         <u-navbar
             v-if="!hideNav"
             :is-back="navBack"
@@ -230,6 +230,10 @@ const props = defineProps({
     extras: {
         type: Array,
         default: () => []
+    },
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: ''
     }
 });
 

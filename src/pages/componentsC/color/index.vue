@@ -3,6 +3,7 @@
         title="Color 色彩"
         desc="uView经过大量调试和研究，得出一套专有的调色板，在各个组件内部，使用统一的配色，为您的产品带来统一又鲜明的视觉效果。"
         apis="color"
+        :custom-style="{ backgroundImage: 'none' }"
     >
         <view class="wrap">
             <view class="item">

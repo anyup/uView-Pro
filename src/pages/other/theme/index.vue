@@ -61,12 +61,12 @@ onMounted(() => {
 // 事件处理
 const handleThemeChange = (themeName: string) => {
     setTheme(themeName);
-    showThemePanel.value = false;
+    // showThemePanel.value = false;
 };
 
 const handleDarkModeChange = (mode: DarkMode) => {
     setDarkMode(mode);
-    showDarkModePanel.value = false;
+    // showDarkModePanel.value = false;
 };
 </script>
 
