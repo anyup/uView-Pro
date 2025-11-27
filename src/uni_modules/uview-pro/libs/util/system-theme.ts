@@ -9,10 +9,11 @@ export function getSystemDarkMode(): SystemTheme {
     try {
         if (typeof uni !== 'undefined' && typeof uni.getSystemInfoSync === 'function') {
             const systemInfo = uni.getSystemInfoSync();
-            if (systemInfo && systemInfo.theme === 'dark') {
+            const theme = systemInfo.osTheme || systemInfo.theme || 'light';
+            if (theme === 'dark') {
                 return 'dark';
             }
-            if (systemInfo && systemInfo.theme === 'light') {
+            if (theme === 'light') {
                 return 'light';
             }
         }
