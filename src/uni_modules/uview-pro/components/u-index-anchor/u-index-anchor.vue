@@ -108,7 +108,7 @@ defineExpose({
     font-weight: 500;
     font-size: 28rpx;
     line-height: 1.2;
-    background-color: rgb(245, 245, 245);
+    background-color: $u-bg-color;
 }
 
 .u-index-anchor--active {

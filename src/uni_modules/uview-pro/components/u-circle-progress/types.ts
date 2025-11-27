@@ -1,6 +1,7 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { ThemeType } from '../../types/global';
 import { baseProps } from '../common/props';
+import { $u } from '../../libs';
 
 /**
  * circleProgress 环形进度条 Props
@@ -17,7 +18,7 @@ export const CircleProgressProps = {
     /** 底部圆环的颜色（灰色的圆环） */
     inactiveColor: {
         type: String,
-        default: 'var(--u-divider-color)'
+        default: () => $u.getColor('dividerColor')
     },
     /** 圆环激活部分的颜色 */
     activeColor: {
