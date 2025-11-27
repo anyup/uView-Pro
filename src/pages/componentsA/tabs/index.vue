@@ -8,7 +8,7 @@
                         <u-toast ref="uToast"></u-toast>
                         <u-tabs
                             v-if="control"
-                            bg-color="#fafafa"
+                            :bg-color="$u.color.bgColor"
                             :bold="bold"
                             :active-color="activeColor"
                             :list="list"
@@ -75,7 +75,7 @@ const tabCountIndex = ref(0);
 const activeColor = ref($u.color['primary']);
 const bold = ref(true);
 const control = ref(true);
-const offset = ref<[number, number]>([5, -5]);
+const offset = ref<[number, number]>([5, 0]);
 
 onLoad(() => {
     list.value = data.value;

@@ -10,7 +10,7 @@
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
                         <u-swipe-action
-                            bg-color="rgb(250, 250, 250)"
+                            :bg-color="$u.color.bgWhite"
                             @open="open"
                             :disabled="disabled"
                             :index="index"

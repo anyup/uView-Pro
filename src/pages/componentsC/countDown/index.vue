@@ -19,7 +19,7 @@
                             :border-color="borderColor"
                             :color="color"
                             @end="end"
-                            bg-color="rgb(250, 250, 250)"
+                            :bg-color="$u.color.bgWhite"
                         ></u-count-down>
                     </view>
                 </view>

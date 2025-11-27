@@ -54,6 +54,7 @@
             title="Navbar 导航栏"
             desc="用于页面顶部导航，支持自定义内容、返回事件、渐变背景等丰富场景。"
             :apis="'navbar'"
+            hide-nav
         >
             <template #default>
                 <view class="u-demo">

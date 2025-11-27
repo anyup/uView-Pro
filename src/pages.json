@@ -568,7 +568,8 @@
                 {
                     "path": "indexList/index",
                     "style": {
-                        "navigationBarTitleText": "indexList-索引列表"
+                        "navigationBarTitleText": "indexList-索引列表",
+                        "navigationStyle": "default"
                     }
                 },
                 // empty内容为空

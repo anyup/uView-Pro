@@ -1,5 +1,5 @@
 <template>
-    <view>
+    <view class="wrap">
         <u-navbar :is-back="false" title="　" :border-bottom="false">
             <view class="u-flex u-row-right" style="width: 100%">
                 <view class="camera u-flex u-row-center">
@@ -61,14 +61,15 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-page {
-    background-color: #ededed;
+.wrap {
+    min-height: 100vh;
+    background-color: $u-bg-color;
 }
 .camera {
     width: 54px;
     height: 44px;
     &:active {
-        background-color: #ededed;
+        background-color: $u-bg-color;
     }
 }
 .user-box {

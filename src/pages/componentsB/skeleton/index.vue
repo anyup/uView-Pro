@@ -22,7 +22,7 @@
                         </view>
                         <!--引用组件-->
                         <u-skeleton
-                            bg-color="rgb(250, 250, 250)"
+                            :bg-color="$u.color.bgWhite"
                             :loading="loading"
                             :animation="animation"
                             :el-color="elColor"

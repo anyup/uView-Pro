@@ -1,5 +1,5 @@
 <template>
-    <view>
+    <view class="wrap">
         <view class="item" v-for="(res, index) in siteList" :key="res.id">
             <view class="top">
                 <view class="name">{{ res.name }}</view>
@@ -68,6 +68,10 @@ onMounted(getData);
 </script>
 
 <style lang="scss" scoped>
+.wrap {
+    min-height: 100vh;
+    background-color: $u-bg-white;
+}
 .item {
     padding: 40rpx 20rpx;
     .top {

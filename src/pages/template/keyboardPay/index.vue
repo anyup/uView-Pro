@@ -1,5 +1,5 @@
 <template>
-    <view>
+    <view class="wrap">
         <wx-tips :type="1" />
         <view class="u-padding-40">
             <u-button type="success" @click="showPop(true)">
@@ -105,6 +105,10 @@ function finish() {
 </script>
 
 <style lang="scss">
+.wrap {
+    min-height: 100vh;
+    background-color: $u-bg-color;
+}
 .money {
     font-size: 80rpx;
     color: $u-type-warning;

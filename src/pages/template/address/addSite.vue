@@ -90,6 +90,7 @@ function confirm(e: any) {
     font-size: 28rpx;
 }
 .wrap {
+    min-height: 100vh;
     background-color: $u-bg-color;
     .top {
         background-color: $u-bg-white;

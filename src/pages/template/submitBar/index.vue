@@ -1,5 +1,5 @@
 <template>
-    <view>
+    <view class="wrap">
         <wx-tips :type="1" />
         <view class="navigation">
             <view class="left">
@@ -30,6 +30,10 @@ import { $u } from '@/uni_modules/uview-pro';
 </script>
 
 <style lang="scss" scoped>
+.wrap {
+    min-height: 100vh;
+    background-color: $u-bg-white;
+}
 .navigation {
     display: flex;
     border: solid 1px $u-border-color;

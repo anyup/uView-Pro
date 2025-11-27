@@ -80,6 +80,8 @@ function finish(val: string) {
 
 <style lang="scss" scoped>
 .wrap {
+    min-height: 100vh;
+    background-color: $u-bg-white;
     padding: 80rpx;
 }
 

@@ -34,7 +34,7 @@
                     >
                         <template #icon>
                             <u-image
-                                custom-style="margin-right: 10rpx"
+                                custom-style="margin-right: 16rpx"
                                 :src="getImageUrl(item.icon)"
                                 :width="50"
                                 :height="50"
@@ -56,7 +56,7 @@
                     >
                         <template #icon>
                             <u-image
-                                style="margin-right: 16rpx"
+                                custom-style="margin-right: 16rpx"
                                 :src="getImageUrl(item.icon, true)"
                                 :width="50"
                                 :height="50"

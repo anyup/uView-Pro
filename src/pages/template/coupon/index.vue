@@ -110,11 +110,8 @@ function onUseCoupon() {
 </script>
 
 <style lang="scss" scoped>
-page {
-    height: 100%;
-    background-color: $u-bg-color;
-}
 .u-wrap {
+    min-height: 100vh;
     padding: 24rpx;
     background-color: $u-bg-color;
 }

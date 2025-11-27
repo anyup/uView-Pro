@@ -16,7 +16,7 @@
         </view>
         <view class="lang">
             <u-icon
-                size="46"
+                size="50"
                 :color="darkMode === 'dark' ? 'warning' : 'primary'"
                 :name="lang"
                 @click="switchLang"

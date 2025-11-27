@@ -53,6 +53,6 @@ onPageScroll((e: { scrollTop: number }) => {
     color: $u-content-color;
     font-size: 14px;
     line-height: 24px;
-    background-color: #fff;
+    background-color: $u-bg-white;
 }
 </style>

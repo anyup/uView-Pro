@@ -64,6 +64,8 @@ function submit() {
 
 <style lang="scss" scoped>
 .wrap {
+    min-height: 100vh;
+    background-color: $u-bg-white;
     font-size: 28rpx;
     .content {
         width: 600rpx;

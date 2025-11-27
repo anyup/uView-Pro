@@ -174,7 +174,7 @@ function maskChange(index: number) {
 }
 
 .slot-content {
-    background-color: #ffffff;
+    background-color: $u-bg-white;
     padding: 24rpx;
 
     .item-box {
@@ -192,7 +192,7 @@ function maskChange(index: number) {
         }
 
         .active {
-            color: #ffffff;
+            color: $u-white-color;
             background-color: $u-type-primary;
         }
     }

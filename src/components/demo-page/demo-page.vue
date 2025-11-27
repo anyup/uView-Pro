@@ -1,6 +1,7 @@
 <template>
     <view class="demo-page">
         <u-navbar
+            v-if="!hideNav"
             :is-back="navBack"
             :title="navTitle || title"
             :background="background"
@@ -12,14 +13,14 @@
             back-icon-color="#ffffff"
         >
             <template #left>
-                <view v-if="tabbar" class="u-m-l-20">
+                <view v-if="tabbar" class="u-m-l-30">
                     <!-- #ifdef MP -->
                     <u-icon
                         custom-prefix="custom-icon"
                         name="theme-fill"
                         size="46"
                         color="#ffffff"
-                        custom-style="margin-right:10px"
+                        custom-style="margin-right:16px"
                         @click="$u.route('/pages/other/theme/index')"
                     ></u-icon>
                     <!-- #endif -->
@@ -34,7 +35,7 @@
             </template>
             <!-- #ifndef MP -->
             <template #right>
-                <view v-if="tabbar" class="u-m-r-20">
+                <view v-if="tabbar" class="u-m-r-30">
                     <u-icon
                         custom-prefix="custom-icon"
                         name="theme-fill"
@@ -189,6 +190,10 @@ const props = defineProps({
     navBack: {
         type: Boolean,
         default: true
+    },
+    hideNav: {
+        type: Boolean,
+        default: false
     },
     tabbar: {
         type: Boolean,

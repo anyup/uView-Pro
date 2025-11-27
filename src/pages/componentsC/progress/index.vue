@@ -16,7 +16,7 @@
                             v-else
                             :percent="percent"
                             :active-color="activeColor"
-                            bg-color="rgb(250, 250, 250)"
+                            :bg-color="$u.color.bgWhite"
                         >
                             <view class="u-progress-content">
                                 <view class="u-progress-dot"></view>
