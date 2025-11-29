@@ -377,8 +377,7 @@ export type LogConfig = Partial<{
 }>;
 
 export interface UViewProOptions {
-    theme?: ThemeColor;
-    themes?: Theme[];
+    theme?: ThemeColor | Theme[];
     log?: LogConfig;
     // 可扩展更多配置项
 }

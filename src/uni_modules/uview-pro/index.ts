@@ -16,10 +16,13 @@ declare const uni: {
 const install = (app: any, options?: UViewProOptions): void => {
     if (options) {
         // 配置主题：统一使用 useTheme 的 initTheme 初始化，避免重复初始化
-        if (options.themes) {
-            // 使用 useTheme 的 initTheme，它会智能处理重复初始化
-            initTheme(options.themes);
-        } else if (options.theme) {
+        if (options.theme) {
+            // 如果是数组，则为多主题配置
+            // 直接使用 useTheme 的 initTheme，它会智能处理重复初始化
+            if (Array.isArray(options.theme)) {
+                initTheme(options.theme);
+                return;
+            }
             // 兼容之前只有一套样式的情况,需要覆盖默认主题
             // 获取默认主题（uviewpro）
             const defaultTheme = defaultThemes[0];
