@@ -2,7 +2,9 @@
 
 /**
  * 发布脚本 (Node.js版本)
- * 使用方法: node scripts/release.js [patch|minor|major]
+ * 使用方法:
+ *   node scripts/release.js [patch|minor|major]  # 语义化版本
+ *   node scripts/release.js 0.5.1                 # 直接指定版本号
  * 在所有平台上都能运行
  */
 
@@ -12,16 +14,33 @@ const path = require('path');
 
 // 获取命令行参数
 const args = process.argv.slice(2);
-const versionType = args[0];
+const versionInput = args[0];
+
+// 验证版本号格式 (支持 x.y.z 格式，如 0.5.1, 1.0.0, 2.3.4-beta.1)
+function isValidVersion(version) {
+    if (!version || typeof version !== 'string') return false;
+    // 匹配语义化版本号: x.y.z 或 x.y.z-prerelease
+    const semverRegex = /^\d+\.\d+\.\d+(-[a-zA-Z0-9.-]+)?$/;
+    return semverRegex.test(version);
+}
+
+// 判断是语义化版本类型还是直接指定版本号
+const isSemverType = ['patch', 'minor', 'major'].includes(versionInput);
+const isDirectVersion = isValidVersion(versionInput);
 
 // 验证参数
-if (!versionType || !['patch', 'minor', 'major'].includes(versionType)) {
-    console.error('❌ 请指定版本类型: patch, minor, 或 major');
-    console.error('使用方法: node scripts/release.js [patch|minor|major]');
+if (!versionInput || (!isSemverType && !isDirectVersion)) {
+    console.error('❌ 请指定版本类型或版本号');
+    console.error('使用方法:');
+    console.error('  node scripts/release.js [patch|minor|major]  # 语义化版本');
+    console.error('  node scripts/release.js 0.5.1                 # 直接指定版本号');
     process.exit(1);
 }
 
-console.log(`🚀 开始发布 ${versionType} 版本...`);
+const versionType = isSemverType ? versionInput : null;
+const targetVersion = isDirectVersion ? versionInput : null;
+
+console.log(`🚀 开始发布 ${targetVersion || versionType} 版本...`);
 
 // 执行命令的辅助函数
 function execCommand(command, options = {}) {
@@ -75,14 +94,25 @@ if (currentBranch !== 'main' && currentBranch !== 'master') {
 
 function continueRelease() {
     try {
-        // 更新版本号
-        console.log('📦 更新版本号...');
-        execCommand(`npm version ${versionType} --no-git-tag-version`);
-
-        // 获取新版本号
         const packageJsonPath = path.join(process.cwd(), 'package.json');
-        const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-        const newVersion = packageJson.version;
+        let newVersion;
+
+        // 更新版本号
+        if (targetVersion) {
+            // 直接指定版本号
+            console.log(`📦 更新版本号为 ${targetVersion}...`);
+            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+            packageJson.version = targetVersion;
+            fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
+            newVersion = targetVersion;
+        } else {
+            // 语义化版本类型
+            console.log('📦 更新版本号...');
+            execCommand(`npm version ${versionType} --no-git-tag-version`);
+            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+            newVersion = packageJson.version;
+        }
+
         console.log(`✨ 新版本: ${newVersion}`);
 
         // 同时更新uview-pro模块的版本号
