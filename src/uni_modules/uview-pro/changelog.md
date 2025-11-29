@@ -1,3 +1,69 @@
+## 0.4.1（2025-11-30）
+
+### ✨ Features | 新功能
+
+- **root:** 新增根节点组件支持，优化主题文件 ([12d14f8](https://github.com/anyup/uView-Pro/commit/12d14f8c859bae1e330b246b6eb1f87c2597c2d7))
+- **iconfont:** 新增iconfont实例 ([4d34d25](https://github.com/anyup/uView-Pro/commit/4d34d25f0c124a6622b8b38b7501b85586843a42))
+- **locales:** 新增locales中英文字段 ([2dbad6d](https://github.com/anyup/uView-Pro/commit/2dbad6d38bc5cd2fbe55aa0998d2264782cb4dfe))
+- **markdown-view:** 新增 markdown-view 模块 ([9e21b6a](https://github.com/anyup/uView-Pro/commit/9e21b6af96c17175dd178923ab2f98c595bacb20))
+- **u-config-provider:** 新增 u-config-provider 组件用于全局主题管理 ([f44857c](https://github.com/anyup/uView-Pro/commit/f44857c44f0354b9408bc40c8d586ace1ea40538))
+- **theme:** 实现自定义多主题，主题切换功能 ([9551d26](https://github.com/anyup/uView-Pro/commit/9551d260451d2c21b7fe9dfab4850a57c5601573))
+- **demo:** 新增 demo-page 组件并重构组件演示页面，添加 API 文档展示 ([ecfd77e](https://github.com/anyup/uView-Pro/commit/ecfd77ea3776720e0bbba7f7678896e685adff3a))
+- **demo-page:** 优化代码示例组件文档获取方式 ([50738be](https://github.com/anyup/uView-Pro/commit/50738beafa879e3f95831287a1aa7cb560b59c20))
+- **theme:** 实现暗黑模式并优化多主题管理 ([38f9346](https://github.com/anyup/uView-Pro/commit/38f93464edf7ba3e6a0d28c025e31cfe27a147bb))
+- **u-config-provider:** 完善u-config-provider主题注入和暗黑模式切换 ([726a7f9](https://github.com/anyup/uView-Pro/commit/726a7f96a31c2e6346c9037842963624b22c3f60))
+- **demo:** 优化主题切换示例逻辑和样式 ([d69af6a](https://github.com/anyup/uView-Pro/commit/d69af6a82b639d35ce757abccccb9f8f9aae14a5))
+- **theme:** 优化主题系统，兼容单主题、多主题配置能力 ([d06cd7f](https://github.com/anyup/uView-Pro/commit/d06cd7f592e5ae4f9dae7f0cd90f173f76cc5e62))
+- **theme:** 更新深蓝主题的色彩配置 ([77e8e5c](https://github.com/anyup/uView-Pro/commit/77e8e5c6ca55281253f86dbc5244c807f04324b3))
+- **config-provider:** 增加非 H5 平台系统暗黑模式识别 ([2175dc6](https://github.com/anyup/uView-Pro/commit/2175dc6892f7f559507e19c44638f5c57ac13e4a))
+- **u-button:** 调整u-button按钮节流默认值为0，优化点击逻辑 ([3fa2593](https://github.com/anyup/uView-Pro/commit/3fa2593dba31c05a97e001fda9cd233306f42a9d))
+- **theme:** 优化主题配置中的暗黑模式处理逻辑，按规则自动生成完整暗色方案 ([8246853](https://github.com/anyup/uView-Pro/commit/82468538004c88637b98c9bd2381b0d44aef0d22))
+- **system:** 添加系统主题变更监听 ([9c35243](https://github.com/anyup/uView-Pro/commit/9c3524390847d92c7345e8a27c4603afa8d094f4))
+- **theme:** 多主题配置兼容单主题 ([79d3223](https://github.com/anyup/uView-Pro/commit/79d3223459a306fb4ba320713ed03a4a6579f563))
+- **u-image:** 增强 u-image 组件自定义样式 ([b133c3c](https://github.com/anyup/uView-Pro/commit/b133c3c00f14738eaa0a61eaec19dbe1b5defcfe))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **app:** 添加本地应用资源 ([cd3f020](https://github.com/anyup/uView-Pro/commit/cd3f02074c871772ea0e42fb26336751eeda7c35))
+- **theme:** 重构主题配置和颜色处理逻辑 ([31aa36b](https://github.com/anyup/uView-Pro/commit/31aa36b9207144836be7073a804b8c7ebd68fc6b))
+- **demo:** 修改演示页面功能及样式，调整演示组件整体样式 ([8760b3c](https://github.com/anyup/uView-Pro/commit/8760b3c82ff129bd1695e384abbc762de6c85cd4))
+- **components:** 优化多个组件主题颜色变量使用，兼容多主题和暗黑模式 ([1a2856f](https://github.com/anyup/uView-Pro/commit/1a2856fc98ec3169d29330f9b7470e936d4aa334))
+- **demo:** 优化演示示例 Demo 的功能 ([445878b](https://github.com/anyup/uView-Pro/commit/445878b906475f5dd3bcc9b15efd9aac597f0603))
+- **demo-page:** 优化demo page展示，主题切换逻辑优化 ([c5ecbaa](https://github.com/anyup/uView-Pro/commit/c5ecbaa437e51cf1bf47f84f0f3bc071f37dd413))
+- 更新自定义主题文件 ([cab8be3](https://github.com/anyup/uView-Pro/commit/cab8be38832bca9de1254a06f199e6b3704ee88e))
+- **color:** 重构颜色组件以提升可维护性 ([d92a052](https://github.com/anyup/uView-Pro/commit/d92a0526f7bfa51eeb40bb90eb0e7fc8f24fe488))
+
+### ⚡ Performance Improvements | 性能优化
+
+- 优化微信小程序代码包体积 ([bf56c99](https://github.com/anyup/uView-Pro/commit/bf56c99515e41d067481cd6498187ed5bd37c193))
+
+### 💄 Styles | 风格
+
+- **demo:** 优化演示页面样式 ([ae5de09](https://github.com/anyup/uView-Pro/commit/ae5de091ee1234b4432eb7d2609f77fd5afd27aa))
+- **components:** 使用变量替代硬编码的颜色值 ([cf0044e](https://github.com/anyup/uView-Pro/commit/cf0044e3be68daff91b764eb31a75cf3ecad86aa))
+- **demo:** 优化替代组件颜色硬编码值，保证主题色和暗黑模式 ([291e92b](https://github.com/anyup/uView-Pro/commit/291e92b07d80532b1620f62ae0ac3f4909bdab6a))
+
+### 📦‍ Build System | 打包构建
+
+- 新增颜色替换脚本 ([b160c28](https://github.com/anyup/uView-Pro/commit/b160c28e838a4f27b9bfa2f3ce47e8ad46e807a0))
+- 指定 Node.js 版本 ([7147284](https://github.com/anyup/uView-Pro/commit/714728421527bbd5abed02fe4fdf51cdf3c2a583))
+- **deps:** 更新 dcloudio uni-app 依赖版本至 4.76 ([f92a348](https://github.com/anyup/uView-Pro/commit/f92a34892369facda3d89add34cfbeddc1872a65))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-tabbar:** 修复 u-tabbar 在鸿蒙应用上高度计算错误的问题 ([cc4bc1a](https://github.com/anyup/uView-Pro/commit/cc4bc1add7ef63f6d9eb519e9ee38414ef3c73eb))
+- **clipboard:** 处理未传入可选参数引起的错误 ([1756b53](https://github.com/anyup/uView-Pro/commit/1756b53f8ce2e2a21d288124c257b4729e48d92a))
+- **theme:** 修复获取系统设置的theme不正确的问题 ([58b0cbb](https://github.com/anyup/uView-Pro/commit/58b0cbb3aa666d8f127bc88850b66d469cc1b996))
+- **install:** 优化 install 方法的错误处理和代码结构 ([7edb867](https://github.com/anyup/uView-Pro/commit/7edb8673b0cdf4238c184a480b91fb73908e6c5c))
+
+### 👷 Continuous Integration | CI 配置
+
+- **release:** 支持直接指定版本号发布 ([e4db5f8](https://github.com/anyup/uView-Pro/commit/e4db5f8b349954548ddef37fc02aa5a397cace01))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/lonelyflyer"><img src="https://github.com/lonelyflyer.png?size=40" width="40" height="40" alt="Lonelyflyer" title="Lonelyflyer"/></a> 
+
 ## 0.3.16（2025-11-21）
 
 ### 📝 Documentation | 文档
