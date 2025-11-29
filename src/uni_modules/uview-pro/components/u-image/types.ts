@@ -1,8 +1,10 @@
 import { type ComponentPublicInstance, type ExtractPropTypes, type PropType } from 'vue';
 import type { ImgMode, Shape } from '../../types/global';
+import { baseProps } from '../common/props';
 
 // 定义 ImageProps 的类型
 export const ImageProps = {
+    ...baseProps,
     /** 图片地址 */
     src: { type: String, default: '' },
     /** 裁剪模式 */

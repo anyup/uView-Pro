@@ -1,5 +1,10 @@
 <template>
-    <view class="u-image" @tap="onClick" :style="[wrapStyle, backgroundStyle]">
+    <view
+        class="u-image"
+        @tap="onClick"
+        :style="$u.toStyle(wrapStyle, backgroundStyle, customStyle)"
+        :class="customClass"
+    >
         <image
             v-if="!isError"
             :src="src"
