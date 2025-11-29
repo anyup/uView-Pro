@@ -24,6 +24,9 @@ npm run release:minor
 
 # 发布主要版本
 npm run release:major
+
+# 发布指定版本
+npm run release 0.5.1
 ```
 
 或者直接使用：
@@ -32,6 +35,7 @@ npm run release:major
 node scripts/release.js patch
 node scripts/release.js minor
 node scripts/release.js major
+node scripts/release.js 0.5.1
 ```
 
 ### 2. Windows PowerShell 方式
@@ -96,6 +100,7 @@ npm run release:major
 - `patch` - 补丁版本 (修复 bug，如 1.0.0 → 1.0.1)
 - `minor` - 次要版本 (新功能，如 1.0.0 → 1.1.0)
 - `major` - 主要版本 (破坏性更新，如 1.0.0 → 2.0.0)
+- `0.5.1` - 指定版本 (自定义更新，如 1.0.0 → 1.5.1)
 
 ## 脚本功能
 
