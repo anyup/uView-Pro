@@ -54,7 +54,7 @@
             <view v-else class="list-wrap">
                 <view v-for="(group, gIndex) in filteredList" :key="gIndex" class="group-section">
                     <view class="group-title">
-                        <image style="width: 50rpx" :src="getIcon(group.icon)" mode="widthFix"></image>
+                        <u-image :height="50" :width="50" :src="getIcon(group.icon)"></u-image>
                         <text class="group-name">{{ getTitle('groupName', group) }}</text>
                         <view class="group-count">{{ group.list.length }}</view>
                     </view>
@@ -68,7 +68,12 @@
                             :style="{ animationDelay: gIndex * 120 + idx * 60 + 'ms' }"
                         >
                             <!-- 图像小预览 -->
-                            <image class="card-img" :src="getIcon(item.icon || item.path)" mode="widthFix"></image>
+                            <u-image
+                                :height="50"
+                                :width="50"
+                                :src="getIcon(item.icon || item.path)"
+                                mode="widthFix"
+                            ></u-image>
                             <view class="card-body">
                                 <view class="card-title">{{ getTitle('title', item) }}</view>
                                 <view class="card-desc">{{ getTitle('desc', item) }}</view>
@@ -383,16 +388,8 @@ onShow(() => {
     filter: saturate(1.02);
 }
 
-.card-img {
-    width: 56rpx;
-    height: 56rpx;
-    border-radius: 8rpx;
-    margin-right: 18rpx;
-    object-fit: cover;
-    transition: transform 0.28s ease;
-}
-
 .card-body {
+    margin-left: 20rpx;
     flex: 1;
 }
 
@@ -498,6 +495,7 @@ onShow(() => {
         -webkit-text-fill-color: transparent;
         background-clip: text;
         font-size: 36rpx;
+        margin-left: 20rpx;
     }
 
     .group-count {

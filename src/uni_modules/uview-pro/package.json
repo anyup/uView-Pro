@@ -1,9 +1,9 @@
 {
     "id": "uview-pro",
     "name": "uview-pro",
-    "displayName": "【支持鸿蒙】uView Pro｜基于Vue3+TS全面重构的80+精选UI组件库",
+    "displayName": "【支持鸿蒙】uView Pro｜基于Vue3+TS的80+精选UI组件库，支持多主题，暗黑模式",
     "version": "0.4.1",
-    "description": "uView Pro，是全面支持Vue3的uni-app生态框架，80+精选组件已使用TypeScript重构，已全面支持uni-app Vue3.0",
+    "description": "uView Pro，是全面支持Vue3的uni-app生态框架，80+精选组件已全面使用TypeScript重构，智能多主题配置，一键暗黑模式",
     "main": "index.ts",
     "module": "index.ts",
     "browser": "index.ts",
@@ -41,9 +41,9 @@
             "permissions": "无"
         },
         "npmurl": "https://www.npmjs.com/package/uview-pro",
-        "darkmode": "x",
+        "darkmode": "√",
         "i18n": "x",
-        "widescreen": "x"
+        "widescreen": "√"
     },
     "uni_modules": {
         "dependencies": [],
