@@ -67,7 +67,15 @@ pnpm dev
 
 ## 交流反馈
 
-欢迎通过各种方式来交流反馈，让 uView Pro 更好的为大家服务：[点击反馈](https://uviewpro.cn/zh/resource/about.html)
+欢迎通过各种方式来交流反馈，让 uView Pro 更好的为大家服务：
+
+[欢迎交流反馈](https://uviewpro.cn/zh/resource/about.html)
+
+## 捐赠 uView Pro
+
+开源不易，如果您认为 `uView Pro` 帮到了您的开发工作，您可以捐赠 `uView Pro`：
+
+[欢迎捐赠留名](https://uviewpro.cn/zh/resource/donation.html)
 
 ## 关于 PR
 
@@ -192,12 +200,6 @@ export function createApp() {
 ```
 
 请通过[快速上手](https://uviewpro.cn/zh/components/quickstart.html)了解更详细的内容
-
-## 捐赠 uView Pro
-
-开源不易，如果您认为 `uView Pro` 帮到了您的开发工作，您可以捐赠 `uView Pro`
-
-[欢迎捐赠留名](https://uviewpro.cn/zh/donate.html)
 
 ## 贡献者
 
