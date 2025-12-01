@@ -14,8 +14,8 @@ declare const uni: {
 
 // $u挂载到uni对象上
 const install = (app: any, options?: UViewProOptions): void => {
-    if (options) {
-        try {
+    try {
+        if (options) {
             // 配置主题：统一使用 useTheme 的 initTheme 初始化，避免重复初始化
             if (options.theme) {
                 // 如果是数组，则为多主题配置
@@ -39,15 +39,21 @@ const install = (app: any, options?: UViewProOptions): void => {
                         initTheme([mergedTheme], defaultTheme.name);
                     }
                 }
+            } else {
+                // 默认初始化系统主题
+                initTheme();
             }
             // 设置调试模式
             logger
                 .setDebugMode(options?.log?.debug ?? false)
                 .setPrefix(options?.log?.prefix)
                 .setShowCallerInfo(options?.log?.showCallerInfo ?? true);
-        } catch (error) {
-            console.error('[install options] Error:', error);
+        } else {
+            // 默认初始化系统主题
+            initTheme();
         }
+    } catch (error) {
+        console.error('[install options] Error:', error);
     }
     uni.$u = $u;
     // 可扩展更多配置项
