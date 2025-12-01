@@ -318,7 +318,7 @@ const apiContent = ref<String>('');
 const tabList = computed(() => {
     const result = [
         { name: '基础演示' },
-        // #ifndef MP || H5
+        // #ifdef APP-HARMONY
         { name: 'API文档', hidden: props.apis ? false : true }
         // #endif
         // { name: '应用场景', hidden: props.scenes || slots.scene ? false : true },
@@ -373,7 +373,7 @@ function clickHref(link: string) {
     $u.clipboard(link, { showToast: true });
 }
 onMounted(() => {
-    // #ifndef MP || H5
+    // #ifdef APP-HARMONY
     if (apis.value) {
         getMarkdown(apis.value).then((res: any) => {
             apiContent.value = res;

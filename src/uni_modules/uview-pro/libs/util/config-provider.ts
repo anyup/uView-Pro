@@ -51,6 +51,7 @@ export class ConfigProvider {
     private debug: boolean = false;
     private systemDarkModeMediaQuery: MediaQueryList | null = null;
     private lastAppliedCssKeys: string[] = [];
+    private interval = 0;
 
     constructor() {
         // 默认不自动初始化，调用 init 以传入主题列表
@@ -95,8 +96,29 @@ export class ConfigProvider {
         } catch (e) {
             if (this.debug) console.warn('[ConfigProvider] uni-app system dark mode listener failed', e);
         }
+        this.initAppEvent();
     }
 
+    /**
+     * App 平台事件监听
+     * 经测试 uni.onThemeChange 在 App 平台目前没生效，暂时只能通过定时检查
+     */
+    private initAppEvent(): void {
+        // #ifdef APP
+        try {
+            if (this.interval) clearInterval(this.interval);
+
+            this.interval = setInterval(() => {
+                if (this.darkModeRef.value === 'auto') {
+                    // 系统主题变化时，重新应用主题
+                    this.applyTheme(this.currentThemeRef.value);
+                }
+            }, 5000);
+        } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] setInterval failed', e);
+        }
+        // #endif
+    }
     /**
      * 检测当前是否应该使用暗黑模式
      */
