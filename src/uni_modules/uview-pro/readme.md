@@ -67,20 +67,7 @@ pnpm dev
 
 ## 交流反馈
 
-`uView Pro` 微信交流群： [点击进入](https://uviewpro.cn/zh/resource/about.html)
-
-`uView Pro` QQ 交流群： [点击进入](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=98nSVDldWEbDdq4lxiP4aL7uATfMSlI6&authKey=G2yQJ5MQiKzMldaxBsIfKt17NuJuUw8Fr6zdKLggc6NZXgw4BVbqkU2U3EE994yd&noverify=0&group_code=811732166)
-
-<table class="table">
-    <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/weixin-chat-cl.png" width="250" height="345" ></td>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/qq-chat.png" width="250" height="345" ></td>
-    </tr>
-    <tr>
-        <td align="center"><strong>微信群</strong><br></td>
-        <td align="center"><strong>QQ群</strong><br></td>
-    </tr>
-</table>
+欢迎通过各种方式来交流反馈，让 uView Pro 更好的为大家服务：[点击反馈](https://uviewpro.cn/zh/resource/about.html)
 
 ## 关于 PR
 
@@ -208,18 +195,9 @@ export function createApp() {
 
 ## 捐赠 uView Pro
 
-`uView Pro` 文档内容和框架源码基于 `uView UI` 二次开发，因此全部开源免费，如果您认为 `uView Pro` 帮到了您的开发工作，您可以捐赠 `uView Pro` 的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
+开源不易，如果您认为 `uView Pro` 帮到了您的开发工作，您可以捐赠 `uView Pro`
 
-<table class="table">
-    <tr>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/wechat-pay.png" width="250" height="345" ></td>
-        <td><img src="https://ik.imagekit.io/anyup/images/social/ali-pay.png" width="250" height="345" ></td>
-    </tr>
-    <tr>
-        <td align="center"><strong>微信</strong><br></td>
-        <td align="center"><strong>支付宝</strong><br></td>
-    </tr>
-</table>
+[欢迎捐赠留名](https://uviewpro.cn/zh/donate.html)
 
 ## 贡献者
 

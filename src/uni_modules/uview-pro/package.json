@@ -3,7 +3,7 @@
     "name": "uview-pro",
     "displayName": "【支持鸿蒙】uView Pro｜基于Vue3+TS的80+精选UI组件库，支持多主题，暗黑模式",
     "version": "0.4.2",
-    "description": "uView Pro，是全面支持Vue3的uni-app生态框架，80+精选组件已全面使用TypeScript重构，智能多主题配置，一键暗黑模式",
+    "description": "uView Pro，是全面支持Vue3+TS的uni-app生态框架，80+精选组件，支持安卓，iOS，鸿蒙，各小程序平台，支持多主题，一键暗黑模式",
     "main": "index.ts",
     "module": "index.ts",
     "browser": "index.ts",
