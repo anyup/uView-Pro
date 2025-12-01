@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2025-12-01
+
+### 📝 Documentation | 文档
+
+- **scripts:** 更新发布指定版本说明文档 ([db6bfe8](https://github.com/anyup/uView-Pro/commit/db6bfe8a7ec2812f34738b5b707240cdfe57e8b3))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **theme:** 修复npm方式加载主题包失效的问题 ([7b9c947](https://github.com/anyup/uView-Pro/commit/7b9c947581697ddbd36632919652689ca8595503))
+- **dark-mode:** 修复 App 平台暗黑模式跟随系统下，切换系统暗黑模式后不即时生效问题 ([880b181](https://github.com/anyup/uView-Pro/commit/880b18153d186f6f5c5f9c81bf12307bd8f00c22))
+- **initTheme:** 优化组件库 install 方法中的主题初始化默认逻辑 ([39e273b](https://github.com/anyup/uView-Pro/commit/39e273b98cd53ec2891c7e68419dd6dfbbeb30c0))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.4.1] - 2025-11-30
 
 ### ✨ Features | 新功能
