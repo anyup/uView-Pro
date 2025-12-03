@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.3] - 2025-12-03
+
+### 📝 Documentation | 文档
+
+- 更新项目描述和移除冗余信息 ([3d5c105](https://github.com/anyup/uView-Pro/commit/3d5c1053873a1a1dc592e02caf62b5e5f9aba3ad))
+- **readme:** 更新交流反馈和捐赠链接 ([266e788](https://github.com/anyup/uView-Pro/commit/266e7883a4e2f3ea8058e0bba0b7ce07a972bad8))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **theme:** 修复不使用 u-config-privider 全局注入时，部分颜色变量不存在的问题 ([cd82d9d](https://github.com/anyup/uView-Pro/commit/cd82d9da3e8fd6066177e3b78b855583e2756a5f))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.4.2] - 2025-12-01
 
 ### 📝 Documentation | 文档
