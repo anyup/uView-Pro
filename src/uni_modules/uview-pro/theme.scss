@@ -2,53 +2,115 @@
 // uni.scss中引入的样式会同时混入到全局样式文件和单独每一个页面的样式中，造成微信程序包太大，
 // 故uni.scss只建议放scss变量名相关样式，其他的样式可以通过main.js或者App.vue引入
 
-// 常用色
-$u-main-color: var(--u-main-color, #303133);
-$u-content-color: var(--u-content-color, #606266);
-$u-tips-color: var(--u-tips-color, #909399);
-$u-light-color: var(--u-light-color, #c0c4cc);
-$u-border-color: var(--u-border-color, #e4e7ed);
-$u-divider-color: var(--u-divider-color, #e4e7ed);
-$u-mask-color: var(--u-mask-color, rgba(0, 0, 0, 0.4));
-$u-shadow-color: var(--u-shadow-color, rgba(0, 0, 0, 0.1));
+:root,
+page {
+    /* 纯色 */
+    --u-white-color: #ffffff;
+    --u-black-color: #000000;
+
+    // 字体色
+    --u-main-color: #303133;
+    --u-content-color: #606266;
+    --u-tips-color: #909399;
+    --u-light-color: #c0c4cc;
+
+    // 边框色
+    --u-border-color: #e4e7ed;
+    --u-divider-color: #e4e7ed;
+
+    // 遮罩色
+    --u-mask-color: rgba(0, 0, 0, 0.4);
+    --u-shadow-color: rgba(0, 0, 0, 0.1);
+
+    /* 背景色 */
+    --u-bg-color: #f3f4f6;
+    --u-bg-white: #ffffff;
+    --u-bg-gray-light: #f5f7fa;
+    --u-bg-gray-dark: #2f343c;
+    --u-bg-black: #000000;
+
+    /* 主色 */
+    --u-type-primary: #2979ff;
+    --u-type-primary-light: #ecf5ff;
+    --u-type-primary-disabled: #a0cfff;
+    --u-type-primary-dark: #2b85e4;
+
+    /* 警告色 */
+    --u-type-warning: #ff9900;
+    --u-type-warning-disabled: #fcbd71;
+    --u-type-warning-dark: #f29100;
+    --u-type-warning-light: #fdf6ec;
+
+    /* 成功色 */
+    --u-type-success: #19be6b;
+    --u-type-success-disabled: #71d5a1;
+    --u-type-success-dark: #18b566;
+    --u-type-success-light: #dbf1e1;
+
+    /* 错误色 */
+    --u-type-error: #fa3534;
+    --u-type-error-disabled: #fab6b6;
+    --u-type-error-dark: #dd6161;
+    --u-type-error-light: #fef0f0;
+
+    /* 信息色 */
+    --u-type-info: #909399;
+    --u-type-info-disabled: #c8c9cc;
+    --u-type-info-dark: #82848a;
+    --u-type-info-light: #f4f4f5;
+}
 
 // 纯色
-$u-white-color: var(--u-white-color, #ffffff);
-$u-black-color: var(--u-black-color, #000000);
+$u-white-color: var(--u-white-color);
+$u-black-color: var(--u-black-color);
+
+// 字体色
+$u-main-color: var(--u-main-color);
+$u-content-color: var(--u-content-color);
+$u-tips-color: var(--u-tips-color);
+$u-light-color: var(--u-light-color);
+
+// 边框色
+$u-border-color: var(--u-border-color);
+$u-divider-color: var(--u-divider-color);
+
+// 遮罩色
+$u-mask-color: var(--u-mask-color);
+$u-shadow-color: var(--u-shadow-color);
 
 // 背景色
-$u-bg-color: var(--u-bg-color, #f3f4f6);
-$u-bg-white: var(--u-bg-white, #ffffff);
-$u-bg-gray-light: var(--u-bg-gray-light, #f5f7fa);
-$u-bg-gray-dark: var(--u-bg-gray-dark, #2f343c);
-$u-bg-black: var(--u-bg-black, #000000);
+$u-bg-color: var(--u-bg-color);
+$u-bg-white: var(--u-bg-white);
+$u-bg-gray-light: var(--u-bg-gray-light);
+$u-bg-gray-dark: var(--u-bg-gray-dark);
+$u-bg-black: var(--u-bg-black);
 
 // 主色
-$u-type-primary: var(--u-type-primary, #2979ff);
-$u-type-primary-light: var(--u-type-primary-light, #ecf5ff);
-$u-type-primary-disabled: var(--u-type-primary-disabled, #a0cfff);
-$u-type-primary-dark: var(--u-type-primary-dark, #2b85e4);
+$u-type-primary: var(--u-type-primary);
+$u-type-primary-light: var(--u-type-primary-light);
+$u-type-primary-disabled: var(--u-type-primary-disabled);
+$u-type-primary-dark: var(--u-type-primary-dark);
 
 // 警告色
-$u-type-warning: var(--u-type-warning, #ff9900);
-$u-type-warning-disabled: var(--u-type-warning-disabled, #fcbd71);
-$u-type-warning-dark: var(--u-type-warning-dark, #f29100);
-$u-type-warning-light: var(--u-type-warning-light, #fdf6ec);
+$u-type-warning: var(--u-type-warning);
+$u-type-warning-disabled: var(--u-type-warning-disabled);
+$u-type-warning-dark: var(--u-type-warning-dark);
+$u-type-warning-light: var(--u-type-warning-light);
 
 // 成功色
-$u-type-success: var(--u-type-success, #19be6b);
-$u-type-success-disabled: var(--u-type-success-disabled, #71d5a1);
-$u-type-success-dark: var(--u-type-success-dark, #18b566);
-$u-type-success-light: var(--u-type-success-light, #dbf1e1);
+$u-type-success: var(--u-type-success);
+$u-type-success-disabled: var(--u-type-success-disabled);
+$u-type-success-dark: var(--u-type-success-dark);
+$u-type-success-light: var(--u-type-success-light);
 
 // 错误色
-$u-type-error: var(--u-type-error, #fa3534);
-$u-type-error-disabled: var(--u-type-error-disabled, #fab6b6);
-$u-type-error-dark: var(--u-type-error-dark, #dd6161);
-$u-type-error-light: var(--u-type-error-light, #fef0f0);
+$u-type-error: var(--u-type-error);
+$u-type-error-disabled: var(--u-type-error-disabled);
+$u-type-error-dark: var(--u-type-error-dark);
+$u-type-error-light: var(--u-type-error-light);
 
 // 信息色
-$u-type-info: var(--u-type-info, #909399);
-$u-type-info-disabled: var(--u-type-info-disabled, #c8c9cc);
-$u-type-info-dark: var(--u-type-info-dark, #82848a);
-$u-type-info-light: var(--u-type-info-light, #f4f4f5);
+$u-type-info: var(--u-type-info);
+$u-type-info-disabled: var(--u-type-info-disabled);
+$u-type-info-dark: var(--u-type-info-dark);
+$u-type-info-light: var(--u-type-info-light);
