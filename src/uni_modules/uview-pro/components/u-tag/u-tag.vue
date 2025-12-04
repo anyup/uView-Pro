@@ -9,10 +9,12 @@
             customClass
         ]"
         class="u-tag"
-        :style="$u.toStyle(customStyle)"
+        :style="$u.toStyle(tagStyle, customStyle)"
         @tap="clickTag"
     >
-        {{ text }}
+        <slot>
+            {{ text }}
+        </slot>
         <view class="u-icon-wrap" @tap.stop>
             <u-icon
                 @click="close"
@@ -75,7 +77,7 @@ const props = defineProps(TagProps);
 /**
  * 计算 tag 的自定义样式
  */
-const customStyle = computed(() => {
+const tagStyle = computed(() => {
     let style: Record<string, any> = {};
     // 文字颜色（如果有此值，会覆盖type值的颜色）
     if (props.color) style.color = props.color;
