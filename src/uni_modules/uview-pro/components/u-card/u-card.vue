@@ -61,6 +61,7 @@
             <slot name="head" v-else />
         </view>
         <view @tap="onBodyClick" class="u-card__body" :style="[{ padding: padding + 'rpx' }, bodyStyle]">
+            <slot />
             <slot name="body" />
         </view>
         <view
