@@ -6,15 +6,17 @@
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
                         <u-switch
-                            v-model="checked"
+                            v-model="modelValue"
                             :loading="loading"
                             :size="size"
                             @change="change"
                             :active-color="activeColor"
                             :disabled="disabled"
-                            :activeValue="100"
-                            :inactiveValue="1"
+                            :activeValue="activeValue"
+                            :inactiveValue="inactiveValue"
                         ></u-switch>
+                        <view>当前开关状态: {{ isChecked }}</view>
+                        <view>当前v-model: {{ modelValue }}</view>
                     </view>
                 </view>
                 <view class="u-config-wrap">
@@ -53,10 +55,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 
-const checked = ref(false);
+type IModelValue = 1 | 100;
+
+const activeValue = ref<IModelValue>(100);
+const inactiveValue = ref<IModelValue>(1);
+const modelValue = ref<IModelValue>(1);
+const isChecked = computed<boolean>(() => modelValue.value === activeValue.value);
 const activeColor = ref($u.color.primary);
 const size = ref<number | string>(50);
 const loading = ref(false);
@@ -64,7 +71,11 @@ const disabled = ref(false);
 
 function modelChange(index: number) {
     // 两个!!可以把0变成false，1变成true
-    checked.value = !!index;
+    modelValueChange(!!index);
+}
+
+function modelValueChange(value: boolean) {
+    modelValue.value = value ? activeValue.value : inactiveValue.value;
 }
 
 function colorChange(index: number) {
@@ -85,29 +96,27 @@ function disabledChange(index: number) {
 }
 
 function asyncChange(index: number) {
-    if (checked.value && index === 1) {
+    if (isChecked.value && index === 1) {
         $u.toast('请先关闭选择器');
         return;
     }
-    if (!checked.value && index === 0) {
+    if (!isChecked.value && index === 0) {
         $u.toast('请先打开选择器');
         return;
     }
     const str = index === 0 ? '是否要关闭？' : '是否要打开？';
     loading.value = true;
-    const oldStatus = checked.value;
-    checked.value = true;
+    const oldStatus = isChecked.value;
+    modelValueChange(true);
     uni.showModal({
         title: '提示',
         content: str,
         complete: (res: { confirm: boolean }) => {
             loading.value = false;
             if (res.confirm) {
-                if (oldStatus) checked.value = false;
-                else checked.value = true;
+                modelValueChange(!oldStatus);
             } else {
-                if (!oldStatus) checked.value = false;
-                else checked.value = true;
+                modelValueChange(!!oldStatus);
             }
         }
     });

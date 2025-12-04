@@ -1,7 +1,7 @@
 <template>
     <view
         class="u-switch"
-        :class="[modelValue == true ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '', customClass]"
+        :class="[isChecked ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '', customClass]"
         @tap="onClick"
         :style="$u.toStyle(switchStyle, customStyle)"
     >
@@ -54,19 +54,27 @@ const props = defineProps(SwitchProps);
 const emit = defineEmits(['update:modelValue', 'change']);
 
 /**
+ * 计算属性：是否处于激活状态
+ * 通过比较modelValue和activeValue来确定开关的真实状态
+ */
+const isChecked = computed(() => {
+    return props.modelValue === props.activeValue;
+});
+
+/**
  * 计算开关样式
  */
 const switchStyle = computed(() => {
     let style: Record<string, string> = {};
     style.fontSize = props.size + 'rpx';
-    style.backgroundColor = props.modelValue ? props.activeColor : props.inactiveColor;
+    style.backgroundColor = isChecked.value ? props.activeColor : props.inactiveColor;
     return style;
 });
 /**
  * 计算加载动画颜色
  */
 const loadingColor = computed(() => {
-    return props.modelValue ? props.activeColor : null;
+    return isChecked.value ? props.activeColor : null;
 });
 
 /**
@@ -76,10 +84,13 @@ function onClick() {
     if (!props.disabled && !props.loading) {
         // 使手机产生短促震动，微信小程序有效，APP(HX 2.6.8)和H5无效
         if (props.vibrateShort) uni.vibrateShort();
-        emit('update:modelValue', !props.modelValue);
+
+        // 根据当前状态切换到另一个值
+        const newValue = isChecked.value ? props.inactiveValue : props.activeValue;
+        emit('update:modelValue', newValue);
         // 放到下一个生命周期，因为双向绑定的value修改父组件状态需要时间，且是异步的
         nextTick(() => {
-            emit('change', props.modelValue ? props.activeValue : props.inactiveValue);
+            emit('change', newValue);
         });
     }
 }
@@ -113,11 +124,6 @@ function onClick() {
     border-radius: 100%;
     z-index: 1;
     background-color: var(--u-bg-white);
-    background-color: var(--u-bg-white);
-    box-shadow:
-        0 3px 1px 0 rgba(0, 0, 0, 0.05),
-        0 2px 2px 0 rgba(0, 0, 0, 0.1),
-        0 3px 3px 0 rgba(0, 0, 0, 0.05);
     box-shadow:
         0 3px 1px 0 rgba(0, 0, 0, 0.05),
         0 2px 2px 0 rgba(0, 0, 0, 0.1),
