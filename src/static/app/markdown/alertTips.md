@@ -11,9 +11,9 @@
 
 ### 平台差异说明
 
-|App|H5|微信小程序|支付宝小程序|百度小程序|头条小程序|QQ小程序|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|√|√|√|√|√|√|√|
+|  App  |  H5   | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ小程序 |
+| :---: | :---: | :--------: | :----------: | :--------: | :--------: | :------: |
+|   √   |   √   |     √      |      √       |     √      |     √      |    √     |
 
 ### 基本使用
 
@@ -51,9 +51,9 @@
 - `close-text`参数配置关闭的文字，默认为一个叉的icon图标。`close-able`为`true`时有效
 - `close-able`参数配置是否允许关闭的文字或图标
 
-::: warning 注意
+
 由于`props`传参的限制，您需要监听组件的`close`事件，并在此此事件中设置`show`参数为`false`，才能关闭组件。
-:::
+
 
 ```html
 <template>
@@ -77,23 +77,23 @@
 
 ### Props
 
-| 参数          | 说明            | 类型            | 默认值             |  可选值   |
-|-------------  |---------------- |---------------|------------------ |-------- |
-| title | 显示的文字  | String | - | - |
-| description | 辅助性文字，颜色比`title`浅一点，字号也小一点，可选 | String  | - | - |
-| close-able | 关闭按钮(默认为叉号icon图标) | Boolean  | false | true |
-| type | 使用预设的颜色 | String  | warning | success / primary / error / info |
-| close-text | 用文字替代关闭图标，`close-able`为`true`时有效 | String  | - | - |
-| show-icon | 是否显示左边的辅助图标 | Boolean  | false | true |
-| show | 显示或隐藏组件 | Boolean  | true | false |
-| icon | 左侧的图标名称，如设置`type`和`show-icon`值，会有一个默认的图标 | String  | - | - |
-| icon-style | 自定义图标的样式，对象形式 | Object  | - | - |
-| title-style | 自定义标题的样式，对象形式 | Object  | - | - |
-| desc-style | 自定义内容的样式，对象形式 | Object  | - | - |
+| 参数        | 说明                                                            | 类型    | 默认值  | 可选值                           |
+| ----------- | --------------------------------------------------------------- | ------- | ------- | -------------------------------- |
+| title       | 显示的文字                                                      | String  | -       | -                                |
+| description | 辅助性文字，颜色比`title`浅一点，字号也小一点，可选             | String  | -       | -                                |
+| close-able  | 关闭按钮(默认为叉号icon图标)                                    | Boolean | false   | true                             |
+| type        | 使用预设的颜色                                                  | String  | warning | success / primary / error / info |
+| close-text  | 用文字替代关闭图标，`close-able`为`true`时有效                  | String  | -       | -                                |
+| show-icon   | 是否显示左边的辅助图标                                          | Boolean | false   | true                             |
+| show        | 显示或隐藏组件                                                  | Boolean | true    | false                            |
+| icon        | 左侧的图标名称，如设置`type`和`show-icon`值，会有一个默认的图标 | String  | -       | -                                |
+| icon-style  | 自定义图标的样式，对象形式                                      | Object  | -       | -                                |
+| title-style | 自定义标题的样式，对象形式                                      | Object  | -       | -                                |
+| desc-style  | 自定义内容的样式，对象形式                                      | Object  | -       | -                                |
 
 ### Events
 
-|事件名|说明|回调参数|
-|:-|:-|:-|
-|close|点击关闭按钮时触发，需在此回调设置`show`为`false`|-|
-|click|点击组件时触发|-|
+| 事件名 | 说明                                              | 回调参数 |
+| :----- | :------------------------------------------------ | :------- |
+| close  | 点击关闭按钮时触发，需在此回调设置`show`为`false` | -        |
+| click  | 点击组件时触发                                    | -        |

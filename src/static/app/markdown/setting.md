@@ -86,11 +86,11 @@ export function createApp() {
 }
 ```
 
-:::tip 温馨提示
+
 - 1.修改 `easycom` 规则后需重启 HX 或重新编译项目。
 - 2.请确保 `pages.json` 中只有一个 easycom 字段，否则请自行合并多个规则。
 - 3.一定要放在 `custom` 内，否则无效。
-:::
+
 
 ### 5. Volar 类型提示支持
 

@@ -21,7 +21,7 @@ console.log(uni.$u.os())
 
 ### 1.5.4升级指导(2020-07-21)
 
-:::warning 重要说明
+
 本次升级主要针对支付宝小程序，需要项目开启支付宝小程序的[component2](https://uniapp.dcloud.io/collocation/manifest?id=mp-alipay)模式(默认关闭)，做法：  
 在项目根目录`manifest.json`中新增`mp-alipay`属性节点，设置`component2`值为`true`：  
 ```json
@@ -31,7 +31,7 @@ console.log(uni.$u.os())
 },
 ......
 ```
-:::
+
 
 - 本次升级主要针对支付宝小程序的兼容，uView目前已全面实现对支付宝小程序的兼容，前提是需要开启支付宝特有的`component2`模式，才能实现一些新特性和支持。  
 - 本次升级中，由于table表格组件的单元格合并模式兼容性不好，且实现方式较为复杂，不利于该组件日后的升级和扩展，故在`1.5.4`版本废弃了table的单元格合并模式，
@@ -86,10 +86,10 @@ console.log(uni.$u.os())
 
 - 在`App.vue`中**首行**的位置，增加如下一行`import "@/uview-pro/index.scss"`：
 
-:::danger 注意：
+
 1. 必须要将标签加入`lang="scss"`属性以支持SCSS，否则会出错！
 2. 请将将引入的代码，写在`style`标签的首行。
-:::
+
 
 ```css
 <style lang="scss">

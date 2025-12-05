@@ -10,9 +10,9 @@
 
 ### 平台差异说明
 
-| App | H5  | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ 小程序 |
-| :-: | :-: | :--------: | :----------: | :--------: | :--------: | :-------: |
-|  √  |  √  |     √      |      √       |     √      |     √      |     √     |
+|  App  |  H5   | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ 小程序 |
+| :---: | :---: | :--------: | :----------: | :--------: | :--------: | :-------: |
+|   √   |   √   |     √      |      √       |     √      |     √      |     √     |
 
 ### 基本使用
 
@@ -34,9 +34,9 @@
 let list = [ '1.png', '2.png' ];
 ```
 
-::: warning 注意
+
 如果需要显示标题，还需要设置`title`参数为`true`
-:::
+
 
 ```html
 <template>
@@ -122,25 +122,25 @@ let list = [ '1.png', '2.png' ];
 
 ### Props
 
-| 参数                           | 说明                                                                               | 类型             | 默认值       | 可选值                                                    |
-| ------------------------------ | ---------------------------------------------------------------------------------- | ---------------- | ------------ | --------------------------------------------------------- |
-| list                           | 轮播图数据，见上方"基本使用"说明                                                   | Array            | -            | -                                                         |
-| title                          | 是否显示标题文字，需要配合`list`参数，见上方说明                                   | Boolean          | false        | true                                                      |
-| mode                           | 指示器模式，见上方说明                                                             | String           | round        | rect / dot / number / none                                |
-| height                         | 轮播图组件高度，单位 rpx                                                           | String \| Number | 250          | -                                                         |
-| indicator-pos                  | 指示器的位置                                                                       | String           | bottomCenter | topLeft / topCenter / topRight / bottomLeft / bottomRight |
-| effect3d                       | 是否开启 3D 效果                                                                   | Boolean          | false        | true                                                      |
-| autoplay                       | 是否自动播放                                                                       | Boolean          | true         | false                                                     |
-| interval                       | 自动轮播时间间隔，单位 ms                                                          | String \| Number | 2500         | -                                                         |
-| circular                       | 是否衔接播放，见上方说明                                                           | Boolean          | true         | false                                                     |
-| duration                       | 切换一张轮播图所需的时间，单位 ms                                                  | String \| Number | 500          | -                                                         |
-| border-radius                  | 轮播图圆角值，单位 rpx                                                             | String \| Number | 8            | -                                                         |
-| title-style                    | 自定义标题样式                                                                     | Object           | -            | -                                                         |
-| effect3d-previous-margin       | effect3d = true 模式的情况下，激活项与前后项之间的距离，单位 rpx                   | String \| Number | 50           | -                                                         |
-| img-mode                       | 图片的裁剪模式，详见[image 组件裁剪模式](https://uniapp.dcloud.io/component/image) | String           | aspectFill   | -                                                         |
-| name                           | 组件内部读取的`list`参数中的属性名，见上方说明                                     | string           | name         | -                                                         |
-| bg-color                       | 背景颜色                                                                           | string           | #f3f4f6      | -                                                         |
-| current | 初始化时，默认显示第几项                                                           | String \| Number | 0            | -                                                         |
+| 参数                     | 说明                                                                               | 类型             | 默认值       | 可选值                                                    |
+| ------------------------ | ---------------------------------------------------------------------------------- | ---------------- | ------------ | --------------------------------------------------------- |
+| list                     | 轮播图数据，见上方"基本使用"说明                                                   | Array            | -            | -                                                         |
+| title                    | 是否显示标题文字，需要配合`list`参数，见上方说明                                   | Boolean          | false        | true                                                      |
+| mode                     | 指示器模式，见上方说明                                                             | String           | round        | rect / dot / number / none                                |
+| height                   | 轮播图组件高度，单位 rpx                                                           | String \| Number | 250          | -                                                         |
+| indicator-pos            | 指示器的位置                                                                       | String           | bottomCenter | topLeft / topCenter / topRight / bottomLeft / bottomRight |
+| effect3d                 | 是否开启 3D 效果                                                                   | Boolean          | false        | true                                                      |
+| autoplay                 | 是否自动播放                                                                       | Boolean          | true         | false                                                     |
+| interval                 | 自动轮播时间间隔，单位 ms                                                          | String \| Number | 2500         | -                                                         |
+| circular                 | 是否衔接播放，见上方说明                                                           | Boolean          | true         | false                                                     |
+| duration                 | 切换一张轮播图所需的时间，单位 ms                                                  | String \| Number | 500          | -                                                         |
+| border-radius            | 轮播图圆角值，单位 rpx                                                             | String \| Number | 8            | -                                                         |
+| title-style              | 自定义标题样式                                                                     | Object           | -            | -                                                         |
+| effect3d-previous-margin | effect3d = true 模式的情况下，激活项与前后项之间的距离，单位 rpx                   | String \| Number | 50           | -                                                         |
+| img-mode                 | 图片的裁剪模式，详见[image 组件裁剪模式](https://uniapp.dcloud.io/component/image) | String           | aspectFill   | -                                                         |
+| name                     | 组件内部读取的`list`参数中的属性名，见上方说明                                     | string           | name         | -                                                         |
+| bg-color                 | 背景颜色                                                                           | string           | #f3f4f6      | -                                                         |
+| current                  | 初始化时，默认显示第几项                                                           | String \| Number | 0            | -                                                         |
 
 ### Events
 

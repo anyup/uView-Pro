@@ -16,29 +16,29 @@ uView中，共有2个组件可以实现tabs标签切换，分别是`tabs`组件�
 <br>
 <br>
 
-::: warning 注意
+
 1. 由于支付宝小程序不支持uni的`swiper`组件`transition`事件的`dx`参数，故此组件不支持支付宝小程序
 2. 此组件目前为uView的`vue`版本，非`nvue`版本(制作中)，内部使用uni-app`swiper`组件为基础，`swiper`是单页组件，
 适合做简单列表左右滑动，因为性能问题，用swiper做复杂长列表，需要较高的优化技巧以及接受一些限制。如果要实现类似腾讯新闻APP首页可以左右
 滑动复杂的多个tab切换，不建议使用本组件，如果使用，请自行测试列表很长时的切换流畅度。后续uView会对`nvue`进行兼容，增强此组件在APP上的能力。  
 官方有一个`nvue`新闻模板示例，内有左右滑动tab功能，具体参考：  
 [插件市场新闻模板示例](https://ext.dcloud.net.cn/plugin?id=103)
-:::
+
 
 ### 平台差异说明
 
-|App|H5|微信小程序|支付宝小程序|百度小程序|头条小程序|QQ小程序|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|√|√|√|x|√|√|√|
+|  App  |  H5   | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ小程序 |
+| :---: | :---: | :--------: | :----------: | :--------: | :--------: | :------: |
+|   √   |   √   |     √      |      x       |     √      |     √      |    √     |
 
 ### 基本使用
 
 通过设置`is-scroll`(默认为`true`)，配置tabsSwiper组件的内容是否可以左右拖动，一般4个标签以下时，无需拖动，设置为`false`，5个标签以上，建议可以左右拖动。
 具体的标签，通过`list`参数配置，该参数要求为数组，元素为对象，对象要有`name`属性，见示例：
 
-:::tip 说明
+
 `is-scroll`参数很重要，如果您的tabs项只有几个，且不想tabs导航栏可以被左右滑动的话，请一定要设置`is-scroll`为`false`，因为它默认为`true`。
-:::
+
 
 ```html
 <u-tabs-swiper ref="tabs" :list="list" :is-scroll="false"></u-tabs-swiper>
@@ -188,30 +188,30 @@ uView中，共有2个组件可以实现tabs标签切换，分别是`tabs`组件�
 
 ### Props
 
-| 参数          | 说明            | 类型            | 默认值             |  可选值   |
-|-------------  |---------------- |---------------|------------------ |-------- |
-| is-scroll | tabs是否可以左右拖动  | Boolean | true | false |
-| list | 标签数组，元素为对象，如[{name: '推荐'}] | Array  | - | - |
-| current | 指定哪个tab为激活状态 | String \| Number  | 0，即`list`的第一项 | - |
-| height | 导航栏的高度，单位rpx | String \| Number  | 80 | - |
-| font-size | tab文字大小，单位rpx | String \| Number  | 30 | - |
-| swiper-width | tabs组件外部swiper的宽度，默认为屏幕宽度，单位rpx | string \| Number  | 750 | - |
-| active-color | 滑块和激活tab文字的颜色  | String | #2979ff | - |
-| inactive-color | tabs文字颜色 | String  | #303133 | - |
-| bar-width | 滑块宽度，单位rpx | String \| Number  | 40 | - |
-| bar-height | 滑块高度，单位rpx | String \| Number  | 6 | - |
-| gutter | 单个tab标签的左右内边距之和，单位rpx | String \| Number  | 40 | - |
-| bg-color | tabs导航栏的背景颜色 | string  | #ffffff | - |
-| name | 组件内部读取的`list`参数中的属性名（tab名称），见上方说明 | string  | name | - |
-| bold | 激活选项的字体是否加粗 | Boolean | true | false |
-| show-bar | 是否显示底部的滑块 | Boolean | true | false |
-| bar-style | 底部滑块的样式，对象形式 | Object | {} | - |
-| active-item-style | 当前活动Item的样式，对象形式 | Object | {} | - |
-| count | 组件内部读取的`list`参数中的属性名（badge徽标数），用法与`name`一致，见上方说明 | string  | count | - |
-| offset | 设置badge的位置偏移，格式为 [x, y]，也即设置的为`top`和`right`的值，单位rpx。 | Array  | [5, 20] | - |
+| 参数              | 说明                                                                            | 类型             | 默认值              | 可选值 |
+| ----------------- | ------------------------------------------------------------------------------- | ---------------- | ------------------- | ------ |
+| is-scroll         | tabs是否可以左右拖动                                                            | Boolean          | true                | false  |
+| list              | 标签数组，元素为对象，如[{name: '推荐'}]                                        | Array            | -                   | -      |
+| current           | 指定哪个tab为激活状态                                                           | String \| Number | 0，即`list`的第一项 | -      |
+| height            | 导航栏的高度，单位rpx                                                           | String \| Number | 80                  | -      |
+| font-size         | tab文字大小，单位rpx                                                            | String \| Number | 30                  | -      |
+| swiper-width      | tabs组件外部swiper的宽度，默认为屏幕宽度，单位rpx                               | string \| Number | 750                 | -      |
+| active-color      | 滑块和激活tab文字的颜色                                                         | String           | #2979ff             | -      |
+| inactive-color    | tabs文字颜色                                                                    | String           | #303133             | -      |
+| bar-width         | 滑块宽度，单位rpx                                                               | String \| Number | 40                  | -      |
+| bar-height        | 滑块高度，单位rpx                                                               | String \| Number | 6                   | -      |
+| gutter            | 单个tab标签的左右内边距之和，单位rpx                                            | String \| Number | 40                  | -      |
+| bg-color          | tabs导航栏的背景颜色                                                            | string           | #ffffff             | -      |
+| name              | 组件内部读取的`list`参数中的属性名（tab名称），见上方说明                       | string           | name                | -      |
+| bold              | 激活选项的字体是否加粗                                                          | Boolean          | true                | false  |
+| show-bar          | 是否显示底部的滑块                                                              | Boolean          | true                | false  |
+| bar-style         | 底部滑块的样式，对象形式                                                        | Object           | {}                  | -      |
+| active-item-style | 当前活动Item的样式，对象形式                                                    | Object           | {}                  | -      |
+| count             | 组件内部读取的`list`参数中的属性名（badge徽标数），用法与`name`一致，见上方说明 | string           | count               | -      |
+| offset            | 设置badge的位置偏移，格式为 [x, y]，也即设置的为`top`和`right`的值，单位rpx。   | Array            | [5, 20]             | -      |
 
 ### Events
 
-|事件名|说明|回调参数|版本|
-|:-|:-|:-|:-|
-|change|点击标签时触发|index: 点击了第几个tab，索引从0开始|-|
+| 事件名 | 说明           | 回调参数                            | 版本 |
+| :----- | :------------- | :---------------------------------- | :--- |
+| change | 点击标签时触发 | index: 点击了第几个tab，索引从0开始 | -    |

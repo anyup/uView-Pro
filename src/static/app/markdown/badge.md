@@ -6,9 +6,9 @@
 
 ### 平台差异说明
 
-|App|H5|微信小程序|支付宝小程序|百度小程序|头条小程序|QQ小程序|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|√|√|√|√|√|√|√|
+|  App  |  H5   | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ小程序 |
+| :---: | :---: | :--------: | :----------: | :--------: | :--------: | :------: |
+|   √   |   √   |     √      |      √       |     √      |     √      |    √     |
 
 ### 基本使用
 
@@ -16,11 +16,11 @@
 - 通过`type`设置主题。重申一次，uView中，所有组件的`type`参数都只有5个固定的可选值，分别是`primary`(蓝色-主色)，`warning`(黄色-警告)，
 `error`(红色-错误)，`success`(绿色-成功)，`info`(灰色-信息)
 
-::: warning 注意
+
 此组件内部默认为`absolute`绝对定位，所以需要给`badge`父组件(元素)设置`position: relative`相对定位，
 再通过调整`offset`偏移值(数组，两个元素，第一个元素为`top`值，第二个元素为`right`值，单位rpx，可为负值，如"[-10, -10]")设置到合适的位置即可。  
 如果不需要组件内容默认的自动绝对定位，设置`absolute`参数为`false`即可。
-:::
+
 
 ```html
 <u-badge type="error" count="7"></u-badge>
@@ -69,19 +69,19 @@
 
 ### Props
 
-| 参数          | 说明            | 类型            | 默认值             |  可选值   |
-|-------------  |---------------- |---------------|------------------ |-------- |
-| count | 展示的数字，大于 `overflowCount` 时显示为 `${overflowCount}+`，为`0`且`show-zero`为`false`时隐藏  | String \| Number | - | - |
-| is-dot | 不展示数字，只有一个小点 | Boolean  | false | true |
-| absolute | 组件是否绝对定位，为`true`时，`offset`参数才有效 | Boolean  | true | false |
-| overflow-count | 展示封顶的数字值 | String \| Number  | 99 | - |
-| type | 使用预设的背景颜色 | String  | error | success / primary / warning / info |
-| show-zero | 当数值为 0 时，是否展示 Badge | Boolean  | false | true |
-| size | Badge的尺寸，设为`mini`会得到小一号的`Badge` | String  | default | mini |
-| offset | 设置badge的位置偏移，格式为 [x, y]，也即设置的为`top`和`right`的值，单位rpx。`absolute`为`true`时有效 | Array | [20, 20] | - |
-| color | 字体颜色 | String  | #ffffff | - |
-| bgColor | 背景颜色，优先级比`type`高，如设置，`type`参数会失效 | String  | - | - |
-| is-center | 组件中心点是否和父组件右上角重合，优先级比`offset`高，如设置，`offset`参数会失效 | Boolean  | false | true |
+| 参数           | 说明                                                                                                  | 类型             | 默认值   | 可选值                             |
+| -------------- | ----------------------------------------------------------------------------------------------------- | ---------------- | -------- | ---------------------------------- |
+| count          | 展示的数字，大于 `overflowCount` 时显示为 `${overflowCount}+`，为`0`且`show-zero`为`false`时隐藏      | String \| Number | -        | -                                  |
+| is-dot         | 不展示数字，只有一个小点                                                                              | Boolean          | false    | true                               |
+| absolute       | 组件是否绝对定位，为`true`时，`offset`参数才有效                                                      | Boolean          | true     | false                              |
+| overflow-count | 展示封顶的数字值                                                                                      | String \| Number | 99       | -                                  |
+| type           | 使用预设的背景颜色                                                                                    | String           | error    | success / primary / warning / info |
+| show-zero      | 当数值为 0 时，是否展示 Badge                                                                         | Boolean          | false    | true                               |
+| size           | Badge的尺寸，设为`mini`会得到小一号的`Badge`                                                          | String           | default  | mini                               |
+| offset         | 设置badge的位置偏移，格式为 [x, y]，也即设置的为`top`和`right`的值，单位rpx。`absolute`为`true`时有效 | Array            | [20, 20] | -                                  |
+| color          | 字体颜色                                                                                              | String           | #ffffff  | -                                  |
+| bgColor        | 背景颜色，优先级比`type`高，如设置，`type`参数会失效                                                  | String           | -        | -                                  |
+| is-center      | 组件中心点是否和父组件右上角重合，优先级比`offset`高，如设置，`offset`参数会失效                      | Boolean          | false    | true                               |
 
 
 

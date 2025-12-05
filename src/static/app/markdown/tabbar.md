@@ -21,15 +21,15 @@
 - 相比原生的 uni-app 的 tabbar，自定义 tabbar 让你失去了路由管理的功能
 - 渲染的速度比不上原生的 tabbar，但是这影响不大
 
-:::tip 提示
+
 以上的缺点，是指自定义模拟 tabbar 页面的情形，我们提供了一个解决方案，可以使用 uni-app 自带 tabbar 系统，保证性能的同时，又能尽情自定义 tabbar 导航栏，见下方`实战教程`说明。
-:::
+
 
 ### 平台差异说明
 
-| App | H5  | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ 小程序 |
-| :-: | :-: | :--------: | :----------: | :--------: | :--------: | :-------: |
-|  √  |  √  |     √      |      √       |     √      |     √      |     √     |
+|  App  |  H5   | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ 小程序 |
+| :---: | :---: | :--------: | :----------: | :--------: | :--------: | :-------: |
+|   √   |   √   |     √      |      √       |     √      |     √      |     √     |
 
 ### 基本使用
 
@@ -244,21 +244,21 @@ let list = [
 
 ### Table Props
 
-| 参数                                | 说明                                                                                                  | 类型             | 默认值  | 可选值 |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------- | ------- | ------ |
-| list                                | 各项的配置参数，见顶部说明，数组形式                                                                  | Array            | -       | -      |
-| show                                | 是否显示组件                                                                                          | Boolean          | true    | false  |
-| v-model                             | 双向绑定的激活项的索引值                                                                              | String \| Number | 0       | -      |
-| bg-color                            | 组件的背景颜色                                                                                        | String           | #ffffff | -      |
-| height                              | 高度，单位任意，数值则为 rpx 单位，不建议修改                                                         | String \| Number | 50px    | -      |
-| icon-size                           | 非中部凸起图标的大小，单位任意，数值则为 rpx 单位                                                     | String \| Number | 40      | -      |
-| mid-button-size                     | 凸起的图标的大小，单位任意，数值则为 rpx 单位                                                         | String \| Number | 90      | -      |
-| active-color                        | 文字和字体图标激活时的颜色                                                                            | String           | #303133 | -      |
-| inactive-color                      | 文字和字体图标未激活时的颜色                                                                          | String           | #606266 | -      |
-| mid-button                          | 是否需要中部凸起的按钮，配置了此值，依然需要配置`list`参数中需凸起项的`midButton`为`true`，见上方说明 | Boolean          | false   | true   |
-| before-switch                       | 切换之前的回调钩子，见上方说明                                                                        | Function         | -       | -      |
-| border-top                          | 是否显示顶部的边框                                                                                    | Boolean          | true    | false  |
-| hide-tab-bar | 是否隐藏原生 tabbar                                                                                   | Boolean          | true    | false  |
+| 参数            | 说明                                                                                                  | 类型             | 默认值  | 可选值 |
+| --------------- | ----------------------------------------------------------------------------------------------------- | ---------------- | ------- | ------ |
+| list            | 各项的配置参数，见顶部说明，数组形式                                                                  | Array            | -       | -      |
+| show            | 是否显示组件                                                                                          | Boolean          | true    | false  |
+| v-model         | 双向绑定的激活项的索引值                                                                              | String \| Number | 0       | -      |
+| bg-color        | 组件的背景颜色                                                                                        | String           | #ffffff | -      |
+| height          | 高度，单位任意，数值则为 rpx 单位，不建议修改                                                         | String \| Number | 50px    | -      |
+| icon-size       | 非中部凸起图标的大小，单位任意，数值则为 rpx 单位                                                     | String \| Number | 40      | -      |
+| mid-button-size | 凸起的图标的大小，单位任意，数值则为 rpx 单位                                                         | String \| Number | 90      | -      |
+| active-color    | 文字和字体图标激活时的颜色                                                                            | String           | #303133 | -      |
+| inactive-color  | 文字和字体图标未激活时的颜色                                                                          | String           | #606266 | -      |
+| mid-button      | 是否需要中部凸起的按钮，配置了此值，依然需要配置`list`参数中需凸起项的`midButton`为`true`，见上方说明 | Boolean          | false   | true   |
+| before-switch   | 切换之前的回调钩子，见上方说明                                                                        | Function         | -       | -      |
+| border-top      | 是否显示顶部的边框                                                                                    | Boolean          | true    | false  |
+| hide-tab-bar    | 是否隐藏原生 tabbar                                                                                   | Boolean          | true    | false  |
 
 ### Events
 

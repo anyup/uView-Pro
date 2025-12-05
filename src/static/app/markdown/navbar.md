@@ -8,9 +8,9 @@
 
 ### 平台差异说明
 
-| App | H5  | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ 小程序 |
-| :-: | :-: | :--------: | :----------: | :--------: | :--------: | :-------: |
-|  √  |  √  |     √      |      √       |     √      |     √      |     √     |
+|  App  |  H5   | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ 小程序 |
+| :---: | :---: | :--------: | :----------: | :--------: | :--------: | :-------: |
+|   √   |   √   |     √      |      √       |     √      |     √      |     √     |
 
 ### 基本使用
 
@@ -21,11 +21,11 @@
 - 通过`title`参数传入需要显示的标题，通过`title-width`(rpx)设置标题区域的宽度，文字超出会通过省略号隐藏
 - 通过`is-fixed`配置是否将导航栏固定在顶部
 
-:::tip 说明
+
 
 - 在小程序中，导航栏会自动适配导航栏右侧的胶囊位置，避开该区域
 - 组件底部默认有一条下边框，如您不需要，可以设置`border-bottom`为`false`即可
-  :::
+  
 
 ```html
 <template>
@@ -146,26 +146,26 @@ uView 提供了一个`background`参数(需对象形式)，可以自定义导航
 
 ### Props
 
-| 参数                               | 说明                                                                                                    | 类型             | 默认值                    | 可选值 |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------- | ------ |
-| height                             | 导航栏高度(不包括状态栏高度在内，内部自动加上)，注意这里的单位是<span style="color: red;">**px**</span> | String \| Number | 44                        | -      |
-| back-icon-color                    | 左边返回图标的颜色                                                                                      | String           | #606266                   | -      |
-| back-icon-name                     | 左边返回图标的名称，只能为 uView 自带的图标，`1.5.5`起由 arrow-left 调整为 nav-back                     | String           | nav-back                  | -      |
-| back-icon-size                     | 左边返回图标的大小，单位 rpx                                                                            | String \| Number | 30                        | -      |
-| back-text                          | 返回图标右边的辅助提示文字                                                                              | String           | -                         | -      |
-| back-text-style                    | 返回图标右边的辅助提示文字的样式，对象形式                                                              | Object           | { color: '#606266' }      | -      |
-| title                              | 导航栏标题，如设置为空字符，将会隐藏标题占位区域                                                        | String           | -                         | -      |
-| title-width                        | 导航栏标题的最大宽度，内容超出会以省略号隐藏，单位 rpx                                                  | String \| Number | 250                       | -      |
-| title-color                        | 标题的颜色                                                                                              | String           | #606266                   | -      |
-| title-size                         | 导航栏标题字体大小，单位 rpx，`1.5.5`起由 32 调整为 44                                                  | String \| Number | 44                        | -      |
-| z-index                            | 固定在顶部时的`z-index`值                                                                               | String \| Number | 980                       | -      |
-| is-back                            | 是否显示导航栏左边返回图标和辅助文字                                                                    | Boolean          | true                      | false  |
-| background                         | 导航栏背景设置(APP 和小程序上包括状态栏的颜色)，见上方说明                                              | Object           | { background: '#ffffff' } | -      |
-| is-fixed                           | 导航栏是否固定在顶部                                                                                    | Boolean          | true                      | false  |
-| border-bottom                      | 导航栏底部是否显示下边框，如定义了较深的背景颜色，可取消此值                                            | Boolean          | true                      | false  |
-| custom-back | 自定义返回逻辑方法，如传入，点击返回按钮执行函数，否则正常返回上一页，注意模板中不需要写方法参数的括号  | Function         | -                         | -      |
-| immersive   | 沉浸式，允许 fixed 定位后导航栏塌陷，仅 fixed 定位下生效                                                | Boolean          | false                     | true   |
-| title-bold                         | 导航栏标题字体是否加粗                                                           | Boolean          | false                     | true   |
+| 参数            | 说明                                                                                                    | 类型             | 默认值                    | 可选值 |
+| --------------- | ------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------- | ------ |
+| height          | 导航栏高度(不包括状态栏高度在内，内部自动加上)，注意这里的单位是<span style="color: red;">**px**</span> | String \| Number | 44                        | -      |
+| back-icon-color | 左边返回图标的颜色                                                                                      | String           | #606266                   | -      |
+| back-icon-name  | 左边返回图标的名称，只能为 uView 自带的图标，`1.5.5`起由 arrow-left 调整为 nav-back                     | String           | nav-back                  | -      |
+| back-icon-size  | 左边返回图标的大小，单位 rpx                                                                            | String \| Number | 30                        | -      |
+| back-text       | 返回图标右边的辅助提示文字                                                                              | String           | -                         | -      |
+| back-text-style | 返回图标右边的辅助提示文字的样式，对象形式                                                              | Object           | { color: '#606266' }      | -      |
+| title           | 导航栏标题，如设置为空字符，将会隐藏标题占位区域                                                        | String           | -                         | -      |
+| title-width     | 导航栏标题的最大宽度，内容超出会以省略号隐藏，单位 rpx                                                  | String \| Number | 250                       | -      |
+| title-color     | 标题的颜色                                                                                              | String           | #606266                   | -      |
+| title-size      | 导航栏标题字体大小，单位 rpx，`1.5.5`起由 32 调整为 44                                                  | String \| Number | 44                        | -      |
+| z-index         | 固定在顶部时的`z-index`值                                                                               | String \| Number | 980                       | -      |
+| is-back         | 是否显示导航栏左边返回图标和辅助文字                                                                    | Boolean          | true                      | false  |
+| background      | 导航栏背景设置(APP 和小程序上包括状态栏的颜色)，见上方说明                                              | Object           | { background: '#ffffff' } | -      |
+| is-fixed        | 导航栏是否固定在顶部                                                                                    | Boolean          | true                      | false  |
+| border-bottom   | 导航栏底部是否显示下边框，如定义了较深的背景颜色，可取消此值                                            | Boolean          | true                      | false  |
+| custom-back     | 自定义返回逻辑方法，如传入，点击返回按钮执行函数，否则正常返回上一页，注意模板中不需要写方法参数的括号  | Function         | -                         | -      |
+| immersive       | 沉浸式，允许 fixed 定位后导航栏塌陷，仅 fixed 定位下生效                                                | Boolean          | false                     | true   |
+| title-bold      | 导航栏标题字体是否加粗                                                                                  | Boolean          | false                     | true   |
 
 ### Slot
 

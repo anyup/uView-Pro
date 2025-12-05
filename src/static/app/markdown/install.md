@@ -2,14 +2,14 @@
 
 <demo-model url="/"></demo-model>
 
-:::tip 说明
+
 
 1. 由于 uView Pro 使用`easycom`模式，让您无需引入组件即可直接使用，但是此功能需要 Hbuilder X 2.5.5 及以上版本才支持，详见[配置 easycom 组件模式](/components/quickstart.html#_3-配置easycom组件模式)。
    `easycom`打包的时候是**按需引入**的，您可以放心引入 uView Pro 的整个组件库，发布打包时会自动剔除您没有使用的组件(注意：调试时仍然是全部引入的)
 
 2. 请确保您下载的[Hbuilder X](https://www.dcloud.io/hbuilderx.html)为`APP开发版`，而非`标准版`，并且在"工具-插件安装"中安装了"scss/sass 编译"插件
 
-:::
+
 
 ### 方式一：npm 安装
 
@@ -85,10 +85,10 @@ pnpm run dev:h5
 <br>
 <br>
 
-:::tip 注意
+
 演示项目不适用于直接开发中，它只是演示用的，可以直接运行并查看效果。  
 如果在微信开发工具真机预览时，提示分包太大运行的问题，请在`HBuilder X`进行设置：菜单栏 运行 -> 运行到小程序模拟器，在下拉菜单中**勾选**"运行时是否压缩代码"
-:::
+
 
 <br>
 <br>

@@ -9,9 +9,9 @@
 - 目前没有加载中的状态，请用uni的`uni.showLoading`，这个需求uni已经做得很好
 
 
-:::warning 注意：
+：
 由于uni中无法通过js创建元素，所以需要在页面中调用`<toast />`组件，再通过`ref`开启
-:::
+
 
 ### 基本使用
 
@@ -81,31 +81,31 @@ this.$refs.uToast.show({
 
 ### Props
 
-| 参数      | 说明        | 类型     |  默认值  |  可选值   |
-|-----------|-----------|----------|----------|---------|
-| z-index | toast展示时的`z-index`值  | String \| Number | 10090 | - |
+| 参数    | 说明                     | 类型             | 默认值 | 可选值 |
+| ------- | ------------------------ | ---------------- | ------ | ------ |
+| z-index | toast展示时的`z-index`值 | String \| Number | 10090  | -      |
 
 ### Params
 
 这些参数为通过`ref`调用`<toast/>`组件内部的`show`方法时，需要传递参数
 
-| 参数      | 说明        | 类型     |  默认值  |  可选值   |
-|-----------|-----------|----------|----------|---------|
-| title | 显示的文本  | String | - | - |
-| type | 主题类型，不填默认为`default` | String  | default | primary / success / error / warning / info |
-| duration | toast的持续时间，单位ms | Nubmer  | 2000 | - |
-| url | toast结束跳转的url，不填不跳转，优先级高于`back`参数 | String  | - | - |
-| icon | 是否显示显示`type`对应的图标，为`false`不显示图标 | Boolean  | true | false |
-| position | toast出现的位置 | String  | center | top / bottom |
-| callback | toast结束后执行的回调方法 | Function  | - | - |
-| isTab | toast结束后，跳转tab页面时需要配置为`true` | Boolean  | false | true |
-| back | toast结束后，是否返回上一页，优先级低于`url`参数 | Boolean  | false | true |
+| 参数     | 说明                                                 | 类型     | 默认值  | 可选值                                     |
+| -------- | ---------------------------------------------------- | -------- | ------- | ------------------------------------------ |
+| title    | 显示的文本                                           | String   | -       | -                                          |
+| type     | 主题类型，不填默认为`default`                        | String   | default | primary / success / error / warning / info |
+| duration | toast的持续时间，单位ms                              | Nubmer   | 2000    | -                                          |
+| url      | toast结束跳转的url，不填不跳转，优先级高于`back`参数 | String   | -       | -                                          |
+| icon     | 是否显示显示`type`对应的图标，为`false`不显示图标    | Boolean  | true    | false                                      |
+| position | toast出现的位置                                      | String   | center  | top / bottom                               |
+| callback | toast结束后执行的回调方法                            | Function | -       | -                                          |
+| isTab    | toast结束后，跳转tab页面时需要配置为`true`           | Boolean  | false   | true                                       |
+| back     | toast结束后，是否返回上一页，优先级低于`url`参数     | Boolean  | false   | true                                       |
 
 ### Methods
 
 方法是通过`ref`调用的，参见上方说明
 注意：所有有关`ref`的调用，都不能在页面的`onLoad`生命周期调用，因为此时组件尚未创建完毕，会报错，应该在`onReady`生命周期调用。
 
-|方法名|说明|参数|版本|
-|:-|:-|:-|:-|
-| show | 显示toast，如需一进入页面就显示toast，请在`onReady`生命周期调用 | 见上方说明 |  -  |
+| 方法名 | 说明                                                            | 参数       | 版本 |
+| :----- | :-------------------------------------------------------------- | :--------- | :--- |
+| show   | 显示toast，如需一进入页面就显示toast，请在`onReady`生命周期调用 | 见上方说明 | -    |

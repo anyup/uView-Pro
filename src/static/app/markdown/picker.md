@@ -10,17 +10,17 @@
 3. 三是单列模式
 4. 四是多列模式
 
-::: warning 说明
+
 从`1.3.0`版本起，不建议使用此组件的单列和多列模式，因为已经有更友好，简单易用，专门用于处理列选择的[Select 列选择器](/components/select.html)组件，
 以后此组件将专注于时间和地区的选择。
-:::
+
 
 
 ### 平台差异说明
 
-|App|H5|微信小程序|支付宝小程序|百度小程序|头条小程序|QQ小程序|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|√|√|√|√|√|√|√|
+|  App  |  H5   | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ小程序 |
+| :---: | :---: | :--------: | :----------: | :--------: | :--------: | :------: |
+|   √   |   √   |     √      |      √       |     √      |     √      |    √     |
 
 ### 基本使用
 
@@ -253,37 +253,37 @@ let params = {
 
 注意：props中没有控制Picker打开与收起的参数，因为这是通过v-model绑定变量实现的，见上方说明。
 
-| 参数          | 说明            | 类型            | 默认值             |  可选值   |
-|-------------  |---------------- |---------------|------------------ |-------- |
-| params | 需要显示的参数，见上方说明，mode=region或mode=time时有效  | Object | - | - |
-| mode | 模式选择，region-地区模式，time-时间模式，selector-单列模式，multiSelector-多列模式  | String	 | time | region / selector / multiSelector |
-| start-year | 可选的开始年份，mode=time时有效 | String \| Number | 1950 | - |
-| end-year | 可选的结束年份，mode=time时有效 | String \| Number | 2050 | - |
-| safe-area-inset-bottom | 是否开启[底部安全区适配](/components/safeAreaInset.html#关于uview某些组件safe-area-inset参数的说明) | Boolean  | false | true |
-| cancel-color | 取消按钮的颜色  | String | #606266 | - |
-| confirm-color | 确认按钮的颜色  | String | #2979ff | - | 6
-| default-time | 默认选中的时间，mode=time时有效，需在`onReady`生命周期赋值，见顶部说明  | String | - | - |
-| default-region | 默认选中的地区，中文形式，mode=region时有效，需在`onReady`生命周期赋值，见顶部说明  | Array | - | - |
-| area-code | 默认选中的地区，编号形式，mode=region时有效  | Array | - | - |
-| default-selector | 数组形式，其中每一项表示选择了`range`对应项中的第几个(下标从0开始)，见上方说明 | Array | [] | - |
-| mask-close-able | 是否允许通过点击遮罩关闭Picker  | Boolean | true | false |
-| show-time-tag | 时间模式时，是否显示后面的年月日中文提示  | Boolean | true | false |
-| z-index | 弹出时的`z-index`值 | String \| Number | 10075 | - |
-| range | 自定义选择的数据，mode=selector或mode=multiSelector时有效 | Array | [] | - |
-| range-key | 当`range`参数的元素为对象时，指定Object中的哪个key的值作为选择器显示内容，见上方说明 | String | - | - |
-| title | 顶部中间的标题 | String | - | - |
-| confirm-text  | 确认按钮的文字 | String | 确认 | - |
-| cancel-text  | 取消按钮的文字 | String | 取消 | - |
+| 参数                   | 说明                                                                                                | 类型             | 默认值  | 可选值                            |
+| ---------------------- | --------------------------------------------------------------------------------------------------- | ---------------- | ------- | --------------------------------- |
+| params                 | 需要显示的参数，见上方说明，mode=region或mode=time时有效                                            | Object           | -       | -                                 |
+| mode                   | 模式选择，region-地区模式，time-时间模式，selector-单列模式，multiSelector-多列模式                 | String           | time    | region / selector / multiSelector |
+| start-year             | 可选的开始年份，mode=time时有效                                                                     | String \| Number | 1950    | -                                 |
+| end-year               | 可选的结束年份，mode=time时有效                                                                     | String \| Number | 2050    | -                                 |
+| safe-area-inset-bottom | 是否开启[底部安全区适配](/components/safeAreaInset.html#关于uview某些组件safe-area-inset参数的说明) | Boolean          | false   | true                              |
+| cancel-color           | 取消按钮的颜色                                                                                      | String           | #606266 | -                                 |
+| confirm-color          | 确认按钮的颜色                                                                                      | String           | #2979ff | -                                 | 6 |
+| default-time           | 默认选中的时间，mode=time时有效，需在`onReady`生命周期赋值，见顶部说明                              | String           | -       | -                                 |
+| default-region         | 默认选中的地区，中文形式，mode=region时有效，需在`onReady`生命周期赋值，见顶部说明                  | Array            | -       | -                                 |
+| area-code              | 默认选中的地区，编号形式，mode=region时有效                                                         | Array            | -       | -                                 |
+| default-selector       | 数组形式，其中每一项表示选择了`range`对应项中的第几个(下标从0开始)，见上方说明                      | Array            | []      | -                                 |
+| mask-close-able        | 是否允许通过点击遮罩关闭Picker                                                                      | Boolean          | true    | false                             |
+| show-time-tag          | 时间模式时，是否显示后面的年月日中文提示                                                            | Boolean          | true    | false                             |
+| z-index                | 弹出时的`z-index`值                                                                                 | String \| Number | 10075   | -                                 |
+| range                  | 自定义选择的数据，mode=selector或mode=multiSelector时有效                                           | Array            | []      | -                                 |
+| range-key              | 当`range`参数的元素为对象时，指定Object中的哪个key的值作为选择器显示内容，见上方说明                | String           | -       | -                                 |
+| title                  | 顶部中间的标题                                                                                      | String           | -       | -                                 |
+| confirm-text           | 确认按钮的文字                                                                                      | String           | 确认    | -                                 |
+| cancel-text            | 取消按钮的文字                                                                                      | String           | 取消    | -                                 |
 
 
 
 ### Events
 
-|事件名|说明|回调参数|版本|
-|:-|:-|:-|:-|
-| confirm | 点击确定按钮，返回当前选择的值 | Object: 见上方"回调参数"部分说明 | - |
-| cancel | 点击取消按钮，返回当前选择的值 | Object: 见上方"回调参数"部分说明 | - |
-| columnchange | 列发生改变时触发，只对mode = multiSelector时有效 | {column: column, index: index}: 见上方"回调参数"部分说明 | - |
+| 事件名       | 说明                                             | 回调参数                                                 | 版本 |
+| :----------- | :----------------------------------------------- | :------------------------------------------------------- | :--- |
+| confirm      | 点击确定按钮，返回当前选择的值                   | Object: 见上方"回调参数"部分说明                         | -    |
+| cancel       | 点击取消按钮，返回当前选择的值                   | Object: 见上方"回调参数"部分说明                         | -    |
+| columnchange | 列发生改变时触发，只对mode = multiSelector时有效 | {column: column, index: index}: 见上方"回调参数"部分说明 | -    |
 
 
 

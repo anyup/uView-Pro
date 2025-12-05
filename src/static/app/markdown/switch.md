@@ -7,9 +7,9 @@
 
 ### 平台差异说明
 
-|App|H5|微信小程序|支付宝小程序|百度小程序|头条小程序|QQ小程序|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|√|√|√|√|√|√|√|
+|  App  |  H5   | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 | QQ小程序 |
+| :---: | :---: | :--------: | :----------: | :--------: | :--------: | :------: |
+|   √   |   √   |     √      |      √       |     √      |     √      |    √     |
 
 ### 基本使用
 
@@ -95,10 +95,10 @@
 
 下面示例为原本是打开状态，用户把它关闭，我们通过异步控制的场景
 
-:::warning 注意
+
 此处示例中，我们通过`watch`监听`checked`变量为`false`的情景，在定时器模拟回调中又将`checked`设置为`false`，会造成无限循环，所以这里
 引入了一个中间变量`controlStatus`来识别
-:::
+
 
 
 ```html
@@ -161,20 +161,20 @@
 当用打开选择器时，该值在`switch`组件内部被修改为`true`，并反映到父组件，否则为`false`，换言之，您无需监听`switch`的`change`事件，也能
 知道某一个`switch`是否被选中的状态
 
-| 参数          | 说明            | 类型            | 默认值             |  可选值   |
-|-------------  |---------------- |---------------|------------------ |-------- |
-| loading | 是否处于加载中  | Boolean | false | true |
-| disabled | 是否禁用  | Boolean | false | true |
-| size | 开关尺寸，单位rpx | String \| Number  | 50 | - |
-| active-color | 打开时的背景色 | String  | #2979ff | - |
-| inactive-color | 关闭时的背景色 | String  | #ffffff | - |
-| vibrate-short | 是否使手机发生短促震动，目前只在iOS的微信小程序和微信小程序开发工具有效  | Boolean | false | true |
-| active-value | 打开选择器时通过change事件发出的值 | Boolean \| Number \| String  | true | |
-| inactive-value | 关闭选择器时通过change事件发出的值 | Boolean \| Number \| String | false |
+| 参数           | 说明                                                                    | 类型                        | 默认值  | 可选值 |
+| -------------- | ----------------------------------------------------------------------- | --------------------------- | ------- | ------ |
+| loading        | 是否处于加载中                                                          | Boolean                     | false   | true   |
+| disabled       | 是否禁用                                                                | Boolean                     | false   | true   |
+| size           | 开关尺寸，单位rpx                                                       | String \| Number            | 50      | -      |
+| active-color   | 打开时的背景色                                                          | String                      | #2979ff | -      |
+| inactive-color | 关闭时的背景色                                                          | String                      | #ffffff | -      |
+| vibrate-short  | 是否使手机发生短促震动，目前只在iOS的微信小程序和微信小程序开发工具有效 | Boolean                     | false   | true   |
+| active-value   | 打开选择器时通过change事件发出的值                                      | Boolean \| Number \| String | true    |        |
+| inactive-value | 关闭选择器时通过change事件发出的值                                      | Boolean \| Number \| String | false   |
 
 
 ### Switch Event
 
-|事件名|说明|回调参数|
-|:-|:-|:-|:-|
+| 事件名 | 说明 | 回调参数 |
+| :----- | :--- | :------- ||
 | change | 在`switch`打开或关闭时触发 | value：打开时为`active-value`值，关闭时为`inactive-value`值 |

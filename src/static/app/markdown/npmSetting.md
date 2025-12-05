@@ -64,9 +64,9 @@ export function createApp() {
 
 #### 3. 引入 uView 基础样式
 
-:::danger 注意！
+
 在`App.vue`中**首行**的位置引入，注意给 style 标签加入 lang="scss"属性
-:::
+
 
 ```css
 <style lang="scss">
@@ -79,13 +79,13 @@ export function createApp() {
 
 此配置需要在项目根目录的`pages.json`中进行。
 
-:::tip 温馨提示
+
 
 1. uni-app 为了调试性能的原因，修改`easycom`规则不会实时生效，配置完后，您需要重启 HX 或者重新编译项目才能正常使用 uView 的功能。
 2. 请确保您的`pages.json`中只有一个`easycom`字段，否则请自行合并多个引入规则。
 3. 注意一定要放在`custom`里，否则无效，https://ask.dcloud.net.cn/question/131175
 
-:::
+
 
 ```json
 // pages.json

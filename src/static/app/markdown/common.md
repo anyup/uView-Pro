@@ -7,12 +7,12 @@
 uView Pro 组件功能的实现，并不依赖全局样式，内置的一些类名，只是提供一些基础且常用的样式，仅此而已。  
 注意：请根据[快速上手](/components/quickstart.html)中的说明，引入 uView Pro 提供的 scss 文件。
 
-:::warning 温馨提示
+
 由于 uView Pro 的内置样式均是写在 scss 文件中的，您在使用的时候，请确保要给页面的`style`标签加上`lang="scss"`属性，否则可能会报错。
 
 <!-- 另外，您可能需要留意，如果页面的`style`标签加入了`lang="scss"`属性，就必须要在`style`标签中写入内容，哪怕是无用的样式也好，否则HX不会解析scss，此非uView的问题。 -->
 
-:::
+
 
 ### 文字省略
 
@@ -270,10 +270,10 @@ flex: 1;
 }
 ```
 
-:::tip 提示
+
 当我们写这些跟`flex`相关的类名时，总应该把`u-flex`写在`class`多个类名的左边，因为`u-flex`是一个集合类，如果你不想要其中的某个属性，如`align-items: center`
 ，可以通过右边的类名覆盖它。
-:::
+
 
 覆盖`u-flex`中的`align-items: center`(对齐)，改为顶部对齐`u-col-top`：
 
