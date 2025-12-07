@@ -17,9 +17,9 @@
             :style="progressStyle"
         >
             <slot v-if="slots.default" />
-            <template v-else-if="showPercent">
+            <text class="u-progress-text" v-else-if="showPercent">
                 {{ percent + '%' }}
-            </template>
+            </text>
         </view>
     </view>
 </template>
@@ -112,6 +112,11 @@ const progressStyle = computed(() => {
 
 .u-striped-active {
     animation: progress-stripes 2s linear infinite;
+}
+
+.u-progress-text {
+    color: var(--u-light-color);
+    padding: 0 10rpx;
 }
 
 @keyframes progress-stripes {
