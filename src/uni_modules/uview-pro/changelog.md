@@ -1,3 +1,20 @@
+## 0.4.4（2025-12-08）
+
+### ✨ Features | 新功能
+
+- **u-card:** u-card 组件的默认插槽同 body 插槽 ([ffa13ed](https://github.com/anyup/uView-Pro/commit/ffa13edcf17ff1559e8bdf2260f6b146680f9d07))
+- **u-tag:** 优化自定义样式 custom-style 应用，支持 text 插槽内容 ([5bdb733](https://github.com/anyup/uView-Pro/commit/5bdb73346252850d74165cda0bb00766e5f6f59f))
+- **u-line-progress:** 优化u-line-progress进度条百分比显示方式 ([1c1d979](https://github.com/anyup/uView-Pro/commit/1c1d97958f3c7e5a28943b46ea25d38b50449364))
+- **switch:** 增强开关组件支持自定义值类型 ([2bcb136](https://github.com/anyup/uView-Pro/commit/2bcb1368aa1f3c7fe83799e909b89fc4349b30c3))
+
+### 📝 Documentation | 文档
+
+- 优化 Markdown 文档样式和格式 ([c80ff6d](https://github.com/anyup/uView-Pro/commit/c80ff6df269eb92a88001373aa96344ff4cafb79))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/liujiayii"><img src="https://github.com/liujiayii.png?size=40" width="40" height="40" alt="liujiayii" title="liujiayii"/></a> 
+
 ## 0.4.3（2025-12-03）
 
 ### 📝 Documentation | 文档
