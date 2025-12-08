@@ -133,6 +133,8 @@ export type FormRuleItem = {
     type?: string;
     validator?: (rule: any, value: any, callback: any) => boolean;
     asyncValidator?: (rule: any, value: any, callback: any) => void;
+    fields?: FormRules;
+    defaultField?: FormRuleItem;
 };
 export type FormRules = Record<string, FormRuleItem | FormRuleItem[]>;
 
