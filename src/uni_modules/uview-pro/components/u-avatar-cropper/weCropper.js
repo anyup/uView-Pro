@@ -38,7 +38,12 @@
 
     function getDevice() {
         if (!device) {
+            // #ifdef MP-WEIXIN
+            device = uni.getWindowInfo();
+            // #endif
+            // #ifndef MP-WEIXIN
             device = uni.getSystemInfoSync();
+            // #endif
         }
         return device;
     }
