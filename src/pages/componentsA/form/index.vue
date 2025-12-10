@@ -164,10 +164,11 @@
                         <view class="u-m-t-50">
                             <u-button
                                 type="default"
-                                @click="() => model.receiptAccount.push({ type: '', account: '' })"
+                                @click="() => model.receiptAccount.push({ accountType: '', account: '' })"
                                 :throttle-time="0"
-                                >添加</u-button
                             >
+                                添加
+                            </u-button>
                         </view>
                     </view>
                 </u-form-item>
