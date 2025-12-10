@@ -126,7 +126,53 @@
                 <u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
                     <u-upload width="160" height="160"></u-upload>
                 </u-form-item>
+                <u-form-item :label-position="labelPosition" label="收款账户" prop="receiptAccount" label-width="150">
+                    <view class="receipt-account-wrapper">
+                        <view v-for="(item, index) in model.receiptAccount" :key="index">
+                            <u-form-item
+                                :label="`账户类型${index + 1}`"
+                                :prop="`receiptAccount.${index}.accountType`"
+                                :label-position="labelPosition"
+                                label-width="150"
+                            >
+                                <u-radio-group
+                                    v-model="item.accountType"
+                                    :width="radioCheckWidth"
+                                    :wrap="radioCheckWrap"
+                                >
+                                    <u-radio
+                                        shape="circle"
+                                        v-for="(item, index) in radioList"
+                                        :key="index"
+                                        :name="item.name"
+                                        :disabled="item.disabled"
+                                    >
+                                        {{ item.name }}
+                                    </u-radio>
+                                </u-radio-group>
+                            </u-form-item>
+                            <u-form-item
+                                :label="`收款账户${index + 1}`"
+                                :prop="`receiptAccount.${index}.account`"
+                                :label-position="labelPosition"
+                                label-width="150"
+                            >
+                                <u-input v-model="item.account" placeholder="请输入收款账户"></u-input>
+                            </u-form-item>
+                            <u-button @click="() => model.receiptAccount.splice(index, 1)">删除账户</u-button>
+                        </view>
+                        <view class="u-m-t-50">
+                            <u-button
+                                type="default"
+                                @click="() => model.receiptAccount.push({ type: '', account: '' })"
+                                :throttle-time="0"
+                                >添加</u-button
+                            >
+                        </view>
+                    </view>
+                </u-form-item>
             </u-form>
+
             <view class="agreement">
                 <u-checkbox v-model="check" @change="checkboxChange"></u-checkbox>
                 <view class="agreement-text"> 勾选代表同意uView的版权协议 </view>
@@ -197,6 +243,10 @@ interface Model {
     remember: boolean;
     photo: string;
     extra: { strong: string };
+    receiptAccount: Array<{
+        accountType: string;
+        account: string;
+    }>;
 }
 
 // 表单模型
@@ -218,7 +268,13 @@ const model = reactive<Model>({
     photo: '',
     extra: {
         strong: ''
-    }
+    },
+    receiptAccount: [
+        {
+            accountType: '',
+            account: ''
+        }
+    ]
 });
 
 // 选择器列表
@@ -313,6 +369,28 @@ const rules: FormRules = {
             trigger: ['change', 'blur']
         }
     ],
+    // 参考文档：https://github.com/yiminghe/async-validator?tab=readme-ov-file#deep-rules
+    receiptAccount: {
+        type: 'array',
+        required: true,
+        message: '必须有一个收款账户',
+        trigger: 'blur',
+        defaultField: {
+            type: 'object',
+            fields: {
+                accountType: {
+                    required: true,
+                    message: '请选择账户类型',
+                    trigger: ['change', 'blur']
+                },
+                account: {
+                    required: true,
+                    message: '请输入收款账户',
+                    trigger: ['change', 'blur']
+                }
+            }
+        }
+    },
     likeFruit: [
         {
             required: true,
@@ -552,5 +630,11 @@ function errorChange(index: number) {
         padding-left: 8rpx;
         color: $u-tips-color;
     }
+}
+
+.receipt-account-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 </style>

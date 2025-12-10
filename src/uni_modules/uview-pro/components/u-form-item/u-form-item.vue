@@ -249,7 +249,7 @@ function getPropByPath(obj: any, path: string) {
 function getRules() {
     // 父组件的所有规则
     let rules = parentExposed?.value?.rules?.value || {};
-    rules = rules ? rules[props.prop] : [];
+    rules = rules ? rules[props.prop] || getPropByPath(rules,props.prop.replace(/(\.|^)(\d+)\./,'.defaultField.fields.')).v : [];
     // 保证返回的是一个数组形式
     return [].concat(rules || []);
 }
