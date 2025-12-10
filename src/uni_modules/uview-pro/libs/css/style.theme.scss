@@ -1,3 +1,4 @@
+/* #ifdef H5 */
 :root {
     color-scheme: light;
 }
@@ -6,6 +7,7 @@
 :root[data-u-theme-mode='dark'] {
     color-scheme: dark;
 }
+/* #endif */
 
 page {
     color: $u-main-color;
