@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.5] - 2025-12-10
+
+### ✨ Features | 新功能
+
+- **u-input:** 为选择类型输入框添加覆盖层以增强交互 ([9b7bac2](https://github.com/anyup/uView-Pro/commit/9b7bac221195d010c31b15915d2927d095bd257f))
+- **u-form:** 增强 u-form 深层校验、动态校验表单 ([97d0ccb](https://github.com/anyup/uView-Pro/commit/97d0ccbe03391f63bed81dcfd1af1432f4f7c77d))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-input:** 修复清空图标点击事件冒泡问题 ([8a214ff](https://github.com/anyup/uView-Pro/commit/8a214ffe8e5588395cdc456e600bc8dd0f03a603))
+- **style:** 修复除H5环境外主题样式作用域问题 ([c02ba3c](https://github.com/anyup/uView-Pro/commit/c02ba3c1454e709b1fa9de817d77b0f2128b5fc0))
+- **u-switch:** 修复开关组件激活颜色默认值的响应式问题 ([3d78647](https://github.com/anyup/uView-Pro/commit/3d78647d75c3201cced2643395ff5dd935d0e7ec))
+- **form:** 修复 form 校验报错问题 ([8d6d60d](https://github.com/anyup/uView-Pro/commit/8d6d60d4af4e5653f7b87afc3f208d0e26809505))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/yoshinosk"><img src="https://github.com/yoshinosk.png?size=40" width="40" height="40" alt="yoshinosk" title="yoshinosk"/></a> 
+
 ## [0.4.4] - 2025-12-08
 
 ### ✨ Features | 新功能
