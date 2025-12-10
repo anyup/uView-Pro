@@ -60,6 +60,7 @@
             @input="handleInput"
             @confirm="onConfirm"
         />
+        <view class="u-input__select-overlay" v-if="type === 'select'" @tap.stop="inputClick"></view>
         <view class="u-input__right-icon u-flex">
             <view
                 class="u-input__right-icon__clear u-input__right-icon__item"
@@ -255,6 +256,12 @@ defineExpose({
     flex: 1;
     @include vue-flex;
 
+    &__select-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
     &__input {
         //height: 70rpx;
         font-size: 28rpx;
@@ -281,6 +288,7 @@ defineExpose({
         padding: 1px 4px;
         border-radius: 10px;
         line-height: 16px;
+        z-index: 2;
     }
 
     &--border {
@@ -293,6 +301,9 @@ defineExpose({
     }
 
     &__right-icon {
+        position: relative;
+        z-index: 2;
+
         &__item {
             margin-left: 10rpx;
         }
