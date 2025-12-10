@@ -65,8 +65,9 @@
             <view
                 class="u-input__right-icon__clear u-input__right-icon__item"
                 v-if="clearable && modelValue != '' && !disabled"
+                @click.stop="onClear"
             >
-                <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" @click="onClear" />
+                <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" />
             </view>
             <view
                 class="u-input__right-icon__clear u-input__right-icon__item"
