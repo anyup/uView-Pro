@@ -42,6 +42,21 @@
 - 详尽的文档支持，现代化的演示效果
 - 按需引入，精简打包体积
 
+## 鸿蒙预览
+
+uView Pro 鸿蒙端应用已正式登陆华为应用市场，为您提供完整的业务场景演示平台，包含组件库、模板示例、场景案例等，支持一键复制下载，帮助开发者快速上手并体验组件的实际应用价值！
+
+> 系统要求：仅支持 HarmonyOS 5.0 及以上版本设备
+
+<table>
+    <tr align="center">
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_harmony.png" width="180" height="180" ></td>
+    </tr>
+    <tr>
+        <td align="center"><strong>鸿蒙应用</strong><br>（浏览器扫码）</td>
+    </tr>
+</table>
+
 ## 手机预览
 
 您可以通过**微信**或**手机浏览器**扫描以下二维码，查看最佳的演示效果。

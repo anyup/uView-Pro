@@ -42,6 +42,21 @@ uView Pro is a uni-app ecosystem framework that fully supports Vue3.0 and TypeSc
 - Detailed documentation and modern demo effects
 - On-demand import, streamlined bundle size
 
+## HarmonyOS Preview
+
+The uView Pro HarmonyOS application has officially been launched in the Huawei App Market, providing you with a complete business scenario demonstration platform. It includes a component library, template samples, scenario cases, and supports one-click copying and downloading to help developers quickly get started and experience the practical value of the components!
+
+> System requirements: Only supported on HarmonyOS 5.0 and above devices
+
+<table>
+    <tr align="center">
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_harmony.png" width="180" height="180" ></td>
+    </tr>
+    <tr>
+        <td align="center"><strong>HarmonyOS</strong><br>（Scan with browse）</td>
+    </tr>
+</table>
+
 ## Mobile Preview
 
 You can scan the following QR codes with **WeChat** or **mobile browser** to view the best demo effect.
