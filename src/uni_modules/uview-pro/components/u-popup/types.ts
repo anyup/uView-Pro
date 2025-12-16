@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { PopupCloseIconPos, PopupMode } from '../../types/global';
 import { baseProps } from '../common/props';
+import zIndex from '../../libs/config/zIndex';
 
 /**
  * PopupMode 弹窗弹出方向类型
@@ -33,7 +34,7 @@ export const PopupProps = {
     /** 圆角 */
     borderRadius: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 弹窗z-index */
-    zIndex: { type: [Number, String] as PropType<number | string>, default: '' },
+    zIndex: { type: [Number, String] as PropType<number | string>, default: zIndex.popup },
     /** 是否显示关闭图标 */
     closeable: { type: Boolean, default: false },
     /** 关闭图标的名称，只能uView的内置图标 */

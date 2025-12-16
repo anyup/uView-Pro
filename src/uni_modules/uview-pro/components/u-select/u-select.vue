@@ -130,7 +130,7 @@ const columnNum = ref(0);
 // 列是否还在滑动中，微信小程序如果在滑动中就点确定，结果可能不准确
 const moving = ref(false);
 // 如果用户有传递z-index值，优先使用
-const uZIndex = computed(() => (props.zIndex ? props.zIndex : 10075));
+const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 
 const popupValue = computed({
     get: () => props.modelValue,

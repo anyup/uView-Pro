@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
+import zIndex from '../../libs/config/zIndex';
 
 /**
  * TopTipsProps top-tips props 类型定义
@@ -10,7 +11,7 @@ export const TopTipsProps = {
     /** 导航栏高度，用于提示的初始化 */
     navbarHeight: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** z-index值 */
-    zIndex: { type: [Number, String] as PropType<number | string>, default: '' }
+    zIndex: { type: [Number, String] as PropType<number | string>, default: zIndex.topTips }
 };
 
 export type TopTipsProps = ExtractPropTypes<typeof TopTipsProps>;

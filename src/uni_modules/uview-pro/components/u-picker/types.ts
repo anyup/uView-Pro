@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { PickerMode, PickerParams } from '../../types/global';
 import { getColor } from '../../';
+import zIndex from '../../libs/config/zIndex';
 
 const defaultParams: PickerParams = {
     year: true,
@@ -107,7 +108,7 @@ export const PickerProps = {
     /** 弹出的z-index值 */
     zIndex: {
         type: [String, Number] as PropType<number | string>,
-        default: 0
+        default: zIndex.popup
     },
     /** 顶部标题 */
     title: {
