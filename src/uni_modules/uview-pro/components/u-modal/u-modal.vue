@@ -68,6 +68,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, watch, useSlots } from 'vue';
+import { $u } from '../..';
 import { ModalProps } from './types';
 
 /**
@@ -113,7 +114,7 @@ const cancelBtnStyle = computed(() => {
 const confirmBtnStyle = computed(() => {
     return Object.assign({ color: props.confirmColor }, props.confirmStyle);
 });
-const uZIndex = computed(() => (props.zIndex ? props.zIndex : 10075));
+const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 
 const popupValue = computed({
     get: () => props.modelValue,

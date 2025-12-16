@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import zIndex from '../../libs/config/zIndex';
 
 /**
  * u-navbar 组件 props 类型定义
@@ -88,7 +89,7 @@ export const NavbarProps = {
     /** 固定在顶部时的z-index值 */
     zIndex: {
         type: [String, Number] as PropType<string | number>,
-        default: ''
+        default: zIndex.navbar
     },
     /** 自定义返回逻辑方法 */
     customBack: {

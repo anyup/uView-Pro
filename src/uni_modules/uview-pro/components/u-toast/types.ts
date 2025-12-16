@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ThemeType, ToastPosition } from '../../types/global';
 import { baseProps } from '../common/props';
+import zIndex from '../../libs/config/zIndex';
 
 /**
  * ToastProps toast props 类型定义
@@ -9,7 +10,7 @@ import { baseProps } from '../common/props';
 export const ToastProps = {
     ...baseProps,
     /** 层级 z-index */
-    zIndex: { type: [Number, String] as PropType<number | string>, default: '' },
+    zIndex: { type: [Number, String] as PropType<number | string>, default: zIndex.toast },
     /** 提示类型，success/warning/error/loading 等 */
     type: { type: String as PropType<ThemeType | 'default'>, default: '' },
     /** 显示时长，单位ms */

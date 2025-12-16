@@ -58,6 +58,7 @@ export default {
 <script setup lang="ts">
 import { KeyboardProps } from './types';
 import { computed } from 'vue';
+import { $u } from '../..';
 
 /**
  * keyboard 键盘
@@ -86,7 +87,7 @@ import { computed } from 'vue';
 const props = defineProps(KeyboardProps);
 const emit = defineEmits(['change', 'update:modelValue', 'confirm', 'cancel', 'backspace']);
 
-const uZIndex = computed(() => (props.zIndex ? props.zIndex : 1075));
+const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 
 const popupValue = computed({
     get: () => props.modelValue,
