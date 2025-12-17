@@ -1,3 +1,22 @@
+## 0.4.6（2025-12-17）
+
+### 📝 Documentation | 文档
+
+- 添加鸿蒙系统预览说明及二维码 ([7f6199a](https://github.com/anyup/uView-Pro/commit/7f6199a30d5477743c20b27a94711b4605787757))
+
+### ✨ Features | 新功能
+
+- **u-slider:** 增强滑块组件功能与灵活性，支持设置滑块的整体范围起点(start)和终点(end) ([a20c44b](https://github.com/anyup/uView-Pro/commit/a20c44b0270cffde02afd8738a932b2d6bae49f4))
+- **button:** 新增按钮禁用与自定义样式功能演示 ([5f1f482](https://github.com/anyup/uView-Pro/commit/5f1f4823e027dc5ab2e6f49f29fe327c6d4318c6))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **button:** 更新禁用状态下按钮样式优先级 ([b3ff20b](https://github.com/anyup/uView-Pro/commit/b3ff20b59818c8bc8204bb2a489eff42ded7e842))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.4.5（2025-12-10）
 
 ### ✨ Features | 新功能
