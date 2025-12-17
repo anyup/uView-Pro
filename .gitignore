@@ -22,3 +22,4 @@ docs/
 *.njsproj
 *.sln
 *.sw?
+.npmrc
