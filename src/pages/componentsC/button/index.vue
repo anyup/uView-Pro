@@ -18,6 +18,8 @@
                         :ripple="ripple"
                         :hairLine="hairLine"
                         :type="type"
+                        :disabled="disabled"
+                        :custom-style="buttonCustomStyle"
                     >
                         山川异域，风月同天
                     </u-button>
@@ -56,6 +58,14 @@
                     <view class="u-item-title">加载中</view>
                     <u-subsection :current="1" :list="['是', '否']" @change="loadingChange"></u-subsection>
                 </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">禁用</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">自定义样式</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="customStyleChange"></u-subsection>
+                </view>
             </view>
         </view>
     </demo-page>
@@ -63,7 +73,7 @@
 
 <script lang="ts" setup>
 import type { ButtonSize, ButtonType, Shape } from '@/uni_modules/uview-pro/types/global';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 // 主题选择
 const type = ref<ButtonType>('default');
@@ -79,7 +89,10 @@ const ripple = ref<boolean>(false);
 const hairLine = ref<boolean>(true);
 // 加载中
 const loading = ref<boolean>(false);
-
+// 禁用
+const disabled = ref<boolean>(false);
+// 自定义样式
+const customStyle = ref<boolean>(false);
 // 主题选择切换
 const typeChange = (e: number) => {
     switch (e) {
@@ -100,6 +113,22 @@ const typeChange = (e: number) => {
             break;
     }
 };
+
+// 自定义样式
+const buttonCustomStyle = computed(() => {
+    if (!customStyle.value) {
+        return {};
+    }
+    return disabled.value
+        ? {
+              backgroundColor: '#999',
+              color: '#f1f1f1'
+          }
+        : {
+              backgroundColor: '#000',
+              color: '#fff'
+          };
+});
 
 // 尺寸大小切换
 const sizeChange = (e: number) => {
@@ -139,6 +168,16 @@ const hairLineChange = (e: number) => {
 // 加载中切换
 const loadingChange = (index: number) => {
     loading.value = index === 0;
+};
+
+// 禁用切换
+const disabledChange = (e: number) => {
+    disabled.value = e === 0;
+};
+
+// 自定义样式切换
+const customStyleChange = (e: number) => {
+    customStyle.value = e === 0;
 };
 
 // 按钮点击事件
