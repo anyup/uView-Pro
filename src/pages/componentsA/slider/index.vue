@@ -7,15 +7,18 @@
                     <view class="u-demo-area">
                         <u-toast ref="uToast"></u-toast>
                         <u-slider
+                            v-model="value"
                             :step="step"
                             :height="height"
                             :block-width="blockWidth"
                             :active-color="activeColor"
                             :value="30"
                             :use-slot="useSlot"
-                            v-model="value"
                             :min="min"
                             :max="max"
+                            :start="startValue"
+                            :end="endValue"
+                            :show-value="showValue"
                             @end="end"
                             @moving="moving"
                         >
@@ -56,8 +59,16 @@
                         <u-subsection :list="['1', '10', '20']" @change="stepChange"></u-subsection>
                     </view>
                     <view class="u-config-item">
+                        <view class="u-item-title">显示滑块数字</view>
+                        <u-subsection :list="['否', '是']" @change="showValueChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
                         <view class="u-item-title">最大最小值</view>
-                        <u-subsection :list="['0-100', '40-80']" @change="minMaxchange"></u-subsection>
+                        <u-subsection :list="['0-100', '40-80']" @change="minMaxChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">滑块起始结束值</view>
+                        <u-subsection :list="['0-100', '40-80']" @change="edgeValueChange"></u-subsection>
                     </view>
                 </view>
             </view>
@@ -67,7 +78,7 @@
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
 const value = ref(30);
 const useSlot = ref(false);
@@ -77,6 +88,9 @@ const height = ref(6);
 const blockWidth = ref(30);
 const min = ref(0);
 const max = ref(100);
+const startValue = ref(0);
+const endValue = ref(100);
+const showValue = ref(false);
 
 function typeChange(index: number) {
     let type = ['primary', 'warning', 'error', 'success'];
@@ -102,13 +116,33 @@ function slotChange(index: number) {
     useSlot.value = !index;
 }
 
-function minMaxchange(index: number) {
+function showValueChange(index: number) {
+    if (index === 0) {
+        // 不显示
+        showValue.value = false;
+    } else {
+        // 显示
+        showValue.value = true;
+    }
+}
+
+function minMaxChange(index: number) {
     if (index === 0) {
         min.value = 0;
         max.value = 100;
     } else {
         min.value = 40;
         max.value = 80;
+    }
+}
+
+function edgeValueChange(index: number) {
+    if (index === 0) {
+        startValue.value = 0;
+        endValue.value = 100;
+    } else {
+        startValue.value = 40;
+        endValue.value = 80;
     }
 }
 

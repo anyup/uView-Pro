@@ -3,8 +3,22 @@
         class="u-slider"
         @tap="onClick"
         :class="[disabled ? 'u-slider--disabled' : '', customClass]"
-        :style="$u.toStyle({ backgroundColor: inactiveColor }, customStyle)"
+        :style="$u.toStyle(sliderStyle, customStyle)"
     >
+        <view
+            v-if="showEdgeValue"
+            class="u-slider__edge u-slider__edge--start"
+            :class="`u-slider__edge--${edgeValuePosition}`"
+        >
+            {{ startLabel }}
+        </view>
+        <view
+            v-if="showEdgeValue"
+            class="u-slider__edge u-slider__edge--end"
+            :class="`u-slider__edge--${edgeValuePosition}`"
+        >
+            {{ endLabel }}
+        </view>
         <view
             class="u-slider__gap"
             :style="
@@ -33,6 +47,9 @@
                         })
                     "
                 />
+                <view v-if="showValue" class="u-slider__value" :class="`u-slider__value--${valuePosition}`">
+                    {{ displayValue }}
+                </view>
             </view>
         </view>
     </view>
@@ -52,16 +69,18 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, useSlots, getCurrentInstance } from 'vue';
+import { computed, ref, watch, onMounted, useSlots, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { SliderProps } from './types';
 
 /**
  * slider 滑块选择器
  * @tutorial https://uviewpro.cn/zh/components/slider.html
- * @property {Number | String} value 滑块默认值（默认0）
- * @property {Number | String} min 最小值（默认0）
- * @property {Number | String} max 最大值（默认100）
+ * @property {Number | String} value 滑块当前值，位于[start, end]范围内（默认0）
+ * @property {Number | String} start 整体范围起点值（默认0）
+ * @property {Number | String} end 整体范围终点值（默认100）
+ * @property {Number | String} min 有效拖动最小值，需在[start, end]中（默认0）
+ * @property {Number | String} max 有效拖动最大值，需在[start, end]中（默认100）
  * @property {Number | String} step 步长（默认1）
  * @property {Number | String} blockWidth 滑块宽度，高等于宽（30）
  * @property {Number | String} height 滑块条高度，单位rpx（默认6）
@@ -70,6 +89,10 @@ import { SliderProps } from './types';
  * @property {String} blockColor 滑块颜色（默认var(--u-bg-white)）
  * @property {Object} blockStyle 给滑块自定义样式，对象形式
  * @property {Boolean} disabled 是否禁用滑块(默认为false)
+ * @property {Boolean} showValue 是否在滑块上方/下方显示当前数值
+ * @property {String} valuePosition 当前数值显示位置，top-上方，bottom-下方（默认top）
+ * @property {Boolean} showEdgeValue 是否在起始和结束位置显示数值
+ * @property {String} edgeValuePosition 起始和结束数值显示位置，top-上方，bottom-下方（默认top）
  * @event start 滑动触发
  * @event moving 正在滑动中
  * @event end 滑动结束
@@ -91,14 +114,69 @@ const newValue = ref(0);
 const distanceX = ref(0);
 const startValue = ref(0);
 const barStyle = ref<Record<string, any>>({});
+const innerValue = ref<number>(0);
+
+const rangeStart = computed(() => Number(props.start));
+const rangeEnd = computed(() => Number(props.end));
+const rangeTotal = computed(() => {
+    const total = rangeEnd.value - rangeStart.value;
+    return total === 0 ? 1 : total;
+});
+
+const sliderStyle = computed(() => {
+    const style = {
+        backgroundColor: props.inactiveColor
+    } as Record<string, any>;
+    if (
+        (props.showValue && props.valuePosition === 'top') ||
+        (props.showEdgeValue && props.edgeValuePosition === 'top')
+    ) {
+        style.marginTop = '80rpx';
+    }
+    if (
+        (props.showValue && props.valuePosition === 'bottom') ||
+        (props.showEdgeValue && props.edgeValuePosition === 'bottom')
+    ) {
+        style.marginBottom = '80rpx';
+    }
+    return style;
+});
+
+// 限制min和max在start和end范围内
+const effectiveMin = computed(() => {
+    const min = Number(props.min);
+    return Math.max(rangeStart.value, Math.min(min, rangeEnd.value));
+});
+
+const effectiveMax = computed(() => {
+    const max = Number(props.max);
+    return Math.min(rangeEnd.value, Math.max(max, rangeStart.value));
+});
+
+const startLabel = computed(() => props.start);
+const endLabel = computed(() => props.end);
+const showValue = computed(() => props.showValue);
+const valuePosition = computed(() => props.valuePosition || 'top');
+const showEdgeValue = computed(() => props.showEdgeValue);
+const edgeValuePosition = computed(() => props.edgeValuePosition || 'top');
+
+const displayValue = computed(() => innerValue.value);
 
 // 监听 value 变化，非滑动状态时才更新滑块值
 watch(
     () => props.modelValue,
     n => {
         // 只有在非滑动状态时，才可以通过modelValue更新滑块值，这里监听，是为了让用户触发
-        if (status.value === 'end') updateValue(props.modelValue, false);
+        if (status.value === 'end') updateValue(n, false);
     }
+);
+
+watch(
+    () => [props.start, props.end, props.min, props.max],
+    () => {
+        updateValue(innerValue.value, false);
+    },
+    { deep: true }
 );
 
 onMounted(() => {
@@ -136,9 +214,9 @@ function onTouchMove(event: TouchEvent) {
     const touches = event.touches[0];
     // 滑块的左边不一定跟屏幕左边接壤，所以需要减去最外层父元素的左边值
     distanceX.value = touches.clientX - sliderRect.value.left;
-    // 获得移动距离对整个滑块的百分比值，此为带有多位小数的值，不能用此更新视图
-    // 否则造成通信阻塞，需要每改变一个step值时修改一次视图
-    newValue.value = (distanceX.value / sliderRect.value.width) * 100;
+    const ratio = distanceX.value / sliderRect.value.width;
+    const raw = rangeStart.value + ratio * rangeTotal.value;
+    newValue.value = raw;
     status.value = 'moving';
     // 发出moving事件
     emit('moving');
@@ -163,13 +241,18 @@ function onTouchEnd() {
  * @param drag 是否为拖动
  */
 function updateValue(value: number | string, drag: boolean) {
-    // 去掉小数部分，同时也是对step步进的处理
-    const width = format(value);
-    // 不允许滑动的值超过max最大值，百分比也不能超过100
-    if (width > Number(props.max) || width > 100) return;
-    // 设置移动的百分比值
+    // 处理为有效值（步进 + min/max 约束），支持负数
+    const formatted = format(value);
+    innerValue.value = formatted;
+
+    // 计算相对于[start, end]的百分比宽度
+    const ratio = (formatted - rangeStart.value) / rangeTotal.value;
+    let percent = ratio * 100;
+    if (percent < 0) percent = 0;
+    if (percent > 100) percent = 100;
+
     const style: Record<string, any> = {
-        width: width + '%'
+        width: percent + '%'
     };
     // 移动期间无需过渡动画
     if (drag === true) {
@@ -178,8 +261,8 @@ function updateValue(value: number | string, drag: boolean) {
         // 非移动期间，删掉对过渡为空的声明，让css中的声明起效
         delete style.transition;
     }
-    // 修改value值
-    emit('update:modelValue', width);
+    // 修改value值（为实际值而非百分比）
+    emit('update:modelValue', formatted);
     barStyle.value = style;
 }
 
@@ -189,11 +272,12 @@ function updateValue(value: number | string, drag: boolean) {
  * @returns 处理后的值
  */
 function format(value: number | string): number {
-    // 将小数变成整数，为了减少对视图的更新，造成视图层与逻辑层的阻塞
-    return (
-        Math.round(Math.max(Number(props.min), Math.min(Number(value), Number(props.max))) / Number(props.step)) *
-        Number(props.step)
-    );
+    const numeric = Number(value);
+    const step = Number(props.step) || 1;
+    // 在有效范围内裁剪（effectiveMin和effectiveMax已限制在start和end范围内），支持负数
+    const clipped = Math.max(effectiveMin.value, Math.min(numeric, effectiveMax.value));
+    // 将值按步长取整，减少对视图的频繁更新
+    return Math.round(clipped / step) * step;
 }
 
 /**
@@ -201,8 +285,9 @@ function format(value: number | string): number {
  */
 function onClick(event: any) {
     if (props.disabled) return;
-    // 直接点击滑块的情况，计算方式与onTouchMove方法相同
-    const value = ((event.detail.x - sliderRect.value.left) / sliderRect.value.width) * 100;
+    // 直接点击滑块的情况，计算为整体[start, end]范围内的值
+    const ratio = (event.detail.x - sliderRect.value.left) / sliderRect.value.width;
+    const value = rangeStart.value + ratio * rangeTotal.value;
     updateValue(value, false);
 }
 </script>
@@ -247,6 +332,88 @@ function onClick(event: any) {
     top: 50%;
     right: 0;
     transform: translate3d(50%, -50%, 0);
+}
+
+.u-slider__value {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22rpx;
+    font-weight: 500;
+    color: #333;
+    white-space: nowrap;
+    min-width: 40rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    padding: 0 10rpx;
+    border-radius: 28rpx;
+    background-color: #ffffff;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.u-slider__value--top {
+    bottom: 100%;
+    margin-bottom: 12rpx;
+}
+
+.u-slider__value--top::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-width: 4px 3px 0 3px;
+    border-style: solid;
+    border-color: #ffffff transparent transparent transparent;
+}
+
+.u-slider__value--bottom {
+    top: 100%;
+    margin-top: 12rpx;
+}
+
+.u-slider__value--bottom::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-width: 0 6rpx 8rpx 6rpx;
+    border-style: solid;
+    border-color: transparent transparent #ffffff transparent;
+}
+
+.u-slider__edge {
+    position: absolute;
+    font-size: 24rpx;
+    color: $u-tips-color;
+    white-space: nowrap;
+}
+
+.u-slider__edge--start {
+    left: 0;
+}
+
+.u-slider__edge--end {
+    right: 0;
+}
+
+.u-slider__edge--top {
+    bottom: 100%;
+    margin-bottom: 8rpx;
+}
+
+.u-slider__edge--bottom {
+    top: 100%;
+    margin-top: 8rpx;
 }
 
 .u-slider--disabled {
