@@ -121,8 +121,8 @@ const buttonCustomStyle = computed(() => {
     }
     return disabled.value
         ? {
-              backgroundColor: '#999',
-              color: '#f1f1f1'
+              backgroundColor: '#999 !important',
+              color: '#f1f1f1 !important'
           }
         : {
               backgroundColor: '#000',
