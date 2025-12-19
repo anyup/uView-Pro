@@ -1,17 +1,22 @@
 <template>
-    <view :style="[customStyle]" class="u-icon" @click="onClick" :class="['u-icon--' + labelPos, customClass]">
-        <image class="u-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="[imgStyle]" />
+    <view
+        :style="$u.toStyle(customStyle)"
+        class="u-icon"
+        @click="onClick"
+        :class="['u-icon--' + labelPos, customClass]"
+    >
+        <image class="u-icon__img" v-if="isImg" :src="props.name" :mode="imgMode" :style="[imgStyle]" />
         <text
             v-else
             class="u-icon__icon"
             :class="iconClass"
-            :style="[iconStyle]"
+            :style="$u.toStyle(iconStyle)"
             :hover-class="hoverClass"
             @touchstart="onTouchstart"
         >
             <text
                 v-if="showDecimalIcon"
-                :style="[decimalIconStyle]"
+                :style="$u.toStyle(decimalIconStyle)"
                 :class="decimalIconClass"
                 :hover-class="hoverClass"
                 class="u-icon__decimal"
@@ -219,8 +224,8 @@ function onClick(event: any) {
  * 图标触摸时触发
  * @emits touchstart(index)
  */
-function onTouchstart() {
-    emit('touchstart', props.index);
+function onTouchstart(event: any) {
+    emit('touchstart', props.index || event);
 }
 </script>
 
