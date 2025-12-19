@@ -65,14 +65,15 @@ const totalPages = computed(() => {
 
 // 切换分页
 function handleChange(type: PaginationDirection) {
-    if (type === 'prev') {
-        current.value -= 1;
-    } else {
-        current.value += 1;
-    }
+    // 先计算新值，确保获取到的是更新后的值
+    const newCurrent = type === 'prev' ? current.value - 1 : current.value + 1;
+
+    // 更新 current 值
+    current.value = newCurrent;
 
     // current为当前页，type值为：next/prev，表示点击的是上一页还是下一页
-    emit('change', { type, current: current.value });
+    // 使用计算后的新值，而不是 current.value，避免异步更新导致的值不同步问题
+    emit('change', { type, current: newCurrent });
 }
 </script>
 
