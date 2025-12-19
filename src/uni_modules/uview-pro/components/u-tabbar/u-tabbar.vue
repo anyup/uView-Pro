@@ -31,7 +31,7 @@
                         :name="elIconPath(index)"
                         img-mode="scaleToFill"
                         :color="elColor(index)"
-                        :custom-prefix="item.customIcon ? 'custom-icon' : 'uicon'"
+                        :custom-prefix="getCustomPrefix(index)"
                     ></u-icon>
                     <u-badge
                         :count="item.count"
@@ -153,6 +153,34 @@ const elColor = computed<(index: number) => string>(() => {
         }
     };
 });
+
+/**
+ * 计算当前item的custom-prefix
+ * customIcon为boolean时：true为"custom-icon"，false为"uicon"
+ * customIcon为string时：直接使用该值
+ * customIcon为空时：默认"uicon"
+ */
+function getCustomPrefix(index: number): string {
+    const customIcon = props.list[index]?.customIcon;
+
+    // 如果为空（undefined/null），返回默认值
+    if (customIcon === undefined || customIcon === null || customIcon === '') {
+        return 'uicon';
+    }
+
+    // 如果是字符串类型，直接返回
+    if (typeof customIcon === 'string') {
+        return customIcon;
+    }
+
+    // 如果是boolean类型
+    if (typeof customIcon === 'boolean') {
+        return customIcon ? 'custom-icon' : 'uicon';
+    }
+
+    // 默认返回uicon
+    return 'uicon';
+}
 
 /**
  * 点击tabbar item

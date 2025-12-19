@@ -401,6 +401,6 @@ export type TabbarItem = {
     selectedIconPath?: string;
     count?: number;
     isDot?: boolean;
-    customIcon?: boolean;
+    customIcon?: boolean | string;
     midButton?: boolean;
 };
