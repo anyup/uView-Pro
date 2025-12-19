@@ -1,3 +1,22 @@
+## 0.4.7（2025-12-19）
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- 忽略部分文件 ([a8a747f](https://github.com/anyup/uView-Pro/commit/a8a747f97e93ed278a305cd1b2671d2ede5c0fde))
+
+### ✨ Features | 新功能
+
+- **u-tabbar:** u-tabbar 组件支持 custom-icon 直接配置图标 custom-prefix ([e577c2d](https://github.com/anyup/uView-Pro/commit/e577c2d083cf46db7124b0df46b2848ef9bdbe80))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-icon:** 修复图标组件样式和事件处理问题 ([1cadf27](https://github.com/anyup/uView-Pro/commit/1cadf27f8bd2aec3a11fb1befb9255256a2e3b3a))
+- **u-pagination:** 修复分页切换时传递不正确的当前页码值 ([4befe02](https://github.com/anyup/uView-Pro/commit/4befe02c5cbb4e7db6fbf49f04ca68fac0f69a37))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.4.6（2025-12-17）
 
 ### 📝 Documentation | 文档
