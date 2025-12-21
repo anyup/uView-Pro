@@ -40,12 +40,9 @@
         <view class="u-flex u-cell_right" v-if="$slots['right-icon']">
             <slot name="right-icon"></slot>
         </view>
-        <u-icon
-            v-if="arrow"
-            name="arrow-right"
-            :style="[arrowStyle]"
-            class="u-icon-wrap u-cell__right-icon-wrap"
-        ></u-icon>
+        <view v-if="arrow" class="u-icon-wrap u-cell__right-icon-wrap">
+            <u-icon name="arrow-right" :style="[arrowStyle]"></u-icon>
+        </view>
     </view>
 </template>
 

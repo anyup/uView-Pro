@@ -244,7 +244,7 @@ function retry(index: number) {
     lists.value[index].progress = 0;
     lists.value[index].error = false;
     lists.value[index].response = null;
-    uni.showLoading({ title: '重新上传' });
+    showToast('重新上传');
     uploadFile(index);
 }
 
