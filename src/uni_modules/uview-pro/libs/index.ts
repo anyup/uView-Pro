@@ -39,7 +39,7 @@ import $parent from './function/$parent';
 // 获取sys()和os()工具方法
 // 获取设备信息，挂载到$u的sys()(system的缩写)属性中，
 // 同时把安卓和ios平台的名称"ios"和"android"挂到$u.os()中，方便取用
-import { sys, os } from './function/sys';
+import { sys, os, getWindowInfo, getDeviceInfo } from './function/sys';
 // 防抖方法
 import debounce from './function/debounce';
 // 节流方法
@@ -307,6 +307,8 @@ export const $u = {
     getColor,
     sys,
     os,
+    getWindowInfo,
+    getDeviceInfo,
     type2icon,
     randomArray,
     hexToRgb: colorGradients.hexToRgb,

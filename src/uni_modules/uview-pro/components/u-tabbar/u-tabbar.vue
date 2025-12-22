@@ -216,7 +216,7 @@ function getOffsetRight(count: number, isDot: boolean): number {
  * 获取凸起按钮外层元素的left值，让其水平居中
  */
 function getMidButtonLeft() {
-    const windowWidth = $u.sys().windowWidth;
+    const windowWidth = $u.getWindowInfo().windowWidth;
     // 由于安卓中css计算left: 50%的结果不准确，故用js计算
     midButtonLeft.value = windowWidth / 2 + 'px';
 }
