@@ -61,7 +61,7 @@ export function getWindowInfo(): Omit<UniApp.GetWindowInfoResult, 'screenTop'> &
  * @returns 设备信息对象
  */
 export function getDeviceInfo(): UniApp.GetDeviceInfoResult {
-    // #ifdef  MP-WEIXIN
+    // #ifdef MP-WEIXIN
     return uni.getDeviceInfo();
     // #endif
     // #ifndef MP-WEIXIN
@@ -77,7 +77,6 @@ export function getDeviceInfo(): UniApp.GetDeviceInfoResult {
         system,
         platform
     } = sys();
-    // #endif
     return {
         deviceBrand,
         deviceModel,
@@ -90,4 +89,5 @@ export function getDeviceInfo(): UniApp.GetDeviceInfoResult {
         system,
         platform
     };
+    // #endif
 }
