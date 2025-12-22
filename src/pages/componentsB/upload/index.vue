@@ -93,6 +93,7 @@ interface UploadFileItem {
     progress?: number;
     [key: string]: any;
 }
+const uToast = ref(null);
 const uUploadRef = ref();
 // u-upload 组件 fileList 类型
 // const fileList = ref<UploadFileItem[]>([]);

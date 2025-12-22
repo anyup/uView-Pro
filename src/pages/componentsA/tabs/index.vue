@@ -56,6 +56,7 @@ import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
 import { ref } from 'vue';
 
+const uToast = ref(null);
 const list = ref([]);
 const data = ref([
     { name: '关注', count: 100 },

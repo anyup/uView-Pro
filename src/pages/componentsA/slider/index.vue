@@ -69,6 +69,7 @@
 import { $u } from '@/uni_modules/uview-pro';
 import { computed, ref } from 'vue';
 
+const uToast = ref(null);
 const value = ref(30);
 const useSlot = ref(false);
 const step = ref<string | number>(1);

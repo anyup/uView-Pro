@@ -64,6 +64,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
+const uToast = ref(null);
 const show = ref<boolean>(false);
 const zoom = ref<boolean>(false);
 const content = ref<string>('慈母手中线，游子身上衣');
