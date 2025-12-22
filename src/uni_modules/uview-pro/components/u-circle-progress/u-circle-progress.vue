@@ -79,8 +79,8 @@ import { $u } from '../..';
 import { CircleProgressProps } from './types';
 // #ifdef MP-WEIXIN || MP-TOUTIAO
 import { canvas2d } from '../../libs/util/canvas-2d';
-import { getWindowInfo } from '../../libs/function/sys';
 // #endif
+import { getWindowInfo } from '../../libs/function/sys';
 
 /**
  * circleProgress 环形进度条
