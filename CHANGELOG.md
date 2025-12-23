@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.8] - 2025-12-23
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-avatar:** 修复 ios 微信小程序默认头像不显示问题 ([9e3420f](https://github.com/anyup/uView-Pro/commit/9e3420fb8d0db533ce7fb3a8e83543b43ac0c7a7))
+- 修复 u-cell 组件中使用 u-icon 样式在微信小程序不生效问题，修复 u-upload 图片上传失败重试是否显示提示配置不生效问题 ([e591d62](https://github.com/anyup/uView-Pro/commit/e591d62befce95c207ca47158549e6fd97f1e58d))
+- **u-cell-item:** 修复图标样式问题并优化组件结构 ([294bf4b](https://github.com/anyup/uView-Pro/commit/294bf4be88fb53a2ccd72fcc8702b09f6d736a30))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **theme:** 修改主题默认为官方内置主题，暗黑模式默认为亮色 ([176b482](https://github.com/anyup/uView-Pro/commit/176b48210209ae362fe30e459e73dff6fc81b53e))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/lime"><img src="https://github.com/lime.png?size=40" width="40" height="40" alt="lime" title="lime"/></a> 
+
 ## [0.4.7] - 2025-12-19
 
 ### 🚀 Chore | 构建/工程依赖/工具
