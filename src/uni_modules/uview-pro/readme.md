@@ -90,7 +90,7 @@ pnpm dev
 
 开源不易，如果您认为 `uView Pro` 帮到了您的开发工作，您可以捐赠 `uView Pro`：
 
-[欢迎捐赠留名](https://uviewpro.cn/zh/resource/donation.html)
+[欢迎捐赠留名](https://uviewpro.cn/zh/reward/donation.html)
 
 ## 关于 PR
 
