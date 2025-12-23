@@ -146,7 +146,7 @@ watch(
             // 数组的some方法意思是，只要数组元素有任意一个元素条件符合，就返回true，而另一个数组的every方法的意思是数组所有元素都符合条件才返回true
             let tmp = lists.value.some(val2 => val2.url == value.url);
             // 如果内部没有这个图片(tmp为false)，则添加到内部
-            !tmp && lists.value.push({ url: value.url, error: false, progress: 100 });
+            !tmp && lists.value.push({ ...value, url: value.url, error: false, progress: 100 });
         });
     },
     { immediate: true, deep: true }
@@ -244,7 +244,9 @@ function retry(index: number) {
     lists.value[index].progress = 0;
     lists.value[index].error = false;
     lists.value[index].response = null;
-    uni.showLoading({ title: '重新上传' });
+    if (props.showTips) {
+        uni.showLoading({ title: '重新上传' });
+    }
     uploadFile(index);
 }
 
