@@ -15,13 +15,10 @@
         :hover-class="hoverClass"
         :style="$u.toStyle({ backgroundColor: bgColor }, customStyle)"
     >
-        <u-icon
-            :size="iconSize"
-            :name="icon"
-            v-if="icon"
-            :custom-style="iconStyle"
-            class="u-cell__left-icon-wrap"
-        ></u-icon>
+        <view v-if="icon" class="u-cell__left-icon-wrap">
+            <u-icon :size="iconSize" :name="icon" :custom-style="iconStyle"></u-icon>
+        </view>
+
         <view class="u-flex" v-else>
             <slot name="icon"></slot>
         </view>
