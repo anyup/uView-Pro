@@ -1,12 +1,14 @@
 <template>
-    <u-index-list :scrollTop="scrollTop" :index-list="indexListRef">
-        <view v-for="(item, idx) in list" :key="idx">
-            <u-index-anchor :index="item.letter" />
-            <view class="list-cell u-border-bottom" v-for="(item1, idx1) in item.data" :key="idx1">
-                {{ item1.name }}
+    <demo-page hide-tabs nav-title="索引列表">
+        <u-index-list :scrollTop="scrollTop" :index-list="indexListRef">
+            <view v-for="(item, idx) in list" :key="idx">
+                <u-index-anchor :index="item.letter" />
+                <view class="list-cell u-border-bottom" v-for="(item1, idx1) in item.data" :key="idx1">
+                    {{ item1.name }}
+                </view>
             </view>
-        </view>
-    </u-index-list>
+        </u-index-list>
+    </demo-page>
 </template>
 
 <script setup lang="ts">

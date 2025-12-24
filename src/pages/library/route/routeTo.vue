@@ -1,15 +1,17 @@
 <template>
-    <view class="u-demo">
-        <view class="u-demo-wrap">
-            <view class="u-demo-title">演示效果</view>
-            <view class="u-demo-area">
-                <view class="u-no-demo-here"> 收到的参数为：{{ paramsStr }} </view>
-                <view class="u-btn-wrap">
-                    <u-button @click="back">返回</u-button>
+    <demo-page hide-tabs nav-title="路由测试">
+        <view class="u-demo">
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">演示效果</view>
+                <view class="u-demo-area">
+                    <view class="u-no-demo-here"> 收到的参数为：{{ paramsStr }} </view>
+                    <view class="u-btn-wrap">
+                        <u-button @click="back">返回</u-button>
+                    </view>
                 </view>
             </view>
         </view>
-    </view>
+    </demo-page>
 </template>
 
 <script lang="ts" setup>
