@@ -1,4 +1,15 @@
-import { http } from 'uview-pro';
+import { Request } from 'uview-pro';
+
+export const http = new Request();
+
+http.setConfig({
+    baseUrl: '/static/app'
+});
+
+http.interceptor.response = async (response: any) => {
+    const { statusCode, data: rawData, errMsg } = response as any;
+    return rawData;
+};
 
 export function getJson(id: string) {
     return loadJSON(`/${id}.json`);
