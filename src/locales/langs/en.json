@@ -19,11 +19,23 @@
         "components": "Components",
         "js": "Tools",
         "template": "Template",
-        "about": "About"
+        "about": "About",
+        "experience": "Experience"
     },
     "common": {
         "intro": "UI framework for rapid development of multiple platforms",
         "title": "uView Pro",
-        "tryit": "Try-it"
+        "tryit": "Try-it",
+        "experienceMap": "Experience Map",
+        "experienceMapDesc": "View component experience levels and task completion status",
+        "scene": "Scene",
+        "sceneDesc": "Experience business scenarios and feel the use of components in applications"
+    },
+    "theme": {
+        "uviewpro": "Default",
+        "purple": "Purple",
+        "green": "Green",
+        "orange": "Orange",
+        "dark": "Dark blue"
     }
 }
