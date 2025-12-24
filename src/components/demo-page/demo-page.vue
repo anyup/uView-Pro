@@ -1,5 +1,5 @@
 <template>
-    <view class="demo-page" :style="$u.toStyle(customStyle)">
+    <view class="demo-page" :class="{ 'has-tabbar': tabbar }" :style="$u.toStyle(customStyle)">
         <u-navbar
             v-if="!hideNav"
             :is-back="navBack"
@@ -390,15 +390,18 @@ onMounted(() => {
     padding-bottom: 30rpx;
     overflow-y: auto;
     background-color: $u-bg-white;
-    background-image: linear-gradient(
-        135deg,
-        rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.04) 0%,
-        rgba(var(--u-type-success-rgb, 25, 190, 107), 0.04) 40%,
-        rgba(var(--u-type-warning-rgb, 255, 153, 0), 0.04) 100%
-    );
     -webkit-font-smoothing: antialiased;
     color: $u-main-color;
     transition: background 0.3s ease;
+
+    &.has-tabbar {
+        background-image: linear-gradient(
+            135deg,
+            rgba(var(--u-type-primary-rgb, 41, 121, 255), 0.04) 0%,
+            rgba(var(--u-type-success-rgb, 25, 190, 107), 0.04) 40%,
+            rgba(var(--u-type-warning-rgb, 255, 153, 0), 0.04) 100%
+        );
+    }
 
     &_api,
     &_scene,
