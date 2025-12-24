@@ -19,8 +19,15 @@ export interface RequestConfig {
     method?: string;
     dataType?: string;
     responseType?: string;
+    timeout?: number;
     meta?: RequestMeta;
+    [key: string]: any;
 }
+
+/**
+ * 忽略的请求参数类型定义
+ */
+const IGNORE_REQUEST_KEYS = ['baseUrl', 'meta'];
 
 /**
  * 请求拦截器类型定义
@@ -43,6 +50,7 @@ export interface RequestOptions {
     params?: Record<string, any>;
     complete?: (response: any) => void;
     meta?: RequestMeta;
+    [key: string]: any;
 }
 
 export class Request {
@@ -57,6 +65,7 @@ export class Request {
             method: 'POST', // 请求方式
             dataType: 'json', // 设置为json，返回后uni.request会对数据进行一次JSON.parse
             responseType: 'text', // 此参数无需处理，因为5+和支付宝小程序不支持，默认为text即可
+            timeout: 60000,
             meta: {
                 originalData: true, // 是否在拦截器中返回服务端的原始数据，见文档说明
                 toast: false, // 是否在请求出错时，弹出toast
@@ -67,6 +76,65 @@ export class Request {
             request: null,
             response: null
         };
+    }
+    /**
+     * 将全局配置合并到本次请求的 options 中
+     * - 忽略 IGNORE_REQUEST_KEYS 中的字段（如 meta）
+     * - 对 header 使用深合并（全局 header 为默认，options.header 优先）
+     * - 对对象类型的字段尝试深合并，基础类型以 options 值优先
+     * - 处理 baseUrl：若存在全局 baseUrl 且 options.url 非完整 url（非 http 开头），则合并成完整 URL
+     */
+    private mergeGlobalConfigToOptions(options: RequestOptions): RequestOptions {
+        const mergedOptions: RequestOptions = { ...options };
+        for (const key of Object.keys(this.config)) {
+            if (IGNORE_REQUEST_KEYS.includes(key)) {
+                continue;
+            }
+            const cfgVal = this.config[key];
+            const optVal = options[key];
+
+            // 跳过未设置的全局配置
+            if (cfgVal === undefined) continue;
+
+            // header 需要做深合并，且以 options.header 为准覆盖同名属性
+            if (key === 'header') {
+                mergedOptions.header = deepMerge(cfgVal || {}, optVal || {});
+                continue;
+            }
+
+            // 针对 method 等枚举字符串，优先使用 options 中的值，否则使用全局配置
+            if (typeof cfgVal === 'string' || typeof cfgVal === 'number' || typeof cfgVal === 'boolean') {
+                mergedOptions[key] = optVal !== undefined ? optVal : cfgVal;
+                continue;
+            }
+
+            // 对对象类型的配置（如自定义扩展）尝试做深合并
+            if (typeof cfgVal === 'object' && !Array.isArray(cfgVal)) {
+                mergedOptions[key] = deepMerge(cfgVal || {}, optVal || {});
+                continue;
+            }
+
+            // 其他类型，若 options 未传入则使用全局配置
+            if (optVal === undefined) {
+                mergedOptions[key] = cfgVal;
+            }
+        }
+        // 如果存在 baseUrl，并且 options.url 为相对地址，则拼接成完整 url
+        const baseUrl = this.config.baseUrl;
+        if (
+            baseUrl &&
+            mergedOptions.url &&
+            typeof mergedOptions.url === 'string' &&
+            mergedOptions.url.indexOf('http') !== 0
+        ) {
+            mergedOptions.url =
+                baseUrl + (mergedOptions.url.indexOf('/') === 0 ? mergedOptions.url : `/${mergedOptions.url}`);
+        }
+        // 确保 url 存在，且为 string
+        if (!mergedOptions.url) {
+            mergedOptions.url = '';
+        }
+        return mergedOptions;
     }
     /**
      * 设置全局默认配置
@@ -88,14 +156,10 @@ export class Request {
         };
         // 让 options.meta 传递到拦截器
         options.meta = mergedMeta;
-        options.dataType = options.dataType || this.config.dataType;
-        options.responseType = options.responseType || this.config.responseType;
         options.url = options.url || '';
         options.params = options.params || {};
-        options.header = Object.assign({}, this.config.header || {}, options.header || {});
-        options.method = (options.method || this.config.method) as RequestOptions['method'];
-        // 保证 url 一定为 string
-        if (!options.url) options.url = '';
+        // 将全局配置合并到本次请求 options 中（注意忽略一些特殊字段如 baseUrl/meta）
+        options = this.mergeGlobalConfigToOptions(options);
 
         if (this.interceptor.request && typeof this.interceptor.request === 'function') {
             const interceptorRequest = this.interceptor.request(options);
@@ -146,11 +210,6 @@ export class Request {
                     }
                 }
             };
-            // 判断用户传递的URL是否http开头
-            options.url =
-                options.url && options.url.indexOf('http') !== 0
-                    ? this.config.baseUrl + (options.url.indexOf('/') === 0 ? options.url : `/${options.url}`)
-                    : options.url;
             uni.request(options);
         });
     }

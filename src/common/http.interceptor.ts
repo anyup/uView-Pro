@@ -23,6 +23,7 @@ const httpRequestConfig: RequestConfig = {
     header: {
         'content-type': 'application/json'
     },
+    timeout: 50000,
     meta: {
         originalData: true,
         toast: true,
