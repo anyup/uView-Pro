@@ -32,7 +32,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { imageSrc } from './image';
-import { $u } from '../..';
+import { $u, os } from '../..';
 import { NoNetworkProps } from './types';
 
 /**
@@ -64,7 +64,7 @@ const uZIndex = computed(() => {
  * 保留所有说明注释
  */
 onMounted(() => {
-    isIOS.value = uni.getSystemInfoSync().platform === 'ios';
+    isIOS.value = os() === 'ios';
     uni.onNetworkStatusChange(res => {
         isConnected.value = res.isConnected;
         networkType.value = res.networkType;

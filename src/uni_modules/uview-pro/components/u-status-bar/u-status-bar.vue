@@ -38,7 +38,7 @@ const style = computed(() => {
     let result: CSSProperties = {
         background: props.background
     };
-    const statusBarHeight = $u.sys().statusBarHeight;
+    const statusBarHeight = $u.getWindowInfo().statusBarHeight;
     if (statusBarHeight === 0) {
         noBar.value = true;
     } else {

@@ -43,6 +43,7 @@ import { ref, computed, watch, nextTick, onMounted, getCurrentInstance } from 'v
 import colorGradient from '../../libs/function/colorGradient';
 import { TabsSwiperProps } from './types';
 import { $u } from '../..';
+import { getWindowInfo } from '../../libs/function/sys';
 
 /**
  * tabsSwiper 全屏选项卡
@@ -75,7 +76,7 @@ import { $u } from '../..';
 const props = defineProps(TabsSwiperProps);
 
 const color = colorGradient;
-const { windowWidth } = uni.getSystemInfoSync();
+const { windowWidth } = getWindowInfo();
 const preId = 'UEl_';
 
 // emits 定义

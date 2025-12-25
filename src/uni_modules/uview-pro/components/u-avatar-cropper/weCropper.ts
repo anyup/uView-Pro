@@ -41,7 +41,12 @@ function validator(instance: any, o: any): void {
 
 function getDevice(): any {
     if (!device) {
+        // #ifdef MP-WEIXIN
+        device = uni.getWindowInfo();
+        // #endif
+        // #ifndef MP-WEIXIN
         device = uni.getSystemInfoSync();
+        // #endif
     }
     return device as any;
 }

@@ -50,7 +50,7 @@ const emit = defineEmits(['trigger']);
 
 const slots = useSlots();
 const instance = getCurrentInstance();
-const sysInfo = $u.sys();
+const windowInfo = $u.getWindowInfo();
 const dragging = ref(true);
 const minLeft = ref(0);
 const maxLeft = ref(0);
@@ -58,9 +58,9 @@ const minTop = ref(0);
 const maxTop = ref(0);
 const expansion = ref(false);
 const direction = ref(props.direction);
-const effectiveWindowHeight = ref(sysInfo.windowHeight);
+const effectiveWindowHeight = ref(windowInfo.windowHeight);
 // #ifdef H5
-effectiveWindowHeight.value = sysInfo.windowTop + sysInfo.windowHeight;
+effectiveWindowHeight.value = windowInfo.windowTop + windowInfo.windowHeight;
 // #endif
 const position = reactive({
     top: 0,
@@ -179,12 +179,12 @@ function handleTouchend() {
         return;
     }
 
-    const middle = sysInfo.windowWidth / 2;
+    const middle = windowInfo.windowWidth / 2;
     const buttonCenter = position.left + btnInfo.value.width / 2;
 
     // 自动吸边，按钮中心位置大于视口的一半时，自动依附在右边，不然就是左边
     position.left =
-        buttonCenter > middle ? sysInfo.windowWidth - btnInfo.value.width - getGap('right') : getGap('left');
+        buttonCenter > middle ? windowInfo.windowWidth - btnInfo.value.width - getGap('right') : getGap('left');
 
     if (expansion.value) direction.value = calcDirection();
 }
@@ -221,7 +221,7 @@ function calcDirection() {
         if (position.left - getGap('left') < actionsWidth) dir = 'right';
     } else if (dir === 'right') {
         // 按钮右侧剩余空间: 有效窗口宽度 - (按钮左侧 + 按钮宽 + 边距)
-        const right = sysInfo.windowWidth - (position.left + btnInfo.value.width + getGap('right'));
+        const right = windowInfo.windowWidth - (position.left + btnInfo.value.width + getGap('right'));
         if (right < actionsWidth) dir = 'left';
     }
 
@@ -232,17 +232,17 @@ function calcDirection() {
 function initPosition() {
     // 根据 props.position 计算初始 left/top
     const pos = props.position || 'right-bottom';
-    const winW = sysInfo.windowWidth;
+    const winW = windowInfo.windowWidth;
     const winH = effectiveWindowHeight.value;
 
     switch (pos) {
         case 'left-top':
             position.left = getGap('left');
-            position.top = getGap('top') + sysInfo.windowTop;
+            position.top = getGap('top') + windowInfo.windowTop;
             break;
         case 'right-top':
             position.left = winW - btnInfo.value.width - getGap('right');
-            position.top = getGap('top') + sysInfo.windowTop;
+            position.top = getGap('top') + windowInfo.windowTop;
             break;
         case 'left-bottom':
             position.left = getGap('left');
@@ -262,7 +262,7 @@ function initPosition() {
             break;
         case 'top-center':
             position.left = Math.round((winW - btnInfo.value.width) / 2);
-            position.top = getGap('top') + sysInfo.windowTop;
+            position.top = getGap('top') + windowInfo.windowTop;
             break;
         case 'bottom-center':
             position.left = Math.round((winW - btnInfo.value.width) / 2);
@@ -282,8 +282,8 @@ onMounted(async () => {
     initPosition();
 
     minLeft.value = getGap('left');
-    minTop.value = getGap('top') + sysInfo.windowTop;
-    maxLeft.value = sysInfo.windowWidth - btnInfo.value.width - getGap('right');
+    minTop.value = getGap('top') + windowInfo.windowTop;
+    maxLeft.value = windowInfo.windowWidth - btnInfo.value.width - getGap('right');
     maxTop.value = effectiveWindowHeight.value - btnInfo.value.height - getGap('bottom');
 });
 

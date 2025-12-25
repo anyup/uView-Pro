@@ -1,21 +1,29 @@
-declare const uni: any;
+import { sys } from '../function/sys';
 
 type SystemTheme = 'light' | 'dark';
+
+function getSystemTheme(): SystemTheme {
+    // #ifdef MP-WEIXIN
+    const { theme } = uni.getAppBaseInfo();
+    return (theme || 'light') as SystemTheme;
+    // #endif
+    // #ifndef MP-WEIXIN
+    const sysInfo = sys();
+    return (sysInfo.osTheme || sysInfo.theme || 'light') as SystemTheme;
+    // #endif
+}
 
 /**
  * 非 H5 平台获取当前系统主题
  */
 export function getSystemDarkMode(): SystemTheme {
     try {
-        if (typeof uni !== 'undefined' && typeof uni.getSystemInfoSync === 'function') {
-            const systemInfo = uni.getSystemInfoSync();
-            const theme = systemInfo.osTheme || systemInfo.theme || 'light';
-            if (theme === 'dark') {
-                return 'dark';
-            }
-            if (theme === 'light') {
-                return 'light';
-            }
+        const theme = getSystemTheme();
+        if (theme === 'dark') {
+            return 'dark';
+        }
+        if (theme === 'light') {
+            return 'light';
         }
     } catch (e) {
         // 获取失败时默认返回亮色

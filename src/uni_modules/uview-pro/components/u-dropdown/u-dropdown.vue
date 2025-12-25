@@ -239,10 +239,10 @@ function highlight(index?: number) {
  * 获取下拉菜单内容的高度
  * 这里的原理为，因为dropdown组件是相对定位的，它的下拉出来的内容，必须给定一个高度
  * 才能让遮罩占满菜单一下，直到屏幕底部的高度
- * this.$u.sys()为uView封装的获取设备信息的方法
+ * this.$u.getWindowInfo()为uView封装的获取设备窗口信息的方法
  */
 function getContentHeight() {
-    const windowHeight = $u.sys().windowHeight;
+    const windowHeight = $u.getWindowInfo().windowHeight;
 
     $u.getRect('.u-dropdown__menu', instance).then((res: any) => {
         // 这里获取的是dropdown的尺寸，在H5上，uniapp获取尺寸是有bug的(以前提出修复过，后来又出现了此bug，目前hx2.8.11版本)

@@ -57,6 +57,7 @@ import { $u } from '../..';
 // 兼容 UMD/ESM 导入 weCropper.js
 import WeCropper from './weCropper';
 import { AvatarCropperProps } from './types';
+import { getWindowInfo } from '../../libs/function/sys';
 
 /**
  * 裁剪矩形框的样式，其中可包含的属性为lineWidth-边框宽度(单位rpx)，color: 边框颜色，
@@ -107,7 +108,7 @@ let cropper: any = null; // WeCropper 实例，类型 any，建议后续补充�
  */
 onMounted(() => {
     // 获取系统信息
-    const rectInfo = uni.getSystemInfoSync();
+    const rectInfo = getWindowInfo();
     width.value = rectInfo.windowWidth;
     height.value = rectInfo.windowHeight - bottomNavHeight.value;
     cropperOpt.width = width.value;

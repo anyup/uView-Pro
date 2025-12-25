@@ -38,6 +38,7 @@ export default {
 import { ref, computed, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { SkeletonProps } from './types';
+import { getWindowInfo } from '../../libs/function/sys';
 
 /**
  * skeleton 骨架屏
@@ -199,9 +200,9 @@ function getCircleEls() {
 
 onMounted(() => {
     // 获取系统信息
-    const systemInfo = uni.getSystemInfoSync();
-    windowHeight.value = systemInfo.windowHeight;
-    windowWinth.value = systemInfo.windowWidth;
+    const windowInfo = getWindowInfo();
+    windowHeight.value = windowInfo.windowHeight;
+    windowWinth.value = windowInfo.windowWidth;
     selecterQueryInfo();
 });
 </script>
