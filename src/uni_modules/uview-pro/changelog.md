@@ -1,3 +1,43 @@
+## 0.4.9（2025-12-24）
+
+### 📝 Documentation | 文档
+
+- **readme:** 修复捐赠页面链接 ([93323ab](https://github.com/anyup/uView-Pro/commit/93323ab414ddc5a4542604928f221a050cbe55c5))
+
+### ✨ Features | 新功能
+
+- **request:** 增强http请求工具，添加请求超时配置和全局配置合并功能 ([54d4a44](https://github.com/anyup/uView-Pro/commit/54d4a448a82d76889524cc2ad0f8f08b758b73fb))
+- **http:** 修改http请求实例和响应拦截器 ([d566496](https://github.com/anyup/uView-Pro/commit/d56649673103b519492033504aa387cd6d037721))
+- **source:** 添加静态资源文件 ([346bce6](https://github.com/anyup/uView-Pro/commit/346bce63126c4cb2c9db1f1665568eb11e26be07))
+- **pages:** 优化多个页面演示样式，统一布局和暗黑模式 ([da68f17](https://github.com/anyup/uView-Pro/commit/da68f17ddf3018f7f5d53a7eebfb3dc1bad550ab))
+- **i18n:** 完善国际化支持文案 ([68accbd](https://github.com/anyup/uView-Pro/commit/68accbd1d864f190e510de380d4ed8d603f8676b))
+- **pages:** 更新iconfont图标 ([bafd4af](https://github.com/anyup/uView-Pro/commit/bafd4af26f6d2ca4dbe6e818b31be84f57c787b0))
+- **demo-page:** 调整演示页面样式并添加tabbar支持 ([f4c5cfc](https://github.com/anyup/uView-Pro/commit/f4c5cfc70920b50602f226220ded4690279cb331))
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **harmony:** 添加调试配置并调整harmony兼容版本 ([bd18fd2](https://github.com/anyup/uView-Pro/commit/bd18fd234bf0aec9671663f5b26294b4622bae81))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
+## 0.4.8（2025-12-23）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-avatar:** 修复 ios 微信小程序默认头像不显示问题 ([9e3420f](https://github.com/anyup/uView-Pro/commit/9e3420fb8d0db533ce7fb3a8e83543b43ac0c7a7))
+- 修复 u-cell 组件中使用 u-icon 样式在微信小程序不生效问题，修复 u-upload 图片上传失败重试是否显示提示配置不生效问题 ([e591d62](https://github.com/anyup/uView-Pro/commit/e591d62befce95c207ca47158549e6fd97f1e58d))
+- **u-cell-item:** 修复图标样式问题并优化组件结构 ([294bf4b](https://github.com/anyup/uView-Pro/commit/294bf4be88fb53a2ccd72fcc8702b09f6d736a30))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **theme:** 修改主题默认为官方内置主题，暗黑模式默认为亮色 ([176b482](https://github.com/anyup/uView-Pro/commit/176b48210209ae362fe30e459e73dff6fc81b53e))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/lime"><img src="https://github.com/lime.png?size=40" width="40" height="40" alt="lime" title="lime"/></a> 
+
 ## 0.4.7（2025-12-19）
 
 ### 🚀 Chore | 构建/工程依赖/工具

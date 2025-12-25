@@ -44,7 +44,7 @@ export class ConfigProvider {
     // 响应式状态，供外部直接引用
     public themesRef = ref<Theme[]>([]);
     public currentThemeRef = ref<Theme | null>(null);
-    public darkModeRef = ref<DarkMode>('auto');
+    public darkModeRef = ref<DarkMode>(config.defaultDarkMode);
     public cssVarsRef = ref<Record<string, string>>({});
     private baseColorTokens: Partial<ThemeColor> = DEFAULT_LIGHT_TOKENS;
     private baseDarkColorTokens: Partial<ThemeColor> = DEFAULT_DARK_TOKENS;
@@ -162,7 +162,7 @@ export class ConfigProvider {
 
         // 尝试从 Storage 读取暗黑模式设置
         const savedDarkMode = this.readStorage<DarkMode>(DARK_MODE_STORAGE_KEY);
-        this.darkModeRef.value = savedDarkMode || 'auto';
+        this.darkModeRef.value = savedDarkMode || config.defaultDarkMode;
 
         // 应用主题
         this.applyTheme(found);

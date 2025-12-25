@@ -26,7 +26,7 @@
                         </u-cell-item>
                         <u-cell-item :border-bottom="false" title="铁马冰河入梦来" value="行万里路" :arrow="false">
                             <template #icon>
-                                <u-icon size="34" name="calendar" style="margin-right: 5px"></u-icon>
+                                <u-icon size="34" name="calendar" custom-style="margin-right: 10rpx"></u-icon>
                             </template>
                             <template #right-icon>
                                 <u-icon size="34" name="calendar"></u-icon>

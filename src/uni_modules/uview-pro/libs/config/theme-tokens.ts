@@ -1,4 +1,5 @@
 import type { Theme, ThemeColor } from '../../types/global';
+import config from './config';
 
 const lightPalette: ThemeColor = {
     primary: '#2979ff',
@@ -90,7 +91,7 @@ const darkCss: Record<string, string> = {
 
 export const defaultThemes: Theme[] = [
     {
-        name: 'uviewpro',
+        name: config.defaultTheme,
         label: '默认蓝',
         description: 'uView Pro 默认主题，支持亮色与暗黑模式',
         color: lightPalette,

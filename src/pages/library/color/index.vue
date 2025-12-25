@@ -2,7 +2,7 @@
     <demo-page
         title="Color 颜色"
         desc="用于获取和展示颜色对象，包含主题色、成功、警告、错误等多种预定义颜色。"
-        :apis="'color'"
+        :apis="'colorjs'"
     >
         <template #default>
             <view class="u-demo">

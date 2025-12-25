@@ -5,7 +5,7 @@ const token = '';
 // 演示
 let baseUrl = 'https://env-00jxty5jnvo5-static.normal.cloudstatic.cn';
 // #ifdef APP
-baseUrl = '/static/app';
+// baseUrl = '/static/app';
 // #endif
 
 // 演示
@@ -23,6 +23,7 @@ const httpRequestConfig: RequestConfig = {
     header: {
         'content-type': 'application/json'
     },
+    timeout: 50000,
     meta: {
         originalData: true,
         toast: true,

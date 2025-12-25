@@ -33,7 +33,8 @@
                 name: 'default',
                 signingConfig: 'default',
                 targetSdkVersion: '6.0.0(20)',
-                compatibleSdkVersion: '6.0.0(20)',
+                compatibleSdkVersion: '5.0.0(12)',
+                compatibleSdkVersionStage: 'beta6',
                 runtimeOS: 'HarmonyOS',
                 buildOption: {
                     strictMode: {
@@ -46,7 +47,8 @@
                 name: 'release',
                 signingConfig: 'release',
                 targetSdkVersion: '6.0.0(20)',
-                compatibleSdkVersion: '6.0.0(20)',
+                compatibleSdkVersion: '5.0.0(12)',
+                compatibleSdkVersionStage: 'beta6',
                 runtimeOS: 'HarmonyOS',
                 buildOption: {
                     strictMode: {

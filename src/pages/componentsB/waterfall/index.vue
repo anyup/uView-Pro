@@ -207,18 +207,11 @@ onReachBottom(() => {
 });
 </script>
 
-<style>
-/* page不能写带scope的style标签中，否则无效 */
-page {
-    background-color: rgb(240, 240, 240);
-}
-</style>
-
 <style lang="scss" scoped>
 .demo-warter {
     border-radius: 8px;
     margin: 5px;
-    background-color: #ffffff;
+    background-color: $u-bg-color;
     padding: 8px;
     position: relative;
 }

@@ -108,6 +108,7 @@
                     ></u-text>
                 </view>
             </view>
+            <!-- #ifdef MP-WEIXIN -->
             <view class="u-demo-block">
                 <text class="u-demo-block__title">小程序开放能力</text>
                 <view class="u-demo-block__content">
@@ -120,6 +121,7 @@
                     ></u-text>
                 </view>
             </view>
+            <!-- #endif -->
         </view>
     </demo-page>
 </template>

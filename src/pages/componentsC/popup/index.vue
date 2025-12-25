@@ -16,6 +16,7 @@
                             :mask="mask"
                             :closeable="closeable"
                             :close-icon-pos="closeIconPos"
+                            custom-class="u-popup-class"
                         >
                             <view v-if="mode == 'center'" style="height: 400rpx">
                                 <view class="close-btn">
@@ -118,5 +119,11 @@ function btnClick() {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+:deep(.u-popup-class) {
+    .u-drawer-content {
+        background-color: $u-bg-color;
+    }
 }
 </style>

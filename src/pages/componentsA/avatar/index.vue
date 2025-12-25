@@ -24,6 +24,10 @@
                 <view class="u-config-wrap">
                     <view class="u-config-title u-border-bottom"> 参数配置 </view>
                     <view class="u-config-item">
+                        <view class="u-item-title">是否默认头像</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="defaultAvatarChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
                         <view class="u-item-title">模式选择</view>
                         <u-subsection :list="['圆形', '圆角方形']" @change="modeChange"></u-subsection>
                     </view>
@@ -64,7 +68,15 @@ const size = ref('90');
 const showLevel = ref(true);
 const showSex = ref(true);
 const sexIcon = ref<Sex>('man');
-const bgColor = ref('#fcbd71');
+const bgColor = ref('var(--u-bg-color)');
+
+function defaultAvatarChange(index: number) {
+    if (index === 0) {
+        src.value = '';
+    } else {
+        src.value = '/static/logo.png';
+    }
+}
 
 function modeChange(index: number) {
     mode.value = index === 0 ? 'circle' : 'square';

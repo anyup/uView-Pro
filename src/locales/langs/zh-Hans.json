@@ -19,11 +19,23 @@
         "components": "组件",
         "js": "工具",
         "template": "模板",
-        "about": "关于"
+        "about": "关于",
+        "experience": "体验地图"
     },
     "common": {
         "intro": "多平台快速开发的UI框架",
         "title": "uView UI",
-        "tryit": "试一试"
+        "tryit": "试一试",
+        "experienceMap": "体验地图",
+        "experienceMapDesc": "查看组件体验等级与任务完成情况",
+        "scene": "实用场景",
+        "sceneDesc": "体验完整的业务场景，感受组件在实际应用中的使用"
+    },
+    "theme": {
+        "uviewpro": "官方蓝",
+        "purple": "霞光紫",
+        "green": "清翠绿",
+        "orange": "暖阳橙",
+        "dark": "午夜蓝"
     }
 }
