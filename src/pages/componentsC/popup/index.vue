@@ -16,7 +16,8 @@
                             :mask="mask"
                             :closeable="closeable"
                             :close-icon-pos="closeIconPos"
-                            custom-class="u-popup-class"
+                            :custom-class="mode === 'center' ? '' : 'custom-popup-class'"
+                            :mask-close-able="maskClickAble"
                         >
                             <view v-if="mode == 'center'" style="height: 400rpx">
                                 <view class="close-btn">
@@ -48,6 +49,10 @@
                         ></u-subsection>
                     </view>
                     <view class="u-config-item">
+                        <view class="u-item-title">点击遮罩是否关闭弹窗</view>
+                        <u-subsection :list="['是', '否']" @change="maskClickAbleChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
                         <view class="u-item-title">关闭按钮</view>
                         <u-subsection :list="['显示', '隐藏']" @change="closeChange"></u-subsection>
                     </view>
@@ -74,6 +79,7 @@ const mode = ref<PopupMode>('left');
 const mask = ref(true); // 是否显示遮罩
 const closeable = ref(true);
 const closeIconPos = ref<PopupCloseIconPos>('top-right');
+const maskClickAble = ref(true);
 
 watch(show, newValue => {
     // console.log(newValue);
@@ -94,6 +100,10 @@ function closeChange(index: number) {
 
 function closePosChange(index: number) {
     closeIconPos.value = ['top-left', 'top-right', 'bottom-left', 'bottom-right'][index] as PopupCloseIconPos;
+}
+
+function maskClickAbleChange(index: number) {
+    maskClickAble.value = !index;
 }
 
 function close() {
@@ -121,7 +131,7 @@ function btnClick() {
     justify-content: center;
 }
 
-:deep(.u-popup-class) {
+:deep(.custom-popup-class) {
     .u-drawer-content {
         background-color: $u-bg-color;
     }

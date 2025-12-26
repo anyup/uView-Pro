@@ -24,7 +24,6 @@
                 zoom && mode == 'center' ? 'u-animation-zoom' : ''
             ]"
             @touchmove.stop.prevent
-            @tap.stop.prevent
             :style="[style]"
         >
             <view
