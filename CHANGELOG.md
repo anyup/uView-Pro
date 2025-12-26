@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.10] - 2025-12-26
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **contributors:** 更新贡献者映射配置 ([d496b21](https://github.com/anyup/uView-Pro/commit/d496b21d85bede68fefc9ffd752e31ecde14735a))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-popup:** 修复u-popup设置mode=center，点击遮罩层无法关闭的问题 ([3896019](https://github.com/anyup/uView-Pro/commit/389601965933d9e1dc74d32c370c4e858df86595))
+- **u-upload:** 优化u-upload组件在多个平台的样式兼容性 ([bfb60b5](https://github.com/anyup/uView-Pro/commit/bfb60b5c2f431d14425eceed9c9e5c248e7cfa29))
+
+### ✨ Features | 新功能
+
+- **u-tabbar:** 增强u-tabbar组件能力，支持文字和图标显示隐藏配置功能 ([29f3394](https://github.com/anyup/uView-Pro/commit/29f3394d7e8a5e2a818e397ffe97420855970333))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.4.9] - 2025-12-24
 
 ### 📝 Documentation | 文档
