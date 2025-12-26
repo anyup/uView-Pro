@@ -18,15 +18,16 @@
                     background: delBgColor
                 }"
             >
-                <u-icon class="u-icon" :name="delIcon" size="20" :color="delColor"></u-icon>
+                <u-icon :name="delIcon" size="20" :color="delColor"></u-icon>
             </view>
-            <u-line-progress
-                v-if="showProgress && item.progress > 0 && item.progress != 100 && !item.error"
-                :show-percent="false"
-                height="16"
-                class="u-progress"
-                :percent="item.progress"
-            ></u-line-progress>
+            <view class="u-upload-progress">
+                <u-line-progress
+                    v-if="showProgress && item.progress > 0 && item.progress != 100 && !item.error"
+                    :show-percent="false"
+                    height="16"
+                    :percent="item.progress"
+                ></u-line-progress>
+            </view>
             <view @tap.stop="retry(index)" v-if="item.error" class="u-error-btn">点击重试</view>
             <image
                 @tap.stop="doPreviewImage(item.url || item.path, index)"
@@ -539,13 +540,7 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     justify-content: center;
 }
 
-.u-icon {
-    @include vue-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.u-progress {
+.u-upload-progress {
     position: absolute;
     bottom: 10rpx;
     left: 8rpx;
