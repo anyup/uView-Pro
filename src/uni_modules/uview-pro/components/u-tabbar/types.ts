@@ -20,6 +20,8 @@ export const TabbarProps = {
     iconSize: { type: [String, Number] as PropType<string | number>, default: 40 },
     /** 凸起图标的大小，单位任意，数值默认rpx */
     midButtonSize: { type: [String, Number] as PropType<string | number>, default: 90 },
+    /** 文本大小，单位任意，数值默认rpx */
+    textSize: { type: [String, Number] as PropType<string | number>, default: 26 },
     /** 激活时的颜色 */
     activeColor: { type: String, default: 'var(--u-main-color)' },
     /** 未激活时的颜色 */

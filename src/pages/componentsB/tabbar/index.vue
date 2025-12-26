@@ -14,6 +14,14 @@
                             <u-subsection :list="['显示', '隐藏']" @change="minButtonChange"></u-subsection>
                         </view>
                         <view class="u-config-item">
+                            <view class="u-item-title">文字</view>
+                            <u-subsection :list="['显示', '隐藏']" @change="textShowChange"></u-subsection>
+                        </view>
+                        <view class="u-config-item">
+                            <view class="u-item-title">图标</view>
+                            <u-subsection :list="['显示', '隐藏']" @change="iconShowChange"></u-subsection>
+                        </view>
+                        <view class="u-config-item">
                             <view class="u-item-title">背景色</view>
                             <u-subsection :list="['#ffffff', '#1f1f1d']" @change="bgColorChange"></u-subsection>
                         </view>
@@ -44,13 +52,14 @@
 
 <script lang="ts" setup>
 import type { TabbarItem } from '@/uni_modules/uview-pro/types/global';
+import { $u } from 'uview-pro';
 import { ref } from 'vue';
 
 const current = ref(0);
 const show = ref(true);
 const bgColor = ref('#ffffff');
 const borderTop = ref(true);
-const list = ref<TabbarItem[]>([
+const originList: TabbarItem[] = [
     {
         iconPath: 'home',
         selectedIconPath: 'home-fill',
@@ -86,13 +95,37 @@ const list = ref<TabbarItem[]>([
         isDot: false,
         customIcon: false
     }
-]);
+];
+const list = ref<TabbarItem[]>($u.deepClone(originList));
 const midButton = ref(true);
 const inactiveColor = ref('#909399');
 const activeColor = ref('#5098FF');
 
-function beforeSwitch(index: number): boolean {
-    return true;
+function textShowChange(index: number) {
+    if (index === 1) {
+        list.value.forEach(item => {
+            item.text = '';
+            item.iconSize = 50;
+        });
+        midButton.value = false;
+    } else {
+        list.value = $u.deepClone(originList);
+        midButton.value = true;
+    }
+}
+
+function iconShowChange(index: number) {
+    if (index === 1) {
+        list.value.forEach(item => {
+            item.iconPath = '';
+            item.selectedIconPath = '';
+            item.textSize = 36;
+        });
+        midButton.value = false;
+    } else {
+        list.value = $u.deepClone(originList);
+        midButton.value = true;
+    }
 }
 
 function showChange(index: number) {

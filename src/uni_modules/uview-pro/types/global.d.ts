@@ -403,4 +403,6 @@ export type TabbarItem = {
     isDot?: boolean;
     customIcon?: boolean | string;
     midButton?: boolean;
+    iconSize?: string | number;
+    textSize?: string | number;
 };

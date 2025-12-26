@@ -20,14 +20,18 @@
                 :style="{ backgroundColor: props.bgColor }"
             >
                 <view
+                    v-if="item.iconPath || item.selectedIconPath"
                     :class="[
                         props.midButton && item.midButton
                             ? 'u-tabbar__content__circle__button'
-                            : 'u-tabbar__content__item__button'
+                            : 'u-tabbar__content__item__button',
+                        !item.text && (item.iconPath || item.selectedIconPath)
+                            ? 'u-tabbar__content__item__button--center'
+                            : ''
                     ]"
                 >
                     <u-icon
-                        :size="props.midButton && item.midButton ? props.midButtonSize : props.iconSize"
+                        :size="getIconSize(index)"
                         :name="elIconPath(index)"
                         img-mode="scaleToFill"
                         :color="elColor(index)"
@@ -40,7 +44,14 @@
                         :offset="[-2, getOffsetRight(item.count, item.isDot)]"
                     ></u-badge>
                 </view>
-                <view class="u-tabbar__content__item__text" :style="{ color: elColor(index) }">
+                <view
+                    v-if="item.text"
+                    class="u-tabbar__content__item__text"
+                    :class="{
+                        'u-tabbar__content__item__text--center': item.text && !(item.iconPath || item.selectedIconPath)
+                    }"
+                    :style="{ color: elColor(index), fontSize: $u.addUnit(getTextSize(index)) }"
+                >
                     <text class="u-line-1">{{ item.text }}</text>
                 </view>
             </view>
@@ -241,6 +252,31 @@ function getOffsetRight(count: number, isDot: boolean): number {
 }
 
 /**
+ * 获取单项icon尺寸（单项优先级高于props）
+ */
+function getIconSize(index: number) {
+    const item = props.list[index] || {};
+    if (props.midButton && item.midButton) {
+        return props.midButtonSize;
+    }
+    if (item.iconSize !== undefined && item.iconSize !== null && item.iconSize !== '') {
+        return item.iconSize;
+    }
+    return props.iconSize;
+}
+
+/**
+ * 获取单项text尺寸（单项优先级高于props）
+ */
+function getTextSize(index: number) {
+    const item = props.list[index] || {};
+    if (item.textSize !== undefined && item.textSize !== null && item.textSize !== '') {
+        return item.textSize;
+    }
+    return props.textSize;
+}
+
+/**
  * 获取凸起按钮外层元素的left值，让其水平居中
  */
 function getMidButtonLeft() {
@@ -302,6 +338,10 @@ function getMidButtonLeft() {
                 left: 50%;
                 transform: translateX(-50%);
             }
+            &__button--center {
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
             &__text {
                 color: $u-content-color;
                 font-size: 26rpx;
@@ -312,6 +352,11 @@ function getMidButtonLeft() {
                 transform: translateX(-50%);
                 width: 100%;
                 text-align: center;
+            }
+            &__text--center {
+                top: 50%;
+                bottom: auto;
+                transform: translate(-50%, -50%);
             }
         }
         &__circle {
