@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import zIndex from '../../libs/config/zIndex';
 
 /**
  * u-no-network 组件 props 类型定义
@@ -13,7 +14,7 @@ export const NoNetworkProps = {
     /** 一个z-index值，用于设置没有网络这个组件的层次 */
     zIndex: {
         type: [Number, String] as PropType<number | string>,
-        default: ''
+        default: zIndex.noNetwork
     },
     /** 没有网络的图片提示 */
     image: {

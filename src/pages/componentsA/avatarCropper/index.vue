@@ -31,6 +31,7 @@ import { ref } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 
 const avatar = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png');
+const uToast = ref(null);
 
 const chooseAvatar = () => {
     $u.route({

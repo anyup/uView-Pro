@@ -156,6 +156,7 @@ import provinces from '../../libs/util/province';
 import citys from '../../libs/util/city';
 import areas from '../../libs/util/area';
 import { PickerProps } from './types';
+import { $u } from '../..';
 
 /**
  * picker picker弹出选择器
@@ -274,7 +275,7 @@ const regionChange = computed(() => `${province.value}-${city.value}`);
 
 const yearAndMonth = computed(() => `${year.value}-${month.value}`);
 // 如果用户有传递z-index值，优先使用
-const uZIndex = computed(() => (props.zIndex ? props.zIndex : 1075));
+const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 
 // 当外部的默认值被动态修改时，如果 preserveSelection 为 false，应把外部值视为新的 saved 值并在打开时生效
 watch(

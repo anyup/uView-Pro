@@ -2,7 +2,7 @@
     <view
         v-if="visibleSync"
         class="u-drawer"
-        :style="$u.toStyle({ zIndex: Number(uZindex) - 1 }, customStyle)"
+        :style="$u.toStyle({ zIndex: Number(uZIndex) - 1 }, customStyle)"
         :class="customClass"
         hover-stop-propagation
     >
@@ -10,7 +10,7 @@
             :duration="duration"
             :custom-style="maskCustomStyle"
             :maskClickAble="maskCloseAble"
-            :z-index="Number(uZindex) - 2"
+            :z-index="Number(uZIndex) - 2"
             :show="showDrawer && mask"
             @click="maskClick"
         ></u-mask>
@@ -124,7 +124,7 @@ const style = computed(() => {
         };
     }
     // 如果用户设置了borderRadius值，添加弹窗的圆角
-    style.zIndex = uZindex.value;
+    style.zIndex = uZIndex.value;
     if (props.borderRadius) {
         switch (props.mode) {
             case 'left':
@@ -155,7 +155,7 @@ const centerStyle = computed(() => {
 
     // 中部弹出的模式，如果没有设置高度，就用auto值，由内容撑开高度
     style.height = props.height ? getUnitValue(props.height) : 'auto';
-    style.zIndex = uZindex.value;
+    style.zIndex = uZIndex.value;
     style.marginTop = `-${$u.addUnit(props.negativeTop)}`;
     if (props.borderRadius) {
         style.borderRadius = `${props.borderRadius}rpx`;
@@ -166,7 +166,7 @@ const centerStyle = computed(() => {
 });
 
 // 计算整理后的z-index值
-const uZindex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
+const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 
 watch(
     () => props.modelValue,

@@ -72,6 +72,7 @@ const loading = ref(true); // 是否显示骨架屏组件
 const animation = ref(false);
 const elColor = ref('#e5e5e5');
 const borderRadius = ref(10);
+const uToast = ref(null);
 
 const current = computed(() => {
     return loading.value ? 0 : 1;

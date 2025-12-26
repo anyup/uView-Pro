@@ -5,7 +5,7 @@
                 <view class="u-demo-wrap">
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
-                        <u-top-tips ref="uTipsRef"></u-top-tips>
+                        <u-top-tips ref="uTipsRef" :navbarHeight="offsetTop"></u-top-tips>
                         <text class="u-no-demo-here">点击参数配置查看效果</text>
                     </view>
                 </view>
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
 
 const duration = ref(2000);
@@ -38,6 +38,16 @@ const type = ref<ThemeType>('primary');
 
 const uTipsRef = ref(null);
 
+const offsetTop = computed(() => {
+    // #ifdef APP || H5
+    return 44;
+    // #endif
+    // #ifdef MP
+    let statusBarHeight = uni.$u.sys().statusBarHeight;
+    let navbarHeight = uni.$u.os() == 'ios' ? 44 : 48;
+    return navbarHeight + statusBarHeight;
+    // #endif
+});
 function typeChange(index: number) {
     type.value =
         index === 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning' : 'info';

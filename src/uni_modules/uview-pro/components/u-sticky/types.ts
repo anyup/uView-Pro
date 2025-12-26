@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
+import zIndex from '../../libs/config/zIndex';
 
 /**
  * StickyProps 吸顶组件 props 类型定义
@@ -18,7 +19,7 @@ export const StickyProps = {
     /** 吸顶区域的背景颜色 */
     bgColor: { type: String, default: 'var(--u-bg-white)' },
     /** z-index值 */
-    zIndex: { type: [Number, String] as PropType<number | string>, default: '' }
+    zIndex: { type: [Number, String] as PropType<number | string>, default: zIndex.sticky }
 };
 
 export type StickyProps = ExtractPropTypes<typeof StickyProps>;
