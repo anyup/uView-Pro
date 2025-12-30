@@ -4,9 +4,9 @@
 
 import { ref } from 'vue';
 import type { DarkMode, Theme, ThemeColor } from '../../types/global';
-import { config, setColor } from '..';
+import config from '../config/config';
 import { defaultThemes } from '../config/theme-tokens';
-import { color as reactiveColor } from '../function/color';
+import { color as reactiveColor } from '../config/color';
 import { getSystemDarkMode as getNativeSystemDarkMode } from './system-theme';
 
 declare const uni: any;
@@ -214,6 +214,39 @@ export class ConfigProvider {
     }
 
     /**
+     * 运行时更新当前主题颜色并应用（不持久化）
+     * @param colors 主题颜色键值，支持部分更新
+     */
+    public setThemeColor(colors: Partial<ThemeColor>) {
+        if (!colors || Object.keys(colors).length === 0) return;
+        if (!this.currentThemeRef.value) {
+            console.warn('[ConfigProvider] setThemeColor called but no current theme');
+            return;
+        }
+
+        const mode = this.getActiveMode();
+
+        if (mode === 'dark') {
+            const existing = this.currentThemeRef.value.darkColor || {};
+            this.currentThemeRef.value.darkColor = {
+                ...existing,
+                ...colors
+            };
+        } else {
+            const existing = this.currentThemeRef.value.color || {};
+            this.currentThemeRef.value.color = {
+                ...existing,
+                ...colors
+            };
+        }
+
+        // 重新应用当前主题以同步运行时 color、CSS 变量等
+        this.applyTheme(this.currentThemeRef.value);
+
+        if (this.debug) console.log('[ConfigProvider] setThemeColor ->', colors);
+    }
+
+    /**
      * 获取当前暗黑模式设置
      */
     getDarkMode(): DarkMode {
@@ -406,10 +439,8 @@ export class ConfigProvider {
             });
 
             // 同步到 uni.$u.color（如果存在）
-            if (typeof uni !== 'undefined' && uni?.$u?.setColor) {
-                uni.$u.setColor(mergedPalette);
-            } else {
-                setColor(mergedPalette);
+            if (typeof uni !== 'undefined' && uni?.$u?.color) {
+                uni.$u.color = reactiveColor;
             }
         } catch (e) {
             if (this.debug) console.warn('[ConfigProvider] sync runtime theme failed', e);

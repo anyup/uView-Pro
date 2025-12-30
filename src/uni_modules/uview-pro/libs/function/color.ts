@@ -1,48 +1,7 @@
-import { reactive } from 'vue';
 import type { ColorType, ThemeColor } from '../../types/global';
-
-// 默认颜色值（作为初始值）
-const defaultColor: ThemeColor = {
-    primary: '#2979ff',
-    primaryDark: '#2b85e4',
-    primaryDisabled: '#a0cfff',
-    primaryLight: '#ecf5ff',
-    success: '#19be6b',
-    successDark: '#18b566',
-    successDisabled: '#71d5a1',
-    successLight: '#dbf1e1',
-    warning: '#ff9900',
-    warningDark: '#f29100',
-    warningDisabled: '#fcbd71',
-    warningLight: '#fdf6ec',
-    error: '#fa3534',
-    errorDark: '#dd6161',
-    errorDisabled: '#fab6b6',
-    errorLight: '#fef0f0',
-    info: '#909399',
-    infoDark: '#82848a',
-    infoDisabled: '#c8c9cc',
-    infoLight: '#f4f4f5',
-    whiteColor: '#ffffff',
-    blackColor: '#000000',
-    mainColor: '#303133',
-    contentColor: '#606266',
-    tipsColor: '#909399',
-    lightColor: '#c0c4cc',
-    borderColor: '#dcdfe6',
-    dividerColor: '#e4e7ed',
-    maskColor: 'rgba(0, 0, 0, 0.4)',
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    bgColor: '#f3f4f6',
-    bgWhite: '#ffffff',
-    bgGrayLight: '#f5f7fa',
-    bgGrayDark: '#2f343c',
-    bgBlack: '#000000'
-};
-
-// 使用 reactive 包装颜色对象，使其在运行时可被响应式读取与更新
-// 这个对象会被 configProvider 在主题切换时更新
-export const color = reactive<ThemeColor>({ ...defaultColor });
+import { color } from '../config/color';
+import { lightPalette } from '../config/theme-tokens';
+import configProvider from '../util/config-provider';
 
 /**
  * 获取颜色值（响应式）
@@ -51,27 +10,17 @@ export const color = reactive<ThemeColor>({ ...defaultColor });
  * @returns 颜色值
  */
 export function getColor(name: ColorType): string {
-    // // 优先从 configProvider 获取当前主题颜色
-    // const currentTheme = configProvider.getCurrentTheme();
-    // if (currentTheme) {
-    //     const isDark = configProvider.isInDarkMode();
-    //     const palette =
-    //         isDark && currentTheme.darkColor && Object.keys(currentTheme.darkColor).length
-    //             ? currentTheme.darkColor
-    //             : currentTheme.color || {};
-
-    //     if (palette[name]) {
-    //         return palette[name] as string;
-    //     }
-    // }
-
     // 从响应式 color 对象获取（会被 configProvider 更新）
     if (color[name]) {
         return color[name] as string;
     }
 
     // 兜底返回默认值
-    return defaultColor[name] || '';
+    return lightPalette[name] || '';
+}
+
+export function setColor(theme: Partial<ThemeColor> | undefined) {
+    configProvider.setThemeColor(theme);
 }
 
 export default color;

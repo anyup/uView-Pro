@@ -1,7 +1,7 @@
 import type { Theme, ThemeColor } from '../../types/global';
 import config from './config';
 
-const lightPalette: ThemeColor = {
+export const lightPalette: ThemeColor = {
     primary: '#2979ff',
     primaryDark: '#2b85e4',
     primaryDisabled: '#a0cfff',
@@ -39,7 +39,7 @@ const lightPalette: ThemeColor = {
     bgBlack: '#000000'
 };
 
-const darkPalette: ThemeColor = {
+export const darkPalette: ThemeColor = {
     primary: '#8ab4ff',
     primaryDark: '#5f8dff',
     primaryDisabled: '#3d4f74',

@@ -87,7 +87,10 @@ onMounted(() => {
 watch(
     () => props.themes,
     val => {
-        if (val && val.length) {
+        // 如果传入的 themes 来自于 configProvider 自身（常见于模板中使用 useTheme() 直接透传），
+        // 那么对其做深度监听会在我们内部更新主题对象时触发该回调，进而再次调用 init 导致循环更新。
+        // 为避免该情况，先做简单保护：当传入对象正是 configProvider.themesRef.value 时不重复初始化。
+        if (val && val.length && val !== configProvider.themesRef.value) {
             configProvider.init(val, props.currentTheme as any);
         }
     },
