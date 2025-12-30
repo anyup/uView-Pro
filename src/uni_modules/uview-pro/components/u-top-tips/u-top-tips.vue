@@ -61,7 +61,7 @@ const uNavbarHeight = computed(() => {
 
 const tipStyle = computed(() => ({
     top: Number(uNavbarHeight.value) + 'px',
-    zIndex: uZIndex.value
+    zIndex: isShow.value ? uZIndex.value : -1
 }));
 
 /**
