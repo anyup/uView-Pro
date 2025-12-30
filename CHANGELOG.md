@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.11] - 2025-12-30
+
+### 📦‍ Build System | 打包构建
+
+- 添加edgeone.json配置 ([ed7ba7d](https://github.com/anyup/uView-Pro/commit/ed7ba7d94dbfa791264a624a03938dc6ac58c0bb))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **theme:** 修复运行时设置 color 与 theme 主题色不同步问题 ([1dcf56a](https://github.com/anyup/uView-Pro/commit/1dcf56a232f5b046e0dce5eb58ec90fb46ce19d5))
+- **u-top-tips:** 修复顶部提示组件zindex显示问题，避免影响其他组件的层级显示 ([91391a8](https://github.com/anyup/uView-Pro/commit/91391a8ca10d505936c0b45488af0a3145cab335))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.4.10] - 2025-12-26
 
 ### 🚀 Chore | 构建/工程依赖/工具
