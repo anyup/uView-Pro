@@ -1,3 +1,24 @@
+## 0.4.12（2026-01-04）
+
+### ♻️ Code Refactoring | 代码重构
+
+- **u-action-sheet:** 优化u-action-sheet组件的类型定义 ([bc5e474](https://github.com/anyup/uView-Pro/commit/bc5e474e7117e20495504ff0e2397a147595033c))
+- **zIndex:** 统一组件z-index值配置 ([ae1da98](https://github.com/anyup/uView-Pro/commit/ae1da986d307e5b4855fa32e5b2995fdb7be69e8))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **form:** 修复field实例销毁时没有正常移除问题 ([57bfd3b](https://github.com/anyup/uView-Pro/commit/57bfd3bf9315d74c416869cd5a8c41562231166a))
+
+### ✨ Features | 新功能
+
+- **u-tabbar:** 新增z-index属性支持自定义层级 ([c75d45f](https://github.com/anyup/uView-Pro/commit/c75d45f45e237453d0248124cdbe5bb797edb117))
+- **u-modal:** 增加u-modal基础属性支持和自定义样式功能 ([201231e](https://github.com/anyup/uView-Pro/commit/201231ee2e0c25c605f12f582650b048e83213de))
+- **components:** 增加u-pagination和u-picker自定义样式支持 ([eb22265](https://github.com/anyup/uView-Pro/commit/eb222657540179fcf8359133df83da89c10b09b8))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/yoshinosk"><img src="https://github.com/yoshinosk.png?size=40" width="40" height="40" alt="yoshinosk" title="yoshinosk"/></a> <a href="https://github.com/liujiayii"><img src="https://github.com/liujiayii.png?size=40" width="40" height="40" alt="liujiayii" title="liujiayii"/></a> 
+
 ## 0.4.11（2025-12-30）
 
 ### 📦‍ Build System | 打包构建
