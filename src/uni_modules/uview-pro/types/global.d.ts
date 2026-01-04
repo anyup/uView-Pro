@@ -21,7 +21,7 @@ export type ActionSheetItem = {
     text: string;
     subText?: string;
     color?: string;
-    fontSize?: string;
+    fontSize?: string | number;
     disabled?: boolean;
 };
 
@@ -29,7 +29,7 @@ export type ActionSheetItem = {
 export type ActionSheetTips = {
     text: string;
     color?: string;
-    fontSize?: string;
+    fontSize?: string | number;
 };
 
 // avatar-cropper 裁剪矩形框的样式
