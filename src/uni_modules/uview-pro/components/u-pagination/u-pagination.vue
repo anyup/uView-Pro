@@ -1,5 +1,5 @@
 <template>
-    <view class="u-pagination">
+    <view class="u-pagination" :style="$u.toStyle(customStyle)" :class="customClass">
         <u-button
             custom-class="custom-class"
             shape="circle"
@@ -51,6 +51,7 @@ export default {
 import { computed } from 'vue';
 import { type PaginationEmits, PaginationProps } from './types.ts';
 import type { PaginationDirection } from '../../types/global';
+import { $u } from '../../';
 
 const props = defineProps(PaginationProps);
 const emit = defineEmits<PaginationEmits>();

@@ -8,8 +8,9 @@
         :safeAreaInsetBottom="safeAreaInsetBottom"
         @close="close"
         :z-index="uZIndex"
+        :custom-class="customClass"
     >
-        <view class="u-datetime-picker">
+        <view class="u-datetime-picker" :style="$u.toStyle(customStyle)">
             <view class="u-picker-header" @touchmove.stop.prevent="">
                 <view
                     class="u-btn-picker u-btn-picker--tips"

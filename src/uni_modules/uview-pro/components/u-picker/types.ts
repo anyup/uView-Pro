@@ -2,6 +2,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import type { PickerMode, PickerParams } from '../../types/global';
 import { getColor } from '../../';
 import zIndex from '../../libs/config/zIndex';
+import { baseProps } from '../common/props';
 
 const defaultParams: PickerParams = {
     year: true,
@@ -20,6 +21,7 @@ const defaultParams: PickerParams = {
  * @description 支持时间、地区、单列、多列等多种模式
  */
 export const PickerProps = {
+    ...baseProps,
     /** picker中需要显示的参数 */
     params: {
         type: Object as PropType<PickerParams>,
