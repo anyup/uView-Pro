@@ -11,8 +11,9 @@
             :border-radius="borderRadius"
             @close="popupClose"
             :negative-top="negativeTop"
+            :custom-class="customClass"
         >
-            <view class="u-model">
+            <view class="u-model" :style="$u.toStyle(customStyle)">
                 <view v-if="showTitle" class="u-model__title u-line-1" :style="[titleStyle]">{{ title }}</view>
                 <view class="u-model__content">
                     <view :style="[contentStyle]" v-if="slots.default">

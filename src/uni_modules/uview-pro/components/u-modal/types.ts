@@ -1,11 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { getColor } from '../../';
+import { baseProps } from '../common/props';
 
 /**
  * u-modal 组件 props 类型定义
  * @description 弹窗模态框，支持多种样式和交互
  */
 export const ModalProps = {
+    ...baseProps,
     /** 是否显示模态框 */
     modelValue: {
         type: Boolean,
