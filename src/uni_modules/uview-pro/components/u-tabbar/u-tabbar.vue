@@ -111,7 +111,7 @@ const props = defineProps(TabbarProps);
 const emit = defineEmits<{ (e: 'change', index: number): void; (e: 'update:modelValue', index: number): void }>();
 
 // 计算z-index值
-const uZIndex = computed(() => $u.zIndex.tabbar);
+const uZIndex = computed(() => props?.zIndex ?? $u.zIndex.tabbar);
 
 // 由于安卓太菜了，通过css居中凸起按钮的外层元素有误差，故通过js计算将其居中
 const midButtonLeft = ref('50%');

@@ -4,10 +4,6 @@ import { baseProps } from '../common/props';
 import zIndex from '../../libs/config/zIndex';
 
 /**
- * PopupMode 弹窗弹出方向类型
- */
-
-/**
  * PopupProps 弹窗 props 类型定义
  * @description 弹出层容器，支持多种弹出方向和自定义内容
  */

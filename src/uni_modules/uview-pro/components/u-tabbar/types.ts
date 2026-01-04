@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
 import type { TabbarItem } from '../../types/global';
+import zIndex from '../../libs/config/zIndex';
 
 /**
  * TabbarProps 底部导航栏 props 类型定义
@@ -35,7 +36,9 @@ export const TabbarProps = {
     /** 是否显示顶部横线 */
     borderTop: { type: Boolean, default: true },
     /** 是否隐藏原生tabbar */
-    hideTabBar: { type: Boolean, default: true }
+    hideTabBar: { type: Boolean, default: true },
+    /** z-index层级 */
+    zIndex: { type: [String, Number] as PropType<string | number>, default: zIndex.tabbar }
 };
 
 export type TabbarProps = ExtractPropTypes<typeof TabbarProps>;
