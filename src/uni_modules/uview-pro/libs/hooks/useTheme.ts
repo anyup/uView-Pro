@@ -69,7 +69,7 @@ function getAvailableThemes() {
 export function initTheme(themes?: any[], defaultThemeName?: string) {
     // 如果有传入主题列表，使用传入的
     if (Array.isArray(themes) && themes.length > 0) {
-        configProvider.init(themes, defaultThemeName);
+        configProvider.initTheme(themes, defaultThemeName);
         return;
     }
 
@@ -91,7 +91,7 @@ export function initTheme(themes?: any[], defaultThemeName?: string) {
     try {
         const builtin = (typeof uni !== 'undefined' && (uni as any).$u && (uni as any).$u.themes) || [];
         if (Array.isArray(builtin) && builtin.length > 0) {
-            configProvider.init(builtin as Theme[], defaultThemeName);
+            configProvider.initTheme(builtin as Theme[], defaultThemeName);
             return;
         }
     } catch (e) {
@@ -99,7 +99,7 @@ export function initTheme(themes?: any[], defaultThemeName?: string) {
     }
 
     // 回退到内置默认主题
-    configProvider.init(defaultThemes as Theme[], defaultThemeName);
+    configProvider.initTheme(defaultThemes as Theme[], defaultThemeName);
 }
 
 /**

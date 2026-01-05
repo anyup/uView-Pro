@@ -143,7 +143,7 @@ export class ConfigProvider {
      * @param themes 可用主题数组
      * @param defaultThemeName 可选默认主题名
      */
-    init(themes?: Theme[], defaultThemeName?: string) {
+    initTheme(themes?: Theme[], defaultThemeName?: string) {
         const normalizedThemes = this.normalizeThemes(themes);
         if (!normalizedThemes.length) {
             console.warn('[ConfigProvider] init called with empty themes');

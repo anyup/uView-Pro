@@ -9,7 +9,12 @@ export function createApp() {
     const app = createSSRApp(App);
     app.use(i18n);
     // 引入uView Pro 主库
-    app.use(uViewPro, { theme });
+    app.use(uViewPro, {
+        theme: {
+            themes: theme,
+            default: 'purple'
+        }
+    });
     // 引入uView Pro 的http插件
     app.use(httpPlugin, { interceptor: httpInterceptor, requestConfig: httpRequestConfig });
     return {

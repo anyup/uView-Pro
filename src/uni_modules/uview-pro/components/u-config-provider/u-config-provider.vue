@@ -13,7 +13,7 @@
  * - 组件/页面场景（推荐）：使用 `useTheme()` 组合式函数在组件内部读取响应式 `currentTheme`、`themes`、`darkMode` 并通过 `setTheme()` 和 `setDarkMode()` 切换主题/模式。
  *
  * 该组件的行为：
- * - 如果在挂载时传入 `themes`，会调用 `configProvider.init(themes)`
+ * - 如果在挂载时传入 `themes`，会调用 `configProvider.initTheme(themes)`
  * - 如果传入 `currentTheme`，会优先设置当前主题
  * - 如果传入 `darkMode`，会设置当前的暗黑模式状态，同时在 document 上添加 `u-theme-dark` 或 `u-theme-light` 类名
  *
@@ -63,7 +63,7 @@ const bootstrapTheme = () => {
 
     // 未初始化，进行初始化
     if (props.themes && props.themes.length) {
-        configProvider.init(props.themes, props.currentTheme as any);
+        configProvider.initTheme(props.themes, props.currentTheme as any);
     } else {
         // 使用 useTheme 的 initTheme，它会处理默认主题
         const { initTheme } = useTheme();
@@ -91,7 +91,7 @@ watch(
         // 那么对其做深度监听会在我们内部更新主题对象时触发该回调，进而再次调用 init 导致循环更新。
         // 为避免该情况，先做简单保护：当传入对象正是 configProvider.themesRef.value 时不重复初始化。
         if (val && val.length && val !== configProvider.themesRef.value) {
-            configProvider.init(val, props.currentTheme as any);
+            configProvider.initTheme(val, props.currentTheme as any);
         }
     },
     { deep: true }

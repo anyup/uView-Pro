@@ -372,6 +372,11 @@ export type Theme = {
     darkCss?: Record<string, string>;
 };
 
+export type Themes = {
+    themes: Theme[];
+    default?: string;
+};
+
 export type LogConfig = Partial<{
     debug?: boolean;
     prefix?: string;
@@ -379,7 +384,7 @@ export type LogConfig = Partial<{
 }>;
 
 export interface UViewProOptions {
-    theme?: ThemeColor | Theme[];
+    theme?: ThemeColor | Theme[] | Themes;
     log?: LogConfig;
     // 可扩展更多配置项
 }
