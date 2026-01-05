@@ -73,9 +73,9 @@
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
-const list = [
+const list = reactive([
     {
         name: '荔枝',
         checked: true,
@@ -96,8 +96,7 @@ const list = [
         checked: false,
         disabled: false
     }
-];
-const disabled = ref(false);
+]);
 const result = ref('荔枝');
 const shape = ref<Shape>('circle');
 const value = ref('荔枝');

@@ -32,16 +32,35 @@
                         @click="switchTheme"
                     ></u-icon>
                 </view>
+                <view v-else>
+                    <!-- #ifdef H5 -->
+                    <u-icon
+                        custom-prefix="custom-icon"
+                        :name="darkModeIcon"
+                        size="46"
+                        color="#ffffff"
+                        @click="switchTheme"
+                    ></u-icon>
+                    <!-- #endif -->
+                </view>
             </template>
             <!-- #ifndef MP -->
             <template #right>
-                <view v-if="tabbar" class="u-m-r-30">
+                <view class="u-m-r-20">
                     <u-icon
+                        v-if="tabbar"
                         custom-prefix="custom-icon"
                         name="theme-fill"
-                        size="46"
+                        size="44"
                         color="#ffffff"
                         @click="$u.route('/pages/other/theme/index')"
+                    ></u-icon>
+                    <u-icon
+                        name="zhuanfa"
+                        size="50"
+                        color="#ffffff"
+                        @click="sharePage"
+                        custom-style="margin-left:10px"
                     ></u-icon>
                 </view>
             </template>
@@ -372,6 +391,14 @@ function handleBtnClick(value: string) {
 function clickHref(link: string) {
     $u.clipboard(link, { showToast: true });
 }
+
+function sharePage() {
+    const pages = getCurrentPages();
+    // 页面栈中的最后一个即为项为当前页面，route属性为页面路径
+    const pageUrl = pages[pages.length - 1].route as string;
+    window.open('https://h5.uviewpro.cn/#/' + pageUrl);
+}
+
 onMounted(() => {
     // #ifdef APP-HARMONY
     if (apis.value) {

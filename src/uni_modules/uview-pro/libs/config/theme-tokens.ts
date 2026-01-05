@@ -34,7 +34,7 @@ export const lightPalette: ThemeColor = {
     shadowColor: 'rgba(0, 0, 0, 0.1)',
     bgColor: '#f3f4f6',
     bgWhite: '#ffffff',
-    bgGrayLight: '#f5f7fa',
+    bgGrayLight: '#f1f1f1',
     bgGrayDark: '#2f343c',
     bgBlack: '#000000'
 };
