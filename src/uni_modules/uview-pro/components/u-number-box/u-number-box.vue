@@ -310,12 +310,12 @@ function handleChange(value: number, type: 'update:modelValue' | 'change' | 'blu
 }
 
 .u-icon-disabled {
-    color: var(--u-bg-gray-light) !important;
+    color: var(--u-type-info-disabled) !important;
     background: var(--u-bg-gray-light) !important;
 }
 
 .u-input-disabled {
-    color: var(--u-bg-gray-light) !important;
+    color: var(--u-type-info-disabled) !important;
     background-color: var(--u-bg-gray-light) !important;
 }
 </style>

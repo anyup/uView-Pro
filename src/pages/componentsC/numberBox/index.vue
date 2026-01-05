@@ -12,6 +12,7 @@
                             :min="0"
                             :step="step"
                             :disabled="disabled"
+                            :disabled-input="disabledInput"
                             @change="change"
                             @focus="focus"
                         ></u-number-box>
@@ -26,6 +27,10 @@
                     <view class="u-config-item">
                         <view class="u-item-title">自定义样式</view>
                         <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">是否禁止输入框手动输入值</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="disabledInputChange"></u-subsection>
                     </view>
                     <view class="u-config-item">
                         <view class="u-item-title">是否禁用</view>
@@ -47,6 +52,7 @@ import { ref } from 'vue';
 const value = ref(1);
 const bgColor = ref('#F2F3F5');
 const color = ref('#323233');
+const disabledInput = ref(false);
 const disabled = ref(false);
 const step = ref(1);
 
@@ -62,6 +68,10 @@ function styleChange(index: number) {
         bgColor.value = '#F2F3F5';
         color.value = '#323233';
     }
+}
+
+function disabledInputChange(index: number) {
+    disabledInput.value = index === 0;
 }
 
 function disabledChange(index: number) {
