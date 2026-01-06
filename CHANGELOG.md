@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.13] - 2026-01-06
+
+### ✨ Features | 新功能
+
+- **theme:** 主题初始化时支持默认主题设置 ([f2b61f6](https://github.com/anyup/uView-Pro/commit/f2b61f6caa1c285753b2e02f97309aa55bb77cca))
+- **theme:** 增强主题系统初始化配置，支持在初始化时设置默认主题和暗黑模式 ([d228d10](https://github.com/anyup/uView-Pro/commit/d228d100baf619799b1dc1c8e289e1e8c9a30699))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-number-box:** 修复 u-number-box 步进器 disabled 时字体不显示问题 ([75b3a74](https://github.com/anyup/uView-Pro/commit/75b3a74e6e763dec1a1ee0d3b4d0a62d646ee389))
+- **u-textarea:** 修复u-textarea组件设置props.border='none'无效的问题 ([c5a97ba](https://github.com/anyup/uView-Pro/commit/c5a97ba4c00d226c8c0fd9605660d2654dec9dc2))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **theme:** 调整u-bg-gray-light默认色值，优化演示示例 ([37d6bda](https://github.com/anyup/uView-Pro/commit/37d6bda939f5d7c54aec09960878f236dfa32bb2))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.4.12] - 2026-01-04
 
 ### ♻️ Code Refactoring | 代码重构
