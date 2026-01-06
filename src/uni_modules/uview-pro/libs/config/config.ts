@@ -1,8 +1,7 @@
-// 此版本发布于2023-03-27
 /**
  * 组件库配置项类型定义
  */
-
+import { reactive } from 'vue';
 import { version } from '../../package.json';
 import type { DarkMode } from '../../types/global';
 
@@ -19,9 +18,7 @@ export interface AppConfig {
     defaultDarkMode: DarkMode;
 }
 
-// const version: string = '1.8.8';
-
-const config: AppConfig = {
+export const config = reactive<AppConfig>({
     v: version,
     version: version,
     // 主题名称
@@ -30,6 +27,6 @@ const config: AppConfig = {
     defaultTheme: 'uviewpro',
     // 默认为亮色模式
     defaultDarkMode: 'light'
-};
+});
 
 export default config;

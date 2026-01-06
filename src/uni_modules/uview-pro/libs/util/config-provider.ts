@@ -33,6 +33,17 @@ const STRUCTURAL_TOKENS = new Set([
     'shadowColor'
 ]);
 
+export type DefaultThemeConfig = {
+    /**
+     * 默认主题
+     */
+    defaultTheme?: string;
+    /**
+     * 默认暗黑模式
+     */
+    defaultDarkMode?: DarkMode;
+};
+
 /**
  * ConfigProvider: 管理全局主题
  * - init(themes, defaultName): 初始化主题系统
@@ -141,28 +152,39 @@ export class ConfigProvider {
     /**
      * 初始化主题系统
      * @param themes 可用主题数组
-     * @param defaultThemeName 可选默认主题名
+     * @param defaultTheme 可选默认主题名
      */
-    initTheme(themes?: Theme[], defaultThemeName?: string) {
+    initTheme(themes?: Theme[], defaultConfig?: string | DefaultThemeConfig) {
         const normalizedThemes = this.normalizeThemes(themes);
         if (!normalizedThemes.length) {
             console.warn('[ConfigProvider] init called with empty themes');
             return;
         }
 
+        // 配置默认主题
+        if (defaultConfig) {
+            if (typeof defaultConfig === 'string') {
+                config.defaultTheme = defaultConfig || config.defaultTheme;
+            } else if (typeof defaultConfig === 'object') {
+                const { defaultTheme, defaultDarkMode } = defaultConfig;
+                config.defaultTheme = defaultTheme || config.defaultTheme;
+                config.defaultDarkMode = defaultDarkMode || config.defaultDarkMode;
+            }
+        }
+
+        // 设置主题列表，响应式
         this.themesRef.value = normalizedThemes.slice();
 
         // 先尝试从 Storage 读取已保存主题名
         const saved = this.readStorage<string>(THEME_STORAGE_KEY);
-
-        let initialName = saved || defaultThemeName || this.themesRef.value[0].name;
+        let initialName = saved || config.defaultTheme || this.themesRef.value[0].name;
         const found = this.themesRef.value.find(t => t.name === initialName) || this.themesRef.value[0];
 
+        // 设置当前主题，响应式
         this.currentThemeRef.value = found;
 
-        // 尝试从 Storage 读取暗黑模式设置
-        const savedDarkMode = this.readStorage<DarkMode>(DARK_MODE_STORAGE_KEY);
-        this.darkModeRef.value = savedDarkMode || config.defaultDarkMode;
+        // 初始化暗黑模式设置
+        this.initDarkMode(config.defaultDarkMode);
 
         // 应用主题
         this.applyTheme(found);
@@ -171,6 +193,16 @@ export class ConfigProvider {
             console.log('[ConfigProvider] initialized, theme=', found.name, 'darkMode=', this.darkModeRef.value);
 
         return this;
+    }
+
+    /**
+     * 初始化暗黑模式设置
+     * @param darkMode
+     */
+    initDarkMode(darkMode?: DarkMode) {
+        // 尝试从 Storage 读取暗黑模式设置
+        const savedDarkMode = this.readStorage<DarkMode>(DARK_MODE_STORAGE_KEY);
+        this.darkModeRef.value = savedDarkMode || darkMode || config.defaultDarkMode;
     }
 
     /**

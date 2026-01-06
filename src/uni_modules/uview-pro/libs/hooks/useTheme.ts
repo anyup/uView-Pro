@@ -7,7 +7,7 @@
  */
 
 import type { DarkMode, Theme } from '../../types/global';
-import configProvider from '../util/config-provider';
+import configProvider, { type DefaultThemeConfig } from '../util/config-provider';
 import { defaultThemes } from '../config/theme-tokens';
 
 const THEME_STORAGE_KEY = 'uview-pro-theme';
@@ -64,42 +64,44 @@ function getAvailableThemes() {
 /**
  * 初始化主题系统
  * @param themes 可选的主题列表，如果未提供则尝试从 uni.$u.themes 读取
- * @param defaultThemeName 可选的默认主题名
+ * @param defaultConfig 可选的默认主题配置，支持字符串（默认主题名）或对象（{ defaultTheme?, defaultDarkMode? }）
  */
-export function initTheme(themes?: any[], defaultThemeName?: string) {
+export function initTheme(themes?: Theme[], defaultConfig?: string | DefaultThemeConfig) {
     // 如果有传入主题列表，使用传入的
     if (Array.isArray(themes) && themes.length > 0) {
-        configProvider.initTheme(themes, defaultThemeName);
+        configProvider.initTheme(themes, defaultConfig);
         return;
     }
 
-    // 若已通过插件或其他方式完成初始化，则不再覆盖，最多按需切换默认主题
-    const existingThemes = configProvider.getThemes();
-    if (existingThemes.length > 0) {
-        if (defaultThemeName) {
-            configProvider.setTheme(defaultThemeName);
-        } else if (!configProvider.getCurrentTheme()) {
-            configProvider.setTheme(existingThemes[0].name);
-        } else {
-            // 触发一次 apply，便于初始化 CSS 变量
-            configProvider.setTheme(configProvider.getCurrentTheme()!.name);
-        }
-        return;
-    }
+    // // 若已通过插件或其他方式完成初始化，则不再覆盖，最多按需切换默认主题
+    // const existingThemes = configProvider.getThemes();
+    // if (existingThemes.length > 0) {
+    //     if (typeof defaultConfig === 'string') {
+    //         configProvider.setTheme(defaultConfig);
+    //     } else if (defaultConfig && typeof defaultConfig === 'object' && (defaultConfig as any).defaultTheme) {
+    //         configProvider.setTheme(defaultConfig.defaultTheme);
+    //     } else if (!configProvider.getCurrentTheme()) {
+    //         configProvider.setTheme(existingThemes[0].name);
+    //     } else {
+    //         // 触发一次 apply，便于初始化 CSS 变量
+    //         configProvider.setTheme(configProvider.getCurrentTheme()!.name);
+    //     }
+    //     return;
+    // }
 
-    // 初始化 configProvider（如果运行时提供了内置主题）
-    try {
-        const builtin = (typeof uni !== 'undefined' && (uni as any).$u && (uni as any).$u.themes) || [];
-        if (Array.isArray(builtin) && builtin.length > 0) {
-            configProvider.initTheme(builtin as Theme[], defaultThemeName);
-            return;
-        }
-    } catch (e) {
-        // ignore
-    }
+    // // 初始化 configProvider（如果运行时提供了内置主题）
+    // try {
+    //     const builtin = (typeof uni !== 'undefined' && (uni as any).$u && (uni as any).$u.themes) || [];
+    //     if (Array.isArray(builtin) && builtin.length > 0) {
+    //         configProvider.initTheme(builtin as Theme[], defaultConfig);
+    //         return;
+    //     }
+    // } catch (e) {
+    //     // ignore
+    // }
 
     // 回退到内置默认主题
-    configProvider.initTheme(defaultThemes as Theme[], defaultThemeName);
+    configProvider.initTheme(defaultThemes as Theme[], defaultConfig);
 }
 
 /**
