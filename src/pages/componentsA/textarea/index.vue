@@ -36,6 +36,12 @@
                         <u-textarea v-model="value5" placeholder="请输入内容" border="bottom"></u-textarea>
                     </view>
                 </view>
+                <view class="u-demo-block">
+                    <text class="u-demo-block__title">无边框</text>
+                    <view class="u-demo-block__content">
+                        <u-textarea v-model="value5" placeholder="请输入内容" border="none"></u-textarea>
+                    </view>
+                </view>
             </view>
         </template>
     </demo-page>

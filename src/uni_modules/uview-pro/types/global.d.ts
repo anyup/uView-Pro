@@ -160,6 +160,8 @@ export type InputConfirmType = 'send' | 'search' | 'next' | 'go' | 'done';
 
 export type InputLabelPosition = 'left' | 'top';
 
+export type TextareaBorder = 'surround' | 'none' | 'bottom';
+
 export type FormErrorType = 'message' | 'border' | 'border-bottom' | 'none' | 'toast';
 
 export type IconLabelPosition = 'left' | 'top' | 'right' | 'bottom';

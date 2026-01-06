@@ -165,7 +165,7 @@ watch(
 // 组件的类名
 const textareaClass = computed(() => {
     let classes: string[] = [];
-    if (props.border) {
+    if (props.border && props.border !== 'none') {
         if (props.border === 'surround') {
             classes = classes.concat(['u-textarea--border', 'u-textarea--radius']);
         } else if (props.border === 'bottom') {
@@ -181,7 +181,7 @@ const textareaClass = computed(() => {
 // 组件的样式
 const textareaStyle = computed(() => {
     const style: Record<string, any> = {};
-    if (props.border) {
+    if (props.border && props.border !== 'none') {
         style.padding = `${props.border ? 20 : 0}rpx`;
     }
     // #ifdef APP-NVUE

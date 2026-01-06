@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
+import type { TextareaBorder } from '../../types/global';
 
 const textarea = {
     value: '',
@@ -72,7 +73,7 @@ export const TextareaProps = {
     // 最大输入长度，设置为 -1 的时候不限制最大长度
     maxlength: { type: [String, Number] as PropType<string | number>, default: textarea.maxlength },
     // 边框类型，surround-四周边框，bottom-底部边框
-    border: { type: [String, Boolean] as PropType<string | boolean>, default: textarea.border },
+    border: { type: [String, Boolean] as PropType<TextareaBorder | boolean>, default: textarea.border },
     // 用于处理或者过滤输入框内容的方法
     formatter: { type: Function as PropType<((val: any) => any) | null>, default: textarea.formatter },
     // 是否忽略组件内对文本合成系统事件的处理
