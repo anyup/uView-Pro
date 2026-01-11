@@ -80,6 +80,7 @@ import { CircleProgressProps } from './types';
 // #ifdef MP-WEIXIN || MP-TOUTIAO
 import { canvas2d } from '../../libs/util/canvas-2d';
 // #endif
+import { getWindowInfo } from '../../libs/function/sys';
 
 /**
  * circleProgress 环形进度条
@@ -132,7 +133,7 @@ const circleColor = computed(() => {
 });
 
 onBeforeMount(() => {
-    pixelRatio.value = uni.getSystemInfoSync().pixelRatio;
+    pixelRatio.value = getWindowInfo().pixelRatio;
 });
 
 // 监听percent变化，动态绘制进度

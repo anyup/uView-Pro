@@ -44,6 +44,7 @@
                     :mid-button="midButton"
                     :inactive-color="inactiveColor"
                     :activeColor="activeColor"
+                    :hide-tab-bar="false"
                 ></u-tabbar>
             </view>
         </template>

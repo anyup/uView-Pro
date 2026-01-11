@@ -68,6 +68,7 @@ export default {
 import { ref, computed } from 'vue';
 import { $u } from '../..';
 import { NavbarProps } from './types';
+import { getWindowInfo, os } from '../../libs/function/sys';
 
 /**
  * navbar 自定义导航栏
@@ -94,8 +95,7 @@ import { NavbarProps } from './types';
  */
 const props = defineProps(NavbarProps);
 // 获取系统状态栏的高度
-const systemInfo = uni.getSystemInfoSync();
-const windowInfo = uni.getWindowInfo();
+const windowInfo = getWindowInfo();
 
 let menuButtonInfo: any = {};
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
@@ -115,7 +115,7 @@ const navbarHeight = computed(() => {
     // 小程序特别处理，让导航栏高度 = 胶囊高度 + 两倍胶囊顶部与状态栏底部的距离之差(相当于同时获得了导航栏底部与胶囊底部的距离)
     // 此方法有缺陷，暂不用(会导致少了几个px)，采用直接固定值的方式
     // return menuButtonInfo.height + (menuButtonInfo.top - this.statusBarHeight) * 2;//导航高度
-    let height = systemInfo.platform == 'ios' ? 44 : 48;
+    let height = os() === 'ios' ? 44 : 48;
     return props.height ? props.height : height;
     // #endif
 });
@@ -132,7 +132,7 @@ const navbarInnerStyle = computed(() => {
     style.height = String(navbarHeight.value) + 'px';
     // 如果是各家小程序，导航栏内部的宽度需要减少右边胶囊的宽度
     // #ifdef MP
-    let rightButtonWidth = systemInfo.windowWidth - menuButtonInfo.left;
+    let rightButtonWidth = windowInfo.windowWidth - menuButtonInfo.left;
     style.marginRight = rightButtonWidth + 'px';
     // #endif
     return style;
@@ -151,16 +151,16 @@ const navbarStyle = computed(() => {
 const titleStyle = computed(() => {
     let style: Record<string, any> = {};
     // #ifndef MP
-    style.left = (systemInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 + 'px';
-    style.right = (systemInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 + 'px';
+    style.left = (windowInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 + 'px';
+    style.right = (windowInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 + 'px';
     // #endif
     // #ifdef MP
     // 此处是为了让标题显示区域即使在小程序有右侧胶囊的情况下也能处于屏幕的中间，是通过绝对定位实现的
-    let rightButtonWidth = systemInfo.windowWidth - menuButtonInfo.left;
-    style.left = (systemInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 + 'px';
+    let rightButtonWidth = windowInfo.windowWidth - menuButtonInfo.left;
+    style.left = (windowInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 + 'px';
     style.right =
         rightButtonWidth -
-        (systemInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 +
+        (windowInfo.windowWidth - uni.upx2px(Number(props.titleWidth))) / 2 +
         rightButtonWidth +
         'px';
     // #endif
