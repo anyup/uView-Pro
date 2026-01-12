@@ -1,5 +1,6 @@
 <template>
     <view class="demo-page" :class="{ 'has-tabbar': tabbar }" :style="$u.toStyle(customStyle)">
+        <!-- #ifndef MP-ALIPAY -->
         <u-navbar
             v-if="!hideNav"
             :is-back="navBack"
@@ -66,6 +67,7 @@
             </template>
             <!-- #endif -->
         </u-navbar>
+        <!-- #endif -->
         <view v-if="title || desc" class="demo-page_header">
             <view class="demo-page_title">{{ title }}</view>
             <view class="demo-page_desc" v-if="desc">{{ desc }}</view>
