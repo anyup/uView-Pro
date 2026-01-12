@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { useTitle } from '@/common/util';
-import { useTheme } from 'uview-pro';
+import { useTheme, useLocale } from 'uview-pro';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -59,6 +59,7 @@ const props = defineProps<{
 
 // 国际化钩子
 const { t, locale } = useI18n();
+const { setLocale } = useLocale();
 const { setTitle } = useTitle(props.index);
 
 /**
@@ -75,6 +76,9 @@ function switchLang() {
     const nextLocale = locale.value === 'zh-Hans' ? 'en' : 'zh-Hans';
     uni.setLocale(nextLocale);
     locale.value = nextLocale;
+    // 同步到组件库国际化（vue-i18n -> uview-pro）
+    const uViewLocale = nextLocale === 'zh-Hans' ? 'zh-CN' : 'en-US';
+    setLocale(uViewLocale);
     // 设置标题
     setTitle();
 }

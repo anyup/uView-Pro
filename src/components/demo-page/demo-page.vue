@@ -414,7 +414,7 @@ onMounted(() => {
 .demo-page {
     width: 100%;
     min-height: 100vh;
-    padding-bottom: 30rpx;
+    // padding-bottom: 30rpx;
     overflow-y: auto;
     background-color: $u-bg-white;
     -webkit-font-smoothing: antialiased;
