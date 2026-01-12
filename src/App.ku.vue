@@ -1,19 +1,30 @@
 <script setup lang="ts">
-import { onShow } from '@dcloudio/uni-app';
-import { useTheme } from 'uview-pro';
+import { onLoad, onShow } from '@dcloudio/uni-app';
+import { useTheme, useLocale } from 'uview-pro';
 import { computed } from 'vue';
 
 const { darkMode, themes, currentTheme } = useTheme();
+const { currentLocale, locales } = useLocale();
 
-const themeName = computed(() => currentTheme.value?.name);
+const currentThemeName = computed(() => currentTheme.value?.name);
+const currentLocaleName = computed(() => currentLocale.value?.name);
 
-onShow(() => {
-    console.log('App Show');
+onLoad(() => {
+    console.log('darkMode->', darkMode.value);
+    console.log('theme->', currentThemeName.value);
+    console.log('locale->', currentLocaleName.value);
 });
+
+onShow(() => {});
 </script>
 
 <template>
-    <u-config-provider :dark-mode="darkMode" :current-theme="themeName" :themes="themes">
+    <u-config-provider
+        :dark-mode="darkMode"
+        :themes="themes"
+        :current-theme="currentThemeName"
+        :current-locale="currentLocaleName"
+    >
         <KuRootView />
     </u-config-provider>
 </template>

@@ -3,7 +3,7 @@ import App from './App.vue';
 import themes from '@/uview-pro.theme';
 import uViewPro, { httpPlugin } from '@/uni_modules/uview-pro';
 import { httpInterceptor, httpRequestConfig } from './common/http.interceptor';
-import i18n from '@/locales';
+import i18n, { getDefaultLocale } from '@/locales';
 
 export function createApp() {
     const app = createSSRApp(App);
@@ -14,6 +14,10 @@ export function createApp() {
             themes: themes,
             defaultTheme: 'purple',
             defaultDarkMode: 'auto'
+        },
+        locale: {
+            locales: [{ name: 'en-US', actionSheet: { cancelText: 'Close' } }],
+            defaultLocale: getDefaultLocale()
         }
     });
     // 引入uView Pro 的http插件

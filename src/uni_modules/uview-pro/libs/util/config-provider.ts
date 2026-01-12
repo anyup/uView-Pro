@@ -8,11 +8,13 @@ import config from '../config/config';
 import { defaultThemes } from '../config/theme-tokens';
 import { color as reactiveColor } from '../config/color';
 import { getSystemDarkMode as getNativeSystemDarkMode } from './system-theme';
+import * as localePack from '../../locale';
 
 declare const uni: any;
 
 const THEME_STORAGE_KEY = 'uview-pro-theme';
 const DARK_MODE_STORAGE_KEY = 'uview-pro-dark-mode';
+const LOCALE_STORAGE_KEY = 'uview-pro-locale';
 const DEFAULT_LIGHT_TOKENS = (defaultThemes[0]?.color || {}) as Partial<ThemeColor>;
 const DEFAULT_DARK_TOKENS = (defaultThemes[0]?.darkColor || {}) as Partial<ThemeColor>;
 const STRUCTURAL_TOKENS = new Set([
@@ -57,6 +59,9 @@ export class ConfigProvider {
     public currentThemeRef = ref<Theme | null>(null);
     public darkModeRef = ref<DarkMode>(config.defaultDarkMode);
     public cssVarsRef = ref<Record<string, string>>({});
+    // 国际化 i18n 状态
+    public localesRef = ref<any[]>([]);
+    public currentLocaleRef = ref<any | null>(null);
     private baseColorTokens: Partial<ThemeColor> = DEFAULT_LIGHT_TOKENS;
     private baseDarkColorTokens: Partial<ThemeColor> = DEFAULT_DARK_TOKENS;
     private debug: boolean = false;
@@ -178,7 +183,9 @@ export class ConfigProvider {
         // 先尝试从 Storage 读取已保存主题名
         const saved = this.readStorage<string>(THEME_STORAGE_KEY);
         let initialName = saved || config.defaultTheme || this.themesRef.value[0].name;
-        const found = this.themesRef.value.find(t => t.name === initialName) || this.themesRef.value[0];
+        let found = this.themesRef.value.find(t => t.name === initialName);
+        if (!found) found = this.themesRef.value.find(t => t.name === config.defaultTheme);
+        if (!found) found = this.themesRef.value[0];
 
         // 设置当前主题，响应式
         this.currentThemeRef.value = found;
@@ -203,6 +210,148 @@ export class ConfigProvider {
         // 尝试从 Storage 读取暗黑模式设置
         const savedDarkMode = this.readStorage<DarkMode>(DARK_MODE_STORAGE_KEY);
         this.darkModeRef.value = savedDarkMode || darkMode || config.defaultDarkMode;
+    }
+
+    /**
+     * 初始化国际化数据
+     * @param locales 可选的 locale 列表（对象数组，包含 name 字段）
+     * @param defaultLocaleName 可选默认 locale 名称
+     */
+    initLocales(locales?: any[], defaultLocaleName?: string) {
+        const normalized = this.normalizeLocales(locales);
+        if (!normalized.length) {
+            if (this.debug) console.warn('[ConfigProvider] initLocales called with empty locales');
+            return;
+        }
+
+        this.localesRef.value = normalized.slice();
+
+        // 尝试从 Storage 读取已保存 locale 名称
+        const saved = this.readStorage<string>(LOCALE_STORAGE_KEY);
+
+        // 根据传入的 defaultLocaleName 或 saved 或 config.defaultLocale 查找 locale
+        const initialName = saved || defaultLocaleName || config.defaultLocale;
+        let found = this.localesRef.value.find((l: any) => l.name === initialName);
+        if (!found) found = this.localesRef.value.find(l => l.name === config.defaultLocale);
+        if (!found) found = this.localesRef.value[0];
+
+        this.currentLocaleRef.value = found;
+
+        if (this.debug) console.log('[ConfigProvider] locales initialized, locale=', found?.name);
+
+        return this;
+    }
+
+    /**
+     * 归一化 locale 配置，保证始终至少有一个默认 locale
+     */
+    private normalizeLocales(locales?: any[]) {
+        // 获取内置语言包（可能包含 zh-CN / en-US 等）
+        let builtinList: any[] = [];
+        try {
+            builtinList = Object.values(localePack || {}).filter(v => v && typeof v === 'object');
+        } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] normalizeLocales read builtin failed', e);
+        }
+
+        // 如果没有传入自定义 locales，直接返回内置列表
+        if (!Array.isArray(locales) || !locales.length) {
+            return builtinList.slice();
+        }
+
+        // 将 builtin 按 name 映射，便于合并
+        const map = new Map<string, any>();
+        builtinList.forEach(item => {
+            if (item && item.name) {
+                map.set(item.name, { ...(item || {}) });
+            }
+        });
+
+        // 合并用户传入的 locales：若 name 相同则对对象字段进行浅合并（嵌套对象尝试合并）
+        locales.forEach(loc => {
+            if (!loc || !loc.name) return;
+            const existing = map.get(loc.name);
+            if (!existing) {
+                // 新增语言直接加入
+                map.set(loc.name, { ...(loc || {}) });
+                return;
+            }
+            // 合并：对每个 key，如果是对象且现有为对象，则进行浅合并，否则覆盖
+            const merged: any = { ...existing };
+            Object.keys(loc).forEach(k => {
+                const v = (loc as any)[k];
+                if (v != null && typeof v === 'object' && !Array.isArray(v) && typeof merged[k] === 'object') {
+                    merged[k] = { ...(merged[k] || {}), ...(v || {}) };
+                } else {
+                    merged[k] = v;
+                }
+            });
+            map.set(loc.name, merged);
+        });
+
+        return Array.from(map.values());
+    }
+
+    /**
+     * 获取所有可用 locale
+     */
+    getLocales() {
+        return this.localesRef.value.slice();
+    }
+
+    /**
+     * 获取当前 locale 对象
+     */
+    getCurrentLocale() {
+        return this.currentLocaleRef.value;
+    }
+
+    /**
+     * 切换 locale 并持久化
+     */
+    setLocale(localeName: string) {
+        if (!this.localesRef.value || this.localesRef.value.length === 0) {
+            console.warn('[ConfigProvider] setLocale called but locales list empty');
+            return;
+        }
+        const locale = this.localesRef.value.find(l => l.name === localeName);
+        if (!locale) {
+            console.warn('[ConfigProvider] locale not found:', localeName);
+            return;
+        }
+        this.currentLocaleRef.value = locale;
+        this.writeStorage(LOCALE_STORAGE_KEY, localeName);
+        if (this.debug) console.log('[ConfigProvider] setLocale ->', localeName);
+    }
+
+    /**
+     * 翻译函数
+     * 支持 key 路径，例如 'calendar.placeholder'
+     * replacements 支持数组或对象替换占位符 {0} 或 {name}
+     */
+    t(key: string, replacements?: any, localeName?: string): string {
+        const localeObj =
+            (localeName && this.localesRef.value.find(l => l.name === localeName)) || this.currentLocaleRef.value;
+        if (!localeObj) return key;
+        const parts = key.split('.');
+        let cur: any = localeObj;
+        for (let i = 0; i < parts.length; i++) {
+            if (cur == null) break;
+            cur = cur[parts[i]];
+        }
+        let text = typeof cur === 'string' ? cur : key;
+        if (replacements != null) {
+            if (Array.isArray(replacements)) {
+                replacements.forEach((val, idx) => {
+                    text = text.split(`{${idx}}`).join(String(val));
+                });
+            } else if (typeof replacements === 'object') {
+                Object.keys(replacements).forEach(k => {
+                    text = text.split(`{${k}}`).join(String(replacements[k]));
+                });
+            }
+        }
+        return text;
     }
 
     /**

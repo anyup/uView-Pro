@@ -386,9 +386,20 @@ export type LogConfig = Partial<{
     showCallerInfo?: boolean;
 }>;
 
+export type Locales = {
+    locales: Locale[];
+    defaultLocale?: string;
+};
+
+export type Locale = {
+    name: string;
+    [key: string]: any;
+};
+
 export interface UViewProOptions {
     theme?: ThemeColor | Theme[] | Themes;
     log?: LogConfig;
+    locale?: string | Locale[] | Locales;
     // 可扩展更多配置项
 }
 

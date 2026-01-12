@@ -9,11 +9,20 @@ const messages = {
 };
 
 // 安全获取locale，避免在SSR环境下出现问题
-const getSafeLocale = () => {
+export const getSafeLocale = () => {
     try {
         return uni.getLocale() || 'zh-Hans';
     } catch (e) {
         return 'zh-Hans';
+    }
+};
+
+export const getDefaultLocale = () => {
+    switch (getSafeLocale()) {
+        case 'en':
+            return 'en-US';
+        default:
+            return 'zh-CN';
     }
 };
 

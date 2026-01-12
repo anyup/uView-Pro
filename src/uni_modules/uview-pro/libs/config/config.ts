@@ -16,6 +16,8 @@ export interface AppConfig {
     defaultTheme: string;
     /** 默认暗黑主题 */
     defaultDarkMode: DarkMode;
+    /** 默认语言 */
+    defaultLocale: string;
 }
 
 export const config = reactive<AppConfig>({
@@ -26,7 +28,9 @@ export const config = reactive<AppConfig>({
     // 默认为官方主题名称
     defaultTheme: 'uviewpro',
     // 默认为亮色模式
-    defaultDarkMode: 'light'
+    defaultDarkMode: 'light',
+    // 默认为中文
+    defaultLocale: 'zh-CN'
 });
 
 export default config;

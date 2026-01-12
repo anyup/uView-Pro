@@ -1,4 +1,4 @@
-import { $u, type RequestOptions, initTheme } from './libs';
+import { $u, type RequestOptions, initTheme, configProvider } from './libs';
 import type { UViewProOptions, Theme } from './types/global';
 import { logger } from './libs/util/logger';
 import { defaultThemes } from './libs/config/theme-tokens';
@@ -47,6 +47,27 @@ const install = (app: any, options?: UViewProOptions): void => {
             } else {
                 // 默认初始化系统主题
                 initTheme();
+            }
+            // 初始化国际化（如果提供 options.locale 或使用内置语言包）
+            try {
+                // options.locale 可以是 string（默认语言名） | any[]（locale 列表） | { locales: any[], defaultLocale?: string }
+                if (options?.locale) {
+                    const optLocale: any = options.locale as any;
+                    if (typeof optLocale === 'string') {
+                        configProvider.initLocales(undefined, optLocale);
+                    } else if (Array.isArray(optLocale)) {
+                        configProvider.initLocales(optLocale);
+                    } else if (optLocale && typeof optLocale === 'object') {
+                        configProvider.initLocales(optLocale.locales, optLocale.defaultLocale);
+                    } else {
+                        configProvider.initLocales();
+                    }
+                } else {
+                    // 无 locale 配置，仍然初始化内置语言包以保证可用
+                    configProvider.initLocales();
+                }
+            } catch (e) {
+                console.error('[install locales] Error:', e);
             }
             // 设置调试模式
             logger
