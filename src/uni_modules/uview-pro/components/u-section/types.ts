@@ -1,5 +1,8 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import { baseProps } from '../common/props';
+import { useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * section 组件 props 类型定义
@@ -12,7 +15,7 @@ export const SectionProps = {
     /** 标题信息 */
     title: { type: String, default: '' },
     /** 右边副标题内容 */
-    subTitle: { type: String, default: '更多' },
+    subTitle: { type: String, default: () => t('section.subTitle') },
     /** 是否显示右边的内容 */
     right: { type: Boolean, default: true },
     /** 主标题的字体大小 */

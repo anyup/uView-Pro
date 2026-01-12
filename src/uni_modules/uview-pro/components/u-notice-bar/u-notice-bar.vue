@@ -114,7 +114,7 @@ const isShow = computed(() => {
 /**
  * 点击通告栏
  */
-function click(index: number) {
+function click(index?: number) {
     emit('click', index);
 }
 

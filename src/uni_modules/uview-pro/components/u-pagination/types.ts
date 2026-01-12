@@ -1,5 +1,8 @@
 import { baseProps } from '../common/props';
 import type { PaginationChangePayload } from '../../types/global';
+import { useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * pagination 分页类型定义
@@ -9,9 +12,9 @@ import type { PaginationChangePayload } from '../../types/global';
 export const PaginationProps = {
     ...baseProps,
     /** 左侧按钮文字 */
-    prevText: { type: String, default: '上一页' },
+    prevText: { type: String, default: () => t('pagination.prevText') },
     /** 右侧按钮文字 */
-    nextText: { type: String, default: '下一页' },
+    nextText: { type: String, default: () => t('pagination.nextText') },
     /** 总条目数 */
     total: Number,
     /** 每页数据量 */

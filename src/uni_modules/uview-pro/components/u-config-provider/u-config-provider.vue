@@ -36,6 +36,7 @@ import { computed, watch, onMounted } from 'vue';
 import { ConfigProviderProps } from './types';
 import { $u, configProvider } from '../../libs';
 import { useTheme } from '../../libs/hooks/useTheme';
+import { useLocale } from '../../libs/hooks/useLocale';
 
 const props = defineProps(ConfigProviderProps);
 
@@ -78,9 +79,31 @@ const bootstrapTheme = () => {
     }
 };
 
+const bootstrapLocale = () => {
+    // 初始化国际化
+    try {
+        const { initLocales, setLocale, getLocales } = useLocale();
+        const existingLocales = getLocales();
+        if (existingLocales.length > 0) {
+            if (props.currentLocale) {
+                setLocale(props.currentLocale as string);
+            }
+        } else {
+            if (props.locales && props.locales.length) {
+                initLocales(props.locales, props.currentLocale as any);
+            } else {
+                initLocales(undefined, props.currentLocale as any);
+            }
+        }
+    } catch (e) {
+        console.warn('[u-config-provider] init locales failed', e);
+    }
+};
+
 // 当传入自定义 themes 时，初始化全局 configProvider（覆盖已有）
 onMounted(() => {
     bootstrapTheme();
+    bootstrapLocale();
 });
 
 // 监听外部 props 变化（如果上层修改 prop）
@@ -112,6 +135,28 @@ watch(
         if (val && val !== configProvider.getDarkMode()) {
             configProvider.setDarkMode(val);
             emit('mode-change', darkMode.value);
+        }
+    }
+);
+
+// 监听 locales prop 变化
+watch(
+    () => props.locales,
+    val => {
+        if (val && val.length) {
+            const { initLocales } = useLocale();
+            initLocales(val, props.currentLocale as any);
+        }
+    },
+    { deep: true }
+);
+
+watch(
+    () => props.currentLocale,
+    val => {
+        if (val) {
+            const { setLocale } = useLocale();
+            setLocale(val);
         }
     }
 );

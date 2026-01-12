@@ -27,12 +27,12 @@
         </view>
         <view class="cropper-buttons safe-area-padding" :style="{ height: bottomNavHeight + 'px' }">
             <!-- #ifdef H5 -->
-            <view class="upload" @tap="uploadTap">选择图片</view>
+            <view class="upload" @tap="uploadTap">{{ t('avatarCropper.select') }}</view>
             <!-- #endif -->
             <!-- #ifndef H5 -->
-            <view class="upload" @tap="uploadTap">重新选择</view>
+            <view class="upload" @tap="uploadTap">{{ t('avatarCropper.reselect') }}</view>
             <!-- #endif -->
-            <view class="getCropperImage" @tap="() => getCropperImage(false)">确定</view>
+            <view class="getCropperImage" @tap="() => getCropperImage(false)">{{ t('avatarCropper.confirm') }}</view>
         </view>
     </view>
 </template>
@@ -53,7 +53,7 @@ export default {
 <script setup lang="ts">
 // @ts-nocheck
 import { ref, reactive, onMounted } from 'vue';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 // 兼容 UMD/ESM 导入 weCropper.js
 import WeCropper from './weCropper';
 import { AvatarCropperProps } from './types';
@@ -63,6 +63,8 @@ import { AvatarCropperProps } from './types';
  * mask-遮罩颜色，一般设置为一个rgba的透明度，如"rgba(0, 0, 0, 0.35)"
  */
 const props = defineProps(AvatarCropperProps);
+
+const { t } = useLocale();
 
 /**
  * 组合式API变量声明
@@ -190,7 +192,7 @@ function touchEnd(e: any) {
  * @param isPre 是否预览
  */
 function getCropperImage(isPre = false) {
-    if (!src.value) return $u.toast('请先选择图片再裁剪');
+    if (!src.value) return $u.toast(t('avatarCropper.noSelect'));
 
     const cropper_opt = {
         destHeight: Number(destWidth.value), // uni.canvasToTempFilePath要求这些参数为数值
@@ -200,7 +202,7 @@ function getCropperImage(isPre = false) {
     cropper.getCropperImage(cropper_opt, (path: string, err: any) => {
         if (err) {
             uni.showModal({
-                title: '温馨提示',
+                title: t('avatarCropper.modalTitle'),
                 content: err.message
             });
         } else {

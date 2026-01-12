@@ -1,6 +1,9 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { InputAlign, SearchShape } from '../../types/global';
 import { baseProps } from '../common/props';
+import { useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * SearchProps 搜索框 props 类型定义
@@ -13,7 +16,7 @@ export const SearchProps = {
     /** 搜索框背景色，默认值var(--u-bg-gray-light) */
     bgColor: { type: String, default: 'var(--u-bg-gray-light)' },
     /** 占位提示文字 */
-    placeholder: { type: String, default: '请输入关键字' },
+    placeholder: { type: String, default: () => t('search.placeholder') },
     /** 是否启用清除控件 */
     clearabled: { type: Boolean, default: true },
     /** 是否自动聚焦 */
@@ -23,7 +26,7 @@ export const SearchProps = {
     /** 右边控件的样式 */
     actionStyle: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
     /** 取消按钮文字 */
-    actionText: { type: String, default: '搜索' },
+    actionText: { type: String, default: () => t('search.actionText') },
     /** 输入框内容对齐方式，可选值为 left|center|right */
     inputAlign: { type: String as PropType<InputAlign>, default: 'left' },
     /** 是否启用输入框 */

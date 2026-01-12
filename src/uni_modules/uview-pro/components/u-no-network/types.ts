@@ -1,5 +1,8 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import zIndex from '../../libs/config/zIndex';
+import { useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * u-no-network 组件 props 类型定义
@@ -9,7 +12,7 @@ export const NoNetworkProps = {
     /** 页面文字提示 */
     tips: {
         type: String,
-        default: '哎呀，网络信号丢失'
+        default: () => t('noNetwork.tips')
     },
     /** 一个z-index值，用于设置没有网络这个组件的层次 */
     zIndex: {

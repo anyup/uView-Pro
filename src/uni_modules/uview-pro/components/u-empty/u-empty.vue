@@ -37,7 +37,9 @@ export default {
 
 <script setup lang="ts">
 import { EmptyProps } from './types';
-import { $u } from '../../';
+import { $u, useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * empty 内容为空
@@ -62,20 +64,20 @@ const props = defineProps(EmptyProps);
  * 预置图标对应的提示文字
  */
 const icons: Record<string, string> = {
-    car: '购物车为空',
-    page: '页面不存在',
-    search: '没有搜索结果',
-    address: '没有收货地址',
-    wifi: '没有WiFi',
-    order: '订单为空',
-    coupon: '没有优惠券',
-    favor: '暂无收藏',
-    permission: '无权限',
-    history: '无历史记录',
-    news: '无新闻列表',
-    message: '消息列表为空',
-    list: '列表为空',
-    data: '数据为空'
+    car: t('empty.car'),
+    page: t('empty.page'),
+    search: t('empty.search'),
+    address: t('empty.address'),
+    wifi: t('empty.wifi'),
+    order: t('empty.order'),
+    coupon: t('empty.coupon'),
+    favor: t('empty.favor'),
+    permission: t('empty.permission'),
+    history: t('empty.history'),
+    news: t('empty.news'),
+    message: t('empty.message'),
+    list: t('empty.list'),
+    data: t('empty.data')
 };
 </script>
 

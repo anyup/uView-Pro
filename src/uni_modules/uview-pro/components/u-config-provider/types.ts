@@ -28,6 +28,17 @@ export const ConfigProviderProps = {
     themes: {
         type: Array as PropType<Theme[]>,
         default: () => configProvider.getThemes()
+    },
+    /**
+     * 国际化配置：传入 locale 列表（数组）并可指定默认语言 currentLocale
+     */
+    locales: {
+        type: Array as PropType<any[]>,
+        default: () => []
+    },
+    currentLocale: {
+        type: String,
+        default: () => configProvider.getCurrentLocale()?.name ?? ''
     }
 };
 

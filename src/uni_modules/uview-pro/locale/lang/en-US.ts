@@ -92,7 +92,8 @@ export default {
         thu: 'Thu',
         fri: 'Fri',
         sat: 'Sat',
-        confirmText: 'Confirm'
+        confirmText: 'Confirm',
+        to: ' to '
     },
     empty: {
         car: 'Shopping cart is empty',

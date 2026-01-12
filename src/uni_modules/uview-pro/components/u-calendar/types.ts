@@ -1,7 +1,9 @@
 import { type ExtractPropTypes, type PropType } from 'vue';
 import type { CalendarChangeDate, CalendarChangeRange, CalendarMode, ThemeType } from '../../types/global';
 import { baseProps } from '../common/props';
-import { getColor } from '../../';
+import { getColor, useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * calendar 日历类型定义
@@ -48,9 +50,9 @@ export const CalendarProps = {
     /** 范围内日期字体颜色 */
     rangeColor: { type: String, default: () => getColor('primary') },
     /** mode=range时生效，起始日期自定义文案 */
-    startText: { type: String, default: '开始' },
+    startText: { type: String, default: () => t('calendar.startText') },
     /** mode=range时生效，结束日期自定义文案 */
-    endText: { type: String, default: '结束' },
+    endText: { type: String, default: () => t('calendar.endText') },
     /** 按钮样式类型 */
     btnType: { type: String as PropType<ThemeType>, default: 'primary' },
     /** 当前选中日期带选中效果 */
@@ -60,7 +62,7 @@ export const CalendarProps = {
     /** 是否显示右上角的关闭图标 */
     closeable: { type: Boolean, default: true },
     /** 顶部的提示文字 */
-    toolTip: { type: String, default: '选择日期' },
+    toolTip: { type: String, default: () => t('calendar.toolTip') },
     /** 是否显示农历 */
     showLunar: { type: Boolean, default: false },
     /** 是否在页面中显示 */

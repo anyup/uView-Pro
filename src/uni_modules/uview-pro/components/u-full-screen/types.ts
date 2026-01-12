@@ -9,6 +9,8 @@ export const FullScreenProps = {
     ...baseProps,
     /** 是否显示弹窗 */
     show: { type: Boolean, default: false },
+    /** 弹窗标题 */
+    title: { type: String, default: '' },
     /** 升级内容，支持富文本 */
     content: { type: String, default: '' }
 };

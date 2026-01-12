@@ -16,7 +16,15 @@
                 {{ cancelBtn ? cancelText : '' }}
             </view>
             <view v-if="showTips" class="u-tooltip-item u-tooltip-tips">
-                {{ tips ? tips : mode == 'number' ? '数字键盘' : mode == 'card' ? '身份证键盘' : '车牌号键盘' }}
+                {{
+                    tips
+                        ? tips
+                        : mode == 'number'
+                          ? t('keyboard.number')
+                          : mode == 'card'
+                            ? t('keyboard.idCard')
+                            : t('keyboard.plate')
+                }}
             </view>
             <view
                 v-if="confirmBtn"
@@ -58,7 +66,7 @@ export default {
 <script setup lang="ts">
 import { KeyboardProps } from './types';
 import { computed } from 'vue';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 
 /**
  * keyboard 键盘
@@ -86,6 +94,8 @@ import { $u } from '../..';
 
 const props = defineProps(KeyboardProps);
 const emit = defineEmits(['change', 'update:modelValue', 'confirm', 'cancel', 'backspace']);
+
+const { t } = useLocale();
 
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 
@@ -147,10 +157,15 @@ function backspace() {
 
 .u-tooltip-item {
     color: var(--u-main-color);
-    flex: 0 0 33.333333%;
+    flex: 0 0 30%;
     text-align: center;
     padding: 20rpx 10rpx;
     font-size: 28rpx;
+}
+
+.u-tooltip-tips {
+    flex-basis: 40%;
+    word-break: break-all;
 }
 
 .u-tooltips-submit {

@@ -1,4 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import { useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * u-keyboard 组件 Props 类型定义
@@ -32,9 +35,9 @@ export const KeyboardProps = {
     /** z-index值 */
     zIndex: { type: [Number, String] as PropType<string | number>, default: '' },
     /** 取消按钮的文字 */
-    cancelText: { type: String, default: '取消' },
+    cancelText: { type: String, default: () => t('keyboard.cancelText') },
     /** 确认按钮的文字 */
-    confirmText: { type: String, default: '确认' }
+    confirmText: { type: String, default: () => t('keyboard.confirmText') }
 };
 
 export type KeyboardProps = ExtractPropTypes<typeof KeyboardProps>;

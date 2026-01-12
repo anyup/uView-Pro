@@ -1,5 +1,8 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { LoadmoreIconType, LoadmoreStatus, LoadmoreText } from '../../types/global';
+import { useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * u-loadmore 组件 props 类型定义
@@ -41,9 +44,9 @@ export const LoadmoreProps = {
     loadText: {
         type: Object as PropType<LoadmoreText>,
         default: () => ({
-            loadmore: '加载更多',
-            loading: '正在加载...',
-            nomore: '没有更多了'
+            loadmore: t('loadmore.loadmore'),
+            loading: t('loadmore.loading'),
+            nomore: t('loadmore.nomore')
         })
     },
     /** 在“没有更多”状态下，是否显示粗点 */

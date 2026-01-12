@@ -8,10 +8,15 @@
             <!-- 只有APP平台，才能跳转设置页，因为需要调用plus环境 -->
             <!-- #ifdef APP-PLUS -->
             <view class="u-to-setting">
-                请检查网络，或前往<text class="u-setting-btn" @tap="openSettings">设置</text>
+                {{ t('noNetwork.checkNetwork') }}
+                <text class="u-setting-btn" @tap="openSettings">
+                    {{ t('noNetwork.setting') }}
+                </text>
             </view>
             <!-- #endif -->
-            <view class="u-retry" :hover-stay-time="150" @tap="retry" hover-class="u-retry-hover"> 重试 </view>
+            <view class="u-retry" :hover-stay-time="150" @tap="retry" hover-class="u-retry-hover">
+                {{ t('noNetwork.retry') }}
+            </view>
         </view>
     </view>
 </template>
@@ -32,7 +37,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { imageSrc } from './image';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 import { NoNetworkProps } from './types';
 
 /**
@@ -47,6 +52,8 @@ import { NoNetworkProps } from './types';
  */
 
 const props = defineProps(NoNetworkProps);
+
+const { t } = useLocale();
 
 const isConnected = ref(true); // 是否有网络连接
 const networkType = ref<string>('none'); // 网络类型
@@ -91,14 +98,14 @@ function retry() {
             networkType.value = res.networkType;
             if (res.networkType == 'none') {
                 uni.showToast({
-                    title: '无网络连接',
+                    title: t('noNetwork.noConnection'),
                     icon: 'none',
                     position: 'top'
                 });
                 isConnected.value = false;
             } else {
                 uni.showToast({
-                    title: '网络已连接',
+                    title: t('noNetwork.connected'),
                     icon: 'none',
                     position: 'top'
                 });

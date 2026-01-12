@@ -1,7 +1,9 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SelectListItem, SelectMode } from '../../types/global';
 import { baseProps } from '../common/props';
-import { getColor } from '../../';
+import { getColor, useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * SelectProps 列选择器 props 类型定义
@@ -40,9 +42,9 @@ export const SelectProps = {
     /** 顶部标题 */
     title: { type: String, default: '' },
     /** 取消按钮的文字 */
-    cancelText: { type: String, default: '取消' },
+    cancelText: { type: String, default: () => t('select.cancelText') },
     /** 确认按钮的文字 */
-    confirmText: { type: String, default: '确认' }
+    confirmText: { type: String, default: () => t('select.confirmText') }
 };
 
 export type SelectProps = ExtractPropTypes<typeof SelectProps>;

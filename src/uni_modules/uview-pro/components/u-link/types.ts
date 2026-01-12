@@ -1,5 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { getColor } from '../../';
+import { getColor, useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * u-link 组件 props 类型定义
@@ -29,7 +31,7 @@ export const LinkProps = {
     /** 小程序中复制到粘贴板的提示语 */
     mpTips: {
         type: String,
-        default: '链接已复制，请在浏览器打开'
+        default: () => t('link.mpTips')
     },
     /** 下划线颜色 */
     lineColor: {

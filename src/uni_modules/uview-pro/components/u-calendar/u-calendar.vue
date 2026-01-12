@@ -223,10 +223,12 @@
             <view class="u-calendar__bottom">
                 <view class="u-calendar__bottom__choose">
                     <text>{{ mode == 'date' ? activeDate : startDate }}</text>
-                    <text v-if="endDate">至{{ endDate }}</text>
+                    <text v-if="endDate">{{ t('calendar.to') }}{{ endDate }}</text>
                 </view>
                 <view class="u-calendar__bottom__btn">
-                    <u-button :type="btnType" shape="circle" size="default" @click="btnFix(false)">确定</u-button>
+                    <u-button :type="btnType" shape="circle" size="default" @click="btnFix(false)">
+                        {{ t('calendar.confirmText') }}
+                    </u-button>
                 </view>
             </view>
         </view>
@@ -248,7 +250,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, useSlots } from 'vue';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 import { CalendarProps, type CalendarEmits } from './types';
 import Calendar from '../../libs/util/calendar';
 
@@ -287,6 +289,8 @@ const props = defineProps(CalendarProps);
 const emit = defineEmits<CalendarEmits>();
 const slots = useSlots();
 
+const { t } = useLocale();
+
 // 组件内部状态
 // 星期几,值为1-7
 const weekday = ref(1);
@@ -312,7 +316,15 @@ const endDate = ref('');
 const isStart = ref(true);
 const min = ref<{ year: number; month: number; day: number } | null>(null);
 const max = ref<{ year: number; month: number; day: number } | null>(null);
-const weekDayZh = ref(['日', '一', '二', '三', '四', '五', '六']);
+const weekDayZh = ref([
+    t('calendar.sun'),
+    t('calendar.mon'),
+    t('calendar.tue'),
+    t('calendar.wed'),
+    t('calendar.thu'),
+    t('calendar.fri'),
+    t('calendar.sat')
+]);
 
 const dataChange = computed(() => `${props.mode}-${props.minDate}-${props.maxDate}`);
 const lunarChange = computed(() => props.showLunar);
@@ -443,7 +455,7 @@ function getWeekday(yearNum: number, monthNum: number) {
 function checkRange(yearNum: number) {
     let overstep = false;
     if (yearNum < Number(props.minYear) || yearNum > Number(props.maxYear)) {
-        uni.showToast({ title: '日期超出范围啦~', icon: 'none' });
+        uni.showToast({ title: t('calendar.outOfRange'), icon: 'none' });
         overstep = true;
     }
     return overstep;
@@ -491,7 +503,7 @@ function changeData() {
     daysArr.value = generateArray(1, days.value);
     weekday.value = getWeekday(year.value, month.value);
     weekdayArr.value = generateArray(1, weekday.value);
-    showTitle.value = `${year.value}年${month.value}月`;
+    showTitle.value = `${year.value}${t('calendar.year')}${month.value}${t('calendar.month')}`;
     if (props.showLunar) {
         lunarArr.value = [];
         daysArr.value.forEach(d => {

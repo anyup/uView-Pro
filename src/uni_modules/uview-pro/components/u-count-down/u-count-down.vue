@@ -18,7 +18,7 @@
             }"
             v-if="props.showDays && (props.hideZeroDay || (!props.hideZeroDay && d != '00'))"
         >
-            {{ props.separator == 'colon' && props.showHours ? ':' : '天' }}
+            {{ props.separator == 'colon' && props.showHours ? ':' : t('countDown.day') }}
         </view>
         <view class="u-countdown-item" :style="$u.toStyle(itemStyle)" v-if="props.showHours">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
@@ -34,7 +34,7 @@
             }"
             v-if="props.showHours"
         >
-            {{ props.separator == 'colon' && props.showMinutes ? ':' : '时' }}
+            {{ props.separator == 'colon' && props.showMinutes ? ':' : t('countDown.hour') }}
         </view>
         <view class="u-countdown-item" :style="$u.toStyle(itemStyle)" v-if="props.showMinutes">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
@@ -50,7 +50,7 @@
             }"
             v-if="props.showMinutes"
         >
-            {{ props.separator == 'colon' && props.showSeconds ? ':' : '分' }}
+            {{ props.separator == 'colon' && props.showSeconds ? ':' : t('countDown.minute') }}
         </view>
         <view class="u-countdown-item" :style="$u.toStyle(itemStyle)" v-if="props.showSeconds">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
@@ -62,7 +62,7 @@
             :style="{ fontSize: props.separatorSize + 'rpx', color: props.separatorColor, paddingBottom: 0 }"
             v-if="props.showSeconds && props.separator == 'zh'"
         >
-            秒
+            {{ t('countDown.second') }}
         </view>
     </view>
 </template>
@@ -83,7 +83,9 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
 import { CountDownProps } from './types';
-import { $u } from '../../';
+import { $u, useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * countDown 倒计时

@@ -92,7 +92,8 @@ export default {
         thu: '四',
         fri: '五',
         sat: '六',
-        confirmText: '确定'
+        confirmText: '确定',
+        to: '至'
     },
     empty: {
         car: '购物车为空',

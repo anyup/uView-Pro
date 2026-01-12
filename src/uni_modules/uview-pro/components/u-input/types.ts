@@ -1,6 +1,9 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { InputAlign, InputConfirmType, InputType } from '../../types/global';
 import { baseProps } from '../common/props';
+import { useLocale } from '../../';
+
+const { t } = useLocale();
 
 /**
  * u-input 组件 props 类型定义
@@ -27,7 +30,7 @@ export const InputProps = {
     /** placeholder显示值(默认 '请输入内容') */
     placeholder: {
         type: String,
-        default: '请输入内容'
+        default: () => t('input.placeholder')
     },
     /** 是否禁用输入框(默认false) */
     disabled: {

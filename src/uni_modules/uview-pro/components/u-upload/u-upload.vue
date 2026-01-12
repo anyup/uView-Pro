@@ -72,7 +72,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 import { UploadProps } from './types';
 
 /**
@@ -118,6 +118,8 @@ import { UploadProps } from './types';
  */
 
 const props = defineProps(UploadProps);
+
+const { t } = useLocale();
 
 const emit = defineEmits([
     'on-list-change',
@@ -203,11 +205,11 @@ function selectFile() {
                 if (!props.multiple && index >= 1) return;
                 if (val.size > Number(props.maxSize)) {
                     emit('on-oversize', val, lists.value, props.index);
-                    showToast('超出允许的文件大小');
+                    showToast(t('upload.overSize'));
                 } else {
                     if (Number(props.maxCount) <= lists.value.length) {
                         emit('on-exceed', val, lists.value, props.index);
-                        showToast('超出最大允许的文件个数');
+                        showToast(t('upload.overMaxCount'));
                         return;
                     }
                     lists.value.push({ url: val.path, progress: 0, error: false, file: val });
@@ -246,7 +248,7 @@ function retry(index: number) {
     lists.value[index].error = false;
     lists.value[index].response = null;
     if (props.showTips) {
-        uni.showLoading({ title: '重新上传' });
+        uni.showLoading({ title: t('upload.reUpload') });
     }
     uploadFile(index);
 }
@@ -299,7 +301,7 @@ async function uploadFile(index = 0) {
     }
     // 检查上传地址
     if (!props.action) {
-        showToast('请配置上传地址', true);
+        showToast(t('upload.noAction'), true);
         return;
     }
     lists.value[index].error = false;
@@ -353,7 +355,7 @@ function uploadError(index: number, err: any) {
     lists.value[index].error = true;
     lists.value[index].response = null;
     emit('on-error', err, index, lists.value, props.index);
-    showToast('上传失败，请重试');
+    showToast(t('upload.uploadFailed'));
 }
 
 /**
@@ -361,8 +363,8 @@ function uploadError(index: number, err: any) {
  */
 function deleteItem(index: number) {
     uni.showModal({
-        title: '提示',
-        content: '您确定要删除此项吗？',
+        title: t('upload.modalTitle'),
+        content: t('upload.deleteConfirm'),
         success: async (res: any) => {
             if (res.confirm) {
                 // 先检查是否有定义before-remove移除前钩子
@@ -383,11 +385,11 @@ function deleteItem(index: number) {
                             })
                             .catch(() => {
                                 // 如果进入promise的reject，终止删除操作
-                                showToast('已终止移除');
+                                showToast(t('upload.terminatedRemove'));
                             });
                     } else if (beforeResponse === false) {
                         // 返回false，终止删除
-                        showToast('已终止移除');
+                        showToast(t('upload.terminatedRemove'));
                     } else {
                         // 如果返回true，执行删除操作
                         handlerDeleteItem(index);
@@ -411,7 +413,7 @@ function handlerDeleteItem(index: number) {
     }
     lists.value.splice(index, 1);
     emit('on-remove', index, lists.value, props.index);
-    showToast('移除成功');
+    showToast(t('upload.removeSuccess'));
 }
 
 /**
@@ -440,7 +442,7 @@ function doPreviewImage(url: string, index: number) {
             emit('on-preview', url, lists.value, props.index);
         },
         fail: () => {
-            uni.showToast({ title: '预览图片失败', icon: 'none' });
+            uni.showToast({ title: t('upload.previewFailed'), icon: 'none' });
         }
     });
 }
@@ -469,7 +471,7 @@ function checkFileExt(file: any) {
         // 转为小写
         return ext.toLowerCase() === fileExt;
     });
-    if (!noArrowExt) showToast(`不允许选择${fileExt}格式的文件`);
+    if (!noArrowExt) showToast(t('upload.notAllowedExt', { ext: fileExt }));
     return noArrowExt;
 }
 
