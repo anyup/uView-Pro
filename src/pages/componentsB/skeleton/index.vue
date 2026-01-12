@@ -1,137 +1,104 @@
 <template>
     <demo-page title="Skeleton 骨架屏" desc="用于加载占位显示，支持动画效果和自定义样式。" :apis="'skeleton'">
-        <template #default>
-            <view class="u-demo">
-                <view class="u-demo-wrap">
-                    <view class="u-demo-title">演示效果</view>
-                    <view class="u-demo-area">
-                        <u-toast ref="uToast"></u-toast>
-                        <view class="container u-skeleton">
-                            <view class="userinfo">
-                                <!--u-skeleton-circle 绘制圆形-->
-                                <image class="userinfo-avatar u-skeleton-circle" :src="userInfo.avatarUrl"></image>
-                                <!--u-skeleton-fillet 绘制圆角矩形-->
-                                <text class="u-skeleton-fillet">{{ userInfo.nickName }}</text>
-                            </view>
-                            <view style="margin: 20px 0">
-                                <!--u-skeleton-rect 绘制矩形-->
-                                <view class="u-skeleton-rect lists" v-for="(item, index) in lists" :key="index">
-                                    <text>{{ item }}</text>
+        <view class="u-page">
+            <view class="u-demo-block">
+                <text class="u-demo-block__title">基础使用</text>
+                <view class="u-demo-block__content">
+                    <u-skeleton rows="3" title loading></u-skeleton>
+                </view>
+            </view>
+            <view class="u-demo-block">
+                <text class="u-demo-block__title">自定义段落行数</text>
+                <view class="u-demo-block__content">
+                    <u-skeleton rows="2" title loading></u-skeleton>
+                </view>
+            </view>
+            <view class="u-demo-block">
+                <text class="u-demo-block__title">设置段落宽度</text>
+                <view class="u-demo-block__content">
+                    <u-skeleton rows="2" title :rowsWidth="['100%', '35%']" loading></u-skeleton>
+                </view>
+            </view>
+            <view class="u-demo-block">
+                <text class="u-demo-block__title">设置段落高度</text>
+                <view class="u-demo-block__content">
+                    <u-skeleton
+                        rows="3"
+                        title
+                        :rowsWidth="['100%', '100%', '100%']"
+                        :rowsHeight="['18px', '18px', '80px']"
+                        loading
+                    ></u-skeleton>
+                </view>
+            </view>
+            <view class="u-demo-block">
+                <text class="u-demo-block__title">是否开启动画</text>
+                <u-switch v-model="switch1" space="2" inactiveColor="#e6e6e6"></u-switch>
+                <u-gap height="15" bgColor="#fff"></u-gap>
+                <view class="u-demo-block__content">
+                    <u-skeleton :animate="switch1" rows="3" title loading></u-skeleton>
+                </view>
+            </view>
+            <view class="u-demo-block">
+                <text class="u-demo-block__title">展示头像</text>
+                <u-gap height="15" bgColor="#fff"></u-gap>
+                <view class="u-demo-block__content">
+                    <u-skeleton :animate="switch1" rows="3" title loading avatar></u-skeleton>
+                </view>
+            </view>
+            <view class="u-demo-block">
+                <text class="u-demo-block__title">切换状态</text>
+                <u-switch v-model="switch2" space="2" inactiveColor="#e6e6e6"></u-switch>
+                <u-gap height="15" bgColor="#fff"></u-gap>
+                <view class="u-demo-block__content">
+                    <u-skeleton rows="2" title :loading="switch2" avatar rowsHeight="14">
+                        <!-- 需要在外部多嵌套一层占位view，否则在nvue下会导致样式失效 -->
+                        <view>
+                            <view class="u-skeleton-slot">
+                                <image src="/static/uview/common/logo.png" class="u-skeleton-slot__image"></image>
+                                <view class="u-skeleton-slot__content">
+                                    <u-text text="利剑出鞘,一统江湖" type="main" size="16px"></u-text>
+                                    <u-text
+                                        type="tips"
+                                        size="14px"
+                                        customStyle="margin-top: 5px"
+                                        text="众多组件覆盖开发过程的各个需求，组件功能丰富，多端兼容。让您快速集成，开箱即用"
+                                    ></u-text>
                                 </view>
                             </view>
                         </view>
-                        <!--引用组件-->
-                        <u-skeleton
-                            :bg-color="$u.color.bgWhite"
-                            :loading="loading"
-                            :animation="animation"
-                            :el-color="elColor"
-                            :border-radius="borderRadius"
-                        ></u-skeleton>
-                    </view>
+                    </u-skeleton>
                 </view>
-                <view class="u-config-wrap">
-                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
-                    <view class="u-config-item">
-                        <view class="u-item-title">加载状态</view>
-                        <u-subsection
-                            :current="current"
-                            :list="['请求中', '请求结束']"
-                            @change="loadingChange"
-                        ></u-subsection>
-                    </view>
-                    <view class="u-config-item">
-                        <view class="u-item-title">骨架动画</view>
-                        <u-subsection current="1" :list="['是', '否']" @change="animationChange"></u-subsection>
-                    </view>
-                    <view class="u-config-item">
-                        <view class="u-item-title">自定义样式</view>
-                        <u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
-                    </view>
-                </view>
+                <u-gap height="50" bgColor="transparent"></u-gap>
             </view>
-        </template>
+        </view>
     </demo-page>
 </template>
 
-<script lang="ts" setup>
-import { ref, computed } from 'vue';
-import { $u } from '@/uni_modules/uview-pro';
-import { onLoad } from '@dcloudio/uni-app';
-
-const userInfo = ref({
-    avatarUrl: 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png',
-    nickName: 'uView Pro'
-});
-const lists = ref([
-    '君不见，黄河之水天上来，奔流到海不复回。君不见，高堂明镜悲白发，朝如青丝暮成雪。',
-    '人生得意须尽欢，莫使金樽空对月',
-    '天生我材必有用，千金散尽还复来'
-]);
-const loading = ref(true); // 是否显示骨架屏组件
-const animation = ref(false);
-const elColor = ref('#e5e5e5');
-const borderRadius = ref(10);
-
-const current = computed(() => {
-    return loading.value ? 0 : 1;
-});
-
-onLoad(() => {
-    getData();
-});
-
-function animationChange(index: number) {
-    animation.value = index === 0 ? true : false;
-    getData();
-}
-
-function loadingChange(index: number) {
-    loading.value = index === 0 ? true : false;
-    if (index === 0) getData();
-}
-
-function styleChange(index: number) {
-    if (index === 0) {
-        elColor.value = $u.color['primary'];
-        borderRadius.value = 14;
-    } else {
-        elColor.value = '#e5e5e5';
-        borderRadius.value = 10;
+<script>
+export default {
+    data() {
+        return {
+            switch1: true,
+            switch2: false
+        };
     }
-    getData();
-}
-
-function getData() {
-    loading.value = true;
-    // 通过延时模拟向后端请求数据，调隐藏骨架屏
-    setTimeout(() => {
-        loading.value = false;
-    }, 3000);
-}
+};
 </script>
 
-<style lang="scss" scoped>
-.container {
-    text-align: left;
-    font-size: 28rpx;
-    color: $u-content-color;
-}
+<style lang="scss">
+.u-skeleton-slot {
+    align-items: flex-start;
 
-.userinfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    &__image {
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+    }
 
-.userinfo-avatar {
-    width: 128rpx;
-    height: 128rpx;
-    margin: 20rpx;
-    border-radius: 50%;
-}
-
-.lists {
-    margin: 10px 0;
+    &__content {
+        margin-left: 10px;
+        flex: 1;
+    }
 }
 </style>

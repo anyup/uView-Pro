@@ -243,6 +243,19 @@ export function kebabCase(word: string): string {
     return newWord;
 }
 
+/**
+ * @description 进行延时，以达到可以简写代码的目的 比如: await uni.$u.sleep(20)将会阻塞20ms
+ * @param {number} value 堵塞时间 单位ms 毫秒
+ * @returns {Promise} 返回promise
+ */
+export function sleep(value: number = 30) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(true);
+        }, value);
+    });
+}
+
 export {
     queryParams,
     route,
@@ -314,7 +327,8 @@ export const $u = {
     formatName,
     addStyle,
     toStyle,
-    kebabCase
+    kebabCase,
+    sleep
 };
 
 // 颜色相关方法单独导出
