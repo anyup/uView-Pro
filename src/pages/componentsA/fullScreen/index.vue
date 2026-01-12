@@ -27,30 +27,6 @@
     </demo-page>
 </template>
 
-<!--<script>-->
-<!--import { $u } from '@/uni_modules/uview-pro';-->
-<!--	export default {-->
-<!--		data() {-->
-<!--			return {-->
-<!--				current: 1-->
-<!--			}-->
-<!--		},-->
-<!--		onShow() {-->
-<!--			this.$nextTick(() => {-->
-<!--				this.current = 1;-->
-<!--			})-->
-<!--		},-->
-<!--		methods: {-->
-<!--			openModal(index) {-->
-<!--				// 可以传递参数-->
-<!--				if(index == 0) {-->
-<!--					$u.route("/uni_modules/uview-pro/components/u-full-screen/u-full-screen?id=1");-->
-<!--				}-->
-<!--			}-->
-<!--		}-->
-<!--	}-->
-<!--</script>-->
-
 <script setup lang="ts">
 import { ref } from 'vue';
 import { onShow } from '@dcloudio/uni-app';
@@ -65,12 +41,9 @@ onShow(() => {
 function openModal(index: number) {
     // 可以传递参数
     if (index === 0) {
-        $u.route('/uni_modules/uview-pro/components/u-full-screen/u-full-screen?id=1');
+        $u.route('/pages/example/fullScreen');
     }
 }
 </script>
 
-<style lang="scss" scoped>
-.u-demo {
-}
-</style>
+<style lang="scss" scoped></style>
