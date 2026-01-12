@@ -846,6 +846,12 @@
                     "style": {
                         "navigationBarTitleText": "theme-主题管理"
                     }
+                },
+                {
+                    "path": "locale/index",
+                    "style": {
+                        "navigationBarTitleText": "locale-国际化"
+                    }
                 }
             ]
         }
