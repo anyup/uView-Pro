@@ -59,9 +59,13 @@
                             'u-tabbar__content__item__text--center':
                                 item.text && !(item.iconPath || item.selectedIconPath)
                         }"
-                        :style="{ color: elColor(index), fontSize: $u.addUnit(getTextSize(index)) }"
                     >
-                        <text class="u-line-1">{{ item.text }}</text>
+                        <text
+                            class="u-line-1"
+                            :style="{ color: elColor(index), fontSize: $u.addUnit(getTextSize(index)) }"
+                        >
+                            {{ item.text }}
+                        </text>
                     </view>
                 </view>
             </view>
