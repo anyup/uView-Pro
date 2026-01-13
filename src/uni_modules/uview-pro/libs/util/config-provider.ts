@@ -217,7 +217,7 @@ export class ConfigProvider {
      * @param locales 可选的 locale 列表（对象数组，包含 name 字段）
      * @param defaultLocaleName 可选默认 locale 名称
      */
-    initLocales(locales?: any[], defaultLocaleName?: string) {
+    initLocales(locales?: any[], defaultLocaleName?: string, isForce?: boolean) {
         const normalized = this.normalizeLocales(locales);
         if (!normalized.length) {
             if (this.debug) console.warn('[ConfigProvider] initLocales called with empty locales');
@@ -230,7 +230,8 @@ export class ConfigProvider {
         const saved = this.readStorage<string>(LOCALE_STORAGE_KEY);
 
         // 根据传入的 defaultLocaleName 或 saved 或 config.defaultLocale 查找 locale
-        const initialName = saved || defaultLocaleName || config.defaultLocale;
+        let initialName = saved || defaultLocaleName || config.defaultLocale;
+        if (isForce && defaultLocaleName) initialName = defaultLocaleName;
         let found = this.localesRef.value.find((l: any) => l.name === initialName);
         if (!found) found = this.localesRef.value.find(l => l.name === config.defaultLocale);
         if (!found) found = this.localesRef.value[0];

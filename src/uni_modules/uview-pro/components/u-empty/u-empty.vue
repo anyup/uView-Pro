@@ -38,6 +38,7 @@ export default {
 <script setup lang="ts">
 import { EmptyProps } from './types';
 import { $u, useLocale } from '../../';
+import { computed } from 'vue';
 
 const { t } = useLocale();
 
@@ -63,22 +64,24 @@ const props = defineProps(EmptyProps);
 /**
  * 预置图标对应的提示文字
  */
-const icons: Record<string, string> = {
-    car: t('empty.car'),
-    page: t('empty.page'),
-    search: t('empty.search'),
-    address: t('empty.address'),
-    wifi: t('empty.wifi'),
-    order: t('empty.order'),
-    coupon: t('empty.coupon'),
-    favor: t('empty.favor'),
-    permission: t('empty.permission'),
-    history: t('empty.history'),
-    news: t('empty.news'),
-    message: t('empty.message'),
-    list: t('empty.list'),
-    data: t('empty.data')
-};
+const icons = computed(() => {
+    return {
+        car: t('empty.car'),
+        page: t('empty.page'),
+        search: t('empty.search'),
+        address: t('empty.address'),
+        wifi: t('empty.wifi'),
+        order: t('empty.order'),
+        coupon: t('empty.coupon'),
+        favor: t('empty.favor'),
+        permission: t('empty.permission'),
+        history: t('empty.history'),
+        news: t('empty.news'),
+        message: t('empty.message'),
+        list: t('empty.list'),
+        data: t('empty.data')
+    };
+});
 </script>
 
 <style scoped lang="scss">

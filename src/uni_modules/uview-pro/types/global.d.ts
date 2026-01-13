@@ -389,6 +389,7 @@ export type LogConfig = Partial<{
 export type Locales = {
     locales: Locale[];
     defaultLocale?: string;
+    isForce?: boolean;
 };
 
 export type Locale = {

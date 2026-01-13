@@ -28,7 +28,7 @@ export function useLocale(namespace?: string) {
         setLocale: (name: string) => configProvider.setLocale(name),
         getLocales: () => configProvider.getLocales(),
         getCurrentLocale: () => configProvider.getCurrentLocale(),
-        initLocales: (locales?: any[], defaultLocaleName?: string) =>
-            configProvider.initLocales(locales, defaultLocaleName)
+        initLocales: (locales?: any[], defaultLocaleName?: string, isForce?: boolean) =>
+            configProvider.initLocales(locales, defaultLocaleName, isForce)
     };
 }

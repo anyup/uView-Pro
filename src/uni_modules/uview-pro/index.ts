@@ -58,7 +58,7 @@ const install = (app: any, options?: UViewProOptions): void => {
                     } else if (Array.isArray(optLocale)) {
                         configProvider.initLocales(optLocale);
                     } else if (optLocale && typeof optLocale === 'object') {
-                        configProvider.initLocales(optLocale.locales, optLocale.defaultLocale);
+                        configProvider.initLocales(optLocale.locales, optLocale.defaultLocale, optLocale.isForce);
                     } else {
                         configProvider.initLocales();
                     }
