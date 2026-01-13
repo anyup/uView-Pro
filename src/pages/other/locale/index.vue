@@ -46,7 +46,7 @@ onMounted(() => {
 function demoAddFrench() {
     const fr = {
         name: 'fr-FR',
-        actionSheet: { cancelText: 'Fermer' },
+        empty: { search: 'Aucun résultat de recherche' },
         common: { intro: 'Bonjour depuis vue-i18n' }
     };
     initLocales([fr]);
@@ -68,8 +68,8 @@ function demoAddFrench() {
                     <text class="value">{{ t('common.intro') }}</text>
                 </view>
                 <view class="info-row">
-                    <text class="label">uView-pro 文案（actionSheet.cancelText）：</text>
-                    <text class="value">{{ uT('actionSheet.cancelText') }}</text>
+                    <text class="label">uView-pro 文案(empty.search)：</text>
+                    <text class="value">{{ uT('empty.search') }}</text>
                 </view>
                 <view class="info-row">
                     <text class="label">vue-i18n 当前 locale：</text>
@@ -80,7 +80,14 @@ function demoAddFrench() {
                     <text class="value">{{ currentLocaleName }}</text>
                 </view>
             </view>
-
+            <view class="panel">
+                <view class="panel-header">
+                    <text class="panel-title">以Empty组件为例，点击切换查看效果</text>
+                </view>
+                <view class="panel-content">
+                    <u-empty mode="search"></u-empty>
+                </view>
+            </view>
             <view class="panel">
                 <view class="panel-header">
                     <text class="panel-title">切换示例</text>
@@ -98,9 +105,11 @@ function demoAddFrench() {
                 <text class="section-title">示例代码</text>
                 <view class="code-block">
                     <text class="code-text">
-                        // 切换 vue-i18n 并同步到 uView-Pro \nlocale.value = 'zh-Hans' \nsetLocale('zh-CN') \n//
-                        添加新语言并设置为默认语言\n// 此处仅为演示，实际应在main.ts中初始化，请参考文档
-                        \ninitLocales(\n[{ \n name: 'fr-FR', \n actionSheet: { cancelText: 'Fermer' } \n}], \n'fr-FR')
+                        // 在main.ts中初始化uView-Pro，添加新语言并设置为默认语言 \napp.use(uViewPro, { \n locale: { \n
+                        locales: [frFR], // 添加法语语言包 \n defaultLocale: 'fr-FR' // 设置默认语言为法语 \n } \n})
+                        \n\n// 在页面中切换语言 \nimport { useI18n } from 'vue-i18n'; \nimport { useLocale } from
+                        'uview-pro'; \nconst { locale } = useI18n(); \nconst { setLocale } = useLocale(); \n// 切换
+                        vue-i18n 并同步到 uView-Pro \nlocale.value = 'en' \nsetLocale('en-US')
                     </text>
                 </view>
             </view>

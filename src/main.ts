@@ -3,7 +3,7 @@ import App from './App.vue';
 import themes from '@/uview-pro.theme';
 import uViewPro, { httpPlugin } from '@/uni_modules/uview-pro';
 import { httpInterceptor, httpRequestConfig } from './common/http.interceptor';
-import i18n, { getDefaultLocale } from '@/locales';
+import i18n from '@/locales';
 // #ifdef MP
 import share from './common/share';
 // #endif
@@ -18,8 +18,22 @@ export function createApp() {
             defaultDarkMode: 'auto'
         },
         locale: {
-            locales: [{ name: 'en-US', actionSheet: { cancelText: 'Close' } }],
-            defaultLocale: getDefaultLocale()
+            // 部分覆盖内置语言包
+            locales: [
+                { name: 'zh-CN', modal: { confirmText: '好的', cancelText: '算了' } },
+                { name: 'en-US', modal: { confirmText: 'OK', cancelText: 'Cancel' } },
+                // 添加法语语言包，仅为示例
+                {
+                    name: 'fr-FR',
+                    modal: {
+                        title: 'Avertissement',
+                        content: 'Contenu',
+                        confirmText: 'Confirmer',
+                        cancelText: 'Annuler'
+                    }
+                }
+            ],
+            defaultLocale: 'zh-CN'
         }
     });
     // 引入uView Pro 的http插件
