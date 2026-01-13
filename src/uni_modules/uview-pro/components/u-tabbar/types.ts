@@ -20,7 +20,7 @@ export const TabbarProps = {
     /** 非凸起图标的大小，单位任意，数值默认rpx */
     iconSize: { type: [String, Number] as PropType<string | number>, default: 40 },
     /** 凸起图标的大小，单位任意，数值默认rpx */
-    midButtonSize: { type: [String, Number] as PropType<string | number>, default: 90 },
+    midButtonSize: { type: [String, Number] as PropType<string | number>, default: 100 },
     /** 文本大小，单位任意，数值默认rpx */
     textSize: { type: [String, Number] as PropType<string | number>, default: 26 },
     /** 激活时的颜色 */
@@ -38,7 +38,9 @@ export const TabbarProps = {
     /** 是否隐藏原生tabbar */
     hideTabBar: { type: Boolean, default: true },
     /** z-index层级 */
-    zIndex: { type: [String, Number] as PropType<string | number>, default: zIndex.tabbar }
+    zIndex: { type: [String, Number] as PropType<string | number>, default: zIndex.tabbar },
+    /** icon和text的间距，单位任意，数值默认rpx */
+    gap: { type: [String, Number] as PropType<string | number>, default: 8 }
 };
 
 export type TabbarProps = ExtractPropTypes<typeof TabbarProps>;

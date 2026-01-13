@@ -424,4 +424,5 @@ export type TabbarItem = {
     midButton?: boolean;
     iconSize?: string | number;
     textSize?: string | number;
+    gap?: string | number;
 };

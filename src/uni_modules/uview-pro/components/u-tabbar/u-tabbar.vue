@@ -20,39 +20,49 @@
                 :style="{ backgroundColor: props.bgColor }"
             >
                 <view
-                    v-if="item.iconPath || item.selectedIconPath"
-                    :class="[
-                        props.midButton && item.midButton
-                            ? 'u-tabbar__content__circle__button'
-                            : 'u-tabbar__content__item__button',
-                        !item.text && (item.iconPath || item.selectedIconPath)
-                            ? 'u-tabbar__content__item__button--center'
-                            : ''
-                    ]"
+                    class="u-tabbar__content__item__container"
+                    :class="{ 'u-tabbar__content__circle__container': props.midButton && item.midButton }"
+                    :style="containerStyle(index)"
                 >
-                    <u-icon
-                        :size="getIconSize(index)"
-                        :name="elIconPath(index)"
-                        img-mode="scaleToFill"
-                        :color="elColor(index)"
-                        :custom-prefix="getCustomPrefix(index)"
-                    ></u-icon>
-                    <u-badge
-                        :count="item.count"
-                        :is-dot="item.isDot"
-                        v-if="item.count || item.isDot"
-                        :offset="[-2, getOffsetRight(item.count, item.isDot)]"
-                    ></u-badge>
-                </view>
-                <view
-                    v-if="item.text"
-                    class="u-tabbar__content__item__text"
-                    :class="{
-                        'u-tabbar__content__item__text--center': item.text && !(item.iconPath || item.selectedIconPath)
-                    }"
-                    :style="{ color: elColor(index), fontSize: $u.addUnit(getTextSize(index)) }"
-                >
-                    <text class="u-line-1">{{ item.text }}</text>
+                    <view
+                        v-if="item.iconPath || item.selectedIconPath"
+                        :class="[
+                            props.midButton && item.midButton
+                                ? 'u-tabbar__content__circle__icon'
+                                : 'u-tabbar__content__item__icon'
+                        ]"
+                    >
+                        <u-icon
+                            :size="getIconSize(index)"
+                            :name="elIconPath(index)"
+                            img-mode="scaleToFill"
+                            :color="elColor(index)"
+                            :custom-prefix="getCustomPrefix(index)"
+                        ></u-icon>
+                        <u-badge
+                            :count="item.count"
+                            :is-dot="item.isDot"
+                            v-if="item.count || item.isDot"
+                            :offset="[
+                                getBadgeOffsetTop(item.count, item.isDot),
+                                getOffsetRight(item.count, item.isDot)
+                            ]"
+                        ></u-badge>
+                    </view>
+                    <!-- #ifdef APP-PLUS -->
+                    <u-gap :height="gap"></u-gap>
+                    <!-- #endif -->
+                    <view
+                        v-if="item.text"
+                        class="u-tabbar__content__item__text"
+                        :class="{
+                            'u-tabbar__content__item__text--center':
+                                item.text && !(item.iconPath || item.selectedIconPath)
+                        }"
+                        :style="{ color: elColor(index), fontSize: $u.addUnit(getTextSize(index)) }"
+                    >
+                        <text class="u-line-1">{{ item.text }}</text>
+                    </view>
                 </view>
             </view>
             <view
@@ -66,7 +76,7 @@
         <!-- calc 计算0时单位不一致会计算失败，这里+1px -->
         <view
             class="u-fixed-placeholder safe-area-inset-bottom"
-            :style="{ height: `calc(${$u.addUnit(props.height)} + ${props.midButton ? '48rpx' : '1px'})` }"
+            :style="{ height: `calc(${$u.addUnit(props.height)} + ${props.midButton ? '60rpx' : '1px'})` }"
         ></view>
     </view>
 </template>
@@ -104,6 +114,7 @@ import { TabbarProps } from './types';
  * @property {Function} beforeSwitch 切换前的回调
  * @property {Boolean} borderTop 是否显示顶部的横线
  * @property {Boolean} hideTabBar 是否隐藏原生tabbar
+ * @property {String|Number} gap icon和text的间距，单位任意，数值默认rpx
  */
 
 const props = defineProps(TabbarProps);
@@ -255,6 +266,15 @@ function getOffsetRight(count: number, isDot: boolean): number {
 }
 
 /**
+ * 计算角标的top值，在垂直布局下调整位置
+ */
+function getBadgeOffsetTop(count: number, isDot: boolean): number {
+    // 在垂直布局下，角标相对于icon的top偏移需要调整
+    // 由于icon现在在flex容器中，需要更小的top偏移
+    return -2;
+}
+
+/**
  * 获取单项icon尺寸（单项优先级高于props）
  */
 function getIconSize(index: number) {
@@ -287,6 +307,30 @@ function getMidButtonLeft() {
     // 由于安卓中css计算left: 50%的结果不准确，故用js计算
     midButtonLeft.value = windowWidth / 2 + 'px';
 }
+
+/**
+ * 图标和文字间距
+ */
+function containerStyle(index: number) {
+    const style: Record<string, any> = {};
+    const item = props.list[index] || {};
+    // #ifndef APP-PLUS
+    if (item.gap !== undefined && item.gap !== null && item.gap !== '') {
+        style.gap = $u.addUnit(item.gap);
+    } else {
+        style.gap = $u.addUnit(props.gap);
+    }
+    // #endif
+    // 如果是中间凸起按钮，为容器增加上内边距，避免文字被绝对定位的图标遮挡
+    if (props.midButton && item.midButton) {
+        const iconSizeRaw = getIconSize(index);
+        const numericSize = parseFloat(String(iconSizeRaw)) || parseFloat(String(props.midButtonSize as any)) || 100;
+        // paddingTop: 半个图标高度 + 10rpx 的缓冲间距
+        style.paddingTop = $u.addUnit(numericSize / 2 + 10);
+        style.boxSizing = 'border-box';
+    }
+    return $u.toStyle(style);
+}
 </script>
 
 <style scoped lang="scss">
@@ -312,9 +356,9 @@ function getMidButtonLeft() {
         /* #endif */
         &__circle__border {
             border-radius: 100%;
-            width: 110rpx;
-            height: 110rpx;
-            top: -48rpx;
+            width: 130rpx;
+            height: 130rpx;
+            top: -58rpx;
             position: absolute;
             z-index: 4;
             background-color: var(--u-bg-white);
@@ -335,31 +379,27 @@ function getMidButtonLeft() {
             flex-direction: column;
             align-items: center;
             position: relative;
-            &__button {
-                position: absolute;
-                top: 8rpx;
-                left: 50%;
-                transform: translateX(-50%);
+            &__container {
+                @include vue-flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                position: relative;
             }
-            &__button--center {
-                top: 50%;
-                transform: translate(-50%, -50%);
+            &__icon {
+                position: relative;
+                @include vue-flex;
+                align-items: center;
+                justify-content: center;
             }
             &__text {
                 color: $u-content-color;
                 font-size: 26rpx;
                 line-height: 28rpx;
-                position: absolute;
-                bottom: 8rpx;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 100%;
                 text-align: center;
-            }
-            &__text--center {
-                top: 50%;
-                bottom: auto;
-                transform: translate(-50%, -50%);
+                width: 100%;
             }
         }
         &__circle {
@@ -371,16 +411,27 @@ function getMidButtonLeft() {
             /* #ifndef APP-NVUE */
             height: calc(100% - 1px);
             /* #endif */
-            &__button {
-                width: 90rpx;
-                height: 90rpx;
+            &__container {
+                @include vue-flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                position: relative;
+                box-sizing: border-box;
+            }
+            &__icon {
+                width: 100rpx;
+                height: 100rpx;
                 border-radius: 100%;
                 @include vue-flex;
                 justify-content: center;
                 align-items: center;
-                position: absolute;
                 background-color: var(--u-bg-white);
-                top: -40rpx;
+                /* 将凸起图标上移，与顶部边框线对齐 */
+                position: absolute;
+                top: -55rpx;
                 left: 50%;
                 z-index: 6;
                 transform: translateX(-50%);
