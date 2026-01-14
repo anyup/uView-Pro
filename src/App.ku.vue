@@ -13,6 +13,7 @@ onLoad(() => {
     console.log('darkMode->', darkMode.value);
     console.log('theme->', currentThemeName.value);
     console.log('locale->', currentLocaleName.value);
+    console.log('locales->', locales.value);
 });
 
 onShow(() => {});

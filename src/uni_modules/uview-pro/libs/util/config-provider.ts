@@ -159,7 +159,7 @@ export class ConfigProvider {
      * @param themes 可用主题数组
      * @param defaultTheme 可选默认主题名
      */
-    initTheme(themes?: Theme[], defaultConfig?: string | DefaultThemeConfig) {
+    initTheme(themes?: Theme[], defaultConfig?: string | DefaultThemeConfig, isForce?: boolean) {
         const normalizedThemes = this.normalizeThemes(themes);
         if (!normalizedThemes.length) {
             console.warn('[ConfigProvider] init called with empty themes');
@@ -183,6 +183,7 @@ export class ConfigProvider {
         // 先尝试从 Storage 读取已保存主题名
         const saved = this.readStorage<string>(THEME_STORAGE_KEY);
         let initialName = saved || config.defaultTheme || this.themesRef.value[0].name;
+        if (isForce && config.defaultTheme) initialName = config.defaultTheme;
         let found = this.themesRef.value.find(t => t.name === initialName);
         if (!found) found = this.themesRef.value.find(t => t.name === config.defaultTheme);
         if (!found) found = this.themesRef.value[0];
@@ -191,7 +192,7 @@ export class ConfigProvider {
         this.currentThemeRef.value = found;
 
         // 初始化暗黑模式设置
-        this.initDarkMode(config.defaultDarkMode);
+        this.initDarkMode(config.defaultDarkMode, isForce);
 
         // 应用主题
         this.applyTheme(found);
@@ -206,10 +207,12 @@ export class ConfigProvider {
      * 初始化暗黑模式设置
      * @param darkMode
      */
-    initDarkMode(darkMode?: DarkMode) {
+    initDarkMode(darkMode?: DarkMode, isForce?: boolean) {
         // 尝试从 Storage 读取暗黑模式设置
         const savedDarkMode = this.readStorage<DarkMode>(DARK_MODE_STORAGE_KEY);
-        this.darkModeRef.value = savedDarkMode || darkMode || config.defaultDarkMode;
+        let darkModeValue = savedDarkMode || darkMode || config.defaultDarkMode;
+        if (isForce && darkMode) darkModeValue = darkMode;
+        this.darkModeRef.value = darkModeValue;
     }
 
     /**

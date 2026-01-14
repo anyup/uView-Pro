@@ -24,10 +24,14 @@ const install = (app: any, options?: UViewProOptions): void => {
                     initTheme(optTheme);
                 } else if (typeof optTheme === 'object' && optTheme.themes) {
                     // 2.如果为对象且有themes，则为多主题配置+设置默认主题
-                    initTheme(optTheme.themes, {
-                        defaultTheme: optTheme.defaultTheme,
-                        defaultDarkMode: optTheme.defaultDarkMode
-                    });
+                    initTheme(
+                        optTheme.themes,
+                        {
+                            defaultTheme: optTheme.defaultTheme,
+                            defaultDarkMode: optTheme.defaultDarkMode
+                        },
+                        optTheme.isForce
+                    );
                 } else {
                     // 3.兼容之前只有一套样式的情况,需要覆盖默认主题，默认系统主题（uviewpro）
                     const defaultTheme = defaultThemes[0];

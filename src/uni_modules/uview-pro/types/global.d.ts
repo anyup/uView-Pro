@@ -378,6 +378,7 @@ export type Themes = {
     themes: Theme[];
     defaultTheme?: string;
     defaultDarkMode?: DarkMode;
+    isForce?: boolean;
 };
 
 export type LogConfig = Partial<{

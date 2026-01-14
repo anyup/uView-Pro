@@ -66,10 +66,10 @@ function getAvailableThemes() {
  * @param themes 可选的主题列表，如果未提供则尝试从 uni.$u.themes 读取
  * @param defaultConfig 可选的默认主题配置，支持字符串（默认主题名）或对象（{ defaultTheme?, defaultDarkMode? }）
  */
-export function initTheme(themes?: Theme[], defaultConfig?: string | DefaultThemeConfig) {
+export function initTheme(themes?: Theme[], defaultConfig?: string | DefaultThemeConfig, isForce?: boolean) {
     // 如果有传入主题列表，使用传入的
     if (Array.isArray(themes) && themes.length > 0) {
-        configProvider.initTheme(themes, defaultConfig);
+        configProvider.initTheme(themes, defaultConfig, isForce);
         return;
     }
 
@@ -104,6 +104,14 @@ export function initTheme(themes?: Theme[], defaultConfig?: string | DefaultThem
     configProvider.initTheme(defaultThemes as Theme[], defaultConfig);
 }
 
+/**
+ * 初始化暗黑模式
+ * @param darkMode 暗黑模式设置
+ * @param isForce 是否强制初始化
+ */
+function initDarkMode(darkMode?: DarkMode, isForce?: boolean) {
+    configProvider.initDarkMode(darkMode, isForce);
+}
 /**
  * 获取当前暗黑模式设置
  */
@@ -150,12 +158,13 @@ export function useTheme() {
         cssVars: configProvider.cssVarsRef,
 
         // 主题相关方法
+        initTheme,
         setTheme,
         getCurrentTheme,
         getAvailableThemes,
-        initTheme,
 
         // 暗黑模式相关方法
+        initDarkMode,
         getDarkMode,
         setDarkMode,
         isInDarkMode,
