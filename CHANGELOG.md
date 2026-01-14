@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-01-14
+
+### ✨ Features | 新功能
+
+- **locale:** 添加组件国际化支持和 use locale hooks ([ff96211](https://github.com/anyup/uView-Pro/commit/ff96211423d27bde350a2ea4b9f1d5a5eb72d604))
+- **locale:** 添加中、英文国际化语言字段支持 ([257eb41](https://github.com/anyup/uView-Pro/commit/257eb4143ac39cab4940ab76844d0c3be02b198c))
+- **locale:** 所有组件实现组件国际化显示替换 ([ef52ff7](https://github.com/anyup/uView-Pro/commit/ef52ff7669c8cb7389377b8bdd4da681dddbb0a6))
+- **locale:** 跟随vue-i18n国际化语言切换功能 ([cccecb0](https://github.com/anyup/uView-Pro/commit/cccecb03763990689e6e66d856cf3588157a61b6))
+- **fullScreen:** 优化fullscreen页面配置和实现，支持国际化 ([8518218](https://github.com/anyup/uView-Pro/commit/85182186848fa6443ed74de9af1e3f5cd15fa724))
+- **locale:** 新增locale国际化和vue-i18n切换示例页面 ([da79723](https://github.com/anyup/uView-Pro/commit/da797230005ff130ea66c315921e4d8d9fa613c1))
+- **demo-page:** 添加支付宝小程序navbar兼容性处理 ([75284a4](https://github.com/anyup/uView-Pro/commit/75284a403b9eb7dee9625279ca5cadd14bba3a63))
+- **u-skeleton:** 重构u-skeleton骨架屏组件实现全新设计 ([c39405d](https://github.com/anyup/uView-Pro/commit/c39405dfd8c4e1fe06fd842efde79ebf6706b0d1))
+- **u-tabbar:** 重构u-tabbar组件内部结构，增加图标文字间距配置 ([e5655da](https://github.com/anyup/uView-Pro/commit/e5655da55c515a8288b12e37084dfec093da542b))
+- **mp-weixin:** 添加小程序全局分享功能 ([e4f8bf5](https://github.com/anyup/uView-Pro/commit/e4f8bf5baae237e8dc443de7c90cd751ef045101))
+- **useLocale:** uselocale hooks 支持命名空间功能 ([4d6e8f2](https://github.com/anyup/uView-Pro/commit/4d6e8f26976725cfdf862bd21af3648b864fdc29))
+- **u-tabbar:** 优化u-tabbar文本样式渲染优先级 ([7d73861](https://github.com/anyup/uView-Pro/commit/7d73861b4cbe1266bc4cbfff31b45a57d9ed960f))
+- **locale:** 初始化多语言时添加 isForce 参数支持强制设置默认语言 ([3309017](https://github.com/anyup/uView-Pro/commit/3309017e6fea3bc00f10efcec9f3ec3f83de9a88))
+- **demo:** 优化国际化配置示例并添加多语言支持 ([177b978](https://github.com/anyup/uView-Pro/commit/177b97869f14023daf4bca632093076716b616d6))
+- **theme:** 主题配置支持强制初始化功能 ([95c895d](https://github.com/anyup/uView-Pro/commit/95c895d0cfb1df37aa6285b88a2247f83add7361))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.4.13] - 2026-01-06
 
 ### ✨ Features | 新功能
