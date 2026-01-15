@@ -27,7 +27,7 @@
                 }"
             >
                 <!-- 为了块对齐 -->
-                <view class="u-form-item--left__content" v-if="required || leftIcon || label">
+                <view class="u-form-item--left__content" v-if="required || leftIcon || label || $slots.label">
                     <!-- nvue不支持伪元素before -->
                     <text v-if="required" class="u-form-item--left__content--required">*</text>
                     <view class="u-form-item--left__content__icon" v-if="leftIcon">
@@ -47,7 +47,9 @@
                             }
                         ]"
                     >
-                        {{ label }}
+                        <slot name="label">
+                            {{ label }}
+                        </slot>
                     </view>
                 </view>
             </view>
@@ -88,7 +90,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick, useSlots } from 'vue';
 import { $u, useChildren, useParent } from '../..';
 // @ts-ignore
 import schema from '../../libs/util/async-validator';
@@ -118,6 +120,9 @@ const { broadcast } = useParent('u-form-item');
  */
 
 const props = defineProps(FormItemProps);
+
+// 插槽
+const $slots = useSlots();
 
 const { parentExposed } = useChildren('u-form-item', 'u-form');
 
@@ -163,7 +168,7 @@ watch(
 const uLabelWidth = computed(() => {
     // 如果用户设置label为空字符串(微信小程序空字符串最终会变成字符串的'true')，意味着要将label的位置宽度设置为auto
     return elLabelPosition.value == 'left'
-        ? props.label === 'true' || props.label === ''
+        ? (props.label === 'true' || props.label === '') && !$slots.label
             ? 'auto'
             : $u.addUnit(elLabelWidth.value)
         : '100%';
@@ -249,7 +254,9 @@ function getPropByPath(obj: any, path: string) {
 function getRules() {
     // 父组件的所有规则
     let rules = parentExposed?.value?.rules?.value || {};
-    rules = rules ? rules[props.prop] || getPropByPath(rules,props.prop.replace(/(\.|^)(\d+)\./,'.defaultField.fields.')).v : [];
+    rules = rules
+        ? rules[props.prop] || getPropByPath(rules, props.prop.replace(/(\.|^)(\d+)\./, '.defaultField.fields.')).v
+        : [];
     // 保证返回的是一个数组形式
     return [].concat(rules || []);
 }
