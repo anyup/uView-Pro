@@ -1,3 +1,14 @@
+## 0.5.1（2026-01-15）
+
+### ✨ Features | 新功能
+
+- **locale:** 统一组件国际化命名空间，以保持命名的一致性并避免与自定义字段时冲突 ([8bd3cc3](https://github.com/anyup/uView-Pro/commit/8bd3cc32b26349da63f5005cb3c29e575c831142))
+- **u-form:** 支持label插槽功能 ([f82994f](https://github.com/anyup/uView-Pro/commit/f82994f5500ec4509dff64c05e115afb0465d4a2))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.0（2026-01-14）
 
 ### ✨ Features | 新功能
