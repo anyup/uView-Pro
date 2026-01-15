@@ -15,9 +15,9 @@ export const ReadMoreProps = {
     /** 展开后是否显示"收起"按钮 */
     toggle: { type: Boolean, default: false },
     /** 关闭时的提示文字 */
-    closeText: { type: String, default: () => t('readMore.closeText') },
+    closeText: { type: String, default: () => t('uReadMore.closeText') },
     /** 展开时的提示文字 */
-    openText: { type: String, default: () => t('readMore.openText') },
+    openText: { type: String, default: () => t('uReadMore.openText') },
     /** 提示的文字颜色 */
     color: { type: String, default: () => getColor('primary') },
     /** 提示文字的大小 */

@@ -34,7 +34,7 @@ export const ActionSheetProps = {
     /** 弹出的z-index值 */
     zIndex: { type: [String, Number], default: 0 },
     /** 取消按钮的文字提示 */
-    cancelText: { type: String, default: () => t('actionSheet.cancelText') },
+    cancelText: { type: String, default: () => t('uActionSheet.cancelText') },
     /** 字体颜色 */
     color: { type: String, default: () => getColor('mainColor') },
     /** 字体大小 */

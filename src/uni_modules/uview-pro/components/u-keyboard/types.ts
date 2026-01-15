@@ -35,9 +35,9 @@ export const KeyboardProps = {
     /** z-index值 */
     zIndex: { type: [Number, String] as PropType<string | number>, default: '' },
     /** 取消按钮的文字 */
-    cancelText: { type: String, default: () => t('keyboard.cancelText') },
+    cancelText: { type: String, default: () => t('uKeyboard.cancelText') },
     /** 确认按钮的文字 */
-    confirmText: { type: String, default: () => t('keyboard.confirmText') }
+    confirmText: { type: String, default: () => t('uKeyboard.confirmText') }
 };
 
 export type KeyboardProps = ExtractPropTypes<typeof KeyboardProps>;

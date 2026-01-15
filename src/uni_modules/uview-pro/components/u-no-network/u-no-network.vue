@@ -8,14 +8,14 @@
             <!-- 只有APP平台，才能跳转设置页，因为需要调用plus环境 -->
             <!-- #ifdef APP-PLUS -->
             <view class="u-to-setting">
-                {{ t('noNetwork.checkNetwork') }}
+                {{ t('uNoNetwork.checkNetwork') }}
                 <text class="u-setting-btn" @tap="openSettings">
-                    {{ t('noNetwork.setting') }}
+                    {{ t('uNoNetwork.setting') }}
                 </text>
             </view>
             <!-- #endif -->
             <view class="u-retry" :hover-stay-time="150" @tap="retry" hover-class="u-retry-hover">
-                {{ t('noNetwork.retry') }}
+                {{ t('uNoNetwork.retry') }}
             </view>
         </view>
     </view>
@@ -98,14 +98,14 @@ function retry() {
             networkType.value = res.networkType;
             if (res.networkType == 'none') {
                 uni.showToast({
-                    title: t('noNetwork.noConnection'),
+                    title: t('uNoNetwork.noConnection'),
                     icon: 'none',
                     position: 'top'
                 });
                 isConnected.value = false;
             } else {
                 uni.showToast({
-                    title: t('noNetwork.connected'),
+                    title: t('uNoNetwork.connected'),
                     icon: 'none',
                     position: 'top'
                 });

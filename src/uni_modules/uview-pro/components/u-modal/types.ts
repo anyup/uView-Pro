@@ -23,7 +23,7 @@ export const ModalProps = {
     /** 标题 */
     title: {
         type: String,
-        default: () => t('modal.title')
+        default: () => t('uModal.title')
     },
     /** 弹窗宽度 */
     width: {
@@ -33,7 +33,7 @@ export const ModalProps = {
     /** 弹窗内容 */
     content: {
         type: String,
-        default: () => t('modal.content')
+        default: () => t('uModal.content')
     },
     /** 是否显示标题 */
     showTitle: {
@@ -53,12 +53,12 @@ export const ModalProps = {
     /** 确认文案 */
     confirmText: {
         type: String,
-        default: () => t('modal.confirmText')
+        default: () => t('uModal.confirmText')
     },
     /** 取消文案 */
     cancelText: {
         type: String,
-        default: () => t('modal.cancelText')
+        default: () => t('uModal.cancelText')
     },
     /** 确认按钮颜色 */
     confirmColor: {

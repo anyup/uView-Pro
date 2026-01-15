@@ -42,9 +42,9 @@ export const SelectProps = {
     /** 顶部标题 */
     title: { type: String, default: '' },
     /** 取消按钮的文字 */
-    cancelText: { type: String, default: () => t('select.cancelText') },
+    cancelText: { type: String, default: () => t('uSelect.cancelText') },
     /** 确认按钮的文字 */
-    confirmText: { type: String, default: () => t('select.confirmText') }
+    confirmText: { type: String, default: () => t('uSelect.confirmText') }
 };
 
 export type SelectProps = ExtractPropTypes<typeof SelectProps>;

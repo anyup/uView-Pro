@@ -1,9 +1,9 @@
 export default {
     name: 'en-US',
-    actionSheet: {
+    uActionSheet: {
         cancelText: 'Cancel'
     },
-    upload: {
+    uUpload: {
         uploadText: 'Select Image',
         retry: 'Retry',
         overSize: 'File size exceeds allowed limit',
@@ -18,23 +18,23 @@ export default {
         notAllowedExt: 'Files with {ext} format are not allowed',
         noAction: 'Please configure upload address'
     },
-    verificationCode: {
+    uVerificationCode: {
         startText: 'Get Code',
         changeText: 'Retry in Xs',
         endText: 'Retry'
     },
-    section: {
+    uSection: {
         subTitle: 'More'
     },
-    select: {
+    uSelect: {
         cancelText: 'Cancel',
         confirmText: 'Confirm'
     },
-    search: {
+    uSearch: {
         placeholder: 'Please enter keywords',
         actionText: 'Search'
     },
-    noNetwork: {
+    uNoNetwork: {
         tips: 'Ooops, network disconnected',
         checkNetwork: 'Please check network or go to',
         setting: 'Settings',
@@ -42,43 +42,43 @@ export default {
         noConnection: 'No network connection',
         connected: 'Network connected'
     },
-    readMore: {
+    uReadMore: {
         closeText: 'Read More',
         openText: 'Collapse'
     },
-    pagination: {
+    uPagination: {
         prevText: 'Prev',
         nextText: 'Next'
     },
-    picker: {
+    uPicker: {
         cancelText: 'Cancel',
         confirmText: 'Confirm'
     },
-    modal: {
+    uModal: {
         title: 'Notice',
         content: 'Content',
         confirmText: 'Confirm',
         cancelText: 'Cancel'
     },
-    loadmore: {
+    uLoadmore: {
         loadmore: 'Load more',
         loading: 'Loading...',
         nomore: 'No more'
     },
-    link: {
+    uLink: {
         mpTips: 'Link copied, please open it in browser'
     },
-    keyboard: {
+    uKeyboard: {
         cancelText: 'Cancel',
         confirmText: 'Confirm',
         number: 'Number Keyboard',
         idCard: 'ID Card Keyboard',
         plate: 'Plate Keyboard'
     },
-    input: {
+    uInput: {
         placeholder: 'Please enter'
     },
-    calendar: {
+    uCalendar: {
         startText: 'Start',
         endText: 'End',
         toolTip: 'Select date',
@@ -95,7 +95,7 @@ export default {
         confirmText: 'Confirm',
         to: ' to '
     },
-    empty: {
+    uEmpty: {
         car: 'Shopping cart is empty',
         page: 'Page not found',
         search: 'No search results',
@@ -111,13 +111,13 @@ export default {
         list: 'No list',
         data: 'No data'
     },
-    countDown: {
+    uCountDown: {
         day: 'days',
         hour: 'hours',
         minute: 'minutes',
         second: 'Second'
     },
-    fullScreen: {
+    uFullScreen: {
         title: 'New Version Available',
         upgrade: 'Upgrade'
     }

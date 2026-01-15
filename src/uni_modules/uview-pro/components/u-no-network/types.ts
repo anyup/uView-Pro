@@ -12,7 +12,7 @@ export const NoNetworkProps = {
     /** 页面文字提示 */
     tips: {
         type: String,
-        default: () => t('noNetwork.tips')
+        default: () => t('uNoNetwork.tips')
     },
     /** 一个z-index值，用于设置没有网络这个组件的层次 */
     zIndex: {

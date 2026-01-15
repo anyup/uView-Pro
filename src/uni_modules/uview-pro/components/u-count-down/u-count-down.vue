@@ -18,7 +18,7 @@
             }"
             v-if="props.showDays && (props.hideZeroDay || (!props.hideZeroDay && d != '00'))"
         >
-            {{ props.separator == 'colon' && props.showHours ? ':' : t('countDown.day') }}
+            {{ props.separator == 'colon' && props.showHours ? ':' : t('uCountDown.day') }}
         </view>
         <view class="u-countdown-item" :style="$u.toStyle(itemStyle)" v-if="props.showHours">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
@@ -34,7 +34,7 @@
             }"
             v-if="props.showHours"
         >
-            {{ props.separator == 'colon' && props.showMinutes ? ':' : t('countDown.hour') }}
+            {{ props.separator == 'colon' && props.showMinutes ? ':' : t('uCountDown.hour') }}
         </view>
         <view class="u-countdown-item" :style="$u.toStyle(itemStyle)" v-if="props.showMinutes">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
@@ -50,7 +50,7 @@
             }"
             v-if="props.showMinutes"
         >
-            {{ props.separator == 'colon' && props.showSeconds ? ':' : t('countDown.minute') }}
+            {{ props.separator == 'colon' && props.showSeconds ? ':' : t('uCountDown.minute') }}
         </view>
         <view class="u-countdown-item" :style="$u.toStyle(itemStyle)" v-if="props.showSeconds">
             <view class="u-countdown-time" :style="{ fontSize: props.fontSize + 'rpx', color: props.color }">
@@ -62,7 +62,7 @@
             :style="{ fontSize: props.separatorSize + 'rpx', color: props.separatorColor, paddingBottom: 0 }"
             v-if="props.showSeconds && props.separator == 'zh'"
         >
-            {{ t('countDown.second') }}
+            {{ t('uCountDown.second') }}
         </view>
     </view>
 </template>

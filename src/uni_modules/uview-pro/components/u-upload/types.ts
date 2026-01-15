@@ -34,7 +34,7 @@ export const UploadProps = {
     /** 是否自定义上传按钮 */
     customBtn: { type: Boolean, default: false },
     /** 上传按钮文字 */
-    uploadText: { type: String, default: () => t('upload.uploadText') },
+    uploadText: { type: String, default: () => t('uUpload.uploadText') },
     /** 上传地址 */
     action: { type: String, default: '' },
     /** 是否禁用 */

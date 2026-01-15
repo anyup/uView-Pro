@@ -122,12 +122,12 @@ export const PickerProps = {
     /** 取消按钮的文字 */
     cancelText: {
         type: String,
-        default: () => t('picker.cancelText')
+        default: () => t('uPicker.cancelText')
     },
     /** 确认按钮的文字 */
     confirmText: {
         type: String,
-        default: () => t('picker.confirmText')
+        default: () => t('uPicker.confirmText')
     }
 };
 

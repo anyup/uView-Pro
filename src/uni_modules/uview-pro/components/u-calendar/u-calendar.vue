@@ -223,11 +223,11 @@
             <view class="u-calendar__bottom">
                 <view class="u-calendar__bottom__choose">
                     <text>{{ mode == 'date' ? activeDate : startDate }}</text>
-                    <text v-if="endDate">{{ t('calendar.to') }}{{ endDate }}</text>
+                    <text v-if="endDate">{{ t('uCalendar.to') }}{{ endDate }}</text>
                 </view>
                 <view class="u-calendar__bottom__btn">
                     <u-button :type="btnType" shape="circle" size="default" @click="btnFix(false)">
-                        {{ t('calendar.confirmText') }}
+                        {{ t('uCalendar.confirmText') }}
                     </u-button>
                 </view>
             </view>
@@ -317,13 +317,13 @@ const isStart = ref(true);
 const min = ref<{ year: number; month: number; day: number } | null>(null);
 const max = ref<{ year: number; month: number; day: number } | null>(null);
 const weekDayZh = ref([
-    t('calendar.sun'),
-    t('calendar.mon'),
-    t('calendar.tue'),
-    t('calendar.wed'),
-    t('calendar.thu'),
-    t('calendar.fri'),
-    t('calendar.sat')
+    t('uCalendar.sun'),
+    t('uCalendar.mon'),
+    t('uCalendar.tue'),
+    t('uCalendar.wed'),
+    t('uCalendar.thu'),
+    t('uCalendar.fri'),
+    t('uCalendar.sat')
 ]);
 
 const dataChange = computed(() => `${props.mode}-${props.minDate}-${props.maxDate}`);
@@ -455,7 +455,7 @@ function getWeekday(yearNum: number, monthNum: number) {
 function checkRange(yearNum: number) {
     let overstep = false;
     if (yearNum < Number(props.minYear) || yearNum > Number(props.maxYear)) {
-        uni.showToast({ title: t('calendar.outOfRange'), icon: 'none' });
+        uni.showToast({ title: t('uCalendar.outOfRange'), icon: 'none' });
         overstep = true;
     }
     return overstep;
@@ -503,7 +503,7 @@ function changeData() {
     daysArr.value = generateArray(1, days.value);
     weekday.value = getWeekday(year.value, month.value);
     weekdayArr.value = generateArray(1, weekday.value);
-    showTitle.value = `${year.value}${t('calendar.year')}${month.value}${t('calendar.month')}`;
+    showTitle.value = `${year.value}${t('uCalendar.year')}${month.value}${t('uCalendar.month')}`;
     if (props.showLunar) {
         lunarArr.value = [];
         daysArr.value.forEach(d => {

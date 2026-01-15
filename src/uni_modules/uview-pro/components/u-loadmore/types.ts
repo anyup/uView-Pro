@@ -44,9 +44,9 @@ export const LoadmoreProps = {
     loadText: {
         type: Object as PropType<LoadmoreText>,
         default: () => ({
-            loadmore: t('loadmore.loadmore'),
-            loading: t('loadmore.loading'),
-            nomore: t('loadmore.nomore')
+            loadmore: t('uLoadmore.loadmore'),
+            loading: t('uLoadmore.loading'),
+            nomore: t('uLoadmore.nomore')
         })
     },
     /** 在“没有更多”状态下，是否显示粗点 */

@@ -31,7 +31,7 @@ export const LinkProps = {
     /** 小程序中复制到粘贴板的提示语 */
     mpTips: {
         type: String,
-        default: () => t('link.mpTips')
+        default: () => t('uLink.mpTips')
     },
     /** 下划线颜色 */
     lineColor: {

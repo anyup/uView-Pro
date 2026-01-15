@@ -68,8 +68,8 @@ function demoAddFrench() {
                     <text class="value">{{ t('common.intro') }}</text>
                 </view>
                 <view class="info-row">
-                    <text class="label">uView-pro 文案(empty.search)：</text>
-                    <text class="value">{{ uT('empty.search') }}</text>
+                    <text class="label">uView-pro 文案(uEmpty.search)：</text>
+                    <text class="value">{{ uT('uEmpty.search') }}</text>
                 </view>
                 <view class="info-row">
                     <text class="label">vue-i18n 当前 locale：</text>

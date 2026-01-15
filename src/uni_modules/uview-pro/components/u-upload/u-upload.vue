@@ -205,11 +205,11 @@ function selectFile() {
                 if (!props.multiple && index >= 1) return;
                 if (val.size > Number(props.maxSize)) {
                     emit('on-oversize', val, lists.value, props.index);
-                    showToast(t('upload.overSize'));
+                    showToast(t('uUpload.overSize'));
                 } else {
                     if (Number(props.maxCount) <= lists.value.length) {
                         emit('on-exceed', val, lists.value, props.index);
-                        showToast(t('upload.overMaxCount'));
+                        showToast(t('uUpload.overMaxCount'));
                         return;
                     }
                     lists.value.push({ url: val.path, progress: 0, error: false, file: val });
@@ -248,7 +248,7 @@ function retry(index: number) {
     lists.value[index].error = false;
     lists.value[index].response = null;
     if (props.showTips) {
-        uni.showLoading({ title: t('upload.reUpload') });
+        uni.showLoading({ title: t('uUpload.reUpload') });
     }
     uploadFile(index);
 }
@@ -301,7 +301,7 @@ async function uploadFile(index = 0) {
     }
     // 检查上传地址
     if (!props.action) {
-        showToast(t('upload.noAction'), true);
+        showToast(t('uUpload.noAction'), true);
         return;
     }
     lists.value[index].error = false;
@@ -355,7 +355,7 @@ function uploadError(index: number, err: any) {
     lists.value[index].error = true;
     lists.value[index].response = null;
     emit('on-error', err, index, lists.value, props.index);
-    showToast(t('upload.uploadFailed'));
+    showToast(t('uUpload.uploadFailed'));
 }
 
 /**
@@ -363,8 +363,8 @@ function uploadError(index: number, err: any) {
  */
 function deleteItem(index: number) {
     uni.showModal({
-        title: t('upload.modalTitle'),
-        content: t('upload.deleteConfirm'),
+        title: t('uUpload.modalTitle'),
+        content: t('uUpload.deleteConfirm'),
         success: async (res: any) => {
             if (res.confirm) {
                 // 先检查是否有定义before-remove移除前钩子
@@ -385,11 +385,11 @@ function deleteItem(index: number) {
                             })
                             .catch(() => {
                                 // 如果进入promise的reject，终止删除操作
-                                showToast(t('upload.terminatedRemove'));
+                                showToast(t('uUpload.terminatedRemove'));
                             });
                     } else if (beforeResponse === false) {
                         // 返回false，终止删除
-                        showToast(t('upload.terminatedRemove'));
+                        showToast(t('uUpload.terminatedRemove'));
                     } else {
                         // 如果返回true，执行删除操作
                         handlerDeleteItem(index);
@@ -413,7 +413,7 @@ function handlerDeleteItem(index: number) {
     }
     lists.value.splice(index, 1);
     emit('on-remove', index, lists.value, props.index);
-    showToast(t('upload.removeSuccess'));
+    showToast(t('uUpload.removeSuccess'));
 }
 
 /**
@@ -442,7 +442,7 @@ function doPreviewImage(url: string, index: number) {
             emit('on-preview', url, lists.value, props.index);
         },
         fail: () => {
-            uni.showToast({ title: t('upload.previewFailed'), icon: 'none' });
+            uni.showToast({ title: t('uUpload.previewFailed'), icon: 'none' });
         }
     });
 }
@@ -471,7 +471,7 @@ function checkFileExt(file: any) {
         // 转为小写
         return ext.toLowerCase() === fileExt;
     });
-    if (!noArrowExt) showToast(t('upload.notAllowedExt', { ext: fileExt }));
+    if (!noArrowExt) showToast(t('uUpload.notAllowedExt', { ext: fileExt }));
     return noArrowExt;
 }
 

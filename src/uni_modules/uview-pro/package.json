@@ -1,9 +1,9 @@
 {
     "id": "uview-pro",
     "name": "uview-pro",
-    "displayName": "【支持鸿蒙】uView Pro｜基于Vue3+TS的高质量UI组件库，支持多主题、暗黑模式",
+    "displayName": "【支持鸿蒙】uView Pro｜基于Vue3+TS的高质量UI组件库，支持多主题、暗黑模式、多语言",
     "version": "0.5.0",
-    "description": "uView Pro是基于Vue3+TS的多平台UI框架，提供80+高质量组件、便捷工具和常用模板，支持多主题与暗黑模式，支持H5/APP/鸿蒙/小程序等多端开发。已在华为鸿蒙应用商店上架，欢迎体验！",
+    "description": "uView Pro是基于Vue3+TS的多平台UI框架，提供80+高质量组件、便捷工具和常用模板，支持多主题、暗黑模式、多语言，支持H5/APP/鸿蒙/小程序多端开发。已在鸿蒙应用商店上架，欢迎体验！",
     "main": "index.ts",
     "module": "index.ts",
     "browser": "index.ts",
@@ -42,7 +42,7 @@
         },
         "npmurl": "https://www.npmjs.com/package/uview-pro",
         "darkmode": "√",
-        "i18n": "x",
+        "i18n": "√",
         "widescreen": "√"
     },
     "uni_modules": {

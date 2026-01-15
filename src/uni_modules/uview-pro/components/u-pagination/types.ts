@@ -12,9 +12,9 @@ const { t } = useLocale();
 export const PaginationProps = {
     ...baseProps,
     /** 左侧按钮文字 */
-    prevText: { type: String, default: () => t('pagination.prevText') },
+    prevText: { type: String, default: () => t('uPagination.prevText') },
     /** 右侧按钮文字 */
-    nextText: { type: String, default: () => t('pagination.nextText') },
+    nextText: { type: String, default: () => t('uPagination.nextText') },
     /** 总条目数 */
     total: Number,
     /** 每页数据量 */

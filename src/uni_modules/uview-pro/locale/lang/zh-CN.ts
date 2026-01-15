@@ -1,9 +1,9 @@
 export default {
     name: 'zh-CN',
-    actionSheet: {
+    uActionSheet: {
         cancelText: '取消'
     },
-    upload: {
+    uUpload: {
         uploadText: '选择图片',
         retry: '点击重试',
         overSize: '超出允许的文件大小',
@@ -18,23 +18,23 @@ export default {
         notAllowedExt: '不允许选择{ext}格式的文件',
         noAction: '请配置上传地址'
     },
-    verificationCode: {
+    uVerificationCode: {
         startText: '获取验证码',
         changeText: 'X秒重新获取',
         endText: '重新获取'
     },
-    section: {
+    uSection: {
         subTitle: '更多'
     },
-    select: {
+    uSelect: {
         cancelText: '取消',
         confirmText: '确认'
     },
-    search: {
+    uSearch: {
         placeholder: '请输入关键字',
         actionText: '搜索'
     },
-    noNetwork: {
+    uNoNetwork: {
         tips: '哎呀，网络信号丢失',
         checkNetwork: '请检查网络，或前往',
         setting: '设置',
@@ -42,43 +42,43 @@ export default {
         noConnection: '无网络连接',
         connected: '网络已连接'
     },
-    readMore: {
+    uReadMore: {
         closeText: '展开阅读全文',
         openText: '收起'
     },
-    pagination: {
+    uPagination: {
         prevText: '上一页',
         nextText: '下一页'
     },
-    picker: {
+    uPicker: {
         cancelText: '取消',
         confirmText: '确认'
     },
-    modal: {
+    uModal: {
         title: '提示',
         content: '内容',
         confirmText: '确认',
         cancelText: '取消'
     },
-    loadmore: {
+    uLoadmore: {
         loadmore: '加载更多',
         loading: '正在加载...',
         nomore: '没有更多了'
     },
-    link: {
+    uLink: {
         mpTips: '链接已复制，请在浏览器打开'
     },
-    keyboard: {
+    uKeyboard: {
         cancelText: '取消',
         confirmText: '确认',
         number: '数字键盘',
         idCard: '身份证键盘',
         plate: '车牌号键盘'
     },
-    input: {
+    uInput: {
         placeholder: '请输入内容'
     },
-    calendar: {
+    uCalendar: {
         startText: '开始',
         endText: '结束',
         toolTip: '选择日期',
@@ -95,7 +95,7 @@ export default {
         confirmText: '确定',
         to: '至'
     },
-    empty: {
+    uEmpty: {
         car: '购物车为空',
         page: '页面不存在',
         search: '没有搜索结果',
@@ -111,13 +111,13 @@ export default {
         list: '列表为空',
         data: '数据为空'
     },
-    countDown: {
+    uCountDown: {
         day: '天',
         hour: '时',
         minute: '分',
         second: '秒'
     },
-    fullScreen: {
+    uFullScreen: {
         title: '发现新版本',
         upgrade: '升级'
     }

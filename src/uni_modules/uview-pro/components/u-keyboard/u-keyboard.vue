@@ -20,10 +20,10 @@
                     tips
                         ? tips
                         : mode == 'number'
-                          ? t('keyboard.number')
+                          ? t('uKeyboard.number')
                           : mode == 'card'
-                            ? t('keyboard.idCard')
-                            : t('keyboard.plate')
+                            ? t('uKeyboard.idCard')
+                            : t('uKeyboard.plate')
                 }}
             </view>
             <view

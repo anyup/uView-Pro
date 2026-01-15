@@ -66,20 +66,20 @@ const props = defineProps(EmptyProps);
  */
 const icons = computed(() => {
     return {
-        car: t('empty.car'),
-        page: t('empty.page'),
-        search: t('empty.search'),
-        address: t('empty.address'),
-        wifi: t('empty.wifi'),
-        order: t('empty.order'),
-        coupon: t('empty.coupon'),
-        favor: t('empty.favor'),
-        permission: t('empty.permission'),
-        history: t('empty.history'),
-        news: t('empty.news'),
-        message: t('empty.message'),
-        list: t('empty.list'),
-        data: t('empty.data')
+        car: t('uEmpty.car'),
+        page: t('uEmpty.page'),
+        search: t('uEmpty.search'),
+        address: t('uEmpty.address'),
+        wifi: t('uEmpty.wifi'),
+        order: t('uEmpty.order'),
+        coupon: t('uEmpty.coupon'),
+        favor: t('uEmpty.favor'),
+        permission: t('uEmpty.permission'),
+        history: t('uEmpty.history'),
+        news: t('uEmpty.news'),
+        message: t('uEmpty.message'),
+        list: t('uEmpty.list'),
+        data: t('uEmpty.data')
     };
 });
 </script>

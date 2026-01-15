@@ -4,8 +4,8 @@
         :class="customClass"
         :style="$u.toStyle(customStyle)"
         :show-cancel-button="true"
-        :confirm-text="t('fullScreen.upgrade')"
-        :title="title || t('fullScreen.title')"
+        :confirm-text="t('uFullScreen.upgrade')"
+        :title="title || t('uFullScreen.title')"
         @cancel="cancel"
         @confirm="confirm"
     >

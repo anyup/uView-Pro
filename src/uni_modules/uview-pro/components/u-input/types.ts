@@ -30,7 +30,7 @@ export const InputProps = {
     /** placeholder显示值(默认 '请输入内容') */
     placeholder: {
         type: String,
-        default: () => t('input.placeholder')
+        default: () => t('uInput.placeholder')
     },
     /** 是否禁用输入框(默认false) */
     disabled: {

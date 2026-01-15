@@ -50,9 +50,9 @@ export const CalendarProps = {
     /** 范围内日期字体颜色 */
     rangeColor: { type: String, default: () => getColor('primary') },
     /** mode=range时生效，起始日期自定义文案 */
-    startText: { type: String, default: () => t('calendar.startText') },
+    startText: { type: String, default: () => t('uCalendar.startText') },
     /** mode=range时生效，结束日期自定义文案 */
-    endText: { type: String, default: () => t('calendar.endText') },
+    endText: { type: String, default: () => t('uCalendar.endText') },
     /** 按钮样式类型 */
     btnType: { type: String as PropType<ThemeType>, default: 'primary' },
     /** 当前选中日期带选中效果 */
@@ -62,7 +62,7 @@ export const CalendarProps = {
     /** 是否显示右上角的关闭图标 */
     closeable: { type: Boolean, default: true },
     /** 顶部的提示文字 */
-    toolTip: { type: String, default: () => t('calendar.toolTip') },
+    toolTip: { type: String, default: () => t('uCalendar.toolTip') },
     /** 是否显示农历 */
     showLunar: { type: Boolean, default: false },
     /** 是否在页面中显示 */

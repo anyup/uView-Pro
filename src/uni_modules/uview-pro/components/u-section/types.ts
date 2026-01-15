@@ -15,7 +15,7 @@ export const SectionProps = {
     /** 标题信息 */
     title: { type: String, default: '' },
     /** 右边副标题内容 */
-    subTitle: { type: String, default: () => t('section.subTitle') },
+    subTitle: { type: String, default: () => t('uSection.subTitle') },
     /** 是否显示右边的内容 */
     right: { type: Boolean, default: true },
     /** 主标题的字体大小 */
