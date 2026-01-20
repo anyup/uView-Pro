@@ -15,7 +15,9 @@
                 fontSize: $u.addUnit(labelSize)
             }"
         >
-            <slot />
+            <slot>
+                {{ label }}
+            </slot>
         </view>
     </view>
 </template>
@@ -34,7 +36,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { $u, useChildren } from '../..';
 import { CheckboxProps } from './types';
 
@@ -55,6 +57,29 @@ import { CheckboxProps } from './types';
 
 const props = defineProps(CheckboxProps);
 const emit = defineEmits(['change', 'update:modelValue']);
+// checkbox 是否选中，true/false
+const checkedValue = ref(props.modelValue);
+
+// checkbox 的value值，id
+const checkboxValue = computed(() => {
+    if (props.value !== '') return props.value;
+    return props.name;
+});
+
+watch(
+    () => props.modelValue,
+    (newVal: boolean) => {
+        checkedValue.value = newVal;
+    }
+);
+
+watch(
+    () => checkedValue.value,
+    (newVal: boolean) => {
+        emit('update:modelValue', newVal);
+    },
+    { immediate: true }
+);
 
 // 使用子组件Hook
 const { parentExposed } = useChildren('u-checkbox', 'u-checkbox-group');
@@ -92,7 +117,7 @@ const elShape = computed(() => {
 // 图标样式
 const iconStyle = computed(() => {
     let style: Record<string, string> = {};
-    if (elActiveColor.value && props.modelValue && !isDisabled.value) {
+    if (elActiveColor.value && checkedValue.value && !isDisabled.value) {
         style.borderColor = elActiveColor.value;
         style.backgroundColor = elActiveColor.value;
     }
@@ -103,15 +128,15 @@ const iconStyle = computed(() => {
 
 // checkbox内部的勾选图标，如果选中状态，为白色，否则为透明色即可
 const iconColor = computed(() => {
-    return props.modelValue ? 'var(--u-white-color)' : 'transparent';
+    return checkedValue.value ? 'var(--u-white-color)' : 'transparent';
 });
 
 const iconClass = computed(() => {
     let classes: string[] = [];
     classes.push('u-checkbox__icon-wrap--' + elShape.value);
-    if (props.modelValue == true) classes.push('u-checkbox__icon-wrap--checked');
+    if (checkedValue.value == true) classes.push('u-checkbox__icon-wrap--checked');
     if (isDisabled.value) classes.push('u-checkbox__icon-wrap--disabled');
-    if (props.modelValue && isDisabled.value) classes.push('u-checkbox__icon-wrap--disabled--checked');
+    if (checkedValue.value && isDisabled.value) classes.push('u-checkbox__icon-wrap--disabled--checked');
     return classes.join(' ');
 });
 
@@ -157,12 +182,7 @@ function toggle() {
  * 触发change事件
  */
 function emitEvent() {
-    const changeValue = {
-        value: !props.modelValue,
-        name: props.name
-    };
-    emit('change', changeValue);
-
+    emit('change', !checkedValue.value);
     // 通知父组件状态变化
     setTimeout(() => {
         if (parentExposed.value?.emitEvent) {
@@ -176,31 +196,34 @@ function emitEvent() {
  */
 function setValue() {
     // 判断是否超过了可选的最大数量
-    if (props.modelValue == true) {
+    if (checkedValue.value == true) {
         emitEvent();
-        emit('update:modelValue', false);
+        checkedValue.value = false;
     } else {
         if (parentExposed?.value?.validateSelection && !parentExposed?.value?.validateSelection()) {
             return;
         }
         emitEvent();
-        emit('update:modelValue', true);
+        checkedValue.value = true;
     }
 }
 
 // 设置组件的modelValue值
 function setChecked(data: any) {
     if (!isDisabled.value) {
-        emit('update:modelValue', data.checked);
-        if (data.checked !== props.modelValue) {
+        const needEmit = checkedValue.value !== data.checked;
+        checkedValue.value = data.checked;
+        if (needEmit) {
             emitEvent();
         }
     }
 }
 
 defineExpose({
-    isChecked: computed(() => props.modelValue),
+    isChecked: computed(() => checkedValue.value),
+    label: props.label,
     name: props.name,
+    value: checkboxValue.value,
     setValue,
     emitEvent,
     props,

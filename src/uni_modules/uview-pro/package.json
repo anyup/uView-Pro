@@ -8,11 +8,11 @@
     "module": "index.ts",
     "browser": "index.ts",
     "keywords": [
-        "uni-app",
-        "library",
-        "component",
-        "uView",
-        "Vue3"
+        "ui",
+        "uview",
+        "uview-pro",
+        "vue3",
+        "typescript"
     ],
     "author": "anyup",
     "license": "MIT",

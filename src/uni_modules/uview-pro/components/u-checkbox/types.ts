@@ -10,8 +10,12 @@ export type CheckboxValue = string | number | boolean;
 
 export const CheckboxProps = {
     ...baseProps,
-    /** checkbox的名称 */
+    /** checkbox的标签 */
+    label: { type: String, default: '' },
+    /** checkbox的值 */
     name: { type: [String, Number], default: '' },
+    /** checkbox的值，不传递时为name的属性 */
+    value: { type: [String, Number], default: '' },
     /** 形状，square为方形，circle为原型 */
     shape: { type: String as PropType<Shape>, default: '' },
     /** 是否为选中状态 */

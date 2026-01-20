@@ -10,6 +10,8 @@ import { getColor } from '../../';
 
 export const CheckboxGroupProps = {
     ...baseProps,
+    /** 绑定值，选中的复选框name组成的数组 */
+    modelValue: { type: Array as PropType<(string | number)[]>, default: undefined },
     /** 最多能选中多少个checkbox */
     max: { type: Number, default: 999 },
     /** 是否禁用所有复选框 */
