@@ -19,7 +19,7 @@ export default {
 
 <script setup lang="ts">
 import { getCurrentInstance, computed, watch, nextTick, onMounted } from 'vue';
-import { $u, useParent, useChildren } from '../..';
+import { $u, useParent, useChildren, useDebounce } from '../..';
 import { CheckboxGroupProps } from './types';
 
 /**
@@ -49,6 +49,7 @@ const emit = defineEmits(['update:modelValue', 'change']);
 // 使用父组件Hook
 const { children, broadcast } = useParent('u-checkbox-group');
 const { emitToParent } = useChildren('u-checkbox-group', 'u-form-item');
+const { debounce } = useDebounce(1);
 
 /**
  * 根据modelValue设置子组件状态
@@ -81,18 +82,20 @@ watch(
  * 派发 change 事件和表单校验
  */
 function emitEvent() {
-    // 收集所有选中的 name
-    let values: any[] = [];
-    children.forEach((child: any) => {
-        if (child.getExposed?.()?.isChecked.value) {
-            values.push(child.getExposed?.()?.value);
-        }
+    debounce(() => {
+        // 收集所有选中的 name
+        let values: any[] = [];
+        children.forEach((child: any) => {
+            if (child.getExposed?.()?.isChecked.value) {
+                values.push(child.getExposed?.()?.value);
+            }
+        });
+        emit('change', values);
+        emit('update:modelValue', values);
+        setTimeout(() => {
+            emitToParent('onFormChange', values);
+        }, 60);
     });
-    emit('change', values);
-    emit('update:modelValue', values);
-    setTimeout(() => {
-        emitToParent('onFormChange', values);
-    }, 60);
 }
 
 /**
