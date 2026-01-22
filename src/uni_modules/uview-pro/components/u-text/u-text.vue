@@ -28,9 +28,9 @@
         <u-link v-else-if="props.mode === 'link'" :href="props.href" underLine>
             <slot>{{ displayValue }}</slot>
         </u-link>
-        <template v-else-if="props.openType && isMp">
+        <template v-else-if="props.openType">
             <button
-                class="u-reset-button u-text__value"
+                class="u-reset-button u-text__value u-text__button"
                 :class="props.type && `u-text__value--${props.type}`"
                 :style="textValueStyle"
                 :openType="props.openType"
@@ -294,6 +294,11 @@ function onOpenSetting(event) {
 
     &--block &__value {
         display: flex;
+    }
+
+    &--block &__button {
+        display: block;
+        width: 100%;
     }
 
     &__price {
