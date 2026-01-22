@@ -31,7 +31,7 @@
                 </text>
             </view>
             <view class="fild-body">
-                <view class="u-flex-1 u-flex" :style="[inputWrapStyle]">
+                <view class="u-flex-1 u-flex u-field-input-wrap" :style="[inputWrapStyle]">
                     <textarea
                         v-if="props.type === 'textarea'"
                         class="u-flex-1 u-textarea-class"
@@ -69,10 +69,12 @@
                         @confirm="onConfirm"
                         @tap="fieldClick"
                     />
+                    <!-- 透明遮罩，只在disabled时显示，用于响应点击事件 -->
+                    <view v-if="props.disabled" class="u-field-disabled-overlay" @tap="fieldClick"></view>
                 </view>
                 <u-icon
+                    v-if="props.clearable && props.modelValue != '' && focused && !props.disabled"
                     :size="props.clearSize"
-                    v-if="props.clearable && props.modelValue != '' && focused"
                     name="close-circle-fill"
                     color="var(--u-light-color)"
                     class="u-clear-icon"
@@ -384,5 +386,19 @@ function fieldClick() {
 
 .u-button-wrap {
     margin-left: 8rpx;
+}
+
+.u-field-input-wrap {
+    position: relative;
+}
+
+.u-field-disabled-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 1;
 }
 </style>

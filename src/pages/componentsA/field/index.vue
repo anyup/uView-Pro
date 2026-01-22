@@ -17,6 +17,8 @@
                             :required="required"
                             :icon="icon1"
                             :type="type"
+                            :disabled="disabled"
+                            @click="handleClick"
                         />
                         <u-field
                             v-model="code"
@@ -24,6 +26,8 @@
                             placeholder="请填写验证码"
                             :required="required"
                             :icon="icon2"
+                            :disabled="disabled"
+                            @click="handleClick"
                         >
                             <template #right>
                                 <u-button v-if="showBtn" size="mini" type="success">发送验证码</u-button>
@@ -50,6 +54,10 @@
                         <u-subsection current="1" :list="['是', '否']" @change="customChange" />
                     </view>
                     <view class="u-config-item">
+                        <view class="u-item-title">是否禁用</view>
+                        <u-subsection current="1" :list="['是', '否']" @change="disabledChange" />
+                    </view>
+                    <view class="u-config-item">
                         <view class="u-item-title">第一个输入框为textarea类型</view>
                         <u-subsection current="1" :list="['是', '否']" @change="textareaChange" />
                     </view>
@@ -72,6 +80,11 @@ const showBtn = ref(false);
 const icon1 = ref('');
 const icon2 = ref('');
 const type = ref<InputType>('text');
+const disabled = ref(false);
+
+function handleClick() {
+    console.log('点击了输入框');
+}
 
 function showBtnChange(index: number) {
     showBtn.value = index === 0;
@@ -95,6 +108,10 @@ function customChange(index: number) {
         icon2.value = '';
         arrow.value = false;
     }
+}
+
+function disabledChange(index: number) {
+    disabled.value = index === 0;
 }
 
 function textareaChange(index: number) {
