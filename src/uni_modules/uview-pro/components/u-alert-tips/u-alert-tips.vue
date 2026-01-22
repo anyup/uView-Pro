@@ -23,9 +23,9 @@
                 v-if="showIcon"
                 :name="uIconName"
                 :size="description ? 40 : 32"
-                class="u-icon"
                 :color="uIconType"
                 :custom-style="iconStyle"
+                custom-class="u-tips-icon"
             ></u-icon>
         </view>
         <view class="u-alert-content" @tap.stop="onClick">
@@ -44,10 +44,10 @@
                 name="close"
                 color="var(--u-light-color)"
                 :size="22"
-                class="u-close-icon"
-                :style="{
+                :custom-style="{
                     top: description ? '18rpx' : '24rpx'
                 }"
+                custom-class="u-close-icon"
             ></u-icon>
         </view>
         <text
@@ -56,8 +56,9 @@
             :style="{
                 top: description ? '18rpx' : '24rpx'
             }"
-            >{{ closeText }}</text
         >
+            {{ closeText }}
+        </text>
     </view>
 </template>
 
@@ -75,7 +76,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import uIcon from '../u-icon/u-icon.vue';
 import { computed } from 'vue';
 import { $u } from '../..';
 import { AlertTipsProps } from './types';
@@ -195,15 +195,21 @@ function onClose() {
     &--border--info-disabled {
         border-color: $u-type-info-disabled;
     }
+
+    :deep(.u-tips-icon) {
+        margin-right: 16rpx;
+    }
+
+    :deep(.u-close-icon) {
+        position: absolute;
+        right: 20rpx;
+        cursor: pointer;
+    }
 }
 
 .u-close-alert-tips {
     opacity: 0;
     visibility: hidden;
-}
-
-.u-icon {
-    margin-right: 16rpx;
 }
 
 .u-alert-title {
@@ -215,12 +221,6 @@ function onClose() {
     font-size: 26rpx;
     text-align: left;
     color: $u-content-color;
-}
-
-.u-close-icon {
-    position: absolute;
-    top: 20rpx;
-    right: 20rpx;
 }
 
 .u-close-hover {
