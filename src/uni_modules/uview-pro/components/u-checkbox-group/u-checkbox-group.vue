@@ -42,7 +42,6 @@ import { CheckboxGroupProps } from './types';
  *              <u-checkbox name="banana">香蕉</u-checkbox>
  *          </u-checkbox-group>
  */
-const instance = getCurrentInstance();
 const props = defineProps(CheckboxGroupProps);
 const emit = defineEmits(['update:modelValue', 'change']);
 

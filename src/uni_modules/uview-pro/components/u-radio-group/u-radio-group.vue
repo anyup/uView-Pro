@@ -63,7 +63,7 @@ function getData() {
 
 /**
  * 设置选中值
- * @param val 选中的 radio 的 name
+ * @param val 选中的 radio 的 value 值
  */
 function setValue(val: string | number) {
     // 通过emit事件，设置父组件通过v-model双向绑定的值

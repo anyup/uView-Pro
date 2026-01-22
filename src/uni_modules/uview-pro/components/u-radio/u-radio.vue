@@ -10,7 +10,9 @@
                 fontSize: $u.addUnit(labelSize)
             }"
         >
-            <slot />
+            <slot>
+                {{ label }}
+            </slot>
         </view>
     </view>
 </template>
@@ -54,6 +56,12 @@ const emit = defineEmits(['change']);
 
 // 使用组件关系 hooks 获取父组件
 const { parentExposed } = useChildren('u-radio', 'u-radio-group');
+
+// radio 的value值，id
+const radioValue = computed(() => {
+    if (props.value !== '') return props.value;
+    return props.name;
+});
 
 // 父组件的默认值（兼容没有父组件的场景）
 const parentData = computed(() => {
@@ -127,7 +135,7 @@ const elShape = computed(() =>
  */
 const iconStyle = computed(() => {
     let style: Record<string, string> = {};
-    if (elActiveColor.value && parentData.value.value == props.name && !elDisabled.value) {
+    if (elActiveColor.value && parentData.value.value == radioValue.value && !elDisabled.value) {
         style.borderColor = elActiveColor.value;
         style.backgroundColor = elActiveColor.value;
     }
@@ -136,14 +144,15 @@ const iconStyle = computed(() => {
     return style;
 });
 
-const iconColor = computed(() => (props.name == parentData.value.value ? 'var(--u-white-color)' : 'transparent'));
+const iconColor = computed(() => (radioValue.value == parentData.value.value ? 'var(--u-white-color)' : 'transparent'));
 
 const iconClass = computed(() => {
     let classes: string[] = [];
     classes.push('u-radio__icon-wrap--' + elShape.value);
-    if (props.name == parentData.value.value) classes.push('u-radio__icon-wrap--checked');
+    if (radioValue.value == parentData.value.value) classes.push('u-radio__icon-wrap--checked');
     if (elDisabled.value) classes.push('u-radio__icon-wrap--disabled');
-    if (props.name == parentData.value.value && elDisabled.value) classes.push('u-radio__icon-wrap--disabled--checked');
+    if (radioValue.value == parentData.value.value && elDisabled.value)
+        classes.push('u-radio__icon-wrap--disabled--checked');
     // 支付宝小程序无法动态绑定一个数组类名，否则解析出来的结果会带有","，而导致失效
     return classes.join(' ');
 });
@@ -192,7 +201,7 @@ function toggle() {
  */
 function emitEvent() {
     // u-radio的name不等于父组件的v-model的值时(意味着未选中)，才发出事件，避免多次点击触发事件
-    if (parentData.value.value != props.name) emit('change', props.name);
+    if (parentData.value.value != radioValue.value) emit('change', radioValue.value);
 }
 /**
  * 改变组件选中状态
@@ -201,7 +210,7 @@ function emitEvent() {
  */
 function setRadioCheckedStatus() {
     emitEvent();
-    parentExposed?.value?.setValue(props.name);
+    parentExposed?.value?.setValue(radioValue.value);
 }
 </script>
 

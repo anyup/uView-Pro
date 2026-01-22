@@ -8,6 +8,8 @@ import { baseProps } from '../common/props';
  */
 export const RadioProps = {
     ...baseProps,
+    label: { type: String, default: '' },
+    value: { type: [String, Number] as PropType<string | number>, default: '' },
     /** radio的名称 */
     name: { type: [String, Number] as PropType<string | number>, default: '' },
     /** 形状，square为方形，circle为圆形 */
