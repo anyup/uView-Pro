@@ -81,6 +81,8 @@ const install = (app: any, options?: UViewProOptions): void => {
         } else {
             // 默认初始化系统主题
             initTheme();
+            // 默认初始化内置语言包以保证可用
+            configProvider.initLocales();
         }
     } catch (error) {
         console.error('[install options] Error:', error);
