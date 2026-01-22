@@ -51,17 +51,20 @@ const isShow = ref(false);
 // 定时器
 let timer: ReturnType<typeof setTimeout> | null = null;
 // 内置配置
-const config = ref({
-    params: {}, // URL跳转的参数，对象
-    title: '', // 显示文本
-    type: '', // 主题类型，primary，success，error，warning，black
-    duration: 2000, // 显示的时间，毫秒
-    isTab: false, // 是否跳转tab页面
-    url: '', // toast消失后是否跳转页面，有则跳转，优先级高于back参数
-    icon: true, // 显示的图标
-    position: 'center', // toast出现的位置
-    callback: null as null | (() => void), // 执行完后的回调函数
-    back: false // 结束toast是否自动返回上一页
+const config = computed(() => {
+    return {
+        zIndex: props.zIndex, // z-index值
+        type: props.type, // 主题类型，primary，success，error，warning，black
+        duration: props.duration, // 显示的时间，毫秒
+        icon: props.icon, // 显示的图标
+        position: props.position, // toast出现的位置
+        callback: props.callback, // 执行完后的回调函数
+        back: props.back, // 结束toast是否自动返回上一页
+        isTab: props.isTab, // 是否跳转tab页面
+        url: props.url, // toast消失后是否跳转页面，有则跳转，优先级高于back参数
+        params: props.params, // URL跳转的参数，对象
+        title: '' // 显示文本
+    };
 });
 // 合并后的临时配置变量
 const tmpConfig = ref<any>({ ...config.value });
