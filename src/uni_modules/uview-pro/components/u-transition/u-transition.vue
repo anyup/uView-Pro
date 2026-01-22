@@ -155,6 +155,23 @@ const handleAnimationEnd = () => {
     }
 };
 
+// 根据mode处理动画顺序（主要用于快速切换时的时序控制）
+const shouldWaitForAnimation = (newPhase: 'enter' | 'leave') => {
+    if (!animating.value) return false;
+
+    const currentPhase = animationPhase.value;
+
+    // 如果当前正在进行相反的动画，根据mode决定是否需要等待
+    if (props.mode === 'out-in' && currentPhase === 'leave' && newPhase === 'enter') {
+        return true; // 等待离开动画完成
+    }
+    if (props.mode === 'in-out' && currentPhase === 'enter' && newPhase === 'leave') {
+        return true; // 等待进入动画完成
+    }
+
+    return false;
+};
+
 watch(
     () => props.show,
     value => {
@@ -171,9 +188,28 @@ watch(
             return;
         }
         if (value) {
-            startEnter();
+            if (shouldWaitForAnimation('enter')) {
+                // 根据mode等待当前动画完成后再开始进入动画
+                // 简单的方式：延迟到下一个tick检查
+                nextTick(() => {
+                    if (!animating.value) {
+                        startEnter();
+                    }
+                });
+            } else {
+                startEnter();
+            }
         } else {
-            startLeave();
+            if (shouldWaitForAnimation('leave')) {
+                // 根据mode等待当前动画完成后再开始离开动画
+                nextTick(() => {
+                    if (!animating.value) {
+                        startLeave();
+                    }
+                });
+            } else {
+                startLeave();
+            }
         }
     },
     { immediate: true }
