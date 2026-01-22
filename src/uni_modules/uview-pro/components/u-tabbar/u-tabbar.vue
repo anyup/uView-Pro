@@ -330,7 +330,7 @@ function containerStyle(index: number) {
         const iconSizeRaw = getIconSize(index);
         const numericSize = parseFloat(String(iconSizeRaw)) || parseFloat(String(props.midButtonSize as any)) || 100;
         // paddingTop: 半个图标高度 + 10rpx 的缓冲间距
-        style.paddingTop = $u.addUnit(numericSize / 2 + 10);
+        style.paddingTop = $u.addUnit(numericSize / 2 + 8);
         style.boxSizing = 'border-box';
     }
     return $u.toStyle(style);
