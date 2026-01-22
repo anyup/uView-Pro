@@ -86,6 +86,7 @@ declare module 'vue' {
         uTimeLineItem: (typeof import('../components/u-time-line-item/u-time-line-item.vue'))['default'];
         uToast: (typeof import('../components/u-toast/u-toast.vue'))['default'];
         uTopTips: (typeof import('../components/u-top-tips/u-top-tips.vue'))['default'];
+        uTransition: (typeof import('../components/u-transition/u-transition.vue'))['default'];
         uTr: (typeof import('../components/u-tr/u-tr.vue'))['default'];
         uUpload: (typeof import('../components/u-upload/u-upload.vue'))['default'];
         uVerificationCode: (typeof import('../components/u-verification-code/u-verification-code.vue'))['default'];

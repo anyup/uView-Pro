@@ -309,6 +309,20 @@ export type FabPosition =
 export type FabDirection = 'top' | 'bottom' | 'left' | 'right';
 // fab 组件 gap
 export type FabGap = Partial<Record<'top' | 'left' | 'right' | 'bottom', number>>;
+// Transition 组件
+export type TransitionPreset =
+    | 'fade'
+    | 'slide-up'
+    | 'slide-down'
+    | 'slide-left'
+    | 'slide-right'
+    | 'zoom-in'
+    | 'zoom-out';
+// Transition 组件 duration
+export type TransitionDuration = {
+    enter?: number;
+    leave?: number;
+};
 
 export type ColorType =
     | 'primary'
