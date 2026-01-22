@@ -38,9 +38,9 @@ const props = defineProps(GapProps);
 const gapStyle = computed(() => {
     return {
         backgroundColor: props.bgColor,
-        height: props.height + 'rpx',
-        marginTop: props.marginTop + 'rpx',
-        marginBottom: props.marginBottom + 'rpx'
+        height: $u.addUnit(props.height),
+        marginTop: $u.addUnit(props.marginTop),
+        marginBottom: $u.addUnit(props.marginBottom)
     };
 });
 </script>
