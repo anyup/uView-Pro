@@ -34,6 +34,7 @@
                 placeholder-class="u-placeholder-class"
                 :placeholder="placeholder"
                 :placeholder-style="`color: ${placeholderColor}`"
+                :adjust-position="adjustPosition"
                 class="u-input"
                 type="text"
                 :style="[

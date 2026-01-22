@@ -52,7 +52,9 @@ export const SearchProps = {
     /** 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"、"30rpx 20rpx"等写法 */
     margin: { type: String, default: '0' },
     /** 左边输入框的图标，可以为uView图标名称或图片路径 */
-    searchIcon: { type: String, default: 'search' }
+    searchIcon: { type: String, default: 'search' },
+    /** 弹出键盘时是否自动调节高度，uni-app默认值是true */
+    adjustPosition: { type: Boolean, default: true }
 };
 
 export type SearchProps = ExtractPropTypes<typeof SearchProps>;
