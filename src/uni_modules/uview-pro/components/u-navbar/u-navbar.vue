@@ -95,7 +95,6 @@ import { NavbarProps } from './types';
 const props = defineProps(NavbarProps);
 // 获取系统状态栏的高度
 const systemInfo = uni.getSystemInfoSync();
-const windowInfo = uni.getWindowInfo();
 
 let menuButtonInfo: any = {};
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
@@ -104,7 +103,14 @@ menuButtonInfo = uni.getMenuButtonBoundingClientRect();
 // #endif
 
 // 状态栏高度
-const statusBarHeight = ref(windowInfo.statusBarHeight);
+const statusBarHeight = ref(0);
+// #ifdef APP || H5 || MP-ALIPAY || MP-WEIXIN
+const windowInfo = uni.getWindowInfo();
+statusBarHeight.value = windowInfo.statusBarHeight;
+// #endif
+// #ifndef APP || H5 || MP-ALIPAY || MP-WEIXIN
+statusBarHeight.value = systemInfo.statusBarHeight;
+// #endif
 
 // 转换字符数值为真正的数值
 const navbarHeight = computed(() => {
