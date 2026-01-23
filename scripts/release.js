@@ -116,6 +116,7 @@ function continueRelease() {
             newVersion = packageJson.version;
             // 更新发布日期
             packageJson.releaseDate = currentDate;
+            fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
         }
 
         console.log(`✨ 新版本: ${newVersion}`);
