@@ -641,6 +641,14 @@ export default [
                 title_en: 'Loading Popup',
                 desc: '阻塞式加载弹窗，用于覆盖页面并提示加载中状态。',
                 desc_en: 'Blocking loading popup to overlay the page and indicate loading status.'
+            },
+            {
+                path: '/pages/componentsB/transition/index',
+                icon: 'loadingPopup',
+                title: 'Transition 动画',
+                title_en: 'Loading Popup',
+                desc: '阻塞式加载弹窗，用于覆盖页面并提示加载中状态。',
+                desc_en: 'Blocking loading popup to overlay the page and indicate loading status.'
             }
         ]
     }

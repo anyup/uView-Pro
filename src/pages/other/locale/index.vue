@@ -9,9 +9,6 @@ const { currentLocale, locales, t: uT, initLocales, setLocale, getLocales } = us
 // vue-i18n
 const { t, locale } = useI18n();
 
-// 本地状态
-const showInitPanel = ref(false);
-
 const currentLocaleName = computed(() => currentLocale.value?.name || '未初始化');
 const vueLocale = computed(() => locale.value || '');
 
@@ -94,9 +91,9 @@ function demoAddFrench() {
                 </view>
                 <view class="panel-content">
                     <view class="button-row">
-                        <button @click="switchLang('zh-Hans')">切换到中文</button>
-                        <button @click="switchLang('en')">Switch to English</button>
-                        <button @click="demoAddFrench">Add French (fr-FR)</button>
+                        <u-button type="primary" @click="switchLang('zh-Hans')">切换到中文</u-button>
+                        <u-button type="primary" @click="switchLang('en')">Switch to English</u-button>
+                        <u-button v-if="false" @click="demoAddFrench">Add French (fr-FR)</u-button>
                     </view>
                 </view>
             </view>
@@ -104,15 +101,16 @@ function demoAddFrench() {
             <view class="example-section">
                 <text class="section-title">示例代码</text>
                 <view class="code-block">
-                    <text class="code-text">
-                        // 在main.ts中初始化uView-Pro，添加新语言并设置为默认语言 \napp.use(uViewPro, { \n locale: { \n
-                        locales: [frFR], // 添加法语语言包 \n defaultLocale: 'fr-FR' // 设置默认语言为法语 \n } \n})
-                        \n\n// 在页面中切换语言 \nimport { useI18n } from 'vue-i18n'; \nimport { useLocale } from
-                        'uview-pro'; \nconst { locale } = useI18n(); \nconst { setLocale } = useLocale(); \n// 切换
-                        vue-i18n 并同步到 uView-Pro \nlocale.value = 'en' \nsetLocale('en-US')
+                    <text class="code-text"
+                        >// 在main.ts中初始化uViewPro，添加新语言包 \napp.use(uViewPro, { \n locale: { \n locales:
+                        [frFR], // 添加法语语言包 \n defaultLocale: 'fr-FR' // 设置默认语言为法语 \n } \n}) \n\n//
+                        在页面中切换语言 \nimport { useI18n } from 'vue-i18n'; \nimport { useLocale } from 'uview-pro';
+                        \nconst { locale } = useI18n(); \nconst { setLocale } = useLocale(); \n// 切换 vue-i18n 并同步到
+                        uView-Pro \nlocale.value = 'en' \nsetLocale('en-US')
                     </text>
                 </view>
             </view>
+            <u-link href="https://uviewpro.cn/zh/guide/i18n.html">更多内容请参考国际化文档：https://uviewpro.cn</u-link>
         </view>
     </demo-page>
 </template>
@@ -176,32 +174,70 @@ function demoAddFrench() {
     gap: 10px;
     flex-wrap: wrap;
 }
-.button-row button {
-    min-width: 110px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(var(--u-border-color-rgb), 0.12);
-    background: white;
-    color: $u-main-color;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
-}
-.button-row button:hover {
-    opacity: 0.95;
-}
+
 .example-section {
-    margin-top: 16px;
+    margin: 24px 0;
 }
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: $u-type-primary;
+    margin-bottom: 12px;
+    display: block;
+}
+
 .code-block {
-    background: rgba(var(--u-border-color-rgb), 0.12);
+    background: rgba(var(--u-border-color-rgb), 0.2);
     border: 1px solid rgba(var(--u-border-color-rgb), 0.6);
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 12px;
+    overflow-x: auto;
 }
+
 .code-text {
     font-family: 'Courier New', monospace;
     font-size: 12px;
     color: $u-main-color;
     white-space: pre-wrap;
     word-break: break-word;
+}
+
+.panel {
+    background: $u-bg-color;
+    border: 1px solid rgba(var(--u-border-color-rgb), 0.6);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: rgba(var(--u-border-color-rgb), 0.2);
+    cursor: pointer;
+    user-select: none;
+
+    &:active {
+        background: rgba(var(--u-border-color-rgb), 0.35);
+    }
+}
+
+.panel-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: $u-main-color;
+}
+
+.toggle-icon {
+    color: $u-tips-color;
+    font-size: 12px;
+}
+
+.panel-content {
+    padding: 16px;
+    border-top: 1px solid $u-border-color;
 }
 </style>

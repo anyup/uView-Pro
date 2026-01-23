@@ -58,6 +58,7 @@
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { ref, computed, watch } from 'vue';
+import { completeMission } from '../../../common/useExperience';
 
 const activeColor = ref('#FA3534');
 const inactiveColor = ref('#b2b2b2');
@@ -125,5 +126,6 @@ function iconChange(index: number) {
 
 function change(val: number) {
     // console.log(val);
+    completeMission('rate');
 }
 </script>

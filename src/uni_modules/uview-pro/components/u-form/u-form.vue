@@ -121,7 +121,7 @@ defineExpose({
         if (!fields.value.includes(field)) fields.value.push(field);
     },
     removeField(field: any) {
-        fields.value = fields.value.filter(f => f.prop !== field.prop)
+        fields.value = fields.value.filter(f => f.prop !== field.prop);
     },
     fields,
     rules,

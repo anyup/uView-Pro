@@ -1,75 +1,82 @@
 <template>
-    <view class="wrap">
-        <view class="item" v-for="(res, index) in siteList" :key="res.id">
-            <view class="top">
-                <view class="name">{{ res.name }}</view>
-                <view class="phone">{{ res.phone }}</view>
-                <view class="tag">
-                    <text v-for="(item, index) in res.tag" :key="index" :class="{ red: item.tagText == '默认' }">
-                        {{ item.tagText }}
-                    </text>
+    <demo-page hide-tabs nav-title="收货地址">
+        <view class="wrap">
+            <view class="item" v-for="res in siteList" :key="res.id">
+                <view class="top">
+                    <view class="name">{{ res.name }}</view>
+                    <view class="phone">{{ res.phone }}</view>
+                    <view class="tag">
+                        <text v-if="res.isDefault" class="red">默认</text>
+                        <text v-for="(item, index) in res.tags" :key="index">{{ item }}</text>
+                    </view>
+                </view>
+                <view class="bottom">
+                    <text class="addr">{{ res.region }} {{ res.detail }}</text>
+                    <view class="actions">
+                        <u-icon @click="editSite(res.id)" name="edit-pen" :size="40" color="#999999"></u-icon>
+                        <u-icon @click="deleteSite(res.id)" name="trash" :size="40" color="#f56c6c"></u-icon>
+                    </view>
                 </view>
             </view>
-            <view class="bottom">
-                广东省深圳市宝安区 自由路66号
-                <u-icon name="edit-pen" :size="40" color="#999999"></u-icon>
+            <view v-if="!siteList.length" class="empty">
+                <u-gap height="200"></u-gap>
+                <u-empty mode="list" text="暂无地址，点击下方新增" :show-empty="true"></u-empty>
+            </view>
+            <view class="addSite" @tap="toAddSite">
+                <view class="add">
+                    <u-icon name="plus" color="#ffffff" class="icon" :size="30"></u-icon>新建收货地址
+                </view>
             </view>
         </view>
-        <view class="addSite" @tap="toAddSite">
-            <view class="add"> <u-icon name="plus" color="#ffffff" class="icon" :size="30"></u-icon>新建收货地址 </view>
-        </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { $u } from 'uview-pro';
+import { ref } from 'vue';
+import { onShow } from '@dcloudio/uni-app';
 
-// 收货地址列表
+const STORAGE_KEY = 'uview-address-list';
 const siteList = ref<any[]>([]);
 
-/**
- * 获取收货地址数据（模拟）
- */
-function getData() {
-    siteList.value = [
-        {
-            id: 1,
-            name: '游X',
-            phone: '183****5523',
-            tag: [{ tagText: '默认' }, { tagText: '家' }],
-            site: '广东省深圳市宝安区 自由路66号'
-        },
-        {
-            id: 2,
-            name: '李XX',
-            phone: '183****5555',
-            tag: [{ tagText: '公司' }],
-            site: '广东省深圳市宝安区 翻身路xx号'
-        },
-        {
-            id: 3,
-            name: '王YY',
-            phone: '153****5555',
-            tag: [],
-            site: '广东省深圳市宝安区 平安路13号'
-        }
-    ];
+function loadList() {
+    try {
+        const list = uni.getStorageSync(STORAGE_KEY) || [];
+        siteList.value = Array.isArray(list) ? list : [];
+    } catch (error) {
+        console.warn('load address list error', error);
+        siteList.value = [];
+    }
 }
 
-/**
- * 跳转到新建收货地址页面
- */
 function toAddSite() {
     uni.navigateTo({ url: '/pages/template/address/addSite' });
 }
 
-// 页面加载时获取数据
-onMounted(getData);
+function editSite(id: string) {
+    uni.navigateTo({ url: `/pages/template/address/addSite?id=${id}` });
+}
+
+function deleteSite(id: string) {
+    uni.showModal({
+        title: '删除地址',
+        content: '确定要删除该地址吗？',
+        success: res => {
+            if (res.confirm) {
+                const list = siteList.value.filter(item => item.id !== id);
+                uni.setStorageSync(STORAGE_KEY, list);
+                siteList.value = list;
+                $u.toast('已删除', 'success');
+            }
+        }
+    });
+}
+
+onShow(loadList);
 </script>
 
 <style lang="scss" scoped>
 .wrap {
-    min-height: 100vh;
     background-color: $u-bg-white;
 }
 .item {
@@ -108,6 +115,14 @@ onMounted(getData);
         font-size: 28rpx;
         justify-content: space-between;
         color: #999999;
+        .addr {
+            flex: 1;
+            padding-right: 20rpx;
+        }
+        .actions {
+            display: flex;
+            gap: 20rpx;
+        }
     }
 }
 .addSite {
@@ -115,9 +130,10 @@ onMounted(getData);
     justify-content: space-around;
     width: 600rpx;
     line-height: 100rpx;
-    position: absolute;
-    bottom: 30rpx;
-    left: 80rpx;
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom) + 20px);
+    left: 50%;
+    transform: translateX(-50%);
     background-color: red;
     border-radius: 60rpx;
     font-size: 30rpx;

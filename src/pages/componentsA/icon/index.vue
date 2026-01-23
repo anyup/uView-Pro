@@ -608,26 +608,6 @@ const iconList = ref([
 ]);
 
 const selectIcon = (name: string) => {
-    // #ifdef H5
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-        navigator.clipboard
-            .writeText(name)
-            .then(() => {
-                uni.showToast({
-                    title: '图标名称已复制',
-                    icon: 'none'
-                });
-            })
-            .catch(() => {
-                uni.showToast({
-                    title: '复制失败',
-                    icon: 'none'
-                });
-            });
-        return;
-    }
-    // #endif
-    // #ifndef H5
     uni.setClipboardData({
         data: name,
         success: () => {
@@ -637,7 +617,6 @@ const selectIcon = (name: string) => {
             });
         }
     });
-    // #endif
 };
 </script>
 

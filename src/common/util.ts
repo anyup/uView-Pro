@@ -35,29 +35,3 @@ export function getRandomColor(): string {
     ];
     return colors[Math.floor(Math.random() * colors.length)];
 }
-
-/**
- * 获取标题（中英文）
- */
-export function useTitle(index: number) {
-    const { t, locale } = useI18n();
-    const titles = ['nav.components', 'nav.js', 'nav.template', 'nav.about'];
-    function getTitle(key: string, item: any = null) {
-        if (!item) return key;
-        return locale.value === 'zh-Hans' ? item[key] : item[`${key}_en`];
-    }
-
-    function setTitle() {
-        uni.setNavigationBarTitle({
-            title: t(titles[index])
-        });
-        titles.forEach((text, index) => {
-            uni.setTabBarItem({
-                index,
-                text: t(text)
-            });
-        });
-    }
-
-    return { getTitle, setTitle };
-}

@@ -74,6 +74,7 @@
 <script lang="ts" setup>
 import type { ButtonSize, ButtonType, Shape } from '@/uni_modules/uview-pro/types/global';
 import { computed, ref } from 'vue';
+import { completeMission } from '../../../common/useExperience';
 
 // 主题选择
 const type = ref<ButtonType>('default');
@@ -112,6 +113,7 @@ const typeChange = (e: number) => {
             type.value = 'success';
             break;
     }
+    completeMission('button');
 };
 
 // 自定义样式

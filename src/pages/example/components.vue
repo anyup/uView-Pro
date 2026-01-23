@@ -1,26 +1,80 @@
 <template>
-    <demo-page :nav-title="t('nav.components')" :nav-back="false" :tabbar="true">
+    <demo-page ref="demoPageRef" :nav-title="t('nav.components')" :nav-back="false" :tabbar="true">
         <view class="wrap">
             <page-nav :desc="desc" title="nav.components" :index="0"></page-nav>
 
             <!-- 主题切换按钮区域 -->
-            <view class="theme-switcher">
-                <view class="theme-label">{{ t('components.theme') || '主题' }}</view>
-                <view class="theme-buttons">
-                    <view
-                        v-for="theme in themes"
-                        :key="theme.name"
-                        class="theme-btn"
-                        :class="{ active: currentTheme.name === theme.name }"
-                        @click="switchTheme(theme.name)"
-                        :title="theme.description"
-                    >
-                        <view class="theme-color" :style="{ backgroundColor: theme.color.primary }"></view>
-                        <view class="theme-name">{{ theme.label }}</view>
+            <demo-guide-use
+                :storage-key="GUIDE_THEME_SWITCHER_KEY"
+                :immediate="guideImmediate[0]"
+                placement="bottom"
+                text="点击「切换主题项目」可体验不同主题效果"
+                button-text="我知道了"
+                @close="guideImmediate[1] = true"
+                :position="{ top: '800rpx', left: '100rpx' }"
+            >
+                <view class="theme-switcher">
+                    <view class="theme-label">{{ t('components.theme') || '主题' }}</view>
+                    <view class="theme-buttons">
+                        <view
+                            v-for="theme in themes"
+                            :key="theme.name"
+                            class="theme-btn"
+                            :class="{ active: currentTheme.name === theme.name }"
+                            @click="switchTheme(theme.name)"
+                            :title="theme.description"
+                        >
+                            <view class="theme-color" :style="{ backgroundColor: theme.color.primary }"></view>
+                            <view class="theme-name">{{ t(`theme.${theme.name}`) }}</view>
+                        </view>
                     </view>
                 </view>
-            </view>
+            </demo-guide-use>
 
+            <!-- 体验地图入口 -->
+            <demo-guide-use
+                :storage-key="GUIDE_EXPERIENCE_KEY"
+                :immediate="guideImmediate[1]"
+                placement="top"
+                text="点击「体验地图 ITEM」可查看我的组件体验等级"
+                button-text="我知道了"
+                @close="demoPageRef.showTabbarGuide()"
+                :position="{ top: '300rpx', left: '100rpx' }"
+            >
+                <view
+                    class="experience-entry"
+                    @click="$u.route({ url: '/pages/example/experienceMap', type: 'switchTab' })"
+                >
+                    <view class="experience-entry__left">
+                        <view class="experience-entry__title">{{ t('common.experienceMap') }}</view>
+                        <view class="experience-entry__desc">{{ t('common.experienceMapDesc') }}</view>
+                    </view>
+                    <view class="experience-entry__right">
+                        <u-icon
+                            custom-prefix="custom-icon"
+                            name="map-route"
+                            size="70"
+                            :color="$u.getColor('primary')"
+                        ></u-icon>
+                    </view>
+                </view>
+            </demo-guide-use>
+
+            <!-- 实用场景入口 -->
+            <view class="scenes-entry" @click="$u.route({ url: '/pages/scenes/index' })">
+                <view class="scenes-entry__left">
+                    <view class="scenes-entry__title">{{ t('common.scene') }}</view>
+                    <view class="scenes-entry__desc">{{ t('common.sceneDesc') }}</view>
+                </view>
+                <view class="scenes-entry__right">
+                    <u-icon
+                        custom-prefix="custom-icon"
+                        name="template-fill"
+                        size="70"
+                        :color="$u.getColor('success')"
+                    ></u-icon>
+                </view>
+            </view>
             <!-- 搜索区域 -->
             <view class="search-container">
                 <u-sticky bg-color="transparent">
@@ -65,7 +119,7 @@
                             v-for="(item, idx) in group.list"
                             :key="idx"
                             @click="handleCardClick(item.path)"
-                            :style="{ animationDelay: gIndex * 120 + idx * 60 + 'ms' }"
+                            :style="{ animationDelay: gIndex * 120 + Number(idx) * 60 + 'ms' }"
                         >
                             <!-- 图像小预览 -->
                             <u-image
@@ -100,29 +154,28 @@
 import rawList from './components.config';
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { onPageScroll, onShareAppMessage, onShow } from '@dcloudio/uni-app';
-import { useTitle } from '@/common/util';
+import { onPageScroll, onShow } from '@dcloudio/uni-app';
+import { useTitle } from '@/common/useHooks';
 import { useTheme } from '@/uni_modules/uview-pro';
 import { $u } from 'uview-pro';
+import { GUIDE_THEME_SWITCHER_KEY, GUIDE_EXPERIENCE_KEY } from '@/common/constant';
+import { completeMission } from '../../common/useExperience';
 
 // 主题管理（使用组合式 useTheme）
 const { currentTheme, themes, setTheme } = useTheme();
 
 const switchTheme = (themeName: string) => {
     setTheme(themeName);
+    completeMission('theme');
 };
 
-// 组件数据
-const itemStyle = {
-    border: '1px solid rgb(230, 230, 230)',
-    marginTop: '20px',
-    padding: '15rpx 20rpx',
-    borderRadius: '8px'
-};
 const list = ref<any[]>(Array.isArray(rawList) ? rawList : []); // 明确类型 any[]
 const scrollTop = ref(0);
 const searchText = ref('');
 const searchBgColor = computed(() => $u.getColor('bgColor'));
+const demoPageRef = ref();
+
+const guideImmediate = ref([true, false]);
 
 // 国际化
 const { t, locale } = useI18n();
@@ -138,6 +191,16 @@ const getIcon = (path: string) => {
 
 // 组件描述
 const desc = computed(() => t('components.desc'));
+
+function backToTop() {
+    // uni.pageScrollTo 用于页面滚动到顶部
+    if (typeof uni !== 'undefined' && uni.pageScrollTo) {
+        uni.pageScrollTo({
+            scrollTop: 0,
+            duration: 0
+        });
+    }
+}
 
 // 搜索过滤逻辑：支持 title / title_en / description / path
 const filteredList = computed(() => {
@@ -200,16 +263,6 @@ function openPage(path: string) {
     uni.navigateTo({ url: path });
 }
 
-/**
- * 分享
- */
-onShareAppMessage(res => {
-    return {
-        title: 'uView Pro - 组件示例',
-        path: '/pages/example/components'
-    };
-});
-
 // 页面滚动事件处理
 onPageScroll(e => {
     scrollTop.value = e.scrollTop;
@@ -224,7 +277,7 @@ onShow(() => {
 <style lang="scss" scoped>
 // 主题切换器
 .theme-switcher {
-    padding: 24rpx 30rpx;
+    padding: 0 30rpx 24rpx 30rpx;
     background: transparent;
 
     .theme-label {
@@ -279,6 +332,62 @@ onShow(() => {
             color: $u-type-primary;
             font-weight: 700;
         }
+    }
+}
+
+.experience-entry {
+    margin: 0 30rpx 12rpx;
+    padding: 30rpx 22rpx;
+    border-radius: 16rpx;
+    background: linear-gradient(135deg, rgba(41, 121, 255, 0.12), rgba(25, 190, 107, 0.08));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.06);
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: 6rpx;
+    }
+    &__title {
+        font-size: 28rpx;
+        font-weight: 600;
+        color: $u-main-color;
+    }
+    &__desc {
+        font-size: 24rpx;
+        color: $u-tips-color;
+    }
+}
+
+.scenes-entry {
+    margin: 0 30rpx 12rpx;
+    padding: 30rpx 22rpx;
+    border-radius: 16rpx;
+    background: linear-gradient(135deg, rgba(25, 190, 107, 0.12), rgba(41, 121, 255, 0.08));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+
+    &:active {
+        transform: scale(0.98);
+    }
+
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: 6rpx;
+    }
+    &__title {
+        font-size: 28rpx;
+        font-weight: 600;
+        color: $u-main-color;
+    }
+    &__desc {
+        font-size: 24rpx;
+        color: $u-tips-color;
     }
 }
 

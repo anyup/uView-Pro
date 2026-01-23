@@ -1,43 +1,46 @@
 <template>
-    <view>
-        <view class="comment" v-for="(res, index) in commentList" :key="res.id">
-            <view class="left"><image :src="res.url" mode="aspectFill"></image></view>
-            <view class="right">
-                <view class="top">
-                    <view class="name">{{ res.name }}</view>
-                    <view class="like" :class="{ highlight: res.isLike }">
-                        <view class="num">{{ res.likeNum }}</view>
-                        <u-icon
-                            v-if="!res.isLike"
-                            name="thumb-up"
-                            :size="30"
-                            color="#9a9a9a"
-                            @click="getLike(index)"
-                        ></u-icon>
-                        <u-icon v-if="res.isLike" name="thumb-up-fill" :size="30" @click="getLike(index)"></u-icon>
+    <demo-page hide-tabs nav-title="评论列表">
+        <view>
+            <view class="comment" v-for="(res, index) in commentList" :key="res.id">
+                <view class="left"><image :src="res.url" mode="aspectFill"></image></view>
+                <view class="right">
+                    <view class="top">
+                        <view class="name">{{ res.name }}</view>
+                        <view class="like" :class="{ highlight: res.isLike }">
+                            <view class="num">{{ res.likeNum }}</view>
+                            <u-icon
+                                v-if="!res.isLike"
+                                name="thumb-up"
+                                :size="30"
+                                color="#9a9a9a"
+                                @click="getLike(index)"
+                            ></u-icon>
+                            <u-icon v-if="res.isLike" name="thumb-up-fill" :size="30" @click="getLike(index)"></u-icon>
+                        </view>
                     </view>
-                </view>
-                <view class="content">{{ res.contentText }}</view>
-                <view class="reply-box">
-                    <view class="item" v-for="(item, index) in res.replyList" :key="item.index">
-                        <view class="username">{{ item.name }}</view>
-                        <view class="text">{{ item.contentStr }}</view>
+                    <view class="content">{{ res.contentText }}</view>
+                    <view class="reply-box">
+                        <view class="item" v-for="(item, index) in res.replyList" :key="item.index">
+                            <view class="username">{{ item.name }}</view>
+                            <view class="text">{{ item.contentStr }}</view>
+                        </view>
+                        <view class="all-reply" @tap="toAllReply" v-if="res.replyList != undefined">
+                            共{{ res.allReply }}条回复
+                            <u-icon class="more" name="arrow-right" :size="26"></u-icon>
+                        </view>
                     </view>
-                    <view class="all-reply" @tap="toAllReply" v-if="res.replyList != undefined">
-                        共{{ res.allReply }}条回复
-                        <u-icon class="more" name="arrow-right" :size="26"></u-icon>
+                    <view class="bottom">
+                        {{ res.date }}
+                        <view class="reply">回复</view>
                     </view>
-                </view>
-                <view class="bottom">
-                    {{ res.date }}
-                    <view class="reply">回复</view>
                 </view>
             </view>
         </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
+import { $u } from 'uview-pro';
 import { ref, onMounted } from 'vue';
 
 // 评论列表响应式
@@ -59,8 +62,10 @@ function getLike(index: number) {
     item.isLike = !item.isLike;
     if (item.isLike) {
         item.likeNum++;
+        $u.toast('点赞成功');
     } else {
         item.likeNum--;
+        $u.toast('取消点赞');
     }
 }
 

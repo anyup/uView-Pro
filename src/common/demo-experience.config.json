@@ -1,0 +1,46 @@
+{
+    "component-image": {
+        "tasks": [
+            {
+                "key": "status",
+                "title": "切换不同加载状态",
+                "desc": "体验加载成功 / 加载中 / 加载失败三种反馈效果"
+            },
+            {
+                "key": "slot",
+                "title": "自定义占位反馈",
+                "desc": "启用自定义加载中与错误插槽，观察差异"
+            },
+            {
+                "key": "shape",
+                "title": "调整图片形状",
+                "desc": "在方形与圆形样式之间切换，感受视觉变化"
+            },
+            {
+                "key": "source",
+                "title": "切换资源来源",
+                "desc": "在网络图片与本地图片之间切换，体验加载表现"
+            }
+        ]
+    },
+    "component-button": {
+        "tasks": [
+            { "key": "type", "title": "切换按钮主题", "desc": "体验 primary / error / warning / success 不同主题风格" },
+            { "key": "size", "title": "调整按钮尺寸", "desc": "在默认 / 中等 / 迷你之间切换，感受占位变化" },
+            { "key": "shape", "title": "改变按钮形状", "desc": "在直角与圆角之间切换，观察视觉差异" },
+            { "key": "plain", "title": "体验镂空样式", "desc": "在是否镂空之间切换，体验不同信息层级" },
+            { "key": "ripple", "title": "水波纹动效体验", "desc": "开启/关闭水波纹，再点击按钮观察动效" },
+            { "key": "hairLine", "title": "细边框显示", "desc": "打开或关闭细边框，感受边界勾勒效果" },
+            { "key": "loading", "title": "加载状态反馈", "desc": "切换按钮加载状态，体验“执行中”反馈样式" }
+        ]
+    },
+    "component-avatar": {
+        "tasks": [
+            { "key": "mode", "title": "切换头像形态", "desc": "在圆形与圆角方形之间来回体验" },
+            { "key": "sex", "title": "调整性别标识", "desc": "切换男 / 女 / 不显示三种性别标识" },
+            { "key": "level", "title": "显示/隐藏等级", "desc": "控制等级角标的显示与否，感受信息密度变化" },
+            { "key": "content", "title": "自定义头像内容", "desc": "在图片头像与纯文字头像之间切换" },
+            { "key": "size", "title": "调整头像尺寸", "desc": "尝试 large / default / mini / 自定义像素四种尺寸" }
+        ]
+    }
+}

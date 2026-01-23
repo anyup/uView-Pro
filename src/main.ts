@@ -14,24 +14,14 @@ export function createApp() {
     app.use(uViewPro, {
         theme: {
             themes: themes,
-            defaultTheme: 'purple',
+            defaultTheme: 'green',
             defaultDarkMode: 'auto'
         },
         locale: {
             // 部分覆盖内置语言包
             locales: [
                 { name: 'zh-CN', uModal: { confirmText: '好的', cancelText: '算了' } },
-                { name: 'en-US', uModal: { confirmText: 'OK', cancelText: 'Cancel' } },
-                // 添加法语语言包，仅为示例
-                {
-                    name: 'fr-FR',
-                    uModal: {
-                        title: 'Avertissement',
-                        content: 'Contenu',
-                        confirmText: 'Confirmer',
-                        cancelText: 'Annuler'
-                    }
-                }
+                { name: 'en-US', uModal: { confirmText: 'OK', cancelText: 'Cancel' } }
             ],
             defaultLocale: 'zh-CN'
         }

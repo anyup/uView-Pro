@@ -7,11 +7,11 @@
                     <view class="u-demo-area">
                         <view>
                             <u-radio-group
+                                v-model="value"
                                 :shape="shape"
                                 :size="size"
                                 :width="width"
                                 :wrap="wrap"
-                                v-model="value"
                                 @change="radioGroupChange"
                                 :activeColor="activeColor"
                             >
@@ -20,14 +20,13 @@
                                     v-for="(item, index) in list"
                                     :disabled="item.disabled"
                                     :key="index"
-                                    :name="item.name"
-                                >
-                                    {{ item.name }}
-                                </u-radio>
+                                    :value="item.value"
+                                    :label="item.label"
+                                />
                             </u-radio-group>
                         </view>
                         <view class="u-demo-result-line">
-                            {{ value ? `选中了"${result}"` : '请选择' }}
+                            {{ value ? `选中了"${value}"` : '请选择' }}
                         </view>
                     </view>
                 </view>
@@ -77,27 +76,26 @@ import { reactive, ref } from 'vue';
 
 const list = reactive([
     {
-        name: '荔枝',
-        checked: true,
+        label: '荔枝',
+        value: '荔枝',
         disabled: false
     },
     {
-        name: '香蕉',
-        checked: false,
+        label: '香蕉',
+        value: '香蕉',
         disabled: false
     },
     {
-        name: '橙子',
-        checked: false,
+        label: '橙子',
+        value: '橙子',
         disabled: false
     },
     {
-        name: '草莓',
-        checked: false,
+        label: '草莓',
+        value: '草莓',
         disabled: false
     }
 ]);
-const result = ref('荔枝');
 const shape = ref<Shape>('circle');
 const value = ref('荔枝');
 const activeColor = ref($u.color.primary);
@@ -114,20 +112,10 @@ function sizeChange(index: number) {
 }
 
 function defaultChooseChange(index: number) {
-    // 特别处理对第一个选的选中的情况，涉及到提示语，选中状态等
-    // 实际开发中不会存在这些情况，只是演示用
-    if (index == 0) {
-        result.value = value.value = list[0].name;
-    } else {
-        if (value.value == list[0].name) {
-            result.value = value.value = '';
-        }
-    }
+    value.value = list[0].value;
 }
 
 function activeColorChange(index: number) {
-    // 如果用户尚未勾选任何radio，切换颜色时，默认选中第一个让用户看到效果，因为勾选了才有效果
-    if (!result.value) result.value = value.value = list[0].name;
     let theme =
         index == 0 ? 'primary' : index == 1 ? 'error' : index == 2 ? 'warning' : index == 3 ? 'success' : 'info';
     activeColor.value = $u.color[theme];
@@ -138,11 +126,11 @@ function disabledChange(index: number) {
 }
 
 function radioChange(e) {
-    //console.log(e);
+    console.log('radioChange', e);
 }
 
 function radioGroupChange(e) {
-    result.value = e;
+    console.log('radioGroupChange', e);
 }
 
 function widthChange(index: number) {

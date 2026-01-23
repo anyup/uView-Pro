@@ -1,78 +1,81 @@
 <template>
-    <view class="wrap">
-        <view class="comment">
-            <view class="top">
-                <view class="left">
-                    <view class="heart-photo"><image :src="comment.url" mode=""></image></view>
-                    <view class="user-info">
-                        <view class="name">{{ comment.name }}</view>
-                        <view class="date">06-25 13:58</view>
+    <demo-page hide-tabs nav-title="评论列表">
+        <view class="wrap">
+            <view class="comment">
+                <view class="top">
+                    <view class="left">
+                        <view class="heart-photo"><image :src="comment.url" mode=""></image></view>
+                        <view class="user-info">
+                            <view class="name">{{ comment.name }}</view>
+                            <view class="date">06-25 13:58</view>
+                        </view>
+                    </view>
+                    <view class="right" :class="{ highlight: comment.isLike }">
+                        {{ comment.likeNum }}
+                        <u-icon
+                            v-if="!comment.isLike"
+                            name="thumb-up"
+                            class="like"
+                            color="$u-tips-color"
+                            :size="30"
+                            @click="getLike"
+                        ></u-icon>
+                        <u-icon
+                            v-if="comment.isLike"
+                            name="thumb-up-fill"
+                            class="like"
+                            :size="30"
+                            @click="getLike"
+                        ></u-icon>
                     </view>
                 </view>
-                <view class="right" :class="{ highlight: comment.isLike }">
-                    {{ comment.likeNum }}
-                    <u-icon
-                        v-if="!comment.isLike"
-                        name="thumb-up"
-                        class="like"
-                        color="$u-tips-color"
-                        :size="30"
-                        @click="getLike"
-                    ></u-icon>
-                    <u-icon
-                        v-if="comment.isLike"
-                        name="thumb-up-fill"
-                        class="like"
-                        :size="30"
-                        @click="getLike"
-                    ></u-icon>
-                </view>
+                <view class="content">{{ comment.contentText }}</view>
             </view>
-            <view class="content">{{ comment.contentText }}</view>
-        </view>
-        <view class="all-reply">
-            <view class="all-reply-top">全部回复（{{ comment.allReply }}）</view>
-            <view class="item" v-for="(item, index) in commentList" :key="index">
-                <view class="comment">
-                    <view class="top">
-                        <view class="left">
-                            <view class="heart-photo"><image :src="item.url" mode=""></image></view>
-                            <view class="user-info">
-                                <view class="name">{{ item.name }}</view>
-                                <view class="date">{{ item.date }}</view>
+            <view class="all-reply">
+                <view class="all-reply-top">全部回复（{{ comment.allReply }}）</view>
+                <view class="item" v-for="(item, index) in commentList" :key="index">
+                    <view class="comment">
+                        <view class="top">
+                            <view class="left">
+                                <view class="heart-photo"><image :src="item.url" mode=""></image></view>
+                                <view class="user-info">
+                                    <view class="name">{{ item.name }}</view>
+                                    <view class="date">{{ item.date }}</view>
+                                </view>
+                            </view>
+                            <view class="right" :class="{ highlight: item.isLike }">
+                                <view class="num">{{ item.likeNum }}</view>
+                                <u-icon
+                                    v-if="!item.isLike"
+                                    name="thumb-up"
+                                    class="like"
+                                    :size="30"
+                                    color="$u-tips-color"
+                                    @click="getLike(index)"
+                                ></u-icon>
+                                <u-icon
+                                    v-if="item.isLike"
+                                    name="thumb-up-fill"
+                                    class="like"
+                                    :size="30"
+                                    @click="getLike(index)"
+                                ></u-icon>
                             </view>
                         </view>
-                        <view class="right" :class="{ highlight: item.isLike }">
-                            <view class="num">{{ item.likeNum }}</view>
-                            <u-icon
-                                v-if="!item.isLike"
-                                name="thumb-up"
-                                class="like"
-                                :size="30"
-                                color="$u-tips-color"
-                                @click="getLike(index)"
-                            ></u-icon>
-                            <u-icon
-                                v-if="item.isLike"
-                                name="thumb-up-fill"
-                                class="like"
-                                :size="30"
-                                @click="getLike(index)"
-                            ></u-icon>
+                        <view class="reply" v-if="item.reply">
+                            <view class="username">{{ item.reply.name }}</view>
+                            <view class="text">{{ item.reply.contentStr }}</view>
                         </view>
+                        <view class="content">{{ item.contentText }}</view>
                     </view>
-                    <view class="reply" v-if="item.reply">
-                        <view class="username">{{ item.reply.name }}</view>
-                        <view class="text">{{ item.reply.contentStr }}</view>
-                    </view>
-                    <view class="content">{{ item.contentText }}</view>
                 </view>
             </view>
         </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
+import { $u } from 'uview-pro';
 import { ref, onMounted } from 'vue';
 
 // 主评论对象
@@ -91,16 +94,20 @@ function getLike(index?: number) {
         item.isLike = !item.isLike;
         if (item.isLike) {
             item.likeNum++;
+            $u.toast('点赞成功');
         } else {
             item.likeNum--;
+            $u.toast('取消点赞');
         }
     } else {
         // 主评论点赞
         comment.value.isLike = !comment.value.isLike;
         if (comment.value.isLike) {
             comment.value.likeNum++;
+            $u.toast('点赞成功');
         } else {
             comment.value.likeNum--;
+            $u.toast('取消点赞');
         }
     }
 }

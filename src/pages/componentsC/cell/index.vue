@@ -70,6 +70,7 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
+import { completeMission } from '../../../common/useExperience';
 
 const icon = ref('setting');
 const arrow = ref(true);
@@ -108,6 +109,7 @@ function rightSlotChange(index: number) {
 
 function click(index: any) {
     // console.log(index);
+    completeMission('cell');
 }
 </script>
 

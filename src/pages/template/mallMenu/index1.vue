@@ -1,45 +1,64 @@
 <template>
-    <view class="u-wrap">
-        <view class="u-search-box">
-            <u-search shape="round"></u-search>
-        </view>
-        <view class="u-menu-wrap">
-            <scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop">
-                <view
-                    v-for="(item, index) in tabbar"
-                    :key="index"
-                    class="u-tab-item"
-                    :class="[current == index ? 'u-tab-item-active' : '']"
-                    :data-current="index"
-                    @tap.stop="swichMenu(index)"
-                >
-                    <text class="u-line-1">{{ item.name }}</text>
-                </view>
-            </scroll-view>
-            <block v-for="(item, index) in tabbar" :key="index">
-                <scroll-view scroll-y class="right-box" v-if="current == index">
-                    <view class="page-view">
-                        <view class="class-item">
-                            <view class="item-title">
-                                <text>{{ item.name }}</text>
-                            </view>
-                            <view class="item-container">
-                                <view class="thumb-box" v-for="(item1, index1) in item.foods" :key="index1">
-                                    <image class="item-menu-image" :src="item1.icon" mode=""></image>
-                                    <view class="item-menu-name">{{ item1.name }}</view>
+    <demo-page hide-tabs hide-ad nav-title="分类">
+        <view class="u-wrap">
+            <view class="u-search-box">
+                <u-search
+                    v-model="searchText"
+                    placeholder="搜索商品"
+                    shape="round"
+                    @search="handleSearch"
+                    @custom="handleSearch"
+                ></u-search>
+            </view>
+            <view class="u-menu-wrap">
+                <scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop">
+                    <view
+                        v-for="(item, index) in tabbar"
+                        :key="index"
+                        class="u-tab-item"
+                        :class="[current == index ? 'u-tab-item-active' : '']"
+                        :data-current="index"
+                        @tap.stop="switchMenu(index)"
+                    >
+                        <text class="u-line-1">{{ item.name }}</text>
+                    </view>
+                </scroll-view>
+                <block v-for="(item, index) in tabbar" :key="index">
+                    <scroll-view scroll-y class="right-box" v-if="current == index">
+                        <view class="page-view">
+                            <view class="class-item">
+                                <view class="item-title">
+                                    <text>{{ item.name }}</text>
+                                </view>
+                                <view class="item-container">
+                                    <view
+                                        class="thumb-box"
+                                        :class="{ 'thumb-box--match': isMatch(item1) }"
+                                        v-for="(item1, index1) in item.foods"
+                                        :key="index1"
+                                    >
+                                        <image class="item-menu-image" :src="item1.icon" mode=""></image>
+                                        <view
+                                            class="item-menu-name"
+                                            :class="{ 'item-menu-name--match': isMatch(item1) }"
+                                        >
+                                            {{ item1.name }}
+                                        </view>
+                                    </view>
                                 </view>
                             </view>
                         </view>
-                    </view>
-                </scroll-view>
-            </block>
+                    </scroll-view>
+                </block>
+            </view>
         </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue';
+import { ref, getCurrentInstance, computed } from 'vue';
 import classifyDataRaw from '@/common/classify.data';
+import { $u } from 'uview-pro';
 
 // 分类数据类型声明
 interface FoodItem {
@@ -52,8 +71,8 @@ interface TabItem {
 }
 
 const classifyData = classifyDataRaw as TabItem[];
-
 const instance = getCurrentInstance();
+const searchText = ref('');
 // 左侧菜单数据
 const tabbar = ref<TabItem[]>(classifyData);
 // 左侧菜单滚动条位置
@@ -64,18 +83,30 @@ const current = ref(0);
 const menuHeight = ref(0);
 // 单个菜单项高度
 const menuItemHeight = ref(0);
+const keyword = computed(() => searchText.value.trim().toLowerCase());
 
-/**
- * 获取图片（示例，未实际使用）
- */
-function getImg(): number {
-    return Math.floor(Math.random() * 35);
+function handleSearch() {
+    if (!keyword.value) return;
+    const idx = tabbar.value.findIndex(item =>
+        (item.foods || []).some(food => food.name.toLowerCase().includes(keyword.value))
+    );
+    if (idx !== -1) {
+        switchMenu(idx);
+    } else {
+        $u.toast('没有找到该商品');
+    }
+}
+
+function isMatch(food: FoodItem) {
+    if (!keyword.value) return false;
+    return food.name.toLowerCase().includes(keyword.value);
 }
 
 /**
  * 点击左侧菜单切换
  */
-async function swichMenu(index: number) {
+async function switchMenu(index: number) {
+    if (!tabbar.value.length) return;
     if (index === current.value) return;
     current.value = index;
     // 如果为0，意味着尚未初始化
@@ -115,9 +146,12 @@ function getElRect(elClass: string, dataVal: 'menuHeight' | 'menuItemHeight'): P
 
 <style lang="scss" scoped>
 .u-wrap {
-    height: calc(100vh);
+    height: 100vh;
+    /* #ifdef MP-WEIXIN */
+    height: calc(100vh - var(--status-bar-height) - 70px);
+    /* #endif */
     /* #ifdef H5 */
-    height: calc(100vh - var(--window-top));
+    height: calc(100vh - var(--window-top) - 44px);
     /* #endif */
     display: flex;
     flex-direction: column;
@@ -213,8 +247,19 @@ function getElRect(elClass: string, dataVal: 'menuHeight' | 'menuItemHeight'): P
     margin-top: 20rpx;
 }
 
+.thumb-box--match {
+    border: 2rpx solid $u-type-primary;
+    border-radius: 12rpx;
+    padding: 8rpx;
+}
+
 .item-menu-image {
     width: 120rpx;
     height: 120rpx;
+}
+
+.item-menu-name--match {
+    color: $u-type-primary;
+    font-weight: 700;
 }
 </style>

@@ -55,6 +55,7 @@
 import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
 import { ref } from 'vue';
+import { completeMission } from '@/common/useExperience';
 
 const list = ref([]);
 const data = ref([
@@ -111,6 +112,7 @@ function countChange(index: number) {
 
 function change(index: number) {
     current.value = index;
+    completeMission('tabs');
 }
 
 function modeChange(index: number) {

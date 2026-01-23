@@ -35,6 +35,7 @@ export default [
                 desc: '对象深度合并，常用于配置和主题',
                 desc_en: 'Deep merge objects, commonly used for configuration and themes'
             },
+            // #ifndef APP-HARMONY
             {
                 path: 'deepClone',
                 icon: 'clone',
@@ -43,6 +44,7 @@ export default [
                 desc: '对象/数组深度克隆，避免引用混乱',
                 desc_en: 'Deep clone objects/arrays to avoid reference issues'
             },
+            // #endif
             {
                 path: 'timeFormat',
                 icon: 'time',
@@ -147,6 +149,7 @@ export default [
                 desc: '获取节点尺寸/位置信息',
                 desc_en: 'Get node size and position information'
             },
+            // #ifndef APP-HARMONY
             {
                 path: 'mpShare',
                 icon: 'share',
@@ -155,6 +158,7 @@ export default [
                 desc: '小程序分享能力',
                 desc_en: 'Mini Program sharing capability'
             }
+            // #endif
         ]
     }
 ];

@@ -1,191 +1,192 @@
 <template>
-    <view>
-        <view class="wrap">
-            <wx-tips :type="1" />
-            <view class="u-tabs-box">
-                <u-tabs-swiper
-                    activeColor="#f29100"
-                    ref="tabs"
-                    :list="list"
-                    :current="current"
-                    @change="change"
-                    :is-scroll="false"
-                    swiperWidth="750"
-                ></u-tabs-swiper>
+    <demo-page hide-tabs show-wx-tips nav-title="订单列表">
+        <view>
+            <view class="wrap">
+                <view class="u-tabs-box">
+                    <u-tabs-swiper
+                        activeColor="#f29100"
+                        ref="tabs"
+                        :list="list"
+                        :current="current"
+                        @change="change"
+                        :is-scroll="false"
+                        swiperWidth="750"
+                    ></u-tabs-swiper>
+                </view>
+                <swiper
+                    class="swiper-box"
+                    :current="swiperCurrent"
+                    @transition="transition"
+                    @animationfinish="animationfinish"
+                >
+                    <!-- 待付款 -->
+                    <swiper-item class="swiper-item">
+                        <scroll-view scroll-y style="height: 100%; width: 100%" @scrolltolower="reachBottom">
+                            <view class="page-box">
+                                <view class="order" v-for="(res, index) in orderList[0]" :key="res.id">
+                                    <view class="top">
+                                        <view class="left">
+                                            <u-icon name="home" :size="30" color="rgb(94,94,94)"></u-icon>
+                                            <view class="store">{{ res.store }}</view>
+                                            <u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"></u-icon>
+                                        </view>
+                                        <view class="right">{{ res.deal }}</view>
+                                    </view>
+                                    <view class="item" v-for="(item, idx) in res.goodsList" :key="idx">
+                                        <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>
+                                        <view class="content">
+                                            <view class="title u-line-2">{{ item.title }}</view>
+                                            <view class="type">{{ item.type }}</view>
+                                            <view class="delivery-time">发货时间 {{ item.deliveryTime }}</view>
+                                        </view>
+                                        <view class="right">
+                                            <view class="price">
+                                                ￥{{ priceInt(item.price) }}
+                                                <text class="decimal">.{{ priceDecimal(item.price) }}</text>
+                                            </view>
+                                            <view class="number">x{{ item.number }}</view>
+                                        </view>
+                                    </view>
+                                    <view class="total">
+                                        共{{ totalNum(res.goodsList) }}件商品 合计:
+                                        <text class="total-price">
+                                            ￥{{ priceInt(totalPrice(res.goodsList)) }}.
+                                            <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>
+                                        </text>
+                                    </view>
+                                    <view class="bottom">
+                                        <view class="more">
+                                            <u-icon name="more-dot-fill" color="rgb(203,203,203)"></u-icon>
+                                        </view>
+                                        <view class="logistics btn" @click="$u.toast('查看物流')">查看物流</view>
+                                        <view class="exchange btn" @click="$u.toast('卖了换钱')">卖了换钱</view>
+                                        <view class="evaluate btn" @click="$u.toast('评价')">评价</view>
+                                    </view>
+                                </view>
+                                <u-loadmore :status="loadStatus[0]" bgColor="#f2f2f2"></u-loadmore>
+                            </view>
+                        </scroll-view>
+                    </swiper-item>
+                    <!-- 待发货 -->
+                    <swiper-item class="swiper-item">
+                        <scroll-view scroll-y style="height: 100%; width: 100%" @scrolltolower="reachBottom">
+                            <view class="page-box">
+                                <view class="order" v-for="(res, index) in orderList[1]" :key="res.id">
+                                    <view class="top">
+                                        <view class="left">
+                                            <u-icon name="home" :size="30" color="rgb(94,94,94)"></u-icon>
+                                            <view class="store">{{ res.store }}</view>
+                                            <u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"></u-icon>
+                                        </view>
+                                        <view class="right">{{ res.deal }}</view>
+                                    </view>
+                                    <view class="item" v-for="(item, idx) in res.goodsList" :key="idx">
+                                        <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>
+                                        <view class="content">
+                                            <view class="title u-line-2">{{ item.title }}</view>
+                                            <view class="type">{{ item.type }}</view>
+                                            <view class="delivery-time">发货时间 {{ item.deliveryTime }}</view>
+                                        </view>
+                                        <view class="right">
+                                            <view class="price">
+                                                ￥{{ priceInt(item.price) }}
+                                                <text class="decimal">.{{ priceDecimal(item.price) }}</text>
+                                            </view>
+                                            <view class="number">x{{ item.number }}</view>
+                                        </view>
+                                    </view>
+                                    <view class="total">
+                                        共{{ totalNum(res.goodsList) }}件商品 合计:
+                                        <text class="total-price">
+                                            ￥{{ priceInt(totalPrice(res.goodsList)) }}.
+                                            <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>
+                                        </text>
+                                    </view>
+                                    <view class="bottom">
+                                        <view class="more">
+                                            <u-icon name="more-dot-fill" color="rgb(203,203,203)"></u-icon>
+                                        </view>
+                                        <view class="logistics btn" @click="$u.toast('查看物流')">查看物流</view>
+                                        <view class="exchange btn" @click="$u.toast('卖了换钱')">卖了换钱</view>
+                                        <view class="evaluate btn" @click="$u.toast('评价')">评价</view>
+                                    </view>
+                                </view>
+                                <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>
+                            </view>
+                        </scroll-view>
+                    </swiper-item>
+                    <!-- 待收货（无数据） -->
+                    <swiper-item class="swiper-item">
+                        <scroll-view scroll-y style="height: 100%; width: 100%">
+                            <view class="page-box">
+                                <view>
+                                    <view class="centre">
+                                        <image
+                                            src="https://ik.imagekit.io/anyup/uview-pro/template/taobao-order.png"
+                                            mode=""
+                                        ></image>
+                                        <view class="explain">
+                                            您还没有相关的订单
+                                            <view class="tips">可以去看看有那些想买的</view>
+                                        </view>
+                                        <view class="btn" @click="$u.toast('随便逛逛')">随便逛逛</view>
+                                    </view>
+                                </view>
+                            </view>
+                        </scroll-view>
+                    </swiper-item>
+                    <!-- 待评价 -->
+                    <swiper-item class="swiper-item">
+                        <scroll-view scroll-y style="height: 100%; width: 100%" @scrolltolower="reachBottom">
+                            <view class="page-box">
+                                <view class="order" v-for="(res, index) in orderList[3]" :key="res.id">
+                                    <view class="top">
+                                        <view class="left">
+                                            <u-icon name="home" :size="30" color="rgb(94,94,94)"></u-icon>
+                                            <view class="store">{{ res.store }}</view>
+                                            <u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"></u-icon>
+                                        </view>
+                                        <view class="right">{{ res.deal }}</view>
+                                    </view>
+                                    <view class="item" v-for="(item, idx) in res.goodsList" :key="idx">
+                                        <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>
+                                        <view class="content">
+                                            <view class="title u-line-2">{{ item.title }}</view>
+                                            <view class="type">{{ item.type }}</view>
+                                            <view class="delivery-time">发货时间 {{ item.deliveryTime }}</view>
+                                        </view>
+                                        <view class="right">
+                                            <view class="price">
+                                                ￥{{ priceInt(item.price) }}
+                                                <text class="decimal">.{{ priceDecimal(item.price) }}</text>
+                                            </view>
+                                            <view class="number">x{{ item.number }}</view>
+                                        </view>
+                                    </view>
+                                    <view class="total">
+                                        共{{ totalNum(res.goodsList) }}件商品 合计:
+                                        <text class="total-price">
+                                            ￥{{ priceInt(totalPrice(res.goodsList)) }}.
+                                            <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>
+                                        </text>
+                                    </view>
+                                    <view class="bottom">
+                                        <view class="more">
+                                            <u-icon name="more-dot-fill" color="rgb(203,203,203)"></u-icon>
+                                        </view>
+                                        <view class="logistics btn" @click="$u.toast('查看物流')">查看物流</view>
+                                        <view class="exchange btn" @click="$u.toast('卖了换钱')">卖了换钱</view>
+                                        <view class="evaluate btn" @click="$u.toast('评价')">评价</view>
+                                    </view>
+                                </view>
+                                <u-loadmore :status="loadStatus[3]" bgColor="#f2f2f2"></u-loadmore>
+                            </view>
+                        </scroll-view>
+                    </swiper-item>
+                </swiper>
             </view>
-            <swiper
-                class="swiper-box"
-                :current="swiperCurrent"
-                @transition="transition"
-                @animationfinish="animationfinish"
-            >
-                <!-- 待付款 -->
-                <swiper-item class="swiper-item">
-                    <scroll-view scroll-y style="height: 100%; width: 100%" @scrolltolower="reachBottom">
-                        <view class="page-box">
-                            <view class="order" v-for="(res, index) in orderList[0]" :key="res.id">
-                                <view class="top">
-                                    <view class="left">
-                                        <u-icon name="home" :size="30" color="rgb(94,94,94)"></u-icon>
-                                        <view class="store">{{ res.store }}</view>
-                                        <u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"></u-icon>
-                                    </view>
-                                    <view class="right">{{ res.deal }}</view>
-                                </view>
-                                <view class="item" v-for="(item, idx) in res.goodsList" :key="idx">
-                                    <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>
-                                    <view class="content">
-                                        <view class="title u-line-2">{{ item.title }}</view>
-                                        <view class="type">{{ item.type }}</view>
-                                        <view class="delivery-time">发货时间 {{ item.deliveryTime }}</view>
-                                    </view>
-                                    <view class="right">
-                                        <view class="price">
-                                            ￥{{ priceInt(item.price) }}
-                                            <text class="decimal">.{{ priceDecimal(item.price) }}</text>
-                                        </view>
-                                        <view class="number">x{{ item.number }}</view>
-                                    </view>
-                                </view>
-                                <view class="total">
-                                    共{{ totalNum(res.goodsList) }}件商品 合计:
-                                    <text class="total-price">
-                                        ￥{{ priceInt(totalPrice(res.goodsList)) }}.
-                                        <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>
-                                    </text>
-                                </view>
-                                <view class="bottom">
-                                    <view class="more">
-                                        <u-icon name="more-dot-fill" color="rgb(203,203,203)"></u-icon>
-                                    </view>
-                                    <view class="logistics btn">查看物流</view>
-                                    <view class="exchange btn">卖了换钱</view>
-                                    <view class="evaluate btn">评价</view>
-                                </view>
-                            </view>
-                            <u-loadmore :status="loadStatus[0]" bgColor="#f2f2f2"></u-loadmore>
-                        </view>
-                    </scroll-view>
-                </swiper-item>
-                <!-- 待发货 -->
-                <swiper-item class="swiper-item">
-                    <scroll-view scroll-y style="height: 100%; width: 100%" @scrolltolower="reachBottom">
-                        <view class="page-box">
-                            <view class="order" v-for="(res, index) in orderList[1]" :key="res.id">
-                                <view class="top">
-                                    <view class="left">
-                                        <u-icon name="home" :size="30" color="rgb(94,94,94)"></u-icon>
-                                        <view class="store">{{ res.store }}</view>
-                                        <u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"></u-icon>
-                                    </view>
-                                    <view class="right">{{ res.deal }}</view>
-                                </view>
-                                <view class="item" v-for="(item, idx) in res.goodsList" :key="idx">
-                                    <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>
-                                    <view class="content">
-                                        <view class="title u-line-2">{{ item.title }}</view>
-                                        <view class="type">{{ item.type }}</view>
-                                        <view class="delivery-time">发货时间 {{ item.deliveryTime }}</view>
-                                    </view>
-                                    <view class="right">
-                                        <view class="price">
-                                            ￥{{ priceInt(item.price) }}
-                                            <text class="decimal">.{{ priceDecimal(item.price) }}</text>
-                                        </view>
-                                        <view class="number">x{{ item.number }}</view>
-                                    </view>
-                                </view>
-                                <view class="total">
-                                    共{{ totalNum(res.goodsList) }}件商品 合计:
-                                    <text class="total-price">
-                                        ￥{{ priceInt(totalPrice(res.goodsList)) }}.
-                                        <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>
-                                    </text>
-                                </view>
-                                <view class="bottom">
-                                    <view class="more">
-                                        <u-icon name="more-dot-fill" color="rgb(203,203,203)"></u-icon>
-                                    </view>
-                                    <view class="logistics btn">查看物流</view>
-                                    <view class="exchange btn">卖了换钱</view>
-                                    <view class="evaluate btn">评价</view>
-                                </view>
-                            </view>
-                            <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>
-                        </view>
-                    </scroll-view>
-                </swiper-item>
-                <!-- 待收货（无数据） -->
-                <swiper-item class="swiper-item">
-                    <scroll-view scroll-y style="height: 100%; width: 100%">
-                        <view class="page-box">
-                            <view>
-                                <view class="centre">
-                                    <image
-                                        src="https://ik.imagekit.io/anyup/uview-pro/template/taobao-order.png"
-                                        mode=""
-                                    ></image>
-                                    <view class="explain">
-                                        您还没有相关的订单
-                                        <view class="tips">可以去看看有那些想买的</view>
-                                    </view>
-                                    <view class="btn">随便逛逛</view>
-                                </view>
-                            </view>
-                        </view>
-                    </scroll-view>
-                </swiper-item>
-                <!-- 待评价 -->
-                <swiper-item class="swiper-item">
-                    <scroll-view scroll-y style="height: 100%; width: 100%" @scrolltolower="reachBottom">
-                        <view class="page-box">
-                            <view class="order" v-for="(res, index) in orderList[3]" :key="res.id">
-                                <view class="top">
-                                    <view class="left">
-                                        <u-icon name="home" :size="30" color="rgb(94,94,94)"></u-icon>
-                                        <view class="store">{{ res.store }}</view>
-                                        <u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"></u-icon>
-                                    </view>
-                                    <view class="right">{{ res.deal }}</view>
-                                </view>
-                                <view class="item" v-for="(item, idx) in res.goodsList" :key="idx">
-                                    <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>
-                                    <view class="content">
-                                        <view class="title u-line-2">{{ item.title }}</view>
-                                        <view class="type">{{ item.type }}</view>
-                                        <view class="delivery-time">发货时间 {{ item.deliveryTime }}</view>
-                                    </view>
-                                    <view class="right">
-                                        <view class="price">
-                                            ￥{{ priceInt(item.price) }}
-                                            <text class="decimal">.{{ priceDecimal(item.price) }}</text>
-                                        </view>
-                                        <view class="number">x{{ item.number }}</view>
-                                    </view>
-                                </view>
-                                <view class="total">
-                                    共{{ totalNum(res.goodsList) }}件商品 合计:
-                                    <text class="total-price">
-                                        ￥{{ priceInt(totalPrice(res.goodsList)) }}.
-                                        <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>
-                                    </text>
-                                </view>
-                                <view class="bottom">
-                                    <view class="more">
-                                        <u-icon name="more-dot-fill" color="rgb(203,203,203)"></u-icon>
-                                    </view>
-                                    <view class="logistics btn">查看物流</view>
-                                    <view class="exchange btn">卖了换钱</view>
-                                    <view class="evaluate btn">评价</view>
-                                </view>
-                            </view>
-                            <u-loadmore :status="loadStatus[3]" bgColor="#f2f2f2"></u-loadmore>
-                        </view>
-                    </scroll-view>
-                </swiper-item>
-            </swiper>
         </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">

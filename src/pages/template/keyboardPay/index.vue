@@ -1,47 +1,48 @@
 <template>
-    <view class="wrap">
-        <wx-tips :type="1" />
-        <view class="u-padding-40">
-            <u-button type="success" @click="showPop(true)">
-                <u-icon name="red-packet"></u-icon>
-                <text class="u-padding-left-10">发送1.00元红包</text>
-            </u-button>
-        </view>
-        <u-keyboard
-            default=""
-            ref="uKeyboard"
-            mode="number"
-            :mask="true"
-            :mask-close-able="false"
-            :dot-enabled="false"
-            v-model="show"
-            :safe-area-inset-bottom="true"
-            :tooltip="false"
-            @change="onChange"
-            @backspace="onBackspace"
-        >
-            <view>
-                <view class="u-text-center u-padding-20 money">
-                    <text>1.00</text>
-                    <text class="u-font-20 u-padding-left-10">元</text>
-                    <view class="u-padding-10 close" data-flag="false" @tap="showPop(false)">
-                        <u-icon name="close" color="#333333" size="28"></u-icon>
-                    </view>
-                </view>
-                <view class="u-flex u-row-center">
-                    <u-message-input
-                        mode="box"
-                        :maxlength="6"
-                        :dot-fill="true"
-                        v-model="password"
-                        :disabled-keyboard="true"
-                        @finish="finish"
-                    ></u-message-input>
-                </view>
-                <view class="u-text-center u-padding-top-10 u-padding-bottom-20 tips">支付键盘</view>
+    <demo-page hide-tabs show-wx-tips nav-title="支付键盘">
+        <view class="wrap">
+            <view class="u-padding-40">
+                <u-button type="success" @click="showPop(true)">
+                    <u-icon name="red-packet"></u-icon>
+                    <text class="u-padding-left-10">发送1.00元红包</text>
+                </u-button>
             </view>
-        </u-keyboard>
-    </view>
+            <u-keyboard
+                default=""
+                ref="uKeyboard"
+                mode="number"
+                :mask="true"
+                :mask-close-able="false"
+                :dot-enabled="false"
+                v-model="show"
+                :safe-area-inset-bottom="true"
+                :tooltip="false"
+                @change="onChange"
+                @backspace="onBackspace"
+            >
+                <view>
+                    <view class="u-text-center u-padding-20 money">
+                        <text>1.00</text>
+                        <text class="u-font-20 u-padding-left-10">元</text>
+                        <view class="u-padding-10 close" data-flag="false" @tap="showPop(false)">
+                            <u-icon name="close" color="#333333" size="28"></u-icon>
+                        </view>
+                    </view>
+                    <view class="u-flex u-row-center">
+                        <u-message-input
+                            mode="box"
+                            :maxlength="6"
+                            :dot-fill="true"
+                            :value="password"
+                            :disabled-keyboard="true"
+                            @finish="finish"
+                        ></u-message-input>
+                    </view>
+                    <view class="u-text-center u-padding-top-10 u-padding-bottom-20 tips">支付键盘</view>
+                </view>
+            </u-keyboard>
+        </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
@@ -105,10 +106,6 @@ function finish() {
 </script>
 
 <style lang="scss">
-.wrap {
-    min-height: 100vh;
-    background-color: $u-bg-color;
-}
 .money {
     font-size: 80rpx;
     color: $u-type-warning;

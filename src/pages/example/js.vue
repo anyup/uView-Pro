@@ -51,8 +51,10 @@
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import rawList from './js.config';
-import { onShareAppMessage, onShow } from '@dcloudio/uni-app';
-import { getRandomColor, useTitle } from '@/common/util';
+import { onShow } from '@dcloudio/uni-app';
+import { useTitle } from '@/common/useHooks';
+import { completeMission } from '@/common/useExperience';
+import { getRandomColor } from '@/common/util';
 
 const list = ref<any[]>(Array.isArray(rawList) ? rawList : []);
 
@@ -86,21 +88,15 @@ function swiperClick(index: number) {
 function getBannerImage(name: string) {
     let url = `https://ik.imagekit.io/anyup/uview-pro/swiper/${name}.png`;
     // #ifdef APP-HARMONY
-    url = `/static/app/${name}.png`;
+    url = `/static/app/swiper/${name}.png`;
     // #endif
     return url;
 }
 
-onShareAppMessage(res => {
-    return {
-        title: 'uView Pro - 工具库示例',
-        path: '/pages/example/js'
-    };
-});
-
 // 设置标题
 onShow(() => {
     setTitle();
+    completeMission('tools');
 });
 </script>
 

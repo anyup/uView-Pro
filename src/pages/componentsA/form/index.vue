@@ -2,10 +2,10 @@
     <demo-page
         title="Form 表单"
         desc="此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。"
+        show-wx-tips
         :apis="'form'"
     >
         <view class="wrap">
-            <wx-tips />
             <u-form :model="model" :rules="rules" ref="uFormRef" :errorType="errorType">
                 <u-form-item
                     :leftIconStyle="{ color: '#888', fontSize: '32rpx' }"
@@ -225,6 +225,7 @@
 import { ref, reactive, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
 import type { FormErrorType, FormRules } from '@/uni_modules/uview-pro/types/global';
+import { completeMission } from '../../../common/useExperience';
 
 // 表单模型类型声明
 interface Model {
@@ -532,6 +533,7 @@ function handleSubmit() {
             console.log('验证失败', errors);
         }
     });
+    completeMission('form');
 }
 
 // 重置表单

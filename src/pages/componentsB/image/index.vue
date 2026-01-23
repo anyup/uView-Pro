@@ -61,6 +61,7 @@
 import { type ImageInstance } from '@/uni_modules/uview-pro/components/u-image/types';
 import { ref } from 'vue';
 import type { Shape } from '@/uni_modules/uview-pro/types/global';
+import { completeMission } from '../../../common/useExperience';
 
 // 定义响应式数据
 const src = ref('https://ik.imagekit.io/anyup/uview-pro/logo/removebg-new.png');
@@ -98,6 +99,7 @@ const errorChange = (index: number) => {
 
 const shapeChange = (index: number) => {
     shape.value = index === 0 ? 'square' : 'circle';
+    completeMission('image-shape');
 };
 
 const srcChange = (index: number) => {

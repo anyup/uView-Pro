@@ -79,6 +79,7 @@
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { ref } from 'vue';
+import { completeMission } from '../../../common/useExperience';
 
 const value = ref(30);
 const useSlot = ref(false);
@@ -148,6 +149,7 @@ function edgeValueChange(index: number) {
 
 function end() {
     // console.log('end');
+    completeMission('slider-move');
 }
 
 function moving() {

@@ -22,10 +22,10 @@
         "dev:quickapp-webview": "uni -p quickapp-webview",
         "dev:quickapp-webview-huawei": "uni -p quickapp-webview-huawei",
         "dev:quickapp-webview-union": "uni -p quickapp-webview-union",
-        "build": "uni build",
+        "build": "node scripts/update-date.js && uni build",
         "postbuild": "node scripts/fix-empty-css.js",
-        "build:custom": "uni build -p",
-        "build:h5": "uni build",
+        "build:custom": "node scripts/update-date.js && uni build -p",
+        "build:h5": "node scripts/update-date.js && uni build",
         "build:h5:ssr": "uni build --ssr",
         "build:app": "uni build -p app",
         "build:app-android": "uni build -p app-android",
@@ -37,7 +37,7 @@
         "build:mp-lark": "uni build -p mp-lark",
         "build:mp-qq": "uni build -p mp-qq",
         "build:mp-toutiao": "uni build -p mp-toutiao",
-        "build:mp-weixin": "uni build -p mp-weixin",
+        "build:mp-weixin": "node scripts/update-date.js && uni build -p mp-weixin",
         "build:mp-xhs": "uni build -p mp-xhs",
         "build:mp-dingtalk": "uni build -p mp-dingtalk",
         "build:quickapp-webview": "uni build -p quickapp-webview",
@@ -137,5 +137,7 @@
     },
     "volta": {
         "node": "20.13.1"
-    }
+    },
+    "buildDate": "2026-01-23",
+    "releaseDate": "2026-01-15"
 }

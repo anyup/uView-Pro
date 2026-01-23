@@ -19,32 +19,19 @@
                 size="50"
                 :color="darkMode === 'dark' ? 'warning' : 'primary'"
                 :name="lang"
-                @click="switchLang"
+                @click="switchLanguage"
             ></u-icon>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import { useTitle } from '@/common/util';
-import { useTheme, useLocale } from 'uview-pro';
+import { useTheme } from 'uview-pro';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useLang, useTitle } from '@/common/useHooks';
 
-const { darkMode, getDarkMode, setDarkMode } = useTheme();
-
-const darkModeIcon = computed(() => {
-    switch (darkMode.value) {
-        case 'light':
-            return 'sun';
-        case 'dark':
-            return 'moon';
-        case 'auto':
-            return 'auto';
-        default:
-            return 'sun';
-    }
-});
+const { darkMode } = useTheme();
 
 /**
  * 页面导航栏组件
@@ -59,8 +46,8 @@ const props = defineProps<{
 
 // 国际化钩子
 const { t, locale } = useI18n();
-const { setLocale } = useLocale();
 const { setTitle } = useTitle(props.index);
+const { switchLang } = useLang();
 
 /**
  * 当前语言标识
@@ -72,32 +59,11 @@ const lang = computed(() => {
 /**
  * 语言切换
  */
-function switchLang() {
-    const nextLocale = locale.value === 'zh-Hans' ? 'en' : 'zh-Hans';
-    uni.setLocale(nextLocale);
-    locale.value = nextLocale;
-    // 同步到组件库国际化（vue-i18n -> uview-pro）
-    const uViewLocale = nextLocale === 'zh-Hans' ? 'zh-CN' : 'en-US';
-    setLocale(uViewLocale);
+function switchLanguage() {
+    const nextLang = locale.value === 'zh-Hans' ? 'en' : 'zh-Hans';
+    switchLang(nextLang);
     // 设置标题
     setTitle();
-}
-
-function switchTheme() {
-    switch (getDarkMode()) {
-        case 'light':
-            setDarkMode('dark');
-            break;
-        case 'dark':
-            setDarkMode('auto');
-            break;
-        case 'auto':
-            setDarkMode('light');
-            break;
-        default:
-            setDarkMode('dark');
-            break;
-    }
 }
 </script>
 

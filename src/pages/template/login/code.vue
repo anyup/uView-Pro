@@ -1,23 +1,25 @@
 <template>
-    <view class="wrap">
-        <view class="key-input">
-            <view class="title">输入验证码</view>
-            <view class="tips">验证码已发送至 +150****9320</view>
-            <u-message-input
-                :focus="true"
-                :value="value"
-                @change="change"
-                @finish="finish"
-                mode="bottomLine"
-                :maxlength="maxlength"
-            ></u-message-input>
-            <text :class="{ error: error }">验证码错误，请重新输入</text>
-            <view class="captcha">
-                <text :class="{ noCaptcha: show }" @tap="noCaptcha">收不到验证码点这里</text>
-                <text :class="{ regain: !show }">{{ second }}秒后重新获取验证码</text>
+    <demo-page hide-tabs nav-title="登录">
+        <view class="wrap">
+            <view class="key-input">
+                <view class="title">输入验证码</view>
+                <view class="tips">验证码已发送至 +150****9320</view>
+                <u-message-input
+                    :focus="true"
+                    :value="value"
+                    @change="change"
+                    @finish="finish"
+                    mode="bottomLine"
+                    :maxlength="maxlength"
+                ></u-message-input>
+                <text :class="{ error: error }">验证码错误，请重新输入</text>
+                <view class="captcha">
+                    <text :class="{ noCaptcha: show }" @tap="noCaptcha">收不到验证码点这里</text>
+                    <text :class="{ regain: !show }">{{ second }}秒后重新获取验证码</text>
+                </view>
             </view>
         </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
@@ -80,8 +82,6 @@ function finish(val: string) {
 
 <style lang="scss" scoped>
 .wrap {
-    min-height: 100vh;
-    background-color: $u-bg-white;
     padding: 80rpx;
 }
 

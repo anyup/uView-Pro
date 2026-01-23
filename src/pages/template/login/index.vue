@@ -1,34 +1,36 @@
 <template>
-    <view class="wrap">
-        <view class="top"></view>
-        <view class="content">
-            <view class="title">欢迎登录美团</view>
-            <input class="u-border-bottom" type="number" v-model="tel" placeholder="请输入手机号" />
-            <view class="tips">未注册的手机号验证后自动创建美团账号</view>
-            <button @tap="submit" :style="[inputStyle]" class="getCaptcha">获取短信验证码</button>
-            <view class="alternative">
-                <view class="password">密码登录</view>
-                <view class="issue">遇到问题</view>
-            </view>
-        </view>
-        <view class="loginBottom">
-            <view class="loginType">
-                <view class="wechat item">
-                    <view class="icon"><u-icon size="70" name="weixin-fill" color="rgb(83,194,64)"></u-icon></view>
-                    微信
-                </view>
-                <view class="QQ item">
-                    <view class="icon"><u-icon size="70" name="qq-fill" color="rgb(17,183,233)"></u-icon></view>
-                    QQ
+    <demo-page hide-tabs nav-title="登录">
+        <view class="wrap">
+            <view class="top"></view>
+            <view class="content">
+                <view class="title">欢迎登录美团</view>
+                <input class="u-border-bottom" type="number" v-model="tel" placeholder="请输入手机号" />
+                <view class="tips">未注册的手机号验证后自动创建美团账号</view>
+                <button @tap="submit" :style="[inputStyle]" class="getCaptcha">获取短信验证码</button>
+                <view class="alternative">
+                    <view class="password" @click="$u.toast('密码登录')">密码登录</view>
+                    <view class="issue" @click="$u.toast('遇到问题')">遇到问题</view>
                 </view>
             </view>
-            <view class="hint">
-                登录代表同意
-                <text class="link">美团点评用户协议、隐私政策，</text>
-                并授权使用您的美团点评账号信息（如昵称、头像、收获地址）以便您统一管理
+            <view class="loginBottom">
+                <view class="loginType">
+                    <view class="wechat item" @click="$u.toast('微信登录')">
+                        <view class="icon"><u-icon size="70" name="weixin-fill" color="rgb(83,194,64)"></u-icon></view>
+                        微信
+                    </view>
+                    <view class="QQ item" @click="$u.toast('QQ登录')">
+                        <view class="icon"><u-icon size="70" name="qq-fill" color="rgb(17,183,233)"></u-icon></view>
+                        QQ
+                    </view>
+                </view>
+                <view class="hint">
+                    登录代表同意
+                    <text class="link">美团点评用户协议、隐私政策，</text>
+                    并授权使用您的美团点评账号信息（如昵称、头像、收获地址）以便您统一管理
+                </view>
             </view>
         </view>
-    </view>
+    </demo-page>
 </template>
 
 <script setup lang="ts">
@@ -64,8 +66,6 @@ function submit() {
 
 <style lang="scss" scoped>
 .wrap {
-    min-height: 100vh;
-    background-color: $u-bg-white;
     font-size: 28rpx;
     .content {
         width: 600rpx;

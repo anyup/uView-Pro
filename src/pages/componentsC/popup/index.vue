@@ -73,6 +73,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
 import type { PopupMode, PopupCloseIconPos } from '@/uni_modules/uview-pro/types/global';
+import { completeMission } from '../../../common/useExperience';
 
 const show = ref(false);
 const mode = ref<PopupMode>('left');
@@ -116,6 +117,7 @@ function open() {
 
 function btnClick() {
     show.value = true;
+    completeMission('popup');
 }
 </script>
 

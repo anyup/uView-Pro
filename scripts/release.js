@@ -95,6 +95,7 @@ if (currentBranch !== 'main' && currentBranch !== 'master') {
 function continueRelease() {
     try {
         const packageJsonPath = path.join(process.cwd(), 'package.json');
+        const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD格式
         let newVersion;
 
         // 更新版本号
@@ -103,6 +104,8 @@ function continueRelease() {
             console.log(`📦 更新版本号为 ${targetVersion}...`);
             const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
             packageJson.version = targetVersion;
+            // 更新发布日期
+            packageJson.releaseDate = currentDate;
             fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
             newVersion = targetVersion;
         } else {
@@ -111,9 +114,12 @@ function continueRelease() {
             execCommand(`npm version ${versionType} --no-git-tag-version`);
             const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
             newVersion = packageJson.version;
+            // 更新发布日期
+            packageJson.releaseDate = currentDate;
         }
 
         console.log(`✨ 新版本: ${newVersion}`);
+        console.log(`✅ 发布日期: ${currentDate}`);
 
         // 同时更新uview-pro模块的版本号
         console.log('📦 更新uview-pro模块版本号...');
