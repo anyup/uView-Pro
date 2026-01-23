@@ -82,36 +82,34 @@
                 <view class="demo-page_desc" v-if="desc">{{ desc }}</view>
             </view>
             <!-- 标签栏 -->
-            <u-sticky>
-                <demo-guide-use
-                    v-if="!tabbar && !hideTabs && tabList.length > 1"
-                    :immediate="guideImmediate[0]"
-                    :position="{ top: '500rpx', right: '200rpx' }"
-                    :storage-key="GUIDE_TABS_KEY"
-                    placement="bottom"
-                    text="左右切换体验：\n演示：初步了解组件的各项能力\n互动反馈：组件沉浸式体验评价\nAPI文档：探索组件更多详细用法"
-                    button-text="下一步"
-                    @close="guideImmediate[1] = true"
-                >
-                    <view v-if="!tabbar && !hideTabs && tabList.length > 1" class="demo-page-tabs">
-                        <view class="demo-page-tabs__container">
-                            <view
-                                v-for="(item, index) in tabList"
-                                :key="index"
-                                class="demo-page-tabs__item"
-                                :class="{ 'demo-page-tabs__item--active': tabIndex === index }"
-                                @click="change(index)"
-                            >
-                                <view class="demo-page-tabs__item-content">
-                                    <text class="demo-page-tabs__item-text">{{ item.name }}</text>
-                                    <view class="demo-page-tabs__item-indicator"></view>
-                                </view>
+            <demo-guide-use
+                v-if="!tabbar && !hideTabs && tabList.length > 1"
+                :immediate="guideImmediate[0]"
+                :position="{ top: '500rpx', right: '200rpx' }"
+                :storage-key="GUIDE_TABS_KEY"
+                placement="bottom"
+                text="左右切换体验：\n演示：初步了解组件的各项能力\n互动反馈：组件沉浸式体验评价\nAPI文档：探索组件更多详细用法"
+                button-text="下一步"
+                @close="guideImmediate[1] = true"
+            >
+                <view v-if="!tabbar && !hideTabs && tabList.length > 1" class="demo-page-tabs">
+                    <view class="demo-page-tabs__container">
+                        <view
+                            v-for="(item, index) in tabList"
+                            :key="index"
+                            class="demo-page-tabs__item"
+                            :class="{ 'demo-page-tabs__item--active': tabIndex === index }"
+                            @click="change(index)"
+                        >
+                            <view class="demo-page-tabs__item-content">
+                                <text class="demo-page-tabs__item-text">{{ item.name }}</text>
+                                <view class="demo-page-tabs__item-indicator"></view>
                             </view>
-                            <view class="demo-page-tabs__slider" :style="sliderStyle"></view>
                         </view>
+                        <view class="demo-page-tabs__slider" :style="sliderStyle"></view>
                     </view>
-                </demo-guide-use>
-            </u-sticky>
+                </view>
+            </demo-guide-use>
             <!-- #ifdef MP-WEIXIN -->
             <ad-custom v-if="!hideAd && !tabbar" unit-id="adunit-f5898174f44ec220"></ad-custom>
             <!-- #endif -->
