@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.2] - 2026-01-23
+
+### ✨ Features | 新功能
+
+- **u-checkbox-group:** 重构u-checkbox多选框组件，group支持v-model双向绑定，标准化使用api ([e4a12f1](https://github.com/anyup/uView-Pro/commit/e4a12f1af6a4d8cae18823b42a918052df36b62d))
+- **hooks:** 新增防抖和节流hook ([4b09373](https://github.com/anyup/uView-Pro/commit/4b09373c31dc3ab7ded01c6ea0cfdf902642b857))
+- **u-search:** 新增adjust-position属性控制键盘弹出时的高度调节 ([3443e7c](https://github.com/anyup/uView-Pro/commit/3443e7cc0d754c10df03134e8bc2c6c977758610))
+- **u-tabbar:** 调整u-tabbar凸起图标上边距以优化显示效果 ([d0963be](https://github.com/anyup/uView-Pro/commit/d0963be197079733779719aae43694ae5b47e6bc))
+- **u-transition:** 新增transition过渡动画组件 ([28ee2c8](https://github.com/anyup/uView-Pro/commit/28ee2c8b0f74bae722f0fe50e498e3407907d2f6))
+- **u-transition:** 添加动画模式切换时的时序控制 ([af4bf0a](https://github.com/anyup/uView-Pro/commit/af4bf0a690128ba16e7660d2ae54c5b93644cfdf))
+- **u-text:** 优化按钮模式在block模式下的样式 ([afda81d](https://github.com/anyup/uView-Pro/commit/afda81d0c8fa7b628b81f8368e6bd2983779b7c9))
+- **u-radio:** 添加label和value属性支持 ([1b824d7](https://github.com/anyup/uView-Pro/commit/1b824d7867dc7fcc3793d7b5d84cbbbcb512dab0))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-checkbox-group:** 修复全选时，u-checkbox-group多次触发change的问题 ([9f813df](https://github.com/anyup/uView-Pro/commit/9f813dfb8a2b8e178b7347223281e09b039f74b0))
+- **u-gap:** 修复 gap 间隔槽传递带单位尺寸无法正确解析的问题 ([cc24efd](https://github.com/anyup/uView-Pro/commit/cc24efd658e510fb9655a189ceaee2647db81528))
+- **u-alert-tips:** 修复微信小程序下组件样式和图标配置不生效的问题 ([d74900e](https://github.com/anyup/uView-Pro/commit/d74900e9e8a61a68b8971abc81e440e8449d3576))
+- **u-navbar:** 修复获取状态栏高度在某些平台失败的问题 ([b8b288e](https://github.com/anyup/uView-Pro/commit/b8b288e33348b78e03be349c6c123e36511342af))
+- **u-toast:** 修复toast提示组件设置prop无效的问题 ([ecd3a0a](https://github.com/anyup/uView-Pro/commit/ecd3a0a23a0ca039fa0abe3a946bfdf1024dd10a))
+- **locale:** 修复注册uview-pro组件库时，未传递locale导致初始化语言包失败的问题 ([d716100](https://github.com/anyup/uView-Pro/commit/d7161000fe9e3d222453603d8fa31d29a1b9a9bb))
+- **u-field:** 修复u-field在禁用状态下，点击输入框无法触发click事件的问题 ([f47761d](https://github.com/anyup/uView-Pro/commit/f47761d00fe2913f0e611577651a3f4108e060b6))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **demo:** 重构u-checkbox复选框演示示例 ([77fc19b](https://github.com/anyup/uView-Pro/commit/77fc19b6f23f8d776b7a56ef9ac27726da7405a1))
+- **demo:** 同步鸿蒙应用功能 ([2ac7050](https://github.com/anyup/uView-Pro/commit/2ac70500004e04bd22442d696e3e869ba33ac355))
+- update release scripts ([818f8b9](https://github.com/anyup/uView-Pro/commit/818f8b9cf6a0a22893305f76e4af2b71409cbc12))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.5.1] - 2026-01-15
 
 ### ✨ Features | 新功能
