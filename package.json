@@ -71,7 +71,9 @@
         "release:major:bat": "scripts\\release.bat major",
         "publish": "cd src/uni_modules/uview-pro && npm publish --access public && cd ../../..",
         "prepare": "husky",
-        "format": "prettier --write . --ignore-path .prettierignore"
+        "format": "prettier --write . --ignore-path .prettierignore",
+        "test:npm": "node scripts/test-npm-package.js",
+        "test:npm:cleanup": "node scripts/test-npm-cleanup.js"
     },
     "config": {
         "commitizen": {
