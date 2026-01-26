@@ -67,7 +67,7 @@ export class ConfigProvider {
     private debug: boolean = false;
     private systemDarkModeMediaQuery: MediaQueryList | null = null;
     private lastAppliedCssKeys: string[] = [];
-    private interval = 0;
+    private interval: ReturnType<typeof setInterval> | number = 0;
 
     constructor() {
         // 默认不自动初始化，调用 init 以传入主题列表
@@ -334,6 +334,15 @@ export class ConfigProvider {
      * replacements 支持数组或对象替换占位符 {0} 或 {name}
      */
     t(key: string, replacements?: any, localeName?: string): string {
+        // 如果 locales 尚未初始化，尝试懒初始化，使用内置语言包作为回退
+        try {
+            if (!Array.isArray(this.localesRef.value) || this.localesRef.value.length === 0) {
+                this.initLocales();
+            }
+        } catch (e) {
+            if (this.debug) console.warn('[ConfigProvider] lazy initLocales failed', e);
+        }
+
         const localeObj =
             (localeName && this.localesRef.value.find(l => l.name === localeName)) || this.currentLocaleRef.value;
         if (!localeObj) return key;
