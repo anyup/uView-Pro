@@ -1,3 +1,22 @@
+## 0.5.3（2026-01-26）
+
+### ♻️ Code Refactoring | 代码重构
+
+- **demo-page:** 移除标签栏外层sticky组件 ([ed49275](https://github.com/anyup/uView-Pro/commit/ed49275bc2962426dc4f9185b4b35f6a994cf383))
+
+### 👷 Continuous Integration | CI 配置
+
+- 添加 npm 包测试脚本 ([78c5524](https://github.com/anyup/uView-Pro/commit/78c5524abbbc368949ec58437361c995f5146234))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **locale:** 修复本地运行时locale国际化字段未加载成功的问题 ([10c017a](https://github.com/anyup/uView-Pro/commit/10c017a401232224ca1642274d65f031f74f12f0))
+- **u-picker:** 修复u-picker/u-select选择器在亮色/暗黑模式下背景色显示问题 ([072a6cc](https://github.com/anyup/uView-Pro/commit/072a6cc1095b5f17b0c15c3cd2a3d6a75d8a9f08))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.2（2026-01-23）
 
 ### ✨ Features | 新功能
