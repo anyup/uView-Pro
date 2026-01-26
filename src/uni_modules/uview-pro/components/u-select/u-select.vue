@@ -44,12 +44,14 @@
                 </view>
                 <view class="u-select__body">
                     <picker-view
-                        @change="columnChange"
-                        class="u-select__body__picker-view"
+                        v-if="modelValue && readyToRender"
                         :value="defaultSelector"
+                        class="u-select__body__picker-view"
+                        mask-class="u-picker-view-mask"
+                        indicator-class="u-picker-view-indicator"
                         @pickstart="pickstart"
                         @pickend="pickend"
-                        v-if="modelValue && readyToRender"
+                        @change="columnChange"
                     >
                         <picker-view-column v-for="(item, index) in columnData" :key="index">
                             <view
@@ -391,6 +393,7 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
         align-items: center;
         justify-content: space-between;
         height: 80rpx;
+        position: relative;
 
         &__title {
             color: $u-content-color;
@@ -400,6 +403,17 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
             min-width: 150rpx;
             padding: 20rpx 30rpx;
         }
+    }
+
+    &__header::after {
+        content: '';
+        position: absolute;
+        border-bottom: 1rpx solid var(--u-border-color);
+        -webkit-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+        bottom: 0;
+        right: 0;
+        left: 0;
     }
 
     &__body {

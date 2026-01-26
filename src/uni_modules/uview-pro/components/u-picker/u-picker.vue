@@ -38,10 +38,12 @@
                     <picker-view
                         v-if="mode == 'region'"
                         :value="valueArr"
-                        @change="change"
                         class="u-picker-view"
+                        mask-class="u-picker-view-mask"
+                        indicator-class="u-picker-view-indicator"
                         @pickstart="pickstart"
                         @pickend="pickend"
+                        @change="change"
                     >
                         <picker-view-column v-if="params.province">
                             <view class="u-column-item" v-for="(item, index) in provinces" :key="index">
@@ -62,10 +64,12 @@
                     <picker-view
                         v-else-if="mode == 'time'"
                         :value="valueArr"
-                        @change="change"
                         class="u-picker-view"
+                        mask-class="u-picker-view-mask"
+                        indicator-class="u-picker-view-indicator"
                         @pickstart="pickstart"
                         @pickend="pickend"
+                        @change="change"
                     >
                         <picker-view-column v-if="params.year">
                             <view class="u-column-item" v-for="(item, index) in years" :key="index">
@@ -107,10 +111,12 @@
                     <picker-view
                         v-else-if="mode == 'selector'"
                         :value="valueArr"
-                        @change="change"
                         class="u-picker-view"
+                        mask-class="u-picker-view-mask"
+                        indicator-class="u-picker-view-indicator"
                         @pickstart="pickstart"
                         @pickend="pickend"
+                        @change="change"
                     >
                         <picker-view-column>
                             <view class="u-column-item" v-for="(item, index) in range" :key="index">
@@ -121,10 +127,12 @@
                     <picker-view
                         v-else-if="mode == 'multiSelector'"
                         :value="valueArr"
-                        @change="change"
                         class="u-picker-view"
+                        mask-class="u-picker-view-mask"
+                        indicator-class="u-picker-view-indicator"
                         @pickstart="pickstart"
                         @pickend="pickend"
+                        @change="change"
                     >
                         <picker-view-column v-for="(item, index) in range" :key="index">
                             <view class="u-column-item" v-for="(item1, index1) in item" :key="index1">
@@ -782,7 +790,7 @@ onMounted(() => {
 .u-picker-header::after {
     content: '';
     position: absolute;
-    border-bottom: 1rpx solid var(--u-bg-gray-light);
+    border-bottom: 1rpx solid var(--u-border-color);
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
     bottom: 0;

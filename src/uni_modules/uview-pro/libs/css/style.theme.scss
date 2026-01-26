@@ -31,3 +31,26 @@ page.u-theme-dark,
     background-color: var(--u-bg-white, #0f1115);
     color: $u-main-color;
 }
+
+// picker-view遮罩层背景色
+.u-picker-view-mask,
+.uni-picker-view-mask {
+    background-image:
+        linear-gradient(180deg, rgba(var(--u-bg-white-rgb), 0.95), rgba(var(--u-bg-white-rgb), 0.6)),
+        linear-gradient(0deg, rgba(var(--u-bg-white-rgb), 0.95), rgba(var(--u-bg-white-rgb), 0.6)) !important;
+}
+
+.u-picker-view-indicator {
+    border: rgba(var(--u-bg-white-rgb), 0.6) !important;
+}
+
+// picker-view指示器边框色
+.u-picker-view-indicator::before,
+.uni-picker-view-indicator::before {
+    border-top: 1px solid var(--u-border-color) !important;
+}
+
+.u-picker-view-indicator::after,
+.uni-picker-view-indicator::after {
+    border-bottom: 1px solid var(--u-border-color) !important;
+}
