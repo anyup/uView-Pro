@@ -35,9 +35,9 @@
                     <textarea
                         v-if="props.type === 'textarea'"
                         class="u-flex-1 u-textarea-class"
-                        :style="[props.fieldStyle]"
-                        :value="props.modelValue"
-                        :placeholder="props.placeholder"
+                        :style="$u.toStyle(props.fieldStyle)"
+                        :value="String(props.modelValue)"
+                        :placeholder="String(props.placeholder)"
                         :placeholderStyle="props.placeholderStyle"
                         :disabled="props.disabled"
                         :maxlength="inputMaxlength"
@@ -50,14 +50,15 @@
                         @confirm="onConfirm"
                         @tap="fieldClick"
                     />
+                    <!-- prettier-ignore -->
                     <input
                         v-else
-                        :style="[props.fieldStyle]"
-                        :type="props.type"
                         class="u-flex-1 u-field__input-wrap"
-                        :value="props.modelValue"
+                        :style="$u.toStyle(props.fieldStyle)"
+                        :type="(props.type as any)"
+                        :value="String(props.modelValue)"
                         :password="props.password || props.type === 'password'"
-                        :placeholder="props.placeholder"
+                        :placeholder="String(props.placeholder)"
                         :placeholderStyle="props.placeholderStyle"
                         :disabled="props.disabled"
                         :maxlength="inputMaxlength"

@@ -210,7 +210,7 @@ function code(value: string, len: number = 6): boolean {
  * 是否函数方法
  * @param {Object} value
  */
-function func(value) {
+function func(value: any) {
     return typeof value === 'function';
 }
 
@@ -218,14 +218,14 @@ function func(value) {
  * 是否promise对象
  * @param {Object} value
  */
-function promise(value) {
+function promise(value: any) {
     return object(value) && func(value.then) && func(value.catch);
 }
 
 /** 是否图片格式
  * @param {Object} value
  */
-function image(value) {
+function image(value: any) {
     const newValue = value.split('?')[0];
     const IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
     return IMAGE_REGEXP.test(newValue);
@@ -235,7 +235,7 @@ function image(value) {
  * 是否视频格式
  * @param {Object} value
  */
-function video(value) {
+function video(value: any) {
     const VIDEO_REGEXP = /\.(mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv|m3u8)/i;
     return VIDEO_REGEXP.test(value);
 }
@@ -245,14 +245,14 @@ function video(value) {
  * @param {Object}
  * @return {Boolean}
  */
-function regExp(o) {
+function regExp(o: any) {
     return o && Object.prototype.toString.call(o) === '[object RegExp]';
 }
 
 /**
  * 验证字符串
  */
-function string(value) {
+function string(value: any) {
     return typeof value === 'string';
 }
 

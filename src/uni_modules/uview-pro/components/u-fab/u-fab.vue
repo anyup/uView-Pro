@@ -41,7 +41,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { directionConfig, FabProps } from './types.ts';
+import { directionConfig, FabProps } from './types';
 import { computed, getCurrentInstance, onMounted, reactive, ref, useSlots, watch } from 'vue';
 import { $u } from '../../';
 

@@ -29,24 +29,25 @@
             <slot>{{ displayValue }}</slot>
         </u-link>
         <template v-else-if="props.openType">
+            <!-- prettier-ignore -->
             <button
                 class="u-reset-button u-text__value u-text__button"
                 :class="props.type && `u-text__value--${props.type}`"
                 :style="textValueStyle"
-                :openType="props.openType"
-                @getuserinfo="onGetUserInfo"
-                @contact="onContact"
-                @getphonenumber="onGetPhoneNumber"
-                @error="onError"
-                @launchapp="onLaunchApp"
-                @opensetting="onOpenSetting"
-                :lang="props.lang"
+                :openType="(props.openType as any)"
+                :lang="(props.lang as any)"
                 :session-from="props.sessionFrom"
                 :send-message-title="props.sendMessageTitle"
                 :send-message-path="props.sendMessagePath"
                 :send-message-img="props.sendMessageImg"
                 :show-message-card="props.showMessageCard"
                 :app-parameter="props.appParameter"
+                @getuserinfo="onGetUserInfo"
+                @contact="onContact"
+                @getphonenumber="onGetPhoneNumber"
+                @error="onError"
+                @launchapp="onLaunchApp"
+                @opensetting="onOpenSetting"
             >
                 <slot>{{ displayValue }}</slot>
             </button>
@@ -161,14 +162,14 @@ const displayValue = computed(() => {
             if (!$u.test.string(val)) return val;
             if (format === 'encrypt') {
                 // 如果format为encrypt，则将姓名进行星号加密处理
-                return $u.formatName(val);
+                return $u.formatName(String(val));
             }
             break;
         case 'date':
             // 进行格式化，判断用户传入的format参数为正则，或者函数，如果没有传入format，则使用默认的格式化处理
             if ($u.test.string(format) && !$u.test.empty(format)) {
                 // 如果format非正则，非函数，则使用默认的时间格式化方法进行操作
-                return $u.timeFormat(val, format);
+                return $u.timeFormat(val, format as string);
             }
             // 如果没有设置format，则设置为默认的时间格式化形式
             return $u.timeFormat(val, 'yyyy-mm-dd');
@@ -240,22 +241,22 @@ function onClick() {
     }
     emit('click');
 }
-function onGetUserInfo(event) {
+function onGetUserInfo(event: any) {
     emit('getuserinfo', event.detail);
 }
-function onContact(event) {
+function onContact(event: any) {
     emit('contact', event.detail);
 }
-function onGetPhoneNumber(event) {
+function onGetPhoneNumber(event: any) {
     emit('getphonenumber', event.detail);
 }
-function onError(event) {
+function onError(event: any) {
     emit('error', event.detail);
 }
-function onLaunchApp(event) {
+function onLaunchApp(event: any) {
     emit('launchapp', event.detail);
 }
-function onOpenSetting(event) {
+function onOpenSetting(event: any) {
     emit('opensetting', event.detail);
 }
 </script>

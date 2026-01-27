@@ -32,7 +32,10 @@ export const TabbarProps = {
     /** tabbar配置项数组 */
     list: { type: Array as PropType<TabbarItem[]>, default: () => [] },
     /** 切换前回调，返回true或Promise */
-    beforeSwitch: { type: Function as PropType<((index: number) => boolean | Promise<any>) | null>, default: null },
+    beforeSwitch: {
+        type: Function as unknown as PropType<((index: number) => boolean | Promise<any>) | null>,
+        default: null
+    },
     /** 是否显示顶部横线 */
     borderTop: { type: Boolean, default: true },
     /** 是否隐藏原生tabbar */

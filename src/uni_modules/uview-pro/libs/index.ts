@@ -248,7 +248,7 @@ export function kebabCase(word: string): string {
  * @param {number} value 堵塞时间 单位ms 毫秒
  * @returns {Promise} 返回promise
  */
-export function sleep(value: number = 30) {
+export function sleep(value: number = 30): Promise<boolean> {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(true);

@@ -76,7 +76,7 @@ const install = (app: any, options?: UViewProOptions): void => {
             // 设置调试模式
             logger
                 .setDebugMode(options?.log?.debug ?? false)
-                .setPrefix(options?.log?.prefix)
+                .setPrefix(options?.log?.prefix || '')
                 .setShowCallerInfo(options?.log?.showCallerInfo ?? true);
         } else {
             // 默认初始化系统主题

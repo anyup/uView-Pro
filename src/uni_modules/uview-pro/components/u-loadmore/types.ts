@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { LoadmoreIconType, LoadmoreStatus, LoadmoreText } from '../../types/global';
+import { baseProps } from '../common/props';
 import { useLocale } from '../../';
 
 const { t } = useLocale();
@@ -10,6 +11,7 @@ const { t } = useLocale();
  */
 
 export const LoadmoreProps = {
+    ...baseProps,
     /** 组件背景色 */
     bgColor: {
         type: String,

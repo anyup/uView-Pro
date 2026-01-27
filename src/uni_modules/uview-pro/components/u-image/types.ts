@@ -1,4 +1,4 @@
-import { type ComponentPublicInstance, type ExtractPropTypes, type PropType } from 'vue';
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue';
 import type { ImgMode, Shape } from '../../types/global';
 import { baseProps } from '../common/props';
 

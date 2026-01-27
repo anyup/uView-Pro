@@ -8,7 +8,7 @@
         <u-icon
             :name="src ? src : 'empty-' + mode"
             :custom-style="iconStyle"
-            :label="text ? text : icons[mode]"
+            :label="text ? text : (icons as any)[mode]"
             label-pos="bottom"
             :label-color="color"
             :label-size="fontSize"

@@ -62,23 +62,23 @@ onMounted(() => {
     }
 });
 
-function setTop(val) {
+function setTop(val: any) {
     top.value = val;
 }
 
-function setHeight(val) {
+function setHeight(val: any) {
     height.value = val;
 }
 
-function setActive(val) {
+function setActive(val: any) {
     active.value = val;
 }
 
-function setAnchorStyle(val) {
+function setAnchorStyle(val: any) {
     anchorStyle.value = val;
 }
 
-function setWrapperStyle(val) {
+function setWrapperStyle(val: any) {
     wrapperStyle.value = val;
 }
 

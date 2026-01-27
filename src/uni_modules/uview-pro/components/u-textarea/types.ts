@@ -75,7 +75,7 @@ export const TextareaProps = {
     // 边框类型，surround-四周边框，bottom-底部边框
     border: { type: [String, Boolean] as PropType<TextareaBorder | boolean>, default: textarea.border },
     // 用于处理或者过滤输入框内容的方法
-    formatter: { type: Function as PropType<((val: any) => any) | null>, default: textarea.formatter },
+    formatter: { type: Function as unknown as PropType<((val: any) => any) | null>, default: textarea.formatter },
     // 是否忽略组件内对文本合成系统事件的处理
     ignoreCompositionEvent: { type: Boolean as PropType<boolean>, default: true },
     /** 是否可清空(默认true) */

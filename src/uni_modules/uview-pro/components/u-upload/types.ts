@@ -70,12 +70,12 @@ export const UploadProps = {
     showTips: { type: Boolean, default: true },
     /** 上传前钩子，返回true或Promise */
     beforeUpload: {
-        type: Function as PropType<((index: number, files: any[]) => boolean | Promise<any>) | null>,
+        type: Function as unknown as PropType<((index: number, files: any[]) => boolean | Promise<any>) | null>,
         default: null
     },
     /** 删除前钩子，返回true或Promise */
     beforeRemove: {
-        type: Function as PropType<((index: number, files: any[]) => boolean | Promise<any>) | null>,
+        type: Function as unknown as PropType<((index: number, files: any[]) => boolean | Promise<any>) | null>,
         default: null
     },
     /** 如果上传后的返回值为json字符串，是否转为json格式 */

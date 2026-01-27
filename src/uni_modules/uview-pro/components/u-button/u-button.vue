@@ -1,4 +1,5 @@
 <template>
+    <!-- prettier-ignore -->
     <button
         id="u-wave-btn"
         class="u-btn u-line-1 u-fix-ios-appearance"
@@ -15,13 +16,13 @@
         :hover-start-time="Number(hoverStartTime)"
         :hover-stay-time="Number(hoverStayTime)"
         :disabled="disabled"
-        :form-type="formType"
+        :form-type="(formType as any)"
         :open-type="disabled || loading ? undefined : openType"
         :app-parameter="appParameter"
         :hover-stop-propagation="hoverStopPropagation"
         :send-message-title="sendMessageTitle"
-        send-message-path="sendMessagePath"
-        :lang="lang"
+        :send-message-path="sendMessagePath"
+        :lang="(lang as any)"
         :data-name="dataName"
         :session-from="sessionFrom"
         :send-message-img="sendMessageImg"

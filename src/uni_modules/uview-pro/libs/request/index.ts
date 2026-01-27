@@ -223,7 +223,7 @@ export class Request {
             method: 'GET',
             url,
             data,
-            header: options.header,
+            header: options.header || {},
             meta: options.meta
         });
     }
@@ -237,7 +237,7 @@ export class Request {
             url,
             method: 'POST',
             data,
-            header: options.header,
+            header: options.header || {},
             meta: options.meta
         });
     }
@@ -251,7 +251,7 @@ export class Request {
             url,
             method: 'PUT',
             data,
-            header: options.header,
+            header: options.header || {},
             meta: options.meta
         });
     }
@@ -265,7 +265,7 @@ export class Request {
             url,
             method: 'DELETE',
             data,
-            header: options.header,
+            header: options.header || {},
             meta: options.meta
         });
     }

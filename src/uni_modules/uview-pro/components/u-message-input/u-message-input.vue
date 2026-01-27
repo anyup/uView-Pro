@@ -1,12 +1,13 @@
 <template>
     <view class="u-char-box" :class="customClass" :style="$u.toStyle(customStyle)">
         <view class="u-char-flex">
+            <!-- prettier-ignore -->
             <input
                 :disabled="props.disabledKeyboard"
                 :value="valueModel"
-                :type="type"
+                :type="(type as any)"
                 :focus="props.focus"
-                :maxlength="props.maxlength"
+                :maxlength="Number(props.maxlength)"
                 class="u-input"
                 @input="getVal"
             />
@@ -137,7 +138,7 @@ const loopCharArr = computed(() => new Array(Number(props.maxlength)));
  * 输入事件处理
  * @param e input事件对象
  */
-function getVal(e: { detail: { value: string } }) {
+function getVal(e: any) {
     const { value } = e.detail;
     valueModel.value = value;
     // 判断长度是否超出了maxlength值，理论上不会发生，因为input组件设置了maxlength属性值

@@ -96,7 +96,7 @@ import { NoticeBarProps } from './types';
 const props = defineProps(NoticeBarProps);
 
 const emit = defineEmits<{
-    (e: 'click', index: number): void;
+    (e: 'click', index: number | undefined): void;
     (e: 'close'): void;
     (e: 'getMore'): void;
     (e: 'end'): void;

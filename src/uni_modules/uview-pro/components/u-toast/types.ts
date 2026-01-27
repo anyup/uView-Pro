@@ -20,7 +20,7 @@ export const ToastProps = {
     /** 显示位置，center/top/bottom */
     position: { type: String as PropType<ToastPosition>, default: 'center' },
     /** 关闭时的回调函数 */
-    callback: { type: Function as PropType<(() => void) | null>, default: null },
+    callback: { type: Function as unknown as PropType<(() => void) | null>, default: null },
     /** 是否返回上一页 */
     back: { type: Boolean, default: false },
     /** 是否为tab页面跳转 */

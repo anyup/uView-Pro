@@ -1,4 +1,4 @@
-import { type ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import { baseProps } from '../common/props';
 
 /**

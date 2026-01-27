@@ -44,8 +44,8 @@
                             :is-dot="item.isDot"
                             v-if="item.count || item.isDot"
                             :offset="[
-                                getBadgeOffsetTop(item.count, item.isDot),
-                                getOffsetRight(item.count, item.isDot)
+                                getBadgeOffsetTop(item.count || 0, item.isDot || false),
+                                getOffsetRight(item.count || 0, item.isDot || false)
                             ]"
                         ></u-badge>
                     </view>
@@ -146,7 +146,7 @@ onMounted(() => {
 /**
  * 计算当前item的icon路径
  */
-const elIconPath = computed<(index: number) => string>(() => {
+const elIconPath = computed<(index: number) => string | undefined>(() => {
     return (index: number) => {
         // 历遍u-tabbar的每一项item时，判断是否传入了pagePath参数，如果传入了
         // 和data中的pageUrl参数对比，如果相等，即可判断当前的item对应当前的tabbar页面，设置高亮图标
@@ -247,7 +247,7 @@ function switchTab(index: number) {
     emit('change', index);
     // 如果有配置pagePath属性，使用uni.switchTab进行跳转
     if (props.list[index]?.pagePath) {
-        uni.switchTab({ url: props.list[index].pagePath });
+        uni.switchTab({ url: props.list[index].pagePath as string });
     } else {
         // 如果配置了papgePath属性，将不会双向绑定v-model传入的value值
         // 因为这个模式下，不再需要v-model绑定的value值了，而是通过getCurrentPages()适配

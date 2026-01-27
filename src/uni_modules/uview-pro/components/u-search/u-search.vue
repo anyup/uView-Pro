@@ -30,7 +30,7 @@
                 @input="inputChange"
                 @focus="getFocus"
                 :focus="focus"
-                :maxlength="maxlength"
+                :maxlength="Number(maxlength)"
                 placeholder-class="u-placeholder-class"
                 :placeholder="placeholder"
                 :placeholder-style="`color: ${placeholderColor}`"

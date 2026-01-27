@@ -95,18 +95,18 @@ const popupValue = computed({
 // 顶部提示的样式
 const tipsStyle = computed(() => {
     let style: Record<string, string> = {};
-    style.color = props.tips?.color || $u.color.tipsColor;
-    style.fontSize = $u.addUnit(props.tips?.fontSize || '26rpx');
+    style.color = String(props.tips?.color || $u.color.tipsColor);
+    style.fontSize = $u.addUnit(String(props.tips?.fontSize || '26rpx'));
     return style;
 });
 
 // 操作项目的样式
 const itemStyle = (index: number) => {
     let style: Record<string, string> = {};
-    style.color = props.list[index]?.color || props.color;
-    style.fontSize = $u.addUnit(props.list[index]?.fontSize || props.fontSize);
+    style.color = String(props.list[index]?.color || props.color);
+    style.fontSize = $u.addUnit(String(props.list[index]?.fontSize || props.fontSize));
     // 选项被禁用的样式
-    if (props.list[index]?.disabled) style.color = $u.color.lightColor;
+    if (props.list[index]?.disabled) style.color = String($u.color.lightColor || '');
     return style;
 };
 

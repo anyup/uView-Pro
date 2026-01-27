@@ -518,7 +518,7 @@ function changeData() {
 /**
  * 获取农历
  */
-function getLunar(year, month, day) {
+function getLunar(year: any, month: any, day: any) {
     const val = Calendar.solar2lunar(year, month, day);
     return {
         dayCn: val.IDayCn,

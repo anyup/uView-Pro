@@ -38,7 +38,10 @@ const style = computed(() => {
     let result: CSSProperties = {};
     // #ifdef APP-NVUE || MP-TOUTIAO
     // nvue下，高度使用js计算填充
-    result.height = $u.addUnit($u.sys().safeAreaInsets.bottom, 'px');
+    const safeAreaInsets = $u.sys()?.safeAreaInsets;
+    if (safeAreaInsets?.bottom) {
+        result.height = $u.addUnit(safeAreaInsets.bottom, 'px');
+    }
     // #endif
     return result;
 });

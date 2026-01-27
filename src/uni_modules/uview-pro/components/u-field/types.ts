@@ -9,17 +9,17 @@ import { baseProps } from '../common/props';
 export const FieldProps = {
     ...baseProps,
     /** label左边的图标，限uView的图标名称 */
-    icon: String,
+    icon: { type: String, default: '' },
     /** 输入框右边的图标名称，限uView的图标名称（默认false） */
-    rightIcon: String,
+    rightIcon: { type: String, default: '' },
     /** 方向属性 */
     arrowDirection: { type: String, default: 'right' },
     /** 是否必填，左边显示红色"*"号（默认false） */
-    required: Boolean,
+    required: { type: Boolean, default: false },
     /** 输入框左边的文字提示 */
-    label: String,
+    label: { type: String, default: '' },
     /** 是否密码输入方式(用点替换文字)，type为text时有效（默认false） */
-    password: Boolean,
+    password: { type: Boolean, default: false },
     /** 是否显示右侧清空内容的图标控件（默认true） */
     clearable: { type: Boolean, default: true },
     /** label的宽度，单位rpx（默认130） */
@@ -35,13 +35,13 @@ export const FieldProps = {
     /** 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息 */
     errorMessage: { type: [String, Boolean] as PropType<string | boolean>, default: '' },
     /** 输入框的提示文字 */
-    placeholder: String,
+    placeholder: { type: String, default: '' },
     /** placeholder的样式(内联样式，字符串)，如"color: var(--u-divider-color)" */
-    placeholderStyle: String,
+    placeholderStyle: { type: String, default: '' },
     /** 是否自动获得焦点（默认false） */
-    focus: Boolean,
+    focus: { type: Boolean, default: false },
     /** 如果type为textarea，且在一个"position:fixed"的区域，需要指明为true（默认false） */
-    fixed: Boolean,
+    fixed: { type: Boolean, default: false },
     /** 输入框绑定值 */
     modelValue: [Number, String],
     /** 输入框类型（text/textarea/password等，默认text） */

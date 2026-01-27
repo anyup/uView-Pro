@@ -350,7 +350,7 @@ onMounted(() => {
             // 继承父表单配置
             // 历遍parentData中的属性，将parent中的同名属性赋值给parentData
             Object.keys(parentData.value).forEach(key => {
-                parentData.value[key] = parentExposed?.value?.props[key];
+                (parentData.value as any)[key] = parentExposed?.value?.props[key];
             });
             // 如果没有传入prop，或者uForm为空(如果u-form-input单独使用，就不会有uForm注入)，就不进行校验
             if (props.prop) {

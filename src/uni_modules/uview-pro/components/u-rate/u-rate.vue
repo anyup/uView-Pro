@@ -8,15 +8,15 @@
     >
         <view class="u-star-wrap" v-for="(item, index) in count" :key="index" :class="[elClass]">
             <u-icon
-                :name="String(activeIndex > index ? elActiveIcon : inactiveIcon)"
-                @click="click(index + 1, $event)"
-                :color="String(activeIndex > index ? elActiveColor : inactiveColor)"
+                :name="String(Number(activeIndex) > Number(index) ? elActiveIcon : inactiveIcon)"
+                @click="click(Number(index) + 1, $event)"
+                :color="String(Number(activeIndex) > Number(index) ? elActiveColor : inactiveColor)"
                 :custom-style="{
                     fontSize: size + 'rpx',
                     padding: `0 ${Number(gutter) / 2 + 'rpx'}`
                 }"
                 :custom-prefix="customPrefix"
-                :show-decimal-icon="showDecimalIcon(index)"
+                :show-decimal-icon="showDecimalIcon(Number(index))"
                 :percent="decimal"
                 :inactive-color="inactiveColor"
             ></u-icon>

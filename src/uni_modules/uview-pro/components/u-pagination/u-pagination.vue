@@ -49,7 +49,7 @@ export default {
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { type PaginationEmits, PaginationProps } from './types.ts';
+import { type PaginationEmits, PaginationProps } from './types';
 import type { PaginationDirection } from '../../types/global';
 import { $u } from '../../';
 

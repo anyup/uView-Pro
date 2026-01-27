@@ -37,11 +37,11 @@
                     <u-icon :name="closeIcon" :color="closeIconColor" :size="closeIconSize"></u-icon>
                 </view>
 
-                <scroll-view class="u-drawer__scroll-view" scroll-y="true">
+                <scroll-view class="u-drawer__scroll-view" :scroll-y="true">
                     <slot />
                 </scroll-view>
             </view>
-            <scroll-view class="u-drawer__scroll-view" scroll-y="true" v-else>
+            <scroll-view class="u-drawer__scroll-view" :scroll-y="true" v-else>
                 <slot />
             </scroll-view>
             <view

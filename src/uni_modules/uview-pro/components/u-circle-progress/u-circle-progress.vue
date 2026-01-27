@@ -165,7 +165,7 @@ onMounted(() => {
 /**
  * 获取canvas上下文
  */
-function getContext(canvasId) {
+function getContext(canvasId: any) {
     return new Promise<UniApp.CanvasContext>(resolve => {
         let ctx = null;
         // #ifndef MP-WEIXIN || MP-TOUTIAO

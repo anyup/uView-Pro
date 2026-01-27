@@ -20,7 +20,9 @@ export function getColor(name: ColorType): string {
 }
 
 export function setColor(theme: Partial<ThemeColor> | undefined) {
-    configProvider.setThemeColor(theme);
+    if (theme) {
+        configProvider.setThemeColor(theme);
+    }
 }
 
 export default color;

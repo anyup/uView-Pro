@@ -1,12 +1,15 @@
 <template>
     <view
         class="u-load-more-wrap"
-        :style="{
-            backgroundColor: props.bgColor,
-            marginBottom: props.marginBottom + 'rpx',
-            marginTop: props.marginTop + 'rpx',
-            height: $u.addUnit(props.height)
-        }"
+        :class="props.customClass"
+        :style="
+            $u.toStyle(props.customStyle, {
+                backgroundColor: props.bgColor,
+                marginBottom: props.marginBottom + 'rpx',
+                marginTop: props.marginTop + 'rpx',
+                height: $u.addUnit(props.height)
+            })
+        "
     >
         <u-line color="var(--u-divider-color)" length="50"></u-line>
         <!-- 加载中和没有更多的状态才显示两边的横线 -->
@@ -22,7 +25,7 @@
             <!-- 如果没有更多的状态下，显示内容为dot（粗点），加载特定样式 -->
             <view
                 class="u-line-1"
-                :style="loadTextStyle"
+                :style="$u.toStyle(loadTextStyle)"
                 :class="[props.status == 'nomore' && props.isDot == true ? 'u-dot-text' : 'u-more-text']"
                 @tap="loadMore"
             >
@@ -79,7 +82,7 @@ const loadTextStyle = computed(() => {
     return {
         color: props.color,
         fontSize: props.fontSize + 'rpx',
-        position: 'relative',
+        position: 'relative' as const,
         zIndex: 1,
         backgroundColor: props.bgColor
         // 如果是加载中状态，动画和文字需要距离近一点

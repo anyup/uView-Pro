@@ -106,10 +106,10 @@ menuButtonInfo = uni.getMenuButtonBoundingClientRect();
 const statusBarHeight = ref(0);
 // #ifdef APP || H5 || MP-ALIPAY || MP-WEIXIN
 const windowInfo = uni.getWindowInfo();
-statusBarHeight.value = windowInfo.statusBarHeight;
+statusBarHeight.value = windowInfo.statusBarHeight || 0;
 // #endif
 // #ifndef APP || H5 || MP-ALIPAY || MP-WEIXIN
-statusBarHeight.value = systemInfo.statusBarHeight;
+statusBarHeight.value = systemInfo.statusBarHeight || 0;
 // #endif
 
 // 转换字符数值为真正的数值

@@ -199,13 +199,13 @@ export function useParent(componentName?: string) {
     };
 
     if (instance.proxy) {
-        instance.proxy[PARENT_CONTEXT_SYMBOL] = parentContext;
+        (instance.proxy as any)[PARENT_CONTEXT_SYMBOL] = parentContext;
     }
 
     onUnmounted(() => {
         childrenMap.forEach((_, childId) => parentContext.removeChild(childId));
         if (instance.proxy) {
-            delete instance.proxy[PARENT_CONTEXT_SYMBOL];
+            delete (instance.proxy as any)[PARENT_CONTEXT_SYMBOL];
         }
         logger.log(`Parent ${name} unmounted and cleaned up`);
     });
@@ -279,7 +279,7 @@ export function useChildren(componentName?: string, parentName?: string) {
 
         let current = instance.parent;
         while (current) {
-            const context = current.proxy?.[PARENT_CONTEXT_SYMBOL];
+            const context = (current.proxy as any)?.[PARENT_CONTEXT_SYMBOL];
             if (context) {
                 if (!context.getInstance) {
                     context.getInstance = () => current;
@@ -384,7 +384,7 @@ export function hasParent(parentName?: string): boolean {
 
     let current = instance.parent;
     while (current) {
-        if (current.proxy?.[PARENT_CONTEXT_SYMBOL]) return true;
+        if ((current.proxy as any)?.[PARENT_CONTEXT_SYMBOL]) return true;
         current = current.parent;
     }
     return false;

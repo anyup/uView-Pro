@@ -6,8 +6,8 @@ function H5Copy(text: string, config: TClipboardOptions) {
                 icon: 'none'
             });
         }
-        config.success(result);
-        config.complete(result);
+        config.success?.(result);
+        config.complete?.(result);
     };
     const fail = (err: string) => {
         if (config.showToast) {
@@ -16,8 +16,8 @@ function H5Copy(text: string, config: TClipboardOptions) {
                 icon: 'none'
             });
         }
-        config.fail(err);
-        config.complete(err);
+        config.fail?.(err);
+        config.complete?.(err);
     };
 
     const textarea = document.createElement('textarea');
@@ -40,7 +40,7 @@ function H5Copy(text: string, config: TClipboardOptions) {
         }
     } catch (err) {
         // console.error('【Clipboard Error】:', err);
-        fail(err);
+        fail(String(err));
     } finally {
         document.body.removeChild(textarea);
     }

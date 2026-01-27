@@ -1,4 +1,4 @@
-import { type ExtractPropTypes, type PropType } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import type { CalendarChangeDate, CalendarChangeRange, CalendarMode, ThemeType } from '../../types/global';
 import { baseProps } from '../common/props';
 import { getColor, useLocale } from '../../';

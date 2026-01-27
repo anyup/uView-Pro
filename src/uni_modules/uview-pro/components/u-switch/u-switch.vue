@@ -74,7 +74,7 @@ const switchStyle = computed(() => {
  * 计算加载动画颜色
  */
 const loadingColor = computed(() => {
-    return isChecked.value ? props.activeColor : null;
+    return isChecked.value ? props.activeColor : undefined;
 });
 
 /**

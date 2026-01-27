@@ -25,7 +25,7 @@ function cssStrToObj(str: string): object {
         const value = values.join(':');
         if (prop && value) {
             const camelProp = prop.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
-            result[camelProp] = value;
+            (result as Record<string, string>)[camelProp] = value;
         }
     });
     return result;
@@ -53,16 +53,16 @@ function cssObjToStr(obj: object): string {
  * 合并多个 CSS 输入（对象或字符串），返回一个 CSS 对象
  */
 export function mergeStyles(...args: (object | string)[]): CSSProperties {
-    const result = {};
+    const result = {} as Record<string, any>;
     for (let i = 0; i < args.length; i++) {
         const arg = args[i];
-        if (!isValidValue(arg)) return;
+        if (!isValidValue(arg)) return result as CSSProperties;
         if (typeof arg === 'string') {
             Object.assign(result, cssStrToObj(arg));
         } else if (test.object(arg)) {
-            const cleanedObj = {};
+            const cleanedObj: Record<string, any> = {};
             Object.keys(arg).forEach(key => {
-                const value = arg[key];
+                const value = (arg as Record<string, any>)[key];
                 if (isValidValue(value)) {
                     // 有效
                     cleanedObj[key] = value;

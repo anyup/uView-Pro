@@ -256,7 +256,7 @@ function retry(index: number) {
 /**
  * 上传图片
  */
-async function uploadFile(index = 0) {
+async function uploadFile(index = 0): Promise<void> {
     if (props.disabled) return;
     if (uploading.value) return;
     // 全部上传完成

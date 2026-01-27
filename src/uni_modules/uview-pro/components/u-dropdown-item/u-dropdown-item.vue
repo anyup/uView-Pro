@@ -8,7 +8,7 @@
         @tap.stop.prevent
     >
         <block v-if="!slots.default && !slots.$default">
-            <scroll-view scroll-y="true" :style="{ height: $u.addUnit(height) }">
+            <scroll-view :scroll-y="true" :style="{ height: $u.addUnit(String(height)) }">
                 <view class="u-dropdown-item__options">
                     <u-cell-group>
                         <u-cell-item
