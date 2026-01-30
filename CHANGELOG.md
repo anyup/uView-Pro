@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.4] - 2026-01-30
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **types:** 优化组件库类型定义和代码健壮性 ([e83eac8](https://github.com/anyup/uView-Pro/commit/e83eac8192476dea5e2d4e5b8b3c68b7da992673))
+- **u-navbar:** 修复状态栏高度获取的条件判断，区分鸿蒙、微信小程序和其他 ([b13d112](https://github.com/anyup/uView-Pro/commit/b13d112be80c46f62bfa343a089f2de70a00f774))
+
+### ✨ Features | 新功能
+
+- **u-loading:** 增强u-loading的自定义样式功能 ([c9151ce](https://github.com/anyup/uView-Pro/commit/c9151ce4bee44c762bd7970ab280184c730e97b1))
+- **u-toast:** 新增函数式调用API和全局toast功能（#101） ([b8c8fbf](https://github.com/anyup/uView-Pro/commit/b8c8fbff70c14fe0a6106794a638e450cecbeddf))
+- **components:** 优化组件类型安全 ([02b638f](https://github.com/anyup/uView-Pro/commit/02b638f6e251c9b52e5e3ebb1e40d644d895308a))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **demo:** 移除多余的toast引用 ([67b2677](https://github.com/anyup/uView-Pro/commit/67b26772eb67e9e2b830c95359688b0116395452))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.5.3] - 2026-01-26
 
 ### ♻️ Code Refactoring | 代码重构
