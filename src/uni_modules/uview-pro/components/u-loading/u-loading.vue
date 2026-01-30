@@ -2,8 +2,8 @@
     <view
         v-if="show"
         class="u-loading"
-        :class="mode === 'circle' ? 'u-loading-circle' : 'u-loading-flower'"
-        :style="[cricleStyle]"
+        :class="[mode === 'circle' ? 'u-loading-circle' : 'u-loading-flower', customClass]"
+        :style="$u.toStyle(cricleStyle, customStyle)"
     >
     </view>
 </template>
@@ -24,6 +24,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { LoadingProps } from './types';
+import { $u } from '../../';
 
 /**
  * loading 加载动画
