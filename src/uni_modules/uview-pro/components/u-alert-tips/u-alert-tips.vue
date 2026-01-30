@@ -118,7 +118,7 @@ const uTitleStyle = computed(() => {
  */
 const uIconName = computed(() => {
     // 如果有设置icon名称就使用，否则根据type主题，推定一个默认的图标
-    return props.icon ? props.icon : $u.type2icon(props.type);
+    return props.icon ? props.icon : $u.type2icon(props.type as any);
 });
 
 /**

@@ -16,7 +16,7 @@
                     v-if="tmpConfig.loading"
                     mode="circle"
                     custom-style="margin-right: 16rpx;"
-                    :color="$u.color[tmpConfig.type]"
+                    :color="($u.color as any)[tmpConfig.type]"
                 ></u-loading>
                 <!-- 其它类型仍然使用图标 -->
                 <u-icon
