@@ -5,7 +5,6 @@
                 <view class="u-demo-wrap">
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
-                        <u-toast ref="uToast"></u-toast>
                         <view class="pre-box" v-if="!showUploadList">
                             <view class="pre-item" v-for="(item, index) in lists" :key="index">
                                 <image class="pre-item-image" :src="item.url" mode="aspectFill"></image>

@@ -20,7 +20,7 @@
 ``` html
 <template>
 	<view>
-		<u-toast ref="uToast" />
+		<u-toast ref="uToastRef" />
 	</view>
 </template>
 
@@ -28,7 +28,7 @@
 	export default {
 		methods: {
 			showToast() {
-				this.$refs.uToast.show({
+				this.$refs.uToastRef.show({
 					title: '登录成功',
 					type: 'success',
 					url: '/pages/user/index'
@@ -52,7 +52,7 @@
 除了`default`状态，其他5种主题，都是默认带有一个左边的图标，可以通过配置`icon`参数为`none`来取消
 
 ``` js
-this.$refs.uToast.show({
+this.$refs.uToastRef.show({
 	title: '操作成功',
 	// 如果不传此type参数，默认为default，也可以手动写上 type: 'default'
 	// type: 'success', 
@@ -67,7 +67,7 @@ this.$refs.uToast.show({
 - 如果配置了`params`参数，就会在跳转时自动在URL后面拼接上这些参数，具体用法如下：
 
 ``` js
-this.$refs.uToast.show({
+this.$refs.uToastRef.show({
 	title: '操作成功',
 	url: '/pages/user/index',
 	params: {

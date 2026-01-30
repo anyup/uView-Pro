@@ -3,7 +3,6 @@
         <view class="u-demo-wrap">
             <view class="u-demo-title">演示效果</view>
             <view class="u-demo-area">
-                <u-toast ref="uToast"></u-toast>
                 <view class="u-avatar-wrap">
                     <image @tap="preAvatar" class="u-avatar-demo" v-if="avatar" :src="avatar" mode="aspectFill"></image>
                 </view>

@@ -5,7 +5,6 @@
                 <view class="u-demo-wrap">
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
-                        <u-toast ref="uToast"></u-toast>
                         <u-tabs
                             v-if="control"
                             :bg-color="$u.color.bgColor"

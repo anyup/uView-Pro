@@ -9,7 +9,6 @@
                 <view class="u-demo-wrap">
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
-                        <u-toast ref="uToast"></u-toast>
                         <view class="u-no-demo-here">请点击弹出弹窗查看效果</view>
                         <u-modal
                             ref="uModalRef"
