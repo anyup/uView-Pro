@@ -104,11 +104,11 @@ menuButtonInfo = uni.getMenuButtonBoundingClientRect();
 
 // 状态栏高度
 const statusBarHeight = ref(0);
-// #ifdef APP || H5 || MP-ALIPAY || MP-WEIXIN
+// #ifdef APP-HARMONY || MP-WEIXIN
 const windowInfo = uni.getWindowInfo();
 statusBarHeight.value = windowInfo.statusBarHeight || 0;
 // #endif
-// #ifndef APP || H5 || MP-ALIPAY || MP-WEIXIN
+// #ifndef APP-HARMONY || MP-WEIXIN
 statusBarHeight.value = systemInfo.statusBarHeight || 0;
 // #endif
 
