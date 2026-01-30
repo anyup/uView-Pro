@@ -28,7 +28,11 @@ export const ToastProps = {
     /** 跳转的url */
     url: { type: String, default: '' },
     /** 跳转参数对象 */
-    params: { type: Object as PropType<Record<string, any>>, default: () => ({}) }
+    params: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
+    /** 是否作为全局根部 toast（通常放在 App.vue 中，给 useToast() 使用） */
+    global: { type: Boolean, default: false },
+    /** 是否为loading “常驻” */
+    loading: { type: Boolean, default: false }
 };
 
 export type ToastProps = ExtractPropTypes<typeof ToastProps>;
@@ -36,4 +40,5 @@ export type ToastProps = ExtractPropTypes<typeof ToastProps>;
 export type ToastExpose = {
     show: (options: Record<string, any>) => void;
     hide: () => void;
+    close: () => void;
 };

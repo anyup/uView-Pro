@@ -1,20 +1,36 @@
 <template>
-    <view
-        class="u-toast"
-        :class="[isShow ? 'u-show' : '', 'u-type-' + tmpConfig.type, 'u-position-' + tmpConfig.position, customClass]"
-        :style="$u.toStyle({ zIndex: uZIndex }, customStyle)"
-    >
-        <view class="u-icon-wrap">
-            <u-icon
-                v-if="tmpConfig.icon"
-                custom-class="u-toast_icon"
-                :name="iconName"
-                :size="30"
-                :color="tmpConfig.type"
-            ></u-icon>
+    <u-mask :z-index="uZIndex" :show="isShow" custom-style="background-color:transparent;">
+        <view
+            class="u-toast"
+            :class="[
+                isShow ? 'u-show' : '',
+                'u-type-' + tmpConfig.type,
+                'u-position-' + tmpConfig.position,
+                customClass
+            ]"
+            :style="$u.toStyle({ zIndex: uZIndex }, customStyle)"
+        >
+            <view class="u-icon-wrap">
+                <!-- loading 类型走独立的加载动画组件 -->
+                <u-loading
+                    v-if="tmpConfig.loading"
+                    mode="circle"
+                    custom-style="margin-right: 16rpx;"
+                    :color="$u.color[tmpConfig.type]"
+                ></u-loading>
+                <!-- 其它类型仍然使用图标 -->
+                <u-icon
+                    v-else-if="tmpConfig.icon && iconName"
+                    custom-class="u-toast_icon"
+                    custom-style="margin-right: 10rpx;"
+                    :name="iconName"
+                    :size="40"
+                    :color="tmpConfig.type"
+                ></u-icon>
+            </view>
+            <text class="u-text">{{ tmpConfig.title }}</text>
         </view>
-        <text class="u-text">{{ tmpConfig.title }}</text>
-    </view>
+    </u-mask>
 </template>
 
 <script lang="ts">
@@ -31,10 +47,17 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { $u } from '../..';
 import type { ToastExpose } from './types';
 import { ToastProps } from './types';
+import {
+    U_TOAST_EVENT_HIDE,
+    U_TOAST_EVENT_SHOW,
+    U_TOAST_GLOBAL_EVENT_HIDE,
+    U_TOAST_GLOBAL_EVENT_SHOW,
+    type ToastPayload
+} from './service';
 
 /**
  * toast 消息提示
@@ -63,6 +86,7 @@ const config = computed(() => {
         isTab: props.isTab, // 是否跳转tab页面
         url: props.url, // toast消失后是否跳转页面，有则跳转，优先级高于back参数
         params: props.params, // URL跳转的参数，对象
+        loading: props.loading,
         title: '' // 显示文本
     };
 });
@@ -154,9 +178,44 @@ function timeEnd() {
     }
 }
 
+/**
+ * @description
+ * 函数式调用支持：
+ * - useToast() 内部通过 uni.$emit 派发「全局」事件，仅由 App 根部的 <u-toast global /> 承接
+ * - 普通页面级 <u-toast /> 监听「页面级」事件（当前版本暂未开放对应函数式 API，仅支持 ref 调用）
+ * - 不影响原有 ref.show()/ref.hide() 使用方式
+ */
+function onServiceShow(payload: ToastPayload) {
+    show(payload || {});
+}
+function onServiceHide() {
+    hide();
+}
+
+// 是否为 App 根部的“全局 toast”
+const isGlobal = computed(() => props.global);
+
+const showEvent = computed(() => (isGlobal.value ? U_TOAST_GLOBAL_EVENT_SHOW : U_TOAST_EVENT_SHOW));
+const hideEvent = computed(() => (isGlobal.value ? U_TOAST_GLOBAL_EVENT_HIDE : U_TOAST_EVENT_HIDE));
+
+onMounted(() => {
+    if (isGlobal.value) {
+        uni?.$on && uni.$on(showEvent.value, onServiceShow);
+        uni?.$on && uni.$on(hideEvent.value, onServiceHide);
+    }
+});
+
+onBeforeUnmount(() => {
+    if (isGlobal.value) {
+        uni?.$off && uni.$off(showEvent.value, onServiceShow);
+        uni?.$off && uni.$off(hideEvent.value, onServiceHide);
+    }
+});
+
 defineExpose<ToastExpose>({
     show,
-    hide
+    hide,
+    close: hide
 });
 </script>
 
@@ -177,7 +236,7 @@ defineExpose<ToastExpose>({
     font-size: 28rpx;
     opacity: 0;
     pointer-events: none;
-    padding: 18rpx 40rpx;
+    padding: 30rpx 40rpx;
 }
 
 .u-toast.u-show {
@@ -190,8 +249,12 @@ defineExpose<ToastExpose>({
     /* #endif */
 }
 
+.u-text {
+    word-break: break-all;
+}
+
 :deep(.u-toast_icon) {
-    margin-right: 8rpx;
+    margin-right: 10rpx;
     @include vue-flex;
     align-items: center;
     line-height: normal;

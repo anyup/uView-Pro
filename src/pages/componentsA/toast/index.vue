@@ -7,6 +7,8 @@
                     <view class="u-demo-area">
                         <u-toast :type="type" ref="uToastRef"></u-toast>
                         <text class="no-mode-here">弹出toast</text>
+                        <u-gap></u-gap>
+                        <u-button type="primary" @click="showGlobalToast">使用useToast弹出</u-button>
                     </view>
                 </view>
                 <view class="u-config-wrap">
@@ -42,6 +44,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from 'uview-pro';
 import { ref } from 'vue';
 
 /**
@@ -61,6 +64,17 @@ const url = ref('');
 
 // toast 组件ref
 const uToastRef = ref();
+const toast = useToast();
+
+function showGlobalToast() {
+    toast.loading({
+        title: '加载中...',
+        type: 'primary'
+    });
+    setTimeout(() => {
+        toast.success('加载完成');
+    }, 2000);
+}
 
 /**
  * 主题切换
@@ -92,15 +106,15 @@ function iconChange(index: number) {
  * @param index 跳转下标
  */
 function urlChange(index: number) {
-    url.value = index == 0 ? '/pages/components/button/index' : '';
-    show();
+    url.value = index == 0 ? '/pages/componentsC/button/index' : '';
+    show('结束后跳转到Button页面');
 }
 /**
  * 显示toast
  */
-function show() {
+function show(value?: string) {
     uToastRef.value?.show?.({
-        title: title.value,
+        title: value || title.value,
         position: position.value,
         type: type.value,
         icon: icon.value,

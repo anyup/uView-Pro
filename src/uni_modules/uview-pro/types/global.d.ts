@@ -1,4 +1,4 @@
-export type ThemeType = 'primary' | 'info' | 'error' | 'warning' | 'success';
+export type ThemeType = 'primary' | 'info' | 'error' | 'warning' | 'success' | 'default';
 
 export type ImgMode = 'aspectFit' | 'aspectFill' | 'widthFix' | 'top' | 'bottom' | 'center' | 'scaleToFill';
 

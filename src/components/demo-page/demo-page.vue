@@ -324,7 +324,6 @@
                 </view>
             </u-transition>
         </view>
-        <u-toast ref="uToastRef"></u-toast>
     </view>
 </template>
 
@@ -342,7 +341,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { $u, useTheme } from 'uview-pro';
+import { $u, useTheme, useToast } from 'uview-pro';
 import { ref, computed, onMounted, onUnmounted, reactive, type PropType, watch } from 'vue';
 import { getMarkdown } from '@/api';
 import type { TabbarItem, TabsItem, ThemeType } from '@/uni_modules/uview-pro/types/global';
@@ -442,14 +441,14 @@ const { t } = useI18n();
 
 const guideImmediate = ref([true, false]);
 const tabbarGuideRef = ref();
-const uToastRef = ref();
+const toast = useToast();
 
 function showTabbarGuide() {
     tabbarGuideRef.value.show();
 }
 
 function showToast(title: string, type: ThemeType = 'success') {
-    uToastRef.value?.show({
+    toast.show({
         title,
         type,
         duration: 2000,

@@ -27,6 +27,7 @@ onShow(() => {});
         :current-locale="currentLocaleName"
     >
         <KuRootView />
+        <u-toast global></u-toast>
     </u-config-provider>
 </template>
 

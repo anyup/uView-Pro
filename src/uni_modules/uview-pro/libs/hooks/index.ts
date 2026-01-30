@@ -6,3 +6,4 @@ export * from './useColor';
 export * from './useLocale';
 export * from './useDebounce';
 export * from './useThrottle';
+export * from './useToast';
