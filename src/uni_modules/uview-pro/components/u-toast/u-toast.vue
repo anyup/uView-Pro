@@ -112,6 +112,7 @@ const uZIndex = computed(() => {
 
 /**
  * 显示toast组件，由父组件通过ref.show(options)形式调用
+ * @description 当 duration 为 0 或不传时，表示不自动关闭，需要手动调用 hide/close 方法关闭
  */
 function show(options: any) {
     // 不将结果合并到config变量，避免多次调用u-toast，前后的配置造成混乱
@@ -122,15 +123,18 @@ function show(options: any) {
         timer = null;
     }
     isShow.value = true;
-    timer = setTimeout(() => {
-        // 倒计时结束，清除定时器，隐藏toast组件
-        isShow.value = false;
-        clearTimeout(timer!);
-        timer = null;
-        // 判断是否存在callback方法，如果存在就执行
-        typeof tmpConfig.value.callback === 'function' && tmpConfig.value.callback();
-        timeEnd();
-    }, tmpConfig.value.duration);
+    // duration 为 0、undefined 或小于等于 0 时，表示不自动关闭，需要手动调用 hide/close
+    if (tmpConfig.value.duration > 0) {
+        timer = setTimeout(() => {
+            // 倒计时结束，清除定时器，隐藏toast组件
+            isShow.value = false;
+            clearTimeout(timer!);
+            timer = null;
+            // 判断是否存在callback方法，如果存在就执行
+            typeof tmpConfig.value.callback === 'function' && tmpConfig.value.callback();
+            timeEnd();
+        }, tmpConfig.value.duration);
+    }
 }
 /**
  * 隐藏toast组件，由父组件通过ref.hide()形式调用
@@ -194,20 +198,28 @@ function onServiceHide() {
 
 // 是否为 App 根部的“全局 toast”
 const isGlobal = computed(() => props.global);
+// 是否为页面级 toast
+const isPage = computed(() => props.page);
 
-const showEvent = computed(() => (isGlobal.value ? U_TOAST_GLOBAL_EVENT_SHOW : U_TOAST_EVENT_SHOW));
-const hideEvent = computed(() => (isGlobal.value ? U_TOAST_GLOBAL_EVENT_HIDE : U_TOAST_EVENT_HIDE));
+// 显示事件
+const showEvent = computed(() => (isGlobal.value ? U_TOAST_GLOBAL_EVENT_SHOW : isPage.value ? U_TOAST_EVENT_SHOW : ''));
+// 隐藏事件
+const hideEvent = computed(() => (isGlobal.value ? U_TOAST_GLOBAL_EVENT_HIDE : isPage.value ? U_TOAST_EVENT_HIDE : ''));
 
 onMounted(() => {
-    if (isGlobal.value) {
+    if (showEvent.value) {
         uni?.$on && uni.$on(showEvent.value, onServiceShow);
+    }
+    if (hideEvent.value) {
         uni?.$on && uni.$on(hideEvent.value, onServiceHide);
     }
 });
 
 onBeforeUnmount(() => {
-    if (isGlobal.value) {
+    if (showEvent.value) {
         uni?.$off && uni.$off(showEvent.value, onServiceShow);
+    }
+    if (hideEvent.value) {
         uni?.$off && uni.$off(hideEvent.value, onServiceHide);
     }
 });

@@ -33,6 +33,8 @@ export type UseToast = {
 export type UseToastOptions = {
     /** 是否使用全局根部 <u-toast global />，默认 true；为 false 时走页面级 <u-toast /> */
     global?: boolean;
+    /** 是否使用页面级 <u-toast page /> */
+    page?: boolean;
 };
 
 function normalize(titleOrOptions: string | UseToastShowOptions): UseToastShowOptions {
@@ -42,24 +44,28 @@ function normalize(titleOrOptions: string | UseToastShowOptions): UseToastShowOp
 
 /**
  * Toast 函数式调用
- * @description 需要页面/应用中至少存在一个 <u-toast /> 实例用于承接事件；不影响原 ref 调用方式。
- * 支持两种调用方式：useToast() / useToast({ global: false }) / useToast(false)
+ * @description 需要页面/应用中至少存在一个 <u-toast global /> 或 <u-toast page /> 实例用于承接事件；不影响原 ref 调用方式。
+ * 支持两种调用方式：应用级 useToast() / useToast({ global: true }) 页面级 useToast({ page: true }) / useToast(false)
  */
 export function useToast(): UseToast;
 export function useToast(options: UseToastOptions): UseToast;
 export function useToast(global: boolean): UseToast;
-export function useToast(optionsOrGlobal: UseToastOptions | boolean = {}): UseToast {
-    const isGlobal =
-        typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal !== false : optionsOrGlobal.global !== false;
-    const showEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_SHOW : U_TOAST_EVENT_SHOW;
-    const hideEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_HIDE : U_TOAST_EVENT_HIDE;
+export function useToast(optionsOrGlobal: UseToastOptions | boolean = true): UseToast {
+    const isGlobal = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal !== false : optionsOrGlobal.global === true;
+    const isPage = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === false : optionsOrGlobal.page === true;
+    const showEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_SHOW : isPage ? U_TOAST_EVENT_SHOW : '';
+    const hideEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_HIDE : isPage ? U_TOAST_EVENT_HIDE : '';
 
     function emitShow(payload: UseToastShowOptions) {
-        uni?.$emit && uni.$emit(showEvent, payload);
+        if (showEvent) {
+            uni?.$emit && uni.$emit(showEvent, payload);
+        }
     }
 
     function emitHide() {
-        uni?.$emit && uni.$emit(hideEvent);
+        if (hideEvent) {
+            uni?.$emit && uni.$emit(hideEvent);
+        }
     }
     function show(titleOrOptions: string | UseToastShowOptions) {
         emitShow(normalize(titleOrOptions));
@@ -84,7 +90,7 @@ export function useToast(optionsOrGlobal: UseToastOptions | boolean = {}): UseTo
         loading: (v: any) => {
             const options = normalize(v);
             // loading 通常需要常驻，除非用户显式传 duration
-            emitShow({ ...options, loading: true, duration: options.duration ?? 1e9 });
+            emitShow({ ...options, loading: true, duration: options.duration ?? 0 });
         }
     };
 }

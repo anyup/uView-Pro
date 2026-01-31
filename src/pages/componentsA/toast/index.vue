@@ -69,11 +69,12 @@ const toast = useToast();
 function showGlobalToast() {
     toast.loading({
         title: '加载中...',
-        type: 'primary'
+        type: 'primary',
+        duration: 2000,
+        callback: () => {
+            toast.success('加载完成');
+        }
     });
-    setTimeout(() => {
-        toast.success('加载完成');
-    }, 2000);
 }
 
 /**
