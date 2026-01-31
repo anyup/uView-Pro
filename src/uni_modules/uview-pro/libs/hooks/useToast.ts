@@ -47,9 +47,6 @@ function normalize(titleOrOptions: string | UseToastShowOptions): UseToastShowOp
  * @description 需要页面/应用中至少存在一个 <u-toast global /> 或 <u-toast page /> 实例用于承接事件；不影响原 ref 调用方式。
  * 支持两种调用方式：应用级 useToast() / useToast({ global: true }) 页面级 useToast({ page: true }) / useToast(false)
  */
-export function useToast(): UseToast;
-export function useToast(options: UseToastOptions): UseToast;
-export function useToast(global: boolean): UseToast;
 export function useToast(optionsOrGlobal: UseToastOptions | boolean = true): UseToast {
     const isGlobal = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal !== false : optionsOrGlobal.global === true;
     const isPage = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === false : optionsOrGlobal.page === true;

@@ -10,6 +10,8 @@
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
                         <view class="u-no-demo-here">请点击弹出弹窗查看效果</view>
+                        <u-gap></u-gap>
+                        <u-button type="primary" @click="showGlobalModal">使用useModal弹出</u-button>
                         <u-modal
                             ref="uModalRef"
                             v-model="show"
@@ -61,14 +63,36 @@
 </template>
 
 <script setup lang="ts">
+import { useModal, useToast } from 'uview-pro';
 import { ref, computed } from 'vue';
 
 const show = ref<boolean>(false);
-const zoom = ref<boolean>(false);
 const content = ref<string>('慈母手中线，游子身上衣');
 const contentSlot = ref<boolean>(false);
 const showTitle = ref<boolean>(true);
 const asyncClose = ref<boolean>(false);
+const modal = useModal();
+const toast = useToast();
+
+function showGlobalModal() {
+    // 完整用法
+    modal.confirm({
+        title: '确认删除',
+        content: '确定要删除这条数据吗？',
+        confirmText: '删除',
+        cancelText: '取消',
+        asyncClose: true,
+        onConfirm: () => {
+            toast.show('用户点击了确认');
+            setTimeout(() => {
+                modal.close();
+            }, 2000);
+        },
+        onCancel: () => {
+            toast.show('用户点击了取消');
+        }
+    });
+}
 
 const current = computed(() => {
     return show.value ? 0 : 1;

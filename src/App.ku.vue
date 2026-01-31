@@ -28,6 +28,7 @@ onShow(() => {});
     >
         <KuRootView />
         <u-toast global></u-toast>
+        <u-modal global></u-modal>
     </u-config-provider>
 </template>
 

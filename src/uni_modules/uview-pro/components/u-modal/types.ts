@@ -33,7 +33,7 @@ export const ModalProps = {
     /** 弹窗内容 */
     content: {
         type: String,
-        default: () => t('uModal.content')
+        default: ''
     },
     /** 是否显示标题 */
     showTitle: {
@@ -114,6 +114,16 @@ export const ModalProps = {
     negativeTop: {
         type: [String, Number] as PropType<number | string>,
         default: 0
+    },
+    /** 是否作为全局根部 modal（通常放在 App.vue 中，给 useModal() 使用） */
+    global: {
+        type: Boolean,
+        default: false
+    },
+    /** 是否作为页面级 modal（通常放在页面中，给 useModal({ page: true }) 使用） */
+    page: {
+        type: Boolean,
+        default: false
     }
 };
 
