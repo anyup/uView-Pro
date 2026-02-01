@@ -21,7 +21,7 @@
                     <view class="setting-item">
                         <view class="setting-item__label"> 多语言 </view>
                         <view class="setting-item__value" @click="showLocalePicker = true">
-                            {{ getLocaleLabel(currentLocale.name) }}
+                            {{ currentLocale.label || currentLocale.name }}
                             <u-icon name="arrow-right" color="#c0c4cc" size="28" />
                         </view>
                     </view>
@@ -106,7 +106,7 @@
                             :key="locale.name"
                             class="theme-item"
                             :class="{ 'theme-item--active': currentLocale.name === locale.name }"
-                            @click="selectLocale(locale.name)"
+                            @click="selectLocale(locale)"
                         >
                             <view class="theme-item__name">
                                 {{ locale.label }}
@@ -158,9 +158,10 @@ const themes = computed(() => {
 });
 
 const locales = computed(() => {
-    return availableLocales.value.map(locale => ({
+    return availableLocales.value.map((locale: any) => ({
         name: locale.name,
-        label: getLocaleLabel(locale.name)
+        label: locale.label || locale.name,
+        locale: locale.locale
     }));
 });
 
@@ -188,10 +189,10 @@ function selectTheme(themeName: string) {
     showToast(`已切换到「${themes.value.find(t => t.name === themeName)?.label}」主题`);
 }
 
-function selectLocale(localeName: string) {
-    switchLang(localeName);
+function selectLocale(locale: any) {
+    switchLang(locale);
     showLocalePicker.value = false;
-    showToast(`已切换到语言「${getLocaleLabel(localeName)}」`);
+    showToast(`已切换到语言「${locale.label}」`);
 }
 
 // 清除缓存

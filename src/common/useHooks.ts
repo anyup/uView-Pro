@@ -4,40 +4,13 @@ import { useI18n } from 'vue-i18n';
 export function useLang() {
     const { locale } = useI18n();
     const { setLocale } = useLocale();
-
-    function getI18nLocale(value: string) {
-        switch (value) {
-            case 'zh-CN':
-            case 'zh-Hans':
-                return 'zh-Hans';
-            case 'en-US':
-            case 'en':
-                return 'en';
-            default:
-                return 'zh-Hans';
-        }
-    }
-
-    function getUProLocale(value: string) {
-        switch (value) {
-            case 'zh-Hans':
-            case 'zh-CN':
-                return 'zh-CN';
-            case 'en':
-            case 'en-US':
-                return 'en-US';
-            default:
-                return 'zh-CN';
-        }
-    }
-
-    function switchLang(lang: string) {
+    function switchLang(payload: any) {
         // 切换uniapp语言
-        uni.setLocale(getI18nLocale(lang));
+        uni.setLocale(payload.locale);
         // 切换vue-i18n语言
-        locale.value = getI18nLocale(lang);
+        locale.value = payload.locale;
         // 切换uView Pro语言
-        setLocale(getUProLocale(lang));
+        setLocale(payload.name);
     }
 
     return {

@@ -61,7 +61,10 @@ const lang = computed(() => {
  */
 function switchLanguage() {
     const nextLang = locale.value === 'zh-Hans' ? 'en' : 'zh-Hans';
-    switchLang(nextLang);
+    switchLang({
+        name: nextLang === 'zh-Hans' ? 'zh-CN' : 'en-US',
+        locale: nextLang
+    });
     // 设置标题
     setTitle();
 }

@@ -1,5 +1,7 @@
 export default {
     name: 'en-US',
+    label: 'English',
+    locale: 'en',
     uActionSheet: {
         cancelText: 'Cancel'
     },

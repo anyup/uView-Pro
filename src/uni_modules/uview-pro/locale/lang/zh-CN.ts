@@ -1,5 +1,7 @@
 export default {
     name: 'zh-CN',
+    label: '简体中文',
+    locale: 'zh-Hans',
     uActionSheet: {
         cancelText: '取消'
     },

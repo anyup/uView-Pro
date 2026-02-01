@@ -12,25 +12,18 @@ const { t, locale } = useI18n();
 const currentLocaleName = computed(() => currentLocale.value?.name || '未初始化');
 const vueLocale = computed(() => locale.value || '');
 
-function mapVueToUView(vueLoc: string) {
-    if (!vueLoc) return 'zh-CN';
-    if (vueLoc.startsWith('zh')) return 'zh-CN';
-    return 'en-US';
-}
-
-function switchLang(vueLoc: string) {
+function switchLang(vueLoc: any) {
     // 切换 vue-i18n
-    locale.value = vueLoc;
+    locale.value = vueLoc.locale;
     try {
         if (typeof uni !== 'undefined' && typeof uni.setLocale === 'function') {
-            uni.setLocale(vueLoc);
+            uni.setLocale(vueLoc.locale);
         }
     } catch (e) {
         // ignore
     }
     // 同步 uView-Pro
-    const mapped = mapVueToUView(vueLoc);
-    setLocale(mapped);
+    setLocale(vueLoc.name);
 }
 
 // 初始化示例：如果没有 locale，则注入自定义 en-US 覆盖示例
@@ -43,6 +36,8 @@ onMounted(() => {
 function demoAddFrench() {
     const fr = {
         name: 'fr-FR',
+        label: '法语',
+        locale: 'fr-FR',
         empty: { search: 'Aucun résultat de recherche' },
         common: { intro: 'Bonjour depuis vue-i18n' }
     };
@@ -91,8 +86,9 @@ function demoAddFrench() {
                 </view>
                 <view class="panel-content">
                     <view class="button-row">
-                        <u-button type="primary" @click="switchLang('zh-Hans')">切换到中文</u-button>
-                        <u-button type="primary" @click="switchLang('en')">Switch to English</u-button>
+                        <u-button v-for="loc in locales" :key="loc.name" type="primary" @click="switchLang(loc)">
+                            切换到{{ loc.label }}
+                        </u-button>
                         <u-button v-if="false" @click="demoAddFrench">Add French (fr-FR)</u-button>
                     </view>
                 </view>
