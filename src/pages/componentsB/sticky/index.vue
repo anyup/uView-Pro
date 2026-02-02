@@ -15,7 +15,7 @@
                     <view class="u-config-title u-border-bottom"> 参数配置 </view>
                     <view class="u-config-item">
                         <view class="u-item-title">吸顶高度</view>
-                        <u-subsection :list="['0', '120', '200']" @change="offsetTopChange"></u-subsection>
+                        <u-subsection :current="2" :list="['0', '120', '200']" @change="offsetTopChange"></u-subsection>
                     </view>
                     <view class="u-config-item">
                         <view class="u-item-title">状态</view>
@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-const offsetTop = ref(0);
+const offsetTop = ref(200);
 const enable = ref(true);
 const uToastRef = ref(null);
 
