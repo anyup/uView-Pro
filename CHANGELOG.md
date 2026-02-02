@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.5] - 2026-02-02
+
+### ✨ Features | 新功能
+
+- **u-toast:** 新增页面级toast功能并优化loading逻辑 ([4eae5b7](https://github.com/anyup/uView-Pro/commit/4eae5b7ef5d4494c4619bee383e62490994b4317))
+- **useModal:** 新增useModal函数式调用API和全局modal功能（#101） ([724edf3](https://github.com/anyup/uView-Pro/commit/724edf3cd69607a6d4e33954f8d2d701f9502ff3))
+- **locale:** 新增语言配置的标签字段label和区域设置字段locale ([49ba6cb](https://github.com/anyup/uView-Pro/commit/49ba6cbea6b53712496e465dd40654af7608a02d))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **demo:** 调整demo演示中吸顶组件默认偏移量为200 ([165da80](https://github.com/anyup/uView-Pro/commit/165da80eb9eec54cf1a5fa8511d82e2b3d11fed1))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.5.4] - 2026-01-30
 
 ### 🐛 Bug Fixes | Bug 修复
