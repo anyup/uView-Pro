@@ -1,3 +1,13 @@
+## 0.5.6（2026-02-04）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **vue-tsc:** 修复部分定时器ts类型定义错误问题（#124） ([dada764](https://github.com/anyup/uView-Pro/commit/dada764eaa6ea73402e8fa6d96a783ae2a68715a))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.5（2026-02-02）
 
 ### ✨ Features | 新功能
