@@ -37,7 +37,7 @@ import { TopTipsProps } from './types';
 
 const props = defineProps(TopTipsProps);
 
-let timer: number | null = null; // 定时器
+let timer: number | ReturnType<typeof setTimeout> | null = null; // 定时器
 const isShow = ref(false); // 是否显示消息组件
 const title = ref(''); // 组件中显示的消息内容
 const type = ref<'primary' | 'success' | 'error' | 'warning' | 'info'>('primary'); // 消息的类型（颜色不同），primary，success，error，warning，info

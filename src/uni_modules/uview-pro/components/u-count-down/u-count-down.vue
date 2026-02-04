@@ -120,7 +120,7 @@ const d = ref('00'); // 天
 const h = ref('00'); // 小时
 const i = ref('00'); // 分钟
 const s = ref('00'); // 秒
-const timer = ref<number | null>(null); // 定时器类型修正
+const timer = ref<number | ReturnType<typeof setInterval> | null>(null); // 定时器
 const seconds = ref(0);
 
 /**
