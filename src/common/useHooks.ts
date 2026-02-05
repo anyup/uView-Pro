@@ -30,11 +30,11 @@ export function useTitle(index: number) {
     }
 
     function setTitle() {
-        uni.setNavigationBarTitle({
+        uni?.setNavigationBarTitle({
             title: t(titles[index])
         });
         titles.forEach((text, index) => {
-            uni.setTabBarItem({
+            uni?.setTabBarItem({
                 index,
                 text: t(text)
             });
