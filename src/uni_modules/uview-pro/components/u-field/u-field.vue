@@ -36,7 +36,7 @@
                         v-if="props.type === 'textarea'"
                         class="u-flex-1 u-textarea-class"
                         :style="$u.toStyle(props.fieldStyle)"
-                        :value="String(props.modelValue)"
+                        :value="inputValue"
                         :placeholder="String(props.placeholder)"
                         :placeholderStyle="props.placeholderStyle"
                         :disabled="props.disabled"
@@ -56,7 +56,7 @@
                         class="u-flex-1 u-field__input-wrap"
                         :style="$u.toStyle(props.fieldStyle)"
                         :type="(props.type as any)"
-                        :value="String(props.modelValue)"
+                        :value="inputValue"
                         :password="props.password || props.type === 'password'"
                         :placeholder="String(props.placeholder)"
                         :placeholderStyle="props.placeholderStyle"
@@ -74,7 +74,7 @@
                     <view v-if="props.disabled" class="u-field-disabled-overlay" @tap="fieldClick"></view>
                 </view>
                 <u-icon
-                    v-if="props.clearable && props.modelValue != '' && focused && !props.disabled"
+                    v-if="props.clearable && inputValue !== '' && focused && !props.disabled"
                     :size="props.clearSize"
                     name="close-circle-fill"
                     color="var(--u-light-color)"
@@ -160,44 +160,16 @@ import { $u } from '../..';
  * @example <u-field v-model="mobile" label="手机号" required :error-message="errorMessage"></u-field>
  */
 
-const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'confirm', 'right-icon-click', 'click']);
+const emit = defineEmits(['update:modelValue', 'input', 'focus', 'blur', 'confirm', 'right-icon-click', 'click']);
 
-/**
- * field 输入框
- * @description 借助此组件，可以实现表单的输入， 有"text"和"textarea"类型的，此外，借助uView的picker和actionSheet组件可以快速实现上拉菜单，时间，地区选择等， 为表单解决方案的利器。
- * @property {string} icon label左边的图标，限uView的图标名称
- * @property {string} rightIcon 输入框右边的图标名称，限uView的图标名称（默认false）
- * @property {boolean} required 是否必填，左边显示红色"*"号（默认false）
- * @property {string} label 输入框左边的文字提示
- * @property {boolean} password 是否密码输入方式(用点替换文字)，type为text时有效（默认false）
- * @property {boolean} clearable 是否显示右侧清空内容的图标控件（默认true）
- * @property {number|string} labelWidth label的宽度，单位rpx（默认130）
- * @property {string} labelAlign label的文字对齐方式（默认left）
- * @property {string} inputAlign 输入框内容对齐方式（默认left）
- * @property {string} iconColor 左边通过icon配置的图标的颜色（默认var(--u-content-color)）
- * @property {boolean} autoHeight 是否自动增高输入区域，type为textarea时有效（默认true）
- * @property {string|boolean} errorMessage 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
- * @property {string} placeholder 输入框的提示文字
- * @property {string} placeholderStyle placeholder的样式(内联样式，字符串)，如"color: var(--u-divider-color)"
- * @property {boolean} focus 是否自动获得焦点（默认false）
- * @property {boolean} fixed 如果type为textarea，且在一个"position:fixed"的区域，需要指明为true（默认false）
- * @property {boolean} disabled 是否不可输入（默认false）
- * @property {number|string} maxlength 最大输入长度，设置为 -1 的时候不限制最大长度（默认140）
- * @property {string} confirmType 设置键盘右下角按钮的文字，仅在type="text"时生效（默认done）
- * @property {string} labelPosition label位置（默认left）
- * @property {Record<string, any>} fieldStyle 自定义输入框的样式，对象形式
- * @property {number|string} clearSize 清除图标的大小，单位rpx（默认30）
- * @property {Record<string, any>} iconStyle 左侧图标样式
- * @property {boolean} borderTop 是否显示field的上边框（默认false）
- * @property {boolean} borderBottom 是否显示field的下边框（默认true）
- * @property {boolean} trim 是否自动去除输入内容首尾空格（默认true）
- * @property {string|number} value 输入框绑定值
- * @property {string} type 输入框类型（text/textarea/password等，默认text）
- */
 const props = defineProps(FieldProps);
 
 const focused = ref(false);
-const itemIndex = ref(0);
+
+const inputValue = computed<string>(() => {
+    if (props.modelValue === undefined || props.modelValue === null) return '';
+    return String(props.modelValue);
+});
 
 const inputWrapStyle = computed(() => {
     const style: Record<string, string> = {};
@@ -253,6 +225,7 @@ function onInput(event: any) {
     // 判断是否去除空格
     if (props.trim) value = $u.trim(value);
     emit('update:modelValue', value);
+    emit('input', value);
 }
 
 function onFocus(event: any) {

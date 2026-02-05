@@ -19,7 +19,7 @@
             v-if="type == 'textarea'"
             class="u-input__input u-input__textarea"
             :style="getStyle"
-            :value="String(defaultValue)"
+            :value="inputValue"
             :placeholder="placeholder"
             :placeholderStyle="placeholderStyle"
             :disabled="disabled"
@@ -43,7 +43,7 @@
             class="u-input__input"
             :type="((type == 'password' ? 'text' : type) as any)"
             :style="getStyle"
-            :value="String(defaultValue)"
+            :value="inputValue"
             :password="type == 'password' && !showPassword"
             :placeholder="placeholder"
             :placeholderStyle="placeholderStyle"
@@ -65,7 +65,7 @@
         <view class="u-input__right-icon u-flex">
             <view
                 class="u-input__right-icon__clear u-input__right-icon__item"
-                v-if="clearable && modelValue != '' && !disabled"
+                v-if="clearable && inputValue !== '' && !disabled"
                 @click.stop="onClear"
             >
                 <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" />
@@ -98,7 +98,7 @@
             }"
             v-if="props.type === 'textarea' && props.count"
         >
-            {{ String(defaultValue).length }}/{{ props.maxlength }}
+            {{ inputValue.length }}/{{ props.maxlength }}
         </text>
     </view>
 </template>
@@ -126,7 +126,6 @@ const emit = defineEmits(['update:modelValue', 'input', 'blur', 'focus', 'confir
 
 const { emitToParent } = useChildren('u-input', 'u-form-item');
 
-const defaultValue = ref(props.modelValue);
 const inputHeight = 70; // input的高度
 const textareaHeight = 100; // textarea的高度
 const validateState = ref(props.validateState); // 当前input的验证状态，用于错误时，边框是否改为红色
@@ -134,11 +133,15 @@ const focused = ref(false); // 当前是否处于获得焦点的状态
 const showPassword = ref(false); // 是否预览密码
 const lastValue = ref(''); // 用于头条小程序，判断@input中，前后的值是否发生了变化
 
+const inputValue = computed<string>(() => {
+    if (props.modelValue === undefined || props.modelValue === null) return '';
+    return String(props.modelValue);
+});
+
 // 监听 value 变化
 watch(
-    () => props.modelValue,
+    () => inputValue.value,
     (nVal, oVal) => {
-        defaultValue.value = nVal;
         // 当值发生变化，且为select类型时(此时input被设置为disabled，不会触发@input事件)，模拟触发@input事件
         if (nVal != oVal && props.type == 'select') handleInput({ detail: { value: nVal } });
     }
@@ -179,8 +182,6 @@ function handleInput(event: any) {
     let value = event.detail.value;
     // 判断是否去除空格
     if (props.trim) value = $u.trim(value);
-    // 当前model 赋值
-    defaultValue.value = value;
     emit('update:modelValue', value);
     emit('input', value);
     // 过一个生命周期再发送事件给u-form-item，否则this.$emit('update:modelValue')更新了父组件的值，但是微信小程序上
@@ -208,7 +209,7 @@ function handleBlur(event: any) {
         focused.value = false;
     }, 100);
     setTimeout(() => {
-        let value = String(defaultValue.value);
+        let value = inputValue.value;
         emit('blur', value);
         // 头条小程序由于自身bug，导致中文下，每按下一个键(尚未完成输入)，都会触发一次@input，导致错误，这里进行判断处理
         // #ifdef MP-TOUTIAO
