@@ -49,6 +49,16 @@
                             @click="switchTheme"
                         ></u-icon>
                         <!-- #endif -->
+                        <!-- #ifdef MP -->
+                        <u-icon
+                            name="share1"
+                            size="48"
+                            color="#ffffff"
+                            custom-style="margin-left:7px"
+                            custom-prefix="custom-icon"
+                            @click="sharePage"
+                        ></u-icon>
+                        <!-- #endif -->
                     </view>
                 </template>
                 <!-- #ifndef MP -->
@@ -63,8 +73,8 @@
                             @click="$u.route('/pages/other/theme/index')"
                         ></u-icon>
                         <u-icon
-                            name="guide"
-                            size="50"
+                            name="share1"
+                            size="46"
                             color="#ffffff"
                             custom-style="margin-left:10px"
                             custom-prefix="custom-icon"
@@ -324,6 +334,18 @@
                 </view>
             </u-transition>
         </view>
+        <u-action-sheet v-model="actionSheetShow" :safe-area-inset-bottom="true">
+            <u-action-sheet-item padding="0">
+                <u-text
+                    text="分享给朋友"
+                    size="32"
+                    openType="share"
+                    :block="true"
+                    line-height="50px"
+                    align="center"
+                ></u-text>
+            </u-action-sheet-item>
+        </u-action-sheet>
     </view>
 </template>
 
@@ -442,7 +464,7 @@ const { t } = useI18n();
 const guideImmediate = ref([true, false]);
 const tabbarGuideRef = ref();
 const toast = useToast();
-
+const actionSheetShow = ref(false);
 function showTabbarGuide() {
     tabbarGuideRef.value.show();
 }
@@ -834,7 +856,16 @@ function sharePage() {
     const pages = getCurrentPages();
     // 页面栈中的最后一个即为项为当前页面，route属性为页面路径
     const pageUrl = pages[pages.length - 1].route as string;
-    window.open('https://h5.uviewpro.cn/#/' + pageUrl);
+    const fullPath = 'https://h5.uviewpro.cn/#/' + pageUrl;
+    // #ifdef H5
+    window.open(fullPath);
+    // #endif
+    // #ifdef APP
+    plus.runtime.openURL(fullPath);
+    // #endif
+    // #ifdef MP
+    actionSheetShow.value = true;
+    // #endif
 }
 
 onMounted(() => {
