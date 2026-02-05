@@ -25,7 +25,7 @@ export const CardProps = {
     /** 副标题字体大小，单位rpx */
     subTitleSize: { type: [Number, String], default: '26' },
     /** 是否显示外部边框，只对full=false时有效(卡片与边框有空隙时) */
-    border: { type: Boolean, default: true },
+    border: { type: Boolean, default: false },
     /** 用于标识点击了第几个 */
     index: { type: [String, Number, Object] as PropType<CardIndex>, default: '' },
     /** 用于隔开上下左右的边距，带单位的写法，如："30rpx 30rpx"，"20rpx 20rpx 30rpx 30rpx" */

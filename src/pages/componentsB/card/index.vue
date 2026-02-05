@@ -11,6 +11,7 @@
                         :thumb="thumb"
                         :padding="padding"
                         :border="border"
+                        :border-radius="borderRadius"
                     >
                         <template #body>
                             <view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
@@ -53,7 +54,15 @@
                     </view>
                     <view class="u-config-item">
                         <view class="u-item-title">外边框</view>
-                        <u-subsection :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
+                        <u-subsection :current="1" :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">圆角</view>
+                        <u-subsection
+                            :current="1"
+                            :list="['0', '16', '30']"
+                            @change="borderRadiusChange"
+                        ></u-subsection>
                     </view>
                 </view>
             </view>
@@ -69,7 +78,8 @@ const subTitle = ref('2020-05-15');
 const thumb = ref('https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png');
 const padding = ref(20);
 const bottomSlot = ref(true);
-const border = ref(true);
+const border = ref(false);
+const borderRadius = ref(16);
 
 function thumbChange(index: number) {
     thumb.value = index === 0 ? 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png' : '';
@@ -85,6 +95,10 @@ function bottomChange(index: number) {
 
 function borderChange(index: number) {
     border.value = !index;
+}
+
+function borderRadiusChange(index: number) {
+    borderRadius.value = [0, 16, 30][index];
 }
 
 function click(index: number) {
