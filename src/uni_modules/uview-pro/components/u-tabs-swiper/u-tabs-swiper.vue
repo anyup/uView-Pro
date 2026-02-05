@@ -4,6 +4,7 @@
             scroll-x
             class="u-scroll-view"
             :scroll-left="scrollLeft"
+            :show-scrollbar="false"
             scroll-with-animation
             :style="{ zIndex: Number(zIndex) + 1 }"
         >
@@ -315,9 +316,6 @@ scroll-view {
     transition-property: background-color, color;
 }
 
-/* #ifndef APP-NVUE */
-::-webkit-scrollbar,
-::-webkit-scrollbar,
 ::-webkit-scrollbar {
     display: none;
     width: 0 !important;
@@ -325,7 +323,6 @@ scroll-view {
     -webkit-appearance: none;
     background: transparent;
 }
-/* #endif */
 
 /* #ifdef H5 */
 // 通过样式穿透，隐藏H5下，scroll-view下的滚动条

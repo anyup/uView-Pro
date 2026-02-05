@@ -2,7 +2,13 @@
     <view class="u-tabs" :style="$u.toStyle({ background: bgColor }, customStyle)" :class="customClass">
         <!-- $u.getRect()对组件根节点无效，因为写了.in(this)，故这里获取内层接点尺寸 -->
         <view>
-            <scroll-view scroll-x class="u-scroll-view" :scroll-left="scrollLeft" scroll-with-animation>
+            <scroll-view
+                scroll-x
+                class="u-scroll-view"
+                :scroll-left="scrollLeft"
+                :show-scrollbar="false"
+                scroll-with-animation
+            >
                 <view class="u-scroll-box" :id="id" :class="{ 'u-tabs-scroll-flex': !isScroll }">
                     <view
                         class="u-tab-item u-line-1"
@@ -246,9 +252,7 @@ scroll-view {
     box-sizing: border-box;
 }
 
-/* #ifndef APP-NVUE */
-::-webkit-scrollbar,
-::-webkit-scrollbar,
+// 隐藏滚动条样式，支持App、H5、小程序等平台
 ::-webkit-scrollbar {
     display: none;
     width: 0 !important;
@@ -256,7 +260,6 @@ scroll-view {
     -webkit-appearance: none;
     background: transparent;
 }
-/* #endif */
 
 .u-scroll-box {
     position: relative;
@@ -273,6 +276,13 @@ scroll-view ::v-deep ::-webkit-scrollbar {
     height: 0 !important;
     -webkit-appearance: none;
     background: transparent;
+}
+/* #endif */
+
+// App-nvue 平台使用特殊的滚动条隐藏方式
+/* #ifdef APP-NVUE */
+.scroll-view-nvue {
+    -webkit-scrollbar: none;
 }
 /* #endif */
 
