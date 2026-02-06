@@ -1,3 +1,20 @@
+## 0.5.7（2026-02-06）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-tabs:** 修复u-tabs的scroll-view在不同平台会显示滚动条的问题，统一各平台的滚动条隐藏逻辑 ([6ba904b](https://github.com/anyup/uView-Pro/commit/6ba904b85fdc5be69ab8b430878e16fa74674c64))
+- **demo:** 修复演示项目在钉钉小程序调用uni.setTabBarItem报错问题（#125） ([fd4ea39](https://github.com/anyup/uView-Pro/commit/fd4ea3987928039e9dcc3a53dc8bea42fce2b685))
+- **u-input,u-field:** 修复输入框绑定值为undefined和null时的显示异常问题 ([4af659f](https://github.com/anyup/uView-Pro/commit/4af659fb365179e3ed7db26a1d8571c327497f7a))
+
+### ✨ Features | 新功能
+
+- **demo-page:** 所有页面支持小程序分享功能 ([a055904](https://github.com/anyup/uView-Pro/commit/a05590443e898ed076d47a04cb8bfc74c2e73da8))
+- **u-card:** u-card添加圆角配置功能并调整默认边框样式 ([e43c939](https://github.com/anyup/uView-Pro/commit/e43c9396a17fe485305e63895a7ea8d6edf1906b))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.6（2026-02-04）
 
 ### 🐛 Bug Fixes | Bug 修复
