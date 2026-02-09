@@ -17,6 +17,7 @@
 [![stars](https://img.shields.io/github/stars/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro)
 [![forks](https://img.shields.io/github/forks/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro)
 [![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro/issues)
+[![downloads](https://img.shields.io/npm/dm/uview-pro?logo=npm&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fuview-pro&style=flat-square)](https://www.npmjs.com/package/uview-pro)
 [![npm version](https://img.shields.io/npm/v/uview-pro)](https://www.npmjs.com/package/uview-pro)
 [![Website](https://img.shields.io/badge/uView%20Pro-docs-blue?style=flat-square)](https://uviewpro.cn)
 [![node version](https://img.shields.io/badge/node-%3E%3D18-green)](https://nodejs.org/)
