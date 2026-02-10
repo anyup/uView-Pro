@@ -15,6 +15,22 @@ export const U_TOAST_EVENT_HIDE = 'uview-pro:u-toast:hide';
 export const U_TOAST_GLOBAL_EVENT_SHOW = 'uview-pro:u-toast:global:show';
 export const U_TOAST_GLOBAL_EVENT_HIDE = 'uview-pro:u-toast:global:hide';
 
+// 根据当前页面获取事件名
+export function getEventWithCurrentPage(event: string) {
+    return event + getCurrentPage();
+}
+
+// 获取当前页面路由
+function getCurrentPage() {
+    try {
+        const pages = getCurrentPages();
+        const currentPage = pages[pages.length - 1].route as string;
+        return currentPage || '';
+    } catch (error) {
+        return '';
+    }
+}
+
 export type ToastPayload = Partial<ToastProps> & {
     /** 文案（兼容 toast.show('xxx')） */
     title?: string;

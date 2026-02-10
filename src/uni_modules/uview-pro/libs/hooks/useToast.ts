@@ -3,6 +3,7 @@ import {
     U_TOAST_EVENT_SHOW,
     U_TOAST_GLOBAL_EVENT_HIDE,
     U_TOAST_GLOBAL_EVENT_SHOW,
+    getEventWithCurrentPage,
     type ToastPayload
 } from '../../components/u-toast/service';
 import type { ThemeType } from '../../types/global';
@@ -50,8 +51,8 @@ function normalize(titleOrOptions: string | UseToastShowOptions): UseToastShowOp
 export function useToast(optionsOrGlobal: UseToastOptions | boolean = true): UseToast {
     const isGlobal = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal !== false : optionsOrGlobal.global === true;
     const isPage = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === false : optionsOrGlobal.page === true;
-    const showEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_SHOW : isPage ? U_TOAST_EVENT_SHOW : '';
-    const hideEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_HIDE : isPage ? U_TOAST_EVENT_HIDE : '';
+    const showEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_SHOW : isPage ? getEventWithCurrentPage(U_TOAST_EVENT_SHOW) : '';
+    const hideEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_HIDE : isPage ? getEventWithCurrentPage(U_TOAST_EVENT_HIDE) : '';
 
     function emitShow(payload: UseToastShowOptions) {
         if (showEvent) {

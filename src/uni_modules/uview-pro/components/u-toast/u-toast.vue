@@ -56,6 +56,7 @@ import {
     U_TOAST_EVENT_SHOW,
     U_TOAST_GLOBAL_EVENT_HIDE,
     U_TOAST_GLOBAL_EVENT_SHOW,
+    getEventWithCurrentPage,
     type ToastPayload
 } from './service';
 
@@ -202,26 +203,54 @@ const isGlobal = computed(() => props.global);
 const isPage = computed(() => props.page);
 
 // 显示事件
-const showEvent = computed(() => (isGlobal.value ? U_TOAST_GLOBAL_EVENT_SHOW : isPage.value ? U_TOAST_EVENT_SHOW : ''));
+const showEvent = computed(() =>
+    isGlobal.value ? U_TOAST_GLOBAL_EVENT_SHOW : isPage.value ? getEventWithCurrentPage(U_TOAST_EVENT_SHOW) : ''
+);
 // 隐藏事件
-const hideEvent = computed(() => (isGlobal.value ? U_TOAST_GLOBAL_EVENT_HIDE : isPage.value ? U_TOAST_EVENT_HIDE : ''));
+const hideEvent = computed(() =>
+    isGlobal.value ? U_TOAST_GLOBAL_EVENT_HIDE : isPage.value ? getEventWithCurrentPage(U_TOAST_EVENT_HIDE) : ''
+);
 
-onMounted(() => {
+// 开始监听事件
+function startListeners() {
+    // 如果为全局 toast，则先移除所有事件监听，再重新监听
+    if (isGlobal.value) {
+        removeAllListeners();
+    }
     if (showEvent.value) {
         uni?.$on && uni.$on(showEvent.value, onServiceShow);
     }
     if (hideEvent.value) {
         uni?.$on && uni.$on(hideEvent.value, onServiceHide);
     }
-});
+}
 
-onBeforeUnmount(() => {
+// 停止监听事件
+function stopListeners() {
     if (showEvent.value) {
         uni?.$off && uni.$off(showEvent.value, onServiceShow);
     }
     if (hideEvent.value) {
         uni?.$off && uni.$off(hideEvent.value, onServiceHide);
     }
+}
+
+// 移除所有事件监听
+function removeAllListeners() {
+    if (showEvent.value) {
+        uni?.$off && uni.$off(showEvent.value);
+    }
+    if (hideEvent.value) {
+        uni?.$off && uni.$off(hideEvent.value);
+    }
+}
+
+onMounted(() => {
+    startListeners();
+});
+
+onBeforeUnmount(() => {
+    stopListeners();
 });
 
 defineExpose<ToastExpose>({
