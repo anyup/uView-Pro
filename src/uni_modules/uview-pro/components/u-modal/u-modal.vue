@@ -89,6 +89,7 @@ import {
     U_MODAL_GLOBAL_EVENT_CLEAR_LOADING,
     U_MODAL_GLOBAL_EVENT_HIDE,
     U_MODAL_GLOBAL_EVENT_SHOW,
+    getEventWithCurrentPage,
     type ModalPayload
 } from './service';
 
@@ -130,10 +131,18 @@ const slots = useSlots();
 const loading = ref(false);
 const isGlobal = computed(() => props.global);
 const isPage = computed(() => props.page);
-const showEvent = computed(() => (isGlobal.value ? U_MODAL_GLOBAL_EVENT_SHOW : isPage.value ? U_MODAL_EVENT_SHOW : ''));
-const hideEvent = computed(() => (isGlobal.value ? U_MODAL_GLOBAL_EVENT_HIDE : isPage.value ? U_MODAL_EVENT_HIDE : ''));
+const showEvent = computed(() =>
+    isGlobal.value ? U_MODAL_GLOBAL_EVENT_SHOW : isPage.value ? getEventWithCurrentPage(U_MODAL_EVENT_SHOW) : ''
+);
+const hideEvent = computed(() =>
+    isGlobal.value ? U_MODAL_GLOBAL_EVENT_HIDE : isPage.value ? getEventWithCurrentPage(U_MODAL_EVENT_HIDE) : ''
+);
 const clearLoadingEvent = computed(() =>
-    isGlobal.value ? U_MODAL_GLOBAL_EVENT_CLEAR_LOADING : isPage.value ? U_MODAL_EVENT_CLEAR_LOADING : ''
+    isGlobal.value
+        ? U_MODAL_GLOBAL_EVENT_CLEAR_LOADING
+        : isPage.value
+          ? getEventWithCurrentPage(U_MODAL_EVENT_CLEAR_LOADING)
+          : ''
 );
 
 // 存储用户传入的回调函数
@@ -312,7 +321,12 @@ function resetTempConfig() {
     userOnCancel = null;
 }
 
-onMounted(() => {
+// 开始监听事件
+function startListeners() {
+    // 如果为全局 toast，则先移除所有事件监听，再重新监听
+    if (isGlobal.value) {
+        removeAllListeners();
+    }
     if (showEvent.value) {
         uni?.$on && uni.$on(showEvent.value, onServiceShow);
     }
@@ -322,9 +336,10 @@ onMounted(() => {
     if (clearLoadingEvent.value) {
         uni?.$on && uni.$on(clearLoadingEvent.value, clearLoading);
     }
-});
+}
 
-onBeforeUnmount(() => {
+// 停止监听事件
+function stopListeners() {
     if (showEvent.value) {
         uni?.$off && uni.$off(showEvent.value, onServiceShow);
     }
@@ -334,6 +349,27 @@ onBeforeUnmount(() => {
     if (clearLoadingEvent.value) {
         uni?.$off && uni.$off(clearLoadingEvent.value, clearLoading);
     }
+}
+
+// 移除所有事件监听
+function removeAllListeners() {
+    if (showEvent.value) {
+        uni?.$off && uni.$off(showEvent.value);
+    }
+    if (hideEvent.value) {
+        uni?.$off && uni.$off(hideEvent.value);
+    }
+    if (clearLoadingEvent.value) {
+        uni?.$off && uni.$off(clearLoadingEvent.value);
+    }
+}
+
+onMounted(() => {
+    startListeners();
+});
+
+onBeforeUnmount(() => {
+    stopListeners();
 });
 
 defineExpose({

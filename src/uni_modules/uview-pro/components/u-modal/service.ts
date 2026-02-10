@@ -17,6 +17,22 @@ export const U_MODAL_GLOBAL_EVENT_SHOW = 'uview-pro:u-modal:global:show';
 export const U_MODAL_GLOBAL_EVENT_HIDE = 'uview-pro:u-modal:global:hide';
 export const U_MODAL_GLOBAL_EVENT_CLEAR_LOADING = 'uview-pro:u-modal:global:clear-loading';
 
+// 根据当前页面获取事件名
+export function getEventWithCurrentPage(event: string) {
+    return event + getCurrentPage();
+}
+
+// 获取当前页面路由
+function getCurrentPage() {
+    try {
+        const pages = getCurrentPages();
+        const currentPage = pages[pages.length - 1].route as string;
+        return currentPage || '';
+    } catch (error) {
+        return '';
+    }
+}
+
 /**
  * u-modal 函数式调用载荷类型
  * @description 完整覆盖 u-modal 的所有 props（除 modelValue 外）

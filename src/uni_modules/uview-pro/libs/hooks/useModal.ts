@@ -5,6 +5,7 @@ import {
     U_MODAL_GLOBAL_EVENT_SHOW,
     U_MODAL_GLOBAL_EVENT_HIDE,
     U_MODAL_GLOBAL_EVENT_CLEAR_LOADING,
+    getEventWithCurrentPage,
     type ModalPayload
 } from '../../components/u-modal/service';
 
@@ -53,9 +54,13 @@ export function useModal(optionsOrGlobal: UseModalOptions | boolean = true): Use
     const isGlobal = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal !== false : optionsOrGlobal.global === true;
     const isPage = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === false : optionsOrGlobal.page === true;
 
-    const showEvent = isGlobal ? U_MODAL_GLOBAL_EVENT_SHOW : isPage ? U_MODAL_EVENT_SHOW : '';
-    const hideEvent = isGlobal ? U_MODAL_GLOBAL_EVENT_HIDE : isPage ? U_MODAL_EVENT_HIDE : '';
-    const clearLoadingEvent = isGlobal ? U_MODAL_GLOBAL_EVENT_CLEAR_LOADING : isPage ? U_MODAL_EVENT_CLEAR_LOADING : '';
+    const showEvent = isGlobal ? U_MODAL_GLOBAL_EVENT_SHOW : isPage ? getEventWithCurrentPage(U_MODAL_EVENT_SHOW) : '';
+    const hideEvent = isGlobal ? U_MODAL_GLOBAL_EVENT_HIDE : isPage ? getEventWithCurrentPage(U_MODAL_EVENT_HIDE) : '';
+    const clearLoadingEvent = isGlobal
+        ? U_MODAL_GLOBAL_EVENT_CLEAR_LOADING
+        : isPage
+          ? getEventWithCurrentPage(U_MODAL_EVENT_CLEAR_LOADING)
+          : '';
 
     function emitShow(payload: UseModalShowOptions) {
         if (showEvent) {
