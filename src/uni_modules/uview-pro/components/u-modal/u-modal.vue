@@ -26,7 +26,7 @@
                         <slot />
                     </view>
                     <view v-else class="u-model__content__message" :style="$u.toStyle(effectiveConfig.contentStyle)">
-                        {{ effectiveConfig.content }}
+                        <text>{{ effectiveConfig.content }}</text>
                     </view>
                 </view>
                 <view

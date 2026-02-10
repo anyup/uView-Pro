@@ -126,19 +126,12 @@
     </demo-page>
 </template>
 
-<script>
-export default {
-    onLoad() {},
-    data() {
-        return {};
-    },
-    methods: {
-        clickHandler() {
-            // #ifndef MP-WEIXIN
-            uni.$u.toast('请在微信小程序内查看效果');
-            // #endif
-        }
-    }
+<script setup lang="ts">
+// 微信小程序开放能力点击事件
+const clickHandler = () => {
+    // #ifndef MP-WEIXIN
+    uni.$u.toast('请在微信小程序内查看效果');
+    // #endif
 };
 </script>
 

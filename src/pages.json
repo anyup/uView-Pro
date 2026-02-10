@@ -942,6 +942,23 @@
                     }
                 }
             ]
+        },
+        {
+            "root": "pages/hooks",
+            "pages": [
+                {
+                    "path": "useModal/index",
+                    "style": {
+                        "navigationBarTitleText": "useModal 模态框"
+                    }
+                },
+                {
+                    "path": "useToast/index",
+                    "style": {
+                        "navigationBarTitleText": "useToast 提示"
+                    }
+                }
+            ]
         }
     ],
     "preloadRule": {
