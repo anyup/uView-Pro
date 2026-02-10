@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.8] - 2026-02-10
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **deps:** 更新 uni-app 相关依赖包版本到 4.87，修复更新包后运行到 h5 报错问题 ([b00751b](https://github.com/anyup/uView-Pro/commit/b00751b2643bd582f2d1b9472e245d856352d4ed))
+
+### 📝 Documentation | 文档
+
+- 添加npm下载量统计徽章 ([63971ee](https://github.com/anyup/uView-Pro/commit/63971eead3365d5efe29166b2252e58904c0306c))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **useToast:** 修复使用useToast全局提示会触发多次监听的问题（#130） ([ae56413](https://github.com/anyup/uView-Pro/commit/ae564132604d27c3d92de2f6ece5eaae75980aaa))
+- **useModal:** 修复使用useModal全局弹窗会触发多次监听的问题（#130） ([50da10c](https://github.com/anyup/uView-Pro/commit/50da10c7c19d65885244df5c99634775be088824))
+- **u-upload:** 修复u-upload组件中删除确认弹窗的“取消”和“确认”按钮国际化问题（#128） ([e48ab1d](https://github.com/anyup/uView-Pro/commit/e48ab1d23f50c850b1fd85c9b48860bd1d5105b0))
+
+### ✨ Features | 新功能
+
+- **useToast:** 支持使用useToast页面级弹出时，toast可指定页面ID（#130） ([7d09ffe](https://github.com/anyup/uView-Pro/commit/7d09ffe5f8bbee5a3872dfc716dc7ba013f7e1bc))
+- **useModal:** 支持使用useModal页面级弹出时，modal可指定页面ID（#130） ([63af409](https://github.com/anyup/uView-Pro/commit/63af409370f775bac7ceabe98db8b5225491baa8))
+- **u-button:** 添加按钮文本属性支持 ([72fda47](https://github.com/anyup/uView-Pro/commit/72fda47673f1b099f12dcd88ca20570d20d3d5bc))
+- **router:** 添加路由跳转hooks功能 ([cb5a687](https://github.com/anyup/uView-Pro/commit/cb5a687bd7ec8c863d237f69b5cb486e86016398))
+- **demo:** 添加useModal和useToast示例页面 ([f42ca51](https://github.com/anyup/uView-Pro/commit/f42ca51839b1ebd3f02106da0310f4bbbfbb96cf))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.5.7] - 2026-02-06
 
 ### 🐛 Bug Fixes | Bug 修复
