@@ -13,6 +13,8 @@ export default {
         reUpload: 'Re-upload',
         uploadFailed: 'Upload failed, please try again',
         modalTitle: 'Notice',
+        modalCancelText: 'Cancel',
+        modalConfirmText: 'Confirm',
         deleteConfirm: 'Are you sure you want to delete this item?',
         terminatedRemove: 'Removal cancelled',
         removeSuccess: 'Removed successfully',

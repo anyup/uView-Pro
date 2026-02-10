@@ -13,6 +13,8 @@ export default {
         reUpload: '重新上传',
         uploadFailed: '上传失败，请重试',
         modalTitle: '提示',
+        modalCancelText: '取消',
+        modalConfirmText: '确定',
         deleteConfirm: '您确定要删除此项吗？',
         terminatedRemove: '已终止移除',
         removeSuccess: '移除成功',

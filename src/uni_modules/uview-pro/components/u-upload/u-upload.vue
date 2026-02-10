@@ -365,6 +365,8 @@ function deleteItem(index: number) {
     uni.showModal({
         title: t('uUpload.modalTitle'),
         content: t('uUpload.deleteConfirm'),
+        cancelText: t('uUpload.modalCancelText'),
+        confirmText: t('uUpload.modalConfirmText'),
         success: async (res: any) => {
             if (res.confirm) {
                 // 先检查是否有定义before-remove移除前钩子
