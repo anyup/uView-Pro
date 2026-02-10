@@ -9,6 +9,8 @@ import { baseProps } from '../common/props';
 
 export const ButtonProps = {
     ...baseProps,
+    /** 按钮文本 */
+    text: { type: String, default: '' },
     /** 是否细边框 */
     hairLine: { type: Boolean, default: true },
     /** 按钮的预置样式，default，primary，error，warning，success */

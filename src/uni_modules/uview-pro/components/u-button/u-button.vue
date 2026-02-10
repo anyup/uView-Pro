@@ -48,7 +48,7 @@
         :hover-class="getHoverClass"
         :loading="loading"
     >
-        <slot></slot>
+        <slot>{{ props.text }}</slot>
         <view
             v-if="ripple"
             class="u-wave-ripple"
