@@ -8,15 +8,18 @@
 import type { ToastProps } from './types';
 
 // 普通（页面级）toast 事件
-export const U_TOAST_EVENT_SHOW = 'uview-pro:u-toast:show';
-export const U_TOAST_EVENT_HIDE = 'uview-pro:u-toast:hide';
+export const U_TOAST_EVENT_SHOW = 'uview-pro:u-toast:show:';
+export const U_TOAST_EVENT_HIDE = 'uview-pro:u-toast:hide:';
 
 // 全局（App 根部）toast 事件，供 useToast() 使用
 export const U_TOAST_GLOBAL_EVENT_SHOW = 'uview-pro:u-toast:global:show';
 export const U_TOAST_GLOBAL_EVENT_HIDE = 'uview-pro:u-toast:global:hide';
 
 // 根据当前页面获取事件名
-export function getEventWithCurrentPage(event: string) {
+export function getEventWithCurrentPage(event: string, page?: string | boolean) {
+    if (page && typeof page === 'string' && page !== '') {
+        return event + page;
+    }
     return event + getCurrentPage();
 }
 

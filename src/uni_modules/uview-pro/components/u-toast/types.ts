@@ -32,7 +32,7 @@ export const ToastProps = {
     /** 是否作为全局根部 toast（通常放在 App.vue 中，给 useToast() 使用） */
     global: { type: Boolean, default: false },
     /** 是否作为页面级 toast（通常放在页面中，给 useToast({ page: true }) 使用） */
-    page: { type: Boolean, default: false },
+    page: { type: [Boolean, String] as PropType<boolean | string>, default: false },
     /** 是否为loading “常驻” */
     loading: { type: Boolean, default: false }
 };

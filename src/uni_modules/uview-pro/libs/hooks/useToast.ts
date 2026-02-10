@@ -34,8 +34,8 @@ export type UseToast = {
 export type UseToastOptions = {
     /** 是否使用全局根部 <u-toast global />，默认 true；为 false 时走页面级 <u-toast /> */
     global?: boolean;
-    /** 是否使用页面级 <u-toast page /> */
-    page?: boolean;
+    /** 是否使用页面级 <u-toast page /> 或某个页面的 <u-toast page="pageId" /> */
+    page?: boolean | string;
 };
 
 function normalize(titleOrOptions: string | UseToastShowOptions): UseToastShowOptions {
@@ -43,16 +43,37 @@ function normalize(titleOrOptions: string | UseToastShowOptions): UseToastShowOp
     return titleOrOptions || {};
 }
 
+function getPage(optionsOrGlobal: UseToastOptions | boolean): string {
+    if (typeof optionsOrGlobal === 'boolean') {
+        return '';
+    }
+    if (optionsOrGlobal.page && typeof optionsOrGlobal.page === 'string' && optionsOrGlobal.page !== '') {
+        return optionsOrGlobal.page;
+    }
+    return '';
+}
+
 /**
  * Toast 函数式调用
  * @description 需要页面/应用中至少存在一个 <u-toast global /> 或 <u-toast page /> 实例用于承接事件；不影响原 ref 调用方式。
- * 支持两种调用方式：应用级 useToast() / useToast({ global: true }) 页面级 useToast({ page: true }) / useToast(false)
+ *
+ * 支持两种调用方式：
+ * - 应用级 useToast() / useToast(true) / useToast({ global: true })
+ * - 页面级 useToast(false) / useToast({ page: true }) / useToast({ page: 'pageId' }) （pageId 应和页面中 <u-toast page="pageId" /> 的 page 属性一致）
  */
 export function useToast(optionsOrGlobal: UseToastOptions | boolean = true): UseToast {
-    const isGlobal = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal !== false : optionsOrGlobal.global === true;
-    const isPage = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === false : optionsOrGlobal.page === true;
-    const showEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_SHOW : isPage ? getEventWithCurrentPage(U_TOAST_EVENT_SHOW) : '';
-    const hideEvent = isGlobal ? U_TOAST_GLOBAL_EVENT_HIDE : isPage ? getEventWithCurrentPage(U_TOAST_EVENT_HIDE) : '';
+    const isGlobal = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === true : !!optionsOrGlobal.global;
+    const isPage = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === false : !!optionsOrGlobal.page;
+    const showEvent = isGlobal
+        ? U_TOAST_GLOBAL_EVENT_SHOW
+        : isPage
+          ? getEventWithCurrentPage(U_TOAST_EVENT_SHOW, getPage(optionsOrGlobal))
+          : '';
+    const hideEvent = isGlobal
+        ? U_TOAST_GLOBAL_EVENT_HIDE
+        : isPage
+          ? getEventWithCurrentPage(U_TOAST_EVENT_HIDE, getPage(optionsOrGlobal))
+          : '';
 
     function emitShow(payload: UseToastShowOptions) {
         if (showEvent) {

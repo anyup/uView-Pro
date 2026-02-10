@@ -198,17 +198,26 @@ function onServiceHide() {
 }
 
 // 是否为 App 根部的“全局 toast”
-const isGlobal = computed(() => props.global);
+const isGlobal = computed(() => !!props.global);
 // 是否为页面级 toast
-const isPage = computed(() => props.page);
+const isPage = computed(() => !!props.page);
 
 // 显示事件
 const showEvent = computed(() =>
-    isGlobal.value ? U_TOAST_GLOBAL_EVENT_SHOW : isPage.value ? getEventWithCurrentPage(U_TOAST_EVENT_SHOW) : ''
+    isGlobal.value
+        ? U_TOAST_GLOBAL_EVENT_SHOW
+        : isPage.value
+          ? getEventWithCurrentPage(U_TOAST_EVENT_SHOW, props.page)
+          : ''
 );
+
 // 隐藏事件
 const hideEvent = computed(() =>
-    isGlobal.value ? U_TOAST_GLOBAL_EVENT_HIDE : isPage.value ? getEventWithCurrentPage(U_TOAST_EVENT_HIDE) : ''
+    isGlobal.value
+        ? U_TOAST_GLOBAL_EVENT_HIDE
+        : isPage.value
+          ? getEventWithCurrentPage(U_TOAST_EVENT_HIDE, props.page)
+          : ''
 );
 
 // 开始监听事件
