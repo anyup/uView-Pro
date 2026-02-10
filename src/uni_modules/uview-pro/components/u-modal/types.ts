@@ -122,7 +122,7 @@ export const ModalProps = {
     },
     /** 是否作为页面级 modal（通常放在页面中，给 useModal({ page: true }) 使用） */
     page: {
-        type: Boolean,
+        type: [Boolean, String] as PropType<boolean | string>,
         default: false
     }
 };

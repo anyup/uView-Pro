@@ -33,8 +33,8 @@ export type UseModal = {
 export type UseModalOptions = {
     /** 是否使用全局根部 <u-modal global /> */
     global?: boolean;
-    /** 是否使用页面级 <u-modal page /> */
-    page?: boolean;
+    /** 是否使用页面级 <u-modal page /> 或某个页面的 <u-modal page="pageId" /> */
+    page?: boolean | string;
 };
 
 function normalize(contentOrOptions: string | UseModalShowOptions): UseModalShowOptions {
@@ -45,21 +45,42 @@ function normalize(contentOrOptions: string | UseModalShowOptions): UseModalShow
     return contentOrOptions || {};
 }
 
+function getPage(optionsOrGlobal: UseModalOptions | boolean): string {
+    if (typeof optionsOrGlobal === 'boolean') {
+        return '';
+    }
+    if (optionsOrGlobal.page && typeof optionsOrGlobal.page === 'string' && optionsOrGlobal.page !== '') {
+        return optionsOrGlobal.page;
+    }
+    return '';
+}
+
 /**
  * Modal 函数式调用
- * @description 需要页面/应用中至少存在一个 <u-modal global /> 或 <u-modal page /> 实例用于承接事件；不影响原调用方式。
- * 支持两种调用方式：应用级 useModal() / useModal({ global: true }) 页面级 useModal({ page: true }) / useModal(false)
+ * @description 需要页面/应用中至少存在一个 <u-modal global /> 或 <u-modal page /> 实例用于承接事件；不影响原 ref 调用方式。
+ *
+ * 支持两种调用方式：
+ * - 应用级 useModal() / useModal(true) / useModal({ global: true })
+ * - 页面级 useModal(false) / useModal({ page: true }) / useModal({ page: 'pageId' }) （pageId 应和页面中 <u-modal page="pageId" /> 的 page 属性一致）
  */
 export function useModal(optionsOrGlobal: UseModalOptions | boolean = true): UseModal {
-    const isGlobal = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal !== false : optionsOrGlobal.global === true;
-    const isPage = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === false : optionsOrGlobal.page === true;
+    const isGlobal = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === true : !!optionsOrGlobal.global;
+    const isPage = typeof optionsOrGlobal === 'boolean' ? optionsOrGlobal === false : !!optionsOrGlobal.page;
 
-    const showEvent = isGlobal ? U_MODAL_GLOBAL_EVENT_SHOW : isPage ? getEventWithCurrentPage(U_MODAL_EVENT_SHOW) : '';
-    const hideEvent = isGlobal ? U_MODAL_GLOBAL_EVENT_HIDE : isPage ? getEventWithCurrentPage(U_MODAL_EVENT_HIDE) : '';
+    const showEvent = isGlobal
+        ? U_MODAL_GLOBAL_EVENT_SHOW
+        : isPage
+          ? getEventWithCurrentPage(U_MODAL_EVENT_SHOW, getPage(optionsOrGlobal))
+          : '';
+    const hideEvent = isGlobal
+        ? U_MODAL_GLOBAL_EVENT_HIDE
+        : isPage
+          ? getEventWithCurrentPage(U_MODAL_EVENT_HIDE, getPage(optionsOrGlobal))
+          : '';
     const clearLoadingEvent = isGlobal
         ? U_MODAL_GLOBAL_EVENT_CLEAR_LOADING
         : isPage
-          ? getEventWithCurrentPage(U_MODAL_EVENT_CLEAR_LOADING)
+          ? getEventWithCurrentPage(U_MODAL_EVENT_CLEAR_LOADING, getPage(optionsOrGlobal))
           : '';
 
     function emitShow(payload: UseModalShowOptions) {

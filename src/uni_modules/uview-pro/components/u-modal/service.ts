@@ -8,9 +8,9 @@
 import type { ModalProps } from './types';
 
 // 普通（页面级）modal 事件
-export const U_MODAL_EVENT_SHOW = 'uview-pro:u-modal:show';
-export const U_MODAL_EVENT_HIDE = 'uview-pro:u-modal:hide';
-export const U_MODAL_EVENT_CLEAR_LOADING = 'uview-pro:u-modal:clear-loading';
+export const U_MODAL_EVENT_SHOW = 'uview-pro:u-modal:show:';
+export const U_MODAL_EVENT_HIDE = 'uview-pro:u-modal:hide:';
+export const U_MODAL_EVENT_CLEAR_LOADING = 'uview-pro:u-modal:clear-loading:';
 
 // 全局（App 根部）modal 事件，供 useModal() 使用
 export const U_MODAL_GLOBAL_EVENT_SHOW = 'uview-pro:u-modal:global:show';
@@ -18,7 +18,10 @@ export const U_MODAL_GLOBAL_EVENT_HIDE = 'uview-pro:u-modal:global:hide';
 export const U_MODAL_GLOBAL_EVENT_CLEAR_LOADING = 'uview-pro:u-modal:global:clear-loading';
 
 // 根据当前页面获取事件名
-export function getEventWithCurrentPage(event: string) {
+export function getEventWithCurrentPage(event: string, page?: string | boolean) {
+    if (page && typeof page === 'string' && page !== '') {
+        return event + page;
+    }
     return event + getCurrentPage();
 }
 

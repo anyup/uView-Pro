@@ -129,19 +129,27 @@ const slots = useSlots();
 
 // 确认按钮是否正在加载中
 const loading = ref(false);
-const isGlobal = computed(() => props.global);
-const isPage = computed(() => props.page);
+const isGlobal = computed(() => !!props.global);
+const isPage = computed(() => !!props.page);
 const showEvent = computed(() =>
-    isGlobal.value ? U_MODAL_GLOBAL_EVENT_SHOW : isPage.value ? getEventWithCurrentPage(U_MODAL_EVENT_SHOW) : ''
+    isGlobal.value
+        ? U_MODAL_GLOBAL_EVENT_SHOW
+        : isPage.value
+          ? getEventWithCurrentPage(U_MODAL_EVENT_SHOW, props.page)
+          : ''
 );
 const hideEvent = computed(() =>
-    isGlobal.value ? U_MODAL_GLOBAL_EVENT_HIDE : isPage.value ? getEventWithCurrentPage(U_MODAL_EVENT_HIDE) : ''
+    isGlobal.value
+        ? U_MODAL_GLOBAL_EVENT_HIDE
+        : isPage.value
+          ? getEventWithCurrentPage(U_MODAL_EVENT_HIDE, props.page)
+          : ''
 );
 const clearLoadingEvent = computed(() =>
     isGlobal.value
         ? U_MODAL_GLOBAL_EVENT_CLEAR_LOADING
         : isPage.value
-          ? getEventWithCurrentPage(U_MODAL_EVENT_CLEAR_LOADING)
+          ? getEventWithCurrentPage(U_MODAL_EVENT_CLEAR_LOADING, props.page)
           : ''
 );
 
