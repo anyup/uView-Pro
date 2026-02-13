@@ -450,13 +450,20 @@ function getWeekday(yearNum: number, monthNum: number) {
 }
 
 /**
- * 检查年份是否超出范围
+ * 检查年月是否超出范围
  */
-function checkRange(yearNum: number) {
+function checkRange(yearNum: number, monthNum: number) {
     let overstep = false;
     if (yearNum < Number(props.minYear) || yearNum > Number(props.maxYear)) {
         uni.showToast({ title: t('uCalendar.outOfRange'), icon: 'none' });
         overstep = true;
+    } else if (props.minDate && props.maxDate) {
+        const beforeMin = yearNum < min.value.year || (yearNum === min.value.year && monthNum < min.value.month);
+        const afterMax = yearNum > max.value.year || (yearNum === max.value.year && monthNum > max.value.month);
+        if (beforeMin || afterMax) {
+            uni.showToast({ title: t('uCalendar.outOfRange'), icon: 'none' });
+            overstep = true;
+        }
     }
     return overstep;
 }
@@ -468,16 +475,18 @@ function changeMonthHandler(isAdd: number) {
     if (isAdd) {
         let m = month.value + 1;
         let y = m > 12 ? year.value + 1 : year.value;
-        if (!checkRange(y)) {
-            month.value = m > 12 ? 1 : m;
+        m = m > 12 ? 1 : m;
+        if (!checkRange(y, m)) {
+            month.value = m;
             year.value = y;
             changeData();
         }
     } else {
         let m = month.value - 1;
         let y = m < 1 ? year.value - 1 : year.value;
-        if (!checkRange(y)) {
-            month.value = m < 1 ? 12 : m;
+        m = m < 1 ? 12 : m;
+        if (!checkRange(y, m)) {
+            month.value = m;
             year.value = y;
             changeData();
         }
@@ -489,7 +498,7 @@ function changeMonthHandler(isAdd: number) {
  */
 function changeYearHandler(isAdd: number) {
     let y = isAdd ? year.value + 1 : year.value - 1;
-    if (!checkRange(y)) {
+    if (!checkRange(y, month.value)) {
         year.value = y;
         changeData();
     }
