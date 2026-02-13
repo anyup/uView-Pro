@@ -450,15 +450,25 @@ function getWeekday(yearNum: number, monthNum: number) {
 }
 
 /**
- * 检查年份是否超出范围
+ * 检查年月是否超出范围
  */
-function checkRange(yearNum: number) {
-    let overstep = false;
+function checkRange(yearNum: number, monthNum: number) {
     if (yearNum < Number(props.minYear) || yearNum > Number(props.maxYear)) {
         uni.showToast({ title: t('uCalendar.outOfRange'), icon: 'none' });
-        overstep = true;
+        return true;
     }
-    return overstep;
+
+    const beforeMin =
+        min.value && (yearNum < min.value.year || (yearNum === min.value.year && monthNum < min.value.month));
+    const afterMax =
+        max.value && (yearNum > max.value.year || (yearNum === max.value.year && monthNum > max.value.month));
+
+    if (beforeMin || afterMax) {
+        uni.showToast({ title: t('uCalendar.outOfRange'), icon: 'none' });
+        return true;
+    }
+
+    return false;
 }
 
 /**
@@ -468,16 +478,18 @@ function changeMonthHandler(isAdd: number) {
     if (isAdd) {
         let m = month.value + 1;
         let y = m > 12 ? year.value + 1 : year.value;
-        if (!checkRange(y)) {
-            month.value = m > 12 ? 1 : m;
+        m = m > 12 ? 1 : m;
+        if (!checkRange(y, m)) {
+            month.value = m;
             year.value = y;
             changeData();
         }
     } else {
         let m = month.value - 1;
         let y = m < 1 ? year.value - 1 : year.value;
-        if (!checkRange(y)) {
-            month.value = m < 1 ? 12 : m;
+        m = m < 1 ? 12 : m;
+        if (!checkRange(y, m)) {
+            month.value = m;
             year.value = y;
             changeData();
         }
@@ -485,12 +497,20 @@ function changeMonthHandler(isAdd: number) {
 }
 
 /**
- * 切换年份
+ * 切换年份：若 minDate/maxDate 的月份在当前年超出，则切换到该年的最小/最大有效月
  */
 function changeYearHandler(isAdd: number) {
     let y = isAdd ? year.value + 1 : year.value - 1;
-    if (!checkRange(y)) {
+    let m = month.value;
+    if (min.value && y === min.value.year && m < min.value.month) {
+        m = min.value.month;
+    }
+    if (max.value && y === max.value.year && m > max.value.month) {
+        m = max.value.month;
+    }
+    if (!checkRange(y, m)) {
         year.value = y;
+        month.value = m;
         changeData();
     }
 }
