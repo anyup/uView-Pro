@@ -1,3 +1,17 @@
+## 0.5.9（2026-02-26）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **calendar:** minDate / maxDate 纳入校验年月范围 ([249c04f](https://github.com/anyup/uView-Pro/commit/249c04f11e8610df4964f2d24d5fbe580e9236f8))
+
+### ✨ Features | 新功能
+
+- **calendar:** 日历选择演示页面新增最小/最大日期切换功能 ([dc8aeae](https://github.com/anyup/uView-Pro/commit/dc8aeae5072774d3d1be1318e4f7b4567c9b0385))
+
+### 👥 Contributors
+
+<a href="https://github.com/zakicheung"><img src="https://github.com/zakicheung.png?size=40" width="40" height="40" alt="张淇" title="张淇"/></a> <a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.8（2026-02-10）
 
 ### 🚀 Chore | 构建/工程依赖/工具
