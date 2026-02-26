@@ -21,6 +21,8 @@
                         :range-bg-color="rangeBgColor"
                         :active-bg-color="activeBgColor"
                         :btn-type="btnType"
+                        :min-date="minDate"
+                        :max-date="maxDate"
                     >
                     </u-calendar>
                     <view class="u-demo-result-line">
@@ -48,6 +50,14 @@
                 <view class="u-config-item">
                     <view class="u-item-title">农历</view>
                     <u-subsection current="1" :list="['显示', '隐藏']" @change="lunarChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">最小可选日期</view>
+                    <u-subsection :list="['1950-01-01', '2025-05-20']" @change="minDateChange"></u-subsection>
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">最大可选日期</view>
+                    <u-subsection :list="['当前日期', '2028-05-20']" @change="maxDateChange"></u-subsection>
                 </view>
                 <view class="u-config-item">
                     <view class="u-item-title">自定义样式</view>
@@ -80,6 +90,8 @@ const rangeColor = ref($u.color.primary);
 const rangeBgColor = ref('rgba(41,121,255,0.13)');
 const activeBgColor = ref($u.color.primary);
 const btnType = ref<ThemeType>('primary');
+const minDate = ref('1950-01-01');
+const maxDate = ref($u.timeFormat(new Date().getTime(), 'yyyy-mm-dd'));
 
 const showMode = computed(() => {
     return isPage.value ? 1 : 0;
@@ -120,6 +132,16 @@ function styleChange(index: number) {
         endText.value = '结束';
         activeBgColor.value = $u.color.primary;
     }
+    show.value = true;
+}
+
+function minDateChange(index: number) {
+    minDate.value = index === 0 ? '1950-01-01' : '2025-05-20';
+    show.value = true;
+}
+
+function maxDateChange(index: number) {
+    maxDate.value = index === 0 ? $u.timeFormat(new Date().getTime(), 'yyyy-mm-dd') : '2028-05-20';
     show.value = true;
 }
 
