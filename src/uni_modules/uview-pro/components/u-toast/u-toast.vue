@@ -48,6 +48,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { onPageHide, onPageShow } from '@dcloudio/uni-app';
 import { $u } from '../..';
 import type { ToastExpose } from './types';
 import { ToastProps } from './types';
@@ -69,7 +70,8 @@ import {
  * @example <u-toast ref="uToast" />
  */
 const props = defineProps(ToastProps);
-
+// 是否已经初始化事件监听
+const isInit = ref(false);
 // 是否显示toast
 const isShow = ref(false);
 // 定时器
@@ -222,10 +224,10 @@ const hideEvent = computed(() =>
 
 // 开始监听事件
 function startListeners() {
-    // 如果为全局 toast，则先移除所有事件监听，再重新监听
-    if (isGlobal.value) {
-        removeAllListeners();
+    if (isInit.value) {
+        return;
     }
+    isInit.value = true;
     if (showEvent.value) {
         uni?.$on && uni.$on(showEvent.value, onServiceShow);
     }
@@ -236,6 +238,10 @@ function startListeners() {
 
 // 停止监听事件
 function stopListeners() {
+    if (!isInit.value) {
+        return;
+    }
+    isInit.value = false;
     if (showEvent.value) {
         uni?.$off && uni.$off(showEvent.value, onServiceShow);
     }
@@ -253,6 +259,14 @@ function removeAllListeners() {
         uni?.$off && uni.$off(hideEvent.value);
     }
 }
+
+onPageShow(() => {
+    startListeners();
+});
+
+onPageHide(() => {
+    stopListeners();
+});
 
 onMounted(() => {
     startListeners();
