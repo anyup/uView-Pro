@@ -79,7 +79,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onBeforeUnmount, useSlots } from 'vue';
+import { ref, computed, watch, useSlots, onMounted, onBeforeUnmount } from 'vue';
+import { onPageHide, onPageShow } from '@dcloudio/uni-app';
 import { $u } from '../..';
 import { ModalProps } from './types';
 import {
@@ -126,7 +127,8 @@ import {
 const props = defineProps(ModalProps);
 const emit = defineEmits(['update:modelValue', 'confirm', 'cancel']);
 const slots = useSlots();
-
+// 是否已经初始化事件监听
+const isInit = ref(false);
 // 确认按钮是否正在加载中
 const loading = ref(false);
 const isGlobal = computed(() => !!props.global);
@@ -331,10 +333,10 @@ function resetTempConfig() {
 
 // 开始监听事件
 function startListeners() {
-    // 如果为全局 toast，则先移除所有事件监听，再重新监听
-    if (isGlobal.value) {
-        removeAllListeners();
+    if (isInit.value) {
+        return;
     }
+    isInit.value = true;
     if (showEvent.value) {
         uni?.$on && uni.$on(showEvent.value, onServiceShow);
     }
@@ -348,6 +350,10 @@ function startListeners() {
 
 // 停止监听事件
 function stopListeners() {
+    if (!isInit.value) {
+        return;
+    }
+    isInit.value = false;
     if (showEvent.value) {
         uni?.$off && uni.$off(showEvent.value, onServiceShow);
     }
@@ -371,6 +377,14 @@ function removeAllListeners() {
         uni?.$off && uni.$off(clearLoadingEvent.value);
     }
 }
+
+onPageShow(() => {
+    startListeners();
+});
+
+onPageHide(() => {
+    stopListeners();
+});
 
 onMounted(() => {
     startListeners();
