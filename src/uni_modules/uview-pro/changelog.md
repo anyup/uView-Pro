@@ -1,3 +1,14 @@
+## 0.5.10（2026-02-28）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **useToast:** 修复useToast使用全局弹出时，某场景下弹出失败的问题 ([83b3d7b](https://github.com/anyup/uView-Pro/commit/83b3d7b64995a1801fdf6a33ff2ce0c99ecceaa6))
+- **useModal:** 修复useModal使用全局弹出时，某场景下弹出失败的问题 ([43f98ea](https://github.com/anyup/uView-Pro/commit/43f98ea4adda12e28cd1d906c36279f808b3ea32))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.9（2026-02-26）
 
 ### 🐛 Bug Fixes | Bug 修复
