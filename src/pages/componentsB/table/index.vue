@@ -10,26 +10,26 @@
                             <u-tr class="u-tr">
                                 <u-th class="u-th">姓名</u-th>
                                 <u-th class="u-th">年龄</u-th>
-                                <u-th class="u-th">籍贯</u-th>
                                 <u-th class="u-th">性别</u-th>
+                                <u-th class="u-th">其他描述</u-th>
                             </u-tr>
                             <u-tr class="u-tr">
                                 <u-td class="u-td">吕布</u-td>
                                 <u-td class="u-td">22</u-td>
-                                <u-td class="u-td">楚河</u-td>
                                 <u-td class="u-td">男</u-td>
+                                <u-td class="u-td">我是吕布，地表最强</u-td>
                             </u-tr>
                             <u-tr class="u-tr">
                                 <u-td class="u-td">项羽</u-td>
                                 <u-td class="u-td">28</u-td>
-                                <u-td class="u-td">汉界</u-td>
                                 <u-td class="u-td">男</u-td>
+                                <u-td class="u-td">楚霸王</u-td>
                             </u-tr>
                             <u-tr class="u-tr">
                                 <u-td class="u-td">木兰</u-td>
                                 <u-td class="u-td">24</u-td>
-                                <u-td class="u-td">南国</u-td>
                                 <u-td class="u-td">女</u-td>
+                                <u-td class="u-td">花木兰替父从军</u-td>
                             </u-tr>
                         </u-table>
                     </view>
