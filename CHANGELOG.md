@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.11] - 2026-03-02
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-table:** 修复table文字换行后导致的行高度不一致，边框线错位的问题 ([b6b9c33](https://github.com/anyup/uView-Pro/commit/b6b9c33d41ac3adc6f6a1eb33edd50a355d267bf))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.5.10] - 2026-02-28
 
 ### 🐛 Bug Fixes | Bug 修复
