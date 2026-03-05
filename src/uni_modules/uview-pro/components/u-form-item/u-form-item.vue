@@ -31,7 +31,7 @@
                     <!-- nvue不支持伪元素before -->
                     <text v-if="required" class="u-form-item--left__content--required">*</text>
                     <view class="u-form-item--left__content__icon" v-if="leftIcon">
-                        <u-icon :name="leftIcon" :custom-style="leftIconStyle"></u-icon>
+                        <u-icon :name="leftIcon" :custom-style="leftIconStyle" v-bind="leftIconProps"></u-icon>
                     </view>
                     <view
                         class="u-form-item--left__content__label"
@@ -59,7 +59,7 @@
                         <slot />
                     </view>
                     <view class="u-form-item--right__content__icon u-flex" v-if="$slots.right || rightIcon">
-                        <u-icon :custom-style="rightIconStyle" v-if="rightIcon" :name="rightIcon"></u-icon>
+                        <u-icon :custom-style="rightIconStyle" v-if="rightIcon" :name="rightIcon" v-bind="rightIconProps"></u-icon>
                         <slot name="right" />
                     </view>
                 </view>
@@ -114,7 +114,9 @@ const { broadcast } = useParent('u-form-item');
  * @property {String} right-icon 右侧自定义字体图标(限uView内置图标)或图片地址
  * @property {String} left-icon 左侧自定义字体图标(限uView内置图标)或图片地址
  * @property {Object} left-icon-style 左侧图标的样式，对象形式
+ * @property {Object} left-icon-props 左侧图标的属性，对象形式
  * @property {Object} right-icon-style 右侧图标的样式，对象形式
+ * @property {Object} right-icon-props 右侧图标的属性，对象形式
  * @property {Boolean} required 是否显示左边的"*"号，这里仅起展示作用，如需校验必填，请通过rules配置必填规则(默认false)
  * @example <u-form-item label="姓名"><u-input v-model="form.name" /></u-form-item>
  */
