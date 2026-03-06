@@ -238,7 +238,12 @@ function scrollByIndex() {
 }
 
 onMounted(() => {
-    init();
+    nextTick(() => {
+        // 延时获取tabs的尺寸信息
+        setTimeout(() => {
+            init();
+        }, 500);
+    });
 });
 
 defineExpose({ init, clickTab, scrollByIndex });
