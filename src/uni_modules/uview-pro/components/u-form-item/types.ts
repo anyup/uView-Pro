@@ -57,8 +57,18 @@ export const FormItemProps = {
         type: Object as PropType<Record<string, any>>,
         default: () => ({})
     },
+    /** 左侧图标的属性 */
+    leftIconProps: {
+        type: Object as PropType<Record<string, any>>,
+        default: () => ({})
+    },
     /** 右侧图标的样式 */
     rightIconStyle: {
+        type: Object as PropType<Record<string, any>>,
+        default: () => ({})
+    },
+    /** 右侧图标的属性 */
+    rightIconProps: {
         type: Object as PropType<Record<string, any>>,
         default: () => ({})
     },
