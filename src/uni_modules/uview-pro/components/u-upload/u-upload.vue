@@ -494,7 +494,7 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     height: 200rpx;
     overflow: hidden;
     margin: 10rpx;
-    background: rgb(244, 245, 246);
+    background: var(--u-bg-gray-light);
     position: relative;
     border-radius: 10rpx;
     /* #ifndef APP-NVUE */
@@ -505,7 +505,7 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
 }
 
 .u-preview-wrap {
-    border: 1px solid rgb(235, 236, 238);
+    border: 1px solid var(--u-border-color);
 }
 
 .u-add-wrap {
@@ -520,7 +520,7 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
 }
 
 .u-add-wrap__hover {
-    background-color: rgb(235, 236, 238);
+    background-color: var(--u-bg-gray-light);
 }
 
 .u-preview-image {
