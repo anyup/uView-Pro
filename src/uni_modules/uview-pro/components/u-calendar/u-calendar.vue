@@ -226,7 +226,13 @@
                     <text v-if="endDate">{{ t('uCalendar.to') }}{{ endDate }}</text>
                 </view>
                 <view class="u-calendar__bottom__btn">
-                    <u-button :type="btnType" shape="circle" size="default" @click="btnFix(false)">
+                    <u-button
+                        :type="btnType"
+                        :disabled="btnDisable"
+                        shape="circle"
+                        size="default"
+                        @click="btnFix(false)"
+                    >
                         {{ t('uCalendar.confirmText') }}
                     </u-button>
                 </view>
@@ -333,6 +339,20 @@ const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 const popupValue = computed({
     get: () => props.modelValue,
     set: (val: boolean) => emit('update:modelValue', val)
+});
+
+const btnDisable = computed(() => {
+    let disable = false;
+    if (props.mode == 'range') {
+        if (!startDate.value || !endDate.value) {
+            disable = true;
+        }
+    } else {
+        if (!activeDate.value) {
+            disable = true;
+        }
+    }
+    return disable;
 });
 
 watch([dataChange, lunarChange], () => {
