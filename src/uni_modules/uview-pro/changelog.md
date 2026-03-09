@@ -1,3 +1,19 @@
+## 0.5.12（2026-03-09）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-tabs:** 延迟初始化tabs组件以确保正确获取尺寸信息，修复在App端滑块偏移问题（#139） ([90f79ff](https://github.com/anyup/uView-Pro/commit/90f79ff8f1e71a2ebc05be7d0318b8107425e09a))
+- **u-upload:** 优化u-upload组件在暗黑模式下的显示效果 ([24955ad](https://github.com/anyup/uView-Pro/commit/24955ad947d6edc736c695f9052344a83fa191ae))
+- **u-calendar:** 优化日历组件设置为range范围选择时，仅当开始、结束时间选择完成时才可点击确定（#136） ([4dee864](https://github.com/anyup/uView-Pro/commit/4dee864abda5e65a755aaaccbaffc430ca463cdd))
+
+### ✨ Features | 新功能
+
+- **demo:** 添加H5平台条件编译控制，优化组件描述文案 ([d482223](https://github.com/anyup/uView-Pro/commit/d4822234e1f0e13a6480732350f884d5034368b5))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.11（2026-03-02）
 
 ### 🐛 Bug Fixes | Bug 修复
