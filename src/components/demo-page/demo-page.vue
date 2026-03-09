@@ -268,6 +268,7 @@
                 </slot>
             </view>
             <!-- 互动反馈组件FAB -->
+            <!-- #ifndef H5 -->
             <demo-guide-use
                 v-if="!tabbar && showFab"
                 :immediate="guideImmediate[1]"
@@ -309,6 +310,7 @@
                     </u-fab>
                 </view>
             </demo-guide-use>
+            <!-- #endif -->
             <!-- 底部标签栏 -->
             <demo-guide-use
                 v-if="tabbar && !showOnboarding"

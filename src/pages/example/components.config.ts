@@ -25,8 +25,8 @@ export default [
                 icon: 'image',
                 title: 'Image 图片',
                 title_en: 'Image',
-                desc: '图片展示组件，支持裁剪、懒加载、占位图与自适应显示。',
-                desc_en: 'Image display with crop, lazy-load, placeholders and responsive modes.'
+                desc: '图片展示组件，支持懒加载、占位图与自适应显示。',
+                desc_en: 'Image display with lazy-load, placeholders and responsive modes.'
             },
             {
                 path: '/pages/componentsC/button/index',
@@ -247,8 +247,8 @@ export default [
                 icon: 'table',
                 title: 'Table 表格',
                 title_en: 'Table',
-                desc: '表格组件，支持排序、分页、列操作与自适应布局。',
-                desc_en: 'Table component supporting sorting, pagination, column operations and responsive layout.'
+                desc: '表格组件，适用于展示大量结构化数据的场景。',
+                desc_en: 'Table component for displaying structured data.'
             },
             {
                 path: '/pages/componentsC/countDown/index',
@@ -350,7 +350,7 @@ export default [
                 icon: 'pressingScreen',
                 title: 'fullScreen 压窗屏',
                 title_en: 'fullScreen',
-                desc: '全屏展示组件，适用于沉浸式内容或媒体播放。',
+                desc: '全屏展示组件，适用于沉浸式内容或应用更新提示。',
                 desc_en: 'Full-screen display for immersive content or media playback.'
             }
         ]
@@ -572,6 +572,14 @@ export default [
                 desc: '分段输入组件，常用于验证码/短信输入体验，支持粘贴与校验。',
                 desc_en: 'Segmented input for codes, supporting paste and validation.'
             },
+            // {
+            //     path: '/pages/componentsC/citySelect/index',
+            //     icon: 'citySelect',
+            //     title: 'CitySelect 城市选择',
+            //     title_en: 'CitySelect',
+            //     desc: '城市选择组件，支持多级联动选择。',
+            //     desc_en: 'City selection component supporting multi-level linkage selection.'
+            // },
             // {
             //     path: '/pages/componentsA/avatarCropper/index',
             //     icon: 'avatarCropper',
