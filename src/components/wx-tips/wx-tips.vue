@@ -15,7 +15,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
-const show = ref(true);
+const show = ref(false);
+
+// #ifdef MP-WEIXIN
+show.value = true;
+// #endif
 
 const props = defineProps({
     type: {
