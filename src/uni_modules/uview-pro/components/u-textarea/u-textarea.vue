@@ -53,7 +53,7 @@
         <view class="u-textarea__right-icon u-flex">
             <view
                 class="u-textarea__right-icon__clear u-textarea__right-icon__item"
-                v-if="clearable && modelValue != '' && !disabled"
+                v-if="clearable && focused && modelValue != '' && !disabled"
             >
                 <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" @click="onClear" />
             </view>
@@ -218,6 +218,7 @@ function setFormatter(e: any) {
 }
 
 function onFocus(e: any) {
+    focused.value = true;
     emit('focus', e);
 }
 
@@ -225,6 +226,7 @@ function onBlur(e: any) {
     setTimeout(() => {
         e.detail.value = innerValue.value;
         let value = e.detail.value;
+        focused.value = false;
         emit('blur', e);
         emitToParent('onFormBlur', value);
     }, 40);
