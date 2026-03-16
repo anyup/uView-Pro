@@ -19,7 +19,12 @@
                         @tap="clickTab(index)"
                         :style="tabItemStyle(index)"
                     >
-                        <u-badge :count="item[count] || item['count'] || 0" :offset="offset" size="mini"></u-badge>
+                        <u-badge
+                            :count="item[count] || item['count'] || 0"
+                            :offset="offset"
+                            :is-dot="isDot"
+                            size="mini"
+                        ></u-badge>
                         {{ item[name] || item['name'] }}
                     </view>
                     <view v-if="showBar" class="u-tab-bar" :style="tabBarStyle"></view>

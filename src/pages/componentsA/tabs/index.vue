@@ -11,10 +11,11 @@
                             :bold="bold"
                             :active-color="activeColor"
                             :list="list"
-                            @change="change"
                             :current="current"
                             :is-scroll="isScroll"
                             :offset="offset"
+                            :is-dot="isDot"
+                            @change="change"
                         ></u-tabs>
                     </view>
                 </view>
@@ -44,6 +45,10 @@
                         <view class="u-item-title">字体加粗</view>
                         <u-subsection mode="button" :list="['是', '否']" @change="boldChange"></u-subsection>
                     </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">徽标是否为圆点</view>
+                        <u-subsection mode="button" :list="['否', '是']" @change="isDotChange"></u-subsection>
+                    </view>
                 </view>
             </view>
         </template>
@@ -53,7 +58,7 @@
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
 import { onLoad } from '@dcloudio/uni-app';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { completeMission } from '@/common/useExperience';
 
 const list = ref([]);
@@ -76,6 +81,7 @@ const activeColor = ref($u.color['primary']);
 const bold = ref(true);
 const control = ref(true);
 const offset = ref<[number, number]>([5, 0]);
+const isDot = ref(false);
 
 onLoad(() => {
     list.value = data.value;
@@ -121,7 +127,7 @@ function modeChange(index: number) {
         case 0:
             isScroll.value = true;
             list.value = data.value;
-            offset.value = [5, -5];
+            offset.value = [5, 0];
             break;
         case 1:
             isScroll.value = false;
@@ -157,6 +163,17 @@ function boldChange(index: number) {
             break;
         case 1:
             bold.value = false;
+            break;
+    }
+}
+
+function isDotChange(index: number) {
+    switch (index) {
+        case 0:
+            isDot.value = false;
+            break;
+        case 1:
+            isDot.value = true;
             break;
     }
 }

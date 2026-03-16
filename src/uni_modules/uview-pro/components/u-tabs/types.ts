@@ -39,6 +39,8 @@ export const TabsProps = {
     count: { type: String, default: 'count' },
     /** 徽标数位置偏移 */
     offset: { type: Array as unknown as PropType<[number, number]>, default: () => [5, 20] },
+    /** 徽标是否是圆点 */
+    isDot: { type: Boolean, default: false },
     /** 活动tab字体是否加粗 */
     bold: { type: Boolean, default: true },
     /** 当前活动tab item的样式 */
