@@ -91,7 +91,14 @@ const handleLoading = (type: ThemeType) => {
     toast.loading({
         title: '正在提交...',
         duration: 3000,
-        type: type
+        type: type,
+        position: 'bottom',
+        callback: () => {
+            toast.show({
+                title: `${type}状态结束`,
+                type: type
+            });
+        }
     });
 };
 

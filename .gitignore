@@ -23,3 +23,6 @@ docs/
 *.sln
 *.sw?
 .npmrc
+.trae/
+.agents/
+skills-lock.json
