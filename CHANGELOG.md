@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.13] - 2026-03-17
+
+### ✨ Features | 新功能
+
+- **u-tabs:** tabs标签组件添加徽标圆点配置功能 ([4c9fe9b](https://github.com/anyup/uView-Pro/commit/4c9fe9b36ee9f04721f53e177bea08407c5e6d11))
+- **u-input:** 优化输入框清除图标显示控制逻辑（#141） ([e08bc10](https://github.com/anyup/uView-Pro/commit/e08bc10ffe81945b09f1afc50e273588b346c9d8))
+- **u-textarea:** 优化textarea清空按钮显示逻辑（#141） ([feab6cf](https://github.com/anyup/uView-Pro/commit/feab6cf55c17e655b7a89b9f748ef814b5ff8472))
+- **demo:** 优化微信小程序声明显示条件 ([72a5cd2](https://github.com/anyup/uView-Pro/commit/72a5cd2503bf90e99a9b7379703e7dce284896cc))
+- **toast:** 调整toast组件配置并添加回调功能 ([e9f697f](https://github.com/anyup/uView-Pro/commit/e9f697f58c6cc207bc4df3c16203565762cb860e))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.5.12] - 2026-03-09
 
 ### 🐛 Bug Fixes | Bug 修复
