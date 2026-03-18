@@ -348,7 +348,7 @@ defineExpose<ToastExpose>({
 .u-type-primary {
     color: $u-type-primary;
     background-color: $u-type-primary-light;
-    border: 1px solid rgb(215, 234, 254);
+    border: 1px solid var(--u-type-primary-light);
 }
 
 .u-type-success {

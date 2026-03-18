@@ -92,7 +92,7 @@ const handleLoading = (type: ThemeType) => {
         title: '正在提交...',
         duration: 3000,
         type: type,
-        position: 'bottom',
+        position: 'center',
         callback: () => {
             toast.show({
                 title: `${type}状态结束`,
