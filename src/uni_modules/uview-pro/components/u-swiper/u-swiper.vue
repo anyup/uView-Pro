@@ -27,14 +27,16 @@
                         margin: effect3d && uCurrent != index ? '0 20rpx' : 0
                     }"
                 >
-                    <image class="u-swiper-image" :src="item[name] || item" :mode="imgMode"></image>
-                    <view
-                        v-if="title && item.title"
-                        class="u-swiper-title u-line-1"
-                        :style="[{ 'padding-bottom': titlePaddingBottom }, titleStyle]"
-                    >
-                        {{ item.title }}
-                    </view>
+                    <slot name="item" :item="item" :index="index" :isActive="uCurrent === index">
+                        <image class="u-swiper-image" :src="item[name] || item" :mode="imgMode"></image>
+                        <view
+                            v-if="title && item.title"
+                            class="u-swiper-title u-line-1"
+                            :style="[{ 'padding-bottom': titlePaddingBottom }, titleStyle]"
+                        >
+                            {{ item.title }}
+                        </view>
+                    </slot>
                 </view>
             </swiper-item>
         </swiper>
