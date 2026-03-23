@@ -52,6 +52,16 @@ export const FormItemProps = {
         type: String,
         default: ''
     },
+    /** 左侧图标的自定义前缀 */
+    leftIconPrefix: {
+        type: String,
+        default: 'uicon'
+    },
+    /** 右侧图标的自定义前缀 */
+    rightIconPrefix: {
+        type: String,
+        default: 'uicon'
+    },
     /** 左侧图标的样式 */
     leftIconStyle: {
         type: Object as PropType<Record<string, any>>,

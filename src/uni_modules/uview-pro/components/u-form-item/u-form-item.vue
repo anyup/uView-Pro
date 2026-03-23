@@ -27,11 +27,20 @@
                 }"
             >
                 <!-- 为了块对齐 -->
-                <view class="u-form-item--left__content" v-if="required || leftIcon || label || $slots.label">
+                <view
+                    v-if="required || leftIcon || label || $slots.label || $slots.leftIcon"
+                    class="u-form-item--left__content"
+                >
                     <!-- nvue不支持伪元素before -->
                     <text v-if="required" class="u-form-item--left__content--required">*</text>
-                    <view class="u-form-item--left__content__icon" v-if="leftIcon">
-                        <u-icon :name="leftIcon" :custom-style="leftIconStyle"></u-icon>
+                    <view class="u-form-item--left__content__icon" v-if="leftIcon || $slots.leftIcon">
+                        <slot name="leftIcon">
+                            <u-icon
+                                :custom-prefix="leftIconPrefix"
+                                :name="leftIcon"
+                                :custom-style="leftIconStyle"
+                            ></u-icon>
+                        </slot>
                     </view>
                     <view
                         class="u-form-item--left__content__label"
@@ -58,8 +67,18 @@
                     <view class="u-form-item--right__content__slot">
                         <slot />
                     </view>
-                    <view class="u-form-item--right__content__icon u-flex" v-if="$slots.right || rightIcon">
-                        <u-icon :custom-style="rightIconStyle" v-if="rightIcon" :name="rightIcon"></u-icon>
+                    <view
+                        class="u-form-item--right__content__icon u-flex"
+                        v-if="$slots.right || $slots.rightIcon || rightIcon"
+                    >
+                        <slot name="rightIcon">
+                            <u-icon
+                                v-if="rightIcon"
+                                :name="rightIcon"
+                                :custom-prefix="rightIconPrefix"
+                                :custom-style="rightIconStyle"
+                            ></u-icon>
+                        </slot>
                         <slot name="right" />
                     </view>
                 </view>
