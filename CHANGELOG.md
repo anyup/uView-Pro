@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.14] - 2026-03-23
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-toast:** 调整提示框位置和边框样式 ([093e31a](https://github.com/anyup/uView-Pro/commit/093e31a34a26902ced26ac841ddfa738fa796528))
+- **u-form:** 修复表单项错误消息样式显示问题 ([462eb6e](https://github.com/anyup/uView-Pro/commit/462eb6e9e3b4d676ac97877327d93705f53400a5))
+
+### 📝 Documentation | 文档
+
+- **readme:** 添加快速启动模板链接 ([afce866](https://github.com/anyup/uView-Pro/commit/afce866f0e7e20b97132bebcbaf56f9aafc25c5c))
+
+### ✨ Features | 新功能
+
+- **u-form-item:** 增加前后图标前缀自定义配置和插槽支持 ([9f32cf7](https://github.com/anyup/uView-Pro/commit/9f32cf7f32e0697ab6771711bc96bc2d8395c597))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.5.13] - 2026-03-17
 
 ### ✨ Features | 新功能
