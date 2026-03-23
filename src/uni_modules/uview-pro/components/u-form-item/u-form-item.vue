@@ -69,7 +69,7 @@
             class="u-form-item__message"
             v-if="validateState === 'error' && showError('message')"
             :style="{
-                paddingLeft: elLabelPosition == 'left' ? $u.addUnit(elLabelWidth) : '0'
+                paddingLeft: elLabelPosition == 'left' && label ? $u.addUnit(elLabelWidth) : '0'
             }"
             >{{ validateMessage }}</view
         >
