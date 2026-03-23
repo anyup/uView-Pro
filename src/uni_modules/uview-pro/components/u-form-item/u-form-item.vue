@@ -233,7 +233,7 @@ const elBorderBottom = computed(() => {
         ? props.borderBottom
         : parentData.value.borderBottom
           ? parentData.value.borderBottom
-          : true;
+          : false;
 });
 
 // 事件派发/广播工具
