@@ -150,6 +150,7 @@ export type InputType =
     | 'email'
     | 'safe-password'
     | 'name'
+    | 'nickname'
     | 'bank-card'
     | 'tel'
     | 'select';
