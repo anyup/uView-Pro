@@ -108,6 +108,11 @@ text {
     flex-direction: column;
 }
 
+.u-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
 // 定义flex等分
 @for $i from 0 through 12 {
     .u-flex-#{$i} {

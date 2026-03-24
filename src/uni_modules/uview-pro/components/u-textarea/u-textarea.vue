@@ -53,7 +53,8 @@
         <view class="u-textarea__right-icon u-flex">
             <view
                 class="u-textarea__right-icon__clear u-textarea__right-icon__item"
-                v-if="clearable && focused && modelValue != '' && !disabled"
+                v-if="clearable && modelValue != '' && !disabled"
+                :class="{ 'u-hidden': !focused }"
             >
                 <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" @click="onClear" />
             </view>

@@ -65,7 +65,8 @@
         <view class="u-input__right-icon u-flex">
             <view
                 class="u-input__right-icon__clear u-input__right-icon__item"
-                v-if="clearIconShow"
+                v-if="clearable && inputValue !== '' && !disabled"
+                :class="{ 'u-hidden': !focused && type !== 'select' }"
                 @click.stop="onClear"
             >
                 <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" />
@@ -136,12 +137,6 @@ const lastValue = ref(''); // 用于头条小程序，判断@input中，前后�
 const inputValue = computed<string>(() => {
     if (props.modelValue === undefined || props.modelValue === null) return '';
     return String(props.modelValue);
-});
-
-// 清除图标是否显示
-const clearIconShow = computed(() => {
-    if (props.type === 'select') return props.clearable && inputValue.value !== '' && !props.disabled;
-    return props.clearable && focused.value && inputValue.value !== '' && !props.disabled;
 });
 
 // 监听 value 变化
