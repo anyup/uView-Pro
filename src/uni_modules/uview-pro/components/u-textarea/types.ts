@@ -1,13 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
-import type { TextareaBorder } from '../../types/global';
+import type { TextareaBorder, SizeType } from '../../types/global';
 
 const textarea = {
     value: '',
     placeholder: '',
     placeholderClass: 'input-placeholder',
     placeholderStyle: 'color: var(--u-light-color)',
-    height: '100rpx',
+    height: '',
     confirmType: 'done',
     disabled: false,
     count: false,
@@ -24,7 +24,8 @@ const textarea = {
     holdKeyboard: false,
     maxlength: 140,
     border: 'surround',
-    formatter: null
+    formatter: null,
+    size: ''
 };
 
 export const TextareaProps = {
@@ -78,6 +79,8 @@ export const TextareaProps = {
     formatter: { type: Function as unknown as PropType<((val: any) => any) | null>, default: textarea.formatter },
     // 是否忽略组件内对文本合成系统事件的处理
     ignoreCompositionEvent: { type: Boolean as PropType<boolean>, default: true },
+    /** 文本域文字大小(默认default)，支持 small/default/large 预设值，也支持 16/16px/16rpx 等自定义值 */
+    size: { type: [String, Number] as PropType<SizeType | string | number>, default: textarea.size },
     /** 是否可清空(默认true) */
     clearable: { type: Boolean, default: true },
     /** 输入框的验证状态，用于错误时，边框是否改为红色 */

@@ -16,7 +16,7 @@
             :value="innerValue"
             :style="getStyle"
             :placeholder="String(props.placeholder)"
-            :placeholder-style="$u.toStyle(props.placeholderStyle)"
+            :placeholder-style="getPlaceholderStyle"
             :placeholder-class="props.placeholderClass"
             :disabled="props.disabled"
             :focus="props.focus"
@@ -43,7 +43,8 @@
         <text
             class="u-textarea__count"
             :style="{
-                'background-color': props.disabled ? 'transparent' : 'var(--u-bg-white)'
+                'background-color': props.disabled ? 'transparent' : 'var(--u-bg-white)',
+                'font-size': currentCountSize
             }"
             v-if="props.count"
         >
@@ -56,7 +57,12 @@
                 v-if="clearable && modelValue != '' && !disabled"
                 :class="{ 'u-hidden': !focused }"
             >
-                <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" @click="onClear" />
+                <u-icon
+                    name="close-circle-fill"
+                    color="var(--u-light-color)"
+                    :size="currentIconSize"
+                    @click="onClear"
+                />
             </view>
         </view>
     </view>
@@ -79,6 +85,7 @@ export default {
 import { ref, computed, watch, nextTick } from 'vue';
 import { TextareaProps } from './types';
 import { $u, useChildren } from '../../';
+import type { SizeType } from '../../types/global';
 
 /**
  * Textarea 文本域
@@ -129,6 +136,7 @@ const emit = defineEmits([
 ]);
 
 const { emitToParent } = useChildren('u-textarea', 'u-form-item');
+const { parentExposed } = useChildren('u-textarea', 'u-form');
 
 // state
 const innerValue = ref('');
@@ -137,6 +145,67 @@ const firstChange = ref(true);
 const changeFromInner = ref(false);
 const innerFormatter = ref((v: any) => v);
 const validateState = ref(props.validateState); // 当前input的验证状态，用于错误时，边框是否改为红色
+
+// 根据 size 定义不同的配置
+const sizeConfig = {
+    small: {
+        fontSize: 24,
+        iconSize: 28,
+        countSize: 20,
+        textareaHeight: 70
+    },
+    default: {
+        fontSize: 28,
+        iconSize: 32,
+        countSize: 24,
+        textareaHeight: 100
+    },
+    large: {
+        fontSize: 32,
+        iconSize: 36,
+        countSize: 24,
+        textareaHeight: 130
+    }
+};
+
+// 获取实际使用的 size 值（优先级：props.size > u-form.size）
+const actualSize = computed(() => {
+    // 优先使用 props 的 size 属性
+    if (props.size !== '') {
+        return String(props.size);
+    }
+    // 次优先：使用 u-form 的 size 属性（u-form 的 size 只支持预设值）
+    if (parentExposed.value?.props?.size) {
+        return String(parentExposed.value.props.size);
+    }
+    // 默认值
+    return 'default';
+});
+
+// 判断实际使用的 size 是否在预设配置中
+const isInSizeConfig = computed(() => actualSize.value in sizeConfig);
+
+// 获取预设 size（用于查找 sizeConfig 配置，如图标大小、高度等）
+const presetSize = computed(() => {
+    return (isInSizeConfig.value ? actualSize.value : 'default') as SizeType;
+});
+
+// 获取当前尺寸配置
+const currentSizeConfig = computed(() => sizeConfig[presetSize.value]);
+
+// 获取实际要使用的 font-size（如果是预设值使用配置值，否则作为自定义值处理）
+const actualFontSize = computed(() => {
+    if (isInSizeConfig.value) {
+        return $u.addUnit(currentSizeConfig.value.fontSize);
+    }
+    // 自定义size值，直接作为fontSize处理
+    return $u.addUnit(actualSize.value);
+});
+
+// 计算当前图标大小
+const currentIconSize = computed(() => currentSizeConfig.value.iconSize);
+// 计算统计显示的字体大小
+const currentCountSize = computed(() => $u.addUnit(currentSizeConfig.value.countSize));
 
 // watch value prop
 watch(
@@ -201,12 +270,23 @@ const getStyle = computed(() => {
     let style: Record<string, any> = {};
     // 如果没有自定义高度，就根据textarea来分配一个默认的高度
     if (props.autoHeight) {
-        style.minHeight = $u.addUnit(props.height || '100rpx');
+        style.minHeight = $u.addUnit(props.height ? props.height : currentSizeConfig.value.textareaHeight);
         style.height = 'auto';
     } else {
-        style.height = $u.addUnit(props.height);
+        style.height = $u.addUnit(props.height ? props.height : currentSizeConfig.value.textareaHeight);
     }
+    // 根据 size 属性设置字体大小
+    style.fontSize = actualFontSize.value;
     return $u.toStyle(style, props.customStyle);
+});
+
+const getPlaceholderStyle = computed(() => {
+    return $u.toStyle(
+        {
+            fontSize: actualFontSize.value
+        },
+        props.placeholderStyle
+    );
 });
 
 function onFormItemError(status: boolean) {

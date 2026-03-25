@@ -13,6 +13,24 @@
                     </view>
                 </view>
                 <view class="u-demo-block">
+                    <text class="u-demo-block__title">输入框大小</text>
+                    <view class="u-demo-block__content">
+                        <u-textarea v-model="value0" placeholder="小输入框" size="small" count></u-textarea>
+                        <u-gap />
+                        <u-textarea v-model="value0" placeholder="中等输入框" size="default" count></u-textarea>
+                        <u-gap />
+                        <u-textarea v-model="value0" placeholder="大输入框" size="large" count></u-textarea>
+                        <u-gap />
+                        <u-textarea
+                            v-model="value0"
+                            placeholder="输入框字体40rpx，高度300rpx"
+                            size="40"
+                            height="300"
+                            count
+                        ></u-textarea>
+                    </view>
+                </view>
+                <view class="u-demo-block">
                     <text class="u-demo-block__title">字数统计</text>
                     <view class="u-demo-block__content">
                         <u-textarea v-model="value2" placeholder="请输入内容" count></u-textarea>
@@ -51,6 +69,7 @@
 import { ref } from 'vue';
 
 // 页面示例中的 v-model 数据
+const value0 = ref<string>('');
 const value1 = ref<string>('');
 const value2 = ref<string>('统计字数');
 const value3 = ref<string>('');
