@@ -8,11 +8,11 @@
         <view
             class="u-switch__node node-class"
             :style="{
-                width: $u.addUnit(size ?? 50),
-                height: $u.addUnit(size ?? 50)
+                width: currentSize,
+                height: currentSize
             }"
         >
-            <u-loading :show="loading" class="u-switch__loading" :size="Number(size) * 0.6" :color="loadingColor" />
+            <u-loading :show="loading" class="u-switch__loading" :size="loadingSize" :color="loadingColor" />
         </view>
     </view>
 </template>
@@ -32,8 +32,9 @@ export default {
 
 <script setup lang="ts">
 import { computed, nextTick } from 'vue';
-import { $u } from '../..';
+import { $u, useChildren } from '../..';
 import { SwitchProps } from './types';
+import type { SizeType } from '../../types/global';
 
 /**
  * switch 开关选择器
@@ -52,6 +53,60 @@ import { SwitchProps } from './types';
 const props = defineProps(SwitchProps);
 
 const emit = defineEmits(['update:modelValue', 'change']);
+const { parentExposed } = useChildren('u-switch', 'u-form');
+
+// 根据 size 定义不同的配置
+const sizeConfig = {
+    small: {
+        size: 40
+    },
+    default: {
+        size: 50
+    },
+    large: {
+        size: 60
+    }
+};
+
+// 获取实际使用的 size 值（优先级：props.size > u-form.size）
+const actualSize = computed(() => {
+    // 优先使用 props 的 size 属性
+    if (props.size !== '') {
+        return String(props.size);
+    }
+    // 次优先：使用 u-form 的 size 属性
+    if (parentExposed.value?.props?.size) {
+        return String(parentExposed.value.props.size);
+    }
+    // 默认值
+    return 'default';
+});
+
+// 判断实际使用的 size 是否在预设配置中
+const isInSizeConfig = computed(() => actualSize.value in sizeConfig);
+
+// 获取预设 size（用于查找 sizeConfig 配置，如图标大小、高度等）
+const presetSize = computed(() => {
+    return (isInSizeConfig.value ? actualSize.value : 'default') as SizeType;
+});
+
+// 获取当前尺寸配置
+const currentSizeConfig = computed(() => sizeConfig[presetSize.value]);
+
+// 获取实际要使用的 size（如果是预设值使用配置值，否则作为自定义值处理）
+const currentSize = computed(() => {
+    if (isInSizeConfig.value) {
+        return $u.addUnit(currentSizeConfig.value.size);
+    }
+    // 自定义size值，直接作为fontSize处理
+    return $u.addUnit(actualSize.value);
+});
+
+// 加载动画尺寸，取当前size的60%
+const loadingSize = computed(() => {
+    const sizeNum = Number(currentSize.value.replace('rpx', ''));
+    return sizeNum * 0.6;
+});
 
 /**
  * 计算属性：是否处于激活状态
@@ -66,7 +121,7 @@ const isChecked = computed(() => {
  */
 const switchStyle = computed(() => {
     let style: Record<string, string> = {};
-    style.fontSize = props.size + 'rpx';
+    style.fontSize = currentSize.value;
     style.backgroundColor = isChecked.value ? props.activeColor : props.inactiveColor;
     return style;
 });

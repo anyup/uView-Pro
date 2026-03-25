@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { baseProps } from '../common/props';
-import { getColor } from '../../';
+import type { SizeType } from '../../types/global';
 
 /**
  * SwitchProps 开关选择器 props 类型定义
@@ -13,7 +13,7 @@ export const SwitchProps = {
     /** 是否禁用 */
     disabled: { type: Boolean, default: false },
     /** 开关尺寸，单位rpx */
-    size: { type: [Number, String] as PropType<number | string>, default: 50 },
+    size: { type: [Number, String] as PropType<number | string | SizeType>, default: '' },
     /** 打开时的颜色 */
     activeColor: { type: String, default: 'var(--u-type-primary)' },
     /** 关闭时的颜色 */

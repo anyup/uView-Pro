@@ -34,7 +34,7 @@
                     </view>
                     <view class="u-config-item">
                         <view class="u-item-title">尺寸(单位rpx)</view>
-                        <u-subsection current="1" :list="['40', '60', '80']" @change="sizeChange"></u-subsection>
+                        <u-subsection current="1" :list="['小', '中', '大', '80']" @change="sizeChange"></u-subsection>
                     </view>
                     <view class="u-config-item">
                         <view class="u-item-title">加载中</view>
@@ -57,6 +57,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
+import type { SizeType } from '@/uni_modules/uview-pro/types/global';
 
 type IModelValue = 1 | 100;
 
@@ -65,7 +66,7 @@ const inactiveValue = ref<IModelValue>(1);
 const modelValue = ref<IModelValue>(1);
 const isChecked = computed<boolean>(() => modelValue.value === activeValue.value);
 const activeColor = ref($u.color.primary);
-const size = ref<number | string>(50);
+const size = ref<SizeType | string | number>('default');
 const loading = ref(false);
 const disabled = ref(false);
 
@@ -84,7 +85,11 @@ function colorChange(index: number) {
 }
 
 function sizeChange(index: number) {
-    size.value = index === 0 ? '40' : index === 1 ? '60' : '80';
+    if (index > 2) {
+        size.value = 80;
+    } else {
+        size.value = index === 0 ? 'small' : index === 1 ? 'default' : 'large';
+    }
 }
 
 function loadingChange(index: number) {
