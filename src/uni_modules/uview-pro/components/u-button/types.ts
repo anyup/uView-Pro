@@ -15,7 +15,7 @@ export const ButtonProps = {
     hairLine: { type: Boolean, default: true },
     /** 按钮的预置样式，default，primary，error，warning，success */
     type: { type: String as PropType<ButtonType>, default: 'default' },
-    /** 按钮尺寸，default，medium，mini */
+    /** 按钮尺寸，default，large, medium=small，mini */
     size: { type: String as PropType<ButtonSize>, default: 'default' },
     /** 按钮形状，circle（两边为半圆），square（带圆角） */
     shape: { type: String as PropType<Shape>, default: 'square' },

@@ -498,6 +498,12 @@ function agreeprivacyauthorization(event: any) {
     background-color: hsla(0, 0%, 100%, 0.35);
 }
 
+.u-size-large {
+    font-size: 36rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+
 .u-size-default {
     font-size: 30rpx;
     height: 80rpx;
@@ -513,6 +519,17 @@ function agreeprivacyauthorization(event: any) {
     height: 70rpx;
     line-height: 70rpx;
     padding: 0 80rpx;
+}
+
+.u-size-small {
+    /* #ifndef APP-NVUE */
+    display: inline-flex;
+    /* #endif */
+    width: auto;
+    font-size: 24rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    padding: 0 30rpx;
 }
 
 .u-size-mini {

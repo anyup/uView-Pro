@@ -36,7 +36,7 @@
                 </view>
                 <view class="u-config-item">
                     <view class="u-item-title">尺寸大小</view>
-                    <u-subsection :list="['默认', '中等', '迷你']" @change="sizeChange"></u-subsection>
+                    <u-subsection :list="['默认', '大', '中等', '小', '极小']" @change="sizeChange"></u-subsection>
                 </view>
                 <view class="u-config-item">
                     <view class="u-item-title">形状</view>
@@ -139,9 +139,15 @@ const sizeChange = (e: number) => {
             size.value = 'default';
             break;
         case 1:
-            size.value = 'medium';
+            size.value = 'large';
             break;
         case 2:
+            size.value = 'medium';
+            break;
+        case 3:
+            size.value = 'small';
+            break;
+        case 4:
             size.value = 'mini';
             break;
     }
