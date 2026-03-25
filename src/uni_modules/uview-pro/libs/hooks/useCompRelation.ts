@@ -1,14 +1,5 @@
-import {
-    ref,
-    reactive,
-    getCurrentInstance,
-    onUnmounted,
-    nextTick,
-    computed,
-    onMounted,
-    type ComponentInternalInstance
-} from 'vue';
-import { logger } from '../util/logger';
+import { ref, reactive, getCurrentInstance, onUnmounted, nextTick, computed, onMounted } from 'vue';
+import { isDebugMode } from '../config/config';
 
 // 类型定义
 interface ParentContext {
@@ -36,6 +27,8 @@ interface ChildContext {
 
 // 符号定义
 const PARENT_CONTEXT_SYMBOL = Symbol('parent_context');
+// 每个组件实例的 child id 缓存，避免同个组件中多次调用 useChildren 时生成不同 id
+const CHILD_ID_SYMBOL = Symbol('child_id');
 
 /**
  * 生成实例唯一ID
@@ -94,7 +87,7 @@ function findAllChildComponents(componentName: string, instance: any): any[] {
     }
 
     traverse(instance);
-    logger.log(`Found ${components.length} ${componentName} components`);
+    if (isDebugMode()) console.log(`Found ${components.length} ${componentName} components`);
     return components;
 }
 
@@ -122,7 +115,8 @@ export function useParent(componentName?: string) {
                   .filter(Boolean) as ChildContext[])
             : Array.from(childrenMap.values());
 
-        logger.log(`Parent ${name} broadcasting event: ${event} to ${targetChildren.length} children`);
+        if (isDebugMode())
+            console.log(`Parent ${name} broadcasting event: ${event} to ${targetChildren.length} children`);
 
         targetChildren.forEach(child => {
             const exposed = child.getExposed();
@@ -130,14 +124,15 @@ export function useParent(componentName?: string) {
                 try {
                     exposed[event](data);
                 } catch (error) {
-                    logger.warn(`Error calling child method ${event}:`, error);
+                    if (isDebugMode('error')) console.error(`Error calling child method ${event}:`, error);
                 }
             }
         });
     };
 
     const broadcastToChildren = (componentName: string, event: string, data?: any) => {
-        logger.log(`Parent ${name} broadcasting event: ${event} to all ${componentName} components`);
+        if (isDebugMode())
+            console.log(`Parent ${name} broadcasting event: ${event} to all ${componentName} components`);
 
         const childComponents = findAllChildComponents(componentName, instance);
         let successCount = 0;
@@ -149,14 +144,15 @@ export function useParent(componentName?: string) {
                     exposed[event](data);
                     successCount++;
                 } catch (error) {
-                    logger.warn(`Error calling ${componentName} method ${event}:`, error);
+                    if (isDebugMode('error')) console.error(`Error calling ${componentName} method ${event}:`, error);
                 }
             }
         });
 
-        logger.log(
-            `Parent ${name} successfully called ${successCount} of ${childComponents.length} ${componentName} components`
-        );
+        if (isDebugMode())
+            console.log(
+                `Parent ${name} successfully called ${successCount} of ${childComponents.length} ${componentName} components`
+            );
     };
 
     const parentContext: ParentContext = {
@@ -165,7 +161,7 @@ export function useParent(componentName?: string) {
             if (!childrenMap.has(child.id)) {
                 childrenMap.set(child.id, child);
                 children.push(child);
-                logger.log(`Parent ${name} added child: ${child.name}`);
+                if (isDebugMode()) console.log(`Parent ${name} added child: ${child.name}`);
             }
         },
         removeChild(childId: string) {
@@ -174,7 +170,7 @@ export function useParent(componentName?: string) {
                 childrenMap.delete(childId);
                 const index = children.findIndex(c => c.id === childId);
                 if (index > -1) children.splice(index, 1);
-                logger.log(`Parent ${name} removed child: ${childId}`);
+                if (isDebugMode()) console.log(`Parent ${name} removed child: ${childId}`);
             }
         },
         broadcast,
@@ -207,7 +203,7 @@ export function useParent(componentName?: string) {
         if (instance.proxy) {
             delete (instance.proxy as any)[PARENT_CONTEXT_SYMBOL];
         }
-        logger.log(`Parent ${name} unmounted and cleaned up`);
+        if (isDebugMode()) console.log(`Parent ${name} unmounted and cleaned up`);
     });
 
     return {
@@ -233,16 +229,23 @@ export function useChildren(componentName?: string, parentName?: string) {
     }
 
     const name = componentName || instance.type.name || instance.type.__name;
-    const instanceId = generateInstanceId(name || 'anonymous');
+    // 生成实例ID，同组件多次使用useChildren会重复创建
+    // const instanceId = generateInstanceId(name || 'anonymous');
+    // 尝试从实例上复用已有的 child id，避免同个组件内多次调用 useChildren 导致重复注册
+    let instanceId: string | undefined = (instance.proxy as any)?.[CHILD_ID_SYMBOL];
+    if (!instanceId) {
+        instanceId = generateInstanceId(name || 'anonymous');
+        if (instance.proxy) (instance.proxy as any)[CHILD_ID_SYMBOL] = instanceId;
+    }
     const parentRef = ref<any | null>(null);
     const parentExposed = ref<Record<string, any>>({});
 
     const createSimulatedParentContext = (parentInstance: any): ParentContext => ({
         name: parentInstance?.type?.name || parentInstance?.type?.__name || 'unknown',
-        addChild: () => logger.log('Simulated parent added child'),
-        removeChild: () => logger.log('Simulated parent removed child'),
-        broadcast: () => logger.log('Simulated parent broadcasting'),
-        broadcastToChildren: () => logger.log('Simulated parent broadcasting to children'),
+        addChild: () => isDebugMode() && console.log('Simulated parent added child'),
+        removeChild: () => isDebugMode() && console.log('Simulated parent removed child'),
+        broadcast: () => isDebugMode() && console.log('Simulated parent broadcasting'),
+        broadcastToChildren: () => isDebugMode() && console.log('Simulated parent broadcasting to children'),
         getChildren: () => [],
         getExposed: () => parentInstance?.exposed || {},
         getChildExposed: () => ({}),
@@ -300,10 +303,10 @@ export function useChildren(componentName?: string, parentName?: string) {
                 parent.addChild(childContext);
             }
             getParentExposed();
-            logger.log(`Child ${name || 'anonymous'} linked to parent ${parent.name}`);
+            if (isDebugMode()) console.log(`Child ${name || 'anonymous'} linked to parent ${parent.name}`);
             return true;
         }
-        logger.log(`Child ${name || 'anonymous'} no parent found, working in standalone mode`);
+        if (isDebugMode()) console.log(`Child ${name || 'anonymous'} no parent found, working in standalone mode`);
         return false;
     };
 
@@ -314,7 +317,7 @@ export function useChildren(componentName?: string, parentName?: string) {
                 try {
                     exposed[event](data, instanceId, name);
                 } catch (error) {
-                    logger.warn(`Error calling parent method ${event}:`, error);
+                    if (isDebugMode('error')) console.error(`Error calling parent method ${event}:`, error);
                 }
             }
         }
@@ -340,7 +343,7 @@ export function useChildren(componentName?: string, parentName?: string) {
         getExposed
     };
 
-    logger.log(`Child ${name || 'anonymous'} registered, looking for parent`);
+    if (isDebugMode()) console.log(`Child ${name || 'anonymous'} registered, looking for parent`);
 
     onMounted(() => {
         let connected = linkParent();
@@ -356,7 +359,7 @@ export function useChildren(componentName?: string, parentName?: string) {
         if (parentRef.value?.removeChild) {
             parentRef.value.removeChild(instanceId);
         }
-        logger.log(`Child ${name || 'anonymous'} unmounted`);
+        if (isDebugMode()) console.log(`Child ${name || 'anonymous'} unmounted`);
     });
 
     return {
@@ -402,13 +405,13 @@ export function getParentContextByName(parentName: string): ParentContext | null
  * 热更新清理函数
  */
 export function cleanupComponentRelations(): void {
-    logger.log('Cleaning up component relations for hot reload');
+    if (isDebugMode()) console.log('Cleaning up component relations for hot reload');
 }
 
 // 热更新处理
 if (import.meta.hot) {
     import.meta.hot.accept(() => {
-        logger.log('Hot reload detected, relations will be automatically reconnected');
+        if (isDebugMode()) console.log('Hot reload detected, relations will be automatically reconnected');
     });
 }
 
