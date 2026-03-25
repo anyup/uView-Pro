@@ -43,7 +43,7 @@
                 </view>
                 <view class="u-config-item">
                     <view class="u-item-title">整体大小(单位rpx)</view>
-                    <u-subsection current="1" :list="['30', '40', '50']" @change="sizeChange"></u-subsection>
+                    <u-subsection current="1" :list="['小', '中', '大', '60']" @change="sizeChange"></u-subsection>
                 </view>
                 <view class="u-config-item">
                     <view class="u-item-title">激活颜色</view>
@@ -79,7 +79,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Shape } from '@/uni_modules/uview-pro/types/global';
+import type { Shape, SizeType } from '@/uni_modules/uview-pro/types/global';
 import { $u } from '@/uni_modules/uview-pro';
 
 const checkboxValues = ref(['荔枝']);
@@ -109,7 +109,7 @@ const list = ref([
 const shape = ref<Shape>('square');
 const max = ref(3);
 const activeColor = ref('primary');
-const size = ref(34);
+const size = ref<SizeType | string | number>('default');
 const wrap = ref(false);
 const width = ref('auto');
 
@@ -118,7 +118,11 @@ function shapeChange(index: number) {
 }
 
 function sizeChange(index: number) {
-    size.value = index === 0 ? 30 : index === 1 ? 40 : 50;
+    if (index > 2) {
+        size.value = 60;
+    } else {
+        size.value = index === 0 ? 'small' : index === 1 ? 'default' : 'large';
+    }
 }
 
 // 全选/全不选

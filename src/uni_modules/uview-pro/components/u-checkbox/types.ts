@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { Shape } from '../../types/global';
+import type { Shape, SizeType } from '../../types/global';
 import { baseProps } from '../common/props';
 
 /**
@@ -31,7 +31,7 @@ export const CheckboxProps = {
     /** label的字体大小，rpx单位 */
     labelSize: { type: [String, Number], default: '' },
     /** 组件的整体大小 */
-    size: { type: [String, Number], default: '' }
+    size: { type: [String, Number] as PropType<SizeType | string | number>, default: '' }
 };
 
 export type CheckboxProps = ExtractPropTypes<typeof CheckboxProps>;

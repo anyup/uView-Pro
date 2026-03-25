@@ -2,7 +2,7 @@
     <view class="u-checkbox" :style="$u.toStyle(checkboxStyle, customStyle)" :class="customClass">
         <view class="u-checkbox__icon-wrap" @tap="toggle" :class="iconClass" :style="$u.toStyle(iconStyle)">
             <u-icon
-                class="u-checkbox__icon-wrap__icon"
+                custom-class="u-checkbox__icon-wrap__icon"
                 name="checkbox-mark"
                 :size="checkboxIconSize"
                 :color="iconColor"
@@ -12,7 +12,7 @@
             class="u-checkbox__label"
             @tap="onClickLabel"
             :style="{
-                fontSize: $u.addUnit(labelSize)
+                fontSize: labelFontSize
             }"
         >
             <slot>
@@ -39,6 +39,7 @@ export default {
 import { computed, ref, watch } from 'vue';
 import { $u, useChildren } from '../..';
 import { CheckboxProps } from './types';
+import type { SizeType } from '../../types/global';
 
 /**
  * checkbox 复选框
@@ -59,6 +60,9 @@ const props = defineProps(CheckboxProps);
 const emit = defineEmits(['change', 'update:modelValue']);
 // checkbox 是否选中，true/false
 const checkedValue = ref(props.modelValue);
+// 使用子组件Hook
+const { parentExposed } = useChildren('u-checkbox', 'u-checkbox-group');
+const { parentExposed: formExposed } = useChildren('u-checkbox', 'u-form');
 
 // checkbox 的value值，id
 const checkboxValue = computed(() => {
@@ -81,8 +85,53 @@ watch(
     { immediate: true }
 );
 
-// 使用子组件Hook
-const { parentExposed } = useChildren('u-checkbox', 'u-checkbox-group');
+// 根据 size 定义不同的配置
+const sizeConfig = {
+    small: {
+        size: 28,
+        fontSize: 24,
+        iconSize: 16
+    },
+    default: {
+        size: 34,
+        fontSize: 28,
+        iconSize: 20
+    },
+    large: {
+        size: 40,
+        fontSize: 32,
+        iconSize: 24
+    }
+};
+
+// 获取实际使用的 size 值（优先级：props.size > u-form.size）
+const actualSize = computed(() => {
+    // 优先使用 props 的 size 属性
+    if (props.size !== '') {
+        return String(props.size);
+    }
+    // 次优先：使用 u-checkbox-group 的 size 属性
+    if (parentExposed.value?.props?.size) {
+        return String(parentExposed.value.props.size);
+    }
+    // 最后：使用 u-form 的 size 属性（u-form 的 size 只支持预设值）
+    if (formExposed.value?.props?.size) {
+        return String(formExposed.value.props.size);
+    }
+    // 默认值
+    return 'default';
+});
+
+// 判断实际使用的 size 是否在预设配置中
+const isInSizeConfig = computed(() => actualSize.value in sizeConfig);
+
+// 获取预设 size（用于查找 sizeConfig 配置，如图标大小、高度等）
+const presetSize = computed(() => {
+    return (isInSizeConfig.value ? actualSize.value : 'default') as SizeType;
+});
+
+// 获取当前尺寸配置
+const currentSizeConfig = computed(() => sizeConfig[presetSize.value]);
 
 // 是否禁用，如果父组件u-checkbox-group禁用的话，将会忽略子组件的配置
 const isDisabled = computed(() => {
@@ -95,13 +144,28 @@ const isLabelDisabled = computed(() => {
 });
 
 // 组件尺寸，对应size的值，默认值为34rpx
-const checkboxSize = computed(() => {
-    return props.size ? props.size : (parentExposed.value?.props?.size ?? 34);
+const checkboxSize = computed(() => currentSizeConfig.value.size);
+
+// 组件的勾选图标的尺寸，默认20rpx
+const checkboxIconSize = computed(() => {
+    if (props.iconSize) {
+        return props.iconSize;
+    }
+    if (parentExposed.value?.props?.iconSize) {
+        return parentExposed.value?.props?.iconSize;
+    }
+    if (isInSizeConfig.value) {
+        return currentSizeConfig.value.iconSize;
+    }
+    return 20;
 });
 
-// 组件的勾选图标的尺寸，默认20
-const checkboxIconSize = computed(() => {
-    return props.iconSize ? props.iconSize : (parentExposed.value?.props?.iconSize ?? 20);
+// label字体大小，默认28rpx
+const labelFontSize = computed(() => {
+    if (isInSizeConfig.value) {
+        return $u.addUnit(currentSizeConfig.value.fontSize);
+    }
+    return $u.addUnit(props.labelSize);
 });
 
 // 组件选中激活时的颜色

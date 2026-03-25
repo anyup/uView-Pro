@@ -18,7 +18,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { getCurrentInstance, computed, watch, nextTick, onMounted } from 'vue';
+import { computed, watch, nextTick, onMounted } from 'vue';
 import { $u, useParent, useChildren, useDebounce } from '../..';
 import { CheckboxGroupProps } from './types';
 

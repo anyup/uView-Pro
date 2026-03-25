@@ -24,14 +24,14 @@ export const CheckboxGroupProps = {
     shape: { type: String as PropType<Shape>, default: 'square' },
     /** 选中状态下的颜色 */
     activeColor: { type: String, default: () => getColor('primary') },
-    /** 组件的整体大小 */
-    size: { type: [String, Number], default: 34 },
+    /** 组件的整体大小，单位rpx，默认34rpx */
+    size: { type: [String, Number], default: '' },
     /** 每个checkbox占u-checkbox-group的宽度 */
     width: { type: String, default: 'auto' },
     /** 是否每个checkbox都换行 */
     wrap: { type: Boolean, default: false },
-    /** 图标的大小，单位rpx */
-    iconSize: { type: [String, Number], default: 20 }
+    /** 图标的大小，单位rpx，默认20rpx */
+    iconSize: { type: [String, Number], default: '' }
 };
 
 export type CheckboxGroupProps = ExtractPropTypes<typeof CheckboxGroupProps>;
