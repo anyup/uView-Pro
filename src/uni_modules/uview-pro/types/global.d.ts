@@ -1,5 +1,7 @@
 export type ThemeType = 'primary' | 'info' | 'error' | 'warning' | 'success' | 'default';
 
+export type SizeType = 'default' | 'small' | 'large';
+
 export type ImgMode = 'aspectFit' | 'aspectFill' | 'widthFix' | 'top' | 'bottom' | 'center' | 'scaleToFill';
 
 export type Direction = 'horizontal' | 'vertical';
@@ -43,7 +45,7 @@ export type BadgeSize = 'default' | 'mini';
 // button 按钮类型
 export type ButtonType = 'primary' | 'info' | 'error' | 'warning' | 'success' | 'default';
 // button 按钮尺寸
-export type ButtonSize = 'default' | 'medium' | 'mini';
+export type ButtonSize = SizeType | 'default' | 'medium' | 'mini';
 // button 按钮 form-type
 export type ButtonFormType = '' | 'submit' | 'reset';
 // button 按钮 scope
@@ -291,7 +293,7 @@ export type TagMode = 'light' | 'dark' | 'plain';
 // tag 组件 shape
 export type TagShape = 'square' | 'circle' | 'circleLeft' | 'circleRight';
 // tag 组件 size
-export type TagSize = 'default' | 'mini' | 'medium';
+export type TagSize = 'default' | 'mini';
 // toast 组件 position
 export type ToastPosition = 'top' | 'center' | 'bottom';
 export type UploadSizeType = 'original' | 'compressed';
@@ -396,12 +398,6 @@ export type Themes = {
     isForce?: boolean;
 };
 
-export type LogConfig = Partial<{
-    debug?: boolean;
-    prefix?: string;
-    showCallerInfo?: boolean;
-}>;
-
 export type Locales = {
     locales: Locale[];
     defaultLocale?: string;
@@ -413,10 +409,12 @@ export type Locale = {
     [key: string]: any;
 };
 
+export type DebugMode = 'log' | 'warn' | 'error' | 'info';
+
 export interface UViewProOptions {
     theme?: ThemeColor | Theme[] | Themes;
-    log?: LogConfig;
     locale?: string | Locale[] | Locales;
+    debugMode?: boolean | DebugMode | DebugMode[];
     // 可扩展更多配置项
 }
 

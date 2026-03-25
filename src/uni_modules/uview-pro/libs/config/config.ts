@@ -3,9 +3,9 @@
  */
 import { reactive } from 'vue';
 import { version } from '../../package.json';
-import type { DarkMode } from '../../types/global';
+import type { DarkMode, DebugMode } from '../../types/global';
 
-export interface AppConfig {
+export type AppConfig = {
     /** 版本号 */
     v: string;
     /** 版本号（冗余字段） */
@@ -18,7 +18,9 @@ export interface AppConfig {
     defaultDarkMode: DarkMode;
     /** 默认语言 */
     defaultLocale: string;
-}
+    /** 是否开启调试模式 */
+    debugMode?: boolean | DebugMode | DebugMode[];
+};
 
 export const config = reactive<AppConfig>({
     v: version,
@@ -30,7 +32,28 @@ export const config = reactive<AppConfig>({
     // 默认为亮色模式
     defaultDarkMode: 'light',
     // 默认为中文
-    defaultLocale: 'zh-CN'
+    defaultLocale: 'zh-CN',
+    // 默认不开启调试模式
+    debugMode: false
 });
+
+export const isDebugMode = (debug: DebugMode = 'log'): boolean => {
+    if (config.debugMode === false) return false;
+    if (config.debugMode === true) return true;
+    if (Array.isArray(config.debugMode)) return config.debugMode.includes(debug);
+    return config.debugMode === debug;
+};
+
+export const setConfig = (options: Partial<AppConfig>) => {
+    try {
+        Object.keys(options).forEach(key => {
+            if (key in config) {
+                (config as any)[key] = options[key as keyof AppConfig];
+            }
+        });
+    } catch (e) {
+        if (isDebugMode('error')) console.error('Failed to set config:', e);
+    }
+};
 
 export default config;

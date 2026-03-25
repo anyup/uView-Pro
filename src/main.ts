@@ -24,7 +24,8 @@ export function createApp() {
                 { name: 'en-US', uModal: { confirmText: 'OK', cancelText: 'Cancel' } }
             ],
             defaultLocale: 'zh-CN'
-        }
+        },
+        debugMode: false // 是否开启日志和警告
     });
     // 引入uView Pro 的http插件
     app.use(httpPlugin, { interceptor: httpInterceptor, requestConfig: httpRequestConfig });

@@ -346,5 +346,4 @@ export {
 
 export * from './hooks';
 
-export * from './util/logger';
 export * from './util/config-provider';

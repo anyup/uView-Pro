@@ -4,7 +4,7 @@
 
 import { ref } from 'vue';
 import type { DarkMode, Theme, ThemeColor } from '../../types/global';
-import config from '../config/config';
+import config, { isDebugMode } from '../config/config';
 import { defaultThemes } from '../config/theme-tokens';
 import { color as reactiveColor } from '../config/color';
 import { getSystemDarkMode as getNativeSystemDarkMode } from './system-theme';
@@ -64,7 +64,6 @@ export class ConfigProvider {
     public currentLocaleRef = ref<any | null>(null);
     private baseColorTokens: Partial<ThemeColor> = DEFAULT_LIGHT_TOKENS;
     private baseDarkColorTokens: Partial<ThemeColor> = DEFAULT_DARK_TOKENS;
-    private debug: boolean = false;
     private systemDarkModeMediaQuery: MediaQueryList | null = null;
     private lastAppliedCssKeys: string[] = [];
     private interval: ReturnType<typeof setInterval> | number = 0;
@@ -95,7 +94,7 @@ export class ConfigProvider {
                 }
             }
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] H5 system dark mode listener failed', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] H5 system dark mode listener failed', e);
         }
 
         // uni-app 平台：使用 uni.onThemeChange API
@@ -110,7 +109,7 @@ export class ConfigProvider {
                 });
             }
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] uni-app system dark mode listener failed', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] uni-app system dark mode listener failed', e);
         }
         this.initAppEvent();
     }
@@ -131,7 +130,7 @@ export class ConfigProvider {
                 }
             }, 5000);
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] setInterval failed', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] setInterval failed', e);
         }
         // #endif
     }
@@ -144,12 +143,12 @@ export class ConfigProvider {
                 return this.systemDarkModeMediaQuery.matches;
             }
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] matchMedia check failed', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] matchMedia check failed', e);
         }
         try {
             return getNativeSystemDarkMode() === 'dark';
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] native system theme check failed', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] native system theme check failed', e);
             return false;
         }
     }
@@ -162,7 +161,7 @@ export class ConfigProvider {
     initTheme(themes?: Theme[], defaultConfig?: string | DefaultThemeConfig, isForce?: boolean) {
         const normalizedThemes = this.normalizeThemes(themes);
         if (!normalizedThemes.length) {
-            console.warn('[ConfigProvider] init called with empty themes');
+            if (isDebugMode('warn')) console.warn('[ConfigProvider] init called with empty themes');
             return;
         }
 
@@ -197,7 +196,7 @@ export class ConfigProvider {
         // 应用主题
         this.applyTheme(found);
 
-        if (this.debug)
+        if (isDebugMode())
             console.log('[ConfigProvider] initialized, theme=', found.name, 'darkMode=', this.darkModeRef.value);
 
         return this;
@@ -223,7 +222,7 @@ export class ConfigProvider {
     initLocales(locales?: any[], defaultLocaleName?: string, isForce?: boolean) {
         const normalized = this.normalizeLocales(locales);
         if (!normalized.length) {
-            if (this.debug) console.warn('[ConfigProvider] initLocales called with empty locales');
+            if (isDebugMode('warn')) console.warn('[ConfigProvider] initLocales called with empty locales');
             return;
         }
 
@@ -241,7 +240,7 @@ export class ConfigProvider {
 
         this.currentLocaleRef.value = found;
 
-        if (this.debug) console.log('[ConfigProvider] locales initialized, locale=', found?.name);
+        if (isDebugMode()) console.log('[ConfigProvider] locales initialized, locale=', found?.name);
 
         return this;
     }
@@ -255,7 +254,7 @@ export class ConfigProvider {
         try {
             builtinList = Object.values(localePack || {}).filter(v => v && typeof v === 'object');
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] normalizeLocales read builtin failed', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] normalizeLocales read builtin failed', e);
         }
 
         // 如果没有传入自定义 locales，直接返回内置列表
@@ -315,17 +314,17 @@ export class ConfigProvider {
      */
     setLocale(localeName: string) {
         if (!this.localesRef.value || this.localesRef.value.length === 0) {
-            console.warn('[ConfigProvider] setLocale called but locales list empty');
+            if (isDebugMode('warn')) console.warn('[ConfigProvider] setLocale called but locales list empty');
             return;
         }
         const locale = this.localesRef.value.find(l => l.name === localeName);
         if (!locale) {
-            console.warn('[ConfigProvider] locale not found:', localeName);
+            if (isDebugMode('warn')) console.warn('[ConfigProvider] locale not found:', localeName);
             return;
         }
         this.currentLocaleRef.value = locale;
         this.writeStorage(LOCALE_STORAGE_KEY, localeName);
-        if (this.debug) console.log('[ConfigProvider] setLocale ->', localeName);
+        if (isDebugMode()) console.log('[ConfigProvider] setLocale ->', localeName);
     }
 
     /**
@@ -340,7 +339,7 @@ export class ConfigProvider {
                 this.initLocales();
             }
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] lazy initLocales failed', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] lazy initLocales failed', e);
         }
 
         const localeObj =
@@ -386,13 +385,13 @@ export class ConfigProvider {
      */
     setTheme(themeName: string) {
         if (!this.themesRef.value || this.themesRef.value.length === 0) {
-            console.warn('[ConfigProvider] setTheme called but themes list empty');
+            if (isDebugMode('warn')) console.warn('[ConfigProvider] setTheme called but themes list empty');
             return;
         }
 
         const theme = this.themesRef.value.find(t => t.name === themeName);
         if (!theme) {
-            console.warn('[ConfigProvider] theme not found:', themeName);
+            if (isDebugMode('warn')) console.warn('[ConfigProvider] theme not found:', themeName);
             return;
         }
 
@@ -404,7 +403,7 @@ export class ConfigProvider {
         // 持久化
         this.writeStorage(THEME_STORAGE_KEY, themeName);
 
-        if (this.debug) console.log('[ConfigProvider] setTheme ->', themeName);
+        if (isDebugMode()) console.log('[ConfigProvider] setTheme ->', themeName);
     }
 
     /**
@@ -414,7 +413,7 @@ export class ConfigProvider {
     public setThemeColor(colors: Partial<ThemeColor>) {
         if (!colors || Object.keys(colors).length === 0) return;
         if (!this.currentThemeRef.value) {
-            console.warn('[ConfigProvider] setThemeColor called but no current theme');
+            if (isDebugMode('warn')) console.warn('[ConfigProvider] setThemeColor called but no current theme');
             return;
         }
 
@@ -437,7 +436,7 @@ export class ConfigProvider {
         // 重新应用当前主题以同步运行时 color、CSS 变量等
         this.applyTheme(this.currentThemeRef.value);
 
-        if (this.debug) console.log('[ConfigProvider] setThemeColor ->', colors);
+        if (isDebugMode()) console.log('[ConfigProvider] setThemeColor ->', colors);
     }
 
     /**
@@ -459,7 +458,7 @@ export class ConfigProvider {
         // 重新应用主题
         this.applyTheme(this.currentThemeRef.value);
 
-        if (this.debug) console.log('[ConfigProvider] setDarkMode ->', mode);
+        if (isDebugMode()) console.log('[ConfigProvider] setDarkMode ->', mode);
     }
 
     /**
@@ -637,7 +636,7 @@ export class ConfigProvider {
                 uni.$u.color = reactiveColor;
             }
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] sync runtime theme failed', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] sync runtime theme failed', e);
         }
     }
 
@@ -677,7 +676,7 @@ export class ConfigProvider {
             const value = uni.getStorageSync(key);
             return (value ?? null) as T | null;
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] failed to read storage', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] failed to read storage', e);
             return null;
         }
     }
@@ -690,7 +689,7 @@ export class ConfigProvider {
             if (typeof uni === 'undefined' || typeof uni.setStorageSync !== 'function') return;
             uni.setStorageSync(key, value);
         } catch (e) {
-            if (this.debug) console.warn('[ConfigProvider] failed to write storage', e);
+            if (isDebugMode('error')) console.error('[ConfigProvider] failed to write storage', e);
         }
     }
 

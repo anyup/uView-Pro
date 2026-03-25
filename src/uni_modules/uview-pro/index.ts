@@ -1,7 +1,7 @@
 import { $u, type RequestOptions, initTheme, configProvider } from './libs';
 import type { UViewProOptions, Theme } from './types/global';
-import { logger } from './libs/util/logger';
 import { defaultThemes } from './libs/config/theme-tokens';
+import { setConfig } from './libs/config/config';
 
 declare const uni: {
     [key: string]: any;
@@ -74,10 +74,9 @@ const install = (app: any, options?: UViewProOptions): void => {
                 console.error('[install locales] Error:', e);
             }
             // 设置调试模式
-            logger
-                .setDebugMode(options?.log?.debug ?? false)
-                .setPrefix(options?.log?.prefix || '')
-                .setShowCallerInfo(options?.log?.showCallerInfo ?? true);
+            setConfig({
+                debugMode: options?.debugMode ?? false
+            });
         } else {
             // 默认初始化系统主题
             initTheme();
