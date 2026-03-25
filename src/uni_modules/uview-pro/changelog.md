@@ -1,3 +1,19 @@
+## 0.5.15（2026-03-25）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-form:** 修复表单项底部边框默认值逻辑 ([d939fbd](https://github.com/anyup/uView-Pro/commit/d939fbd5df85c266f8a8f5e23ebeca251eee94ec))
+- **u-input:** 修复u-input输入框在某些微信小程序平台下，重新获取焦点时会清空输入框的问题 ([cedecfa](https://github.com/anyup/uView-Pro/commit/cedecfa4bf2142046bb512b1d9e87f6c9d77516d))
+- **demo:** 优化微信小程序首页u-sticky使用配置 ([cc4e9ac](https://github.com/anyup/uView-Pro/commit/cc4e9ac9f022e7713b2eb2746038a8481729c0b4))
+
+### ✨ Features | 新功能
+
+- **types:** 添加昵称输入类型支持 ([bd15170](https://github.com/anyup/uView-Pro/commit/bd15170d0ccc76098debb9e37b4acfbe43fef043))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/xaunseus"><img src="https://github.com/xaunseus.png?size=40" width="40" height="40" alt="xaunseus" title="xaunseus"/></a> 
+
 ## 0.5.14（2026-03-23）
 
 ### 🐛 Bug Fixes | Bug 修复
