@@ -1,5 +1,5 @@
 import type { PropType, ExtractPropTypes } from 'vue';
-import type { InputAlign, InputLabelPosition } from '../../types/global';
+import type { InputAlign, InputLabelPosition, SizeType } from '../../types/global';
 import { baseProps } from '../common/props';
 
 /**
@@ -76,6 +76,11 @@ export const FormItemProps = {
     required: {
         type: Boolean,
         default: false
+    },
+    /** 表单内组件的大小，仅支持预设值 default/small/large */
+    size: {
+        type: String as PropType<SizeType | string>,
+        default: ''
     }
 };
 

@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { FormRules, InputAlign, FormErrorType, InputLabelPosition } from '../../types/global';
+import type { FormRules, InputAlign, FormErrorType, InputLabelPosition, SizeType } from '../../types/global';
 import { baseProps } from '../common/props';
 
 /**
@@ -23,7 +23,9 @@ export const FormProps = {
     /** label字体的对齐方式 */
     labelAlign: { type: String as PropType<InputAlign>, default: 'left' },
     /** label的样式，对象形式 */
-    labelStyle: { type: Object as PropType<Record<string, any>>, default: () => ({}) }
+    labelStyle: { type: Object as PropType<Record<string, any>>, default: () => ({}) },
+    /** 表单内组件的大小，仅支持预设值 default/small/large（默认 default） */
+    size: { type: String as PropType<SizeType>, default: 'default' }
 };
 
 export type FormProps = ExtractPropTypes<typeof FormProps>;

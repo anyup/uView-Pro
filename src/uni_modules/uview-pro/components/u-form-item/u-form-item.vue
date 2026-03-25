@@ -36,8 +36,9 @@
                     <view class="u-form-item--left__content__icon" v-if="leftIcon || $slots.leftIcon">
                         <slot name="leftIcon">
                             <u-icon
-                                :custom-prefix="leftIconPrefix"
                                 :name="leftIcon"
+                                :size="currentIconSize"
+                                :custom-prefix="leftIconPrefix"
                                 :custom-style="leftIconStyle"
                             ></u-icon>
                         </slot>
@@ -46,6 +47,7 @@
                         class="u-form-item--left__content__label"
                         :style="[
                             elLabelStyle,
+                            { 'font-size': actualFontSize },
                             {
                                 'justify-content':
                                     elLabelAlign == 'left'
@@ -75,6 +77,7 @@
                             <u-icon
                                 v-if="rightIcon"
                                 :name="rightIcon"
+                                :size="currentIconSize"
                                 :custom-prefix="rightIconPrefix"
                                 :custom-style="rightIconStyle"
                             ></u-icon>
@@ -88,10 +91,13 @@
             class="u-form-item__message"
             v-if="validateState === 'error' && showError('message')"
             :style="{
-                paddingLeft: elLabelPosition == 'left' && label ? $u.addUnit(elLabelWidth) : '0'
+                paddingLeft: elLabelPosition == 'left' && label ? $u.addUnit(elLabelWidth) : '0',
+                fontSize: $u.addUnit(currentSizeConfig.messageSize),
+                lineHeight: $u.addUnit(currentSizeConfig.messageSize)
             }"
-            >{{ validateMessage }}</view
         >
+            {{ validateMessage }}
+        </view>
     </view>
 </template>
 
@@ -114,10 +120,9 @@ import { $u, useChildren, useParent } from '../..';
 // @ts-ignore
 import schema from '../../libs/util/async-validator';
 import { FormItemProps } from './types';
+import type { SizeType } from '../../types/global';
 // 去除警告信息
 schema.warning = function () {};
-
-const { broadcast } = useParent('u-form-item');
 
 /**
  * form-item 表单item
@@ -143,6 +148,7 @@ const props = defineProps(FormItemProps);
 // 插槽
 const $slots = useSlots();
 
+const { broadcast } = useParent('u-form-item');
 const { parentExposed } = useChildren('u-form-item', 'u-form');
 
 // 组件状态
@@ -167,6 +173,62 @@ const showError = computed(() => (type: string) => {
     else if (errorType.value.indexOf(type) >= 0) return true;
     else return false;
 });
+
+// 根据 size 定义不同的配置
+const sizeConfig = {
+    small: {
+        fontSize: 24,
+        iconSize: 28,
+        messageSize: 20
+    },
+    default: {
+        fontSize: 28,
+        iconSize: 32,
+        messageSize: 24
+    },
+    large: {
+        fontSize: 32,
+        iconSize: 36,
+        messageSize: 28
+    }
+};
+
+// 获取实际使用的 size 值（优先级：u-textarea.size > u-form.size）
+const actualSize = computed(() => {
+    // 优先使用 props 的 size 属性
+    if (props.size !== '') {
+        return String(props.size);
+    }
+    // 次优先：使用 u-form 的 size 属性（u-form 的 size 只支持预设值）
+    if (parentExposed.value?.props?.size) {
+        return String(parentExposed.value.props.size);
+    }
+    // 默认值
+    return 'default';
+});
+
+// 判断实际使用的 size 是否在预设配置中
+const isInSizeConfig = computed(() => actualSize.value in sizeConfig);
+
+// 获取预设 size（用于查找 sizeConfig 配置，如图标大小、高度等）
+const presetSize = computed(() => {
+    return (isInSizeConfig.value ? actualSize.value : 'default') as SizeType;
+});
+
+// 获取当前尺寸配置
+const currentSizeConfig = computed(() => sizeConfig[presetSize.value]);
+
+// 获取实际要使用的 font-size（如果是预设值使用配置值，否则作为自定义值处理）
+const actualFontSize = computed(() => {
+    if (isInSizeConfig.value) {
+        return $u.addUnit(currentSizeConfig.value.fontSize);
+    }
+    // 自定义size值，直接作为fontSize处理
+    return $u.addUnit(actualSize.value);
+});
+
+// 计算当前图标大小
+const currentIconSize = computed(() => currentSizeConfig.value.iconSize);
 
 // 监听校验状态和父表单 errorType 变化
 watch(validateState, () => {
@@ -446,6 +508,8 @@ defineExpose({
 
             &__icon {
                 margin-right: 8rpx;
+                @include vue-flex;
+                align-items: center;
             }
 
             &--required {
@@ -474,16 +538,16 @@ defineExpose({
 
             &__slot {
                 flex: 1;
-                /* #ifndef MP */
                 @include vue-flex;
                 align-items: center;
-                /* #endif */
             }
 
             &__icon {
                 margin-left: 10rpx;
                 color: $u-light-color;
                 font-size: 30rpx;
+                @include vue-flex;
+                align-items: center;
             }
         }
     }

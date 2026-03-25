@@ -6,7 +6,11 @@
         :apis="'form'"
     >
         <view class="wrap">
-            <u-form :model="model" :rules="rules" ref="uFormRef" :errorType="errorType">
+            <view class="u-config-item">
+                <view class="u-item-title">表单大小</view>
+                <u-subsection current="1" :list="['小', '中', '大']" @change="sizeChange" />
+            </view>
+            <u-form :model="model" :rules="rules" ref="uFormRef" :errorType="errorType" :size="size">
                 <u-form-item
                     :leftIconStyle="{ color: '#888', fontSize: '32rpx' }"
                     left-icon="account"
@@ -133,7 +137,7 @@
                                 :label="`账户类型${index + 1}`"
                                 :prop="`receiptAccount.${index}.accountType`"
                                 :label-position="labelPosition"
-                                label-width="150"
+                                label-width="160"
                             >
                                 <u-radio-group
                                     v-model="item.accountType"
@@ -155,11 +159,11 @@
                                 :label="`收款账户${index + 1}`"
                                 :prop="`receiptAccount.${index}.account`"
                                 :label-position="labelPosition"
-                                label-width="150"
+                                label-width="160"
                             >
                                 <u-input v-model="item.account" placeholder="请输入收款账户"></u-input>
                             </u-form-item>
-                            <u-button @click="() => model.receiptAccount.splice(index, 1)">删除账户</u-button>
+                            <u-button @click="() => model.receiptAccount.splice(index, 1)"> 删除 </u-button>
                         </view>
                         <view class="u-m-t-50">
                             <u-button
@@ -175,8 +179,7 @@
             </u-form>
 
             <view class="agreement">
-                <u-checkbox v-model="check" @change="checkboxChange"></u-checkbox>
-                <view class="agreement-text"> 勾选代表同意uView的版权协议 </view>
+                <u-checkbox v-model="check" @change="checkboxChange">勾选代表同意 uView Pro 的版权协议</u-checkbox>
             </view>
             <u-button type="primary" @click="handleSubmit" :throttle-time="0">提交</u-button>
             <u-gap></u-gap>
@@ -224,7 +227,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue';
 import { $u } from '@/uni_modules/uview-pro';
-import type { FormErrorType, FormRules } from '@/uni_modules/uview-pro/types/global';
+import type { FormErrorType, FormRules, SizeType } from '@/uni_modules/uview-pro/types/global';
 import { completeMission } from '../../../common/useExperience';
 
 // 表单模型类型声明
@@ -285,6 +288,8 @@ const selectList = ref([
     { value: '服装', label: '服装' },
     { value: '工艺品', label: '工艺品' }
 ]);
+
+const size = ref<SizeType>('default');
 
 // 校验规则
 const rules: FormRules = {
@@ -616,6 +621,11 @@ function errorChange(index: number) {
     if (index === 1) errorType.value = ['toast'];
     if (index === 2) errorType.value = ['border-bottom'];
     if (index === 3) errorType.value = ['border'];
+}
+
+function sizeChange(index: number) {
+    const sizes: SizeType[] = ['small', 'default', 'large'];
+    size.value = sizes[index];
 }
 </script>
 
