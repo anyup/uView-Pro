@@ -77,7 +77,7 @@
             </view>
             <!-- 搜索区域 -->
             <view class="search-container">
-                <u-sticky bg-color="transparent">
+                <u-sticky :offset-top="offsetTop" bg-color="transparent">
                     <view class="search-box">
                         <u-search
                             v-model="searchText"
@@ -188,6 +188,14 @@ const getIcon = (path: string) => {
     // #endif
     return 'https://ik.imagekit.io/anyup/uview-pro/example/' + path + '.png';
 };
+
+const offsetTop = computed(() => {
+    let offset = 0;
+    // #ifdef MP-WEIXIN
+    offset = 200;
+    // #endif
+    return offset; // 其他平台默认偏移
+});
 
 // 组件描述
 const desc = computed(() => t('components.desc'));
