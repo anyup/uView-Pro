@@ -189,26 +189,31 @@ function close() {
 .u-mode-dark-primary {
     background-color: $u-type-primary;
     color: var(--u-white-color);
+    border: 1px solid $u-type-primary;
 }
 
 .u-mode-dark-success {
     background-color: $u-type-success;
     color: var(--u-white-color);
+    border: 1px solid $u-type-success;
 }
 
 .u-mode-dark-error {
     background-color: $u-type-error;
     color: var(--u-white-color);
+    border: 1px solid $u-type-error;
 }
 
 .u-mode-dark-warning {
     background-color: $u-type-warning;
     color: var(--u-white-color);
+    border: 1px solid $u-type-warning;
 }
 
 .u-mode-dark-info {
     background-color: $u-type-info;
     color: var(--u-white-color);
+    border: 1px solid $u-type-info;
 }
 
 .u-mode-plain-primary {
