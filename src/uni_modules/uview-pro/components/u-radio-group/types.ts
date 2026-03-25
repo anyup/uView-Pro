@@ -16,13 +16,13 @@ export const RadioGroupProps = {
     /** 选中状态下的颜色 */
     activeColor: { type: String, default: () => getColor('primary') },
     /** 组件的整体大小 */
-    size: { type: [String, Number] as PropType<number | string>, default: 34 },
+    size: { type: [String, Number] as PropType<number | string>, default: '' },
     /** 是否禁止点击提示语选中复选框 */
     labelDisabled: { type: Boolean, default: false },
     /** 形状，square为方形，circle为原型 */
     shape: { type: String as PropType<Shape>, default: 'circle' },
     /** 图标的大小，单位rpx */
-    iconSize: { type: [String, Number] as PropType<number | string>, default: 20 },
+    iconSize: { type: [String, Number] as PropType<number | string>, default: '' },
     /** 每个checkbox占u-checkbox-group的宽度 */
     width: { type: [String, Number] as PropType<number | string>, default: 'auto' },
     /** 是否每个checkbox都换行 */

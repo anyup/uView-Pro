@@ -38,7 +38,7 @@
                     </view>
                     <view class="u-config-item">
                         <view class="u-item-title">整体大小(单位rpx)</view>
-                        <u-subsection current="1" :list="['30', '40', '50']" @change="sizeChange"></u-subsection>
+                        <u-subsection current="1" :list="['小', '中', '大', '60']" @change="sizeChange"></u-subsection>
                     </view>
                     <view class="u-config-item">
                         <view class="u-item-title">激活颜色</view>
@@ -71,7 +71,7 @@
 
 <script setup lang="ts">
 import { $u } from '@/uni_modules/uview-pro';
-import type { Shape } from '@/uni_modules/uview-pro/types/global';
+import type { Shape, SizeType } from '@/uni_modules/uview-pro/types/global';
 import { reactive, ref } from 'vue';
 
 const list = reactive([
@@ -99,7 +99,7 @@ const list = reactive([
 const shape = ref<Shape>('circle');
 const value = ref('荔枝');
 const activeColor = ref($u.color.primary);
-const size = ref(34);
+const size = ref<SizeType | string | number>('default');
 const wrap = ref(false);
 const width = ref('auto');
 
@@ -108,7 +108,11 @@ function shapeChange(index: number) {
 }
 
 function sizeChange(index: number) {
-    size.value = index == 0 ? 30 : index == 1 ? 40 : 50;
+    if (index > 2) {
+        size.value = 60;
+    } else {
+        size.value = index === 0 ? 'small' : index === 1 ? 'default' : 'large';
+    }
 }
 
 function defaultChooseChange(index: number) {

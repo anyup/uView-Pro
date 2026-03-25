@@ -1,13 +1,18 @@
 <template>
     <view class="u-radio" :style="$u.toStyle(radioStyle, customStyle)" :class="customClass">
         <view class="u-radio__icon-wrap" @tap="toggle" :class="iconClass" :style="$u.toStyle(iconStyle)">
-            <u-icon class="u-radio__icon-wrap__icon" name="checkbox-mark" :size="elIconSize" :color="iconColor" />
+            <u-icon
+                custom-class="u-radio__icon-wrap__icon"
+                name="checkbox-mark"
+                :size="elIconSize"
+                :color="iconColor"
+            />
         </view>
         <view
             class="u-radio__label"
             @tap="onClickLabel"
             :style="{
-                fontSize: $u.addUnit(labelSize)
+                fontSize: labelFontSize
             }"
         >
             <slot>
@@ -34,6 +39,7 @@ export default {
 import { computed } from 'vue';
 import { $u, useChildren } from '../..';
 import { RadioProps } from './types';
+import type { SizeType } from '../../types/global';
 
 /**
  * radio 单选框
@@ -56,6 +62,7 @@ const emit = defineEmits(['change']);
 
 // 使用组件关系 hooks 获取父组件
 const { parentExposed } = useChildren('u-radio', 'u-radio-group');
+const { parentExposed: formExposed } = useChildren('u-radio', 'u-form');
 
 // radio 的value值，id
 const radioValue = computed(() => {
@@ -81,6 +88,54 @@ const parentData = computed(() => {
     );
 });
 
+// 根据 size 定义不同的配置
+const sizeConfig = {
+    small: {
+        size: 28,
+        fontSize: 24,
+        iconSize: 16
+    },
+    default: {
+        size: 34,
+        fontSize: 28,
+        iconSize: 20
+    },
+    large: {
+        size: 40,
+        fontSize: 32,
+        iconSize: 24
+    }
+};
+
+// 获取实际使用的 size 值（优先级：props.size > u-radio-group.size > u-form.size）
+const actualSize = computed(() => {
+    // 优先使用 props 的 size 属性
+    if (props.size !== '') {
+        return String(props.size);
+    }
+    // 次优先：使用 u-radio-group 的 size 属性
+    if (parentExposed.value?.props?.size) {
+        return String(parentExposed.value.props.size);
+    }
+    // 最后：使用 u-form 的 size 属性（u-form 的 size 只支持预设值）
+    if (formExposed.value?.props?.size) {
+        return String(formExposed.value.props.size);
+    }
+    // 默认值
+    return 'default';
+});
+
+// 判断实际使用的 size 是否在预设配置中
+const isInSizeConfig = computed(() => actualSize.value in sizeConfig);
+
+// 获取预设 size（用于查找 sizeConfig 配置，如图标大小、高度等）
+const presetSize = computed(() => {
+    return (isInSizeConfig.value ? actualSize.value : 'default') as SizeType;
+});
+
+// 获取当前尺寸配置
+const currentSizeConfig = computed(() => sizeConfig[presetSize.value]);
+
 /**
  * 是否禁用，如果父组件u-radio-group禁用的话，将会忽略子组件的配置
  */
@@ -103,18 +158,31 @@ const elLabelDisabled = computed(() =>
  * 组件尺寸，对应size的值，默认值为34rpx
  * 兼容无size属性场景
  */
-const elSize = computed(() => {
-    // 若props无size，直接用默认值
-    // 兼容老代码，parentData.value.size 可能不存在
-    return (props as any).size ? (props as any).size : parentData.value.size ? parentData.value.size : 34;
-});
+const elSize = computed(() => currentSizeConfig.value.size);
 
 /**
  * 组件的勾选图标的尺寸，默认20
  */
-const elIconSize = computed(() =>
-    props.iconSize ? props.iconSize : parentData.value.iconSize ? parentData.value.iconSize : 20
-);
+const elIconSize = computed(() => {
+    if (props.iconSize) {
+        return props.iconSize;
+    }
+    if (parentExposed.value?.props?.iconSize) {
+        return parentExposed.value?.props?.iconSize;
+    }
+    if (isInSizeConfig.value) {
+        return currentSizeConfig.value.iconSize;
+    }
+    return 20;
+});
+
+// label字体大小，默认28
+const labelFontSize = computed(() => {
+    if (isInSizeConfig.value) {
+        return $u.addUnit(currentSizeConfig.value.fontSize);
+    }
+    return $u.addUnit(props.labelSize);
+});
 
 /**
  * 组件选中激活时的颜色
