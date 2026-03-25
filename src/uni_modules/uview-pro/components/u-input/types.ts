@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { InputAlign, InputConfirmType, InputType } from '../../types/global';
+import type { InputAlign, InputConfirmType, InputType, SizeType } from '../../types/global';
 import { baseProps } from '../common/props';
 import { useLocale } from '../../';
 
@@ -26,6 +26,11 @@ export const InputProps = {
     inputAlign: {
         type: String as PropType<InputAlign>,
         default: 'left'
+    },
+    /** 输入框文字的大小(默认default)，支持 small/default/large 预设值，也支持 16/16px/16rpx 等自定义值 */
+    size: {
+        type: [String, Number] as PropType<SizeType | string | number>,
+        default: ''
     },
     /** placeholder显示值(默认 '请输入内容') */
     placeholder: {

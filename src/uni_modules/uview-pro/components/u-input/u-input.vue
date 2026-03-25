@@ -21,7 +21,7 @@
             :style="getStyle"
             :value="inputValue"
             :placeholder="placeholder"
-            :placeholderStyle="placeholderStyle"
+            :placeholderStyle="getPlaceholderStyle"
             :disabled="disabled"
             :maxlength="inputMaxlength"
             :fixed="fixed"
@@ -46,7 +46,7 @@
             :value="inputValue"
             :password="type == 'password' && !showPassword"
             :placeholder="placeholder"
-            :placeholderStyle="placeholderStyle"
+            :placeholderStyle="getPlaceholderStyle"
             :disabled="disabled || type === 'select'"
             :maxlength="inputMaxlength"
             :focus="focus"
@@ -66,17 +66,19 @@
             <view
                 class="u-input__right-icon__clear u-input__right-icon__item"
                 v-if="clearable && inputValue !== '' && !disabled"
+                :style="{ marginLeft: $u.addUnit(iconSpacing) }"
                 :class="{ 'u-hidden': !focused && type !== 'select' }"
                 @click.stop="onClear"
             >
-                <u-icon size="32" name="close-circle-fill" color="var(--u-light-color)" />
+                <u-icon :size="currentIconSize" name="close-circle-fill" color="var(--u-light-color)" />
             </view>
             <view
                 class="u-input__right-icon__clear u-input__right-icon__item"
                 v-if="passwordIcon && type == 'password'"
+                :style="{ marginLeft: $u.addUnit(iconSpacing) }"
             >
                 <u-icon
-                    size="32"
+                    :size="currentIconSize"
                     :name="!showPassword ? 'eye' : 'eye-fill'"
                     color="var(--u-light-color)"
                     @click="showPassword = !showPassword"
@@ -88,8 +90,9 @@
                 :class="{
                     'u-input__right-icon--select--reverse': selectOpen
                 }"
+                :style="{ marginLeft: $u.addUnit(iconSpacing) }"
             >
-                <u-icon name="arrow-down-fill" size="26" color="var(--u-light-color)"></u-icon>
+                <u-icon name="arrow-down-fill" :size="selectIconSize" color="var(--u-light-color)"></u-icon>
             </view>
         </view>
         <text
@@ -121,18 +124,86 @@ export default {
 import { ref, computed, watch } from 'vue';
 import { $u, useChildren } from '../..';
 import { InputProps } from './types';
+import type { SizeType } from '../../types/global';
 
 const props = defineProps(InputProps);
 const emit = defineEmits(['update:modelValue', 'input', 'blur', 'focus', 'confirm', 'click']);
 
 const { emitToParent } = useChildren('u-input', 'u-form-item');
+const { parentExposed } = useChildren('u-input', 'u-form');
 
-const inputHeight = 70; // input的高度
-const textareaHeight = 100; // textarea的高度
 const validateState = ref(props.validateState); // 当前input的验证状态，用于错误时，边框是否改为红色
 const focused = ref(false); // 当前是否处于获得焦点的状态
 const showPassword = ref(false); // 是否预览密码
 const lastValue = ref(''); // 用于头条小程序，判断@input中，前后的值是否发生了变化
+
+// 根据 size 定义不同的配置
+const sizeConfig = {
+    small: {
+        inputHeight: 56,
+        textareaHeight: 70,
+        fontSize: 24,
+        iconSize: 28,
+        iconSpacing: 6
+    },
+    default: {
+        inputHeight: 70,
+        textareaHeight: 100,
+        fontSize: 28,
+        iconSize: 32,
+        iconSpacing: 10
+    },
+    large: {
+        inputHeight: 84,
+        textareaHeight: 130,
+        fontSize: 32,
+        iconSize: 36,
+        iconSpacing: 14
+    }
+};
+
+// 获取实际使用的 size 值（优先级：props.size > u-form.size）
+const actualSize = computed(() => {
+    // 优先使用 props 的 size 属性
+    if (props.size !== '') {
+        return String(props.size);
+    }
+    // 次优先：使用 u-form 的 size 属性（u-form 的 size 只支持预设值）
+    if (parentExposed.value?.props?.size) {
+        return String(parentExposed.value.props.size);
+    }
+    // 默认值
+    return 'default';
+});
+
+// 判断实际使用的 size 是否在预设配置中
+const isInSizeConfig = computed(() => actualSize.value in sizeConfig);
+
+// 获取预设 size（用于查找 sizeConfig 配置，如图标大小、高度等）
+const presetSize = computed(() => {
+    return (isInSizeConfig.value ? actualSize.value : 'default') as SizeType;
+});
+
+// 获取当前尺寸配置
+const currentSizeConfig = computed(() => sizeConfig[presetSize.value]);
+
+// 获取实际要使用的 font-size（如果是预设值使用配置值，否则作为自定义值处理）
+const actualFontSize = computed(() => {
+    if (isInSizeConfig.value) {
+        return $u.addUnit(currentSizeConfig.value.fontSize);
+    }
+    // 自定义size值，直接作为fontSize处理
+    return $u.addUnit(actualSize.value);
+});
+
+// 计算当前图标大小
+const currentIconSize = computed(() => currentSizeConfig.value.iconSize);
+
+// 计算 select 图标大小（比常规图标稍小）
+const selectIconSize = computed(() => currentSizeConfig.value.iconSize - 4);
+
+// 计算图标间距
+const iconSpacing = computed(() => currentSizeConfig.value.iconSpacing);
 
 const inputValue = computed<string>(() => {
     if (props.modelValue === undefined || props.modelValue === null) return '';
@@ -163,12 +234,25 @@ const getStyle = computed(() => {
     let style: Record<string, any> = {};
     // 如果没有自定义高度，就根据type为input还是textarea来分配一个默认的高度
     style.minHeight = props.height
-        ? props.height + 'rpx'
-        : props.type == 'textarea'
-          ? `${textareaHeight}rpx`
-          : `${inputHeight}rpx`;
+        ? $u.addUnit(props.height)
+        : props.type === 'textarea'
+          ? $u.addUnit(currentSizeConfig.value.textareaHeight)
+          : $u.addUnit(currentSizeConfig.value.inputHeight);
+    // 根据 size 属性设置字体大小
+    style.fontSize = actualFontSize.value;
     return $u.toStyle(style, props.customStyle);
 });
+
+const getPlaceholderStyle = computed(() => {
+    return $u.toStyle(
+        {
+            fontSize: actualFontSize.value
+        },
+        props.placeholderStyle
+    );
+});
+
+// 计算光标与键盘的距离
 const getCursorSpacing = computed(() => Number(props.cursorSpacing));
 // 光标起始位置
 const uSelectionStart = computed(() => String(props.selectionStart));
@@ -259,6 +343,7 @@ defineExpose({
     position: relative;
     flex: 1;
     @include vue-flex;
+    align-items: center;
 
     &__select-overlay {
         position: absolute;
@@ -271,6 +356,8 @@ defineExpose({
         font-size: 28rpx;
         color: $u-main-color;
         flex: 1;
+        align-self: center;
+        line-height: normal;
     }
 
     &__textarea {
@@ -307,10 +394,6 @@ defineExpose({
     &__right-icon {
         position: relative;
         z-index: 2;
-
-        &__item {
-            margin-left: 10rpx;
-        }
 
         &--select {
             transition: transform 0.4s;

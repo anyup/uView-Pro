@@ -9,10 +9,10 @@
                 <view class="u-demo-title">演示效果</view>
                 <view class="u-demo-area">
                     <u-input
-                        :custom-style="customStyle"
                         v-model="username"
                         label="用户名"
                         placeholder="请填写用户名"
+                        :custom-style="customStyle"
                         :type="type"
                         :input-align="inputAlign"
                         :maxlength="maxlength"
@@ -20,25 +20,31 @@
                         :border="border"
                         :border-color="borderColor"
                         :focus="focus"
+                        :size="size"
                     />
                     <u-gap></u-gap>
                     <u-input
-                        :custom-style="customStyle"
                         v-model="password"
                         label="密码"
                         placeholder="请填写密码"
+                        :custom-style="customStyle"
                         :type="type2"
                         :input-align="inputAlign"
                         :maxlength="maxlength"
                         :clearable="clearable"
                         :border="border"
                         :border-color="borderColor"
+                        :size="size"
                     >
                     </u-input>
                 </view>
             </view>
             <view class="u-config-wrap">
                 <view class="u-config-title u-border-bottom">参数配置</view>
+                <view class="u-config-item">
+                    <view class="u-item-title">输入框大小</view>
+                    <u-subsection current="1" :list="['小', '中', '大', '60']" @change="sizeChange" />
+                </view>
                 <view class="u-config-item">
                     <view class="u-item-title">第一个输入框为textarea类型</view>
                     <u-subsection current="1" :list="['是', '否']" @change="textareaChange" />
@@ -82,7 +88,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { InputType, InputAlign } from '@/uni_modules/uview-pro/types/global';
+import type { InputType, InputAlign, SizeType } from '@/uni_modules/uview-pro/types/global';
 
 const username = ref('');
 const password = ref('');
@@ -96,6 +102,7 @@ const borderColor = ref('#dcdfe6');
 const focus = ref(false);
 const passwordIcon = ref(true);
 const customStyle = ref<Record<string, any>>({});
+const size = ref<SizeType | string>('default');
 
 function textareaChange(index: number) {
     type.value = index === 0 ? 'textarea' : 'text';
@@ -127,5 +134,13 @@ function passwordIconChange(index: number) {
 }
 function customStyleChange(index: number) {
     customStyle.value = index === 0 ? { background: '#f5f5f5', color: '#333' } : {};
+}
+function sizeChange(index: number) {
+    const sizes: SizeType[] = ['small', 'default', 'large'];
+    if (index < 3) {
+        size.value = sizes[index];
+    } else {
+        size.value = '60rpx';
+    }
 }
 </script>
