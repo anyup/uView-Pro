@@ -456,7 +456,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
     // 如果当前没有prop的话表示当前不要进行删除（因为没有注入）
     if (parentExposed?.value && props.prop) {
-        parentExposed?.value?.removeField({ prop: props.prop });
+        parentExposed?.value?.removeField && parentExposed?.value?.removeField({ prop: props.prop });
     }
 });
 
