@@ -6,10 +6,6 @@
         :apis="'form'"
     >
         <view class="wrap">
-            <view class="u-config-item">
-                <view class="u-item-title">表单大小</view>
-                <u-subsection current="1" :list="['小', '中', '大']" @change="sizeChange" />
-            </view>
             <u-form :model="model" :rules="rules" ref="uFormRef" :errorType="errorType" :size="size">
                 <u-form-item
                     :leftIconStyle="{ color: '#888', fontSize: '32rpx' }"
@@ -199,6 +195,10 @@
             <u-verification-code seconds="60" ref="uCodeRef" @change="codeChange"></u-verification-code>
             <view class="u-config-wrap">
                 <view class="u-config-title u-border-bottom"> 参数配置 </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">表单大小</view>
+                    <u-subsection current="1" :list="['小', '中', '大']" @change="sizeChange" />
+                </view>
                 <view class="u-config-item">
                     <view class="u-item-title">label对齐方式</view>
                     <u-subsection :list="['左边', '上方']" @change="labelPositionChange"></u-subsection>

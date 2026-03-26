@@ -4,7 +4,7 @@
             <view class="u-demo">
                 <view class="u-demo-wrap">
                     <view class="u-demo-title">演示效果</view>
-                    <view class="u-demo-area">
+                    <view class="u-demo-area u-flex-col u-col-center">
                         <view>
                             <u-radio-group
                                 v-model="value"
