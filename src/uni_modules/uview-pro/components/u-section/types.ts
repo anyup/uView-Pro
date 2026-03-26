@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import { useLocale } from '../../';
 
 const { t } = useLocale();
@@ -11,7 +10,16 @@ const { t } = useLocale();
 export type FontSize = string | number;
 
 export const SectionProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 标题信息 */
     title: { type: String, default: '' },
     /** 右边副标题内容 */

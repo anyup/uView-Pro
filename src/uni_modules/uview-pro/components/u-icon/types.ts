@@ -1,12 +1,20 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { IconLabelPosition, ImgMode } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * u-icon 组件 Props 类型定义
  */
 export const IconProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 图标名称，见示例图标集 */
     name: { type: String, default: '' },
     /** 图标颜色，可接受主题色 */

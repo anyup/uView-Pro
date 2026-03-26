@@ -1,11 +1,19 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 
 /**
  * u-empty 组件 Props 类型定义
  */
 export const EmptyProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 图标路径 */
     src: { type: String, default: '' },
     /** 提示文字 */

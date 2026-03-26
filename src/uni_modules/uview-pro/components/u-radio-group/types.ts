@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { Shape } from '../../types/global';
-import { baseProps } from '../common/props';
 import { getColor } from '../../';
 
 /**
@@ -8,7 +7,16 @@ import { getColor } from '../../';
  * @description 单选框用于有一个选择，用户只能选择其中一个的场景。搭配u-radio使用
  */
 export const RadioGroupProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 是否禁用所有单选框 */
     disabled: { type: Boolean, default: false },
     /** 匹配某一个radio组件，如果某个radio的name值等于此值，那么这个radio就被会选中 */

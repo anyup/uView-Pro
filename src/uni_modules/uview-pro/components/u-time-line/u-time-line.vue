@@ -18,7 +18,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { baseProps } from '../common/props';
+import type { PropType } from 'vue';
 import { $u } from '../../';
 
 /**
@@ -28,7 +28,18 @@ import { $u } from '../../';
  * @example <u-time-line></u-time-line>
  */
 
-const props = defineProps({ ...baseProps });
+const props = defineProps({
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    }
+});
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { InputAlign, SearchShape } from '../../types/global';
-import { baseProps } from '../common/props';
 import { useLocale } from '../../';
 
 const { t } = useLocale();
@@ -10,7 +9,16 @@ const { t } = useLocale();
  * @description 集成常见搜索框功能，开箱即用
  */
 export const SearchProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 搜索框形状，round-圆形，square-方形 */
     shape: { type: String as PropType<SearchShape>, default: 'round' },
     /** 搜索框背景色，默认值var(--u-bg-gray-light) */

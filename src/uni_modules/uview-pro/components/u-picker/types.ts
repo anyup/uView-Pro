@@ -2,7 +2,6 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import type { PickerMode, PickerParams } from '../../types/global';
 import { getColor, useLocale } from '../../';
 import zIndex from '../../libs/config/zIndex';
-import { baseProps } from '../common/props';
 
 const { t } = useLocale();
 
@@ -23,7 +22,16 @@ const defaultParams: PickerParams = {
  * @description 支持时间、地区、单列、多列等多种模式
  */
 export const PickerProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** picker中需要显示的参数 */
     params: {
         type: Object as PropType<PickerParams>,

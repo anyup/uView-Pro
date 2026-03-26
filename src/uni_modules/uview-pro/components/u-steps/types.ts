@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { StepDirection, StepMode, StepsListItem, ThemeType } from '../../types/global';
-import { baseProps } from '../common/props';
 import { getColor } from '../../';
 
 /**
@@ -9,7 +8,16 @@ import { getColor } from '../../';
  */
 
 export const StepsProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 步骤条的类型，dot|number */
     mode: { type: String as PropType<StepMode>, default: 'dot' },
     /** 步骤条的数据 */

@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SwipeActionOption } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * swipeAction 左滑单元格 props 类型定义
@@ -8,7 +7,16 @@ import { baseProps } from '../common/props';
  */
 
 export const SwipeActionProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** index值，用于得知点击删除的是哪个按钮 */
     index: {
         type: [Number, String] as PropType<string | number>,

@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import type { TabbarItem } from '../../types/global';
 import zIndex from '../../libs/config/zIndex';
 
@@ -8,7 +7,16 @@ import zIndex from '../../libs/config/zIndex';
  * @description 底部导航栏，支持凸起按钮、徽标、切换前回调等
  */
 export const TabbarProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 是否显示tabbar */
     show: { type: Boolean, default: true },
     /** v-model绑定当前激活项的值 */

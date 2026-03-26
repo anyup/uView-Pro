@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { BadgeSize, ThemeType } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * badge 角标类型定义
@@ -8,7 +7,16 @@ import { baseProps } from '../common/props';
  */
 
 export const BadgeProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 使用预设的背景颜色 primary,warning,success,error,info */
     type: { type: String as PropType<ThemeType>, default: 'error' },
     /** Badge的尺寸，default, mini */

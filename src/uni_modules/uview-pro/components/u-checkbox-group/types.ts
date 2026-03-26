@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { Shape } from '../../types/global';
-import { baseProps } from '../common/props';
 import { getColor } from '../../';
 
 /**
@@ -9,7 +8,16 @@ import { getColor } from '../../';
  */
 
 export const CheckboxGroupProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 绑定值，选中的复选框name组成的数组 */
     modelValue: { type: Array as PropType<(string | number)[]>, default: undefined },
     /** 最多能选中多少个checkbox */

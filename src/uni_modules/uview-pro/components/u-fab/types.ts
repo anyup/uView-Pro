@@ -1,6 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import type { FabDirection, FabGap, FabPosition, ThemeType } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * fab 悬浮按钮类型定义
@@ -8,7 +7,16 @@ import { baseProps } from '../common/props';
  */
 
 export const FabProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 按钮的预置样式，primary，info，error，warning，success */
     type: { type: String as PropType<ThemeType>, default: 'primary' },
     /** 是否禁止状态 */

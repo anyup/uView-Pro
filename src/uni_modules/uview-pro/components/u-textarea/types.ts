@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import type { TextareaBorder, SizeType } from '../../types/global';
 
 const textarea = {
@@ -29,7 +28,16 @@ const textarea = {
 };
 
 export const TextareaProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     // 输入框的内容
     modelValue: { type: [String, Number] as PropType<string | number>, default: textarea.value },
     // 输入框为空时占位符

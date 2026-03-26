@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { RowAlign, RowJustify } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * RowProps 行布局 props 类型定义
@@ -8,7 +7,16 @@ import { baseProps } from '../common/props';
  */
 
 export const RowProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 给col添加间距，左右边距各占一半 */
     gutter: { type: [String, Number] as PropType<number | string>, default: 20 },
     /** 水平排列方式，可选值为`start`(或`flex-start`)、`end`(或`flex-end`)、`center`、`around`(或`space-around`)、`between`(或`space-between`) */

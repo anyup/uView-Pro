@@ -1,10 +1,18 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import { config, configProvider } from '../../libs';
 import type { Theme } from '../../types/global';
 
 export const ConfigProviderProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /**
      * 主题风格，可选值：
      * - 'light': 强制亮色模式（默认）

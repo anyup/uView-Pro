@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { InputAlign, InputConfirmType, InputType, SizeType } from '../../types/global';
-import { baseProps } from '../common/props';
 import { useLocale } from '../../';
 
 const { t } = useLocale();
@@ -11,7 +10,16 @@ const { t } = useLocale();
  */
 
 export const InputProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 用于双向绑定输入框的值 */
     modelValue: {
         type: [String, Number] as PropType<string | number>,

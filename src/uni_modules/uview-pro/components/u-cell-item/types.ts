@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { CellItemArrowDirection } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * cell-item 组件 props 类型定义
@@ -10,7 +9,16 @@ export type CellItemIndex = string | number;
 export type CellItemStyle = Record<string, any>;
 
 export const CellItemProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 左侧图标名称(只能uView内置图标)，或者图标src */
     icon: { type: String, default: '' },
     /** 左侧标题 */

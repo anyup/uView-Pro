@@ -30,6 +30,7 @@ export function createApp() {
     // 引入uView Pro 的http插件
     app.use(httpPlugin, { interceptor: httpInterceptor, requestConfig: httpRequestConfig });
     // #ifdef MP
+    // @ts-ignore
     app.mixin(share);
     // #endif
     return {

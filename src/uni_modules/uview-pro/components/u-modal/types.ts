@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { getColor, useLocale } from '../../';
-import { baseProps } from '../common/props';
 
 const { t } = useLocale();
 
@@ -9,7 +8,16 @@ const { t } = useLocale();
  * @description 弹窗模态框，支持多种样式和交互
  */
 export const ModalProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 是否显示模态框 */
     modelValue: {
         type: Boolean,

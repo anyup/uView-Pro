@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ThemeType, ToastPosition } from '../../types/global';
-import { baseProps } from '../common/props';
 import zIndex from '../../libs/config/zIndex';
 
 /**
@@ -8,7 +7,16 @@ import zIndex from '../../libs/config/zIndex';
  * @description 消息提示组件，支持 z-index 及多种配置项
  */
 export const ToastProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 层级 z-index */
     zIndex: { type: [Number, String] as PropType<number | string>, default: zIndex.toast },
     /** 提示类型，success/warning/error/loading 等 */

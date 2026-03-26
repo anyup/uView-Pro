@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TabsSwiperAutoCenterMode, TabsSwiperListItem } from '../../types/global';
-import { baseProps } from '../common/props';
 import { getColor } from '../../';
 
 /**
@@ -8,7 +7,16 @@ import { getColor } from '../../';
  * @description 全屏选项卡，支持滑块、渐变色、滚动居中等
  */
 export const TabsSwiperProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** tabs是否可以左右拖动 */
     isScroll: { type: Boolean, default: true },
     /** 标签数组，元素为对象，如[{name: '推荐'}] */

@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 
 type LoadingMode = 'circle' | 'flower';
 
@@ -8,7 +7,16 @@ type LoadingMode = 'circle' | 'flower';
  * @description 加载动画，支持多种模式
  */
 export const LoadingProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 动画的类型 */
     mode: {
         type: String as PropType<LoadingMode>,

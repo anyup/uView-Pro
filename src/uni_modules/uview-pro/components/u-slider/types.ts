@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import { getColor } from '../../';
 
 /**
@@ -7,7 +6,16 @@ import { getColor } from '../../';
  * @description 滑块选择器，支持自定义样式、步长、禁用等
  */
 export const SliderProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 当前进度百分比值，范围0-100 */
     modelValue: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 是否禁用滑块 */

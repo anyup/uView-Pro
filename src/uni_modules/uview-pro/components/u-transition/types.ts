@@ -1,9 +1,17 @@
 import type { PropType } from 'vue';
-import { baseProps } from '../common/props';
 import type { TransitionDuration, TransitionPreset } from '../../types/global';
 
 export const TransitionProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     show: {
         type: Boolean,
         default: true

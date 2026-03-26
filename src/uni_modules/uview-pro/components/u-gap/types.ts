@@ -1,12 +1,20 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 
 /**
  * u-gap 组件 Props 类型定义
  * @description 间隔槽组件属性
  */
 export const GapProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 背景颜色 */
     bgColor: { type: String, default: 'transparent' },
     /** 高度 */

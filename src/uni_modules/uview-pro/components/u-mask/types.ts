@@ -1,12 +1,20 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 
 /**
  * u-mask 组件 props 类型定义
  * @description 遮罩层，支持自定义样式、缩放、动画等
  */
 export const MaskProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 是否显示遮罩 */
     show: {
         type: Boolean,

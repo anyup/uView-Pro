@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ActionSheetItem, ActionSheetTips } from '../../types/global';
-import { baseProps } from '../common/props';
 import { getColor, useLocale } from '../../';
 
 const { t } = useLocale();
@@ -10,7 +9,16 @@ const { t } = useLocale();
  * @description 本组件用于从底部弹出一个操作菜单，供用户选择并返回结果。本组件功能类似于uni的uni.showActionSheetAPI，配置更加灵活，所有平台都表现一致。
  */
 export const ActionSheetProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 点击遮罩是否可以关闭actionSheet */
     maskCloseAble: { type: Boolean, default: true },
     /** 按钮的文字数组，可以自定义颜色和字体大小，字体单位为rpx */

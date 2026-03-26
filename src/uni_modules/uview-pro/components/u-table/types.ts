@@ -1,13 +1,21 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TextAlign } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * TableProps 表格 props 类型定义
  * @description 表格组件，支持自定义边框、背景、对齐方式等
  */
 export const TableProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 表格边框的颜色 */
     borderColor: { type: String, default: 'var(--u-border-color)' },
     /** 单元格的内容对齐方式，作用类似css的text-align */

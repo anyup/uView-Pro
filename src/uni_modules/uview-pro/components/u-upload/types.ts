@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ImgMode, UploadSizeType, UploadSourceType } from '../../types/global';
-import { baseProps } from '../common/props';
 import { useLocale } from '../../';
 
 const { t } = useLocale();
@@ -10,7 +9,16 @@ const { t } = useLocale();
  * @description 文件上传组件，支持多种自定义参数
  */
 export const UploadProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 选择器宽度，单位rpx */
     width: { type: [Number, String] as PropType<number | string>, default: 200 },
     /** 选择器高度，单位rpx */

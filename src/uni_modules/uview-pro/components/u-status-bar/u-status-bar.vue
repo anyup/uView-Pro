@@ -22,7 +22,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, onMounted, type CSSProperties } from 'vue';
-import { StatusBarProps } from './props';
+import { StatusBarProps } from './types';
 import { $u } from '../../';
 
 /**

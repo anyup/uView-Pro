@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { PopupCloseIconPos, PopupMode } from '../../types/global';
-import { baseProps } from '../common/props';
 import zIndex from '../../libs/config/zIndex';
 
 /**
@@ -8,7 +7,16 @@ import zIndex from '../../libs/config/zIndex';
  * @description 弹出层容器，支持多种弹出方向和自定义内容
  */
 export const PopupProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 显示状态 */
     show: { type: Boolean, default: false },
     /** 弹出方向，left|right|top|bottom|center */

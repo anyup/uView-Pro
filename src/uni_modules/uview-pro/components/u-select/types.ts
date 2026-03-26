@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SelectListItem, SelectMode } from '../../types/global';
-import { baseProps } from '../common/props';
 import { getColor, useLocale } from '../../';
 
 const { t } = useLocale();
@@ -10,7 +9,16 @@ const { t } = useLocale();
  * @description 用于单列、多列、多列联动的选择场景
  */
 export const SelectProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 列数据 */
     list: { type: Array as PropType<SelectListItem[] | SelectListItem[][]>, default: () => [] },
     /** 是否显示边框 */

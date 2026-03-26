@@ -1,10 +1,18 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { Shape } from '../../types/global';
-import { baseProps } from '../common/props';
 
 // u-back-top 组件 props
 export const BackTopProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 返回顶部的形状，circle-圆形，square-方形 */
     mode: { type: String as PropType<Shape>, default: 'circle' },
     /** 自定义图标 */

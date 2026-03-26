@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { CalendarChangeDate, CalendarChangeRange, CalendarMode, ThemeType } from '../../types/global';
-import { baseProps } from '../common/props';
 import { getColor, useLocale } from '../../';
 
 const { t } = useLocale();
@@ -10,7 +9,16 @@ const { t } = useLocale();
  * @description 供 u-calendar 组件 props 使用
  */
 export const CalendarProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 是否开启底部安全区适配 */
     safeAreaInsetBottom: { type: Boolean, default: false },
     /** 是否允许通过点击遮罩关闭Picker */

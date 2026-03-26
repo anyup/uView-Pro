@@ -1,13 +1,21 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ImgMode, SwiperIndicatorPosition, SwiperMode } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * SwiperProps 轮播图 props 类型定义
  * @description 轮播图，支持多种指示器、3D、自动播放等
  */
 export const SwiperProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 轮播数据列表，数组对象 */
     list: { type: Array as PropType<Array<Record<string, any>>>, default: () => [] },
     /** 是否显示标题 */

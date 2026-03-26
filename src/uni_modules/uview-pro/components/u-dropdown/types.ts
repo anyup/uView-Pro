@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import { getColor } from '../../';
 
 /**
@@ -7,7 +6,16 @@ import { getColor } from '../../';
  * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景
  */
 export const DropdownProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 菜单标题和选项的激活态颜色 */
     activeColor: { type: String, default: () => getColor('primary') },
     /** 菜单标题和选项的未激活态颜色 */

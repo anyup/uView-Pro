@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TabsItem } from '../../types/global';
-import { baseProps } from '../common/props';
 import { getColor } from '../../';
 
 /**
@@ -8,7 +7,16 @@ import { getColor } from '../../';
  * @description 标签组件，支持横向滚动、滑块、徽标等
  */
 export const TabsProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** tabs是否可以左右拖动 */
     isScroll: { type: Boolean, default: true },
     /** 标签数组 */

@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import zIndex from '../../libs/config/zIndex';
 
 /**
@@ -7,7 +6,16 @@ import zIndex from '../../libs/config/zIndex';
  * @description 吸顶组件，支持自定义吸顶距离、z-index、背景色等
  */
 export const StickyProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px */
     offsetTop: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 列表中的索引值 */

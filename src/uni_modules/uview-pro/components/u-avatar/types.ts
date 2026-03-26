@@ -1,10 +1,18 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ImgMode } from '../../types/global';
-import { baseProps } from '../common/props';
 
 // u-avatar 组件 props
 export const AvatarProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 背景颜色 */
     bgColor: { type: String, default: 'transparent' },
     /** 头像路径 */

@@ -21,7 +21,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, onMounted, type CSSProperties } from 'vue';
-import { SafeBottomProps } from './props';
+import { SafeBottomProps } from './types';
 import { $u } from '../../';
 
 /**

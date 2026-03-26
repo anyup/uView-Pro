@@ -1,12 +1,20 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 
 /**
  * u-count-down 倒计时 Props
  * @description 该组件一般使用于某个活动的截止时间上，通过数字的变化，给用户明确的时间感受，提示用户进行某一个行为操作。
  */
 export const CountDownProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 倒计时的时间，秒为单位 */
     timestamp: { type: [Number, String] as PropType<number | string>, default: 0 },
     /** 是否自动开始倒计时 */

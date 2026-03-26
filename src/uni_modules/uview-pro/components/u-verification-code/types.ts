@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import { useLocale } from '../../';
 
 const { t } = useLocale();
@@ -9,7 +8,16 @@ const { t } = useLocale();
  * @description 验证码输入倒计时组件
  */
 export const VerificationCodeProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 倒计时时长，单位秒 */
     seconds: { type: [String, Number] as PropType<string | number>, default: 60 },
     /** 开始时按钮文字 */

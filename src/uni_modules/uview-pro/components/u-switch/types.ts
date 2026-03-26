@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import type { SizeType } from '../../types/global';
 
 /**
@@ -7,7 +6,16 @@ import type { SizeType } from '../../types/global';
  * @description 选择开关，支持自定义颜色、尺寸、值等
  */
 export const SwitchProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 是否显示加载中状态 */
     loading: { type: Boolean, default: false },
     /** 是否禁用 */

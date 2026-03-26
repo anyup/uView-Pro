@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 
 const skeleton = {
     loading: true,
@@ -20,7 +19,16 @@ const skeleton = {
  * @description 骨架屏用于页面数据加载时的占位
  */
 export const SkeletonProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     // 是否展示骨架组件
     loading: {
         type: Boolean,

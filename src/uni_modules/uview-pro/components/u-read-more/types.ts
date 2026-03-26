@@ -1,5 +1,4 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { baseProps } from '../common/props';
 import { getColor, useLocale } from '../../';
 
 const { t } = useLocale();
@@ -9,7 +8,16 @@ const { t } = useLocale();
  * @description 内容较长时收起/展开的场景
  */
 export const ReadMoreProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 默认的显示占位高度，单位为rpx */
     showHeight: { type: [Number, String] as PropType<number | string>, default: 400 },
     /** 展开后是否显示"收起"按钮 */

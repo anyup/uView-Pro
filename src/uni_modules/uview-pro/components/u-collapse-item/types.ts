@@ -1,13 +1,21 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { TextAlign } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * u-collapse-item 手风琴Item Props
  * @description 通过折叠面板收纳内容区域（搭配u-collapse使用）
  */
 export const CollapseItemProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 标题 */
     title: { type: String, default: '' },
     /** 标题的对齐方式 */

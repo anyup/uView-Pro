@@ -1,13 +1,21 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { InputAlign, InputConfirmType, InputLabelPosition, InputType } from '../../types/global';
-import { baseProps } from '../common/props';
 
 /**
  * u-field 组件 Props 类型定义
  * @description 表单输入框属性
  */
 export const FieldProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** label左边的图标，限uView的图标名称 */
     icon: { type: String, default: '' },
     /** 输入框右边的图标名称，限uView的图标名称（默认false） */

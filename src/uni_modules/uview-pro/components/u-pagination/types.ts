@@ -1,6 +1,6 @@
-import { baseProps } from '../common/props';
 import type { PaginationChangePayload } from '../../types/global';
 import { useLocale } from '../../';
+import type { PropType } from 'vue';
 
 const { t } = useLocale();
 
@@ -10,7 +10,16 @@ const { t } = useLocale();
  */
 
 export const PaginationProps = {
-    ...baseProps,
+    /** 自定义根节点样式 */
+    customStyle: {
+        type: [String, Object] as PropType<string | Record<string, any>>,
+        default: () => ({})
+    },
+    /** 自定义根节点样式类 */
+    customClass: {
+        type: String as unknown as PropType<string>,
+        default: ''
+    },
     /** 左侧按钮文字 */
     prevText: { type: String, default: () => t('uPagination.prevText') },
     /** 右侧按钮文字 */
