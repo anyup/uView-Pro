@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.16] - 2026-03-26
+
+### ✨ Features | 新功能
+
+- **web:** 浏览器平台添加触摸模拟器支持 ([cf96a73](https://github.com/anyup/uView-Pro/commit/cf96a73e09512291143954401aa7850ac59f1207))
+- **u-button:** 新增 large、small 按钮尺寸选项，丰富按钮尺寸规格 ([053d7e8](https://github.com/anyup/uView-Pro/commit/053d7e8ab92af403cdfde36369f38a2aded27288))
+- **u-input:** u-input添加size属性，支持small/default/large预设值以及自定义尺寸（#137） ([afed961](https://github.com/anyup/uView-Pro/commit/afed961f65c86bd84a2b02828bb361480c7f95b3))
+- **u-textarea:** u-textarea组件新增size属性，支持small/default/large预设值以及自定义数值（#137） ([47296e8](https://github.com/anyup/uView-Pro/commit/47296e8669d419d41959dff01de758a610122d34))
+- **u-checkbox:** u-checkbox，u-checkbox-group支持small/default/large预设尺寸配置，优化组件样式（#137） ([e8918e2](https://github.com/anyup/uView-Pro/commit/e8918e28a413d861e05a213d49f9a1b39af17964))
+- **u-radio:** u-radio，u-radio-group支持small/default/large预设尺寸配置（#137） ([51af7f8](https://github.com/anyup/uView-Pro/commit/51af7f8f86eed99ee159738e43d5dc2d5c6747c8))
+- **u-switch:** u-switch支持small/default/large预设尺寸配置（#137） ([6041d52](https://github.com/anyup/uView-Pro/commit/6041d52338172d40957e3ed7af1dde01aa7de074))
+- **u-form:** 新增表单大小配置功能，u-form支持小、中、大三种尺寸设置（#137） ([324adb9](https://github.com/anyup/uView-Pro/commit/324adb99de9dfbb72a0a0c40748c11323d3b9470))
+- **u-tag:** 为深色模式标签添加边框样式，保持统一性 ([84d0ad6](https://github.com/anyup/uView-Pro/commit/84d0ad6c805d570e216beaa2dc586687a5aae848))
+
+### ♻️ Code Refactoring | 代码重构
+
+- 添加调试模式配置并重构日志系统 ([a52a3f7](https://github.com/anyup/uView-Pro/commit/a52a3f7d6be7d8332a67c1d8458f4e65e0a0204e))
+- **props:** 移除baseProps公共属性并内联到各组件，修复uni_modules引入方式在微信小程序正式打包运行报错的问题 ([f30f779](https://github.com/anyup/uView-Pro/commit/f30f7792a48679afc3cf705a5eb0b182591fe9b5))
+- **form:** 调整表单大小配置位置 ([45ffecd](https://github.com/anyup/uView-Pro/commit/45ffecd3522df85cdaaa62ecb9c33d7839443586))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **useChildren:** 修复组件关系工具子组件ID缓存问题，避免同组件多次调用useChildren时重复注册 ([3a8c659](https://github.com/anyup/uView-Pro/commit/3a8c659ce596b483559cf4b061d0b54d784a902b))
+- **u-form:** 修复移除字段时方法不存在的错误 ([58ada99](https://github.com/anyup/uView-Pro/commit/58ada99a8cbd44874eebfd305a4aeb721add8558))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.5.15] - 2026-03-25
 
 ### 🐛 Bug Fixes | Bug 修复
