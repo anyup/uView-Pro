@@ -5,7 +5,7 @@
                 <view class="u-demo-wrap">
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
-                        <u-top-tips ref="uTipsRef"></u-top-tips>
+                        <u-top-tips ref="uTipsRef" :navbar-height="navbarHeight" :z-index="999"></u-top-tips>
                         <text class="u-no-demo-here">点击参数配置查看效果</text>
                     </view>
                 </view>
@@ -29,8 +29,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import type { ThemeType } from '@/uni_modules/uview-pro/types/global';
+
+const navbarHeight = computed(() => {
+    return uni.getSystemInfoSync().statusBarHeight + 44;
+});
 
 const duration = ref(2000);
 const title = ref('忽如一夜春风来，千树万树梨花开');
