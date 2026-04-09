@@ -58,6 +58,6 @@ const thStyle = computed(() => {
     font-size: 28rpx;
     color: $u-main-color;
     font-weight: bold;
-    background-color: rgb(245, 246, 248);
+    background-color: $u-bg-color;
 }
 </style>
