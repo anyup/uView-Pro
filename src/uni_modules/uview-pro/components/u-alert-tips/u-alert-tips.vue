@@ -42,7 +42,7 @@
                 v-if="closeAble && !closeText"
                 hoverClass="u-type-error-hover-color"
                 name="close"
-                color="var(--u-light-color)"
+                color="var(--u-tips-color)"
                 :size="22"
                 :custom-style="{
                     top: description ? '18rpx' : '24rpx'
