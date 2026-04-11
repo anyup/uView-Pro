@@ -97,7 +97,9 @@ export default {
         fri: '五',
         sat: '六',
         confirmText: '确定',
-        to: '至'
+        to: '至',
+        holiday: '休',
+        workday: '班'
     },
     uEmpty: {
         car: '购物车为空',

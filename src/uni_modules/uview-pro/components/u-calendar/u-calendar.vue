@@ -1,109 +1,192 @@
 <template>
-    <view v-if="props.isPage" class="u-calendar" :class="props.customClass" :style="$u.toStyle(customStyle)">
-        <!-- <view class="u-calendar__header">
-            <view class="u-calendar__header__text" v-if="!slots.tooltip">
-                {{ toolTip }}
+    <!-- isPage 为 true 时直接嵌入页面，不使用弹窗 -->
+    <template v-if="props.isPage">
+        <view class="u-calendar u-calendar--page" :class="props.customClass" :style="$u.toStyle(customStyle)">
+            <view class="u-calendar__header" v-if="!props.isPage">
+                <view class="u-calendar__header__text" v-if="!slots.tooltip">
+                    {{ toolTip }}
+                </view>
+                <slot v-else name="tooltip" />
             </view>
-            <slot v-else name="tooltip" />
-        </view> -->
-        <view class="u-calendar__action u-flex u-row-center">
-            <view class="u-calendar__action__icon">
-                <u-icon
-                    v-if="changeYear"
-                    name="arrow-left-double"
-                    :color="yearArrowColor"
-                    @click="changeYearHandler(0)"
-                ></u-icon>
+            <view class="u-calendar__action u-flex u-row-center">
+                <view class="u-calendar__action__icon">
+                    <u-icon
+                        v-if="changeYear"
+                        name="arrow-left-double"
+                        :color="yearArrowColor"
+                        @click="changeYearHandler(0)"
+                    ></u-icon>
+                </view>
+                <view class="u-calendar__action__icon">
+                    <u-icon
+                        v-if="changeMonth"
+                        name="arrow-left"
+                        :color="monthArrowColor"
+                        @click="changeMonthHandler(0)"
+                    ></u-icon>
+                </view>
+                <view class="u-calendar__action__text">{{ showTitle }}</view>
+                <view class="u-calendar__action__icon">
+                    <u-icon
+                        v-if="changeMonth"
+                        name="arrow-right"
+                        :color="monthArrowColor"
+                        @click="changeMonthHandler(1)"
+                    ></u-icon>
+                </view>
+                <view class="u-calendar__action__icon">
+                    <u-icon
+                        v-if="changeYear"
+                        name="arrow-right-double"
+                        :color="yearArrowColor"
+                        @click="changeYearHandler(1)"
+                    ></u-icon>
+                </view>
             </view>
-            <view class="u-calendar__action__icon">
-                <u-icon
-                    v-if="changeMonth"
-                    name="arrow-left"
-                    :color="monthArrowColor"
-                    @click="changeMonthHandler(0)"
-                ></u-icon>
+            <view class="u-calendar__week-day">
+                <view class="u-calendar__week-day__text" v-for="(item, index) in weekDayZh" :key="index">
+                    {{ item }}
+                </view>
             </view>
-            <view class="u-calendar__action__text">{{ showTitle }}</view>
-            <view class="u-calendar__action__icon">
-                <u-icon
-                    v-if="changeMonth"
-                    name="arrow-right"
-                    :color="monthArrowColor"
-                    @click="changeMonthHandler(1)"
-                ></u-icon>
+            <view class="u-calendar__content">
+                <!-- 前置空白部分 -->
+                <block v-for="(item, index) in weekdayArr" :key="index">
+                    <view class="u-calendar__content__item"></view>
+                </block>
+                <view
+                    class="u-calendar__content__item"
+                    :class="{
+                        'u-hover-class': openDisAbled(year, month, index + 1),
+                        'u-calendar__content--start-date':
+                            (mode == 'range' && startDate == `${year}-${month}-${index + 1}`) || mode == 'date',
+                        'u-calendar__content--end-date':
+                            (mode == 'range' && endDate == `${year}-${month}-${index + 1}`) || mode == 'date',
+                        'u-calendar__content--checked': isCheckedDate(index + 1),
+                        'u-calendar__content--today-checked': isTodayChecked(index + 1),
+                        'u-calendar__content--checkin-mode': props.checkinMode
+                    }"
+                    :style="{
+                        backgroundColor:
+                            !props.checkinMode && props.checkedDates.length === 0 && !props.todayChecked
+                                ? getColor(index, 1)
+                                : ''
+                    }"
+                    v-for="(item, index) in daysArr"
+                    :key="index"
+                    @tap="dateClick(index)"
+                >
+                    <view
+                        class="u-calendar__content__item__inner"
+                        :class="{ 'u-calendar__content__item__inner--today-checked': isTodayChecked(index + 1) }"
+                        :style="{
+                            color: getCheckinTextColor(index + 1) || getColor(index, 2),
+                            backgroundColor: getCheckinColor(index + 1)
+                        }"
+                    >
+                        <!-- 今日已打卡时显示对勾，否则显示日期 -->
+                        <view v-if="isTodayChecked(index + 1)" class="u-calendar__content__item__checkmark">
+                            <u-icon name="checkmark" size="36" :color="props.checkedColor"></u-icon>
+                        </view>
+                        <template v-else>
+                            <!-- 自定义日期内容插槽 - 优先级最高 -->
+                            <template v-if="props.useDateSlot">
+                                <view class="u-calendar__content__item__day">{{ index + 1 }}</view>
+                                <view
+                                    class="u-calendar__content__item__lunar"
+                                    :style="{ color: getSlotColor(index + 1) }"
+                                >
+                                    <slot name="date" :date="getDateInfo(index + 1)"></slot>
+                                </view>
+                            </template>
+                            <template v-else>
+                                <!-- 日期数字右上角标记：休/班 -->
+                                <view
+                                    v-if="isHoliday(index + 1)"
+                                    class="u-calendar__content__item__mark u-calendar__content__item__mark--holiday"
+                                    :style="{ color: getHolidayWorkdayColor(index + 1, props.holidayColor) }"
+                                >
+                                    {{ t('uCalendar.holiday') }}
+                                </view>
+                                <view
+                                    v-else-if="isWorkday(index + 1)"
+                                    class="u-calendar__content__item__mark u-calendar__content__item__mark--workday"
+                                    :style="{ color: getHolidayWorkdayColor(index + 1, props.workdayColor) }"
+                                >
+                                    {{ t('uCalendar.workday') }}
+                                </view>
+                                <view class="u-calendar__content__item__day">{{ index + 1 }}</view>
+                                <!-- 范围选择开始日期显示"开始" -->
+                                <view
+                                    v-if="
+                                        mode == 'range' &&
+                                        startDate == `${year}-${month}-${index + 1}` &&
+                                        startDate != endDate
+                                    "
+                                    class="u-calendar__content__item__lunar"
+                                    :style="{ color: activeColor }"
+                                >
+                                    {{ startText }}
+                                </view>
+                                <!-- 范围选择结束日期显示"结束" -->
+                                <view
+                                    v-else-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`"
+                                    class="u-calendar__content__item__lunar"
+                                    :style="{ color: activeColor }"
+                                >
+                                    {{ endText }}
+                                </view>
+                                <!-- 节日名称 -->
+                                <view
+                                    v-else-if="getFestival(index + 1)"
+                                    class="u-calendar__content__item__lunar u-calendar__content__item__festival"
+                                    :style="{ color: getHolidayWorkdayColor(index + 1, props.festivalColor) }"
+                                >
+                                    {{ getFestival(index + 1) }}
+                                </view>
+                                <!-- 农历 -->
+                                <view
+                                    v-else-if="props.showLunar"
+                                    class="u-calendar__content__item__lunar"
+                                    :style="{ color: getCheckinLunarColor(index + 1) || getColor(index, 2) }"
+                                >
+                                    {{
+                                        lunarArr[index]?.dayCn === '初一'
+                                            ? lunarArr[index].monthCn
+                                            : (lunarArr[index]?.dayCn ?? '')
+                                    }}
+                                </view>
+                                <!-- 占位元素：当有节日/农历数据时保持高度一致 -->
+                                <view
+                                    v-else-if="props.showFestival"
+                                    class="u-calendar__content__item__lunar u-calendar__content__item__placeholder"
+                                ></view>
+                            </template>
+                        </template>
+                    </view>
+                </view>
+                <view class="u-calendar__content__bg-month">{{ month }}</view>
             </view>
-            <view class="u-calendar__action__icon">
-                <u-icon
-                    v-if="changeYear"
-                    name="arrow-right-double"
-                    :color="yearArrowColor"
-                    @click="changeYearHandler(1)"
-                ></u-icon>
+            <!-- 页面模式下不显示确定按钮，选择完成自动触发change事件 -->
+            <view class="u-calendar__bottom" v-if="!props.isPage">
+                <view class="u-calendar__bottom__choose">
+                    <text>{{ mode == 'date' ? activeDate : startDate }}</text>
+                    <text v-if="endDate">{{ t('uCalendar.to') }}{{ endDate }}</text>
+                </view>
+                <view class="u-calendar__bottom__btn">
+                    <u-button
+                        :type="btnType"
+                        :disabled="btnDisable"
+                        shape="circle"
+                        size="default"
+                        @click="btnFix(false)"
+                    >
+                        {{ t('uCalendar.confirmText') }}
+                    </u-button>
+                </view>
             </view>
         </view>
-        <view class="u-calendar__week-day">
-            <view class="u-calendar__week-day__text" v-for="(item, index) in weekDayZh" :key="index">{{ item }}</view>
-        </view>
-        <view class="u-calendar__content">
-            <!-- 前置空白部分 -->
-            <block v-for="(item, index) in weekdayArr" :key="index">
-                <view class="u-calendar__content__item"></view>
-            </block>
-            <view
-                class="u-calendar__content__item"
-                :class="{
-                    'u-hover-class': openDisAbled(year, month, index + 1),
-                    'u-calendar__content--start-date':
-                        (mode == 'range' && startDate == `${year}-${month}-${index + 1}`) || mode == 'date',
-                    'u-calendar__content--end-date':
-                        (mode == 'range' && endDate == `${year}-${month}-${index + 1}`) || mode == 'date'
-                }"
-                :style="{ backgroundColor: getColor(index, 1) }"
-                v-for="(item, index) in daysArr"
-                :key="index"
-                @tap="dateClick(index)"
-            >
-                <view class="u-calendar__content__item__inner" :style="{ color: getColor(index, 2) }">
-                    <view>{{ index + 1 }}</view>
-                </view>
-                <view
-                    class="u-calendar__content__item__tips"
-                    :style="{ color: activeColor }"
-                    v-if="mode == 'range' && startDate == `${year}-${month}-${index + 1}` && startDate != endDate"
-                >
-                    {{ startText }}
-                </view>
-                <view
-                    class="u-calendar__content__item__tips"
-                    :style="{ color: activeColor }"
-                    v-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`"
-                >
-                    {{ endText }}
-                </view>
-                <view
-                    v-if="
-                        props.showLunar &&
-                        !(mode == 'range' && startDate == `${year}-${month}-${index + 1}` && startDate != endDate) &&
-                        !(mode == 'range' && endDate == `${year}-${month}-${index + 1}`)
-                    "
-                    class="u-calendar__content__item__tips"
-                    :style="{ color: getColor(index, 2) }"
-                >
-                    {{ lunarArr[index]?.dayCn === '初一' ? lunarArr[index].monthCn : (lunarArr[index]?.dayCn ?? '') }}
-                </view>
-            </view>
-            <view class="u-calendar__content__bg-month">{{ month }}</view>
-        </view>
-        <!-- <view class="u-calendar__bottom">
-            <view class="u-calendar__bottom__choose">
-                <text>{{ mode == 'date' ? activeDate : startDate }}</text>
-                <text v-if="endDate">至{{ endDate }}</text>
-            </view>
-            <view class="u-calendar__bottom__btn">
-                <u-button :type="btnType" shape="circle" size="default" @click="btnFix(false)">确定</u-button>
-            </view>
-        </view> -->
-    </view>
+    </template>
+    <!-- isPage 为 false 时使用弹窗模式 -->
     <u-popup
         v-else
         :maskCloseAble="maskCloseAble"
@@ -184,38 +267,76 @@
                     @tap="dateClick(index)"
                 >
                     <view class="u-calendar__content__item__inner" :style="{ color: getColor(index, 2) }">
-                        <view>{{ index + 1 }}</view>
-                    </view>
-                    <view
-                        class="u-calendar__content__item__tips"
-                        :style="{ color: activeColor }"
-                        v-if="mode == 'range' && startDate == `${year}-${month}-${index + 1}` && startDate != endDate"
-                    >
-                        {{ startText }}
-                    </view>
-                    <view
-                        class="u-calendar__content__item__tips"
-                        :style="{ color: activeColor }"
-                        v-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`"
-                    >
-                        {{ endText }}
-                    </view>
-                    <view
-                        v-if="
-                            props.showLunar &&
-                            !(
-                                mode == 'range' &&
-                                startDate == `${year}-${month}-${index + 1}` &&
-                                startDate != endDate
-                            ) &&
-                            !(mode == 'range' && endDate == `${year}-${month}-${index + 1}`)
-                        "
-                        class="u-calendar__content__item__tips"
-                        :style="{ color: getColor(index, 2) }"
-                    >
-                        {{
-                            lunarArr[index]?.dayCn === '初一' ? lunarArr[index].monthCn : (lunarArr[index]?.dayCn ?? '')
-                        }}
+                        <!-- 自定义日期内容插槽 - 优先级最高 -->
+                        <template v-if="props.useDateSlot">
+                            <view class="u-calendar__content__item__day">{{ index + 1 }}</view>
+                            <view class="u-calendar__content__item__lunar" :style="{ color: getSlotColor(index + 1) }">
+                                <slot name="date" :date="getDateInfo(index + 1)"></slot>
+                            </view>
+                        </template>
+                        <template v-else>
+                            <!-- 日期数字右上角标记：休/班 -->
+                            <view
+                                v-if="isHoliday(index + 1)"
+                                class="u-calendar__content__item__mark u-calendar__content__item__mark--holiday"
+                                :style="{ color: getHolidayWorkdayColor(index + 1, props.holidayColor) }"
+                            >
+                                {{ t('uCalendar.holiday') }}
+                            </view>
+                            <view
+                                v-else-if="isWorkday(index + 1)"
+                                class="u-calendar__content__item__mark u-calendar__content__item__mark--workday"
+                                :style="{ color: getHolidayWorkdayColor(index + 1, props.workdayColor) }"
+                            >
+                                {{ t('uCalendar.workday') }}
+                            </view>
+                            <view class="u-calendar__content__item__day">{{ index + 1 }}</view>
+                            <!-- 范围选择开始日期显示"开始" -->
+                            <view
+                                v-if="
+                                    mode == 'range' &&
+                                    startDate == `${year}-${month}-${index + 1}` &&
+                                    startDate != endDate
+                                "
+                                class="u-calendar__content__item__lunar"
+                                :style="{ color: activeColor }"
+                            >
+                                {{ startText }}
+                            </view>
+                            <!-- 范围选择结束日期显示"结束" -->
+                            <view
+                                v-else-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`"
+                                class="u-calendar__content__item__lunar"
+                                :style="{ color: activeColor }"
+                            >
+                                {{ endText }}
+                            </view>
+                            <!-- 节日名称 -->
+                            <view
+                                v-else-if="getFestival(index + 1)"
+                                class="u-calendar__content__item__lunar u-calendar__content__item__festival"
+                                :style="{ color: getHolidayWorkdayColor(index + 1, props.festivalColor) }"
+                            >
+                                {{ getFestival(index + 1) }}
+                            </view>
+                            <!-- 农历 -->
+                            <view
+                                v-else-if="props.showLunar"
+                                class="u-calendar__content__item__lunar"
+                                :style="{ color: getColor(index, 2) }"
+                            >
+                                {{
+                                    lunarArr[index]?.dayCn === '初一'
+                                        ? lunarArr[index].monthCn
+                                        : (lunarArr[index]?.dayCn ?? '')
+                                }}
+                            </view>
+                            <!-- 占位元素：当有节日/农历数据时保持高度一致 -->
+                            <view
+                                v-else-if="props.showFestival"
+                                class="u-calendar__content__item__lunar u-calendar__content__item__placeholder"
+                            ></view>
+                        </template>
                     </view>
                 </view>
                 <view class="u-calendar__content__bg-month">{{ month }}</view>
@@ -288,6 +409,11 @@ import Calendar from '../../libs/util/calendar';
  * @property {String} btn-type 底部确定按钮的主题(默认 'primary')
  * @property {String} toolTip 顶部提示文字，如设置名为tooltip的slot，此参数将失效(默认 '选择日期')
  * @property {Boolean} closeable 是否显示右上角的关闭图标(默认true)
+ * @property {Boolean} is-page 是否在页面中直接显示，不使用弹窗(默认false)
+ * @property {String} default-date 默认选中的日期，mode=date时生效，格式：2024-01-01
+ * @property {String} start-date 默认选中的开始日期，mode=range时生效，格式：2024-01-01
+ * @property {String} end-date 默认选中的结束日期，mode=range时生效，格式：2024-01-01
+ * @property {Boolean} readonly 是否只读，只读模式下禁止点击选择日期(默认false)
  * @example <u-calendar v-model="show" :mode="mode"></u-calendar>
  */
 
@@ -332,8 +458,29 @@ const weekDayZh = ref([
     t('uCalendar.sat')
 ]);
 
+// 内置中国传统节日（公历日期）
+const builtInFestivals: Record<string, string> = {
+    '1-1': '元旦',
+    '2-14': '情人节',
+    '3-8': '妇女节',
+    '3-12': '植树节',
+    '4-1': '愚人节',
+    '5-1': '劳动节',
+    '5-4': '青年节',
+    '6-1': '儿童节',
+    '7-1': '建党节',
+    '8-1': '建军节',
+    '9-10': '教师节',
+    '10-1': '国庆节',
+    '11-11': '光棍节',
+    '12-25': '圣诞节'
+};
+
 const dataChange = computed(() => `${props.mode}-${props.minDate}-${props.maxDate}`);
 const lunarChange = computed(() => props.showLunar);
+const defaultDateChange = computed(
+    () => `${props.defaultDate}-${props.startDate}-${props.endDate}-${props.defaultSelectToday}`
+);
 // 如果用户有传递z-index值，优先使用
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 const popupValue = computed({
@@ -356,6 +503,10 @@ const btnDisable = computed(() => {
 });
 
 watch([dataChange, lunarChange], () => {
+    init();
+});
+
+watch(defaultDateChange, () => {
     init();
 });
 
@@ -384,6 +535,208 @@ function getColor(index: number, type: number) {
 }
 
 /**
+ * 判断日期是否已打卡
+ */
+function isCheckedDate(dayNum: number) {
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    return props.checkedDates.includes(date);
+}
+
+/**
+ * 判断是否是今日且已打卡
+ * 优先级：1. todayChecked 属性 2. 自动判断 checkedDates 中是否包含今天
+ */
+function isTodayChecked(dayNum: number) {
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    // 首先检查是否是今天
+    if (date !== today.value) {
+        return false;
+    }
+    // 优先级1：手动设置的 todayChecked
+    if (props.todayChecked) {
+        return true;
+    }
+    // 优先级2：自动判断 checkedDates 中是否包含今天
+    if (props.checkedDates.includes(date)) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * 获取打卡日期背景色
+ */
+function getCheckinColor(dayNum: number) {
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    const isToday = date === today.value;
+    const isInCheckedDates = props.checkedDates.includes(date);
+
+    // 只有在打卡签到模式下或设置了打卡数据时才返回颜色
+    if (!props.checkinMode && props.checkedDates.length === 0 && !props.todayChecked) {
+        return '';
+    }
+
+    // 今日已打卡显示绿色（优先级：todayChecked > 自动判断）
+    if (isToday && (props.todayChecked || isInCheckedDates)) {
+        return props.todayCheckedBgColor;
+    }
+
+    // 其他已打卡日期显示橙色
+    if (isInCheckedDates) {
+        return props.checkedBgColor;
+    }
+
+    // 打卡签到模式下，未打卡日期显示灰色
+    if (props.checkinMode) {
+        return props.uncheckedBgColor;
+    }
+    return '';
+}
+
+/**
+ * 获取打卡日期文字颜色
+ */
+function getCheckinTextColor(dayNum: number) {
+    // 只有在打卡签到模式下或设置了打卡数据时才返回颜色
+    if (!props.checkinMode && props.checkedDates.length === 0 && !props.todayChecked) {
+        return '';
+    }
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    // 已打卡日期显示白色文字
+    if (props.checkedDates.includes(date) || (date === today.value && props.todayChecked)) {
+        return props.checkedColor;
+    }
+    // 打卡签到模式下，未打卡日期显示白色文字
+    if (props.checkinMode) {
+        return props.uncheckedColor;
+    }
+    return '';
+}
+
+/**
+ * 获取打卡日期农历文字颜色
+ */
+function getCheckinLunarColor(dayNum: number) {
+    // 只有在打卡签到模式下或设置了打卡数据时才返回颜色
+    if (!props.checkinMode && props.checkedDates.length === 0 && !props.todayChecked) {
+        return '';
+    }
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    // 已打卡日期的农历显示白色文字
+    if (props.checkedDates.includes(date) || (date === today.value && props.todayChecked)) {
+        return props.checkedColor;
+    }
+    // 打卡签到模式下，未打卡日期的农历显示白色文字
+    if (props.checkinMode) {
+        return props.uncheckedColor;
+    }
+    return '';
+}
+
+/**
+ * 获取自定义插槽的颜色
+ * 当选中日期时显示白色，否则显示默认颜色
+ */
+function getSlotColor(dayNum: number) {
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    // 选中日期的自定义内容显示白色（仅在 isActiveCurrent 为 true 时）
+    if (props.isActiveCurrent && (activeDate.value === date || startDate.value === date || endDate.value === date)) {
+        return props.activeColor;
+    }
+    // 打卡签到模式下使用对应的颜色
+    if (props.checkinMode || props.checkedDates.length > 0 || props.todayChecked) {
+        return getCheckinLunarColor(dayNum) || props.color;
+    }
+    return props.color;
+}
+
+/**
+ * 获取日期信息，用于自定义插槽
+ */
+function getDateInfo(dayNum: number) {
+    const dateStr = `${year.value}-${month.value}-${dayNum}`;
+    const dateObj = new Date(dateStr.replace(/\-/g, '/'));
+    const dayOfWeek = dateObj.getDay();
+    const weekNames = [
+        t('uCalendar.sun'),
+        t('uCalendar.mon'),
+        t('uCalendar.tue'),
+        t('uCalendar.wed'),
+        t('uCalendar.thu'),
+        t('uCalendar.fri'),
+        t('uCalendar.sat')
+    ];
+
+    const isSelected = activeDate.value === dateStr || startDate.value === dateStr || endDate.value === dateStr;
+
+    return {
+        year: year.value,
+        month: month.value,
+        day: dayNum,
+        date: dateStr,
+        week: weekNames[dayOfWeek],
+        weekNum: dayOfWeek,
+        isToday: dateStr === today.value,
+        isHoliday: props.holidays.includes(dateStr),
+        isWorkday: props.workdays.includes(dateStr),
+        isChecked: props.checkedDates.includes(dateStr),
+        isSelected,
+        isTodayChecked: dateStr === today.value && props.todayChecked,
+        lunar: lunarArr[dayNum - 1] || null
+    };
+}
+
+/**
+ * 判断是否是节假日
+ */
+function isHoliday(dayNum: number) {
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    return props.holidays.includes(date);
+}
+
+/**
+ * 判断是否是加班日
+ */
+function isWorkday(dayNum: number) {
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    return props.workdays.includes(date);
+}
+
+/**
+ * 获取节日名称（合并内置节日和用户自定义节日）
+ * 用户传入空字符串可覆盖内置节日，表示不显示该节日
+ */
+function getFestival(dayNum: number) {
+    if (!props.showFestival) {
+        return '';
+    }
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    const monthDay = `${month.value}-${dayNum}`;
+    // 优先检查用户自定义节日（包括空字符串，用于覆盖内置节日）
+    if (date in props.festivals) {
+        return props.festivals[date];
+    }
+    // 然后检查内置节日（如果启用了 showFestival）
+    if (builtInFestivals[monthDay]) {
+        return builtInFestivals[monthDay];
+    }
+    return '';
+}
+
+/**
+ * 获取节假日/加班日文字颜色
+ * 当选中日期时显示白色，否则显示对应的颜色
+ */
+function getHolidayWorkdayColor(dayNum: number, defaultColor: string) {
+    const date = `${year.value}-${month.value}-${dayNum}`;
+    // 选中日期的节假日/加班日显示白色
+    if (activeDate.value === date || startDate.value === date || endDate.value === date) {
+        return props.activeColor;
+    }
+    return defaultColor;
+}
+
+/**
  * 初始化日历数据
  */
 function init() {
@@ -397,9 +750,71 @@ function init() {
     month.value = now.getMonth() + 1;
     day.value = now.getDate();
     today.value = `${now.getFullYear()}-${month.value}-${day.value}`;
-    activeDate.value = today.value;
     min.value = initDate(String(props.minDate));
     max.value = initDate(String(props.maxDate) || today.value);
+
+    // 处理默认选中日期
+    // 优先级1: defaultDate / startDate / endDate（显式指定日期）
+    // 优先级2: defaultSelectToday（默认选中今天）
+    // 优先级3: 不选中任何日期
+    if (props.mode === 'date' && props.defaultDate) {
+        // 单选模式：使用 defaultDate（优先级1）
+        const defaultDateObj = new Date(props.defaultDate.replace(/\-/g, '/'));
+        if (!isNaN(defaultDateObj.getTime())) {
+            year.value = defaultDateObj.getFullYear();
+            month.value = defaultDateObj.getMonth() + 1;
+            day.value = defaultDateObj.getDate();
+            // 统一格式为 YYYY-M-D，与 getColor 中的格式一致
+            activeDate.value = `${year.value}-${month.value}-${day.value}`;
+        } else if (props.defaultSelectToday) {
+            activeDate.value = today.value;
+        } else {
+            activeDate.value = '';
+        }
+    } else if (props.mode === 'range' && (props.startDate || props.endDate)) {
+        // 范围模式：使用 startDate 和 endDate（优先级1）
+        const startDateObj = props.startDate ? new Date(props.startDate.replace(/\-/g, '/')) : null;
+        const endDateObj = props.endDate ? new Date(props.endDate.replace(/\-/g, '/')) : null;
+
+        if (startDateObj && !isNaN(startDateObj.getTime())) {
+            // 设置当前显示月份为开始日期所在月份
+            year.value = startDateObj.getFullYear();
+            month.value = startDateObj.getMonth() + 1;
+
+            // 设置开始日期 - 统一格式为 YYYY-M-D
+            startYear.value = startDateObj.getFullYear();
+            startMonth.value = startDateObj.getMonth() + 1;
+            startDay.value = startDateObj.getDate();
+            startDate.value = `${startYear.value}-${startMonth.value}-${startDay.value}`;
+        }
+
+        if (endDateObj && !isNaN(endDateObj.getTime())) {
+            // 设置结束日期 - 统一格式为 YYYY-M-D
+            endYear.value = endDateObj.getFullYear();
+            endMonth.value = endDateObj.getMonth() + 1;
+            endDay.value = endDateObj.getDate();
+            endDate.value = `${endYear.value}-${endMonth.value}-${endDay.value}`;
+        }
+
+        isStart.value = true;
+        activeDate.value = '';
+    } else if (props.defaultSelectToday) {
+        // 优先级2：默认选中今天
+        activeDate.value = today.value;
+        resetRangeState();
+    } else {
+        // 优先级3：不选中任何日期
+        activeDate.value = '';
+        resetRangeState();
+    }
+
+    changeData();
+}
+
+/**
+ * 重置范围选择状态
+ */
+function resetRangeState() {
     startDate.value = '';
     startYear.value = 0;
     startMonth.value = 0;
@@ -409,7 +824,6 @@ function init() {
     endDay.value = 0;
     endDate.value = '';
     isStart.value = true;
-    changeData();
 }
 
 /**
@@ -575,15 +989,19 @@ function getLunar(year: any, month: any, day: any) {
  * 日期点击事件
  */
 function dateClick(dayIdx: number) {
-    if (props.isPage) {
-        return;
-    }
+    // 只读模式下禁止点击
+    if (props.readonly) return;
+
     const d = dayIdx + 1;
     if (!openDisAbled(year.value, month.value, d)) {
         day.value = d;
         let date = `${year.value}-${month.value}-${d}`;
         if (props.mode == 'date') {
             activeDate.value = date;
+            // 页面模式下，单选日期选择完成自动触发change事件
+            if (props.isPage) {
+                btnFix(true);
+            }
         } else {
             let compare =
                 new Date(date.replace(/\-/g, '/')).getTime() < new Date(startDate.value.replace(/\-/g, '/')).getTime();
@@ -604,6 +1022,10 @@ function dateClick(dayIdx: number) {
                 endMonth.value = month.value;
                 endDay.value = day.value;
                 isStart.value = true;
+                // 页面模式下，范围选择完成（选了结束日期）自动触发change事件
+                if (props.isPage) {
+                    btnFix(true);
+                }
             }
         }
     }
@@ -630,7 +1052,8 @@ function getWeekText(date: string) {
  * 确定按钮事件
  */
 function btnFix(show: boolean) {
-    if (!show) {
+    // 页面模式下不关闭，弹窗模式下关闭
+    if (!show && !props.isPage) {
         close();
     }
     if (props.mode == 'date') {
@@ -698,6 +1121,11 @@ function btnFix(show: boolean) {
 .u-calendar {
     color: $u-content-color;
 
+    &--page {
+        background-color: var(--u-bg-white);
+        border-radius: 16rpx;
+    }
+
     &__header {
         width: 100%;
         box-sizing: border-box;
@@ -762,6 +1190,39 @@ function btnFix(show: boolean) {
             border-bottom-left-radius: 8rpx;
         }
 
+        &--checked {
+            .u-calendar__content__item__inner {
+                width: 80rpx;
+                height: 80rpx;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        &--today-checked {
+            .u-calendar__content__item__inner {
+                width: 80rpx;
+                height: 80rpx;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        &--checkin-mode {
+            .u-calendar__content__item__inner {
+                width: 80rpx;
+                height: 80rpx;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
         &__item {
             width: 14.2857%;
             @include vue-flex;
@@ -779,8 +1240,6 @@ function btnFix(show: boolean) {
                 justify-content: center;
                 flex-direction: column;
                 font-size: 32rpx;
-                position: relative;
-                border-radius: 50%;
 
                 &__desc {
                     width: 100%;
@@ -795,6 +1254,61 @@ function btnFix(show: boolean) {
                 }
             }
 
+            &__day {
+                font-size: 32rpx;
+                line-height: 1;
+            }
+
+            &__lunar {
+                font-size: 22rpx;
+                line-height: 1;
+                margin-top: 2rpx;
+                transform: scale(0.85);
+            }
+
+            // 节假日/加班日标签样式
+            &__holiday,
+            &__workday {
+                font-size: 22rpx;
+                line-height: 1;
+                margin-top: 2rpx;
+                transform: scale(0.85);
+            }
+
+            // 右上角标记样式（休/班）
+            &__mark {
+                position: absolute;
+                top: 8rpx;
+                right: 8rpx;
+                font-size: 24rpx;
+                line-height: 1;
+                transform: scale(0.75);
+                z-index: 1;
+
+                &--holiday {
+                    color: var(--u-type-error);
+                }
+
+                &--workday {
+                    color: var(--u-type-primary);
+                }
+            }
+
+            // 节日名称样式（与农历保持一致）
+            &__festival {
+                font-size: 22rpx;
+                line-height: 1;
+                transform: scale(0.85);
+                color: var(--u-type-primary);
+            }
+
+            // 占位元素样式
+            &__placeholder {
+                min-height: 22rpx;
+                margin-top: 2rpx;
+                opacity: 0;
+            }
+
             &__tips {
                 width: 100%;
                 font-size: 24rpx;
@@ -806,6 +1320,27 @@ function btnFix(show: boolean) {
                 text-align: center;
                 bottom: 8rpx;
                 z-index: 2;
+            }
+
+            &__check-icon {
+                position: absolute;
+                right: 4rpx;
+                top: 4rpx;
+                z-index: 3;
+            }
+
+            &__checkmark {
+                @include vue-flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+            }
+
+            &__inner--today-checked {
+                @include vue-flex;
+                align-items: center;
+                justify-content: center;
             }
         }
 

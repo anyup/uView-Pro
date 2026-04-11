@@ -97,7 +97,9 @@ export default {
         fri: 'Fri',
         sat: 'Sat',
         confirmText: 'Confirm',
-        to: ' to '
+        to: ' to ',
+        holiday: '休',
+        workday: '班'
     },
     uEmpty: {
         car: 'Shopping cart is empty',
