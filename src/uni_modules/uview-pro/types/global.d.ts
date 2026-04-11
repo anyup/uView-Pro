@@ -209,7 +209,7 @@ export type PickerParams = {
     timestamp?: boolean;
 };
 
-export type PopupMode = 'left' | 'right' | 'top' | 'bottom' | 'center';
+export type PopupMode = 'left' | 'right' | 'top' | 'bottom' | 'center' | 'inline';
 export type PopupCloseIconPos = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
 // Row水平排列方式，可选值为`start`(或`flex-start`)、`end`(或`flex-end`)、`center`、`around`(或`space-around`)、`between`(或`space-between`)
