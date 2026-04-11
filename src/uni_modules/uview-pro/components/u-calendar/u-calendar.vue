@@ -1,7 +1,21 @@
 <template>
-    <!-- isPage 为 true 时直接嵌入页面，不使用弹窗 -->
-    <template v-if="props.isPage">
-        <view class="u-calendar u-calendar--page" :class="props.customClass" :style="$u.toStyle(customStyle)">
+    <u-popup
+        v-model="popupValue"
+        length="auto"
+        :maskCloseAble="maskCloseAble"
+        :mode="props.isPage ? 'inline' : 'bottom'"
+        :popup="false"
+        :safeAreaInsetBottom="safeAreaInsetBottom"
+        :z-index="uZIndex"
+        :border-radius="borderRadius"
+        :closeable="closeable"
+        @close="close"
+    >
+        <view
+            class="u-calendar"
+            :class="[props.customClass, { 'u-calendar--page': props.isPage }]"
+            :style="$u.toStyle(customStyle)"
+        >
             <view class="u-calendar__header" v-if="!props.isPage">
                 <view class="u-calendar__header__text" v-if="!slots.tooltip">
                     {{ toolTip }}
@@ -168,180 +182,6 @@
             </view>
             <!-- 页面模式下不显示确定按钮，选择完成自动触发change事件 -->
             <view class="u-calendar__bottom" v-if="!props.isPage">
-                <view class="u-calendar__bottom__choose">
-                    <text>{{ mode == 'date' ? activeDate : startDate }}</text>
-                    <text v-if="endDate">{{ t('uCalendar.to') }}{{ endDate }}</text>
-                </view>
-                <view class="u-calendar__bottom__btn">
-                    <u-button
-                        :type="btnType"
-                        :disabled="btnDisable"
-                        shape="circle"
-                        size="default"
-                        @click="btnFix(false)"
-                    >
-                        {{ t('uCalendar.confirmText') }}
-                    </u-button>
-                </view>
-            </view>
-        </view>
-    </template>
-    <!-- isPage 为 false 时使用弹窗模式 -->
-    <u-popup
-        v-else
-        :maskCloseAble="maskCloseAble"
-        mode="bottom"
-        :popup="false"
-        v-model="popupValue"
-        length="auto"
-        :safeAreaInsetBottom="safeAreaInsetBottom"
-        @close="close"
-        :z-index="uZIndex"
-        :border-radius="borderRadius"
-        :closeable="closeable"
-    >
-        <view class="u-calendar" :class="props.customClass" :style="$u.toStyle(customStyle)">
-            <view class="u-calendar__header">
-                <view class="u-calendar__header__text" v-if="!slots.tooltip">
-                    {{ toolTip }}
-                </view>
-                <slot v-else name="tooltip" />
-            </view>
-            <view class="u-calendar__action u-flex u-row-center">
-                <view class="u-calendar__action__icon">
-                    <u-icon
-                        v-if="changeYear"
-                        name="arrow-left-double"
-                        :color="yearArrowColor"
-                        @click="changeYearHandler(0)"
-                    ></u-icon>
-                </view>
-                <view class="u-calendar__action__icon">
-                    <u-icon
-                        v-if="changeMonth"
-                        name="arrow-left"
-                        :color="monthArrowColor"
-                        @click="changeMonthHandler(0)"
-                    ></u-icon>
-                </view>
-                <view class="u-calendar__action__text">{{ showTitle }}</view>
-                <view class="u-calendar__action__icon">
-                    <u-icon
-                        v-if="changeMonth"
-                        name="arrow-right"
-                        :color="monthArrowColor"
-                        @click="changeMonthHandler(1)"
-                    ></u-icon>
-                </view>
-                <view class="u-calendar__action__icon">
-                    <u-icon
-                        v-if="changeYear"
-                        name="arrow-right-double"
-                        :color="yearArrowColor"
-                        @click="changeYearHandler(1)"
-                    ></u-icon>
-                </view>
-            </view>
-            <view class="u-calendar__week-day">
-                <view class="u-calendar__week-day__text" v-for="(item, index) in weekDayZh" :key="index">
-                    {{ item }}
-                </view>
-            </view>
-            <view class="u-calendar__content">
-                <!-- 前置空白部分 -->
-                <block v-for="(item, index) in weekdayArr" :key="index">
-                    <view class="u-calendar__content__item"></view>
-                </block>
-                <view
-                    class="u-calendar__content__item"
-                    :class="{
-                        'u-hover-class': openDisAbled(year, month, index + 1),
-                        'u-calendar__content--start-date':
-                            (mode == 'range' && startDate == `${year}-${month}-${index + 1}`) || mode == 'date',
-                        'u-calendar__content--end-date':
-                            (mode == 'range' && endDate == `${year}-${month}-${index + 1}`) || mode == 'date'
-                    }"
-                    :style="{ backgroundColor: getColor(index, 1) }"
-                    v-for="(item, index) in daysArr"
-                    :key="index"
-                    @tap="dateClick(index)"
-                >
-                    <view class="u-calendar__content__item__inner" :style="{ color: getColor(index, 2) }">
-                        <!-- 自定义日期内容插槽 - 优先级最高 -->
-                        <template v-if="props.useDateSlot">
-                            <view class="u-calendar__content__item__day">{{ index + 1 }}</view>
-                            <view class="u-calendar__content__item__lunar" :style="{ color: getSlotColor(index + 1) }">
-                                <slot name="date" :date="getDateInfo(index + 1)"></slot>
-                            </view>
-                        </template>
-                        <template v-else>
-                            <!-- 日期数字右上角标记：休/班 -->
-                            <view
-                                v-if="isHoliday(index + 1)"
-                                class="u-calendar__content__item__mark u-calendar__content__item__mark--holiday"
-                                :style="{ color: getHolidayWorkdayColor(index + 1, props.holidayColor) }"
-                            >
-                                {{ t('uCalendar.holiday') }}
-                            </view>
-                            <view
-                                v-else-if="isWorkday(index + 1)"
-                                class="u-calendar__content__item__mark u-calendar__content__item__mark--workday"
-                                :style="{ color: getHolidayWorkdayColor(index + 1, props.workdayColor) }"
-                            >
-                                {{ t('uCalendar.workday') }}
-                            </view>
-                            <view class="u-calendar__content__item__day">{{ index + 1 }}</view>
-                            <!-- 范围选择开始日期显示"开始" -->
-                            <view
-                                v-if="
-                                    mode == 'range' &&
-                                    startDate == `${year}-${month}-${index + 1}` &&
-                                    startDate != endDate
-                                "
-                                class="u-calendar__content__item__lunar"
-                                :style="{ color: activeColor }"
-                            >
-                                {{ startText }}
-                            </view>
-                            <!-- 范围选择结束日期显示"结束" -->
-                            <view
-                                v-else-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`"
-                                class="u-calendar__content__item__lunar"
-                                :style="{ color: activeColor }"
-                            >
-                                {{ endText }}
-                            </view>
-                            <!-- 节日名称 -->
-                            <view
-                                v-else-if="getFestival(index + 1)"
-                                class="u-calendar__content__item__lunar u-calendar__content__item__festival"
-                                :style="{ color: getHolidayWorkdayColor(index + 1, props.festivalColor) }"
-                            >
-                                {{ getFestival(index + 1) }}
-                            </view>
-                            <!-- 农历 -->
-                            <view
-                                v-else-if="props.showLunar"
-                                class="u-calendar__content__item__lunar"
-                                :style="{ color: getColor(index, 2) }"
-                            >
-                                {{
-                                    lunarArr[index]?.dayCn === '初一'
-                                        ? lunarArr[index].monthCn
-                                        : (lunarArr[index]?.dayCn ?? '')
-                                }}
-                            </view>
-                            <!-- 占位元素：当有节日/农历数据时保持高度一致 -->
-                            <view
-                                v-else-if="props.showFestival"
-                                class="u-calendar__content__item__lunar u-calendar__content__item__placeholder"
-                            ></view>
-                        </template>
-                    </view>
-                </view>
-                <view class="u-calendar__content__bg-month">{{ month }}</view>
-            </view>
-            <view class="u-calendar__bottom">
                 <view class="u-calendar__bottom__choose">
                     <text>{{ mode == 'date' ? activeDate : startDate }}</text>
                     <text v-if="endDate">{{ t('uCalendar.to') }}{{ endDate }}</text>
@@ -999,7 +839,8 @@ function dateClick(dayIdx: number) {
         if (props.mode == 'date') {
             activeDate.value = date;
             // 页面模式下，单选日期选择完成自动触发change事件
-            if (props.isPage) {
+            // 打卡签到模式下，弹窗模式也立即触发change事件
+            if (props.isPage || props.checkinMode) {
                 btnFix(true);
             }
         } else {

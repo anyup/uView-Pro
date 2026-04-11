@@ -11,7 +11,6 @@
                     <u-calendar
                         v-model="show"
                         ref="calendar"
-                        @change="change"
                         :is-page="isPage"
                         :mode="mode"
                         :show-lunar="showLunar"
@@ -29,13 +28,14 @@
                         :readonly="readonly"
                         :checked-dates="checkedDates"
                         :today-checked="todayChecked"
-                        :checkin-mode="demoType === 1"
+                        :checkin-mode="checkinMode"
                         :holidays="holidays"
                         :workdays="workdays"
                         :festivals="festivals"
                         :show-festival="showFestival"
                         :use-date-slot="useDateSlot"
                         :default-select-today="defaultSelectToday"
+                        @change="change"
                     >
                         <!-- 自定义日期内容插槽 - 电商价格日历示例 -->
                         <template v-if="demoType === 3" #date="{ date }">
@@ -164,6 +164,9 @@ const festivals = ref<Record<string, string>>({});
 
 // 是否启用自定义日期插槽
 const useDateSlot = ref(false);
+
+// 是否启用打卡签到模式
+const checkinMode = ref(false);
 
 // 默认选中今天
 const defaultSelectToday = ref(true);
@@ -363,6 +366,7 @@ function demoTypeChange(index: number) {
         festivals.value = {};
         showFestival.value = false;
         useDateSlot.value = false;
+        checkinMode.value = true;
         result.value = '点击今日日期进行打卡';
     } else if (index === 2) {
         // 切换到节假日模式
@@ -373,6 +377,7 @@ function demoTypeChange(index: number) {
         checkedDates.value = [];
         todayChecked.value = false;
         useDateSlot.value = false;
+        checkinMode.value = false;
         // 设置节假日（本月1-3号）
         holidays.value = [
             formatDate(new Date(now.getFullYear(), now.getMonth(), 1)),
@@ -405,6 +410,7 @@ function demoTypeChange(index: number) {
         festivals.value = {};
         showFestival.value = false;
         useDateSlot.value = true;
+        checkinMode.value = false;
         // 生成价格数据（模拟）
         priceMap.value = {};
         const currentMonth = now.getMonth();
@@ -428,6 +434,7 @@ function demoTypeChange(index: number) {
         showFestival.value = false;
         priceMap.value = {};
         useDateSlot.value = false;
+        checkinMode.value = false;
         readonly.value = false;
         result.value = '请选择日期';
     }
