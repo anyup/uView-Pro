@@ -190,6 +190,11 @@ const defaultDateList = computed(() => {
     }
 });
 
+// 格式化日期为 YYYY-MM-DD 格式
+const formatDate = (date: Date) => {
+    return $u.timeFormat(date.getTime(), 'yyyy-mm-dd');
+};
+
 const showModeChange = (index: number) => {
     isPage.value = index === 1;
     show.value = index === 0;
@@ -247,9 +252,6 @@ function defaultSelectTodayChange(index: number) {
 
 function defaultDateChange(index: number) {
     const now = new Date();
-    const formatDate = (date: Date) => {
-        return $u.timeFormat(date.getTime(), 'yyyy-mm-dd');
-    };
 
     if (mode.value === 'date') {
         // 单选模式
@@ -328,8 +330,9 @@ function change(e: CalendarChangeRange | CalendarChangeDate) {
         }
         // 打卡签到模式下，点击日期模拟打卡
         if (demoType.value === 1) {
-            const dateStr = `${single.year}-${single.month}-${single.day}`;
-            if (dateStr === `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`) {
+            const dateStr = single.result; // 使用 YYYY-MM-DD 格式
+            const todayStr = formatDate(new Date());
+            if (dateStr === todayStr) {
                 todayChecked.value = true;
                 toast.success('今日已打卡');
             } else if (!checkedDates.value.includes(dateStr)) {
@@ -345,9 +348,6 @@ function change(e: CalendarChangeRange | CalendarChangeDate) {
 function demoTypeChange(index: number) {
     demoType.value = index;
     const now = new Date();
-    const formatDate = (date: Date) => {
-        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    };
     if (index === 1) {
         // 切换到打卡签到模式，设置示例数据
         isPage.value = true;
@@ -378,22 +378,24 @@ function demoTypeChange(index: number) {
         todayChecked.value = false;
         useDateSlot.value = false;
         checkinMode.value = false;
-        // 设置节假日（本月1-3号）
+        // 设置节假日（本月1-3号）- 使用 YYYY-MM-DD 格式
         holidays.value = [
             formatDate(new Date(now.getFullYear(), now.getMonth(), 1)),
             formatDate(new Date(now.getFullYear(), now.getMonth(), 2)),
             formatDate(new Date(now.getFullYear(), now.getMonth(), 3))
         ];
-        // 设置加班日（本月6-7号）
+        // 设置加班日（本月6-7号）- 使用 YYYY-MM-DD 格式
         workdays.value = [
-            formatDate(new Date(now.getFullYear(), now.getMonth(), 5)),
-            formatDate(new Date(now.getFullYear(), now.getMonth(), 6))
+            formatDate(new Date(now.getFullYear(), now.getMonth(), 6)),
+            formatDate(new Date(now.getFullYear(), now.getMonth(), 7))
         ];
-        // 设置节日
+        // 设置节日 - 使用 MM-DD 格式（每年固定）和 YYYY-MM-DD 格式（特定年份）
         festivals.value = {
-            [formatDate(new Date(now.getFullYear(), now.getMonth(), 1))]: '愚人节',
-            [formatDate(new Date(now.getFullYear(), now.getMonth(), 4))]: '清明节',
-            [formatDate(new Date(now.getFullYear(), now.getMonth(), 20))]: '谷雨'
+            // 每年固定的节日（MM-DD 格式）
+            '04-01': '愚人节',
+            '04-04': '清明节',
+            // 特定年份的节日（YYYY-MM-DD 格式）
+            [formatDate(new Date(now.getFullYear(), now.getMonth(), 20))]: '自定义'
         };
         showFestival.value = true;
         result.value = '右上角红色"休"=节假日，蓝色"班"=加班日，下方显示节日名称或农历';

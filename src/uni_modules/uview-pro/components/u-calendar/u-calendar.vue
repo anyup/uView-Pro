@@ -72,9 +72,11 @@
                     :class="{
                         'u-hover-class': openDisAbled(year, month, index + 1),
                         'u-calendar__content--start-date':
-                            (mode == 'range' && startDate == `${year}-${month}-${index + 1}`) || mode == 'date',
+                            (mode == 'range' && startDate == `${year}-${formatNum(month)}-${formatNum(index + 1)}`) ||
+                            mode == 'date',
                         'u-calendar__content--end-date':
-                            (mode == 'range' && endDate == `${year}-${month}-${index + 1}`) || mode == 'date',
+                            (mode == 'range' && endDate == `${year}-${formatNum(month)}-${formatNum(index + 1)}`) ||
+                            mode == 'date',
                         'u-calendar__content--checked': isCheckedDate(index + 1),
                         'u-calendar__content--today-checked': isTodayChecked(index + 1),
                         'u-calendar__content--checkin-mode': props.checkinMode
@@ -133,7 +135,7 @@
                                 <view
                                     v-if="
                                         mode == 'range' &&
-                                        startDate == `${year}-${month}-${index + 1}` &&
+                                        startDate == `${year}-${formatNum(month)}-${formatNum(index + 1)}` &&
                                         startDate != endDate
                                     "
                                     class="u-calendar__content__item__lunar"
@@ -143,7 +145,10 @@
                                 </view>
                                 <!-- 范围选择结束日期显示"结束" -->
                                 <view
-                                    v-else-if="mode == 'range' && endDate == `${year}-${month}-${index + 1}`"
+                                    v-else-if="
+                                        mode == 'range' &&
+                                        endDate == `${year}-${formatNum(month)}-${formatNum(index + 1)}`
+                                    "
                                     class="u-calendar__content__item__lunar"
                                     :style="{ color: activeColor }"
                                 >
@@ -298,20 +303,20 @@ const weekDayZh = ref([
     t('uCalendar.sat')
 ]);
 
-// 内置中国传统节日（公历日期）
+// 内置中国传统节日（公历日期，格式：MM-DD）
 const builtInFestivals: Record<string, string> = {
-    '1-1': '元旦',
-    '2-14': '情人节',
-    '3-8': '妇女节',
-    '3-12': '植树节',
-    '4-1': '愚人节',
-    '5-1': '劳动节',
-    '5-4': '青年节',
-    '6-1': '儿童节',
-    '7-1': '建党节',
-    '8-1': '建军节',
-    '9-10': '教师节',
-    '10-1': '国庆节',
+    '01-01': '元旦',
+    '02-14': '情人节',
+    '03-08': '妇女节',
+    '03-12': '植树节',
+    '04-01': '愚人节',
+    '05-01': '劳动节',
+    '05-04': '青年节',
+    '06-01': '儿童节',
+    '07-01': '建党节',
+    '08-01': '建军节',
+    '09-10': '教师节',
+    '10-01': '国庆节',
     '11-11': '光棍节',
     '12-25': '圣诞节'
 };
@@ -362,7 +367,7 @@ onMounted(() => {
 function getColor(index: number, type: number) {
     let color = type == 1 ? '' : props.color;
     let dayNum = index + 1;
-    let date = `${year.value}-${month.value}-${dayNum}`;
+    let date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     let timestamp = new Date(date.replace(/\-/g, '/')).getTime();
     let start = startDate.value.replace(/\-/g, '/');
     let end = endDate.value.replace(/\-/g, '/');
@@ -378,7 +383,7 @@ function getColor(index: number, type: number) {
  * 判断日期是否已打卡
  */
 function isCheckedDate(dayNum: number) {
-    const date = `${year.value}-${month.value}-${dayNum}`;
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     return props.checkedDates.includes(date);
 }
 
@@ -387,7 +392,7 @@ function isCheckedDate(dayNum: number) {
  * 优先级：1. todayChecked 属性 2. 自动判断 checkedDates 中是否包含今天
  */
 function isTodayChecked(dayNum: number) {
-    const date = `${year.value}-${month.value}-${dayNum}`;
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     // 首先检查是否是今天
     if (date !== today.value) {
         return false;
@@ -407,7 +412,7 @@ function isTodayChecked(dayNum: number) {
  * 获取打卡日期背景色
  */
 function getCheckinColor(dayNum: number) {
-    const date = `${year.value}-${month.value}-${dayNum}`;
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     const isToday = date === today.value;
     const isInCheckedDates = props.checkedDates.includes(date);
 
@@ -441,7 +446,7 @@ function getCheckinTextColor(dayNum: number) {
     if (!props.checkinMode && props.checkedDates.length === 0 && !props.todayChecked) {
         return '';
     }
-    const date = `${year.value}-${month.value}-${dayNum}`;
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     // 已打卡日期显示白色文字
     if (props.checkedDates.includes(date) || (date === today.value && props.todayChecked)) {
         return props.checkedColor;
@@ -461,7 +466,7 @@ function getCheckinLunarColor(dayNum: number) {
     if (!props.checkinMode && props.checkedDates.length === 0 && !props.todayChecked) {
         return '';
     }
-    const date = `${year.value}-${month.value}-${dayNum}`;
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     // 已打卡日期的农历显示白色文字
     if (props.checkedDates.includes(date) || (date === today.value && props.todayChecked)) {
         return props.checkedColor;
@@ -478,7 +483,7 @@ function getCheckinLunarColor(dayNum: number) {
  * 当选中日期时显示白色，否则显示默认颜色
  */
 function getSlotColor(dayNum: number) {
-    const date = `${year.value}-${month.value}-${dayNum}`;
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     // 选中日期的自定义内容显示白色（仅在 isActiveCurrent 为 true 时）
     if (props.isActiveCurrent && (activeDate.value === date || startDate.value === date || endDate.value === date)) {
         return props.activeColor;
@@ -494,7 +499,7 @@ function getSlotColor(dayNum: number) {
  * 获取日期信息，用于自定义插槽
  */
 function getDateInfo(dayNum: number) {
-    const dateStr = `${year.value}-${month.value}-${dayNum}`;
+    const dateStr = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     const dateObj = new Date(dateStr.replace(/\-/g, '/'));
     const dayOfWeek = dateObj.getDay();
     const weekNames = [
@@ -530,7 +535,7 @@ function getDateInfo(dayNum: number) {
  * 判断是否是节假日
  */
 function isHoliday(dayNum: number) {
-    const date = `${year.value}-${month.value}-${dayNum}`;
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     return props.holidays.includes(date);
 }
 
@@ -538,26 +543,36 @@ function isHoliday(dayNum: number) {
  * 判断是否是加班日
  */
 function isWorkday(dayNum: number) {
-    const date = `${year.value}-${month.value}-${dayNum}`;
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     return props.workdays.includes(date);
 }
 
 /**
  * 获取节日名称（合并内置节日和用户自定义节日）
  * 用户传入空字符串可覆盖内置节日，表示不显示该节日
+ * 支持两种格式：
+ * 1. 年-月-日：特定年份的节日，如 '2024-04-04': '清明节'
+ * 2. 月-日：每年的固定节日，如 '04-04': '清明节'
  */
 function getFestival(dayNum: number) {
-    if (!props.showFestival) {
+    if (!props.showFestival && Object.keys(props.festivals).length === 0) {
         return '';
     }
-    const date = `${year.value}-${month.value}-${dayNum}`;
-    const monthDay = `${month.value}-${dayNum}`;
-    // 优先检查用户自定义节日（包括空字符串，用于覆盖内置节日）
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
+    const monthDay = `${formatNum(month.value)}-${formatNum(dayNum)}`;
+
+    // 优先检查用户自定义节日（特定年份格式）
     if (date in props.festivals) {
         return props.festivals[date];
     }
-    // 然后检查内置节日（如果启用了 showFestival）
-    if (builtInFestivals[monthDay]) {
+
+    // 然后检查用户自定义节日（每年固定格式，月-日）
+    if (monthDay in props.festivals) {
+        return props.festivals[monthDay];
+    }
+
+    // 最后检查内置节日（如果启用了 showFestival）
+    if (props.showFestival && builtInFestivals[monthDay]) {
         return builtInFestivals[monthDay];
     }
     return '';
@@ -568,7 +583,7 @@ function getFestival(dayNum: number) {
  * 当选中日期时显示白色，否则显示对应的颜色
  */
 function getHolidayWorkdayColor(dayNum: number, defaultColor: string) {
-    const date = `${year.value}-${month.value}-${dayNum}`;
+    const date = `${year.value}-${formatNum(month.value)}-${formatNum(dayNum)}`;
     // 选中日期的节假日/加班日显示白色
     if (activeDate.value === date || startDate.value === date || endDate.value === date) {
         return props.activeColor;
@@ -589,7 +604,7 @@ function init() {
     year.value = now.getFullYear();
     month.value = now.getMonth() + 1;
     day.value = now.getDate();
-    today.value = `${now.getFullYear()}-${month.value}-${day.value}`;
+    today.value = `${now.getFullYear()}-${formatNum(month.value)}-${formatNum(day.value)}`;
     min.value = initDate(String(props.minDate));
     max.value = initDate(String(props.maxDate) || today.value);
 
@@ -604,8 +619,8 @@ function init() {
             year.value = defaultDateObj.getFullYear();
             month.value = defaultDateObj.getMonth() + 1;
             day.value = defaultDateObj.getDate();
-            // 统一格式为 YYYY-M-D，与 getColor 中的格式一致
-            activeDate.value = `${year.value}-${month.value}-${day.value}`;
+            // 统一格式为 YYYY-MM-DD，与 getColor 中的格式一致
+            activeDate.value = `${year.value}-${formatNum(month.value)}-${formatNum(day.value)}`;
         } else if (props.defaultSelectToday) {
             activeDate.value = today.value;
         } else {
@@ -621,19 +636,19 @@ function init() {
             year.value = startDateObj.getFullYear();
             month.value = startDateObj.getMonth() + 1;
 
-            // 设置开始日期 - 统一格式为 YYYY-M-D
+            // 设置开始日期 - 统一格式为 YYYY-MM-DD
             startYear.value = startDateObj.getFullYear();
             startMonth.value = startDateObj.getMonth() + 1;
             startDay.value = startDateObj.getDate();
-            startDate.value = `${startYear.value}-${startMonth.value}-${startDay.value}`;
+            startDate.value = `${startYear.value}-${formatNum(startMonth.value)}-${formatNum(startDay.value)}`;
         }
 
         if (endDateObj && !isNaN(endDateObj.getTime())) {
-            // 设置结束日期 - 统一格式为 YYYY-M-D
+            // 设置结束日期 - 统一格式为 YYYY-MM-DD
             endYear.value = endDateObj.getFullYear();
             endMonth.value = endDateObj.getMonth() + 1;
             endDay.value = endDateObj.getDate();
-            endDate.value = `${endYear.value}-${endMonth.value}-${endDay.value}`;
+            endDate.value = `${endYear.value}-${formatNum(endMonth.value)}-${formatNum(endDay.value)}`;
         }
 
         isStart.value = true;
@@ -683,10 +698,10 @@ function initDate(date: string) {
  */
 function openDisAbled(yearNum: number, monthNum: number, dayNum: number) {
     let bool = true;
-    let date = `${yearNum}/${monthNum}/${dayNum}`;
+    let date = `${yearNum}/${formatNum(monthNum)}/${formatNum(dayNum)}`;
     // let today = this.today.replace(/\-/g, '/');
-    let minStr = min.value ? `${min.value.year}/${min.value.month}/${min.value.day}` : '';
-    let maxStr = max.value ? `${max.value.year}/${max.value.month}/${max.value.day}` : '';
+    let minStr = min.value ? `${min.value.year}/${formatNum(min.value.month)}/${formatNum(min.value.day)}` : '';
+    let maxStr = max.value ? `${max.value.year}/${formatNum(max.value.month)}/${formatNum(max.value.day)}` : '';
     let timestamp = new Date(date).getTime();
     if (min.value && max.value && timestamp >= new Date(minStr).getTime() && timestamp <= new Date(maxStr).getTime()) {
         bool = false;
@@ -835,7 +850,7 @@ function dateClick(dayIdx: number) {
     const d = dayIdx + 1;
     if (!openDisAbled(year.value, month.value, d)) {
         day.value = d;
-        let date = `${year.value}-${month.value}-${d}`;
+        let date = `${year.value}-${formatNum(month.value)}-${formatNum(d)}`;
         if (props.mode == 'date') {
             activeDate.value = date;
             // 页面模式下，单选日期选择完成自动触发change事件
@@ -906,7 +921,7 @@ function btnFix(show: boolean) {
         let result = `${y}-${formatNum(m)}-${formatNum(d)}`;
         let weekText = getWeekText(result);
         let isToday = false;
-        if (`${y}-${m}-${d}` == today.value) {
+        if (result == today.value) {
             // 今天
             isToday = true;
         }

@@ -19,5 +19,9 @@
     "eslint.validate": ["javascript", "typescript", "vue"],
     "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    // Markdown 文件禁用保存时格式化
+    "[markdown]": {
+        "editor.formatOnSave": false
     }
 }
