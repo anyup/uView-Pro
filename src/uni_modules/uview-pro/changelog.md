@@ -1,3 +1,26 @@
+## 0.5.17（2026-04-15）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **demo:** 修复topTips组件演示示例在小程序中不弹出的问题，需设置自定义navbar高度 ([0c72d24](https://github.com/anyup/uView-Pro/commit/0c72d24cd77f4ba6b6cb411810fcf5f0bd1d3272))
+- **u-table:** 修复表格表头暗黑模式背景色问题 ([c7fd1a5](https://github.com/anyup/uView-Pro/commit/c7fd1a58e87c4efb84ccf737fe9d1e755908ba8f))
+- **u-alert-tips:** 修复关闭按钮颜色样式问题 ([94001cf](https://github.com/anyup/uView-Pro/commit/94001cf79a03ea75695e414a7971e7ec39f445b6))
+
+### ✨ Features | 新功能
+
+- **theme:** 更新主题配置和本地化文本 ([4caa2ed](https://github.com/anyup/uView-Pro/commit/4caa2edf9542f7f2b0a7bb9870585390f0241e80))
+- **u-calendar:** 增强日历组件功能，支持多种日历模式：打卡签到、节假日标记、价格日历等场景，支持自定义插槽功能，动态价格显示；支持选中日期，只读模式设置；修复范围选择背景色样式问题 ([7a9250e](https://github.com/anyup/uView-Pro/commit/7a9250eb49f6694286bb0c3dad7bc9780ae95864))
+- **u-popup:** 新增inline模式支持，允许弹窗组件直接插入页面内容而非传统弹窗形式 ([2e8890c](https://github.com/anyup/uView-Pro/commit/2e8890ca3c9cacb90739b33cb0e38db7e2bdb473))
+- **u-calendar:** 统一日期格式YYYY-MM-DD，确保跨组件日期处理的一致性 ([092cc53](https://github.com/anyup/uView-Pro/commit/092cc5392b64990342c43fcbac9aec1bfa2bf982))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **u-calendar:** 重构日历组件模板，统一页面和弹窗模式的日历组件结构 ([42894b8](https://github.com/anyup/uView-Pro/commit/42894b850f903e2471ca42e02f0379443139838b))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.16（2026-03-26）
 
 ### ✨ Features | 新功能
