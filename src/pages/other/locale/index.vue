@@ -18,6 +18,7 @@ function switchLang(vueLoc: any) {
     try {
         if (typeof uni !== 'undefined' && typeof uni.setLocale === 'function') {
             uni.setLocale(vueLoc.locale);
+            uni.setStorageSync('UNI_LOCALE', vueLoc.locale);
         }
     } catch (e) {
         // ignore

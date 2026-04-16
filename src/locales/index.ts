@@ -11,7 +11,7 @@ const messages = {
 // 安全获取locale，避免在SSR环境下出现问题
 export const getSafeLocale = () => {
     try {
-        return uni.getLocale() || 'zh-Hans';
+        return uni.getStorageSync('UNI_LOCALE') || uni.getLocale() || 'zh-Hans';
     } catch (e) {
         return 'zh-Hans';
     }

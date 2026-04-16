@@ -7,6 +7,7 @@ export function useLang() {
     function switchLang(payload: any) {
         // 切换uniapp语言
         uni.setLocale(payload.locale);
+        uni.setStorageSync('UNI_LOCALE', payload.locale);
         // 切换vue-i18n语言
         locale.value = payload.locale;
         // 切换uView Pro语言
