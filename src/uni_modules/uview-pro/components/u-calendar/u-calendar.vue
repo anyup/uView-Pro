@@ -527,7 +527,7 @@ function getDateInfo(dayNum: number) {
         isChecked: props.checkedDates.includes(dateStr),
         isSelected,
         isTodayChecked: dateStr === today.value && props.todayChecked,
-        lunar: lunarArr[dayNum - 1] || null
+        lunar: lunarArr.value[dayNum - 1] || null
     };
 }
 
