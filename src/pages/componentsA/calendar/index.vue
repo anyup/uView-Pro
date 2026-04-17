@@ -350,7 +350,6 @@ function demoTypeChange(index: number) {
     const now = new Date();
     if (index === 1) {
         // 切换到打卡签到模式，设置示例数据
-        isPage.value = true;
         mode.value = 'date';
         readonly.value = false;
         showLunar.value = true;
@@ -370,7 +369,6 @@ function demoTypeChange(index: number) {
         result.value = '点击今日日期进行打卡';
     } else if (index === 2) {
         // 切换到节假日模式
-        isPage.value = true;
         mode.value = 'date';
         readonly.value = false;
         showLunar.value = true;
@@ -401,7 +399,6 @@ function demoTypeChange(index: number) {
         result.value = '右上角红色"休"=节假日，蓝色"班"=加班日，下方显示节日名称或农历';
     } else if (index === 3) {
         // 切换到价格日历模式
-        isPage.value = true;
         mode.value = 'date';
         readonly.value = false;
         showLunar.value = false;
@@ -439,6 +436,10 @@ function demoTypeChange(index: number) {
         checkinMode.value = false;
         readonly.value = false;
         result.value = '请选择日期';
+    }
+
+    if (isPage.value === false) {
+        showModeChange(index);
     }
 }
 
