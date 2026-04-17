@@ -17,7 +17,7 @@
                 :key="index"
                 :class="{ 'u-tabbar__content__circle': props.midButton && item.midButton }"
                 @tap.stop="clickHandler(index)"
-                :style="{ backgroundColor: props.bgColor }"
+                :style="$u.toStyle(getItemStyle(item))"
             >
                 <view
                     class="u-tabbar__content__item__container"
@@ -32,6 +32,12 @@
                                 : 'u-tabbar__content__item__icon'
                         ]"
                     >
+                        <!-- 凸起按钮边框 -->
+                        <view
+                            v-if="props.midButton && item.midButton && props.borderTop"
+                            class="u-tabbar__content__circle__border"
+                            :style="{ backgroundColor: props.bgColor }"
+                        ></view>
                         <u-icon
                             :size="getIconSize(index)"
                             :name="elIconPath(index)"
@@ -69,12 +75,6 @@
                     </view>
                 </view>
             </view>
-            <view
-                v-if="props.midButton"
-                class="u-tabbar__content__circle__border"
-                :class="{ 'u-border': props.borderTop }"
-                :style="{ backgroundColor: props.bgColor, left: midButtonLeft }"
-            ></view>
         </view>
         <!-- 这里加上一个48rpx的高度,是为了增高有凸起按钮时的防塌陷高度(也即按钮凸出来部分的高度) -->
         <!-- calc 计算0时单位不一致会计算失败，这里+1px -->
@@ -102,6 +102,7 @@ export default {
 import { ref, computed, onMounted } from 'vue';
 import { $u } from '../..';
 import { TabbarProps } from './types';
+import type { TabbarItem } from '../../types/global';
 
 /**
  * u-tabbar 底部导航栏
@@ -128,8 +129,51 @@ const emit = defineEmits<{ (e: 'change', index: number): void; (e: 'update:model
 // 计算z-index值
 const uZIndex = computed(() => props?.zIndex ?? $u.zIndex.tabbar);
 
-// 由于安卓太菜了，通过css居中凸起按钮的外层元素有误差，故通过js计算将其居中
-const midButtonLeft = ref('50%');
+/**
+ * 检查是否有任意item设置了width
+ */
+const hasCustomWidth = computed(() => {
+    return props.list?.some(item => item.width !== undefined && item.width !== null && item.width !== '') || false;
+});
+
+/**
+ * 计算每个item的宽度，根据list数量平分
+ * 如果任意item设置了width，则不自动计算，返回auto
+ */
+const autoItemWidth = computed(() => {
+    // 如果用户设置了任意一个width，就不自动计算
+    if (hasCustomWidth.value) return 'auto';
+
+    const count = props.list?.length || 0;
+    if (count === 0) return 'auto';
+    return `${100 / count}%`;
+});
+
+/**
+ * 获取单个item的样式
+ * 使用 flex 简写属性设置宽度，与原有样式保持一致
+ */
+function getItemStyle(item: TabbarItem): Record<string, any> {
+    const style: Record<string, any> = {};
+    // 背景色
+    style.backgroundColor = props.bgColor;
+    // flex宽度设置
+    if (item.width !== undefined && item.width !== null && item.width !== '') {
+        // 固定宽度：不伸缩
+        style.flex = `0 0 ${$u.addUnit(item.width)}`;
+        style.width = $u.addUnit(item.width);
+    } else if (hasCustomWidth.value) {
+        // 如果其他item设置了width，未设置的自动填充剩余空间
+        style.flex = '1 1 auto';
+        style.width = 'auto';
+    } else {
+        // 自动平分：不伸缩，按百分比分配
+        style.flex = `0 0 ${autoItemWidth.value}`;
+        style.width = autoItemWidth.value;
+    }
+    return style;
+}
+
 const pageUrl = ref(''); // 当前页面URL
 
 onMounted(() => {
@@ -140,7 +184,6 @@ onMounted(() => {
     const pages = getCurrentPages();
     // 页面栈中的最后一个即为项为当前页面，route属性为页面路径
     pageUrl.value = pages[pages.length - 1].route as string;
-    if (props.midButton) getMidButtonLeft();
 });
 
 /**
@@ -304,15 +347,6 @@ function getTextSize(index: number) {
 }
 
 /**
- * 获取凸起按钮外层元素的left值，让其水平居中
- */
-function getMidButtonLeft() {
-    const windowWidth = $u.sys().windowWidth;
-    // 由于安卓中css计算left: 50%的结果不准确，故用js计算
-    midButtonLeft.value = windowWidth / 2 + 'px';
-}
-
-/**
  * 图标和文字间距
  */
 function containerStyle(index: number) {
@@ -358,22 +392,7 @@ function containerStyle(index: number) {
         /* #ifndef APP-NVUE */
         box-sizing: content-box;
         /* #endif */
-        &__circle__border {
-            border-radius: 100%;
-            width: 130rpx;
-            height: 130rpx;
-            top: -58rpx;
-            position: absolute;
-            z-index: 4;
-            background-color: var(--u-bg-white);
-            // 由于安卓的无能，导致只有3个tabbar item时，此css计算方式有误差
-            // 故使用js计算的形式来定位，此处不注释，是因为js计算有延后，避免出现位置闪动
-            left: 50%;
-            transform: translateX(-50%);
-            &:after {
-                border-radius: 100px;
-            }
-        }
+
         &__item {
             flex: 1;
             justify-content: center;
@@ -404,6 +423,7 @@ function containerStyle(index: number) {
                 line-height: 28rpx;
                 text-align: center;
                 width: 100%;
+                z-index: 6;
             }
         }
         &__circle {
@@ -439,6 +459,17 @@ function containerStyle(index: number) {
                 left: 50%;
                 z-index: 6;
                 transform: translateX(-50%);
+            }
+            &__border {
+                position: absolute;
+                top: -18rpx;
+                width: 130rpx;
+                height: 130rpx;
+                border-radius: 100%;
+                border-top: 1px solid var(--u-border-color);
+                background-color: var(--u-bg-white);
+                z-index: 0;
+                pointer-events: none;
             }
         }
     }

@@ -440,4 +440,6 @@ export type TabbarItem = {
     iconSize?: string | number;
     textSize?: string | number;
     gap?: string | number;
+    /** 自定义宽度，优先级高于自动计算的宽度 */
+    width?: string | number;
 };
