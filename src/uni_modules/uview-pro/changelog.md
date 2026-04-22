@@ -1,3 +1,24 @@
+## 0.5.18（2026-04-22）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-calendar:** 修复农历数据响应式访问问题 ([0a88b13](https://github.com/anyup/uView-Pro/commit/0a88b13911fc8c47229f5d9cab0fdfc8ade09ecb))
+- **mp-weixin:** 修复微信小程序演示示例vue-i18n多语言切换后uni.getLocale()始终获取中文的问题 ([30b811f](https://github.com/anyup/uView-Pro/commit/30b811f85db29165cd150bea380dfe44f94fda79))
+- **demo:** 取消底部导航标题配置设置国际化文案 ([7b949ab](https://github.com/anyup/uView-Pro/commit/7b949ab8695fbc3d9db51b96da1b25a1f05c2ed3))
+- **demo:** 修复日历组件demo切换逻辑 ([9aa706a](https://github.com/anyup/uView-Pro/commit/9aa706a0e7b564c2bef75d1d6e7a90023dfc1c17))
+
+### ✨ Features | 新功能
+
+- **u-tabbar:** 底部导航栏支持自定义item宽度配置，优化item平分功能 ([997846f](https://github.com/anyup/uView-Pro/commit/997846fb5f8ba4648e4d0514f0846ce80a217490))
+
+### 📝 Documentation | 文档
+
+- update uview pro desc ([ba65d2e](https://github.com/anyup/uView-Pro/commit/ba65d2e34a1e620b595122a81df48a333c97bbcd))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.17（2026-04-15）
 
 ### 🐛 Bug Fixes | Bug 修复
