@@ -30,7 +30,7 @@
 
 `uView UI`，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的 UI 框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。
 
-`uView Pro`，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，目前已全面支持 uni-app Vue3.0。
+`uView Pro`，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，已覆盖 Android、iOS、鸿蒙以及微信/头条/支付宝等主流小程序平台，真正实现“一套代码，多端运行”，支持多主题系统、暗黑模式与国际化（i18n）。
 
 ## [官方文档：https://uviewpro.cn](https://uviewpro.cn)
 

@@ -8,11 +8,11 @@
     "module": "index.ts",
     "browser": "index.ts",
     "keywords": [
-        "ui",
-        "uview",
         "uview-pro",
         "vue3",
-        "typescript"
+        "多主题",
+        "暗黑模式",
+        "多语言"
     ],
     "author": "anyup",
     "license": "MIT",
