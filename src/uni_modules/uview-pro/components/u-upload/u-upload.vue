@@ -422,16 +422,18 @@ watch(
                 if (value.path) existingPaths.add(value.path);
             }
         });
-        // 同步完成后触发一次事件
-        emitListChange();
     },
     { immediate: true, deep: true }
 );
 
-// 文件列表变化时触发事件（在关键操作后手动触发，避免 deep: true 的性能开销）
-function emitListChange() {
-    emit('on-list-change', lists.value, props.index);
-}
+// 监听 lists 变化，自动触发 on-list-change 事件
+watch(
+    lists,
+    n => {
+        emit('on-list-change', n, props.index);
+    },
+    { deep: true }
+);
 
 /**
  * 从路径中获取文件名
@@ -551,7 +553,6 @@ function formatFileSize(size: number): string {
  */
 function clear() {
     lists.value = [];
-    emitListChange();
 }
 
 /**
@@ -778,8 +779,6 @@ function handleFilesSelected(files: any[], sourceType: 'image' | 'video' | 'medi
 
     // 每次文件选择完，抛出一个事件，并将当前内部选择的文件数组抛出去
     emit('on-choose-complete', lists.value, props.index);
-    // 触发列表变化事件
-    emitListChange();
     if (props.autoUpload) uploadFile(listOldLength);
 }
 
@@ -996,8 +995,6 @@ function handlerDeleteItem(index: number) {
     }
     lists.value.splice(index, 1);
     emit('on-remove', index, lists.value, props.index);
-    // 触发列表变化事件
-    emitListChange();
     showToast(t('uUpload.removeSuccess'));
 }
 
@@ -1008,7 +1005,6 @@ function remove(index: number) {
     // 判断索引的合法范围
     if (index >= 0 && index < lists.value.length) {
         lists.value.splice(index, 1);
-        emitListChange();
     }
 }
 
