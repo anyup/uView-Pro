@@ -1,59 +1,205 @@
 <template>
-    <view class="u-upload" v-if="!disabled" :class="customClass" :style="$u.toStyle(customStyle)">
-        <view
-            v-if="showUploadList"
-            class="u-list-item u-preview-wrap"
-            v-for="(item, index) in lists"
-            :key="index"
-            :style="{
-                width: $u.addUnit(width),
-                height: $u.addUnit(height)
-            }"
-        >
-            <view
-                v-if="deletable"
-                class="u-delete-icon"
-                @tap.stop="deleteItem(index)"
-                :style="{
-                    background: delBgColor
-                }"
-            >
-                <u-icon :name="delIcon" size="20" :color="delColor"></u-icon>
+    <view
+        v-if="!disabled"
+        class="u-upload"
+        :class="[customClass, { 'u-upload--list': props.mode === 'list' }]"
+        :style="$u.toStyle(customStyle)"
+    >
+        <!-- 列表模式 -->
+        <template v-if="props.mode === 'list'">
+            <view v-if="showUploadList" class="u-upload-list">
+                <view
+                    v-for="(item, index) in lists"
+                    class="u-upload-list__item"
+                    :key="index"
+                    :class="{ 'u-upload-list__item--error': item.error }"
+                >
+                    <!-- 左侧：图片缩略图或文件图标 -->
+                    <view class="u-upload-list__left" @tap.stop="handlePreview(item, index)">
+                        <!-- 图片类型：显示缩略图 -->
+                        <template v-if="isImageFile(item)">
+                            <image class="u-upload-list__thumb" :src="item.url || item.path" mode="aspectFill" />
+                        </template>
+                        <!-- 非图片类型：显示文件图标 -->
+                        <template v-else>
+                            <view class="u-upload-list__icon" :style="{ background: getFileIcon(item).bgColor }">
+                                <u-icon :name="getFileIcon(item).name" size="32" color="var(--u-white-color)"></u-icon>
+                            </view>
+                        </template>
+                    </view>
+
+                    <!-- 中间：文件名和大小 -->
+                    <view class="u-upload-list__center" @tap.stop="handlePreview(item, index)">
+                        <text
+                            v-if="showFileName && item.name"
+                            class="u-upload-list__name"
+                            :class="{ 'u-upload-list__name--error': item.error }"
+                        >
+                            {{ getFileName(item) }}
+                        </text>
+                        <text v-if="showFileSize && item.size" class="u-upload-list__size">
+                            {{ formatFileSize(item.size) }}
+                        </text>
+                        <!-- 进度条 -->
+                        <view
+                            v-if="showProgress && item.progress > 0 && item.progress < 100 && !item.error"
+                            class="u-upload-list__progress"
+                        >
+                            <u-line-progress
+                                height="4"
+                                :show-percent="false"
+                                :percent="item.progress"
+                            ></u-line-progress>
+                        </view>
+                        <view
+                            v-if="item.error"
+                            class="u-upload-list__retry"
+                            hover-class="u-upload-list__retry--hover"
+                            hover-stay-time="150"
+                            @tap.stop="retry(index)"
+                        >
+                            <u-icon name="reload" size="24" color="var(--u-type-error)"></u-icon>
+                            <text class="u-upload-list__retry-text">{{ t('uUpload.retry') }}</text>
+                        </view>
+                    </view>
+
+                    <!-- 右侧：删除按钮 -->
+                    <view
+                        v-if="deletable"
+                        class="u-upload-list__right"
+                        @tap.stop="deleteItem(index)"
+                        :style="{
+                            backgroundColor: delBgColor
+                        }"
+                    >
+                        <u-icon :name="delIcon" size="20" :color="delColor"></u-icon>
+                    </view>
+                </view>
             </view>
-            <view class="u-upload-progress">
-                <u-line-progress
-                    v-if="showProgress && item.progress > 0 && item.progress != 100 && !item.error"
-                    :show-percent="false"
-                    height="16"
-                    :percent="item.progress"
-                ></u-line-progress>
+
+            <!-- 列表模式：自定义文件列表插槽 -->
+            <slot name="file" :file="lists"></slot>
+
+            <!-- 列表模式：添加按钮 -->
+            <view v-if="Number(maxCount) > lists.length" class="u-upload-list__add" @tap="selectFile">
+                <slot name="addBtn"></slot>
+                <view
+                    v-if="!customBtn"
+                    class="u-upload-list__add-btn"
+                    hover-class="u-upload-list__add-btn--hover"
+                    hover-stay-time="150"
+                >
+                    <u-icon name="plus" size="32" :color="$u.color.primary"></u-icon>
+                    <text class="u-upload-list__add-text">{{ uploadBtnText }}</text>
+                </view>
             </view>
-            <view @tap.stop="retry(index)" v-if="item.error" class="u-error-btn">点击重试</view>
-            <image
-                @tap.stop="doPreviewImage(item.url || item.path, index)"
-                class="u-preview-image"
-                v-if="!item.isImage"
-                :src="item.url || item.path"
-                :mode="imageMode"
-            ></image>
-        </view>
-        <slot name="file" :file="lists"></slot>
-        <view style="display: inline-block" @tap="selectFile" v-if="Number(maxCount) > lists.length">
-            <slot name="addBtn"></slot>
-            <view
-                v-if="!customBtn"
-                class="u-list-item u-add-wrap"
-                hover-class="u-add-wrap__hover"
-                hover-stay-time="150"
-                :style="{
-                    width: $u.addUnit(width),
-                    height: $u.addUnit(height)
-                }"
-            >
-                <u-icon name="plus" class="u-add-btn" size="40"></u-icon>
-                <view class="u-add-tips">{{ uploadText }}</view>
+        </template>
+
+        <!-- 网格模式（默认） -->
+        <template v-else>
+            <template v-if="showUploadList">
+                <view
+                    class="u-upload-grid__item u-upload-grid__preview"
+                    v-for="(item, index) in lists"
+                    :key="index"
+                    :style="{
+                        width: $u.addUnit(width),
+                        height: $u.addUnit(height)
+                    }"
+                >
+                    <view
+                        v-if="deletable"
+                        class="u-upload-grid__delete"
+                        @tap.stop="deleteItem(index)"
+                        :style="{
+                            backgroundColor: delBgColor
+                        }"
+                    >
+                        <u-icon :name="delIcon" size="20" :color="delColor"></u-icon>
+                    </view>
+                    <view class="u-upload-grid__progress">
+                        <u-line-progress
+                            v-if="showProgress && item.progress > 0 && item.progress !== 100 && !item.error"
+                            :show-percent="false"
+                            height="16"
+                            :percent="item.progress"
+                        ></u-line-progress>
+                    </view>
+                    <view @tap.stop="retry(index)" v-if="item.error" class="u-upload-grid__error">{{
+                        t('uUpload.retry')
+                    }}</view>
+
+                    <!-- 图片类型预览 -->
+                    <template v-if="isImageFile(item)">
+                        <image
+                            @tap.stop="handlePreview(item, index)"
+                            class="u-upload-grid__image"
+                            :src="item.url || item.path"
+                            :mode="imageMode"
+                        ></image>
+                    </template>
+
+                    <!-- 视频类型预览 -->
+                    <template v-else-if="isVideoFile(item)">
+                        <view class="u-upload-grid__file" @tap.stop="doPreviewFile(item, index)">
+                            <view class="u-upload-grid__file-icon" :style="{ background: getFileIcon(item).bgColor }">
+                                <u-icon :name="getFileIcon(item).name" size="48" color="var(--u-white-color)"></u-icon>
+                            </view>
+                            <view class="u-upload-grid__file-info" v-if="showFileName || showFileSize">
+                                <text
+                                    v-if="showFileName && item.name"
+                                    class="u-upload-grid__file-name"
+                                    :style="{ color: item.error ? 'var(--u-type-error)' : 'var(--u-content-color)' }"
+                                >
+                                    {{ getFileName(item) }}
+                                </text>
+                                <text v-if="showFileSize && item.size" class="u-upload-grid__file-size">{{
+                                    formatFileSize(item.size)
+                                }}</text>
+                            </view>
+                        </view>
+                    </template>
+
+                    <!-- 其他文件类型预览 -->
+                    <template v-else>
+                        <view class="u-upload-grid__file" @tap.stop="doPreviewFile(item, index)">
+                            <view class="u-upload-grid__file-icon" :style="{ background: getFileIcon(item).bgColor }">
+                                <u-icon :name="getFileIcon(item).name" size="48" color="var(--u-white-color)"></u-icon>
+                            </view>
+                            <view class="u-upload-grid__file-info" v-if="showFileName || showFileSize">
+                                <text
+                                    v-if="showFileName && item.name"
+                                    class="u-upload-grid__file-name"
+                                    :style="{ color: item.error ? 'var(--u-type-error)' : 'var(--u-content-color)' }"
+                                >
+                                    {{ getFileName(item) }}
+                                </text>
+                                <text v-if="showFileSize && item.size" class="u-upload-grid__file-size">
+                                    {{ formatFileSize(item.size) }}
+                                </text>
+                            </view>
+                        </view>
+                    </template>
+                </view>
+            </template>
+            <slot name="file" :file="lists"></slot>
+            <view style="display: inline-block" @tap="selectFile" v-if="Number(maxCount) > lists.length">
+                <slot name="addBtn"></slot>
+                <view
+                    v-if="!customBtn"
+                    class="u-upload-grid__item u-upload-grid__add"
+                    hover-class="u-upload-grid__add--hover"
+                    hover-stay-time="150"
+                    :style="{
+                        width: $u.addUnit(width),
+                        height: $u.addUnit(height)
+                    }"
+                >
+                    <u-icon name="plus" class="u-upload-grid__add-icon" size="40"></u-icon>
+                    <view class="u-upload-grid__add-text">{{ uploadBtnText }}</view>
+                </view>
             </view>
-        </view>
+        </template>
     </view>
 </template>
 
@@ -71,50 +217,71 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { $u, useLocale } from '../..';
 import { UploadProps } from './types';
+import type { UploadFileItem } from '../../types/global';
 
 /**
- * upload 图片上传
- * @description 该组件用于上传图片场景
+ * upload 文件上传
+ * @description 该组件用于上传文件场景，支持图片、视频、文档等多种类型，支持网格和列表两种展示模式
  * @tutorial https://uviewpro.cn/zh/components/upload.html
+ *
  * @property {String} action 服务器上传地址
- * @property {String Number} max-count 最大选择图片的数量（默认99）
- * @property {Boolean} custom-btn 如果需要自定义选择图片的按钮，设置为true（默认false）
- * @property {Boolean} show-progress 是否显示进度条（默认true）
- * @property {Boolean} disabled 是否启用(显示/移仓)组件（默认false）
- * @property {String} image-mode 预览图片等显示模式，可选值为uni的image的mode属性值（默认aspectFill）
- * @property {String} del-icon 右上角删除图标名称，只能为uView内置图标
- * @property {String} del-bg-color 右上角关闭按钮的背景颜色
- * @property {String | Number} index 在各个回调事件中的最后一个参数返回，用于区别是哪一个组件的事件
- * @property {String} del-color 右上角关闭按钮图标的颜色
- * @property {Object} header 上传携带的头信息，对象形式
- * @property {Object} form-data 上传额外携带的参数
- * @property {String} name 上传文件的字段名，供后端获取使用（默认file）
- * @property {Array<String>} size-type original 原图，compressed 压缩图，默认二者都有（默认['original', 'compressed']）
- * @property {Array<String>} source-type 选择图片的来源，album-从相册选图，camera-使用相机，默认二者都有（默认['album', 'camera']）
- * @property {Boolean} preview-full-image	是否可以通过uni.previewImage预览已选择的图片（默认true）
- * @property {Boolean} multiple	是否开启图片多选，部分安卓机型不支持（默认true）
- * @property {Boolean} deletable 是否显示删除图片的按钮（默认true）
+ * @property {String} accept 接受上传的文件类型，可选值：image|video|file|media|all，默认image
+ * @property {String} mode 上传组件的展示模式，可选值：grid|list，默认grid
+ * @property {String Number} max-count 最大选择文件的数量（默认52）
  * @property {String Number} max-size 选择单个文件的最大大小，单位B(byte)，默认不限制（默认Number.MAX_VALUE）
- * @property {Array<Object>} file-list 默认显示的图片列表，数组元素为对象，必须提供url属性
- * @property {Boolean} upload-text 选择图片按钮的提示文字（默认“选择图片”）
- * @property {Boolean} auto-upload 选择完图片是否自动上传，见上方说明（默认true）
- * @property {Boolean} show-tips 特殊情况下是否自动提示toast，见上方说明（默认true）
- * @property {Boolean} show-upload-list 是否显示组件内部的图片预览（默认true）
- * @event {Function} on-oversize 图片大小超出最大允许大小
- * @event {Function} on-preview 全屏预览图片时触发
- * @event {Function} on-remove 移除图片时触发
- * @event {Function} on-success 图片上传成功时触发
- * @event {Function} on-change 图片上传后，无论成功或者失败都会触发
- * @event {Function} on-error 图片上传失败时触发
- * @event {Function} on-progress 图片上传过程中的进度变化过程触发
- * @event {Function} on-uploaded 所有图片上传完毕触发
- * @event {Function} on-choose-complete 每次选择图片后触发，只是让外部可以得知每次选择后，内部的文件列表
+ * @property {Boolean} multiple 是否开启文件多选（默认true）
+ * @property {Boolean} disabled 是否禁用组件（默认false）
+ * @property {Boolean} auto-upload 选择完文件是否自动上传（默认true）
+ * @property {Boolean} deletable 是否显示删除文件的按钮（默认true）
+ * @property {Boolean} show-confirm 删除文件前是否显示确认弹窗（默认true）
+ * @property {Boolean} show-tips 特殊情况下是否自动提示toast（默认true）
+ * @property {Boolean} show-progress 是否显示上传进度条（默认true）
+ * @property {Boolean} show-upload-list 是否显示组件内部的文件预览列表（默认true）
+ * @property {Boolean} show-file-name 是否显示文件名（默认true）
+ * @property {Boolean} show-file-size 是否显示文件大小（默认false）
+ * @property {Boolean} preview-full-image 是否可以通过uni.previewImage预览已选择的图片（默认true）
+ * @property {Boolean} preview-file 是否可预览文件（非图片类型）（默认true）
+ * @property {Boolean} custom-btn 是否自定义选择文件的按钮，设置为true可使用addBtn插槽（默认false）
+ * @property {String} upload-text 选择文件按钮的提示文字（默认根据accept自动显示）
+ * @property {String} image-mode 预览图片的显示模式，可选值为uni的image的mode属性值（默认aspectFill）
+ * @property {String} del-icon 右上角删除图标名称，只能为uView内置图标（默认'close'）
+ * @property {String} del-bg-color 右上角删除按钮的背景颜色（默认'var(--u-type-error)'）
+ * @property {String} del-color 右上角删除按钮图标的颜色（默认'var(--u-white-color)'）
+ * @property {String | Number} index 在各个回调事件中的最后一个参数返回，用于区别是哪一个组件的事件
+ * @property {Object} header 上传携带的请求头信息，对象形式
+ * @property {Object} form-data 上传额外携带的参数
+ * @property {String} name 上传文件的字段名，供后端获取使用（默认'file'）
+ * @property {Array<String>} size-type original 原图，compressed 压缩图，默认二者都有（默认['original', 'compressed']）
+ * @property {Array<String>} source-type 选择文件的来源，album-从相册选图，camera-使用相机，默认二者都有（默认['album', 'camera']）
+ * @property {Array<String>} limit-type 限制允许上传的文件后缀，如['png', 'jpg']。优先级高于accept内置的格式限制
+ * @property {Array<String>} extension 选择文件时的扩展名过滤，仅在H5和微信小程序accept='file'时有效，如['.pdf', '.docx']
+ * @property {Object} file-icon-map 文件类型图标映射配置，用于自定义不同文件类型的图标和颜色
+ * @property {Boolean} compressed 选择视频时是否压缩（默认true）
+ * @property {Number} max-duration 选择视频时拍摄最长时长，单位秒（默认60）
+ * @property {String} camera 选择视频时摄像头方向，可选值：front|back（默认'back'）
+ * @property {Array<Object>} file-list 默认显示的文件列表，数组元素为对象，必须提供url属性
+ * @property {Function} before-upload 上传前钩子，返回false或Promise.reject则跳过当前文件上传
+ * @property {Function} before-remove 删除前钩子，返回false或Promise.reject则阻止删除
+ * @property {Boolean} to-json 如果上传后的返回值为json字符串，是否自动转为json格式（默认true）
+ *
+ * @event {Function} on-oversize 文件大小超出max-size限制时触发
+ * @event {Function} on-exceed 文件数量超出max-count限制时触发
+ * @event {Function} on-choose-complete 每次选择文件后触发，返回当前文件列表
  * @event {Function} on-choose-fail 文件选择失败时触发
+ * @event {Function} on-uploaded 所有文件上传完毕时触发
+ * @event {Function} on-success 单个文件上传成功时触发
+ * @event {Function} on-error 单个文件上传失败时触发
+ * @event {Function} on-change 单个文件上传状态改变时触发（无论成功或失败）
+ * @event {Function} on-progress 文件上传过程中的进度变化时触发
+ * @event {Function} on-remove 移除文件时触发
+ * @event {Function} on-preview 预览文件时触发
  * @event {Function} on-list-change 文件列表发生变化时触发
- * @example <u-upload :action="action" :file-list="fileList" ></u-upload>
+ *
+ * @example <u-upload :action="action" :file-list="fileList" accept="image"></u-upload>
+ * @example <u-upload :action="action" accept="file" mode="list" :show-file-name="true"></u-upload>
  */
 
 const props = defineProps(UploadProps);
@@ -136,39 +303,255 @@ const emit = defineEmits([
     'on-preview'
 ]);
 
-const lists = ref<any[]>([]);
+const lists = ref<UploadFileItem[]>([]);
 const uploading = ref(false);
+
+// 默认文件图标映射
+const defaultFileIconMap: Record<string, { name: string; bgColor: string }> = {
+    image: { name: 'photo', bgColor: 'var(--u-type-primary)' },
+    video: { name: 'play-circle', bgColor: 'var(--u-type-error)' },
+    pdf: { name: 'file-text', bgColor: 'var(--u-type-error)' },
+    word: { name: 'file-text', bgColor: 'var(--u-type-primary)' },
+    excel: { name: 'file-text', bgColor: 'var(--u-type-success)' },
+    ppt: { name: 'file-text', bgColor: 'var(--u-type-warning)' },
+    zip: { name: 'folder', bgColor: 'var(--u-tips-color)' },
+    audio: { name: 'volume-up', bgColor: 'var(--u-type-info)' },
+    file: { name: 'file-text', bgColor: 'var(--u-tips-color)' }
+};
+
+// 文件扩展名到类型的映射
+const extTypeMap: Record<string, string> = {
+    // 图片
+    png: 'image',
+    jpg: 'image',
+    jpeg: 'image',
+    gif: 'image',
+    bmp: 'image',
+    webp: 'image',
+    svg: 'image',
+    // 视频
+    mp4: 'video',
+    avi: 'video',
+    mov: 'video',
+    wmv: 'video',
+    flv: 'video',
+    mkv: 'video',
+    rmvb: 'video',
+    '3gp': 'video',
+    m3u8: 'video',
+    // PDF
+    pdf: 'pdf',
+    // Word
+    doc: 'word',
+    docx: 'word',
+    // Excel
+    xls: 'excel',
+    xlsx: 'excel',
+    csv: 'excel',
+    // PPT
+    ppt: 'ppt',
+    pptx: 'ppt',
+    // 压缩包
+    zip: 'zip',
+    rar: 'zip',
+    '7z': 'zip',
+    tar: 'zip',
+    gz: 'zip',
+    // 音频
+    mp3: 'audio',
+    wav: 'audio',
+    wma: 'audio',
+    ogg: 'audio',
+    aac: 'audio',
+    flac: 'audio'
+};
+
+/**
+ * 根据 accept 类型获取上传按钮文字
+ */
+const uploadBtnText = computed(() => {
+    // 如果用户自定义了 uploadText，优先使用
+    if (props.uploadText !== t('uUpload.uploadText')) {
+        return props.uploadText;
+    }
+    // 根据 accept 类型返回对应的国际化文本
+    switch (props.accept) {
+        case 'image':
+            return t('uUpload.uploadImage');
+        case 'video':
+            return t('uUpload.uploadVideo');
+        case 'file':
+            return t('uUpload.uploadFile');
+        case 'media':
+            return t('uUpload.uploadMedia');
+        case 'all':
+        default:
+            return t('uUpload.uploadFile');
+    }
+});
 
 // 监听 fileList 变化，自动同步内部 lists
 watch(
     () => props.fileList,
     val => {
-        val.map((value: any) => {
-            // 首先检查内部是否已经添加过这张图片，因为外部绑定了一个对象给fileList的话(对象引用)，进行修改外部fileList
-            // 时，会触发watch，导致重新把原来的图片再次添加到this.lists
-            // 数组的some方法意思是，只要数组元素有任意一个元素条件符合，就返回true，而另一个数组的every方法的意思是数组所有元素都符合条件才返回true
-            let tmp = lists.value.some(val2 => val2.url == value.url);
-            // 如果内部没有这个图片(tmp为false)，则添加到内部
-            !tmp && lists.value.push({ ...value, url: value.url, error: false, progress: 100 });
+        // 使用 Set 优化查找性能，从 O(n²) 降到 O(n)
+        const existingUrls = new Set(lists.value.map(item => item.url).filter(Boolean));
+        const existingPaths = new Set(lists.value.map(item => item.path).filter(Boolean));
+
+        val.forEach((value: UploadFileItem) => {
+            // 检查是否已存在（O(1) 查找）,内部是否已经添加过这个文件
+            const isDuplicate =
+                (value.url && existingUrls.has(value.url)) || (value.path && existingPaths.has(value.path));
+
+            // 如果内部没有这个文件(tmp为false)，则添加到内部
+            if (!isDuplicate) {
+                const fileType = value.fileType || detectFileType(value);
+                const newItem = {
+                    ...value,
+                    url: value.url,
+                    path: value.path,
+                    name: value.name || getFileNameFromPath(value.url || value.path || ''),
+                    size: value.size || 0,
+                    fileType,
+                    error: false,
+                    progress: 100
+                };
+                lists.value.push(newItem);
+                // 更新 Set，避免重复添加
+                if (value.url) existingUrls.add(value.url);
+                if (value.path) existingPaths.add(value.path);
+            }
         });
+        // 同步完成后触发一次事件
+        emitListChange();
     },
     { immediate: true, deep: true }
 );
 
-// 监听 lists 变化，发出事件
-watch(
-    lists,
-    n => {
-        emit('on-list-change', n, props.index);
-    },
-    { deep: true }
-);
+// 文件列表变化时触发事件（在关键操作后手动触发，避免 deep: true 的性能开销）
+function emitListChange() {
+    emit('on-list-change', lists.value, props.index);
+}
+
+/**
+ * 从路径中获取文件名
+ */
+function getFileNameFromPath(path: string): string {
+    if (!path) return '';
+    const arr = path.split('/');
+    return arr[arr.length - 1] || '';
+}
+
+/**
+ * 根据扩展名检测文件类型
+ */
+function getFileTypeByExt(ext: string): 'image' | 'video' | 'file' {
+    const lowerExt = ext.toLowerCase();
+    if (['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'].includes(lowerExt)) {
+        return 'image';
+    }
+    if (['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv', 'rmvb', '3gp', 'm3u8'].includes(lowerExt)) {
+        return 'video';
+    }
+    return 'file';
+}
+
+/**
+ * 检测文件类型
+ */
+function detectFileType(file: UploadFileItem): 'image' | 'video' | 'file' {
+    return getFileTypeByExt(getFileExt(file));
+}
+
+/**
+ * 获取文件扩展名
+ */
+function getFileExt(file: UploadFileItem): string {
+    const path = file.url || file.path || file.name || '';
+    if (!path) return '';
+    const reg = /\.([^.]+)$/;
+    const match = path.match(reg);
+    return match ? match[1].toLowerCase() : '';
+}
+
+/**
+ * 判断是否为图片文件
+ */
+function isImageFile(file: UploadFileItem): boolean {
+    if (file.fileType) return file.fileType === 'image';
+    const ext = getFileExt(file);
+    return ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg', 'image'].includes(ext);
+}
+
+/**
+ * 判断是否为视频文件
+ */
+function isVideoFile(file: UploadFileItem): boolean {
+    if (file.fileType) return file.fileType === 'video';
+    const ext = getFileExt(file);
+    return ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv', 'rmvb', '3gp', 'm3u8'].includes(ext);
+}
+
+/**
+ * 获取文件图标配置
+ */
+function getFileIcon(file: UploadFileItem): { name: string; bgColor: string } {
+    const ext = getFileExt(file);
+    const type = extTypeMap[ext] || 'file';
+
+    // 优先使用用户自定义配置
+    if (props.fileIconMap && props.fileIconMap[type]) {
+        const customIcon = props.fileIconMap[type];
+        return {
+            name: customIcon.name,
+            bgColor: customIcon.color || defaultFileIconMap[type]?.bgColor || 'var(--u-tips-color)'
+        };
+    }
+
+    return defaultFileIconMap[type] || defaultFileIconMap.file;
+}
+
+/**
+ * 获取文件名（处理过长的情况）
+ */
+function getFileName(file: UploadFileItem): string {
+    const name = file.name || getFileNameFromPath(file.url || file.path || '');
+    if (!name) return '未知文件';
+    // 如果文件名过长，截断显示
+    if (name.length > 15) {
+        const ext = getFileExt(file);
+        return name.substring(0, 12) + '...' + (ext ? '.' + ext : '');
+    }
+    return name;
+}
+
+/**
+ * 格式化文件大小（简化版，避免 Math.log 计算）
+ */
+function formatFileSize(size: number): string {
+    if (size === 0) return '0 B';
+
+    const KB = 1024;
+    const MB = KB * 1024;
+    const GB = MB * 1024;
+
+    if (size < KB) {
+        return size + ' B';
+    } else if (size < MB) {
+        return (size / KB).toFixed(2) + ' KB';
+    } else if (size < GB) {
+        return (size / MB).toFixed(2) + ' MB';
+    } else {
+        return (size / GB).toFixed(2) + ' GB';
+    }
+}
 
 /**
  * 清除列表
  */
 function clear() {
     lists.value = [];
+    emitListChange();
 }
 
 /**
@@ -179,49 +562,240 @@ function reUpload() {
 }
 
 /**
- * 选择图片
+ * 选择文件
  */
 function selectFile() {
     if (props.disabled) return;
+
+    // 根据 accept 类型选择不同的文件选择方式
+    switch (props.accept) {
+        case 'image':
+            chooseImage();
+            break;
+        case 'video':
+            chooseVideo();
+            break;
+        case 'media':
+            chooseMedia();
+            break;
+        case 'file':
+        case 'all':
+            chooseFile();
+            break;
+        default:
+            chooseImage();
+    }
+}
+
+/**
+ * 选择图片
+ */
+function chooseImage() {
     const newMaxCount = Number(props.maxCount) - lists.value.length;
-    // 设置为只选择图片的时候使用 chooseImage 来实现
-    let chooseFile: Promise<any>;
-    chooseFile = new Promise((resolve, reject) => {
-        uni.chooseImage({
-            count: props.multiple ? (newMaxCount > 9 ? 9 : newMaxCount) : 1,
-            sourceType: props.sourceType as string[],
-            sizeType: props.sizeType as string[],
-            success: resolve,
-            fail: reject
-        });
-    });
-    chooseFile
-        .then((res: any) => {
-            let listOldLength = lists.value.length;
-            res.tempFiles.map((val: any, index: number) => {
-                // 检查文件后缀是否允许，如果不在limitType内，就会返回false
-                if (!checkFileExt(val)) return;
-                // 如果是非多选，index大于等于1或者超出最大限制数量时，不处理
-                if (!props.multiple && index >= 1) return;
-                if (val.size > Number(props.maxSize)) {
-                    emit('on-oversize', val, lists.value, props.index);
-                    showToast(t('uUpload.overSize'));
-                } else {
-                    if (Number(props.maxCount) <= lists.value.length) {
-                        emit('on-exceed', val, lists.value, props.index);
-                        showToast(t('uUpload.overMaxCount'));
-                        return;
-                    }
-                    lists.value.push({ url: val.path, progress: 0, error: false, file: val });
-                }
-            });
-            // 每次图片选择完，抛出一个事件，并将当前内部选择的图片数组抛出去
-            emit('on-choose-complete', lists.value, props.index);
-            if (props.autoUpload) uploadFile(listOldLength);
-        })
-        .catch((error: any) => {
+
+    uni.chooseImage({
+        count: props.multiple ? (newMaxCount > 9 ? 9 : newMaxCount) : 1,
+        sourceType: props.sourceType,
+        sizeType: props.sizeType as string[],
+        success: (res: any) => {
+            handleFilesSelected(res.tempFiles, 'image');
+        },
+        fail: (error: any) => {
             emit('on-choose-fail', error);
+        }
+    });
+}
+
+/**
+ * 选择视频
+ */
+function chooseVideo() {
+    uni.chooseVideo({
+        sourceType: props.sourceType,
+        compressed: props.compressed,
+        maxDuration: props.maxDuration,
+        camera: props.camera as 'front' | 'back',
+        success: (res: any) => {
+            const file = {
+                path: res.tempFilePath,
+                name: res.name || getFileNameFromPath(res.tempFilePath),
+                size: res.size || 0,
+                width: res.width,
+                height: res.height,
+                duration: res.duration
+            };
+            handleFilesSelected([file], 'video');
+        },
+        fail: (error: any) => {
+            emit('on-choose-fail', error);
+        }
+    });
+}
+
+/**
+ * 选择媒体文件（图片+视频）
+ */
+function chooseMedia() {
+    // #ifdef MP-WEIXIN || MP-TOUTIAO || APP
+    const newMaxCount = Number(props.maxCount) - lists.value.length;
+    uni.chooseMedia({
+        count: props.multiple ? (newMaxCount > 9 ? 9 : newMaxCount) : 1,
+        mediaType: ['image', 'video'],
+        sourceType: props.sourceType,
+        maxDuration: props.maxDuration,
+        camera: props.camera as 'front' | 'back',
+        success: (res: any) => {
+            const files = res.tempFiles.map((file: any) => ({
+                path: file.tempFilePath,
+                name: file.name || getFileNameFromPath(file.tempFilePath),
+                size: file.size || 0,
+                thumb: file.thumbTempFilePath,
+                duration: file.duration,
+                width: file.width,
+                height: file.height
+            }));
+            handleFilesSelected(files, 'media');
+        },
+        fail: (error: any) => {
+            emit('on-choose-fail', error);
+        }
+    });
+    // #endif
+
+    // #ifndef MP-WEIXIN || MP-TOUTIAO || APP
+    // 非支持平台回退到选择图片
+    chooseImage();
+    // #endif
+}
+
+/**
+ * 选择文件
+ */
+function chooseFile() {
+    // #ifdef H5 || MP-WEIXIN
+    const newMaxCount = Number(props.maxCount) - lists.value.length;
+
+    // #ifdef H5
+    // H5 使用 chooseFile
+    if (typeof uni.chooseFile === 'function') {
+        uni.chooseFile({
+            count: props.multiple ? (newMaxCount > 100 ? 100 : newMaxCount) : 1,
+            type: 'all',
+            extension: props.extension.length > 0 ? props.extension : undefined,
+            success: (res: any) => {
+                handleFilesSelected(res.tempFiles, 'file');
+            },
+            fail: (error: any) => {
+                emit('on-choose-fail', error);
+            }
         });
+    }
+    // #endif
+
+    // #ifdef MP-WEIXIN
+    // 微信小程序使用 chooseMessageFile
+    if (typeof uni.chooseMessageFile === 'function') {
+        uni.chooseMessageFile({
+            count: props.multiple ? (newMaxCount > 100 ? 100 : newMaxCount) : 1,
+            type: 'all',
+            extension: props.extension.length > 0 ? props.extension : undefined,
+            success: (res: any) => {
+                const files = res.tempFiles.map((file: any) => ({
+                    path: file.path,
+                    name: file.name,
+                    size: file.size,
+                    type: file.type
+                }));
+                handleFilesSelected(files, 'file');
+            },
+            fail: (error: any) => {
+                emit('on-choose-fail', error);
+            }
+        });
+    }
+    // #endif
+    // #endif
+
+    // #ifndef H5 || MP-WEIXIN
+    // 其他平台暂不支持文件选择，提示用户
+    showToast(t('uUpload.fileNotSupported') || '当前平台暂不支持文件选择');
+    // #endif
+}
+
+/**
+ * 处理选中的文件
+ */
+function handleFilesSelected(files: any[], sourceType: 'image' | 'video' | 'media' | 'file') {
+    let listOldLength = lists.value.length;
+
+    files.forEach((val: any, index: number) => {
+        // 检查文件后缀是否允许
+        if (!checkFileExt(val)) return;
+
+        // 如果是非多选，index大于等于1或者超出最大限制数量时，不处理
+        if (!props.multiple && index >= 1) return;
+
+        if (val.size > Number(props.maxSize)) {
+            emit('on-oversize', val, lists.value, props.index);
+            showToast(t('uUpload.overSize'));
+        } else {
+            if (Number(props.maxCount) <= lists.value.length) {
+                emit('on-exceed', val, lists.value, props.index);
+                showToast(t('uUpload.overMaxCount'));
+                return;
+            }
+
+            // 根据 accept 和 sourceType 确定 fileType
+            let fileType: 'image' | 'video' | 'file';
+            if (props.accept === 'image') {
+                fileType = 'image';
+            } else if (props.accept === 'video') {
+                fileType = 'video';
+            } else if (props.accept === 'file') {
+                fileType = 'file';
+            } else {
+                // media 或 all 时，根据路径或 sourceType 检测
+                fileType = detectFileTypeFromPath(val.path || val.name || '');
+            }
+
+            lists.value.push({
+                url: val.path,
+                path: val.path,
+                name: val.name || getFileNameFromPath(val.path || ''),
+                size: val.size || 0,
+                progress: 0,
+                error: false,
+                file: val,
+                fileType,
+                thumb: val.thumb || '',
+                width: val.width,
+                height: val.height,
+                duration: val.duration,
+                type: val.type
+            });
+        }
+    });
+
+    // 每次文件选择完，抛出一个事件，并将当前内部选择的文件数组抛出去
+    emit('on-choose-complete', lists.value, props.index);
+    // 触发列表变化事件
+    emitListChange();
+    if (props.autoUpload) uploadFile(listOldLength);
+}
+
+/**
+ * 从路径中获取文件扩展名
+ */
+function getExtFromPath(path: string): string {
+    if (!path) return '';
+    return path.split('.').pop() || '';
+}
+
+/**
+ * 根据路径检测文件类型
+ */
+function detectFileTypeFromPath(path: string): 'image' | 'video' | 'file' {
+    return getFileTypeByExt(getExtFromPath(path));
 }
 
 /**
@@ -241,7 +815,7 @@ function upload() {
 }
 
 /**
- * 对失败的图片重新上传
+ * 对失败的文件重新上传
  */
 function retry(index: number) {
     lists.value[index].progress = 0;
@@ -254,31 +828,27 @@ function retry(index: number) {
 }
 
 /**
- * 上传图片
+ * 上传文件
  */
 async function uploadFile(index = 0): Promise<void> {
     if (props.disabled) return;
     if (uploading.value) return;
+
     // 全部上传完成
     if (index >= lists.value.length) {
         emit('on-uploaded', lists.value, props.index);
         return;
     }
+
     // 检查是否是已上传或者正在上传中
-    if (lists.value[index].progress == 100) {
-        if (props.autoUpload == false) uploadFile(index + 1);
+    if (lists.value[index].progress === 100) {
+        if (props.autoUpload === false) uploadFile(index + 1);
         return;
     }
+
     // 执行before-upload钩子
     if (props.beforeUpload && typeof props.beforeUpload === 'function') {
-        // 执行回调，同时传入索引和文件列表当作参数
-        // 在微信，支付宝等环境(H5正常)，会导致父组件定义的customBack()函数体中的this变成子组件的this
-        // 通过bind()方法，绑定父组件的this，让this.customBack()的this为父组件的上下文
-        // 因为upload组件可能会被嵌套在其他组件内，比如u-form，这时this.$parent其实为u-form的this，
-        // 非页面的this，所以这里需要往上历遍，一直寻找到最顶端的$parent，这里用了this.$u.$parent.call(this)
-        // 明白意思即可，无需纠结this.$u.$parent.call(this)的细节
         let beforeResponse = props.beforeUpload(index, lists.value);
-        // 判断是否返回了promise
         if (
             typeof beforeResponse === 'object' &&
             beforeResponse !== null &&
@@ -289,32 +859,32 @@ async function uploadFile(index = 0): Promise<void> {
                     // promise返回成功，不进行动作，继续上传
                 })
                 .catch(() => {
-                    // 进入catch回调的话，继续下一张
+                    // 进入catch回调的话，继续下一个
                     return uploadFile(index + 1);
                 });
         } else if (beforeResponse === false) {
-            // 如果返回false，继续下一张图片的上传
             return uploadFile(index + 1);
-        } else {
-            // 此处为返回"true"的情形，这里不写代码，就跳过此处，继续执行当前的上传逻辑
         }
     }
+
     // 检查上传地址
     if (!props.action) {
         showToast(t('uUpload.noAction'), true);
         return;
     }
+
     lists.value[index].error = false;
     uploading.value = true;
+
     // 创建上传对象
-    const task = uni.uploadFile({
+    const uploadTask = uni.uploadFile({
         url: props.action,
-        filePath: lists.value[index].url,
+        filePath: lists.value[index].url || lists.value[index].path || '',
         name: props.name,
         formData: props.formData,
         header: props.header,
         // #ifdef MP-ALIPAY
-        fileType: 'image',
+        fileType: isImageFile(lists.value[index]) ? 'image' : 'video',
         // #endif
         success: (res: any) => {
             // 判断是否json字符串，将其转为json格式
@@ -333,13 +903,19 @@ async function uploadFile(index = 0): Promise<void> {
             uploadError(index, e);
         },
         complete: (res: any) => {
+            // 上传完成后清除任务引用
+            lists.value[index].uploadTask = undefined;
             uni.hideLoading();
             uploading.value = false;
             uploadFile(index + 1);
             emit('on-change', res, index, lists.value, props.index);
         }
     });
-    task.onProgressUpdate((res: any) => {
+
+    // 保存上传任务引用，用于后续取消上传
+    lists.value[index].uploadTask = uploadTask as unknown as UniApp.UploadTask;
+
+    uploadTask.onProgressUpdate((res: any) => {
         if (res.progress > 0) {
             lists.value[index].progress = res.progress;
             emit('on-progress', res, index, lists.value, props.index);
@@ -359,125 +935,237 @@ function uploadError(index: number, err: any) {
 }
 
 /**
- * 删除一个图片
+ * 删除一个文件
  */
 function deleteItem(index: number) {
-    uni.showModal({
-        title: t('uUpload.modalTitle'),
-        content: t('uUpload.deleteConfirm'),
-        cancelText: t('uUpload.modalCancelText'),
-        confirmText: t('uUpload.modalConfirmText'),
-        success: async (res: any) => {
-            if (res.confirm) {
-                // 先检查是否有定义before-remove移除前钩子
-                // 执行before-remove钩子
-                if (props.beforeRemove && typeof props.beforeRemove === 'function') {
-                    // 此处钩子执行 原理同before-remove参数，见上方注释
-                    let beforeResponse = props.beforeRemove(index, lists.value);
-                    // 判断是否返回了promise
-                    if (
-                        typeof beforeResponse === 'object' &&
-                        beforeResponse !== null &&
-                        typeof (beforeResponse as Promise<any>).then === 'function'
-                    ) {
-                        await (beforeResponse as Promise<any>)
-                            .then(() => {
-                                // promise返回成功，不进行动作，继续上传
-                                handlerDeleteItem(index);
-                            })
-                            .catch(() => {
-                                // 如果进入promise的reject，终止删除操作
-                                showToast(t('uUpload.terminatedRemove'));
-                            });
-                    } else if (beforeResponse === false) {
-                        // 返回false，终止删除
-                        showToast(t('uUpload.terminatedRemove'));
-                    } else {
-                        // 如果返回true，执行删除操作
-                        handlerDeleteItem(index);
-                    }
-                } else {
-                    // 如果不存在before-remove钩子，
-                    handlerDeleteItem(index);
+    // 如果需要确认弹窗，显示 uni.showModal
+    if (props.showConfirm) {
+        uni.showModal({
+            title: t('uUpload.modalTitle'),
+            content: t('uUpload.deleteConfirm'),
+            cancelText: t('uUpload.modalCancelText'),
+            confirmText: t('uUpload.modalConfirmText'),
+            success: async (res: any) => {
+                if (res.confirm) {
+                    await executeBeforeRemove(index);
                 }
             }
-        }
-    });
+        });
+    } else {
+        // 不需要确认弹窗，直接执行删除
+        executeBeforeRemove(index);
+    }
 }
 
 /**
- * 执行移除图片的动作
+ * 执行删除前的钩子并删除文件
+ */
+async function executeBeforeRemove(index: number) {
+    // 执行before-remove钩子
+    if (props.beforeRemove && typeof props.beforeRemove === 'function') {
+        let beforeResponse = props.beforeRemove(index, lists.value);
+        if (
+            typeof beforeResponse === 'object' &&
+            beforeResponse !== null &&
+            typeof (beforeResponse as Promise<any>).then === 'function'
+        ) {
+            await (beforeResponse as Promise<any>)
+                .then(() => {
+                    handlerDeleteItem(index);
+                })
+                .catch(() => {
+                    showToast(t('uUpload.terminatedRemove'));
+                });
+        } else if (beforeResponse === false) {
+            showToast(t('uUpload.terminatedRemove'));
+        } else {
+            handlerDeleteItem(index);
+        }
+    } else {
+        handlerDeleteItem(index);
+    }
+}
+
+/**
+ * 执行移除文件的动作
  */
 function handlerDeleteItem(index: number) {
-    // 如果文件正在上传中，终止上传任务，进度在0 < progress < 100则意味着正在上传
+    // 如果文件正在上传中，终止上传任务
     if (lists.value[index].progress < 100 && lists.value[index].progress > 0) {
-        typeof lists.value[index].uploadTask != 'undefined' && lists.value[index].uploadTask.abort();
+        typeof lists.value[index].uploadTask != 'undefined' && lists.value[index].uploadTask?.abort?.();
     }
     lists.value.splice(index, 1);
     emit('on-remove', index, lists.value, props.index);
+    // 触发列表变化事件
+    emitListChange();
     showToast(t('uUpload.removeSuccess'));
 }
 
 /**
- * 用户通过ref手动的形式，移除一张图片
+ * 用户通过ref手动的形式，移除一个文件
  */
 function remove(index: number) {
     // 判断索引的合法范围
     if (index >= 0 && index < lists.value.length) {
         lists.value.splice(index, 1);
-        emit('on-list-change', lists.value, props.index);
+        emitListChange();
     }
+}
+
+/**
+ * 预览/打开文件
+ */
+function doPreviewFile(item: string | UploadFileItem, index: number) {
+    // 处理字符串类型的文件
+    if (typeof item === 'string') {
+        item = { url: item };
+    }
+    // 图片文件预览
+    if (isImageFile(item)) {
+        doPreviewImage(item.url || item.path || '', index);
+        return;
+    }
+    // 视频文件不支持预览
+    if (isVideoFile(item)) {
+        return;
+    }
+    // 尝试打开文档
+    openDocument(item);
 }
 
 /**
  * 预览图片
  */
 function doPreviewImage(url: string, index: number) {
-    // 判断是否允许预览
-    if (!props.previewFullImage) return;
     // 获取所有图片的url
-    const images = lists.value.map(item => item.url || item.path);
+    const images = lists.value.filter(item => isImageFile(item)).map(item => item.url || item.path || '');
     uni.previewImage({
         urls: images,
         current: url,
         success: () => {
-            emit('on-preview', url, lists.value, props.index);
+            console.log('预览图片成功');
         },
         fail: () => {
-            uni.showToast({ title: t('uUpload.previewFailed'), icon: 'none' });
+            showToast(t('uUpload.previewFailed'));
         }
     });
 }
 
 /**
- * 判断文件后缀是否允许
+ * 打开文档
  */
-function checkFileExt(file: any) {
-    // 检查是否在允许的后缀中
-    let noArrowExt = false;
-    // 获取后缀名
-    let fileExt = '';
-    const reg = /.+\./;
-    // 如果是H5，需要从name中判断
+function openDocument(item: UploadFileItem) {
     // #ifdef H5
-    // H5环境下从name中获取后缀
-    fileExt = file.name.replace(reg, '').toLowerCase();
+    // H5 环境直接在新标签页打开
+    if (item.url) {
+        window.open(item.url, '_blank');
+    }
     // #endif
 
-    // 非H5环境下从path中获取后缀
     // #ifndef H5
-    fileExt = file.path.replace(reg, '').toLowerCase();
+    // 其他环境尝试使用 uni.openDocument
+    if (item.path || item.url) {
+        uni.openDocument({
+            filePath: item.path || item.url || '',
+            showMenu: true,
+            success: () => {
+                console.log('打开文档成功');
+            },
+            fail: err => {
+                console.error('打开文档失败', err);
+                showToast(t('uUpload.openFailed') || '无法打开此文件');
+            }
+        });
+    }
     // #endif
-    // 使用数组的some方法，只要符合limitType中的一个，就返回true
-    noArrowExt = (props.limitType as string[]).some((ext: string) => {
-        // 转为小写
-        return ext.toLowerCase() === fileExt;
-    });
-    if (!noArrowExt) showToast(t('uUpload.notAllowedExt', { ext: fileExt }));
-    return noArrowExt;
 }
 
-defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImage, lists });
+/**
+ * 统一处理预览
+ */
+function handlePreview(item: UploadFileItem, index: number) {
+    emit('on-preview', item.url || item.path, lists.value, props.index);
+    // 判断是否允许预览
+    if (!props.previewFile) return;
+    // 图片文件预览
+    if (isImageFile(item) && props.previewFullImage) {
+        doPreviewImage(item.url || item.path || '', index);
+        return;
+    }
+    // 文件预览
+    doPreviewFile(item, index);
+}
+
+/**
+ * 从文件名或路径中提取扩展名（简化版，避免正则表达式）
+ */
+function extractExt(file: { name?: string; path?: string }): string {
+    let source: string;
+    // #ifdef H5
+    source = file.name || file.path || '';
+    // #endif
+    // #ifndef H5
+    source = file.path || file.name || '';
+    // #endif
+
+    if (!source) return '';
+    const lastDotIndex = source.lastIndexOf('.');
+    return lastDotIndex > -1 ? source.slice(lastDotIndex + 1).toLowerCase() : '';
+}
+
+/**
+ * 判断文件后缀是否允许
+ */
+function checkFileExt(file: { name?: string; path?: string }): boolean {
+    const fileExt = extractExt(file);
+
+    // 根据 accept 类型确定允许的后缀
+    let allowedExts: string[] = [];
+    if (props.limitType && props.limitType.length > 0) {
+        allowedExts = props.limitType;
+    } else if (props.accept === 'image') {
+        allowedExts = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg', 'image'];
+    } else if (props.accept === 'video') {
+        allowedExts = ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv', 'rmvb', '3gp', 'm3u8'];
+    } else if (props.accept === 'file') {
+        // file 类型使用用户设置的 extension 或允许所有文件
+        allowedExts = props.extension.length > 0 ? (props.extension as string[]) : [];
+    } else if (props.accept === 'media') {
+        // media 类型，合并图片和视频格式
+        allowedExts = [
+            'png',
+            'jpg',
+            'jpeg',
+            'gif',
+            'webp',
+            'bmp',
+            'svg',
+            'mp4',
+            'avi',
+            'mov',
+            'wmv',
+            'flv',
+            'mkv',
+            'rmvb',
+            '3gp',
+            'm3u8'
+        ];
+    } else {
+        // all 类型，允许所有文件
+        return true;
+    }
+
+    // 如果没有限制类型（空数组），允许所有
+    if (allowedExts.length === 0) return true;
+
+    // 使用数组的some方法，只要符合allowedExts中的一个，就返回true
+    const isValid = allowedExts.some(ext => ext.toLowerCase() === fileExt);
+
+    if (!isValid) showToast(t('uUpload.notAllowedExt', { ext: fileExt || '未知' }));
+    return isValid;
+}
+
+defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImage, doPreviewFile, lists });
 </script>
 
 <style lang="scss" scoped>
@@ -489,7 +1177,8 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     align-items: center;
 }
 
-.u-list-item {
+// ==================== Grid 模式样式 ====================
+.u-upload-grid__item {
     width: 200rpx;
     height: 200rpx;
     overflow: hidden;
@@ -504,33 +1193,33 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     justify-content: center;
 }
 
-.u-preview-wrap {
+.u-upload-grid__preview {
     border: 1px solid var(--u-border-color);
 }
 
-.u-add-wrap {
+.u-upload-grid__add {
     flex-direction: column;
     color: $u-content-color;
     font-size: 26rpx;
 }
 
-.u-add-tips {
+.u-upload-grid__add-text {
     margin-top: 20rpx;
     line-height: 40rpx;
 }
 
-.u-add-wrap__hover {
+.u-upload-grid__add--hover {
     background-color: var(--u-bg-gray-light);
 }
 
-.u-preview-image {
+.u-upload-grid__image {
     display: block;
     width: 100%;
     height: 100%;
     border-radius: 10rpx;
 }
 
-.u-delete-icon {
+.u-upload-grid__delete {
     position: absolute;
     top: 10rpx;
     right: 10rpx;
@@ -544,7 +1233,7 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     justify-content: center;
 }
 
-.u-upload-progress {
+.u-upload-grid__progress {
     position: absolute;
     bottom: 10rpx;
     left: 8rpx;
@@ -553,7 +1242,7 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     width: auto;
 }
 
-.u-error-btn {
+.u-upload-grid__error {
     color: var(--u-white-color);
     background-color: $u-type-error;
     font-size: 20rpx;
@@ -565,5 +1254,232 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     right: 0;
     z-index: 9;
     line-height: 1;
+}
+
+// Grid 模式：文件预览样式
+.u-upload-grid__file {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16rpx;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.u-upload-grid__file-icon {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 16rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12rpx;
+}
+
+.u-upload-grid__file-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: -20rpx;
+    opacity: 0.9;
+}
+
+.u-upload-grid__file-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.u-upload-grid__file-name {
+    font-size: 22rpx;
+    line-height: 1.4;
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.u-upload-grid__file-size {
+    font-size: 20rpx;
+    color: var(--u-tips-color);
+    margin-top: 4rpx;
+}
+
+// ==================== 列表模式样式 ====================
+.u-upload--list {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+// 列表模式容器
+.u-upload-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+// 列表项
+.u-upload-list__item {
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    background: var(--u-bg-white);
+    border-radius: 12rpx;
+    margin-bottom: 16rpx;
+    border: 1rpx solid var(--u-border-color);
+    position: relative;
+}
+
+.u-upload-list__item--error {
+    border-color: var(--u-type-error);
+    position: relative;
+}
+
+.u-upload-list__item--error::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--u-type-error);
+    opacity: 0.05;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.u-upload-list__item:last-child {
+    margin-bottom: 0;
+}
+
+// 左侧：缩略图/图标
+.u-upload-list__left {
+    flex-shrink: 0;
+    margin-right: 20rpx;
+}
+
+.u-upload-list__thumb {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 8rpx;
+    background: var(--u-bg-gray-light);
+}
+
+.u-upload-list__icon {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 8rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// 中间：文件名信息
+.u-upload-list__center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.u-upload-list__name {
+    font-size: 28rpx;
+    color: var(--u-content-color);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.u-upload-list__name--error {
+    color: var(--u-type-error);
+}
+
+.u-upload-list__size {
+    font-size: 24rpx;
+    color: var(--u-tips-color);
+    margin-top: 8rpx;
+    text-align: left;
+}
+
+.u-upload-list__progress {
+    margin-top: 12rpx;
+    width: 100%;
+}
+
+// 重试按钮
+.u-upload-list__retry {
+    display: flex;
+    align-items: center;
+    margin-top: 8rpx;
+    padding: 8rpx 16rpx;
+    border-radius: 8rpx;
+    align-self: flex-start;
+    position: relative;
+}
+
+.u-upload-list__retry::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--u-type-error);
+    opacity: 0.1;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.u-upload-list__retry--hover::before {
+    opacity: 0.2;
+}
+
+.u-upload-list__retry-text {
+    font-size: 24rpx;
+    color: var(--u-type-error);
+    margin-left: 8rpx;
+}
+
+// 右侧：删除按钮
+.u-upload-list__right {
+    flex-shrink: 0;
+    margin-left: 20rpx;
+    background-color: $u-type-error;
+    border-radius: 100rpx;
+    width: 44rpx;
+    height: 44rpx;
+    @include vue-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// 列表模式添加按钮
+.u-upload-list__add {
+    margin-top: 16rpx;
+}
+
+.u-upload-list__add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24rpx;
+    background: var(--u-bg-white);
+    border: 2rpx dashed var(--u-border-color);
+    border-radius: 12rpx;
+    transition: all 0.3s;
+}
+
+.u-upload-list__add-btn--hover {
+    background: var(--u-bg-gray-light);
+    border-color: var(--u-type-primary);
+}
+
+.u-upload-list__add-text {
+    margin-left: 16rpx;
+    font-size: 28rpx;
+    color: var(--u-type-primary);
 }
 </style>

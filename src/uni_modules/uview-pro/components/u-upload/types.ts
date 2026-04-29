@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { ImgMode, UploadSizeType, UploadSourceType } from '../../types/global';
+import type { ImgMode, UploadSizeType, UploadSourceType, UploadAcceptType, UploadFileItem } from '../../types/global';
 import { useLocale } from '../../';
 
 const { t } = useLocale();
@@ -27,6 +27,12 @@ export const UploadProps = {
     maxCount: { type: [Number, String] as PropType<number | string>, default: 52 },
     /** 是否可删除 */
     deletable: { type: Boolean, default: true },
+    /**
+     * 上传组件的展示模式
+     * @description grid-网格模式(默认), list-列表模式
+     * @default 'grid'
+     */
+    mode: { type: String as PropType<'grid' | 'list'>, default: 'grid' },
     /** 是否显示上传列表 */
     showUploadList: { type: Boolean, default: true },
     /** 是否显示上传进度 */
@@ -61,33 +67,88 @@ export const UploadProps = {
     sourceType: { type: Array as PropType<UploadSourceType[]>, default: () => ['album', 'camera'] },
     /** 是否可预览大图 */
     previewFullImage: { type: Boolean, default: true },
+    /** 是否可预览文件 */
+    previewFile: { type: Boolean, default: true },
     /** 是否支持多选 */
     multiple: { type: Boolean, default: true },
-    /** 单个文件最大大小，单位B */
+    /** 单个文件最大大小，单位B(byte)，默认不限制 */
     maxSize: { type: [Number, String] as PropType<number | string>, default: Number.MAX_VALUE },
     /** 文件列表 */
-    fileList: { type: Array as PropType<any[]>, default: () => [] },
+    fileList: { type: Array as PropType<UploadFileItem[]>, default: () => [] },
     /** 限制文件类型 */
-    /** 允许上传的图片后缀 */
+    /** 允许上传的文件后缀 */
     /** 支付宝小程序真机选择图片的后缀为"image" */
     /** https://opendocs.alipay.com/mini/api/media-image */
-    limitType: { type: Array as PropType<string[]>, default: () => ['png', 'jpg', 'jpeg', 'webp', 'gif', 'image'] },
+    limitType: { type: Array as PropType<string[]>, default: () => [] },
     /** 是否自动上传 */
     autoUpload: { type: Boolean, default: true },
     /** 是否显示提示 */
     showTips: { type: Boolean, default: true },
+    /** 是否显示确认弹窗 */
+    showConfirm: { type: Boolean, default: true },
     /** 上传前钩子，返回true或Promise */
     beforeUpload: {
-        type: Function as unknown as PropType<((index: number, files: any[]) => boolean | Promise<any>) | null>,
+        type: Function as unknown as PropType<
+            ((index: number, files: UploadFileItem[]) => boolean | Promise<any>) | null
+        >,
         default: null
     },
     /** 删除前钩子，返回true或Promise */
     beforeRemove: {
-        type: Function as unknown as PropType<((index: number, files: any[]) => boolean | Promise<any>) | null>,
+        type: Function as unknown as PropType<
+            ((index: number, files: UploadFileItem[]) => boolean | Promise<any>) | null
+        >,
         default: null
     },
     /** 如果上传后的返回值为json字符串，是否转为json格式 */
-    toJson: { type: Boolean, default: true }
+    toJson: { type: Boolean, default: true },
+    /**
+     * 接受上传的文件类型
+     * @description image-图片(默认), video-视频, file-文件, media-媒体(图片+视频), all-所有文件
+     * @default 'image'
+     */
+    accept: { type: String as PropType<UploadAcceptType>, default: 'image' },
+    /**
+     * 是否显示文件名
+     * @default true
+     */
+    showFileName: { type: Boolean, default: true },
+    /**
+     * 是否显示文件大小
+     * @default false
+     */
+    showFileSize: { type: Boolean, default: false },
+    /**
+     * 文件类型图标映射配置
+     * @description 用于自定义不同文件类型的图标
+     */
+    fileIconMap: {
+        type: Object as PropType<Record<string, { name: string; color?: string }>>,
+        default: () => ({})
+    },
+    /**
+     * 选择视频时是否压缩
+     * @default true
+     */
+    compressed: { type: Boolean, default: true },
+    /**
+     * 选择视频时拍摄最长时长，单位秒
+     * @default 60
+     */
+    maxDuration: { type: Number, default: 60 },
+    /**
+     * 选择视频时，是前置还是后置摄像头
+     * @default 'back'
+     */
+    camera: { type: String as PropType<'front' | 'back'>, default: 'back' },
+    /**
+     * 选择文件时的扩展名过滤
+     * @description 仅在 accept='file' 或 accept='all' 时有效
+     */
+    extension: { type: Array as PropType<string[]>, default: () => [] }
 };
 
 export type UploadProps = ExtractPropTypes<typeof UploadProps>;
+
+// 重新导出全局类型，方便从组件入口导入
+export type { UploadAcceptType, UploadFileItem } from '../../types/global';

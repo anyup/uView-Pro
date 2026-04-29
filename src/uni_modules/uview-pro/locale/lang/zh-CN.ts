@@ -6,7 +6,11 @@ export default {
         cancelText: '取消'
     },
     uUpload: {
-        uploadText: '选择图片',
+        uploadText: '选择文件',
+        uploadImage: '选择图片',
+        uploadVideo: '选择视频',
+        uploadFile: '选择文件',
+        uploadMedia: '选择媒体',
         retry: '点击重试',
         overSize: '超出允许的文件大小',
         overMaxCount: '超出最大允许的文件个数',
@@ -20,7 +24,9 @@ export default {
         removeSuccess: '移除成功',
         previewFailed: '预览图片失败',
         notAllowedExt: '不允许选择{ext}格式的文件',
-        noAction: '请配置上传地址'
+        noAction: '请配置上传地址',
+        fileNotSupported: '当前平台暂不支持文件选择',
+        openFailed: '无法打开此文件'
     },
     uVerificationCode: {
         startText: '获取验证码',

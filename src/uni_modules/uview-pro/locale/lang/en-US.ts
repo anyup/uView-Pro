@@ -6,7 +6,11 @@ export default {
         cancelText: 'Cancel'
     },
     uUpload: {
-        uploadText: 'Select Image',
+        uploadText: 'Select File',
+        uploadImage: 'Select Image',
+        uploadVideo: 'Select Video',
+        uploadFile: 'Select File',
+        uploadMedia: 'Select Media',
         retry: 'Retry',
         overSize: 'File size exceeds allowed limit',
         overMaxCount: 'Exceeds maximum allowed number of files',
@@ -20,7 +24,9 @@ export default {
         removeSuccess: 'Removed successfully',
         previewFailed: 'Failed to preview image',
         notAllowedExt: 'Files with {ext} format are not allowed',
-        noAction: 'Please configure upload address'
+        noAction: 'Please configure upload address',
+        fileNotSupported: 'File selection is not supported on this platform',
+        openFailed: 'Unable to open this file'
     },
     uVerificationCode: {
         startText: 'Get Code',

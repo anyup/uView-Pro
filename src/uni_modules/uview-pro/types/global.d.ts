@@ -298,6 +298,31 @@ export type TagSize = 'default' | 'mini';
 export type ToastPosition = 'top' | 'center' | 'bottom';
 export type UploadSizeType = 'original' | 'compressed';
 export type UploadSourceType = 'album' | 'camera';
+
+/**
+ * 上传文件类型
+ * @description image-图片, video-视频, file-文件, media-媒体(图片+视频), all-所有文件
+ */
+export type UploadAcceptType = 'image' | 'video' | 'file' | 'media' | 'all';
+
+/**
+ * 上传文件项
+ */
+export interface UploadFileItem {
+    url?: string;
+    path?: string;
+    name?: string;
+    size?: number;
+    type?: string;
+    fileType?: 'image' | 'video' | 'file';
+    progress?: number;
+    error?: boolean;
+    response?: any;
+    uploadTask?: any;
+    file?: any;
+    thumb?: string;
+    [key: string]: any;
+}
 // fab 组件 position
 export type FabPosition =
     | 'left-top'
