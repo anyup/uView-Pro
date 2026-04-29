@@ -3,8 +3,12 @@
 /**
  * 发布脚本 (Node.js版本)
  * 使用方法:
- *   node scripts/release.js [patch|minor|major]  # 语义化版本
- *   node scripts/release.js 0.5.1                 # 直接指定版本号
+ *   node scripts/release.js [patch|minor|major]              # 语义化版本（默认不推送）
+ *   node scripts/release.js prerelease [alpha|beta|rc]       # 预览版本（默认不推送）
+ *   node scripts/release.js 0.5.1                          # 直接指定版本号（默认不推送）
+ *   node scripts/release.js patch --push                   # 提交并推送
+ *   node scripts/release.js push                           # 推送上次未推送的发布
+ *   node scripts/release.js undo                           # 撤销本地发布（仅未推送时）
  * 在所有平台上都能运行
  */
 
@@ -14,7 +18,137 @@ const path = require('path');
 
 // 获取命令行参数
 const args = process.argv.slice(2);
-const versionInput = args[0];
+
+// 特殊命令：push - 用于推送之前未 push 的发布
+if (args[0] === 'push') {
+    console.log('🚀 开始推送发布标签和提交...');
+    try {
+        // 获取当前版本
+        const packageJsonPath = path.join(process.cwd(), 'package.json');
+        const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+        const version = packageJson.version;
+
+        // 推送提交和标签
+        console.log('📤 推送提交...');
+        execSync('git push origin HEAD', { stdio: 'inherit' });
+        console.log(`📤 推送标签 v${version}...`);
+        execSync(`git push origin "v${version}"`, { stdio: 'inherit' });
+        console.log(`✅ 版本 ${version} 推送成功！`);
+        process.exit(0);
+    } catch (error) {
+        console.error('❌ 推送失败:', error.message);
+        process.exit(1);
+    }
+}
+
+// 特殊命令：undo - 用于撤销本地的发布（仅支持未推送的情况）
+if (args[0] === 'undo') {
+    console.log('↩️  开始撤销本地发布...');
+    try {
+        // 获取当前版本
+        const packageJsonPath = path.join(process.cwd(), 'package.json');
+        const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+        const version = packageJson.version;
+        const tagName = `v${version}`;
+
+        // 检查是否有未推送的提交
+        console.log('🔍 检查提交状态...');
+        try {
+            const unpushedCommits = execSync('git log origin/HEAD..HEAD --oneline', { encoding: 'utf8' }).trim();
+            if (!unpushedCommits) {
+                console.error('❌ 错误：没有未推送的提交，或者当前分支没有远程跟踪分支');
+                console.error('💡 该命令仅用于撤销未推送的本地发布');
+                process.exit(1);
+            }
+        } catch (e) {
+            // 如果没有远程分支，git log 会报错，这也是可以撤销的情况
+        }
+
+        // 检查标签是否存在
+        console.log(`🔍 检查标签 ${tagName}...`);
+        let tagExists = false;
+        try {
+            execSync(`git rev-parse ${tagName}`, { stdio: 'pipe' });
+            tagExists = true;
+        } catch (e) {
+            console.log(`⚠️  标签 ${tagName} 不存在`);
+        }
+
+        // 获取最后一次提交信息
+        const lastCommitMsg = execSync('git log -1 --pretty=%B', { encoding: 'utf8' }).trim();
+        const isReleaseCommit = lastCommitMsg.includes('chore(release): bump version to');
+
+        if (!isReleaseCommit) {
+            console.error('❌ 错误：最后一次提交不是发布提交');
+            console.error('💡 最后一次提交信息:', lastCommitMsg.substring(0, 50) + '...');
+            console.error('💡 请手动检查并撤销');
+            process.exit(1);
+        }
+
+        console.log('');
+        console.log('⚠️  即将执行以下操作：');
+        console.log(`   1. 删除本地标签: ${tagName}`);
+        console.log('   2. 撤销最后一次提交（保留修改到暂存区）');
+        console.log('   3. 恢复 package.json 和 changelog 文件');
+        console.log('');
+        console.log('💡 撤销后版本号需要手动修改回之前的版本');
+        console.log('');
+
+        // 由于是命令行工具，直接执行而不询问
+        // 删除本地标签
+        if (tagExists) {
+            console.log(`🗑️  删除本地标签 ${tagName}...`);
+            execSync(`git tag -d ${tagName}`, { stdio: 'inherit' });
+        }
+
+        // 撤销最后一次提交，保留修改
+        console.log('↩️  撤销最后一次提交...');
+        execSync('git reset --soft HEAD~1', { stdio: 'inherit' });
+
+        // 恢复 package.json 文件
+        console.log('📄 恢复 package.json...');
+        execSync('git checkout -- package.json', { stdio: 'inherit' });
+
+        // 恢复 uview-pro 模块的 package.json
+        const uviewProPackagePath = 'src/uni_modules/uview-pro/package.json';
+        if (fs.existsSync(uviewProPackagePath)) {
+            console.log('📄 恢复 uview-pro package.json...');
+            try {
+                execSync(`git checkout -- ${uviewProPackagePath}`, { stdio: 'inherit' });
+            } catch (e) {
+                console.log('⚠️  未找到 uview-pro package.json 或无需恢复');
+            }
+        }
+
+        // 恢复 changelog
+        console.log('📄 恢复 changelog...');
+        execSync('git checkout -- CHANGELOG.md', { stdio: 'inherit' });
+        try {
+            execSync('git checkout -- src/uni_modules/uview-pro/changelog.md', { stdio: 'inherit' });
+        } catch (e) {
+            console.log('⚠️  未找到 uview-pro changelog 或无需恢复');
+        }
+
+        console.log('');
+        console.log('✅ 本地发布撤销成功！');
+        console.log('');
+        console.log('📋 当前状态：');
+        console.log(`   • 标签 ${tagName} 已删除`);
+        console.log('   • 提交已撤销，修改已保留在暂存区');
+        console.log('   • package.json 和 changelog 已恢复');
+        console.log('');
+        console.log('💡 如需修改版本号，请手动编辑 package.json');
+        console.log('💡 如需重新发布，运行: npm run release:patch (或其他版本类型)');
+        process.exit(0);
+    } catch (error) {
+        console.error('❌ 撤销失败:', error.message);
+        process.exit(1);
+    }
+}
+
+// 检查是否有 --push 参数（默认不推送）
+const shouldPush = args.includes('--push');
+const versionInput = args.find(arg => !arg.startsWith('--'));
 
 // 验证版本号格式 (支持 x.y.z 格式，如 0.5.1, 1.0.0, 2.3.4-beta.1)
 function isValidVersion(version) {
@@ -25,22 +159,44 @@ function isValidVersion(version) {
 }
 
 // 判断是语义化版本类型还是直接指定版本号
-const isSemverType = ['patch', 'minor', 'major'].includes(versionInput);
+const isSemverType = ['patch', 'minor', 'major', 'prerelease'].includes(versionInput);
 const isDirectVersion = isValidVersion(versionInput);
 
 // 验证参数
 if (!versionInput || (!isSemverType && !isDirectVersion)) {
     console.error('❌ 请指定版本类型或版本号');
     console.error('使用方法:');
-    console.error('  node scripts/release.js [patch|minor|major]  # 语义化版本');
-    console.error('  node scripts/release.js 0.5.1                 # 直接指定版本号');
+    console.error('  node scripts/release.js [patch|minor|major]              # 语义化版本（默认不推送）');
+    console.error('  node scripts/release.js prerelease [alpha|beta|rc]       # 预览版本（默认不推送）');
+    console.error('  node scripts/release.js 0.5.1                            # 直接指定版本号（默认不推送）');
+    console.error('');
+    console.error('选项:');
+    console.error('  --push                                                   # 提交并推送');
+    console.error('');
+    console.error('其他命令:');
+    console.error('  node scripts/release.js push                             # 推送上次未推送的发布');
+    console.error('  node scripts/release.js undo                             # 撤销本地发布（仅未推送时）');
     process.exit(1);
+}
+
+// 处理 prerelease 类型和标识
+let prereleaseId = '';
+if (versionInput === 'prerelease') {
+    prereleaseId = args[1] || 'beta'; // 默认使用 beta
 }
 
 const versionType = isSemverType ? versionInput : null;
 const targetVersion = isDirectVersion ? versionInput : null;
 
-console.log(`🚀 开始发布 ${targetVersion || versionType} 版本...`);
+// 显示发布信息
+const releaseTypeText = targetVersion
+    ? targetVersion
+    : versionType === 'prerelease'
+      ? `${prereleaseId} 预览版`
+      : versionType;
+const isPrereleaseType = versionType === 'prerelease' || (targetVersion && targetVersion.includes('-'));
+
+console.log(`${isPrereleaseType ? '🧪' : '🚀'} 开始发布 ${releaseTypeText} 版本...`);
 
 // 执行命令的辅助函数
 function execCommand(command, options = {}) {
@@ -97,6 +253,7 @@ function continueRelease() {
         const packageJsonPath = path.join(process.cwd(), 'package.json');
         const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD格式
         let newVersion;
+        const isPrerelease = versionType === 'prerelease' || (targetVersion && targetVersion.includes('-'));
 
         // 更新版本号
         if (targetVersion) {
@@ -108,6 +265,15 @@ function continueRelease() {
             packageJson.releaseDate = currentDate;
             fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
             newVersion = targetVersion;
+        } else if (versionType === 'prerelease') {
+            // 预览版本
+            console.log(`📦 更新版本号为 ${prereleaseId} 预览版本...`);
+            execCommand(`npm version prerelease --preid=${prereleaseId} --no-git-tag-version`);
+            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+            newVersion = packageJson.version;
+            // 更新发布日期
+            packageJson.releaseDate = currentDate;
+            fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
         } else {
             // 语义化版本类型
             console.log('📦 更新版本号...');
@@ -155,139 +321,35 @@ function continueRelease() {
         execCommand(`git tag -a "v${newVersion}" -m "Release version ${newVersion}"`);
 
         // 推送更改和标签
-        console.log('🚀 推送更改和标签...');
-        execCommand('git push origin HEAD');
-        execCommand(`git push origin "v${newVersion}"`);
-
-        // 尝试创建 GitHub/Gitee Release（如果检测到相应仓库且提供了 Token）
-        try {
-            const repoInfo = getRepoInfo();
-            if (repoInfo) {
-                const body = extractCurrentVersionChangelog(newVersion);
-                if (repoInfo.host.includes('github.com')) {
-                    const ghToken = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
-                    if (ghToken) {
-                        createGithubRelease({ token: ghToken, repoInfo, version: newVersion, body });
-                        console.log(`✅ 已创建 GitHub Release: v${newVersion}`);
-                    } else {
-                        console.log('ℹ️ 未检测到 GITHUB_TOKEN，跳过自动创建 GitHub Release');
-                    }
-                } else if (repoInfo.host.includes('gitee.com')) {
-                    const geToken = process.env.GITEE_TOKEN;
-                    if (geToken) {
-                        createGiteeRelease({ token: geToken, repoInfo, version: newVersion, body });
-                        console.log(`✅ 已创建 Gitee Release: v${newVersion}`);
-                    } else {
-                        console.log('ℹ️ 未检测到 GITEE_TOKEN，跳过自动创建 Gitee Release');
-                    }
-                }
-            }
-        } catch (e) {
-            console.warn('⚠️  创建 GitHub Release 失败（已忽略）：', e.message);
+        if (shouldPush) {
+            console.log('🚀 推送更改和标签...');
+            execCommand('git push origin HEAD');
+            execCommand(`git push origin "v${newVersion}"`);
         }
 
-        console.log(`✅ 版本 ${newVersion} 发布成功!`);
+        console.log(`${isPrerelease ? '🎉 预览版本' : '✅ 版本'} ${newVersion} 发布成功!`);
         console.log('📝 Changelog 已更新');
-        console.log(`🏷️  标签 v${newVersion} 已创建并推送`);
+        if (shouldPush) {
+            console.log(`🏷️  标签 v${newVersion} 已创建并推送`);
+        } else {
+            console.log(`🏷️  标签 v${newVersion} 已创建（未推送）`);
+            console.log('💡 如需推送，运行: npm run release:push');
+            console.log(`   或: git push origin HEAD && git push origin "v${newVersion}"`);
+        }
+        if (isPrerelease) {
+            console.log('');
+            console.log('⚠️  这是一个预览版本，仅供测试使用');
+        }
         console.log('');
         console.log('📋 下一步:');
-        console.log('1. 如需上传构建产物，可前往 Release 页面添加');
-        console.log('2. 或者配置 GITHUB_TOKEN 以启用自动创建 Release');
+        if (!shouldPush) {
+            console.log('1. 检查无误后，运行 npm run release:push 推送发布');
+            console.log('2. 如需创建 GitHub/Gitee Release，请手动前往仓库创建');
+        } else {
+            console.log('如需创建 GitHub/Gitee Release，请手动前往仓库创建');
+        }
     } catch (error) {
         console.error('❌ 发布过程中出现错误:', error.message);
         process.exit(1);
     }
-}
-
-function getRepoInfo() {
-    // 优先从 package.json repository 字段解析
-    try {
-        const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'));
-        const repo = pkg.repository || '';
-        const url = typeof repo === 'string' ? repo : repo.url || '';
-        if (url) {
-            return parseGitUrl(url);
-        }
-    } catch {}
-    // 退回解析 git remote
-    try {
-        const remote = execSync('git remote get-url origin', { encoding: 'utf8' }).trim();
-        return parseGitUrl(remote);
-    } catch {}
-    return null;
-}
-
-function parseGitUrl(url) {
-    // 支持 https://github.com/owner/repo(.git) 以及 git@github.com:owner/repo.git
-    let host = '';
-    let owner = '';
-    let repo = '';
-    try {
-        if (url.startsWith('git@')) {
-            const match = url.match(/^git@([^:]+):([^/]+)\/([^\.]+)(?:\.git)?$/);
-            if (match) {
-                host = match[1];
-                owner = match[2];
-                repo = match[3];
-            }
-        } else {
-            const u = new URL(url.replace(/\.git$/, ''));
-            host = u.host;
-            const parts = u.pathname.replace(/^\//, '').split('/');
-            owner = parts[0];
-            repo = parts[1]?.replace(/\.git$/, '') || '';
-        }
-    } catch {}
-    if (host && owner && repo) return { host, owner, repo };
-    return null;
-}
-
-function extractCurrentVersionChangelog(version) {
-    const changelogPath = path.join(process.cwd(), 'CHANGELOG.md');
-    if (!fs.existsSync(changelogPath)) return '';
-    const content = fs.readFileSync(changelogPath, 'utf8');
-    const header = `## [${version}]`;
-    const start = content.indexOf(header);
-    if (start === -1) return '';
-    const next = content.indexOf('\n## ', start + header.length);
-    const section = next !== -1 ? content.slice(start, next).trim() : content.slice(start).trim();
-    // 去掉首行标题，仅保留正文作为 Release body，更清爽
-    const lines = section.split('\n');
-    if (lines.length > 1) {
-        return lines.slice(1).join('\n').trim();
-    }
-    return section;
-}
-
-function createGithubRelease({ token, repoInfo, version, body }) {
-    const api = `https://api.github.com/repos/${repoInfo.owner}/${repoInfo.repo}/releases`;
-    const payload = {
-        tag_name: `v${version}`,
-        name: `v${version}`,
-        body: body || '',
-        draft: false,
-        prerelease: false
-    };
-    const cmd = `curl -sS -X POST -H "Authorization: Bearer ${token}" -H "Accept: application/vnd.github+json" ${api} -d '${JSON.stringify(payload)}'`;
-    execCommand(cmd, { stdio: 'pipe' });
-}
-
-function createGiteeRelease({ token, repoInfo, version, body }) {
-    // Gitee API: POST https://gitee.com/api/v5/repos/{owner}/{repo}/releases
-    // 认证使用 access_token，字段名为 access_token
-    const api = `https://gitee.com/api/v5/repos/${repoInfo.owner}/${repoInfo.repo}/releases`;
-    const payload = {
-        access_token: token,
-        tag_name: `v${version}`,
-        name: `v${version}`,
-        body: body || '',
-        // target_commitish 可选，默认当前分支 HEAD
-        draft: false,
-        prerelease: false
-    };
-    const form = Object.entries(payload)
-        .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
-        .join('&');
-    const cmd = `curl -sS -X POST "${api}" -H "Content-Type: application/x-www-form-urlencoded" -d "${form}"`;
-    execCommand(cmd, { stdio: 'pipe' });
 }
