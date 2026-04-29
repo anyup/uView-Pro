@@ -1,79 +1,174 @@
 <template>
-    <demo-page title="Upload 上传" desc="用于文件上传，支持多个文件、进度显示和自定义样式。" :apis="'upload'">
+    <demo-page
+        title="Upload 上传"
+        desc="用于文件上传，支持图片、视频、文档等多种文件类型，支持多个文件、进度显示和自定义样式。"
+        :apis="'upload'"
+    >
         <template #default>
             <view class="u-demo">
+                <!-- 基础用法 - 图片上传（网格模式） -->
                 <view class="u-demo-wrap">
-                    <view class="u-demo-title">演示效果</view>
+                    <view class="u-demo-title">基础用法 - 图片上传</view>
                     <view class="u-demo-area">
-                        <view class="pre-box" v-if="!showUploadList">
-                            <view class="pre-item" v-for="(item, index) in lists" :key="index">
-                                <image class="pre-item-image" :src="item.url" mode="aspectFill"></image>
-                                <view class="u-delete-icon" @tap.stop="deleteItem(index)">
-                                    <u-icon name="close" size="20" color="#ffffff"></u-icon>
-                                </view>
-                                <u-line-progress
-                                    v-if="(item.progress ?? 0) > 0 && !item.error"
-                                    :show-percent="false"
-                                    height="16"
-                                    class="u-progress"
-                                    :percent="item.progress ?? 0"
-                                ></u-line-progress>
-                            </view>
-                        </view>
                         <u-upload
-                            ref="uUploadRef"
-                            :before-remove="beforeRemove"
-                            :custom-btn="customBtn"
-                            :show-upload-list="showUploadList"
+                            ref="imageUploadRef"
+                            v-model="imageList"
+                            accept="image"
                             :action="action"
-                            :auto-upload="autoUpload"
-                            :file-list="fileList"
-                            :show-progress="showProgress"
-                            :deletable="deletable"
-                            :max-count="maxCount"
-                            @on-choose-fail="onChooseFail"
-                            @on-choose-complete="onChooseComplete"
-                            @on-error="onError"
-                            @on-change="onChange"
-                            @on-success="onSuccess"
-                            @on-list-change="onListChange"
-                            @on-uploaded="onUploaded"
-                            @on-progress="onProgress"
-                            @on-remove="onRemove"
-                            @on-preview="onPreview"
+                            :max-count="6"
+                        />
+                    </view>
+                </view>
+
+                <!-- 文件上传 - 列表模式 -->
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">文件上传 - 列表模式</view>
+                    <view class="u-demo-area">
+                        <u-upload
+                            ref="fileUploadRef"
+                            v-model="fileList"
+                            accept="file"
+                            mode="list"
+                            :action="action"
+                            :max-count="5"
+                            :show-file-name="true"
+                            :show-file-size="true"
+                        />
+                    </view>
+                </view>
+
+                <!-- 手动上传示例 -->
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">手动上传（点击按钮开始上传）</view>
+                    <view class="u-demo-area">
+                        <u-upload
+                            ref="manualUploadRef"
+                            v-model="manualList"
+                            accept="image"
+                            :action="action"
+                            :auto-upload="false"
+                            :max-count="3"
+                            @on-choose-complete="onManualChooseComplete"
+                        />
+                        <view class="u-btn-group">
+                            <u-button
+                                :custom-style="{ marginTop: '20rpx' }"
+                                type="primary"
+                                :disabled="manualList.length === 0"
+                                @click="startManualUpload"
+                            >
+                                开始上传
+                            </u-button>
+                            <u-button
+                                :custom-style="{ marginTop: '20rpx', marginLeft: '20rpx' }"
+                                @click="clearManualList"
+                            >
+                                清空列表
+                            </u-button>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 视频上传 -->
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">视频上传</view>
+                    <view class="u-demo-area">
+                        <u-upload
+                            ref="videoUploadRef"
+                            v-model="videoList"
+                            accept="video"
+                            :action="action"
+                            :max-count="2"
+                            :max-duration="60"
+                            :show-file-name="true"
+                        />
+                    </view>
+                </view>
+
+                <!-- 自定义上传按钮 -->
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">自定义上传按钮</view>
+                    <view class="u-demo-area">
+                        <u-upload
+                            ref="customUploadRef"
+                            v-model="customList"
+                            accept="image"
+                            :action="action"
+                            :custom-btn="true"
+                            :max-count="3"
                         >
-                            <template v-if="customBtn" #addBtn>
-                                <view class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
-                                    <u-icon name="photo" size="60" :color="$u.color.primary"></u-icon>
+                            <template #addBtn>
+                                <view
+                                    class="custom-upload-btn"
+                                    hover-class="custom-upload-btn__hover"
+                                    hover-stay-time="150"
+                                >
+                                    <u-icon name="photo" size="48" color="#2979ff"></u-icon>
+                                    <text class="custom-upload-text">点击上传图片</text>
                                 </view>
                             </template>
                         </u-upload>
-                        <u-button :custom-style="{ marginTop: '20rpx' }" @click="upload">上传</u-button>
-                        <u-button :custom-style="{ marginTop: '40rpx' }" @click="clear">清空列表</u-button>
-                        <!-- <u-button :custom-style="{ marginTop: '40rpx' }" @click="reUpload">重新上传</u-button> -->
                     </view>
                 </view>
-                <view class="u-config-wrap">
-                    <view class="u-config-title u-border-bottom"> 参数配置 </view>
-                    <view class="u-config-item">
-                        <view class="u-item-title">上传方式</view>
-                        <u-subsection
-                            current="1"
-                            :list="['自动上传', '手动上传']"
-                            @change="autoUploadChange"
-                        ></u-subsection>
-                    </view>
-                    <view class="u-config-item">
-                        <view class="u-item-title">自定义控件(进度条和删除按钮)</view>
-                        <u-subsection :list="['显示', '隐藏']" @change="controlChange"></u-subsection>
-                    </view>
-                    <view class="u-config-item">
-                        <view class="u-item-title">最大上传数量</view>
-                        <u-subsection current="1" :list="['1', '2', '4']" @change="maxCountChange"></u-subsection>
-                    </view>
-                    <view class="u-config-item">
-                        <view class="u-item-title">自定义样式(预览区域和上传按钮)</view>
-                        <u-subsection current="1" :list="['是', '否']" @change="customStyleChange"></u-subsection>
+
+                <!-- 自定义文件列表展示 -->
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">自定义文件列表（使用 file 插槽）</view>
+                    <view class="u-demo-area">
+                        <u-upload
+                            ref="customFileListRef"
+                            v-model="customFileList"
+                            accept="file"
+                            mode="list"
+                            :action="action"
+                            :show-upload-list="false"
+                            :custom-btn="true"
+                            :max-count="5"
+                        >
+                            <template #file="{ file }">
+                                <view class="custom-file-list">
+                                    <view v-for="(item, index) in file" :key="index" class="custom-file-item">
+                                        <u-icon
+                                            :name="isImageFile(item) ? 'photo' : 'file-text'"
+                                            size="40"
+                                            color="var(--u-type-primary)"
+                                        />
+                                        <view class="custom-file-info">
+                                            <text class="custom-file-name">{{ item.name || '未命名文件' }}</text>
+                                            <text v-if="item.size" class="custom-file-size">
+                                                {{ formatSize(item.size) }}
+                                            </text>
+                                        </view>
+                                        <view
+                                            v-if="item.progress < 100 && item.progress > 0"
+                                            class="custom-file-progress"
+                                        >
+                                            <u-line-progress :percent="item.progress" height="8" />
+                                        </view>
+                                        <view class="custom-file-status">
+                                            <u-icon
+                                                v-if="item.progress === 100"
+                                                :name="item.error ? 'close-circle' : 'checkmark-circle'"
+                                                size="34"
+                                                :color="item.error ? 'var(--u-type-error)' : 'var(--u-type-success)'"
+                                            />
+                                            <text v-else class="custom-file-progress-text">
+                                                {{ Math.floor(item.progress || 0) }}%
+                                            </text>
+                                        </view>
+                                        <view class="custom-file-delete" @click="removeCustomFile(index)">
+                                            <u-icon name="close" size="24" color="var(--u-tips-color)" />
+                                        </view>
+                                    </view>
+                                </view>
+                            </template>
+                            <template #addBtn>
+                                <view class="custom-file-add-btn">
+                                    <u-icon name="plus" size="32" color="var(--u-type-primary)" />
+                                    <text class="custom-file-add-text">添加文件</text>
+                                </view>
+                            </template>
+                        </u-upload>
                     </view>
                 </view>
             </view>
@@ -83,249 +178,264 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { $u } from '@/uni_modules/uview-pro';
+import { useToast } from '@/uni_modules/uview-pro';
+import type { UploadFileItem } from '@/uni_modules/uview-pro/types/global';
 
-// 上传文件项类型
-interface UploadFileItem {
-    url: string;
-    error?: boolean;
-    progress?: number;
-    [key: string]: any;
-}
-const uUploadRef = ref();
-// u-upload 组件 fileList 类型
-// const fileList = ref<UploadFileItem[]>([]);
-const fileList = ref<UploadFileItem[]>([
+const toast = useToast();
+
+// 上传地址（实际使用请替换为真实地址，演示使用模拟上传）
+const action = ref<string>('https://example.com/upload');
+
+// 各上传组件引用
+const imageUploadRef = ref();
+const fileUploadRef = ref();
+const manualUploadRef = ref();
+const videoUploadRef = ref();
+const customUploadRef = ref();
+const customFileListRef = ref();
+
+// 文件列表
+const imageList = ref<UploadFileItem[]>([
     {
         url: 'https://ik.imagekit.io/anyup/uview-pro/common/logo-new.png',
+        name: 'logo.png',
+        size: 1024 * 50,
         error: false,
         progress: 100
     }
 ]);
-// 组件内部的文件列表
-const lists = ref<UploadFileItem[]>([]);
-// 上传接口地址
-const action = ref<string>('http://127.0.0.1:7001/upload');
-// 是否显示上传列表
-const showUploadList = ref<boolean>(true);
-// 是否自定义上传按钮
-const customBtn = ref<boolean>(false);
-// 是否自动上传
-const autoUpload = ref<boolean>(false);
-// 是否显示进度条
-const showProgress = ref<boolean>(true);
-// 是否可删除
-const deletable = ref<boolean>(true);
-// 是否自定义样式
-const customStyle = ref<boolean>(false);
-// 最大上传数量
-const maxCount = ref<number>(2);
 
-/**
- * 重新上传（如需）
- */
-function reUpload() {
-    uUploadRef.value.reUpload();
-}
-/**
- * 清空上传列表
- */
-function clear() {
-    uUploadRef.value.clear();
-}
-/**
- * 上传方式切换
- */
-function autoUploadChange(index: number) {
-    autoUpload.value = index === 0;
-}
-/**
- * 控件显示切换
- */
-function controlChange(index: number) {
-    if (index === 0) {
-        showProgress.value = true;
-        deletable.value = true;
-    } else {
-        showProgress.value = false;
-        deletable.value = false;
+const fileList = ref<UploadFileItem[]>([
+    {
+        url: 'https://example.com/document.pdf',
+        name: '示例文档.pdf',
+        size: 1024 * 1024 * 2.5,
+        error: false,
+        progress: 100
     }
-}
-/**
- * 最大上传数量切换
- */
-function maxCountChange(index: number) {
-    maxCount.value = index === 0 ? 1 : index === 1 ? 2 : 4;
-}
-/**
- * 自定义样式切换
- */
-function customStyleChange(index: number) {
-    if (index === 0) {
-        showUploadList.value = false;
-        customBtn.value = true;
-    } else {
-        showUploadList.value = true;
-        customBtn.value = false;
+]);
+
+const manualList = ref<UploadFileItem[]>([]);
+const videoList = ref<UploadFileItem[]>([]);
+const customList = ref<UploadFileItem[]>([]);
+const customFileList = ref<UploadFileItem[]>([
+    {
+        url: 'https://example.com/report.pdf',
+        name: '年度报告.pdf',
+        size: 1024 * 1024 * 3.2,
+        error: false,
+        progress: 100
+    },
+    {
+        url: 'https://example.com/contract.docx',
+        name: '合同文档.docx',
+        size: 1024 * 450,
+        error: false,
+        progress: 100
     }
+]);
+
+// 模拟上传函数
+function mockUpload(uploadRef: any, listRef: UploadFileItem[]) {
+    const lists = uploadRef?.lists as UploadFileItem[];
+    if (!lists || lists.length === 0) return;
+
+    lists.forEach((item: UploadFileItem, index: number) => {
+        // 只处理未上传或上传失败的文件
+        if (item.progress === 100 && !item.error) return;
+
+        const shouldSuccess = Math.random() > 0.1; // 90%成功率
+        const totalTime = 2000 + Math.random() * 2000; // 2-4秒
+        const interval = 100;
+        const step = 100 / (totalTime / interval);
+
+        let progress = item.progress || 0;
+        const timer = setInterval(() => {
+            progress += step;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(timer);
+
+                lists[index].progress = 100;
+                if (shouldSuccess) {
+                    lists[index].error = false;
+                    lists[index].response = { code: 200, message: 'success', url: lists[index].url };
+                    toast.success('上传成功');
+                } else {
+                    lists[index].error = true;
+                    toast.error('上传失败');
+                }
+            } else {
+                lists[index].progress = Math.floor(progress);
+            }
+        }, interval);
+    });
 }
-/**
- * 手动上传
- */
-function upload() {
-    uUploadRef.value.upload();
+
+// 手动上传
+function startManualUpload() {
+    mockUpload(manualUploadRef.value, manualList.value);
 }
-/**
- * 删除预览图片
- */
-function deleteItem(index: number) {
-    uUploadRef.value.remove(index);
+
+// 清空手动上传列表
+function clearManualList() {
+    manualUploadRef.value?.clear();
+    toast.success('已清空');
 }
-/**
- * 图片大小超出最大允许大小
- */
-function onOversize(file: UploadFileItem, lists: UploadFileItem[]) {
-    // console.log('onOversize', file, lists);
+
+// 手动选择完成回调
+function onManualChooseComplete() {
+    toast.success('选择完成，点击"开始上传"按钮上传');
 }
-/**
- * 全屏预览图片时触发
- */
-function onPreview(url: string, lists: UploadFileItem[]) {
-    console.log('onPreview', url, lists);
+
+// 判断是否为图片文件
+function isImageFile(item: UploadFileItem): boolean {
+    const ext = item.name?.split('.').pop()?.toLowerCase() || '';
+    return ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg'].includes(ext);
 }
-/**
- * 移除图片时触发
- */
-function onRemove(index: number, lists: UploadFileItem[]) {
-    console.log('onRemove', index, lists);
+
+// 格式化文件大小
+function formatSize(bytes: number): string {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
-/**
- * 图片上传失败时触发
- */
-function onError(res: any, index: number, lists: UploadFileItem[]) {
-    console.log('onError', res, index, lists);
-}
-/**
- * 图片上传成功时触发
- */
-function onSuccess(data: any, index: number, lists: UploadFileItem[]) {
-    console.log('onSuccess', data, index, lists);
-}
-/**
- * 图片上传后，无论成功或者失败都会触发
- */
-function onChange(res: any, index: number, lists: UploadFileItem[]) {
-    console.log('onChange', res, index, lists);
-}
-/**
- * 图片上传过程中的进度变化过程触发
- */
-function onProgress(res: any, index: number, lists: UploadFileItem[]) {
-    console.log('onProgress', res, index, lists);
-}
-/**
- * 所有图片上传完毕触发
- */
-function onUploaded(listsArg: UploadFileItem[]) {
-    console.log('onUploaded', listsArg);
-}
-/**
- * 文件列表发生变化时触发
- */
-function onListChange(listsArg: UploadFileItem[]) {
-    console.log('onListChange', listsArg);
-    lists.value = listsArg;
-}
-/**
- * 移除图片前的钩子，返回false将被阻止图片删除
- */
-function beforeRemove(index: number, lists: UploadFileItem[]): boolean {
-    console.log('beforeRemove', index, lists);
-    return true;
-}
-/**
- * 选择图片失败时触发
- */
-function onChooseFail(e: any) {
-    console.log('onChooseFail', e);
-}
-/**
- * 选择图片完成时触发
- */
-function onChooseComplete(listsArg: UploadFileItem[], index: number) {
-    console.log('onChooseComplete', listsArg, index);
+
+// 删除自定义文件列表中的文件
+function removeCustomFile(index: number) {
+    customFileListRef.value?.remove(index);
 }
 </script>
 
 <style lang="scss">
 .u-demo-wrap {
-    background-color: $u-bg-white;
+    background-color: var(--u-bg-white);
     padding: 40rpx 8rpx;
     margin-left: -14rpx;
     margin-right: -14rpx;
-}
-
-.u-add-wrap {
-    flex-direction: column;
-    color: $u-content-color;
-    font-size: 28rpx;
-}
-
-::v-deep .slot-btn {
-    width: 329rpx;
-    height: 140rpx;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgb(244, 245, 246);
-    border-radius: 10rpx;
-}
-
-.slot-btn__hover {
-    background-color: rgb(235, 236, 238);
-}
-
-.pre-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.pre-item {
-    flex: 0 0 48.5%;
-    border-radius: 10rpx;
-    height: 140rpx;
-    overflow: hidden;
-    position: relative;
     margin-bottom: 20rpx;
 }
 
-.u-progress {
-    position: absolute;
-    bottom: 10rpx;
-    left: 8rpx;
-    right: 8rpx;
-    z-index: 9;
-    width: auto;
+.u-demo-title {
+    font-size: 28rpx;
+    font-weight: bold;
+    color: var(--u-main-color);
+    margin-bottom: 20rpx;
 }
 
-.pre-item-image {
+.u-demo-area {
+    padding: 10rpx 0;
+}
+
+.u-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+// 自定义上传按钮样式
+.custom-upload-btn {
+    width: 200rpx;
+    height: 200rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--u-bg-gray-light);
+    border-radius: 10rpx;
+    border: 2rpx dashed var(--u-border-color);
+}
+
+.custom-upload-btn__hover {
+    background-color: var(--u-bg-gray-light);
+    opacity: 0.8;
+}
+
+.custom-upload-text {
+    margin-top: 16rpx;
+    font-size: 24rpx;
+    color: var(--u-tips-color);
+}
+
+// 自定义文件列表样式
+.custom-file-list {
     width: 100%;
-    height: 140rpx;
+    margin-bottom: 20rpx;
 }
 
-.u-delete-icon {
-    position: absolute;
-    top: 10rpx;
-    right: 10rpx;
-    z-index: 10;
-    background-color: $u-type-error;
-    border-radius: 100rpx;
-    width: 44rpx;
-    height: 44rpx;
+.custom-file-item {
     display: flex;
     align-items: center;
+    padding: 24rpx;
+    background: var(--u-bg-white);
+    border-radius: 12rpx;
+    margin-bottom: 16rpx;
+    border: 1rpx solid var(--u-border-color);
+}
+
+.custom-file-item:last-child {
+    margin-bottom: 0;
+}
+
+.custom-file-info {
+    flex: 1;
+    margin-left: 20rpx;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.custom-file-name {
+    font-size: 28rpx;
+    color: var(--u-main-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-file-size {
+    font-size: 24rpx;
+    color: var(--u-tips-color);
+    margin-top: 8rpx;
+}
+
+.custom-file-progress {
+    width: 120rpx;
+    margin-left: 20rpx;
+}
+
+.custom-file-progress-text {
+    font-size: 24rpx;
+    color: var(--u-primary-color);
+}
+
+.custom-file-status {
+    margin-left: 20rpx;
+    min-width: 48rpx;
+    display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.custom-file-delete {
+    display: flex;
+    align-items: center;
+    margin-left: 20rpx;
+    padding: 8rpx;
+}
+
+.custom-file-add-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: var(--u-bg-white);
+}
+
+.custom-file-add-text {
+    margin-left: 16rpx;
+    font-size: 28rpx;
+    color: var(--u-tips-color);
 }
 </style>
