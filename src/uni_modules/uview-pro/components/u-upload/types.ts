@@ -73,7 +73,15 @@ export const UploadProps = {
     multiple: { type: Boolean, default: true },
     /** 单个文件最大大小，单位B(byte)，默认不限制 */
     maxSize: { type: [Number, String] as PropType<number | string>, default: Number.MAX_VALUE },
-    /** 文件列表 */
+    /**
+     * 文件列表（v-model 双向绑定）
+     * @description 推荐使用 v-model 替代 :file-list
+     */
+    modelValue: { type: Array as PropType<UploadFileItem[]>, default: () => [] },
+    /**
+     * 文件列表（初始值，向后兼容）
+     * @deprecated 请使用 v-model
+     */
     fileList: { type: Array as PropType<UploadFileItem[]>, default: () => [] },
     /** 限制文件类型 */
     /** 允许上传的文件后缀 */

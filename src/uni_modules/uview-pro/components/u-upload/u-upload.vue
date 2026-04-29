@@ -300,7 +300,8 @@ const emit = defineEmits([
     'on-change',
     'on-progress',
     'on-remove',
-    'on-preview'
+    'on-preview',
+    'update:modelValue'
 ]);
 
 const lists = ref<UploadFileItem[]>([]);
@@ -390,46 +391,71 @@ const uploadBtnText = computed(() => {
     }
 });
 
-// 监听 fileList 变化，自动同步内部 lists
+/**
+ * 同步外部列表到内部 lists
+ * @param val 外部传入的文件列表
+ * @param isModelValue 是否来自 modelValue
+ */
+function syncToInternal(val: UploadFileItem[], isModelValue: boolean = false) {
+    // 只有当不是由内部变化触发时才同步（避免循环更新）
+    const externalList = isModelValue ? props.modelValue : props.fileList;
+    const externalSet = new Set(externalList.map((item: UploadFileItem) => item.url || item.path).filter(Boolean));
+    const internalSet = new Set(lists.value.map(item => item.url || item.path).filter(Boolean));
+
+    // 检查是否需要同步（简单比较长度和关键属性）
+    const needSync =
+        externalList.length !== lists.value.length ||
+        !externalList.every(
+            (item: UploadFileItem) => externalSet.has(item.url || item.path) && internalSet.has(item.url || item.path)
+        );
+
+    if (!needSync) return;
+
+    // 清空并重新填充（保持数据一致性）
+    lists.value = val.map((value: UploadFileItem) => {
+        const fileType = value.fileType || detectFileType(value);
+        return {
+            ...value,
+            url: value.url,
+            path: value.path,
+            name: value.name || getFileNameFromPath(value.url || value.path || ''),
+            size: value.size || 0,
+            fileType,
+            error: value.error || false,
+            progress: value.progress ?? 100
+        };
+    });
+}
+
+// 监听 modelValue 变化，自动同步内部 lists（v-model 模式，优先级更高）
 watch(
-    () => props.fileList,
+    () => props.modelValue,
     val => {
-        // 使用 Set 优化查找性能，从 O(n²) 降到 O(n)
-        const existingUrls = new Set(lists.value.map(item => item.url).filter(Boolean));
-        const existingPaths = new Set(lists.value.map(item => item.path).filter(Boolean));
-
-        val.forEach((value: UploadFileItem) => {
-            // 检查是否已存在（O(1) 查找）,内部是否已经添加过这个文件
-            const isDuplicate =
-                (value.url && existingUrls.has(value.url)) || (value.path && existingPaths.has(value.path));
-
-            // 如果内部没有这个文件(tmp为false)，则添加到内部
-            if (!isDuplicate) {
-                const fileType = value.fileType || detectFileType(value);
-                const newItem = {
-                    ...value,
-                    url: value.url,
-                    path: value.path,
-                    name: value.name || getFileNameFromPath(value.url || value.path || ''),
-                    size: value.size || 0,
-                    fileType,
-                    error: false,
-                    progress: 100
-                };
-                lists.value.push(newItem);
-                // 更新 Set，避免重复添加
-                if (value.url) existingUrls.add(value.url);
-                if (value.path) existingPaths.add(value.path);
-            }
-        });
+        if (val && val.length > 0) {
+            syncToInternal(val, true);
+        }
     },
     { immediate: true, deep: true }
 );
 
-// 监听 lists 变化，自动触发 on-list-change 事件
+// 监听 fileList 变化，自动同步内部 lists（向后兼容模式，仅在 modelValue 为空时生效）
+watch(
+    () => props.fileList,
+    val => {
+        // 如果 modelValue 有值，优先使用 modelValue，忽略 fileList
+        if (props.modelValue && props.modelValue.length > 0) return;
+        syncToInternal(val, false);
+    },
+    { immediate: true, deep: true }
+);
+
+// 监听 lists 变化，自动触发事件
 watch(
     lists,
     n => {
+        // 触发 v-model 更新
+        emit('update:modelValue', n);
+        // 触发 on-list-change 事件（向后兼容）
         emit('on-list-change', n, props.index);
     },
     { deep: true }
