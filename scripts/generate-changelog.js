@@ -96,7 +96,7 @@ function resolveRange() {
 }
 
 function buildSectionHeader({ version, date }) {
-    return `## [${version}] - ${date}`;
+    return `## ${version} - ${date}`;
 }
 
 function collectCommits(range) {
@@ -301,8 +301,16 @@ function generateChangelog() {
 
             if (hasExisting) {
                 if (noUnreleased) {
-                    // 不保留 Unreleased 模式：找到第一个版本区块，在其前插入新版本
-                    const firstVersionIndex = existingContent.indexOf('\n## [');
+                    // 不保留 Unreleased 模式：找到第一个版本区块（跳过 ## [Unreleased]），在其前插入新版本
+                    let firstVersionIndex = existingContent.indexOf('\n## ');
+                    // 如果找到的是 ## [Unreleased]，则继续找下一个
+                    if (firstVersionIndex !== -1) {
+                        const lineEnd = existingContent.indexOf('\n', firstVersionIndex + 1);
+                        const headerLine = existingContent.slice(firstVersionIndex, lineEnd);
+                        if (headerLine.includes('[Unreleased]')) {
+                            firstVersionIndex = existingContent.indexOf('\n## ', lineEnd);
+                        }
+                    }
                     if (firstVersionIndex !== -1) {
                         finalContent =
                             existingContent.slice(0, firstVersionIndex) +
@@ -365,7 +373,7 @@ function generateChangelog() {
                 );
 
                 // 移除重复的版本区块（保留第一个）
-                const versionBlocks = cleanBody.split('\n## [');
+                const versionBlocks = cleanBody.split('\n## ');
                 if (versionBlocks.length > 1) {
                     const firstBlock = versionBlocks[0];
                     const otherBlocks = versionBlocks.slice(1);
@@ -375,10 +383,14 @@ function generateChangelog() {
                     const seenVersions = new Set();
 
                     otherBlocks.forEach(block => {
-                        const versionMatch = block.match(/^(\d+\.\d+\.\d+)/);
+                        // 跳过 Unreleased 区块
+                        if (block.startsWith('[Unreleased]')) {
+                            return;
+                        }
+                        const versionMatch = block.match(/^(\[?\d+\.\d+\.\d+)/);
                         if (versionMatch && !seenVersions.has(versionMatch[1])) {
                             seenVersions.add(versionMatch[1]);
-                            uniqueBlocks.push('## [' + block);
+                            uniqueBlocks.push('## ' + block);
                         }
                     });
 
@@ -390,12 +402,12 @@ function generateChangelog() {
         }
 
         // 统一调整版本间隔为1行（清理多余的空行）
-        if (finalContent.includes('## [')) {
-            // 清理头部后的多余空行，只保留1行间隔
-            finalContent = finalContent.replace(/(# Changelog[\s\S]*?)\n\n\n+## \[/, '$1\n\n## [');
+        if (finalContent.includes('## ')) {
+            // 清理头部后的多余空行，只保留1行间隔（匹配 ## [Unreleased] 或 ## 版本号）
+            finalContent = finalContent.replace(/(# Changelog[\s\S]*?)\n\n\n+## /, '$1\n\n## ');
 
             // 清理版本区块之间的多余空行，只保留1行间隔
-            finalContent = finalContent.replace(/\n\n\n+## \[/g, '\n\n## [');
+            finalContent = finalContent.replace(/\n\n\n+## /g, '\n\n## ');
 
             // 清理文件末尾的多余空行
             finalContent = finalContent.replace(/\n+$/, '\n');
@@ -412,10 +424,10 @@ function generateChangelog() {
                 if (fs.existsSync(componentChangelogPath)) {
                     const componentContent = fs.readFileSync(componentChangelogPath, 'utf8');
 
-                    // 提取当前版本的内容
+                    // 提取当前版本的内容（兼容带方括号和不带方括号的格式）
                     const currentVersion = JSON.parse(fs.readFileSync('package.json', 'utf8')).version;
                     const currentSectionMatch = finalContent.match(
-                        new RegExp(`## \\[${currentVersion}\\][\\s\\S]*?(?=\\n## \\[|$)`)
+                        new RegExp(`## \\[?${currentVersion}\\]?[\\s\\S]*?(?=\\n## |$)`)
                     );
 
                     if (currentSectionMatch) {
@@ -423,7 +435,7 @@ function generateChangelog() {
 
                         // 转换为组件库 changelog 的格式（去掉 emoji，调整日期格式）
                         currentSection = currentSection
-                            .replace(/## \[(\d+\.\d+\.\d+)\] - (\d{4}-\d{2}-\d{2})/, '## $1（$2）')
+                            .replace(/## \[?(\d+\.\d+\.\d+[^\s]*)\]? - (\d{4}-\d{2}-\d{2})/, '## $1（$2）')
                             .replace(/### 🚀 Chore \| 构建\/工程依赖\/工具/, '### 🚀 Chore | 构建/工程依赖/工具')
                             .replace(/### 🐛 Bug Fixes \| Bug 修复/, '### 🐛 Bug Fixes | Bug 修复')
                             .replace(/### ✨ Features \| 新功能/, '### ✨ Features | 新功能')
