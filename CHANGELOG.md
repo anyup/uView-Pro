@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.0-beta.0 - 2026-04-30
+
+### ✨ Features | 新功能
+
+- **u-upload:** 新增多种上传模式和文件类型支持，支持图片、视频、文档等多种类型，支持网格(grid)和列表(list)两种展示模式 ([f75d34c](https://github.com/anyup/uView-Pro/commit/f75d34c22d551c41e8e873bc5779089ff2b2c0c7))
+- **u-upload:** 新增 v-model 支持并优化文件列表同步逻辑 ([5548d84](https://github.com/anyup/uView-Pro/commit/5548d847b5c442da40775ec06ecfab7f0fddf448))
+- **upload:** 完善上传组件示例页面功能，添加多种上传模式示例：图片上传（网格模式）、文件上传（列表模式）、视频上传 ([d43b3d2](https://github.com/anyup/uView-Pro/commit/d43b3d2c7f0ff7a7fe45467d49d451ca878b7eb1))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **u-divider:** 规范化 slot 标签 ([fccac33](https://github.com/anyup/uView-Pro/commit/fccac33b6adce3395179d5c55b7b8a0a4d25a800))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-upload:** 优化微信小程序平台监听文件列表变化不触发on-list-change事件的场景 ([47fa5c1](https://github.com/anyup/uView-Pro/commit/47fa5c1dfa30214dfc40f7ee01b09f6f95d09b9a))
+- **changelog:** 修复版本标题格式和Unreleased区块处理 ([3a87f47](https://github.com/anyup/uView-Pro/commit/3a87f4739cdebc1aafcb33e3f9b31dd79f9bc3d2))
+
+### 👷 Continuous Integration | CI 配置
+
+- 增强预发布版本支持和发布管理功能 ([86abdaa](https://github.com/anyup/uView-Pro/commit/86abdaad6a618dfa42416138f05baf910f52fba5))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## [0.5.18] - 2026-04-22
 
 ### 🐛 Bug Fixes | Bug 修复
@@ -1804,313 +1829,4 @@ Tagger: anyup <anyupxing@163.com>
 ## [0.0.2] - tag v0.0.2
 
 Tagger: anyup <anyupxing@163.com>
-
-## 67个组件已使用Vue3+TS完成重构，如下：
-
-### 基础组件（8）
-
-- Color 色彩
-- Icon 图标
-- Image 图片
-- Button 按钮
-- Layout 布局
-- Cell 单元格
-- Badge 徽标数
-- Tag 标签
-
----
-
-### 表单组件（15）
-
-- Form 表单
-- Calendar 日历
-- Select 列选择器
-- Keyboard 键盘
-- Picker 选择器
-- Rate 评分
-- Search 搜索
-- NumberBox 步进器
-- Upload 上传
-- VerificationCode 验证码倒计时
-- Field 输入框
-- Checkbox 复选框
-- Radio 单选框
-- Switch 开关选择器
-- Slider 滑动选择器
-
----
-
-### 数据组件（4）
-
-- Progress 进度条
-- Table 表格
-- CountDown 倒计时
-- CountTo 数字滚动
-
----
-
-### 反馈组件（10）
-
-- ActionSheet 操作菜单
-- AlertTips 警告提示
-- Toast 消息提示
-- NoticeBar 滚动通知
-- TopTips 顶部提示
-- SwipeAction 滑动单元格
-- Collapse 折叠面板
-- Popup 弹出层
-- Modal 模态框
-- fullScreen 压窗屏
-
----
-
-### 布局组件（11）
-
-- Line 线条
-- Card 卡片
-- Mask 遮罩层
-- NoNetwork 无网络提示
-- Grid 宫格布局
-- Swiper 轮播图
-- TimeLine 时间轴
-- Skeleton 骨架屏
-- Sticky 吸顶
-- Waterfall 瀑布流
-- Divider 分割线
-
----
-
-### 导航组件（11）
-
-- Dropdown 下拉菜单
-- Tabbar 底部导航栏
-- BackTop 返回顶部
-- Navbar 导航栏
-- Tabs 标签
-- TabsSwiper 全屏选项卡
-- Subsection 分段器
-- IndexList 索引列表
-- Steps 步骤条
-- Empty 内容为空
-- Section 查看更多
-
----
-
-### 其他组件（8）
-
-- MessageInput 验证码输入
-- Loadmore 加载更多
-- ReadMore 展开阅读更多
-- LazyLoad 懒加载
-- Gap 间隔槽
-- Avatar 头像
-- Link 超链接
-- Loading 加载动画
-
----
-
-2025-08-04
-
-### ♻️ Code Refactoring | 代码重构
-
-- update components to use $u directly for utility functions ([e97b9fd](https://github.com/anyup/uView-Pro/commit/e97b9fda94cb79b3f6317b6568a801ae0dce900c))
-- **u-icon:** 重构 u-icon 组件 ([5d8ea1b](https://github.com/anyup/uView-Pro/commit/5d8ea1b63cd8ae17fcf58dbcac5af011c442264a))
-- **u-image:** 重构 u-image 组件 ([7768616](https://github.com/anyup/uView-Pro/commit/7768616b4e9d0966d9e8172a2cc6658e934a8ecd))
-- **u-loading:** 优化 u-loading 组件的模板和样式 ([891cc65](https://github.com/anyup/uView-Pro/commit/891cc65e6f17e205bacc2376a8fe818391a756d3))
-- **u-icon:** 重构 u-icon 组件，优化代码结构和样式 ([6fc8e86](https://github.com/anyup/uView-Pro/commit/6fc8e867b9d3342ff4ec03f539999dd13ac5d28f))
-- **button:** 重构按钮组件，优化代码结构和使用 Composition API ([e110919](https://github.com/anyup/uView-Pro/commit/e11091904a1a3c9f816e48a30226f5fc91f95b2e))
-- **u-button:** 重构 u-button 组件，优化代码结构，使用 Composition API ([9f5cfe3](https://github.com/anyup/uView-Pro/commit/9f5cfe367fc581b74c96518c0e27f9383a298328))
-- **u-image:** 增加 changeStatus 方法以管理加载状态和错误状态 ([31bf604](https://github.com/anyup/uView-Pro/commit/31bf6043008ce610c1aff32ad3afa08a3f176dd2))
-- **color:** 优化颜色组件结构，简化模板和样式 ([e637df1](https://github.com/anyup/uView-Pro/commit/e637df19eda555677a9fa3f3b544e37694b0c8bb))
-- **u-image:** 重构 u-image 组件，迁移至 Composition API，优化代码结构 ([ccb088a](https://github.com/anyup/uView-Pro/commit/ccb088a7d7de3d54f2dd9aa1615e910826cad982))
-- **u-col, u-row:** 重构 u-col 和 u-row 组件，迁移至 Composition API，优化代码结构 ([690cfc6](https://github.com/anyup/uView-Pro/commit/690cfc6c6ef2d6ff8fe3b87ca3c681ce90bd2a4a))
-- **u-cell-group, u-cell-item:** 重构 u-cell-group 和 u-cell-item 组件，迁移至 Composition API，优化代码结构 ([56b3848](https://github.com/anyup/uView-Pro/commit/56b3848cdb7924d5b0f9e471dd2dda534c163ee7))
-- **index.vue:** 移除 u-demo-wrap 的内联样式，优化布局结构 ([e4bd433](https://github.com/anyup/uView-Pro/commit/e4bd433ea1f04aaa5d2fa6830360312ac44214d7))
-- **keyboard:** 重构键盘组件并添加 TypeScript 支持 ([5d6db3d](https://github.com/anyup/uView-Pro/commit/5d6db3de1bb425816acb5c37149a4134ef9a2206))
-- **modal:** 重构模态组件 ([4f1d03c](https://github.com/anyup/uView-Pro/commit/4f1d03c39895ad99fb0f0086fd58d1a86b9b69c8))
-- **components:** 重构 u-select 组件 ([ed6492f](https://github.com/anyup/uView-Pro/commit/ed6492fae447907b46cc211c4ccec2c3081898e4))
-- **picker:** 更新 v-model 语法 ([ad88e98](https://github.com/anyup/uView-Pro/commit/ad88e98eec6b2a214e5f74d4a77960a98ba667eb))
-- **rate:** 重构 rate 组件 ([cb5fdf6](https://github.com/anyup/uView-Pro/commit/cb5fdf6f48f9da732b3ca268df296fa696c938b6))
-- **u-search:** 重构搜索框组件 ([cf21fae](https://github.com/anyup/uView-Pro/commit/cf21fae30fd0ec156d09649cc3b007f5c283f2f0))
-- **toast:** 重构 toast 组件 ([c51eb14](https://github.com/anyup/uView-Pro/commit/c51eb144c4cbb935444f6654bba83174e246b43c))
-- **u-image:** 重构 u-image 组件 ([2f121ef](https://github.com/anyup/uView-Pro/commit/2f121efad4b8d7a74c581d221da94e903ddb6fc0))
-- **citySelect:** 更新城市选择器数据文件路径 ([194202a](https://github.com/anyup/uView-Pro/commit/194202a2e8ee06cec9b70822789a896a3b2c9c7d))
-- **colorful-uni-plus:** 重构 u-badge 组件 ([c274d54](https://github.com/anyup/uView-Pro/commit/c274d548606b8719da7af0c8e4e21b6809a2f48c))
-- **colorful-uni-plus:** 重构 u-calendar 组件 ([87ca8da](https://github.com/anyup/uView-Pro/commit/87ca8daa65930b9b13928dd37a07f6907c26d360))
-- **colorful-uni-plus:** 重构 u-tag 组件 ([1d227ff](https://github.com/anyup/uView-Pro/commit/1d227ff175e43a8793e9615a900130d7011ea5c6))
-- **i18n:** 优化国际化配置并添加全局翻译函数 ([fe13f34](https://github.com/anyup/uView-Pro/commit/fe13f342e554dc66671c1e4a3af5d26ab4a4f55a))
-- **colorful-uni-plus:** 重构 u-switch 组件 ([e7eeac7](https://github.com/anyup/uView-Pro/commit/e7eeac79b3382a4130277b59927d2bf3f0e20207))
-- **全局:** 重构 v-model 用法并优化 $u 工具库 ([c3c9d6e](https://github.com/anyup/uView-Pro/commit/c3c9d6e6f58b58a3a052534af2173e03c02ab0f1))
-- **colorful-uni-plus:** 重构事件派发和广播工具，新增 mitt 实现 ([4a4b22f](https://github.com/anyup/uView-Pro/commit/4a4b22fcaf33b88a0b54d4c4dda885428c0c6f2b))
-- **colorful-uni-plus:** 将 u-action-sheet 组件重构为组合式 API，优化 props 和事件处理 ([c23469b](https://github.com/anyup/uView-Pro/commit/c23469b431ee41a2fed94a823ec7145e8bc2b2e1))
-- **colorful-uni-plus:** 将 u-checkbox 组件重构为组合式 API，优化 props 和事件处理 ([75bbb92](https://github.com/anyup/uView-Pro/commit/75bbb923d33f2d739437521da97924aebb678afa))
-- **colorful-uni-plus:** 将 u-checkbox-group 组件重构为组合式 API，优化 props 和事件处理 ([c38bf5d](https://github.com/anyup/uView-Pro/commit/c38bf5d4f7f537a27979bcf1aee28f7ecac8840f))
-- **colorful-uni-plus:** 将 u-form 组件重构为组合式 API，优化 props 和事件处理 ([f84a8f9](https://github.com/anyup/uView-Pro/commit/f84a8f97ea8997fb55997a42cc746cc77b032a77))
-- **u-rate:** 使用 getCurrentInstance 优化节点获取方法 ([aa1dc53](https://github.com/anyup/uView-Pro/commit/aa1dc538e705ad19bda8c19d339a0b106f8ff566))
-- **u-upload:** 重构 u-upload 组件 ([3f0c01e](https://github.com/anyup/uView-Pro/commit/3f0c01eb0d5b8ae06f88aa502d1b9d79f82d2a7d))
-- **form:** 重构 u-form 和 u-form-item 组件 ([2445f3b](https://github.com/anyup/uView-Pro/commit/2445f3b689d50abd52c8feb95e0eb9ce7d950bd3))
-- **colorful-uni-plus:** 重构 u-back-top 组件 ([bcae27f](https://github.com/anyup/uView-Pro/commit/bcae27f64650631ea353f4d1120e05314a78eadc))
-- **avatar:** 重构头像组件，使用 Vue 3 的新特性 ([d8b7ea7](https://github.com/anyup/uView-Pro/commit/d8b7ea79d37928fa0773408831b5fa2a8da358be))
-- **colorful-uni-plus:** 重构 u-alert-tips 组件 ([dd5aee3](https://github.com/anyup/uView-Pro/commit/dd5aee3b537ca18172bf7c06f313dbf85add079e))
-- **card:** 重构卡片组件并优化示例 ([bd0a312](https://github.com/anyup/uView-Pro/commit/bd0a312482401a5dc99eaa1f4550eccc9e555c25))
-- **colorful-uni-plus:** 重构 u-circle-progress 组件 ([63f2dec](https://github.com/anyup/uView-Pro/commit/63f2dec21a6acf18c12fb6e9db3e8c603ed86af4))
-- **colorful-uni-plus:** 重构 u-line-progress 组件 ([853c585](https://github.com/anyup/uView-Pro/commit/853c585371e0e00af9b769e959ebaccf4c691862))
-- **componentsC:** 优化 progress 组件中的颜色处理 ([53bfb95](https://github.com/anyup/uView-Pro/commit/53bfb95b4aea795e41cec9e480467b0497783f43))
-- **colorful-uni-plus:** 重构 u-collapse 组件 ([319f8f6](https://github.com/anyup/uView-Pro/commit/319f8f6d63018551fbae4ed4673f9827075f9a82))
-- **divider:** 重构 u-divider 组件 ([90f9e0a](https://github.com/anyup/uView-Pro/commit/90f9e0ae180bcbbda49441bf048a72f241119782))
-- **colorful-uni-plus:** 重构 u-empty 组件 ([5a51281](https://github.com/anyup/uView-Pro/commit/5a51281d3283c610b79c9f8c7b9a564db0299dac))
-- **components:** 重构 u-gap 组件 ([e0abd72](https://github.com/anyup/uView-Pro/commit/e0abd725af20e0a0b512090861395f8d9df4d0fb))
-- **components:** 重构 u-line 组件 ([623d25c](https://github.com/anyup/uView-Pro/commit/623d25cdb6117d460d79c90179174fcab227d9ba))
-- **components:** 重构 u-link 组件 ([46e509c](https://github.com/anyup/uView-Pro/commit/46e509cbd763de253b1e78d43c15d2acc8fc4c72))
-- 删除无用的加载页面组件 ([b656ce2](https://github.com/anyup/uView-Pro/commit/b656ce27c9c46b7ec8a970320059223882117b62))
-- **components:** 重构 u-loadmore 组件 ([43e983a](https://github.com/anyup/uView-Pro/commit/43e983ad88c1811a94e44cb119faa3e3fae8bb00))
-- **components:** 重构 u-mask 组件 ([4a7962e](https://github.com/anyup/uView-Pro/commit/4a7962e2dc1b24e4c1747ee268c6f9c3bfff8bb5))
-- **components:** 重构 u-message-input 组件 ([eba51d2](https://github.com/anyup/uView-Pro/commit/eba51d254537175b91d3471076e19e4b2ba68b72))
-- **libs:** 重构组件库代码并添加类型定义 ([add879d](https://github.com/anyup/uView-Pro/commit/add879d085e078310e94db48dc3a4168da805643))
-- **colorful-uni-plus:** 重构 $u 工具库 ([cdac9e2](https://github.com/anyup/uView-Pro/commit/cdac9e23d39d351e6db74b3c827ce99634f3efc1))
-- **i18n:** 重构国际化文案并支持简体中文 ([2024330](https://github.com/anyup/uView-Pro/commit/20243309d5120d724afd0bc3e3a37e044d22da0a))
-- **i18n:** 重构国际化配置并简化代码 ([8cf46ad](https://github.com/anyup/uView-Pro/commit/8cf46adde563d588324a5c8a673442c6edd9292e))
-- **modal:** 更新模态组件以支持 Vue 3 ([6587764](https://github.com/anyup/uView-Pro/commit/6587764d61a57289d2df6050e06e32decd9384da))
-- 更新组件属性绑定方式 ([3cb5643](https://github.com/anyup/uView-Pro/commit/3cb5643437cae1e428cbdd97758356037693791f))
-- **components:** 更新组件以使用 modelValue ([272107b](https://github.com/anyup/uView-Pro/commit/272107ba6422017594a7baf3c4051a1af2e275d0))
-- **$parent:** 重构 $parent 方法以适配 Vue 3 ([189a029](https://github.com/anyup/uView-Pro/commit/189a0290dab31e0adb67240c1d660aa887f25e24))
-- **subsection:** 重构分段器组件 ([dbf7659](https://github.com/anyup/uView-Pro/commit/dbf765947b4996d4341c794b1587f918c9c7906c))
-- **u-tabbar:** 重构 u-tabbar 组件 ([c089528](https://github.com/anyup/uView-Pro/commit/c089528dd8994993ed9c96f9eb08a7d256e0f25c))
-- **colorful-uni-plus:** 优化 u-circle-progress 组件代码 ([c5ff9cf](https://github.com/anyup/uView-Pro/commit/c5ff9cf0920656c8faf444136d21b87030bf864f))
-- **notice-bar:** 重构 u-column-notice 和 u-notice-bar 组件 ([43ab34c](https://github.com/anyup/uView-Pro/commit/43ab34c2ff5162afa9fbb3df4b95a0db5856b06a))
-- **time-line:** 重构时间轴组件 ([63ebfed](https://github.com/anyup/uView-Pro/commit/63ebfeddc3976e60d7b2a06b3caa818f9277f2dc))
-- **componentsB:** 优化瀑布流组件代码 ([bac061f](https://github.com/anyup/uView-Pro/commit/bac061f66c7dcfaa87a936ff9d54331a0837f2c9))
-- **countDown:** 重构倒计时组件 ([94f66ea](https://github.com/anyup/uView-Pro/commit/94f66ea96616f80fd2fdb3d402b5cfcce3e55792))
-- **u-count-to:** 重构计数器组件 ([fff0e56](https://github.com/anyup/uView-Pro/commit/fff0e569b4e14001c060db7b12d9f43f0873bb44))
-- **field:** 重构 u-field 组件 ([b8daf24](https://github.com/anyup/uView-Pro/commit/b8daf247c9748f8809cda58f71f733872c78deaa))
-- **components:** 重构 u-full-screen 组件 ([deb3d65](https://github.com/anyup/uView-Pro/commit/deb3d65ba44ead65134c948f9cb7be3c751ffb66))
-- **pages:** 调整页面配置并优化组件示例 ([98f0141](https://github.com/anyup/uView-Pro/commit/98f014113673d08d80dcae7d145b2b0f87ae34dd))
-- **components:** 重构 u-read-more 组件 ([151bcd2](https://github.com/anyup/uView-Pro/commit/151bcd2106af943719bc28cd479bab3cd205bb33))
-- **function:** 重构 getRect 方法并移至独立模块 ([be2e19e](https://github.com/anyup/uView-Pro/commit/be2e19ec25dd56340067fc45f639978140c9fa6a))
-- **verificationCode:** 重构验证码组件 ([68e823c](https://github.com/anyup/uView-Pro/commit/68e823ccaf5c01259a8854353ad4165eb35b3a5f))
-- **components:** 重构 u-section 组件 ([3d81859](https://github.com/anyup/uView-Pro/commit/3d81859239e63aea2f161c0123774e37d91b0b3a))
-- **u-search:** 重构搜索组件 ([e404a74](https://github.com/anyup/uView-Pro/commit/e404a74416806d927758c752ec61057aa01fb01a))
-- **u-slider:** 重构滑块组件，支持 Composition API ([2eb5a85](https://github.com/anyup/uView-Pro/commit/2eb5a85f54216ce9d136a7950236d0726ca1a419))
-- **slider:** 优化 slider 组件的代码结构和功能 ([323e419](https://github.com/anyup/uView-Pro/commit/323e4199e78f25519a6bc177f72955689fe5411a))
-- **components:** 优化组件中的 slot 判断逻辑 ([3325cbf](https://github.com/anyup/uView-Pro/commit/3325cbf1166904d846dede55c604de7b832f1b17))
-- **components:** 重构 u-steps 组件 ([4e46526](https://github.com/anyup/uView-Pro/commit/4e46526b0b1806f12ddf8f9dc4829dc0bc5be554))
-- **sticky:** 重构 u-sticky 组件 ([ae2ff1b](https://github.com/anyup/uView-Pro/commit/ae2ff1b130a4888bdb7ca9048c11c1534ec7718f))
-- **components:** 重构 u-top-tips 组件 ([970250f](https://github.com/anyup/uView-Pro/commit/970250f66e87ba709e42008380bc285a175e2491))
-- **skeleton:** 重构骨架屏组件 ([8e50b08](https://github.com/anyup/uView-Pro/commit/8e50b083cac2f10f3e299fc7368541121d629d82))
-- **u-toast:** 删除冗余的 defineExpose 代码 ([9495c47](https://github.com/anyup/uView-Pro/commit/9495c47c2b9ccf679eb31db24d3df1458fa04acb))
-- **components:** 重构 u-checkbox-group 组件 ([577c68f](https://github.com/anyup/uView-Pro/commit/577c68fc4bed5eb6cec649858c2decce7920864d))
-- **avatar-cropper:** 重构头像裁剪组件并添加 TypeScript 支持 ([4f320bb](https://github.com/anyup/uView-Pro/commit/4f320bbfb0adbb41da4daca2c0f3ef45ec519b0c))
-- 启用头像裁剪功能 ([10b7cea](https://github.com/anyup/uView-Pro/commit/10b7cea104b67e2e81ac113110eabbace4241a6f))
-- **radio:** 重构单选框组件 ([526c62f](https://github.com/anyup/uView-Pro/commit/526c62f5c41d1a24dc15d7de986b57bf725d86c7))
-- 更新项目依赖库名称 ([854cef1](https://github.com/anyup/uView-Pro/commit/854cef1f02e2b8be6ac2758d7cda76e37f503a18))
-- 移除未使用的 Vue 导入 ([3831f58](https://github.com/anyup/uView-Pro/commit/3831f58f12b624d29cf1a985a1861de848989288))
-- **timeFrom:** 删除未使用的时间格式化函数 ([f72f84a](https://github.com/anyup/uView-Pro/commit/f72f84a3a1135086789ad964921b8a2319158125))
-- **table:** 重构表格组件并添加 TypeScript 支持 ([efcf0cc](https://github.com/anyup/uView-Pro/commit/efcf0ccc33439168918d9e7f89a45a7123bb2f4f))
-- **componentsB:** 优化 table 组件中的代码 ([813f4cc](https://github.com/anyup/uView-Pro/commit/813f4cc0dfc38de7496ffe4eaf017669f9918fed))
-- **components:** 重构 u-dropdown 组件 ([121d36c](https://github.com/anyup/uView-Pro/commit/121d36ce27fc1846942c7219b3e0d83cf3246774))
-- **uview-next:** 重构 u-grid 和 u-grid-item 组件 ([ab497b5](https://github.com/anyup/uView-Pro/commit/ab497b5b9d67fda886e38bace640117ea523310d))
-- **src:** 优化代码结构和功能 ([d05634d](https://github.com/anyup/uView-Pro/commit/d05634d3730704d5f6f30b5a2ed7ba2cee879f78))
-- **components:** 重构 tabs 组件 ([7d18f15](https://github.com/anyup/uView-Pro/commit/7d18f1535e549eeb5b5baf7faa278067c4d882f5))
-- **u-swiper:** 重构轮播图组件 ([2c6677e](https://github.com/anyup/uView-Pro/commit/2c6677eeb67de65a5a9efa788bacb3089ca883d6))
-- **order:** 优化订单列表数据处理 ([e22ba25](https://github.com/anyup/uView-Pro/commit/e22ba253ff0709bd97851833defa84fa09541929))
-- **u-tabs-swiper:** 重构 tabs-swiper 组件 ([0bd1e07](https://github.com/anyup/uView-Pro/commit/0bd1e07dccd661ed91d65644f60b0ad4bf9c2d45))
-- **components:** 重构 swipeAction 组件 ([7bab063](https://github.com/anyup/uView-Pro/commit/7bab0630311e5967f13e5a7f4615ffecddd1154e))
-- **src:** 修改 index.list.js 文件的模块导出方式 ([1eb1e34](https://github.com/anyup/uView-Pro/commit/1eb1e347579908de00fd1e78c6c621bd6443c0c0))
-- **u-keyboard:** 优化键盘组件代码结构 ([57fef9d](https://github.com/anyup/uView-Pro/commit/57fef9d1cdc8df1c7ea84dedeb861459aa634f72))
-- **citySelect:** 优化城市选择器组件 ([893cd23](https://github.com/anyup/uView-Pro/commit/893cd2330dc07725759d3236f62b18baf2cb00ba))
-- **components:** 移除未使用的 defineOptions 导入 ([9ffe702](https://github.com/anyup/uView-Pro/commit/9ffe7024561a79051444f5517d21f449ed745275))
-- **components:** 更新 image 组件的示例图片 ([80e1eb9](https://github.com/anyup/uView-Pro/commit/80e1eb9136e1576f1a9b9bcc3136b053390d5e6d))
-- **uview:** 调整 getRect 函数中 getCurrentInstance 的调用时机 ([a862ca2](https://github.com/anyup/uView-Pro/commit/a862ca2dc307e39c98e992c340403d9c7ebb1acd))
-- **hooks:** 重命名 useParent 为 useEmitter ([2d7dac3](https://github.com/anyup/uView-Pro/commit/2d7dac31d65d25c294184a0213290c3f7bf89081))
-- **uview-next:** 重构获取父组件方法 ([62fb181](https://github.com/anyup/uView-Pro/commit/62fb18103e117a7bf4e54451a884ff374c741a9b))
-- **uview:** 优化 $parent 函数 ([8b5c307](https://github.com/anyup/uView-Pro/commit/8b5c3074fd0fa108cea67d2a2a1ce759d94dd5bd))
-- **uview:** 重构索引列表组件 ([4cba486](https://github.com/anyup/uView-Pro/commit/4cba48679d46160e0d5014eb8739ff542a29717d))
-- 删除未使用的库 ([ba16bcf](https://github.com/anyup/uView-Pro/commit/ba16bcfb21fef5bd1129e75e0a50bd74520c6a6e))
-- update uview-pro ([cd25350](https://github.com/anyup/uView-Pro/commit/cd25350f399125ad53bcbd3cb5caf62082761415))
-- **components:** 优化多个组件的代码结构和样式 ([2528e32](https://github.com/anyup/uView-Pro/commit/2528e32c7becc837dd65d68fd02645ebd4daa287))
-- **u-number-box:** 重构步进器组件 ([86ab625](https://github.com/anyup/uView-Pro/commit/86ab6257e33cc21178375259ece0dc3846a8f19a))
-- 更新 logo 和资源链接 ([e5edd61](https://github.com/anyup/uView-Pro/commit/e5edd61cd3f696ef46350d5f7dfb119788f74b09))
-- **example:** 重构组件页面布局和样式 ([a2c44e0](https://github.com/anyup/uView-Pro/commit/a2c44e0832dafd4e9bc73434a301a498f161d44b))
-- **components:** 重构 getRect 方法的调用方式 ([73695d4](https://github.com/anyup/uView-Pro/commit/73695d4b1dac0f6d3f4df3a6976a322b09a9a7de))
-- **components:** 优化组件内部实例获取方式 ([60f563d](https://github.com/anyup/uView-Pro/commit/60f563d73b0bc5ee49dbde44a393012d9171ca75))
-- **u-tabbar:** 修改 beforeSwitch 回调的执行方式 ([2a5d3de](https://github.com/anyup/uView-Pro/commit/2a5d3de1a94278099f37d6c3ad41aae8f7d5675d))
-- **i18n:** 更新多语言文案并简化导航栏标题 ([f78a437](https://github.com/anyup/uView-Pro/commit/f78a437432c5b924c9ce61d2b607d5896345a27a))
-- **example:** 重构组件页面并迁移到 TypeScript ([f65df40](https://github.com/anyup/uView-Pro/commit/f65df402bd92a3f7a770408bd133b2197e1155f9))
-- **u-alert-tips:** 优化类型定义和代码结构 ([22af614](https://github.com/anyup/uView-Pro/commit/22af61445411dbd52881fd03603952f8240ee7e6))
-- **example:** 注释掉 AvatarCropper 组件的路由配置 ([2bb17d7](https://github.com/anyup/uView-Pro/commit/2bb17d7aaf0c8f0c3b7fc3247947a777429edb44))
-- **about:** 重构关于页面 ([6d9b76d](https://github.com/anyup/uView-Pro/commit/6d9b76d44fca5934d488e9086aa4faef22ae5fc1))
-- **pages:** 优化关于页面样式和布局 ([5b0d08b](https://github.com/anyup/uView-Pro/commit/5b0d08baa2d732ed038d549a40558b79221acea7))
-- **componentsC:** 重构 cell 组件的模板和样式 ([ff67d6d](https://github.com/anyup/uView-Pro/commit/ff67d6df94ebbaec2d1a1e1b3c0052c2d96fca46))
-- **components:** 优化组件示例和替换图片链接 ([42cbd53](https://github.com/anyup/uView-Pro/commit/42cbd532d6f34d353b15b717f7a3c4ad04579c36))
-- **src:** 更新 uview-pro 插件引用 ([f4bcc4d](https://github.com/anyup/uView-Pro/commit/f4bcc4dd976784ce885eddf56795808428f9c16e))
-- 更新文档链接和网址 ([0b358c8](https://github.com/anyup/uView-Pro/commit/0b358c8d9655b21eff06982befb2af2e6c244cfd))
-
-### 📦‍ Build System | 打包构建
-
-- **deps:** 升级 Vue 依赖版本 ([955bb69](https://github.com/anyup/uView-Pro/commit/955bb69f8539f3b196088c93a4e31f16cf1b659c))
-- 更新项目配置和版本信息 ([faecbb8](https://github.com/anyup/uView-Pro/commit/faecbb89fdc1d0e6ed8d13b82e508c3506d97cf4))
-- 更新项目配置和版本信息 ([939e370](https://github.com/anyup/uView-Pro/commit/939e370d7c3549c7bd1817bd0a4abe5a617f9854))
-- **manifest:** 优化 H5 端性能并更新标题 ([1c05616](https://github.com/anyup/uView-Pro/commit/1c0561625a6b1ab6e52f733dc469660c5c0d48e7))
-- **.gitignore:** 更新 .gitignore 文件 ([877dbc6](https://github.com/anyup/uView-Pro/commit/877dbc6818d6c9435c3c0367ed07969cdb12e5eb))
-- 更新 manifest 文件 ([29a739b](https://github.com/anyup/uView-Pro/commit/29a739be2bb94eff6eca9aeb080eec1497909ad3))
-- **uview-pro:** 添加 npm 配置文件 ([b17b0de](https://github.com/anyup/uView-Pro/commit/b17b0de7fde38f9f192e7304c4ceab0cfa8743c1))
-- **uview-pro:** 更新项目配置和依赖 ([9e47ac9](https://github.com/anyup/uView-Pro/commit/9e47ac9f145f146dbdc77ebe9e3dfe3c54314638))
-
-### ✨ Features | 新功能
-
-- add utils ([cdbd7a5](https://github.com/anyup/uView-Pro/commit/cdbd7a567174a6e48324d4975cd548210668b6b4))
-- **navbar:** 添加自定义返回事件功能 ([651221e](https://github.com/anyup/uView-Pro/commit/651221e41d83075396f15193a18fe7b142752c5e))
-- **utils:** 添加 parent 函数并实现 useParent 钩子 ([08b52e9](https://github.com/anyup/uView-Pro/commit/08b52e9df5260b378af596ab770c76f76badd4b8))
-- **i18n:** 实现国际化切换功能 ([d759245](https://github.com/anyup/uView-Pro/commit/d75924501e77e4f3b596f30e3d9a17763868cbac))
-- 移除 request/index.ts 中的冗余 interface 定义，简化代码结构 ([0f4b3cb](https://github.com/anyup/uView-Pro/commit/0f4b3cb67e316aa1b2c6b3b7e5371e1c91c47e0b))
-- 更新页面样式和国际化逻辑 ([696c705](https://github.com/anyup/uView-Pro/commit/696c70571fdb76ca918563b137bfb43cb2a1b291))
-- **common:** 添加分类数据和 HTTP 相关文件 ([d9d7b06](https://github.com/anyup/uView-Pro/commit/d9d7b06cbcfe8ed6cebc234a445b2f823efafe5a))
-- **store:** 添加 Pinia store 工具方法 ([faa56c8](https://github.com/anyup/uView-Pro/commit/faa56c8e8a4f2281fba13ed1961b517140df6994))
-- **hooks:** 新增 useEmitter 钩子用于组件间通信 ([40229ff](https://github.com/anyup/uView-Pro/commit/40229ff25dbac04f0b012f07896b74a2759439fc))
-- **noNetwork:** 添加无网络提示图片 ([6ef777f](https://github.com/anyup/uView-Pro/commit/6ef777f945e37294e2d98e3b4dd9ddecc204ede5))
-- **uview:** 新增 parentData 方法并重构相关功能 ([996f73a](https://github.com/anyup/uView-Pro/commit/996f73ae86977a7815ad9137522ddd3d2556f3ed))
-- swiper示例 ([582a9c7](https://github.com/anyup/uView-Pro/commit/582a9c7265d70ebd42d5b948f8b2470f8f8730b2))
-- 更新小程序配置并调整页面结构 ([40b562a](https://github.com/anyup/uView-Pro/commit/40b562ab5bc5e8e80bcb9d03e88b9ad59b635e2b))
-- **manifest:** 添加应用图标并更新应用 ID ([941733a](https://github.com/anyup/uView-Pro/commit/941733ad5eddc6740c2935e7f3be1a8ebea07fea))
-- **example:** 添加关于页面并更新图标 ([f10479f](https://github.com/anyup/uView-Pro/commit/f10479f5fc016cc3046097d17f98c4348f9ff398))
-- **pages:** 添加关于页面 ([0bf8afd](https://github.com/anyup/uView-Pro/commit/0bf8afd1a826942c95b2592998a7842d0c360d6a))
-
-### 💄 Styles | 风格
-
-- **.prettierrc.js:** 调整代码格式化配置 ([fa4a40e](https://github.com/anyup/uView-Pro/commit/fa4a40ef3b3bb88818fe5796482f05a66595101b))
-- **components:** 更新组件样式穿透写法 - 将 /deep/ 样式穿透写法替换为 ::v-deep ([a63c896](https://github.com/anyup/uView-Pro/commit/a63c896868fb14ef71dd4f9e268b7fd3496a16b9))
-- **components:** 优化代码格式和引用 ([9099838](https://github.com/anyup/uView-Pro/commit/909983831a75a809f16814b3fee866a499608a6b))
-- **components:** 优化多语言切换显示和组件样式 ([16e5e3f](https://github.com/anyup/uView-Pro/commit/16e5e3fc455736246394dddd3b8a74c211937f08))
-
-### 🐛 Bug Fixes | Bug 修复
-
-- **i18n:** 优化国际化配置和语言切换逻辑 ([0ab3efa](https://github.com/anyup/uView-Pro/commit/0ab3efa72b471ac67470f034edaadfccf4c1981f))
-- **u-picker:** 优化地区选择器数据结构和渲染逻辑 ([b580381](https://github.com/anyup/uView-Pro/commit/b580381e0c40f974b4e2afd1d1fdb06343fdadf2))
-- **u-read-more:** 优化 getRect 方法调用 ([2c8dd25](https://github.com/anyup/uView-Pro/commit/2c8dd2515a477ce9cd744e08daf09c6cd0b60215))
-- **u-circle-progress:** 修复支付宝小程序不支持 canvas-id 的问题 ([0990ae3](https://github.com/anyup/uView-Pro/commit/0990ae3751d3864fadb3335dcd567044d6bf5d12))
-- **componentsA:** 优化键盘组件演示页面 ([8fc7592](https://github.com/anyup/uView-Pro/commit/8fc7592d91795633274743444c08b7061ad3bfda))
-- **u-button:** 优化$u库的导入方式 ([2db0a0d](https://github.com/anyup/uView-Pro/commit/2db0a0d59d7c0f81dd95c4a2d9ef7f4942c10ee4))
-
-### 📝 Documentation | 文档
-
-- **README:** 添加 pnpm 依赖管理说明 ([89f987f](https://github.com/anyup/uView-Pro/commit/89f987fddeef031bc969eb854a39aa57f4d39431))
-- **README:** 更新 uView Pro 项目文档 ([17e3958](https://github.com/anyup/uView-Pro/commit/17e3958dcd50e58c743b7a2bfcaf876cb6498058))
-- **README:** 更新 uView Pro 项目文档 ([781b53e](https://github.com/anyup/uView-Pro/commit/781b53e1db9cc2e9b683a1f3526c720c845975ed))
-- **README:** update readme ([2bf9fcc](https://github.com/anyup/uView-Pro/commit/2bf9fcc366a5990a42300e7dd605e1adbc49aed0))
-- **uview-pro:** 添加项目说明和快速上手指南 ([d9c23c6](https://github.com/anyup/uView-Pro/commit/d9c23c6732d0ecde85a111fb486158fc80d5dfbe))
-- **README:** 更新快速上手指南以适配 uView Pro 和 Vue 3 ([d361392](https://github.com/anyup/uView-Pro/commit/d361392c078227cc669b60f83d05280b47935f2f))
-- **uview-pro:** 更新文档和元数据 ([ac09984](https://github.com/anyup/uView-Pro/commit/ac09984c6019ced104433ade41ac205a76127e00))
-
-### 🚀 Chore | 构建/工程依赖/工具
-
-- remove yarn.lock file ([83c2a35](https://github.com/anyup/uView-Pro/commit/83c2a358305c1c76f4d35b7f65c33ed8267211ea))
-- **package:** 添加 App 平台开发和构建脚本 ([42220ed](https://github.com/anyup/uView-Pro/commit/42220edc95a9b6686cddf235e094a398bd2d1f78))
-
-### ⚡ Performance Improvements | 性能优化
-
-- **$parent:** 优化 $parent 函数以提升性能 ([b3b8d4a](https://github.com/anyup/uView-Pro/commit/b3b8d4a91372eac1399294e83e0569719cbc1012))
-- **u-sticky:** 优化内容观测者初始化 ([17111a0](https://github.com/anyup/uView-Pro/commit/17111a05622dc6738c7526e52cfaa20729444e7d))
-
-### 👥 Contributors
-
-<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a>
+

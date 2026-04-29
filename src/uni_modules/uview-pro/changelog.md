@@ -1,3 +1,28 @@
+## 0.6.0-beta.0（2026-04-30）
+
+### ✨ Features | 新功能
+
+- **u-upload:** 新增多种上传模式和文件类型支持，支持图片、视频、文档等多种类型，支持网格(grid)和列表(list)两种展示模式 ([f75d34c](https://github.com/anyup/uView-Pro/commit/f75d34c22d551c41e8e873bc5779089ff2b2c0c7))
+- **u-upload:** 新增 v-model 支持并优化文件列表同步逻辑 ([5548d84](https://github.com/anyup/uView-Pro/commit/5548d847b5c442da40775ec06ecfab7f0fddf448))
+- **upload:** 完善上传组件示例页面功能，添加多种上传模式示例：图片上传（网格模式）、文件上传（列表模式）、视频上传 ([d43b3d2](https://github.com/anyup/uView-Pro/commit/d43b3d2c7f0ff7a7fe45467d49d451ca878b7eb1))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **u-divider:** 规范化 slot 标签 ([fccac33](https://github.com/anyup/uView-Pro/commit/fccac33b6adce3395179d5c55b7b8a0a4d25a800))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-upload:** 优化微信小程序平台监听文件列表变化不触发on-list-change事件的场景 ([47fa5c1](https://github.com/anyup/uView-Pro/commit/47fa5c1dfa30214dfc40f7ee01b09f6f95d09b9a))
+- **changelog:** 修复版本标题格式和Unreleased区块处理 ([3a87f47](https://github.com/anyup/uView-Pro/commit/3a87f4739cdebc1aafcb33e3f9b31dd79f9bc3d2))
+
+### 👷 Continuous Integration | CI 配置
+
+- 增强预发布版本支持和发布管理功能 ([86abdaa](https://github.com/anyup/uView-Pro/commit/86abdaad6a618dfa42416138f05baf910f52fba5))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.5.18（2026-04-22）
 
 ### 🐛 Bug Fixes | Bug 修复
