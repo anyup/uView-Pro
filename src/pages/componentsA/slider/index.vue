@@ -147,12 +147,12 @@ function edgeValueChange(index: number) {
 }
 
 function end() {
-    // console.log('end');
+    console.log('end');
     completeMission('slider-move');
 }
 
 function moving() {
-    // console.log('moving');
+    console.log('moving');
 }
 </script>
 

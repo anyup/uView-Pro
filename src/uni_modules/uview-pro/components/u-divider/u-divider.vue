@@ -27,8 +27,9 @@
                 color: color,
                 fontSize: fontSize + 'rpx'
             }"
-            ><slot
-        /></view>
+        >
+            <slot />
+        </view>
         <view
             class="u-divider-line"
             :class="[type ? 'u-divider-line--bordercolor--' + type : '']"
