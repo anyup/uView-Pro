@@ -279,6 +279,7 @@ import type { UploadFileItem } from '../../types/global';
  * @property {Function} before-upload 上传前钩子，返回false或Promise.reject则跳过当前文件上传
  * @property {Function} before-remove 删除前钩子，返回false或Promise.reject则阻止删除
  * @property {Boolean} to-json 如果上传后的返回值为json字符串，是否自动转为json格式（默认true）
+ * @property {Boolean} custom-choose 是否使用自定义文件选择，开启后点击选择文件会触发 on-choose 事件而不调用默认选择API（默认false）
  *
  * @event {Function} on-oversize 文件大小超出max-size限制时触发
  * @event {Function} on-exceed 文件数量超出max-count限制时触发
@@ -292,6 +293,7 @@ import type { UploadFileItem } from '../../types/global';
  * @event {Function} on-remove 移除文件时触发
  * @event {Function} on-preview 预览文件时触发
  * @event {Function} on-list-change 文件列表发生变化时触发
+ * @event {Function} on-choose 启用 custom-choose 时触发，参数为 { accept, maxCount, fileList, index }，用户可自定义文件选择逻辑
  *
  * @example <u-upload :action="action" :file-list="fileList" accept="image"></u-upload>
  * @example <u-upload :action="action" accept="file" mode="list" :show-file-name="true"></u-upload>
@@ -305,6 +307,7 @@ const emit = defineEmits([
     'on-list-change',
     'on-oversize',
     'on-exceed',
+    'on-choose',
     'on-choose-complete',
     'on-choose-fail',
     'on-uploaded',
@@ -607,6 +610,17 @@ function reUpload() {
 function selectFile() {
     if (props.disabled) return;
 
+    // 如果启用了自定义选择，触发 on-choose 事件，由用户自行处理文件选择
+    if (props.customChoose) {
+        emit('on-choose', {
+            accept: props.accept,
+            maxCount: props.maxCount,
+            fileList: lists.value,
+            index: props.index
+        });
+        return;
+    }
+
     // 根据 accept 类型选择不同的文件选择方式
     switch (props.accept) {
         case 'image':
@@ -764,6 +778,8 @@ function chooseFile() {
 
 /**
  * 处理选中的文件
+ * @param files 文件数组
+ * @param sourceType 文件来源类型
  */
 function handleFilesSelected(files: any[], sourceType: 'image' | 'video' | 'media' | 'file') {
     let listOldLength = lists.value.length;
@@ -794,8 +810,12 @@ function handleFilesSelected(files: any[], sourceType: 'image' | 'video' | 'medi
             } else if (props.accept === 'file') {
                 fileType = 'file';
             } else {
-                // media 或 all 时，根据路径或 sourceType 检测
-                fileType = detectFileTypeFromPath(val.path || val.name || '');
+                // media 或 all 时，根据 sourceType 或路径检测
+                if (sourceType === 'image' || sourceType === 'video') {
+                    fileType = sourceType;
+                } else {
+                    fileType = detectFileTypeFromPath(val.path || val.name || '');
+                }
             }
 
             lists.value.push({
@@ -818,7 +838,17 @@ function handleFilesSelected(files: any[], sourceType: 'image' | 'video' | 'medi
 
     // 每次文件选择完，抛出一个事件，并将当前内部选择的文件数组抛出去
     emit('on-choose-complete', lists.value, props.index);
+    // 使用 props.autoUpload 是否立即上传
     if (props.autoUpload) uploadFile(listOldLength);
+}
+
+/**
+ * 添加文件到列表（供外部调用，配合 custom-choose 使用）
+ * @param files 文件数组，格式为 { path: string, name?: string, size?: number, fileType?: 'image'|'video'|'file', ... }
+ */
+function addFiles(files: any[]) {
+    if (!files || !Array.isArray(files) || files.length === 0) return;
+    handleFilesSelected(files, props.accept as 'image' | 'video' | 'media' | 'file');
 }
 
 /**
@@ -1200,7 +1230,18 @@ function checkFileExt(file: { name?: string; path?: string }): boolean {
     return isValid;
 }
 
-defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImage, doPreviewFile, lists });
+defineExpose({
+    lists,
+    clear,
+    reUpload,
+    selectFile,
+    upload,
+    retry,
+    remove,
+    previewImage: doPreviewImage,
+    previewFile: doPreviewFile,
+    addFiles
+});
 </script>
 
 <style lang="scss" scoped>

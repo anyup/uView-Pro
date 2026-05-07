@@ -199,7 +199,7 @@ const videoUploadRef = ref();
 const customUploadRef = ref();
 const customFileListRef = ref();
 
-const imageShape = ref<string>('circle');
+const imageShape = ref<string>('square');
 
 // 文件列表
 const imageList = ref<UploadFileItem[]>([

@@ -159,7 +159,13 @@ export const UploadProps = {
      * @description 可选值：square-方形(默认), circle-圆形。在 grid 模式下作用于图片和添加按钮，在 list 模式下作用于图标
      * @default 'square'
      */
-    imageShape: { type: String as PropType<'square' | 'circle'>, default: 'square' }
+    imageShape: { type: String as PropType<'square' | 'circle'>, default: 'square' },
+    /**
+     * 是否使用自定义选择文件
+     * @description 设置为 true 时，点击选择文件会触发 on-choose 事件，不会调用默认的文件选择 API，用户可自行处理文件选择逻辑，然后通过 addFiles 方法将文件添加到列表
+     * @default false
+     */
+    customChoose: { type: Boolean, default: false }
 };
 
 export type UploadProps = ExtractPropTypes<typeof UploadProps>;
