@@ -15,6 +15,7 @@
                             v-model="imageList"
                             accept="image"
                             :action="action"
+                            :image-shape="imageShape"
                             :max-count="6"
                         />
                     </view>
@@ -30,9 +31,27 @@
                             accept="file"
                             mode="list"
                             :action="action"
+                            :image-shape="imageShape"
                             :max-count="5"
                             :show-file-name="true"
                             :show-file-size="true"
+                        />
+                    </view>
+                </view>
+
+                <!-- 视频上传 -->
+                <view class="u-demo-wrap">
+                    <view class="u-demo-title">视频上传</view>
+                    <view class="u-demo-area">
+                        <u-upload
+                            ref="videoUploadRef"
+                            v-model="videoList"
+                            accept="video"
+                            :action="action"
+                            :image-shape="imageShape"
+                            :max-count="2"
+                            :max-duration="60"
+                            :show-file-name="true"
                         />
                     </view>
                 </view>
@@ -46,6 +65,7 @@
                             v-model="manualList"
                             accept="image"
                             :action="action"
+                            :image-shape="imageShape"
                             :auto-upload="false"
                             :max-count="3"
                             @on-choose-complete="onManualChooseComplete"
@@ -69,22 +89,6 @@
                     </view>
                 </view>
 
-                <!-- 视频上传 -->
-                <view class="u-demo-wrap">
-                    <view class="u-demo-title">视频上传</view>
-                    <view class="u-demo-area">
-                        <u-upload
-                            ref="videoUploadRef"
-                            v-model="videoList"
-                            accept="video"
-                            :action="action"
-                            :max-count="2"
-                            :max-duration="60"
-                            :show-file-name="true"
-                        />
-                    </view>
-                </view>
-
                 <!-- 自定义上传按钮 -->
                 <view class="u-demo-wrap">
                     <view class="u-demo-title">自定义上传按钮</view>
@@ -94,6 +98,7 @@
                             v-model="customList"
                             accept="image"
                             :action="action"
+                            :image-shape="imageShape"
                             :custom-btn="true"
                             :max-count="3"
                         >
@@ -194,6 +199,8 @@ const videoUploadRef = ref();
 const customUploadRef = ref();
 const customFileListRef = ref();
 
+const imageShape = ref<string>('circle');
+
 // 文件列表
 const imageList = ref<UploadFileItem[]>([
     {
@@ -215,8 +222,17 @@ const fileList = ref<UploadFileItem[]>([
     }
 ]);
 
+const videoList = ref<UploadFileItem[]>([
+    {
+        url: 'https://example.com/video.mp4',
+        name: '示例视频.mp4',
+        size: 1024 * 1024 * 2.5,
+        error: false,
+        progress: 100
+    }
+]);
+
 const manualList = ref<UploadFileItem[]>([]);
-const videoList = ref<UploadFileItem[]>([]);
 const customList = ref<UploadFileItem[]>([]);
 const customFileList = ref<UploadFileItem[]>([
     {

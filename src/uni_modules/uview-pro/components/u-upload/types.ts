@@ -153,7 +153,13 @@ export const UploadProps = {
      * 选择文件时的扩展名过滤
      * @description 仅在 accept='file' 或 accept='all' 时有效
      */
-    extension: { type: Array as PropType<string[]>, default: () => [] }
+    extension: { type: Array as PropType<string[]>, default: () => [] },
+    /**
+     * 图片/图标展示形状
+     * @description 可选值：square-方形(默认), circle-圆形。在 grid 模式下作用于图片和添加按钮，在 list 模式下作用于图标
+     * @default 'square'
+     */
+    imageShape: { type: String as PropType<'square' | 'circle'>, default: 'square' }
 };
 
 export type UploadProps = ExtractPropTypes<typeof UploadProps>;

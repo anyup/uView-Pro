@@ -18,11 +18,20 @@
                     <view class="u-upload-list__left" @tap.stop="handlePreview(item, index)">
                         <!-- 图片类型：显示缩略图 -->
                         <template v-if="isImageFile(item)">
-                            <image class="u-upload-list__thumb" :src="item.url || item.path" mode="aspectFill" />
+                            <image
+                                class="u-upload-list__thumb"
+                                :class="{ 'u-upload-list__thumb--circle': props.imageShape === 'circle' }"
+                                :src="item.url || item.path"
+                                :mode="imageMode"
+                            />
                         </template>
                         <!-- 非图片类型：显示文件图标 -->
                         <template v-else>
-                            <view class="u-upload-list__icon" :style="{ background: getFileIcon(item).bgColor }">
+                            <view
+                                class="u-upload-list__icon"
+                                :class="{ 'u-upload-list__icon--circle': props.imageShape === 'circle' }"
+                                :style="{ background: getFileIcon(item).bgColor }"
+                            >
                                 <u-icon :name="getFileIcon(item).name" size="32" color="var(--u-white-color)"></u-icon>
                             </view>
                         </template>
@@ -99,8 +108,9 @@
         <template v-else>
             <template v-if="showUploadList">
                 <view
-                    class="u-upload-grid__item u-upload-grid__preview"
                     v-for="(item, index) in lists"
+                    class="u-upload-grid__item u-upload-grid__preview"
+                    :class="{ 'u-upload-grid__item--circle': props.imageShape === 'circle' }"
                     :key="index"
                     :style="{
                         width: $u.addUnit(width),
@@ -132,10 +142,11 @@
                     <!-- 图片类型预览 -->
                     <template v-if="isImageFile(item)">
                         <image
-                            @tap.stop="handlePreview(item, index)"
                             class="u-upload-grid__image"
+                            :class="{ 'u-upload-grid__image--circle': props.imageShape === 'circle' }"
                             :src="item.url || item.path"
                             :mode="imageMode"
+                            @tap.stop="handlePreview(item, index)"
                         ></image>
                     </template>
 
@@ -190,6 +201,7 @@
                     class="u-upload-grid__item u-upload-grid__add"
                     hover-class="u-upload-grid__add--hover"
                     hover-stay-time="150"
+                    :class="{ 'u-upload-grid__item--circle': props.imageShape === 'circle' }"
                     :style="{
                         width: $u.addUnit(width),
                         height: $u.addUnit(height)
@@ -262,6 +274,7 @@ import type { UploadFileItem } from '../../types/global';
  * @property {Boolean} compressed 选择视频时是否压缩（默认true）
  * @property {Number} max-duration 选择视频时拍摄最长时长，单位秒（默认60）
  * @property {String} camera 选择视频时摄像头方向，可选值：front|back（默认'back'）
+ * @property {String} image-shape 图片/图标展示形状，可选值：square|circle（默认'square'），在grid模式下作用于图片和添加按钮，在list模式下作用于图标
  * @property {Array<Object>} file-list 默认显示的文件列表，数组元素为对象，必须提供url属性
  * @property {Function} before-upload 上传前钩子，返回false或Promise.reject则跳过当前文件上传
  * @property {Function} before-remove 删除前钩子，返回false或Promise.reject则阻止删除
@@ -1241,6 +1254,27 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     border-radius: 10rpx;
 }
 
+.u-upload-grid__image--circle {
+    border-radius: 50%;
+}
+
+.u-upload-grid__item--circle {
+    border-radius: 50%;
+}
+
+.u-upload-grid__item--circle .u-upload-grid__delete {
+    top: 20rpx;
+    right: 30rpx;
+    width: 36rpx;
+    height: 36rpx;
+}
+
+.u-upload-grid__item--circle .u-upload-grid__progress {
+    bottom: 16rpx;
+    left: 16rpx;
+    right: 16rpx;
+}
+
 .u-upload-grid__delete {
     position: absolute;
     top: 10rpx;
@@ -1390,6 +1424,10 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     background: var(--u-bg-gray-light);
 }
 
+.u-upload-list__thumb--circle {
+    border-radius: 50%;
+}
+
 .u-upload-list__icon {
     width: 80rpx;
     height: 80rpx;
@@ -1397,6 +1435,10 @@ defineExpose({ clear, reUpload, selectFile, upload, retry, remove, doPreviewImag
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.u-upload-list__icon--circle {
+    border-radius: 50%;
 }
 
 // 中间：文件名信息
