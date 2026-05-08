@@ -1,3 +1,14 @@
+## 0.6.0-beta.1（2026-05-08）
+
+### ✨ Features | 新功能
+
+- **u-upload:** 新增image-shape属性支持圆形和方形展示 ([fac9414](https://github.com/anyup/uView-Pro/commit/fac941413ba4d944116513934306376a0188fcda))
+- **u-upload:** 新增customChoose属性支持自定义文件选择功能 ([97e17ee](https://github.com/anyup/uView-Pro/commit/97e17eeae15c03a7791bb5eec4159782f3d70d84))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.0-beta.0（2026-04-30）
 
 ### ✨ Features | 新功能
