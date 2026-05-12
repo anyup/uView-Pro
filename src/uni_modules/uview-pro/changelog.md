@@ -1,3 +1,13 @@
+## 0.6.0（2026-05-12）
+
+### ✨ Features | 新功能
+
+- **theme:** 添加默认颜色变量的RGB值支持 ([59af59f](https://github.com/anyup/uView-Pro/commit/59af59f5ea160155939ec4c6c3e33f968910c3e4))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.0-beta.1（2026-05-08）
 
 ### ✨ Features | 新功能
