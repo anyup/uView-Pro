@@ -7,19 +7,24 @@
                     <view class="u-demo-area">
                         <view class="u-demo-result-line">{{ input ? input : 'Picker值' }}</view>
                         <u-picker
+                            v-model="show"
+                            end-year="2030"
                             :mode="mode"
                             :defaultTime="defaultTime"
-                            v-model="show"
                             :defaultRegion="defaultRegion"
                             :params="params"
-                            end-year="2030"
-                            @confirm="confirm"
                             :defaultSelector="defaultSelector"
                             :range="range"
                             :range-key="rangKey"
                             :preserve-selection="false"
+                            @confirm="confirm"
                             @columnchange="columnchange"
-                        ></u-picker>
+                        >
+                            <template #title>
+                                <view>自定义标题</view>
+                                <view style="font-size: 12px">子标题</view>
+                            </template>
+                        </u-picker>
                     </view>
                 </view>
                 <view class="u-config-wrap">

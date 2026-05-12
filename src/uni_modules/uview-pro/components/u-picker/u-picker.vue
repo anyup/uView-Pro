@@ -21,7 +21,11 @@
                 >
                     {{ cancelText }}
                 </view>
-                <view class="u-picker__title u-line-1">{{ title }}</view>
+                <view class="u-picker__title u-line-1">
+                    <slot name="title">
+                        {{ title }}
+                    </slot>
+                </view>
                 <view
                     class="u-btn-picker u-btn-picker--primary"
                     :style="{ color: moving ? cancelColor : confirmColor }"
@@ -777,7 +781,7 @@ onMounted(() => {
 
 .u-picker-header {
     width: 100%;
-    height: 90rpx;
+    min-height: 90rpx;
     @include vue-flex;
     justify-content: space-between;
     align-items: center;
