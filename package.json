@@ -54,6 +54,7 @@
         "changelog:current:plain": "node scripts/generate-changelog.js --plain --current",
         "changelog:current:no-unreleased": "node scripts/generate-changelog.js --emoji --current --no-unreleased",
         "changelog:current:plain:no-unreleased": "node scripts/generate-changelog.js --plain --current --no-unreleased",
+        "changelog:release": "node scripts/generate-changelog.js --emoji --current --no-unreleased --exclude-types=build,chore,ci,docs,revert,test",
         "changelog:last": "node scripts/generate-changelog.js --emoji --last",
         "changelog:last:plain": "node scripts/generate-changelog.js --plain --last",
         "changelog:all": "node scripts/generate-changelog.js --emoji --all",

@@ -13,6 +13,17 @@ const sinceLastTag = args.includes('--last') || args.includes('--since-last-tag'
 const generateAll = args.includes('--all') || args.includes('--by-tags');
 const noUnreleased = args.includes('--no-unreleased');
 
+// 需要排除的 commit 类型（例如：--exclude-types=chore,ci,docs）
+let excludeTypes = [];
+const excludeTypesArg = args.find(a => a.startsWith('--exclude-types='));
+if (excludeTypesArg) {
+    excludeTypes = excludeTypesArg
+        .split('=')[1]
+        .split(',')
+        .map(t => t.trim())
+        .filter(Boolean);
+}
+
 // 如果没有指定参数，默认使用 emoji
 const shouldUseEmoji = useEmoji || (!usePlain && !useEmoji);
 
@@ -110,7 +121,7 @@ function collectCommits(range) {
     });
 }
 
-function groupCommitsByType(commits) {
+function groupCommitsByType(commits, excludeTypes = []) {
     const commitsByType = {};
     commits.forEach(commit => {
         if (!commit.subject) return;
@@ -118,6 +129,7 @@ function groupCommitsByType(commits) {
         if (match) {
             const [, type, scope, description] = match;
             if (!emojiMap[type]) return;
+            if (excludeTypes.includes(type)) return;
             if (!commitsByType[type]) commitsByType[type] = [];
             commitsByType[type].push({
                 ...commit,
@@ -240,7 +252,7 @@ function generateChangelog() {
 
         // 解析提交
         const commits = collectCommits(range);
-        const commitsByType = groupCommitsByType(commits);
+        const commitsByType = groupCommitsByType(commits, excludeTypes);
 
         // 收集贡献者信息
         const contributors = collectContributors(commits);
@@ -272,7 +284,7 @@ function generateChangelog() {
                 const tagDate = safeExec(`git show -s --format=%ad --date=format:%Y-%m-%d ${tag}`) || '';
                 const rangeExp = prev ? `${prev}..${tag}` : `${tag}`;
                 const tagCommits = collectCommits(rangeExp);
-                const groups = groupCommitsByType(tagCommits);
+                const groups = groupCommitsByType(tagCommits, excludeTypes);
                 const tagContributors = collectContributors(tagCommits);
                 let body = renderBodyFromGroups(groups, tagContributors);
                 if (!body) body = renderFallbackBody();

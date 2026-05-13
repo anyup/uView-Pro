@@ -302,7 +302,7 @@ function continueRelease() {
 
         // 生成 changelog（按当前版本生成版本化条目，可配置是否保留 Unreleased）
         console.log('📝 生成 changelog...');
-        execCommand('npm run changelog:current:no-unreleased');
+        execCommand('npm run changelog:release');
 
         // 提交更改
         console.log('💾 提交更改...');
