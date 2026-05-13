@@ -1,3 +1,22 @@
+## 0.6.1（2026-05-13）
+
+### ✨ Features | 新功能
+
+- **theme:** 添加默认颜色变量的RGB值支持 ([59af59f](https://github.com/anyup/uView-Pro/commit/59af59f5ea160155939ec4c6c3e33f968910c3e4))
+- **u-picker:** 支持自定义标题插槽并调整样式 ([c3f2967](https://github.com/anyup/uView-Pro/commit/c3f296718a53449665cf14441ed1adef817274d1))
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+- **release:** bump version to 0.6.0 ([cb7351f](https://github.com/anyup/uView-Pro/commit/cb7351fe85e96a5abcd2d4eea0c1771f62148fd0))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **canvas:** 修复头条小程序中CanvasContext的Illegal invocation错误 ([05ebe29](https://github.com/anyup/uView-Pro/commit/05ebe2998007421cf2d2db8664bbe2963419129f))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.0（2026-05-12）
 
 ### ✨ Features | 新功能
