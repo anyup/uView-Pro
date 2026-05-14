@@ -1,12 +1,7 @@
 <template>
     <view class="u-radio" :style="$u.toStyle(radioStyle, customStyle)" :class="customClass">
         <view class="u-radio__icon-wrap" @tap="toggle" :class="iconClass" :style="$u.toStyle(iconStyle)">
-            <u-icon
-                custom-class="u-radio__icon-wrap__icon"
-                name="checkbox-mark"
-                :size="elIconSize"
-                :color="iconColor"
-            />
+            <u-icon name="checkbox-mark" :size="elIconSize" :color="iconColor" />
         </view>
         <view
             class="u-radio__label"
@@ -309,12 +304,9 @@ function setRadioCheckedStatus() {
         font-size: 20px;
         border: 1px solid var(--u-border-color);
         transition-duration: 0.2s;
-
         /* #ifdef MP-TOUTIAO */
         // 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
-        &__icon {
-            line-height: 0;
-        }
+        line-height: 0;
         /* #endif */
 
         &--circle {
