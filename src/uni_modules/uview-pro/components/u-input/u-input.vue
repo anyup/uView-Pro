@@ -398,14 +398,14 @@ defineExpose({
 
     &--disabled &__input {
         background-color: transparent;
-        color: var(--u-disabled-color, $u-light-color);
-        -webkit-text-fill-color: var(--u-disabled-color, $u-light-color);
+        color: $u-light-color;
+        -webkit-text-fill-color: $u-light-color;
     }
 
     &--disabled &__textarea {
         background-color: transparent;
-        color: var(--u-disabled-color, $u-light-color);
-        -webkit-text-fill-color: var(--u-disabled-color, $u-light-color);
+        color: $u-light-color;
+        -webkit-text-fill-color: $u-light-color;
     }
 
     &__right-icon {
