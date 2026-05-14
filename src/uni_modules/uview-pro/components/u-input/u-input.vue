@@ -393,19 +393,19 @@ defineExpose({
     }
 
     &--disabled {
-        background-color: #f5f7fa;
+        background-color: $u-bg-color;
     }
 
     &--disabled &__input {
         background-color: transparent;
-        color: var(--u-disabled-color, #c0c4cc);
-        -webkit-text-fill-color: var(--u-disabled-color, #c0c4cc);
+        color: var(--u-disabled-color, $u-light-color);
+        -webkit-text-fill-color: var(--u-disabled-color, $u-light-color);
     }
 
     &--disabled &__textarea {
         background-color: transparent;
-        color: var(--u-disabled-color, #c0c4cc);
-        -webkit-text-fill-color: var(--u-disabled-color, #c0c4cc);
+        color: var(--u-disabled-color, $u-light-color);
+        -webkit-text-fill-color: var(--u-disabled-color, $u-light-color);
     }
 
     &__right-icon {
