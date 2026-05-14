@@ -395,6 +395,14 @@ defineExpose({
         background-color: $u-bg-gray-light;
     }
 
+    &--disabled &__field {
+        background-color: transparent;
+        color: $u-light-color;
+        -webkit-text-fill-color: $u-light-color;
+        padding-left: 10rpx;
+        padding-top: 10rpx;
+    }
+
     &__field {
         flex: 1;
         font-size: 28rpx;

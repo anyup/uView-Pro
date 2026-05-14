@@ -329,6 +329,7 @@ function onClear(event: any) {
 }
 
 function inputClick() {
+    if (props.disabled) return;
     emit('click');
 }
 
@@ -393,19 +394,22 @@ defineExpose({
     }
 
     &--disabled {
-        background-color: $u-bg-color;
+        background-color: $u-bg-gray-light;
     }
 
     &--disabled &__input {
         background-color: transparent;
         color: $u-light-color;
         -webkit-text-fill-color: $u-light-color;
+        padding-left: 10rpx;
     }
 
     &--disabled &__textarea {
         background-color: transparent;
         color: $u-light-color;
         -webkit-text-fill-color: $u-light-color;
+        padding-left: 10rpx;
+        padding-top: 10rpx;
     }
 
     &__right-icon {
