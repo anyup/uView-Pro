@@ -4,7 +4,8 @@
         :class="[
             {
                 'u-input--border': border,
-                'u-input--error': validateState
+                'u-input--error': validateState,
+                'u-input--disabled': disabled
             },
             customClass
         ]"
@@ -328,6 +329,7 @@ function onClear(event: any) {
 }
 
 function inputClick() {
+    if (props.disabled) return;
     emit('click');
 }
 
@@ -389,6 +391,25 @@ defineExpose({
 
     &--error {
         border-color: $u-type-error !important;
+    }
+
+    &--disabled {
+        background-color: $u-bg-gray-light;
+    }
+
+    &--disabled &__input {
+        background-color: transparent;
+        color: $u-light-color;
+        -webkit-text-fill-color: $u-light-color;
+        padding-left: 10rpx;
+    }
+
+    &--disabled &__textarea {
+        background-color: transparent;
+        color: $u-light-color;
+        -webkit-text-fill-color: $u-light-color;
+        padding-left: 10rpx;
+        padding-top: 10rpx;
     }
 
     &__right-icon {

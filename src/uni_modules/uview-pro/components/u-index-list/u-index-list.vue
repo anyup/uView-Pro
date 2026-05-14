@@ -248,7 +248,7 @@ function onScroll() {
  */
 function onTouchMove(event: TouchEvent) {
     touchmove.value = true;
-    const sidebarLength = children.length;
+    const sidebarLength = indexList.value.length;
     const touch = event.touches[0];
     const itemHeight = sidebar.height / sidebarLength;
     let clientY = touch.clientY;
