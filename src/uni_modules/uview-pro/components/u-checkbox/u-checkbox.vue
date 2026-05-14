@@ -1,12 +1,7 @@
 <template>
     <view class="u-checkbox" :style="$u.toStyle(checkboxStyle, customStyle)" :class="customClass">
         <view class="u-checkbox__icon-wrap" @tap="toggle" :class="iconClass" :style="$u.toStyle(iconStyle)">
-            <u-icon
-                custom-class="u-checkbox__icon-wrap__icon"
-                name="checkbox-mark"
-                :size="checkboxIconSize"
-                :color="iconColor"
-            />
+            <u-icon name="checkbox-mark" :size="checkboxIconSize" :color="iconColor" />
         </view>
         <view
             class="u-checkbox__label"
@@ -323,11 +318,9 @@ defineExpose({
         font-size: 20px;
         border: 1px solid var(--u-border-color);
         transition-duration: 0.2s;
-
         /* #ifdef MP-TOUTIAO */
-        &__icon {
-            line-height: 0;
-        }
+        // 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
+        line-height: 0;
         /* #endif */
 
         &--circle {
