@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.2 - 2026-05-15
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-checkbox:** 修复多选框在头条、抖音小程序图标偏移的问题 ([8ea1838](https://github.com/anyup/uView-Pro/commit/8ea18383b94b421cabea7d080a6867f4b6133ff5))
+- **u-radio:** 修复单选框在头条、抖音小程序图标偏移的问题 ([dd7d6fe](https://github.com/anyup/uView-Pro/commit/dd7d6fee5a22bb39b3dcea9a24b9a06da40ee20e))
+
+### ✨ Features | 新功能
+
+- 添加 u-input 组件禁用状态样式 (#155) ([1145d99](https://github.com/anyup/uView-Pro/commit/1145d996ca111da769665ee5dca1bf07a0a1968d))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> <a href="https://github.com/1361176289"><img src="https://github.com/1361176289.png?size=40" width="40" height="40" alt="小陆同学" title="小陆同学"/></a> 
+
 ## 0.6.1 - 2026-05-13
 
 ### ✨ Features | 新功能
