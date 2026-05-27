@@ -51,7 +51,13 @@
                         </text>
                         <!-- 进度条 -->
                         <view
-                            v-if="showProgress && item.progress > 0 && item.progress < 100 && !item.error"
+                            v-if="
+                                showProgress &&
+                                item.progress !== undefined &&
+                                item.progress > 0 &&
+                                item.progress < 100 &&
+                                !item.error
+                            "
                             class="u-upload-list__progress"
                         >
                             <u-line-progress
@@ -129,7 +135,13 @@
                     </view>
                     <view class="u-upload-grid__progress">
                         <u-line-progress
-                            v-if="showProgress && item.progress > 0 && item.progress !== 100 && !item.error"
+                            v-if="
+                                showProgress &&
+                                item.progress !== undefined &&
+                                item.progress > 0 &&
+                                item.progress !== 100 &&
+                                !item.error
+                            "
                             :show-percent="false"
                             height="16"
                             :percent="item.progress"
@@ -1059,8 +1071,9 @@ async function executeBeforeRemove(index: number) {
  */
 function handlerDeleteItem(index: number) {
     // 如果文件正在上传中，终止上传任务
-    if (lists.value[index].progress < 100 && lists.value[index].progress > 0) {
-        typeof lists.value[index].uploadTask != 'undefined' && lists.value[index].uploadTask?.abort?.();
+    const item = lists.value[index];
+    if (item && item.progress !== undefined && item.progress < 100 && item.progress > 0) {
+        typeof item.uploadTask != 'undefined' && item.uploadTask?.abort?.();
     }
     lists.value.splice(index, 1);
     emit('on-remove', index, lists.value, props.index);
