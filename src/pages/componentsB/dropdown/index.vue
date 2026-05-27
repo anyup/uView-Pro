@@ -1,47 +1,51 @@
 <template>
     <demo-page title="Dropdown 下拉菜单" desc="用于展示下拉菜单，支持单选、多选、自定义样式等功能。" :apis="'dropdown'">
+        <template #top>
+            <view class="u-m-p-50">
+                <view class="u-demo-area u-flex u-row-center">
+                    <u-dropdown
+                        :close-on-click-mask="mask"
+                        ref="uDropdownRef"
+                        :activeColor="activeColor"
+                        :borderBottom="borderBottom"
+                        :fixed="isFixed"
+                        :immersive="immersive"
+                    >
+                        <u-dropdown-item
+                            @change="change"
+                            v-model="value1"
+                            title="距离"
+                            :options="options1"
+                        ></u-dropdown-item>
+                        <u-dropdown-item
+                            @change="change"
+                            v-model="value2"
+                            title="温度"
+                            :options="options2"
+                        ></u-dropdown-item>
+                        <u-dropdown-item title="属性">
+                            <view class="slot-content">
+                                <view class="item-box">
+                                    <view
+                                        class="item"
+                                        :class="[item.active ? 'active' : '']"
+                                        @tap="tagClick(index)"
+                                        v-for="(item, index) in list"
+                                        :key="index"
+                                    >
+                                        {{ item.label }}
+                                    </view>
+                                </view>
+                                <u-button type="primary" @click="closeDropdown">确定</u-button>
+                            </view>
+                        </u-dropdown-item>
+                    </u-dropdown>
+                </view>
+            </view>
+        </template>
         <template #default>
             <view>
-                <view class="u-m-p-50">
-                    <view class="u-demo-area u-flex u-row-center">
-                        <u-dropdown
-                            :close-on-click-mask="mask"
-                            ref="uDropdownRef"
-                            :activeColor="activeColor"
-                            :borderBottom="borderBottom"
-                        >
-                            <u-dropdown-item
-                                @change="change"
-                                v-model="value1"
-                                title="距离"
-                                :options="options1"
-                            ></u-dropdown-item>
-                            <u-dropdown-item
-                                @change="change"
-                                v-model="value2"
-                                title="温度"
-                                :options="options2"
-                            ></u-dropdown-item>
-                            <u-dropdown-item title="属性">
-                                <view class="slot-content">
-                                    <view class="item-box">
-                                        <view
-                                            class="item"
-                                            :class="[item.active ? 'active' : '']"
-                                            @tap="tagClick(index)"
-                                            v-for="(item, index) in list"
-                                            :key="index"
-                                        >
-                                            {{ item.label }}
-                                        </view>
-                                    </view>
-                                    <u-button type="primary" @click="closeDropdown">确定</u-button>
-                                </view>
-                            </u-dropdown-item>
-                        </u-dropdown>
-                    </view>
-                </view>
-                <view class="u-config-wrap">
+                <view class="u-config-wrap" style="height: 1000px">
                     <view class="u-config-title u-border-bottom"> 参数配置 </view>
                     <view class="u-config-item">
                         <view class="u-item-title">下边框</view>
@@ -53,6 +57,14 @@
                             :list="['#2979ff', '#ff9900', '#19be6b']"
                             @change="activeColorChange"
                         ></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">fixed定位</view>
+                        <u-subsection :list="['关闭', '开启']" @change="fixedChange"></u-subsection>
+                    </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">沉浸式(仅fixed)</view>
+                        <u-subsection :list="['关闭', '开启']" @change="immersiveChange"></u-subsection>
                     </view>
                     <view class="u-config-item">
                         <view class="u-item-title">遮罩是否可点击</view>
@@ -71,6 +83,9 @@ import { ref } from 'vue';
 const value1 = ref('');
 const value2 = ref(2);
 const mask = ref(true);
+const isFixed = ref(false);
+const immersive = ref(false);
+
 const options1 = ref([
     {
         label: '默认排序',
@@ -165,6 +180,14 @@ function closeDropdown() {
 
 function maskChange(index: number) {
     mask.value = !index;
+}
+
+function fixedChange(index: number) {
+    isFixed.value = !!index;
+}
+
+function immersiveChange(index: number) {
+    immersive.value = !!index;
 }
 </script>
 

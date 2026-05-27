@@ -1,63 +1,73 @@
 <template>
-    <view class="u-dropdown" :style="$u.toStyle(styles, customStyle)" :class="customClass">
-        <view
-            class="u-dropdown__menu"
-            :style="{ height: $u.addUnit(height) }"
-            :class="{ 'u-border-bottom': borderBottom }"
-        >
+    <view class="u-dropdown-wrapper">
+        <view class="u-dropdown" :style="dropdownRootStyle" :class="[{ 'u-dropdown__fixed': fixed }, customClass]">
             <view
-                class="u-dropdown__menu__item"
-                v-for="(item, index) in menuList"
-                :key="index"
-                @tap.stop="menuClick(index)"
+                class="u-dropdown__menu"
+                :style="{ height: $u.addUnit(height) }"
+                :class="{ 'u-border-bottom': borderBottom }"
             >
-                <view class="u-flex">
-                    <text
-                        class="u-dropdown__menu__item__text"
-                        :style="{
-                            color: item.disabled
-                                ? 'var(--u-light-color)'
-                                : index === current || highlightIndex == index
-                                  ? activeColor
-                                  : inactiveColor,
-                            fontSize: $u.addUnit(titleSize)
-                        }"
-                        >{{ item.title }}</text
-                    >
-                    <view
-                        class="u-dropdown__menu__item__arrow"
-                        :class="{
-                            'u-dropdown__menu__item__arrow--rotate': index === current
-                        }"
-                    >
-                        <u-icon
-                            :custom-style="{ display: 'flex' }"
-                            :name="menuIcon"
-                            :size="$u.addUnit(menuIconSize)"
-                            :color="index === current || highlightIndex == index ? activeColor : 'var(--u-light-color)'"
-                        ></u-icon>
+                <view
+                    class="u-dropdown__menu__item"
+                    v-for="(item, index) in menuList"
+                    :key="index"
+                    @tap.stop="menuClick(index)"
+                >
+                    <view class="u-flex">
+                        <text
+                            class="u-dropdown__menu__item__text"
+                            :style="{
+                                color: item.disabled
+                                    ? 'var(--u-light-color)'
+                                    : index === current || highlightIndex == index
+                                      ? activeColor
+                                      : inactiveColor,
+                                fontSize: $u.addUnit(titleSize)
+                            }"
+                            >{{ item.title }}</text
+                        >
+                        <view
+                            class="u-dropdown__menu__item__arrow"
+                            :class="{
+                                'u-dropdown__menu__item__arrow--rotate': index === current
+                            }"
+                        >
+                            <u-icon
+                                :custom-style="{ display: 'flex' }"
+                                :name="menuIcon"
+                                :size="$u.addUnit(menuIconSize)"
+                                :color="
+                                    index === current || highlightIndex == index ? activeColor : 'var(--u-light-color)'
+                                "
+                            ></u-icon>
+                        </view>
                     </view>
                 </view>
             </view>
-        </view>
-        <view
-            class="u-dropdown__content"
-            :style="[
-                contentStyle,
-                {
-                    transition: `opacity ${Number(duration) / 1000}s linear`,
-                    top: $u.addUnit(height),
-                    height: contentHeight + 'px'
-                }
-            ]"
-            @tap="maskClick"
-            @touchmove.stop.prevent
-        >
-            <view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
-                <slot></slot>
+            <view
+                class="u-dropdown__content"
+                :style="[
+                    contentStyle,
+                    {
+                        transition: `opacity ${Number(duration) / 1000}s linear`,
+                        top: $u.addUnit(height),
+                        height: contentHeight + 'px'
+                    }
+                ]"
+                @tap="maskClick"
+                @touchmove.stop.prevent
+            >
+                <view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
+                    <slot></slot>
+                </view>
+                <view class="u-dropdown__content__mask"></view>
             </view>
-            <view class="u-dropdown__content__mask"></view>
         </view>
+        <!-- fixed定位时的占位区域，防止页面内容塌陷 -->
+        <view
+            v-if="fixed && !immersive"
+            class="u-dropdown__placeholder"
+            :style="{ height: dropdownPlaceholderHeight + 'px' }"
+        ></view>
     </view>
 </template>
 
@@ -75,13 +85,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, getCurrentInstance, nextTick } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import { $u, useParent } from '../..';
 import { DropdownProps } from './types';
 
 /**
  * dropdown 下拉菜单
- * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景
+ * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景。
+ * 支持fixed定位，自动适配状态栏和导航栏高度，并提供占位区域防止页面塌陷。
  * @tutorial https://uviewpro.cn/zh/components/dropdown.html
  * @property {String} active-color 标题和选项卡选中的颜色（默认主题色primary）
  * @property {String} inactive-color 标题和选项卡未选中的颜色（默认var(--u-content-color)）
@@ -92,9 +103,14 @@ import { DropdownProps } from './types';
  * @property {String | Number} border-radius 菜单展开内容下方的圆角值，单位任意（默认0）
  * @property {Boolean} border-bottom 标题菜单是否显示下边框（默认false）
  * @property {String | Number} title-size 标题的字体大小，单位任意，数值默认为rpx单位（默认28）
+ * @property {Boolean} fixed 是否使用fixed定位固定在顶部，自动适配状态栏和导航栏高度（默认false）
+ * @property {String | Number} offset-top fixed定位时，在自动计算的偏移量基础上的额外顶部偏移量，单位px（默认0）
+ * @property {String | Number} navbar-height fixed定位时，状态栏+导航栏的总高度(px)。不设置则自动获取，设置任意数值(包括0)则使用指定值
+ * @property {Boolean} immersive 沉浸式模式，仅在fixed下生效，开启后不生成占位区域（默认false）
+ * @property {String | Number} z-index fixed定位时的z-index值（默认985）
  * @event {Function} open 下拉菜单被打开时触发
  * @event {Function} close 下拉菜单被关闭时触发
- * @example <u-dropdown></u-dropdown>
+ * @example <u-dropdown :fixed="true"></u-dropdown>
  */
 
 const props = defineProps(DropdownProps);
@@ -115,14 +131,74 @@ const contentStyle = ref<any>({ zIndex: -1, opacity: 0 });
 const highlightIndex = ref<number>(99999);
 // 下拉内容高度
 const contentHeight = ref<number>(0);
-// 子组件引用
-const instance = getCurrentInstance();
-// 兼容头条样式
-const styles = computed(() => {
-    const style: any = {};
+
+// ==================== fixed定位相关 ====================
+// 获取系统状态栏高度
+const systemInfo = uni.getSystemInfoSync();
+const statusBarHeight = ref(0);
+// #ifdef APP-HARMONY || MP-WEIXIN
+const windowInfo = uni.getWindowInfo();
+statusBarHeight.value = windowInfo.statusBarHeight || 0;
+// #endif
+// #ifndef APP-HARMONY || MP-WEIXIN
+statusBarHeight.value = systemInfo.statusBarHeight || 0;
+// #endif
+
+// 默认导航栏高度（与 u-navbar 保持一致）
+const defaultNavbarHeight = computed(() => {
+    // #ifdef APP || H5
+    return 44;
+    // #endif
+    // #ifdef MP
+    return systemInfo.platform === 'ios' ? 44 : 48;
+    // #endif
+});
+
+/**
+ * 计算 fixed 定位时的总偏移高度（px）
+ * - 若用户通过 navbarHeight 指定了任意数值（包括0），则使用用户指定值
+ * - 否则（空字符串）自动计算：状态栏高度 + 默认导航栏高度
+ * - 最后加上 offsetTop 作为额外偏移
+ */
+const dropdownOffsetHeight = computed(() => {
+    let baseHeight: number;
+    if (props.navbarHeight !== '' && props.navbarHeight !== undefined && props.navbarHeight !== null) {
+        // 用户手动指定了 navbar 高度（包括0），直接使用
+        baseHeight = Number(props.navbarHeight);
+    } else {
+        // 自动计算：状态栏高度 + 默认导航栏高度
+        baseHeight = statusBarHeight.value + defaultNavbarHeight.value;
+    }
+    // 加上用户设置的额外 offsetTop 偏移
+    return baseHeight + Number(props.offsetTop);
+});
+
+/**
+ * 占位区域高度 = dropdown菜单栏自身高度（px）
+ * 不包含状态栏+导航栏偏移，因为页面上已有 navbar 等元素占据该空间
+ */
+const dropdownPlaceholderHeight = computed(() => {
+    return uni.upx2px(Number(props.height));
+});
+
+/**
+ * dropdown 根节点样式
+ * fixed 时设置 top 和 z-index
+ */
+const dropdownRootStyle = computed(() => {
+    const style: Record<string, any> = {};
+
+    // 兼容头条小程序
     // #ifdef MP-TOUTIAO
     style.width = '100vw';
     // #endif
+
+    // fixed 定位时，计算顶部偏移和 z-index
+    if (props.fixed) {
+        style.top = dropdownOffsetHeight.value + 'px';
+        style.zIndex = props.zIndex ? Number(props.zIndex) : $u.zIndex.dropdown;
+    }
+
     return style;
 });
 
@@ -193,7 +269,7 @@ function open(index: number) {
     // 重置高亮索引，否则会造成多个菜单同时高亮
     // highlightIndex.value = 9999;
     // 展开时，设置下拉内容的样式
-    contentStyle.value = { zIndex: 11 };
+    contentStyle.value = { zIndex: 11, display: 'block' };
     // 标记展开状态以及当前展开项的索引
     active.value = true;
     current.value = index;
@@ -214,8 +290,12 @@ function close() {
     // 设置为收起状态，同时current归位，设置为空字符串
     active.value = false;
     current.value = 99999;
-    // 下拉内容的样式进行调整，不透明度设置为0
-    contentStyle.value = { zIndex: -1, opacity: 0 };
+    // 下拉内容的样式进行调整，不透明度设置为0，fixed模式下隐藏display避免遮挡页面元素
+    if (props.fixed) {
+        contentStyle.value = { zIndex: -1, opacity: 0, display: 'none' };
+    } else {
+        contentStyle.value = { zIndex: -1, opacity: 0 };
+    }
 }
 
 /**
@@ -243,14 +323,15 @@ function highlight(index?: number) {
  */
 function getContentHeight() {
     const windowHeight = $u.sys().windowHeight;
+    contentHeight.value = windowHeight;
 
-    $u.getRect('.u-dropdown__menu', instance).then((res: any) => {
-        // 这里获取的是dropdown的尺寸，在H5上，uniapp获取尺寸是有bug的(以前提出修复过，后来又出现了此bug，目前hx2.8.11版本)
-        // H5端bug表现为元素尺寸的top值为导航栏底部到到元素的上边沿的距离，但是元素的bottom值确是导航栏顶部到元素底部的距离
-        // 二者是互相矛盾的，本质原因是H5端导航栏非原生，uni的开发者大意造成
-        // 这里取菜单栏的botton值合理的，不能用res.top，否则页面会造成滚动
-        contentHeight.value = windowHeight - res.bottom;
-    });
+    // $u.getRect('.u-dropdown__menu', instance).then((res: any) => {
+    //     // 这里获取的是dropdown的尺寸，在H5上，uniapp获取尺寸是有bug的(以前提出修复过，后来又出现了此bug，目前hx2.8.11版本)
+    //     // H5端bug表现为元素尺寸的top值为导航栏底部到到元素的上边沿的距离，但是元素的bottom值确是导航栏顶部到元素底部的距离
+    //     // 二者是互相矛盾的，本质原因是H5端导航栏非原生，uni的开发者大意造成
+    //     // 这里取菜单栏的botton值合理的，不能用res.top，否则页面会造成滚动
+    //     contentHeight.value = windowHeight - res.bottom;
+    // });
 }
 
 onMounted(() => {
@@ -275,10 +356,25 @@ defineExpose({
 <style scoped lang="scss">
 @import '../../libs/css/style.components.scss';
 
+.u-dropdown-wrapper {
+    width: 100%;
+}
+
 .u-dropdown {
     flex: 1;
     width: 100%;
     position: relative;
+
+    &__fixed {
+        position: fixed;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+    }
+
+    &__placeholder {
+        width: 100%;
+    }
 
     &__menu {
         @include vue-flex;
@@ -312,7 +408,6 @@ defineExpose({
 
     &__content {
         position: absolute;
-        z-index: 8;
         width: 100%;
         left: 0px;
         bottom: 0;

@@ -86,6 +86,7 @@
             </u-navbar>
             <!-- #endif -->
             <wx-tips v-if="showWxTips" />
+            <slot name="top"></slot>
             <!-- 标题 -->
             <view v-if="title || desc" class="demo-page_header">
                 <view class="demo-page_title">{{ title }}</view>

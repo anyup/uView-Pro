@@ -12,6 +12,7 @@ export interface ZIndexConfig {
     sticky: number;
     indexListSticky: number;
     tabbar: number;
+    dropdown: number;
 }
 
 const zIndex: ZIndexConfig = {
@@ -24,7 +25,8 @@ const zIndex: ZIndexConfig = {
     topTips: 975,
     sticky: 970,
     indexListSticky: 965,
-    tabbar: 998
+    tabbar: 998,
+    dropdown: 985
 };
 
 export default zIndex;

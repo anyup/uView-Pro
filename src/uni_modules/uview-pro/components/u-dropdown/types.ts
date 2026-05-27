@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { getColor } from '../../';
+import zIndex from '../../libs/config/zIndex';
 
 /**
  * u-dropdown 下拉菜单 Props
@@ -37,7 +38,30 @@ export const DropdownProps = {
     /** 菜单右侧的icon图标 */
     menuIcon: { type: String, default: 'arrow-down' },
     /** 菜单右侧图标的大小 */
-    menuIconSize: { type: [Number, String] as PropType<number | string>, default: 26 }
+    menuIconSize: { type: [Number, String] as PropType<number | string>, default: 26 },
+    /**
+     * 是否使用fixed定位，开启后下拉菜单固定在顶部，
+     * 自动适配状态栏和导航栏高度，并生成占位区域防止页面塌陷
+     */
+    fixed: { type: Boolean, default: false },
+    /**
+     * fixed定位时，在自动计算的偏移量基础上的额外顶部偏移量（px），用于用户微调位置。
+     * 实际top = statusBarHeight + navbarHeight + offsetTop
+     */
+    offsetTop: { type: [Number, String] as PropType<number | string>, default: 0 },
+    /**
+     * fixed定位时，状态栏和导航栏所占的总高度（px）。
+     * 默认不设置（空字符串），组件会自动获取系统状态栏高度 + 默认导航栏高度（44px）。
+     * 设置任意数值（包括0）则使用用户指定值，不再自动计算。
+     */
+    navbarHeight: { type: [Number, String] as PropType<number | string>, default: '' },
+    /**
+     * 沉浸式模式，仅在fixed下生效。
+     * 开启后不生成占位区域，允许页面内容延伸到dropdown下方（类似沉浸式导航栏）
+     */
+    immersive: { type: Boolean, default: false },
+    /** fixed定位时的z-index值 */
+    zIndex: { type: [Number, String] as PropType<number | string>, default: zIndex.dropdown }
 };
 
 export type DropdownProps = ExtractPropTypes<typeof DropdownProps>;
