@@ -1,3 +1,17 @@
+## 0.6.3（2026-05-28）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-upload:** 修复进度条显示和上传终止的判断逻辑（#156） ([ad30563](https://github.com/anyup/uView-Pro/commit/ad305638b7e0977c60eda470a682ebb3ecf62c9e))
+
+### ✨ Features | 新功能
+
+- **u-dropdown:** 新增fixed定位选项，支持自动适配状态栏和导航栏高度，新增immersive沉浸式模式，增加offsetTop、navbarHeight、zIndex，增强灵活性 ([fc262bd](https://github.com/anyup/uView-Pro/commit/fc262bd5cc078fd3cbb825df2a9066427ccc9b69))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.2（2026-05-15）
 
 ### 🐛 Bug Fixes | Bug 修复
