@@ -24,6 +24,7 @@
             :placeholder="placeholder"
             :placeholderStyle="getPlaceholderStyle"
             :disabled="disabled"
+            :readonly="readonly"
             :maxlength="inputMaxlength"
             :fixed="fixed"
             :focus="focus"
@@ -49,6 +50,7 @@
             :placeholder="placeholder"
             :placeholderStyle="getPlaceholderStyle"
             :disabled="disabled || type === 'select'"
+            :readonly="readonly"
             :maxlength="inputMaxlength"
             :focus="focus"
             :confirmType="confirmType"
@@ -62,7 +64,8 @@
             @input="handleInput"
             @confirm="onConfirm"
         />
-        <view class="u-input__select-overlay" v-if="type === 'select'" @tap.stop="inputClick"></view>
+        <!-- 透明遮罩，在readonly时显示，用于捕获点击事件（原生input设置disabled会阻止点击冒泡） -->
+        <view v-if="readonly || type === 'select'" class="u-input__readonly-overlay" @tap.stop="inputClick"></view>
         <view class="u-input__right-icon u-flex">
             <view
                 class="u-input__right-icon__clear u-input__right-icon__item"
@@ -347,7 +350,7 @@ defineExpose({
     @include vue-flex;
     align-items: center;
 
-    &__select-overlay {
+    &__readonly-overlay {
         position: absolute;
         inset: 0;
         z-index: 1;

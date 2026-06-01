@@ -50,6 +50,11 @@ export const InputProps = {
         type: Boolean,
         default: false
     },
+    /** 是否只读，禁止输入但可点击，样式不变，可触发click事件(默认false) */
+    readonly: {
+        type: Boolean,
+        default: false
+    },
     /** 输入框的最大可输入长度(默认140) */
     maxlength: {
         type: [Number, String] as PropType<number | string>,

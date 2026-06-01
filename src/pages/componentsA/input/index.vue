@@ -21,6 +21,8 @@
                         :border-color="borderColor"
                         :focus="focus"
                         :size="size"
+                        :disabled="disabled"
+                        :readonly="readonly"
                     />
                     <u-gap></u-gap>
                     <u-input
@@ -35,8 +37,50 @@
                         :border="border"
                         :border-color="borderColor"
                         :size="size"
+                        :disabled="disabled"
+                        :readonly="readonly"
                     >
                     </u-input>
+                </view>
+            </view>
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">Select 下拉选择</view>
+                <view class="u-demo-area">
+                    <u-input
+                        v-model="selectValue"
+                        type="select"
+                        label="选择城市"
+                        placeholder="点击选择城市"
+                        :border="true"
+                        @click="showSelect = true"
+                    />
+                    <u-action-sheet
+                        v-model="showSelect"
+                        :list="cityList"
+                        :tips="{ text: '请选择城市', color: '#909399', fontSize: '24rpx' }"
+                        @click="onSelect"
+                    />
+                </view>
+            </view>
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">禁用与只读</view>
+                <view class="u-demo-area">
+                    <u-input
+                        v-model="disabledValue"
+                        label="禁用状态"
+                        placeholder="禁用状态下无法输入和点击"
+                        :border="true"
+                        disabled
+                    />
+                    <u-gap></u-gap>
+                    <u-input
+                        v-model="readonlyValue"
+                        label="只读状态"
+                        placeholder="只读状态下可点击但无法输入"
+                        :border="true"
+                        readonly
+                        @click="onReadonlyClick"
+                    />
                 </view>
             </view>
             <view class="u-config-wrap">
@@ -81,6 +125,14 @@
                     <view class="u-item-title">自定义样式</view>
                     <u-subsection current="1" :list="['有', '无']" @change="customStyleChange" />
                 </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">禁用状态</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="disabledChange" />
+                </view>
+                <view class="u-config-item">
+                    <view class="u-item-title">只读状态</view>
+                    <u-subsection current="1" :list="['是', '否']" @change="readonlyChange" />
+                </view>
             </view>
         </view>
     </demo-page>
@@ -103,6 +155,28 @@ const focus = ref(false);
 const passwordIcon = ref(true);
 const customStyle = ref<Record<string, any>>({});
 const size = ref<SizeType | string>('default');
+const disabled = ref(false);
+const readonly = ref(false);
+
+// Select 相关
+const selectValue = ref('');
+const showSelect = ref(false);
+const cityList = ref([{ text: '北京' }, { text: '上海' }, { text: '广州' }, { text: '深圳' }]);
+
+function onSelect(index: number) {
+    selectValue.value = cityList.value[index].text;
+}
+
+// 禁用与只读示例
+const disabledValue = ref('禁用状态的值');
+const readonlyValue = ref('只读状态的值');
+
+function onReadonlyClick() {
+    uni.showToast({
+        title: '点击了只读输入框',
+        icon: 'none'
+    });
+}
 
 function textareaChange(index: number) {
     type.value = index === 0 ? 'textarea' : 'text';
@@ -142,5 +216,11 @@ function sizeChange(index: number) {
     } else {
         size.value = '60rpx';
     }
+}
+function disabledChange(index: number) {
+    disabled.value = index === 0;
+}
+function readonlyChange(index: number) {
+    readonly.value = index === 0;
 }
 </script>
