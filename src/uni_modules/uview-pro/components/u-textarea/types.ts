@@ -55,6 +55,8 @@ export const TextareaProps = {
     confirmType: { type: String as PropType<string>, default: textarea.confirmType },
     // 是否禁用
     disabled: { type: Boolean as PropType<boolean>, default: textarea.disabled },
+    // 是否只读，禁止输入但可点击，样式不变，可触发click事件
+    readonly: { type: Boolean as PropType<boolean>, default: false },
     // 是否显示统计字数
     count: { type: Boolean as PropType<boolean>, default: textarea.count },
     // 是否自动获取焦点，nvue不支持，H5取决于浏览器的实现

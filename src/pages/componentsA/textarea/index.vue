@@ -1,7 +1,7 @@
 <template>
     <demo-page
         title="Textarea 多行文本"
-        desc="用于多行文本输入，支持字数统计、自动增高、禁用等功能。"
+        desc="用于多行文本输入，支持字数统计、自动增高、禁用、只读等功能。"
         :apis="'Textarea'"
     >
         <template #default>
@@ -49,6 +49,18 @@
                     </view>
                 </view>
                 <view class="u-demo-block">
+                    <text class="u-demo-block__title">只读状态</text>
+                    <view class="u-demo-block__content">
+                        <u-textarea
+                            v-model="value6"
+                            placeholder="文本域为只读状态，可点击但无法输入"
+                            readonly
+                            count
+                            @click="onReadonlyClick"
+                        ></u-textarea>
+                    </view>
+                </view>
+                <view class="u-demo-block">
                     <text class="u-demo-block__title">下划线模式</text>
                     <view class="u-demo-block__content">
                         <u-textarea v-model="value5" placeholder="请输入内容" border="bottom"></u-textarea>
@@ -73,12 +85,21 @@ const value0 = ref<string>('');
 const value1 = ref<string>('');
 const value2 = ref<string>('统计字数');
 const value3 = ref<string>('');
-const value4 = ref<string>('');
+const value4 = ref<string>('禁用状态的文本内容');
 const value5 = ref<string>('');
+const value6 = ref<string>('只读状态的文本内容，可点击触发事件');
 
 // 保留原示例中的 formatter 方法（若需传入组件，可通过 ref/prop 传递）
 function formatter(value: string) {
     return value.replace(/[^0-9]/gi, '');
+}
+
+// 只读状态点击事件
+function onReadonlyClick() {
+    uni.showToast({
+        title: '点击了只读文本域',
+        icon: 'none'
+    });
 }
 </script>
 

@@ -3,7 +3,8 @@
         class="u-textarea"
         :class="[
             {
-                'u-textarea--error': validateState
+                'u-textarea--error': validateState,
+                'u-textarea--disabled': props.disabled
             },
             textareaClass,
             customClass
@@ -19,6 +20,7 @@
             :placeholder-style="getPlaceholderStyle"
             :placeholder-class="props.placeholderClass"
             :disabled="props.disabled"
+            :readonly="props.readonly"
             :focus="props.focus"
             :autoHeight="props.autoHeight"
             :fixed="props.fixed"
@@ -51,6 +53,8 @@
             {{ innerValue.length }}/{{ props.maxlength }}
         </text>
 
+        <!-- 透明遮罩，在readonly时显示，用于捕获点击事件（原生textarea设置disabled会阻止点击冒泡） -->
+        <view v-if="props.readonly" class="u-textarea__readonly-overlay" @tap.stop="textareaClick"></view>
         <view class="u-textarea__right-icon u-flex">
             <view
                 class="u-textarea__right-icon__clear u-textarea__right-icon__item"
@@ -132,7 +136,8 @@ const emit = defineEmits([
     'input',
     'confirm',
     'keyboardheightchange',
-    'change'
+    'change',
+    'click'
 ]);
 
 const { emitToParent } = useChildren('u-textarea', 'u-form-item');
@@ -359,6 +364,11 @@ function onClear(event: any) {
     valueChange();
 }
 
+function textareaClick() {
+    if (props.disabled) return;
+    emit('click');
+}
+
 defineExpose({
     onFormItemError
 });
@@ -373,6 +383,12 @@ defineExpose({
     position: relative;
     @include flex;
     flex: 1;
+
+    &__readonly-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
 
     &--border {
         border-radius: 4px;
