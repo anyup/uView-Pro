@@ -1,7 +1,14 @@
 <template>
     <view
         class="u-field"
-        :class="[{ 'u-border-top': props.borderTop, 'u-border-bottom': props.borderBottom }, customClass]"
+        :class="[
+            {
+                'u-border-top': props.borderTop,
+                'u-border-bottom': props.borderBottom,
+                'u-field--disabled': props.disabled
+            },
+            customClass
+        ]"
         :style="$u.toStyle(customStyle)"
     >
         <view
@@ -40,6 +47,7 @@
                         :placeholder="String(props.placeholder)"
                         :placeholderStyle="props.placeholderStyle"
                         :disabled="props.disabled"
+                        :readonly="props.readonly"
                         :maxlength="inputMaxlength"
                         :focus="props.focus"
                         :autoHeight="props.autoHeight"
@@ -48,7 +56,6 @@
                         @blur="onBlur"
                         @focus="onFocus"
                         @confirm="onConfirm"
-                        @tap="fieldClick"
                     />
                     <!-- prettier-ignore -->
                     <input
@@ -61,6 +68,7 @@
                         :placeholder="String(props.placeholder)"
                         :placeholderStyle="props.placeholderStyle"
                         :disabled="props.disabled"
+                        :readonly="props.readonly"
                         :maxlength="inputMaxlength"
                         :focus="props.focus"
                         :confirmType="props.confirmType"
@@ -68,10 +76,9 @@
                         @blur="onBlur"
                         @input="onInput"
                         @confirm="onConfirm"
-                        @tap="fieldClick"
                     />
-                    <!-- 透明遮罩，只在disabled时显示，用于响应点击事件 -->
-                    <view v-if="props.disabled" class="u-field-disabled-overlay" @tap="fieldClick"></view>
+                    <!-- 透明遮罩，在disabled或readonly时显示，用于捕获点击事件（原生input设置disabled会阻止点击冒泡） -->
+                    <view v-if="props.readonly" class="u-field__readonly-overlay" @tap.stop="fieldClick"></view>
                 </view>
                 <u-icon
                     v-if="props.clearable && inputValue !== '' && focused && !props.disabled"
@@ -256,6 +263,7 @@ function rightIconClick() {
 }
 
 function fieldClick() {
+    if (props.disabled) return;
     emit('click');
 }
 </script>
@@ -366,7 +374,7 @@ function fieldClick() {
     position: relative;
 }
 
-.u-field-disabled-overlay {
+.u-field__readonly-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -374,5 +382,16 @@ function fieldClick() {
     bottom: 0;
     background-color: transparent;
     z-index: 1;
+}
+
+.u-field--disabled {
+    background-color: $u-bg-gray-light;
+}
+
+.u-field--disabled .u-textarea-class,
+.u-field--disabled .u-field__input-wrap {
+    background-color: transparent;
+    color: $u-light-color;
+    -webkit-text-fill-color: $u-light-color;
 }
 </style>

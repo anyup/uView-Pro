@@ -56,6 +56,8 @@ export const FieldProps = {
     type: { type: String as PropType<InputType>, default: 'text' },
     /** 是否不可输入（默认false） */
     disabled: { type: Boolean, default: false },
+    /** 是否只读，禁止输入但可点击，样式不变，可触发click事件（默认false） */
+    readonly: { type: Boolean, default: false },
     /** 最大输入长度，设置为 -1 的时候不限制最大长度（默认140） */
     maxlength: { type: [Number, String] as PropType<string | number>, default: 140 },
     /** 设置键盘右下角按钮的文字，仅在type="text"时生效（默认done） */
