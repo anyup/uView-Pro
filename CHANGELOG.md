@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.4 - 2026-06-02
+
+### ✨ Features | 新功能
+
+- **u-input:** 新增readonly输入属性，支持设置输入框只读状态，新增禁用与只读示例页面及配置项（#160） ([6a92373](https://github.com/anyup/uView-Pro/commit/6a92373a6c8a1c2875b93d6dbb3985df34887c4e))
+- **u-textarea:** 新增click事件支持，在只读/非禁用状态下可触发点击回调，更新演示页面（#160） ([a79dc57](https://github.com/anyup/uView-Pro/commit/a79dc57262bfb3909d2f35bbf26589906e9a4c8d))
+- **u-field:** 新增readonly属性支持，设置后可点击但无法输入，调整disabled和readonly状态的遮罩逻辑与样式（#160） ([708f13b](https://github.com/anyup/uView-Pro/commit/708f13bb3601c0c77a0a75f1b4d1c148f28c7229))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.3 - 2026-05-28
 
 ### 🐛 Bug Fixes | Bug 修复
