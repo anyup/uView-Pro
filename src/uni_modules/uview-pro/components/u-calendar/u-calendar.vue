@@ -18,7 +18,7 @@
         >
             <view class="u-calendar__header" v-if="!props.isPage">
                 <view class="u-calendar__header__text" v-if="!slots.tooltip">
-                    {{ toolTip }}
+                    {{ getToolTip }}
                 </view>
                 <slot v-else name="tooltip" />
             </view>
@@ -141,7 +141,7 @@
                                     class="u-calendar__content__item__lunar"
                                     :style="{ color: activeColor }"
                                 >
-                                    {{ startText }}
+                                    {{ getStartText }}
                                 </view>
                                 <!-- 范围选择结束日期显示"结束" -->
                                 <view
@@ -152,7 +152,7 @@
                                     class="u-calendar__content__item__lunar"
                                     :style="{ color: activeColor }"
                                 >
-                                    {{ endText }}
+                                    {{ getEndText }}
                                 </view>
                                 <!-- 节日名称 -->
                                 <view
@@ -346,6 +346,11 @@ const btnDisable = computed(() => {
     }
     return disable;
 });
+
+// 国际化计算属性
+const getStartText = computed(() => props.startText || t('uCalendar.startText'));
+const getEndText = computed(() => props.endText || t('uCalendar.endText'));
+const getToolTip = computed(() => props.toolTip || t('uCalendar.toolTip'));
 
 watch([dataChange, lunarChange], () => {
     init();

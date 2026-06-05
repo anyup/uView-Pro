@@ -51,7 +51,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 import { LoadmoreProps } from './types';
 
 /**
@@ -73,6 +73,7 @@ import { LoadmoreProps } from './types';
  */
 const props = defineProps(LoadmoreProps);
 const emits = defineEmits(['loadmore']);
+const { t } = useLocale();
 
 // 粗点
 const dotText = ref('●');
@@ -105,10 +106,18 @@ const flowerStyle = computed(() => {
 // 显示的提示文字
 const showText = computed(() => {
     let text = '';
-    if (props.status === 'loadmore') text = props.loadText.loadmore;
-    else if (props.status === 'loading') text = props.loadText.loading;
+    // 获取国际化默认值
+    const defaultLoadText = {
+        loadmore: t('uLoadmore.loadmore'),
+        loading: t('uLoadmore.loading'),
+        nomore: t('uLoadmore.nomore')
+    };
+    // 合并用户传入的值和默认值
+    const loadText = { ...defaultLoadText, ...props.loadText };
+    if (props.status === 'loadmore') text = loadText.loadmore;
+    else if (props.status === 'loading') text = loadText.loading;
     else if (props.status === 'nomore' && props.isDot) text = dotText.value;
-    else text = props.loadText.nomore;
+    else text = loadText.nomore;
     return text;
 });
 

@@ -1,7 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { getColor, useLocale } from '../../';
-
-const { t } = useLocale();
+import { getColor } from '../../';
 
 /**
  * ReadMoreProps 阅读更多 props 类型定义
@@ -23,9 +21,9 @@ export const ReadMoreProps = {
     /** 展开后是否显示"收起"按钮 */
     toggle: { type: Boolean, default: false },
     /** 关闭时的提示文字 */
-    closeText: { type: String, default: () => t('uReadMore.closeText') },
+    closeText: { type: String, default: '' },
     /** 展开时的提示文字 */
-    openText: { type: String, default: () => t('uReadMore.openText') },
+    openText: { type: String, default: '' },
     /** 提示的文字颜色 */
     color: { type: String, default: () => getColor('primary') },
     /** 提示文字的大小 */

@@ -40,7 +40,7 @@
             v-if="cancelBtn"
             @tap="close"
         >
-            {{ cancelText }}
+            {{ getCancelText }}
         </view>
     </u-popup>
 </template>
@@ -60,7 +60,7 @@ export default {
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { $u, useParent } from '../..';
+import { $u, useParent, useLocale } from '../..';
 import { ActionSheetProps } from './types';
 
 /**
@@ -85,12 +85,17 @@ const props = defineProps(ActionSheetProps);
 
 const emit = defineEmits(['update:modelValue', 'click', 'close']);
 
+const { t } = useLocale();
+
 useParent('u-action-sheet');
 
 const popupValue = computed({
     get: () => props.modelValue,
     set: (val: boolean) => emit('update:modelValue', val)
 });
+
+// 国际化计算属性
+const getCancelText = computed(() => props.cancelText || t('uActionSheet.cancelText'));
 
 // 顶部提示的样式
 const tipsStyle = computed(() => {

@@ -32,7 +32,7 @@
                 :focus="focus"
                 :maxlength="Number(maxlength)"
                 placeholder-class="u-placeholder-class"
-                :placeholder="placeholder"
+                :placeholder="getPlaceholder"
                 :placeholder-style="`color: ${placeholderColor}`"
                 :adjust-position="adjustPosition"
                 class="u-input"
@@ -57,7 +57,7 @@
             :class="[showActionBtn || show ? 'u-action-active' : '']"
             @tap.stop.prevent="custom"
         >
-            {{ actionText }}
+            {{ getActionText }}
         </view>
     </view>
 </template>
@@ -78,7 +78,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue';
 import { SearchProps } from './types';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 
 /**
  * search 搜索框
@@ -127,6 +127,8 @@ const emit = defineEmits([
     'click'
 ]);
 
+const { t } = useLocale();
+
 // 绑定输入框的值
 const keyword = ref(props.modelValue);
 // 是否显示右边的清除图标
@@ -148,6 +150,9 @@ watch(keyword, nVal => {
     emit('input', nVal);
     emit('change', nVal);
 });
+
+const getPlaceholder = computed(() => props.placeholder || t('uSearch.placeholder'));
+const getActionText = computed(() => props.actionText || t('uSearch.actionText'));
 
 /**
  * 是否显示右侧action按钮
@@ -285,7 +290,7 @@ function clickHandler() {
 }
 
 .u-action-active {
-    width: 80rpx;
+    width: 100rpx;
     margin-left: 10rpx;
 }
 </style>

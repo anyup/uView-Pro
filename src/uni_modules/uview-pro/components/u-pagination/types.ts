@@ -1,8 +1,5 @@
 import type { PaginationChangePayload } from '../../types/global';
-import { useLocale } from '../../';
 import type { PropType } from 'vue';
-
-const { t } = useLocale();
 
 /**
  * pagination 分页类型定义
@@ -21,9 +18,9 @@ export const PaginationProps = {
         default: ''
     },
     /** 左侧按钮文字 */
-    prevText: { type: String, default: () => t('uPagination.prevText') },
+    prevText: { type: String, default: '' },
     /** 右侧按钮文字 */
-    nextText: { type: String, default: () => t('uPagination.nextText') },
+    nextText: { type: String, default: '' },
     /** 总条目数 */
     total: Number,
     /** 每页数据量 */

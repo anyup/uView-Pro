@@ -18,9 +18,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
+import { ref, watch, onMounted, onBeforeUnmount, computed } from 'vue';
 import { VerificationCodeProps } from './types';
-import { $u } from '../../';
+import { $u, useLocale } from '../../';
 
 /**
  * verificationCode 验证码输入框
@@ -38,9 +38,16 @@ import { $u } from '../../';
  * @example <u-verification-code :seconds="seconds" @end="end" @start="start" ref="uCode" />
  */
 
+const props = defineProps(VerificationCodeProps);
+
 const emit = defineEmits(['change', 'start', 'end']);
 
-const props = defineProps(VerificationCodeProps);
+const { t } = useLocale();
+
+// 国际化计算属性
+const getStartText = computed(() => props.startText || t('uVerificationCode.startText'));
+const getChangeText = computed(() => props.changeText || t('uVerificationCode.changeText'));
+const getEndText = computed(() => props.endText || t('uVerificationCode.endText'));
 
 /** 当前倒计时秒数 */
 const secNum = ref(Number(props.seconds));
@@ -75,7 +82,7 @@ onBeforeUnmount(() => {
 function checkKeepRunning() {
     // 获取上一次退出页面(H5还包括刷新)时的时间戳，如果没有上次的保存，此值可能为空
     const lastTimestamp = Number(uni.getStorageSync(props.uniqueKey + '_$uCountDownTimestamp'));
-    if (!lastTimestamp) return changeEvent(props.startText);
+    if (!lastTimestamp) return changeEvent(getStartText.value);
     // 当前秒的时间戳
     const nowTimestamp = Math.floor(+new Date() / 1000);
     // 判断当前的时间戳，是否小于上一次的本该按设定结束，却提前结束的时间戳
@@ -88,7 +95,7 @@ function checkKeepRunning() {
         start();
     } else {
         // 如果不存在需要继续上一次的倒计时，执行正常的逻辑
-        changeEvent(props.startText);
+        changeEvent(getStartText.value);
     }
 }
 
@@ -104,16 +111,16 @@ function start() {
     emit('start');
     canGetCode.value = false;
     // 一开始时就提示，否则要等setInterval的1秒后才会有提示
-    changeEvent(props.changeText.replace(/x|X/, String(secNum.value)));
+    changeEvent(getChangeText.value.replace(/x|X/, String(secNum.value)));
     setTimeToStorage();
     timer = setInterval(() => {
         if (--secNum.value) {
             // 用当前倒计时的秒数替换提示字符串中的"x"字母
-            changeEvent(props.changeText.replace(/x|X/, String(secNum.value)));
+            changeEvent(getChangeText.value.replace(/x|X/, String(secNum.value)));
         } else {
             clearInterval(timer!);
             timer = null;
-            changeEvent(props.endText);
+            changeEvent(getEndText.value);
             secNum.value = Number(props.seconds);
             emit('end');
             canGetCode.value = true;
@@ -129,7 +136,7 @@ function reset() {
     if (timer) clearInterval(timer);
     timer = null;
     secNum.value = Number(props.seconds);
-    changeEvent(props.endText);
+    changeEvent(getEndText.value);
 }
 
 /**

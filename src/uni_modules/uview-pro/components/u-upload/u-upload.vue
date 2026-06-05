@@ -400,7 +400,7 @@ const extTypeMap: Record<string, string> = {
  */
 const uploadBtnText = computed(() => {
     // 如果用户自定义了 uploadText，优先使用
-    if (props.uploadText !== t('uUpload.uploadText')) {
+    if (props.uploadText) {
         return props.uploadText;
     }
     // 根据 accept 类型返回对应的国际化文本

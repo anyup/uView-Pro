@@ -28,7 +28,7 @@
                         :hover-stay-time="150"
                         @tap="getResult('cancel')"
                     >
-                        {{ cancelText }}
+                        {{ getCancelText }}
                     </view>
                     <view class="u-select__header__title u-line-1"> {{ title }}</view>
                     <view
@@ -39,7 +39,7 @@
                         @touchmove.stop=""
                         @tap.stop="getResult('confirm')"
                     >
-                        {{ confirmText }}
+                        {{ getConfirmText }}
                     </view>
                 </view>
                 <view class="u-select__body">
@@ -86,7 +86,7 @@ export default {
 import { ref, computed, watch, nextTick } from 'vue';
 import { SelectProps } from './types';
 import type { SelectListItem } from '../../types/global';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 
 /**
  * select 列选择器
@@ -112,8 +112,9 @@ import { $u } from '../..';
 
 const props = defineProps(SelectProps);
 const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'click']);
-// 用于列改变时，保存当前的索引，下一次变化时比较得出是哪一列发生了变化
+const { t } = useLocale();
 
+// 用于列改变时，保存当前的索引，下一次变化时比较得出是哪一列发生了变化
 const defaultSelector = ref<number[]>([0]);
 // picker-view的数据
 const columnData = ref<SelectListItem[][]>([]);
@@ -138,6 +139,10 @@ const popupValue = computed({
     get: () => props.modelValue,
     set: (val: boolean) => emit('update:modelValue', val)
 });
+
+// 国际化计算属性
+const getCancelText = computed(() => props.cancelText || t('uSelect.cancelText'));
+const getConfirmText = computed(() => props.confirmText || t('uSelect.confirmText'));
 
 watch(
     () => props.modelValue,

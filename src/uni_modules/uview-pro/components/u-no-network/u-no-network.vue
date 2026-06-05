@@ -3,7 +3,7 @@
         <view class="u-inner">
             <image class="u-error-icon" :src="image" mode="widthFix"></image>
             <view class="u-tips">
-                {{ tips }}
+                {{ getTips }}
             </view>
             <!-- 只有APP平台，才能跳转设置页，因为需要调用plus环境 -->
             <!-- #ifdef APP-PLUS -->
@@ -54,6 +54,9 @@ import { NoNetworkProps } from './types';
 const props = defineProps(NoNetworkProps);
 
 const { t } = useLocale();
+
+// 国际化计算属性
+const getTips = computed(() => props.tips || t('uNoNetwork.tips'));
 
 const isConnected = ref(true); // 是否有网络连接
 const networkType = ref<string>('none'); // 网络类型

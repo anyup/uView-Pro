@@ -21,7 +21,7 @@
             class="u-input__input u-input__textarea"
             :style="getStyle"
             :value="inputValue"
-            :placeholder="placeholder"
+            :placeholder="getPlaceholder"
             :placeholderStyle="getPlaceholderStyle"
             :disabled="disabled"
             :readonly="readonly"
@@ -47,7 +47,7 @@
             :style="getStyle"
             :value="inputValue"
             :password="type == 'password' && !showPassword"
-            :placeholder="placeholder"
+            :placeholder="getPlaceholder"
             :placeholderStyle="getPlaceholderStyle"
             :disabled="disabled || type === 'select'"
             :readonly="readonly"
@@ -126,12 +126,14 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-import { $u, useChildren } from '../..';
+import { $u, useChildren, useLocale } from '../..';
 import { InputProps } from './types';
 import type { SizeType } from '../../types/global';
 
 const props = defineProps(InputProps);
 const emit = defineEmits(['update:modelValue', 'input', 'blur', 'focus', 'confirm', 'click']);
+
+const { t } = useLocale();
 
 const { emitToParent } = useChildren('u-input', 'u-form-item');
 const { parentExposed } = useChildren('u-input', 'u-form');
@@ -262,6 +264,8 @@ const getCursorSpacing = computed(() => Number(props.cursorSpacing));
 const uSelectionStart = computed(() => String(props.selectionStart));
 // 光标结束位置
 const uSelectionEnd = computed(() => String(props.selectionEnd));
+// placeholder 国际化
+const getPlaceholder = computed(() => props.placeholder || t('uInput.placeholder'));
 
 /**
  * change 事件

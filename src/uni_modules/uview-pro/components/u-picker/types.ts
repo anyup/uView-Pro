@@ -1,9 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { PickerMode, PickerParams } from '../../types/global';
-import { getColor, useLocale } from '../../';
+import { getColor } from '../../';
 import zIndex from '../../libs/config/zIndex';
-
-const { t } = useLocale();
 
 const defaultParams: PickerParams = {
     year: true,
@@ -130,12 +128,12 @@ export const PickerProps = {
     /** 取消按钮的文字 */
     cancelText: {
         type: String,
-        default: () => t('uPicker.cancelText')
+        default: ''
     },
     /** 确认按钮的文字 */
     confirmText: {
         type: String,
-        default: () => t('uPicker.confirmText')
+        default: ''
     }
 };
 

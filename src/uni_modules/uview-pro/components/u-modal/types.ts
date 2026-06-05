@@ -1,7 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { getColor, useLocale } from '../../';
-
-const { t } = useLocale();
+import { getColor } from '../../';
 
 /**
  * u-modal 组件 props 类型定义
@@ -31,7 +29,7 @@ export const ModalProps = {
     /** 标题 */
     title: {
         type: String,
-        default: () => t('uModal.title')
+        default: ''
     },
     /** 弹窗宽度 */
     width: {
@@ -61,12 +59,12 @@ export const ModalProps = {
     /** 确认文案 */
     confirmText: {
         type: String,
-        default: () => t('uModal.confirmText')
+        default: ''
     },
     /** 取消文案 */
     cancelText: {
         type: String,
-        default: () => t('uModal.cancelText')
+        default: ''
     },
     /** 确认按钮颜色 */
     confirmColor: {

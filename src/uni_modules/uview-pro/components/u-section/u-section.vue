@@ -41,7 +41,7 @@
         >
             <slot name="right" v-if="$slots.right" />
             <template v-else>
-                {{ subTitle }}
+                {{ getSubTitle }}
                 <view class="u-section__right-info__icon-arrow u-flex" v-if="arrow">
                     <u-icon name="arrow-right" size="24" :color="subColor"></u-icon>
                 </view>
@@ -66,7 +66,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { SectionProps } from './types';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 
 /**
  * section 查看更多
@@ -89,6 +89,11 @@ import { $u } from '../..';
 const props = defineProps(SectionProps);
 
 const emit = defineEmits(['click']);
+
+const { t } = useLocale();
+
+// 国际化计算属性
+const getSubTitle = computed(() => props.subTitle || t('uSection.subTitle'));
 
 /**
  * 左边竖条的样式

@@ -10,7 +10,7 @@
             @click="handleChange('prev')"
         >
             <u-icon v-if="showIcon" :name="prevIcon"></u-icon>
-            <text v-else>{{ prevText }}</text>
+            <text v-else>{{ getPrevText }}</text>
         </u-button>
         <view class="u-pagination-text">
             <slot>
@@ -29,7 +29,7 @@
             @click="handleChange('next')"
         >
             <u-icon v-if="showIcon" :name="nextIcon"></u-icon>
-            <text v-else>{{ nextText }}</text>
+            <text v-else>{{ getNextText }}</text>
         </u-button>
     </view>
 </template>
@@ -51,7 +51,9 @@ export default {
 import { computed } from 'vue';
 import { type PaginationEmits, PaginationProps } from './types';
 import type { PaginationDirection } from '../../types/global';
-import { $u } from '../../';
+import { $u, useLocale } from '../../';
+
+const { t } = useLocale();
 
 const props = defineProps(PaginationProps);
 const emit = defineEmits<PaginationEmits>();
@@ -63,6 +65,10 @@ const totalPages = computed(() => {
     const size = props.pageSize || 10;
     return Math.ceil((props.total || 0) / size);
 });
+
+// 国际化计算属性
+const getPrevText = computed(() => props.prevText || t('uPagination.prevText'));
+const getNextText = computed(() => props.nextText || t('uPagination.nextText'));
 
 // 切换分页
 function handleChange(type: PaginationDirection) {

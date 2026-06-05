@@ -81,7 +81,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch, useSlots, onMounted, onBeforeUnmount } from 'vue';
 import { onPageHide, onPageShow } from '@dcloudio/uni-app';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 import { ModalProps } from './types';
 import {
     U_MODAL_EVENT_CLEAR_LOADING,
@@ -127,6 +127,9 @@ import {
 const props = defineProps(ModalProps);
 const emit = defineEmits(['update:modelValue', 'confirm', 'cancel']);
 const slots = useSlots();
+
+const { t } = useLocale();
+
 // 是否已经初始化事件监听
 const isInit = ref(false);
 // 确认按钮是否正在加载中
@@ -191,6 +194,11 @@ const tempConfig = ref<Partial<ModalPayload>>({});
 // 函数式调用时的内部显示状态（用于 global 模式）
 const internalShow = ref(false);
 
+// 国际化计算属性
+const getTitle = computed(() => props.title || t('uModal.title'));
+const getConfirmText = computed(() => props.confirmText || t('uModal.confirmText'));
+const getCancelText = computed(() => props.cancelText || t('uModal.cancelText'));
+
 // 有效的配置（函数式调用时合并 tempConfig 和 props，v-model 时使用 props）
 const effectiveConfig = computed(() => {
     // 如果有临时配置（函数式调用），合并用户配置与 props 默认值
@@ -201,10 +209,19 @@ const effectiveConfig = computed(() => {
             result[key] = (tempConfig.value as Record<string, any>)[key] ?? (props as Record<string, any>)[key];
         }
         result.zIndex = tempConfig.value.zIndex ?? props.zIndex ?? $u.zIndex.popup;
+        // 处理国际化字段
+        result.title = result.title || t('uModal.title');
+        result.confirmText = result.confirmText || t('uModal.confirmText');
+        result.cancelText = result.cancelText || t('uModal.cancelText');
         return result;
     }
-    // v-model 直接控制时使用 props
-    return props;
+    // v-model 直接控制时使用 props，但处理国际化
+    return {
+        ...props,
+        title: getTitle.value,
+        confirmText: getConfirmText.value,
+        cancelText: getCancelText.value
+    };
 });
 // 取消按钮样式
 const cancelBtnStyle = computed(() => {

@@ -53,11 +53,7 @@ export const LoadmoreProps = {
     /** 显示的文字 */
     loadText: {
         type: Object as PropType<LoadmoreText>,
-        default: () => ({
-            loadmore: t('uLoadmore.loadmore'),
-            loading: t('uLoadmore.loading'),
-            nomore: t('uLoadmore.nomore')
-        })
+        default: () => ({})
     },
     /** 在“没有更多”状态下，是否显示粗点 */
     isDot: {

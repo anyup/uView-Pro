@@ -19,7 +19,7 @@
                     :hover-stay-time="150"
                     @tap="getResult('cancel')"
                 >
-                    {{ cancelText }}
+                    {{ getCancelText }}
                 </view>
                 <view class="u-picker__title u-line-1">
                     <slot name="title">
@@ -34,7 +34,7 @@
                     @touchmove.stop=""
                     @tap.stop="getResult('confirm')"
                 >
-                    {{ confirmText }}
+                    {{ getConfirmText }}
                 </view>
             </view>
             <view class="u-picker-body">
@@ -169,7 +169,7 @@ import provinces from '../../libs/util/province';
 import citys from '../../libs/util/city';
 import areas from '../../libs/util/area';
 import { PickerProps } from './types';
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 
 /**
  * picker picker弹出选择器
@@ -205,6 +205,12 @@ const popupValue = computed({
 });
 
 const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'columnchange']);
+
+const { t } = useLocale();
+
+// 国际化计算属性
+const getCancelText = computed(() => props.cancelText || t('uPicker.cancelText'));
+const getConfirmText = computed(() => props.confirmText || t('uPicker.confirmText'));
 
 // 主要数据
 const years = ref<number[]>([]);

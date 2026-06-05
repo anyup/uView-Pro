@@ -27,8 +27,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { $u } from '../..';
+import { $u, useLocale } from '../..';
 import { LinkProps } from './types';
+import { computed } from 'vue';
 
 /**
  * link 超链接
@@ -44,6 +45,11 @@ import { LinkProps } from './types';
  */
 const props = defineProps(LinkProps);
 const emit = defineEmits(['click']);
+
+const { t } = useLocale();
+
+// 国际化计算属性
+const getMpTips = computed(() => props.mpTips || t('uLink.mpTips'));
 
 /**
  * 打开链接方法
@@ -70,8 +76,8 @@ function openLink() {
             data: props.href,
             success: () => {
                 uni.hideToast();
-                if (typeof $u !== 'undefined' && $u.toast && props.mpTips) {
-                    $u.toast(props.mpTips);
+                if (typeof $u !== 'undefined' && $u.toast) {
+                    $u.toast(getMpTips.value);
                 }
             }
         });

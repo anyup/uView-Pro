@@ -1,8 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { ImgMode, UploadSizeType, UploadSourceType, UploadAcceptType, UploadFileItem } from '../../types/global';
-import { useLocale } from '../../';
-
-const { t } = useLocale();
 
 /**
  * UploadProps upload props 类型定义
@@ -48,7 +45,7 @@ export const UploadProps = {
     /** 是否自定义上传按钮 */
     customBtn: { type: Boolean, default: false },
     /** 上传按钮文字 */
-    uploadText: { type: String, default: () => t('uUpload.uploadText') },
+    uploadText: { type: String, default: '' },
     /** 上传地址 */
     action: { type: String, default: '' },
     /** 是否禁用 */
