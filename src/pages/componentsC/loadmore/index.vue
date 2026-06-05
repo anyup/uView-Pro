@@ -44,18 +44,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { LoadmoreIconType, LoadmoreStatus } from '@/uni_modules/uview-pro/types/global';
+import type { LoadmoreIconType, LoadmoreStatus, LoadmoreText } from '@/uni_modules/uview-pro/types/global';
 import { ref } from 'vue';
 
 const uToastRef = ref();
 const status = ref<LoadmoreStatus>('loadmore');
 const iconType = ref<LoadmoreIconType>('circle');
 const isDot = ref(false);
-const loadText = ref({
-    loadmore: '点击或上拉加载更多',
-    loading: '正在加载...',
-    nomore: '没有更多了'
-});
+const loadText = ref<LoadmoreText>({} as LoadmoreText);
 const current = ref<number>(0);
 
 function statusChange(index: number) {
@@ -71,11 +67,7 @@ function loadTextChange(index: number) {
             nomore: '我也是有底线的'
         };
     } else {
-        loadText.value = {
-            loadmore: '点击或上拉加载更多',
-            loading: '正在加载...',
-            nomore: '没有更多了'
-        };
+        loadText.value = {} as LoadmoreText;
     }
 }
 

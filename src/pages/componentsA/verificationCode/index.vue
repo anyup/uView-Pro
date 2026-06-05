@@ -11,20 +11,20 @@
                     <view class="u-demo-area">
                         <u-toast ref="uToastRef"></u-toast>
                         <u-verification-code
+                            ref="uCodeRef"
                             :keep-running="true"
                             :seconds="seconds"
-                            @end="end"
-                            @start="start"
-                            ref="uCodeRef"
-                            @change="codeChange"
                             :startText="startText"
                             :changeText="changeText"
                             :endText="endText"
+                            @end="end"
+                            @start="start"
+                            @change="codeChange"
                         ></u-verification-code>
                         <u-button @click="getCode">{{ tips }}</u-button>
-                        <u-button :custom-style="{ marginTop: '30rpx' }" @tap="reset" style="margin-top: 30rpx"
-                            >重置</u-button
-                        >
+                        <u-button :custom-style="{ marginTop: '30rpx' }" @tap="reset" style="margin-top: 30rpx">
+                            重置
+                        </u-button>
                     </view>
                 </view>
                 <view class="u-config-wrap">
@@ -48,9 +48,9 @@ import { ref } from 'vue';
 
 const tips = ref('');
 const seconds = ref(60);
-const startText = ref('获取验证码');
-const changeText = ref('X秒重新获取');
-const endText = ref('重新获取');
+const startText = ref('');
+const changeText = ref('');
+const endText = ref('');
 
 const uToastRef = ref(null);
 const uCodeRef = ref(null);
@@ -94,9 +94,9 @@ function textChange(index: number) {
         changeText.value = '重新获取Xs';
         endText.value = '再次获取';
     } else {
-        startText.value = '获取验证码';
-        changeText.value = 'X秒重新获取';
-        endText.value = '重新获取';
+        startText.value = '';
+        changeText.value = '';
+        endText.value = '';
     }
 }
 
