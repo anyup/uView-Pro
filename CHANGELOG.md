@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.5 - 2026-06-05
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **locale:** 修复多个组件在多语言切换时不能实时更新的问题，统一默认值处理方式 ([86dbc61](https://github.com/anyup/uView-Pro/commit/86dbc61d4ffb9f70f2b98e11566b7ca90549a687))
+
+### ✨ Features | 新功能
+
+- **demo:** 新增多语言切换图标到演示页面的头部 ([9dfd98e](https://github.com/anyup/uView-Pro/commit/9dfd98e5ef8e1e0d5a091cd256fefee2a3ae8064))
+- **loadmore,verificationCode:** 优化loadmore和verificationCode组件的演示示例 ([cddfaf9](https://github.com/anyup/uView-Pro/commit/cddfaf94354ebf5fde954f0098e23a7debc5c550))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.4 - 2026-06-02
 
 ### ✨ Features | 新功能
