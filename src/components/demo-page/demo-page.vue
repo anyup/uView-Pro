@@ -73,6 +73,13 @@
                             @click="$u.route('/pages/other/theme/index')"
                         ></u-icon>
                         <u-icon
+                            v-else
+                            size="50"
+                            color="#ffffff"
+                            :name="locale === 'zh-Hans' ? 'zh' : 'en'"
+                            @click="switchLanguage"
+                        ></u-icon>
+                        <u-icon
                             name="share1"
                             size="46"
                             color="#ffffff"
@@ -376,6 +383,7 @@ import { useExperienceCenter } from '@/common/useExperienceCenter';
 import DemoGuide from '@/components/demo-guide/demo-guide.vue';
 import DemoGuideUse from '@/components/demo-guide-use/demo-guide-use.vue';
 import { GUIDE_TABS_KEY, GUIDE_FAB_KEY, GUIDE_TABBAR_KEY, isPlatform } from '@/common/constant';
+import { useLang } from '../../common/useHooks';
 
 const { darkMode, getDarkMode, setDarkMode, setTheme, currentTheme, getAvailableThemes } = useTheme();
 
@@ -462,12 +470,21 @@ const background = reactive({
     backgroundImage: 'linear-gradient(90deg, var(--u-type-primary-dark), var(--u-type-primary-disabled))'
 });
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
+const { switchLang } = useLang();
 
 const guideImmediate = ref([true, false]);
 const tabbarGuideRef = ref();
 const toast = useToast();
 const actionSheetShow = ref(false);
+
+function switchLanguage() {
+    const nextLang = locale.value === 'zh-Hans' ? 'en' : 'zh-Hans';
+    switchLang({
+        name: nextLang === 'zh-Hans' ? 'zh-CN' : 'en-US',
+        locale: nextLang
+    });
+}
 function showTabbarGuide() {
     tabbarGuideRef.value.show();
 }
