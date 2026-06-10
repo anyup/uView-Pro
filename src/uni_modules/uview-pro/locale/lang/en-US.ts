@@ -93,7 +93,7 @@ export default {
         endText: 'End',
         toolTip: 'Select date',
         outOfRange: 'Date out of range',
-        year: '',
+        year: '/',
         month: '',
         sun: 'Sun',
         mon: 'Mon',

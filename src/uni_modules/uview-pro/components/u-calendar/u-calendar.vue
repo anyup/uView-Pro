@@ -275,7 +275,6 @@ const weekdayArr = ref<number[]>([]);
 const days = ref(0);
 const daysArr = ref<number[]>([]);
 const lunarArr = ref<any[]>([]);
-const showTitle = ref('');
 const year = ref(2020);
 const month = ref(0);
 // 当前月有多少天
@@ -351,6 +350,7 @@ const btnDisable = computed(() => {
 const getStartText = computed(() => props.startText || t('uCalendar.startText'));
 const getEndText = computed(() => props.endText || t('uCalendar.endText'));
 const getToolTip = computed(() => props.toolTip || t('uCalendar.toolTip'));
+const showTitle = computed(() => `${year.value}${t('uCalendar.year')}${month.value}${t('uCalendar.month')}`);
 
 watch([dataChange, lunarChange], () => {
     init();
@@ -817,7 +817,6 @@ function changeData() {
     daysArr.value = generateArray(1, days.value);
     weekday.value = getWeekday(year.value, month.value);
     weekdayArr.value = generateArray(1, weekday.value);
-    showTitle.value = `${year.value}${t('uCalendar.year')}${month.value}${t('uCalendar.month')}`;
     if (props.showLunar) {
         lunarArr.value = [];
         daysArr.value.forEach(d => {
