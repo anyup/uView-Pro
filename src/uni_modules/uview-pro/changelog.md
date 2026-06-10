@@ -1,3 +1,13 @@
+## 0.6.6（2026-06-10）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-calendar:** 修复日历标题无法实时通过切换多语言更新的问题，初始化英文日历默认分隔符（#166） ([18beabb](https://github.com/anyup/uView-Pro/commit/18beabbd72c4e21eb19b417d09073bd87457cefc))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.5（2026-06-05）
 
 ### 🐛 Bug Fixes | Bug 修复
