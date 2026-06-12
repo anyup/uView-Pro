@@ -394,8 +394,9 @@ function change(param1: 'showDrawer' | 'visibleSync', param2: 'visibleSync' | 's
     transform: scale(1.15);
 }
 
+/* 使用 none 而非 translate3D(0,0,0)，避免非 none 的 transform 为后代 position:fixed 元素创建包含块 */
 .u-drawer-content-visible {
-    transform: translate3D(0px, 0px, 0px) !important;
+    transform: none !important;
 }
 
 .u-close {
