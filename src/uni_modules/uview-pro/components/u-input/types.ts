@@ -147,6 +147,11 @@ export const InputProps = {
         type: Boolean,
         default: true
     },
+    /** 点击键盘右下角按钮时是否保持键盘不收起（默认false） */
+    confirmHold: {
+        type: Boolean,
+        default: false
+    },
     /** 输入框的验证状态，用于错误时，边框是否改为红色 */
     validateState: {
         type: Boolean,
