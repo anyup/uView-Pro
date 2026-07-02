@@ -21,6 +21,7 @@ const textarea = {
     adjustPosition: true,
     disableDefaultPadding: false,
     holdKeyboard: false,
+    confirmHold: false,
     maxlength: 140,
     border: 'surround',
     formatter: null,
@@ -81,6 +82,8 @@ export const TextareaProps = {
     disableDefaultPadding: { type: Boolean as PropType<boolean>, default: textarea.disableDefaultPadding },
     // focus时，点击页面的时候不收起键盘，只微信小程序有效
     holdKeyboard: { type: Boolean as PropType<boolean>, default: textarea.holdKeyboard },
+    // 点击完成按钮时是否保持键盘不收起
+    confirmHold: { type: Boolean as PropType<boolean>, default: textarea.confirmHold },
     // 最大输入长度，设置为 -1 的时候不限制最大长度
     maxlength: { type: [String, Number] as PropType<string | number>, default: textarea.maxlength },
     // 边框类型，surround-四周边框，bottom-底部边框

@@ -32,6 +32,7 @@
             :adjustPosition="props.adjustPosition"
             :disableDefaultPadding="props.disableDefaultPadding"
             :holdKeyboard="props.holdKeyboard"
+            :confirm-hold="props.confirmHold"
             :maxlength="Number(props.maxlength)"
             :confirmType="(props.confirmType as any)"
             :ignoreCompositionEvent="props.ignoreCompositionEvent"
@@ -115,6 +116,7 @@ import type { SizeType } from '../../types/global';
  * @property {Boolean}				adjustPosition			键盘弹起时，是否自动上推页面（默认 true ）
  * @property {Boolean | Number}		disableDefaultPadding	是否去掉 iOS 下的默认内边距，只微信小程序有效（默认 false ）
  * @property {Boolean}				holdKeyboard			focus时，点击页面的时候不收起键盘，只微信小程序有效（默认 false ）
+ * @property {Boolean}				confirmHold				点击完成按钮时是否保持键盘不收起（默认 false ）
  * @property {String | Number}		maxlength				最大输入长度，设置为 -1 的时候不限制最大长度（默认 140 ）
  * @property {String}				border					边框类型，surround-四周边框，none-无边框，bottom-底部边框（默认 'surround' ）
  * @property {Boolean}				ignoreCompositionEvent	是否忽略组件内对文本合成系统事件的处理
