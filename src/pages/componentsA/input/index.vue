@@ -44,6 +44,18 @@
                 </view>
             </view>
             <view class="u-demo-wrap">
+                <view class="u-demo-title">点击完成按钮键盘不收起</view>
+                <view class="u-demo-area">
+                    <u-input
+                        v-model="confirmHoldValue"
+                        label="confirm-hold 测试"
+                        placeholder="点击完成按钮键盘不收起"
+                        :border="true"
+                        confirm-hold
+                    />
+                </view>
+            </view>
+            <view class="u-demo-wrap">
                 <view class="u-demo-title">Select 下拉选择</view>
                 <view class="u-demo-area">
                     <u-input
@@ -157,6 +169,8 @@ const customStyle = ref<Record<string, any>>({});
 const size = ref<SizeType | string>('default');
 const disabled = ref(false);
 const readonly = ref(false);
+
+const confirmHoldValue = ref('');
 
 // Select 相关
 const selectValue = ref('');

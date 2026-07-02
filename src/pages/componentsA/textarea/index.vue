@@ -72,6 +72,12 @@
                         <u-textarea v-model="value5" placeholder="请输入内容" border="none"></u-textarea>
                     </view>
                 </view>
+                <view class="u-demo-block">
+                    <text class="u-demo-block__title">设置confirm-hold</text>
+                    <view class="u-demo-block__content">
+                        <u-textarea v-model="value7" placeholder="点击完成按钮键盘不收起" confirm-hold></u-textarea>
+                    </view>
+                </view>
             </view>
         </template>
     </demo-page>
@@ -88,6 +94,7 @@ const value3 = ref<string>('');
 const value4 = ref<string>('禁用状态的文本内容');
 const value5 = ref<string>('');
 const value6 = ref<string>('只读状态的文本内容，可点击触发事件');
+const value7 = ref<string>('');
 
 // 保留原示例中的 formatter 方法（若需传入组件，可通过 ref/prop 传递）
 function formatter(value: string) {
