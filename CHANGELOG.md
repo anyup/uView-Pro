@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.7 - 2026-07-02
+
+### ✨ Features | 新功能
+
+- **u-input:** u-input新增confirm-hold属性，支持点击键盘右下角按钮保持键盘不收起（#170） ([27a57cd](https://github.com/anyup/uView-Pro/commit/27a57cdf0046a11b1a8a72c6fb44aecbe39b0c50))
+- **u-textarea:** u-textarea新增confirm-hold属性，支持点击键盘右下角按钮保持键盘不收起（#170） ([3244812](https://github.com/anyup/uView-Pro/commit/3244812c961ab3cf2011e2433740fd9be407d347))
+- **input,textarea:** 新增confirm-hold属性的使用示例（#170） ([b030a2d](https://github.com/anyup/uView-Pro/commit/b030a2dfd30099cda2e9e63e96fb9a2e00d2f639))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.6 - 2026-06-10
 
 ### 🐛 Bug Fixes | Bug 修复
