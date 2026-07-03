@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.8 - 2026-07-03
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-button:** 添加data-eventsync属性以修复事件同步问题（#172） ([cbec72a](https://github.com/anyup/uView-Pro/commit/cbec72ac1959630dd7cb436fc74944bf0ad6bddb))
+- **u-input:** 修复输入框readonly状态下无效问题，调整z-index层级（#173） ([38eca40](https://github.com/anyup/uView-Pro/commit/38eca4023f2f0300b795e8eb786a22002cec67b3))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.7 - 2026-07-02
 
 ### ✨ Features | 新功能
