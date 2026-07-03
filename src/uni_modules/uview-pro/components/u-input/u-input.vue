@@ -359,7 +359,7 @@ defineExpose({
     &__readonly-overlay {
         position: absolute;
         inset: 0;
-        z-index: 1;
+        z-index: 2;
     }
 
     &__input {
@@ -390,7 +390,7 @@ defineExpose({
         padding: 1px 4px;
         border-radius: 10px;
         line-height: 16px;
-        z-index: 2;
+        z-index: 3;
     }
 
     &--border {
@@ -423,7 +423,7 @@ defineExpose({
 
     &__right-icon {
         position: relative;
-        z-index: 2;
+        z-index: 3;
 
         &--select {
             transition: transform 0.4s;
