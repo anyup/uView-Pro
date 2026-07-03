@@ -3,6 +3,7 @@
     <button
         id="u-wave-btn"
         class="u-btn u-line-1 u-fix-ios-appearance"
+        data-eventsync="true"
         :class="[
             'u-size-' + size,
             plain ? 'u-btn--' + type + '--plain' : '',
