@@ -883,6 +883,13 @@
                         "navigationBarTitleText": "SwipeAction 左滑删除"
                     }
                 },
+                // colorPicker-颜色选择器
+                {
+                    "path": "colorPicker/index",
+                    "style": {
+                        "navigationBarTitleText": "ColorPicker 颜色选择器"
+                    }
+                },
                 {
                     "path": "transition/index",
                     "style": {
