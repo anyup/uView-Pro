@@ -135,21 +135,7 @@ onBeforeMount(() => {
     pixelRatio.value = uni.getSystemInfoSync().pixelRatio;
 });
 
-// 监听percent变化，动态绘制进度
-watch(
-    () => props.percent,
-    (nVal, oVal = 0) => {
-        let next = nVal > 100 ? 100 : nVal;
-        let prev = oVal < 0 ? 0 : oVal;
-        newPercent.value = next;
-        oldPercent.value = prev;
-        setTimeout(() => {
-            // 无论是百分比值增加还是减少，需要操作还是原来的旧的百分比值
-            // 将此值减少或者新增到新的百分比值
-            drawCircleByProgress(prev);
-        }, 50);
-    }
-);
+
 
 onMounted(() => {
     // 赋值，用于加载后第一个画圆使用
@@ -160,6 +146,21 @@ onMounted(() => {
         drawProgressBg();
         drawCircleByProgress(oldPercent.value);
     }, 50);
+	// 监听percent变化，动态绘制进度。组件挂在后监听，兼容onMounted，watch同时触发导致的渲染问题
+	watch(
+	    () => props.percent,
+	    (nVal, oVal = 0) => {
+	        let next = nVal > 100 ? 100 : nVal;
+	        let prev = oVal < 0 ? 0 : oVal;
+	        newPercent.value = next;
+	        oldPercent.value = prev;
+	        setTimeout(() => {
+	            // 无论是百分比值增加还是减少，需要操作还是原来的旧的百分比值
+	            // 将此值减少或者新增到新的百分比值
+	            drawCircleByProgress(prev);
+	        }, 50);
+	    }
+	);
 });
 
 /**
