@@ -133,7 +133,7 @@ import { InputProps } from './types';
 import type { SizeType } from '../../types/global';
 
 const props = defineProps(InputProps);
-const emit = defineEmits(['update:modelValue', 'input', 'blur', 'focus', 'confirm', 'click']);
+const emit = defineEmits(['update:modelValue', 'input', 'blur', 'focus', 'confirm', 'click', 'clear']);
 
 const { t } = useLocale();
 
@@ -334,6 +334,7 @@ function onClear(event: any) {
     } catch (e) {
         console.log(e);
     }
+    emit('clear');
     handleInput({ detail: { value: '' } });
 }
 
