@@ -1,3 +1,14 @@
+## 0.6.9（2026-07-15）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-input:** 新增clear事件并在清空时触发（#175） ([103fadc](https://github.com/anyup/uView-Pro/commit/103fadc3649a9555ccb97682d04005ff63cc02f9))
+- **u-input:** 修复input在readonly状态下在低版本安卓上无效的问题 ([fccacbd](https://github.com/anyup/uView-Pro/commit/fccacbda882b846af1445dfaf7868f2981e21cb5))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.8（2026-07-03）
 
 ### 🐛 Bug Fixes | Bug 修复
