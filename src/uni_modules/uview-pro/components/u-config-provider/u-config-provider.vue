@@ -42,50 +42,46 @@ const props = defineProps(ConfigProviderProps);
 
 const emit = defineEmits<{
     'theme-change': [themeName: string];
-    'mode-change': [mode: 'light' | 'dark'];
+    'mode-change': [mode: string];
 }>();
 
-// 计算当前的主题模式（亮色/暗黑）
-const darkMode = computed(() => (configProvider.isInDarkMode() ? 'dark' : 'light'));
+const { initTheme } = useTheme();
+const { initLocales, setLocale, getLocales, getCurrentLocale } = useLocale();
 
 const bootstrapTheme = () => {
-    // 如果已经初始化过主题，不再重复初始化，只更新 props 相关配置
-    const existingThemes = configProvider.getThemes();
-    if (existingThemes.length > 0) {
-        // 已初始化，只更新当前主题和暗黑模式
-        if (props.currentTheme) {
-            configProvider.setTheme(props.currentTheme as string);
+    // 初始化主题
+    try {
+        // 如果已经初始化过主题，不再重复初始化，只更新 props 相关配置
+        const existingThemes = configProvider.getThemes();
+        if (existingThemes.length > 0) {
+            // 已初始化，只在值不同时才更新（避免覆盖用户之前的设置）
+            if (props.currentTheme && props.currentTheme !== configProvider.getCurrentTheme()?.name) {
+                configProvider.setTheme(props.currentTheme as string);
+            }
+            if (props.darkMode && props.darkMode !== configProvider.getDarkMode()) {
+                configProvider.setDarkMode(props.darkMode);
+            }
+            return;
         }
-        if (props.darkMode) {
-            configProvider.setDarkMode(props.darkMode);
+
+        // 未初始化，进行初始化
+        if (props.themes && props.themes.length) {
+            configProvider.initTheme(props.themes, props.currentTheme as any);
+        } else {
+            // 使用 useTheme 的 initTheme，它会处理默认主题
+            initTheme(undefined, props.currentTheme as any);
         }
-        return;
-    }
-
-    // 未初始化，进行初始化
-    if (props.themes && props.themes.length) {
-        configProvider.initTheme(props.themes, props.currentTheme as any);
-    } else {
-        // 使用 useTheme 的 initTheme，它会处理默认主题
-        const { initTheme } = useTheme();
-        initTheme(undefined, props.currentTheme as any);
-    }
-
-    if (props.currentTheme) {
-        configProvider.setTheme(props.currentTheme as string);
-    }
-    if (props.darkMode) {
-        configProvider.setDarkMode(props.darkMode);
+    } catch (e) {
+        console.warn('[u-config-provider] init theme failed', e);
     }
 };
 
 const bootstrapLocale = () => {
     // 初始化国际化
     try {
-        const { initLocales, setLocale, getLocales } = useLocale();
         const existingLocales = getLocales();
         if (existingLocales.length > 0) {
-            if (props.currentLocale) {
+            if (props.currentLocale && props.currentLocale !== getCurrentLocale()?.name) {
                 setLocale(props.currentLocale as string);
             }
         } else {
@@ -134,7 +130,6 @@ watch(
     val => {
         if (val && val !== configProvider.getDarkMode()) {
             configProvider.setDarkMode(val);
-            emit('mode-change', darkMode.value);
         }
     }
 );
@@ -144,7 +139,6 @@ watch(
     () => props.locales,
     val => {
         if (val && val.length) {
-            const { initLocales } = useLocale();
             initLocales(val, props.currentLocale as any);
         }
     },
@@ -155,7 +149,6 @@ watch(
     () => props.currentLocale,
     val => {
         if (val) {
-            const { setLocale } = useLocale();
             setLocale(val);
         }
     }
@@ -175,9 +168,12 @@ watch(
 // 监听暗黑模式变更并触发事件
 watch(
     () => configProvider.darkModeRef.value,
-    () => {
-        emit('mode-change', darkMode.value);
-    }
+    (val, oldVal) => {
+        if (val && val !== oldVal) {
+            emit('mode-change', val);
+        }
+    },
+    { immediate: true }
 );
 
 // 计算合并样式（作为局部 fallback），configProvider 已经会把变量注入到 document 上

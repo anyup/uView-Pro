@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { config, configProvider } from '../../libs';
-import type { Theme } from '../../types/global';
+import type { Theme, DarkMode } from '../../types/global';
 
 export const ConfigProviderProps = {
     /** 自定义根节点样式 */
@@ -20,8 +20,8 @@ export const ConfigProviderProps = {
      * - 'auto': 自动跟随系统设置
      */
     darkMode: {
-        type: String as PropType<'light' | 'dark' | 'auto'>,
-        default: () => config.defaultDarkMode
+        type: String as PropType<DarkMode>,
+        default: () => configProvider.getDarkMode()
     },
     /**
      * 当前主题名称（用于多主题切换）
