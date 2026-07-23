@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.10 - 2026-07-23
+
+### ♻️ Code Refactoring | 代码重构
+
+- **u-config-provider:** 优化暗黑模式和主题初始化逻辑 ([0c010db](https://github.com/anyup/uView-Pro/commit/0c010db5b83bf9514b856cba95a7ba8d9aa56dbf))
+- **theme:** 简化初始化主题和多语言相关逻辑 ([ec5d64b](https://github.com/anyup/uView-Pro/commit/ec5d64b0c8e0b494ab21c8c4bf278cf1e2559317))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.9 - 2026-07-15
 
 ### 🐛 Bug Fixes | Bug 修复
