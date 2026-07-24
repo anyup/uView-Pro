@@ -6,7 +6,7 @@ const { darkMode, currentTheme } = useTheme();
 const { currentLocale, locales } = useLocale();
 
 onLoad(() => {
-    console.log('App.ku.vue onLoad');
+    console.log('App.root.vue onLoad');
     console.log('darkMode->', darkMode.value);
     console.log('theme->', currentTheme.value?.name);
     console.log('locale->', currentLocale.value?.name);
@@ -14,13 +14,13 @@ onLoad(() => {
 });
 
 onShow(() => {
-    console.log('App.ku.vue onShow');
+    console.log('App.root.vue onShow');
 });
 </script>
 
 <template>
     <u-config-provider>
-        <KuRootView />
+        <slot />
         <u-toast global></u-toast>
         <u-modal global></u-modal>
     </u-config-provider>

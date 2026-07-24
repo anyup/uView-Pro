@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite';
 import Uni from '@dcloudio/vite-plugin-uni';
 import path from 'path';
-import UniKuRoot from '@uni-ku/root';
+import { UniRoot } from './src/uni_modules/uview-pro/plugins';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [UniKuRoot(), Uni()],
+    plugins: [UniRoot(), Uni()],
     resolve: {
         alias: {
             '@': path.join(process.cwd(), './src'),

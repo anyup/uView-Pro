@@ -103,12 +103,11 @@
     "devDependencies": {
         "@commitlint/cli": "^19.8.1",
         "@commitlint/config-conventional": "^19.8.1",
-        "@dcloudio/types": "^3.4.8",
+        "@dcloudio/types": "3.4.19",
         "@dcloudio/uni-automator": "3.0.0-4080720251210001",
         "@dcloudio/uni-cli-shared": "3.0.0-4080720251210001",
         "@dcloudio/uni-stacktracey": "3.0.0-4080720251210001",
         "@dcloudio/vite-plugin-uni": "3.0.0-4080720251210001",
-        "@uni-ku/root": "^1.4.1",
         "@vue/runtime-core": "3.4.21",
         "@vue/tsconfig": "^0.8.1",
         "commitizen": "^4.3.1",
