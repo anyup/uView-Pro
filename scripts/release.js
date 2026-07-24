@@ -300,6 +300,10 @@ function continueRelease() {
             console.warn('⚠️  未找到uview-pro模块的package.json文件');
         }
 
+        // 编译 Vite 插件（生成 .mjs 文件供 npm 使用）
+        console.log('🔧 编译 Vite 插件...');
+        execCommand('npm run build:plugins');
+
         // 生成 changelog（按当前版本生成版本化条目，可配置是否保留 Unreleased）
         console.log('📝 生成 changelog...');
         execCommand('npm run changelog:release');
@@ -309,6 +313,8 @@ function continueRelease() {
         execCommand(
             'git add package.json src/uni_modules/uview-pro/package.json CHANGELOG.md src/uni_modules/uview-pro/changelog.md'
         );
+        // 强制添加编译产物到 git（.gitignore 忽略了 .mjs，但发布时需要提交）
+        execCommand('git add -f src/uni_modules/uview-pro/plugins/');
         execCommand(`git commit -m "chore(release): bump version to ${newVersion}
 
 - Update package.json version

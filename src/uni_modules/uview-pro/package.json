@@ -7,6 +7,16 @@
     "main": "index.ts",
     "module": "index.ts",
     "browser": "index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./plugins": {
+            "types": "./plugins/index.ts",
+            "import": "./plugins/index.mjs",
+            "require": "./plugins/index.cjs",
+            "default": "./plugins/index.mjs"
+        },
+        "./*": "./*"
+    },
     "keywords": [
         "uview-pro",
         "vue3",

@@ -75,11 +75,19 @@ function modifyViteConfig() {
             }
             return ln;
         });
+        // 替换插件 import 为 npm 方式
+        if (content.includes("from './src/uni_modules/uview-pro/plugins'")) {
+            content = content.replace(
+                /from\s+['"]\.\/src\/uni_modules\/uview-pro\/plugins['"]/g,
+                "from 'uview-pro/plugins'"
+            );
+            changed = true;
+        }
         if (changed) {
-            fs.writeFileSync(viteConfigPath, newLines.join('\n'), 'utf8');
-            log('已修改 vite.config.ts（注释包含 uview-pro alias 的行）。');
+            fs.writeFileSync(viteConfigPath, content, 'utf8');
+            log('已修改 vite.config.ts（注释 alias + 插件 import 改为 npm 方式）。');
         } else {
-            log('vite.config.ts 中未找到需注释的 uview-pro alias 行，跳过。');
+            log('vite.config.ts 中未找到需修改的内容，跳过。');
         }
     } catch (e) {
         console.error('修改 vite.config.ts 失败：', e);

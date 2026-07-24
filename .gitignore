@@ -22,6 +22,8 @@ docs/
 *.njsproj
 *.sln
 *.sw?
+*.cjs
+*.mjs
 .npmrc
 .trae/
 .agents/
