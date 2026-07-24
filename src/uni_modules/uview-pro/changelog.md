@@ -1,3 +1,13 @@
+## 0.6.11（2026-07-24）
+
+### ✨ Features | 新功能
+
+- **vite-plugin-uni-root:** 新增内置的 root vite 插件，实现全局根组件自动注入，无需自行引入第三方插件实现 ([f5359a9](https://github.com/anyup/uView-Pro/commit/f5359a92d93150a064f6814a8700cacf272d3556))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.10（2026-07-23）
 
 ### ♻️ Code Refactoring | 代码重构
