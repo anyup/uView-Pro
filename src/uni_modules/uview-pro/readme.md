@@ -229,11 +229,8 @@ export function createApp() {
 
 `uView Pro` 遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，意味着您无需支付任何费用，也无需授权，即可将 `uView Pro` 应用到您的产品中。
 
-## 鸣谢
+## 致谢
 
-再次感谢 `uView UI` 开发团队，以及所有为 `uView UI` 的贡献者，以及所有为 `uView Pro` 的贡献者。
+uView Pro 基于 [uView UI 1.8.8](https://github.com/umicro/uView) 进行 TypeScript 完全重构，在此向 uView UI 原作者及所有贡献者致以诚挚感谢。
 
-- [Github](https://github.com/anyup/uview-pro)
-- [Gitee](https://gitee.com/anyup/uview-pro)
-- [uView UI 1.0](https://github.com/umicro/uView)
-- [uView UI 2.0](https://github.com/umicro/uView2.0)
+同时感谢每一位为 uView Pro 提交 Issue、PR 和改进建议的社区开发者。

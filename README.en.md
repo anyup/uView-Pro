@@ -268,9 +268,7 @@ uView Pro follows the [MIT](https://en.wikipedia.org/wiki/MIT_License) open sour
 
 ## Acknowledgements
 
-Special thanks to the uView UI development team, all contributors to uView UI, and all contributors to uView Pro.
+uView Pro is completely rebuilt from [uView UI 1.8.8](https://github.com/umicro/uView) using TypeScript. Sincere thanks to the original authors and all contributors of uView UI.
 
-- [Github](https://github.com/anyup/uview-pro)
-- [Gitee](https://gitee.com/anyup/uview-pro)
-- [uView UI 1.0](https://github.com/umicro/uView)
-- [uView UI 2.0](https://github.com/umicro/uView2.0)
+Also thanks to every community developer who submitted issues, PRs, and improvement suggestions for uView Pro.
+
