@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.12 - 2026-07-24
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **vite:** 修复vite插件root根组件在使用npm方式引入时导致无法被正确加载的问题 ([90561fa](https://github.com/anyup/uView-Pro/commit/90561fa406a8c9d8d49f8223cdda333cc662a42a))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.11 - 2026-07-24
 
 ### ✨ Features | 新功能
