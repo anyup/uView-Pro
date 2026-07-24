@@ -313,8 +313,6 @@ function continueRelease() {
         execCommand(
             'git add package.json src/uni_modules/uview-pro/package.json CHANGELOG.md src/uni_modules/uview-pro/changelog.md'
         );
-        // 强制添加编译产物到 git（.gitignore 忽略了 .mjs，但发布时需要提交）
-        execCommand('git add -f src/uni_modules/uview-pro/plugins/');
         execCommand(`git commit -m "chore(release): bump version to ${newVersion}
 
 - Update package.json version
