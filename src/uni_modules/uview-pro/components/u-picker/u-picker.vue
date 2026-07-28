@@ -305,12 +305,12 @@ watch(
             if (props.modelValue) {
                 // reinit while open
                 readyToRender.value = false;
-                await nextTick();
+                init();
+                readyToRender.value = true;
                 // #ifdef APP-PLUS
+                await nextTick();
                 await new Promise(resolve => setTimeout(resolve, 20));
                 // #endif
-                await init();
-                readyToRender.value = true;
             }
         }
     },
@@ -324,12 +324,12 @@ watch(
             savedDefaultTime.value = n || null;
             if (props.modelValue) {
                 readyToRender.value = false;
-                await nextTick();
+                init();
+                readyToRender.value = true;
                 // #ifdef APP-PLUS
+                await nextTick();
                 await new Promise(resolve => setTimeout(resolve, 20));
                 // #endif
-                await init();
-                readyToRender.value = true;
             }
         }
     }
@@ -342,12 +342,12 @@ watch(
             savedDefaultRegion.value = n && (n as any[]).length ? (n as any[]).slice() : null;
             if (props.modelValue) {
                 readyToRender.value = false;
-                await nextTick();
+                init();
+                readyToRender.value = true;
                 // #ifdef APP-PLUS
+                await nextTick();
                 await new Promise(resolve => setTimeout(resolve, 20));
                 // #endif
-                await init();
-                readyToRender.value = true;
             }
         }
     },
@@ -369,15 +369,15 @@ watch(
     () => props.modelValue,
     async n => {
         if (n) {
-            // 等待一次 DOM 更新
-            await nextTick();
-            // APP-PLUS 原生控件可能需要更长的原生初始化时间，先短延迟以提高稳定性
+            // 同步调用 init()，确保 picker-view 列数据在渲染前就填充完毕
+            // 这对抖音等小程序平台至关重要：原生 picker-view 需要在创建时就有完整数据
+            init();
+            readyToRender.value = true;
+            // APP-PLUS 原生控件可能需要更长的原生初始化时间
             // #ifdef APP-PLUS
+            await nextTick();
             await new Promise(resolve => setTimeout(resolve, 20));
             // #endif
-            // 初始化数据并在完成后再渲染 picker-view
-            await init();
-            readyToRender.value = true;
         } else {
             // 关闭时隐藏 picker，保留已保存的值
             readyToRender.value = false;
@@ -461,7 +461,7 @@ function initTimeValue() {
 /**
  * 初始化picker各列数据
  */
-async function init() {
+function init() {
     valueArr.value = [];
     if (props.mode == 'time') {
         initTimeValue();
@@ -509,8 +509,6 @@ async function init() {
         valueArr.value = getEffectiveDefaultSelector();
         multiSelectorValue.value = getEffectiveDefaultSelector();
     }
-    // 等待 DOM 与 Vue 响应式更新完成，确保在原生组件挂载时数据已就绪
-    await nextTick();
 }
 /**
  * 设置年份列
