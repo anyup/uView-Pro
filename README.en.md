@@ -12,8 +12,8 @@
 
 <div align="center">
 
-[![star](https://gitee.com/anyup/uView-Pro/badge/star.svg)](https://gitee.com/anyup/uView-Pro)
-[![fork](https://gitee.com/anyup/uView-Pro/badge/fork.svg)](https://gitee.com/anyup/uView-Pro)
+[![star](https://gitee.com/anyup/uView-Pro/badge/star.svg?theme=gvp)](https://gitee.com/anyup/uView-Pro)
+[![fork](https://gitee.com/anyup/uView-Pro/badge/fork.svg?theme=gvp)](https://gitee.com/anyup/uView-Pro)
 [![stars](https://img.shields.io/github/stars/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro)
 [![forks](https://img.shields.io/github/forks/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro)
 [![issues](https://img.shields.io/github/issues/anyup/uView-Pro?style=flat-square&logo=GitHub)](https://github.com/anyup/uView-Pro/issues)
