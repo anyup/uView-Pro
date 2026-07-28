@@ -119,6 +119,7 @@ const defaultSelector = ref<number[]>([0]);
 // picker-view的数据
 const columnData = ref<SelectListItem[][]>([]);
 // 控制 picker 是否渲染（等待初始化完成）
+// 初始为 false，确保 picker-view 原生组件在数据就绪后才创建（抖音小程序等平台需要在创建时就有完整数据）
 const readyToRender = ref(false);
 // 保存用户上次确认的索引，如果用户未确认过，则为 null，首次打开会使用 props.defaultValue
 const savedSelector = ref<number[] | null>(
@@ -148,17 +149,17 @@ watch(
     () => props.modelValue,
     async val => {
         if (val) {
-            // 等待一次 DOM 更新
-            await nextTick();
-            // 在 App（APP-PLUS）平台上，原生 picker 可能需要更长时间初始化
-            // 我们先执行 init，并在 init 完成后将 readyToRender 置为 true，保证 picker 在数据就绪后渲染
-            // #ifdef APP-PLUS
-            await new Promise(resolve => setTimeout(resolve, 20));
-            // #endif
+            // 同步调用 init()，确保 columnData 在 picker-view 渲染前就填充完毕
+            // 这对抖音等小程序平台至关重要：原生 picker-view 需要在创建时就有完整数据
             init();
             readyToRender.value = true;
+            // 在 App（APP-PLUS）平台上，原生 picker 可能需要更长时间初始化
+            // #ifdef APP-PLUS
+            await nextTick();
+            await new Promise(resolve => setTimeout(resolve, 20));
+            // #endif
         } else {
-            // 关闭弹窗时复位
+            // 关闭弹窗时复位，下次打开时 picker-view 会重新创建，确保数据刷新
             readyToRender.value = false;
         }
     },
