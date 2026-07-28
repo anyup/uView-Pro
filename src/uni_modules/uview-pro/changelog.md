@@ -1,3 +1,14 @@
+## 0.6.13（2026-07-28）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-picker:** 修复抖音小程序等平台picker数据加载，导致弹窗失败问题（#174） ([ead3cdc](https://github.com/anyup/uView-Pro/commit/ead3cdc18fc5be05a3022acac4485fc3e3e75faa))
+- **u-select:** 修复抖音小程序select弹出问题（#174） ([c7a4c28](https://github.com/anyup/uView-Pro/commit/c7a4c2856f9790747ec234b0a6cc1154b560d701))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.12（2026-07-24）
 
 ### 🐛 Bug Fixes | Bug 修复
