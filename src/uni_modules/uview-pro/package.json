@@ -9,6 +9,7 @@
     "browser": "index.ts",
     "exports": {
         ".": "./index.ts",
+        "./types": "./types/index.d.ts",
         "./plugins": {
             "types": "./plugins/index.ts",
             "import": "./plugins/index.mjs",
