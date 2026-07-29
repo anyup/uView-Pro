@@ -7,14 +7,22 @@
     "main": "index.ts",
     "module": "index.ts",
     "browser": "index.ts",
+    "types": "types/index.d.ts",
     "exports": {
-        ".": "./index.ts",
+        ".": {
+            "import": "./index.ts",
+            "default": "./index.ts"
+        },
         "./plugins": {
             "types": "./plugins/index.ts",
             "import": "./plugins/index.mjs",
             "require": "./plugins/index.cjs",
             "default": "./plugins/index.mjs"
         },
+        "./types": "./types/index.d.ts",
+        "./types/*": "./types/*.d.ts",
+        "./components/*": "./components/*",
+        "./libs/*": "./libs/*",
         "./*": "./*"
     },
     "keywords": [

@@ -1,6 +1,8 @@
 /// <reference path="./components.d.ts" />
 /// <reference path="./uni-app.d.ts" />
 
+export * from './global';
+
 import { $u } from '../libs';
 
 // uview-pro 模块类型声明
