@@ -152,7 +152,7 @@ UniRoot({
 
 ## 注意事项
 
-- Vue 版本需 >= 3.2.13（使用 `vue/compiler-sfc` 的 `parse` API）
+- Vue 版本需 >= 3.2.13（使用 `vue/compiler-sfc` 的 `parse` API，HBuilderX 环境下自动降级为正则匹配）
 - 页面模板中如有 `<page-meta>` 组件，会被提取到包裹层外部，确保微信小程序兼容
 - 页面模板中如有嵌套 `<template #slot>` 具名插槽，不影响根模板的正确识别
 

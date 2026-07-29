@@ -4,13 +4,17 @@ import { normalizePath } from 'vite';
 
 /**
  * Parse Vue SFC file, return descriptor
+ *
+ * When vue/compiler-sfc is not available (e.g. HBuilderX projects where
+ * vue is not in node_modules), returns null instead of throwing.
+ * Callers should fall back to regex-based matching.
  */
 export async function parseSFC(code: string) {
     try {
         const { parse } = await import('vue/compiler-sfc');
         return parse(code, { pad: 'space' }).descriptor;
     } catch {
-        throw new Error('[vite-plugin-uni-root] Vue version must be 3.2.13 or higher.');
+        return null;
     }
 }
 
