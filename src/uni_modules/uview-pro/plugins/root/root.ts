@@ -1,4 +1,22 @@
 /**
+ * 创建一个最小的 sourcemap，用于满足 Vite/Rollup 的 sourcemap 要求。
+ *
+ * 这是一个空映射的 sourcemap（mappings 为空字符串），不提供精确的源码映射，
+ * 但可以避免 "Sourcemap is likely to be incorrect" 警告。
+ * 调试器会回退到显示转换后的代码，不影响功能。
+ *
+ * 纯 JS 实现，无需第三方依赖。
+ */
+function createEmptySourcemap() {
+    return {
+        version: 3 as const,
+        sources: [] as string[],
+        names: [] as string[],
+        mappings: ''
+    };
+}
+
+/**
  * 向 main.ts 注入 App.root.vue 的导入和全局注册
  *
  * 流程：
@@ -23,7 +41,7 @@ export function registerRootApp(code: string, fileName: string = 'App.root') {
         newCode = newCode.replace(/(createApp[\s\S]*?)(return\s*\{)/, `$1${vueUseComponentCode}\n    $2`);
     }
 
-    return { code: newCode };
+    return { code: newCode, map: createEmptySourcemap() };
 }
 
 /**
@@ -31,5 +49,5 @@ export function registerRootApp(code: string, fileName: string = 'App.root') {
  * 无需替换，直接透传。
  */
 export function rebuildRootApp(code: string) {
-    return { code };
+    return { code, map: createEmptySourcemap() };
 }

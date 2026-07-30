@@ -66,6 +66,12 @@ export async function transformPage(code: string) {
     const wrappedContent = `\n${pageMetaSource}\n<global-root-view>${newContent}</global-root-view>\n`;
 
     return {
-        code: code.slice(0, openTagEnd) + wrappedContent + code.slice(closeTagStart)
+        code: code.slice(0, openTagEnd) + wrappedContent + code.slice(closeTagStart),
+        map: {
+            version: 3 as const,
+            sources: [] as string[],
+            names: [] as string[],
+            mappings: ''
+        }
     };
 }
