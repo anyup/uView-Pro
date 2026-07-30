@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.14 - 2026-07-30
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **uni-root:** 适配HBuilderX环境，添加parser降级逻辑 ([f70749d](https://github.com/anyup/uView-Pro/commit/f70749d14d8e67f44ee44707c6c185b6a06e4b7e))
+- **plugin:** 解决微信小程序平台Vite/Rollup的sourcemap不正确警告问题 ([8158f79](https://github.com/anyup/uView-Pro/commit/8158f79223a6d73b7a715e288c812432081c3b70))
+
+### ♻️ Code Refactoring | 代码重构
+
+- **types:** 优化uview-pro的类型声明和导出配置 ([f540d45](https://github.com/anyup/uView-Pro/commit/f540d45fc5bf1ba340138699872d8f97857656fb))
+
+### ✨ Features | 新功能
+
+- **root:** root根组件新增生命周期钩子和日志 ([d144b24](https://github.com/anyup/uView-Pro/commit/d144b2432402955e6973628d4dddaa2697f6f901))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.13 - 2026-07-28
 
 ### 🐛 Bug Fixes | Bug 修复
