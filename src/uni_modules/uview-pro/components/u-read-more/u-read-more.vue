@@ -55,6 +55,7 @@ export default {
 import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 import { $u, useLocale } from '../..';
 import { ReadMoreProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * readMore 阅读更多

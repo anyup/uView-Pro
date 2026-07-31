@@ -53,6 +53,8 @@ export default {
 import { ref, computed } from 'vue';
 import { $u, useLocale } from '../..';
 import { LoadmoreProps } from './types';
+import uLine from '../u-line/u-line.vue';
+import uLoading from '../u-loading/u-loading.vue';
 
 /**
  * loadmore 加载更多

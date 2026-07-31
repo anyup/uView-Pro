@@ -44,6 +44,7 @@ import { ref, computed, watch, nextTick, onMounted, getCurrentInstance } from 'v
 import colorGradient from '../../libs/function/colorGradient';
 import { TabsSwiperProps } from './types';
 import { $u } from '../..';
+import uBadge from '../u-badge/u-badge.vue';
 
 /**
  * tabsSwiper 全屏选项卡

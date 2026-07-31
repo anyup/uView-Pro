@@ -35,6 +35,7 @@ import { computed, nextTick } from 'vue';
 import { $u, useChildren } from '../..';
 import { SwitchProps } from './types';
 import type { SizeType } from '../../types/global';
+import uLoading from '../u-loading/u-loading.vue';
 
 /**
  * switch 开关选择器

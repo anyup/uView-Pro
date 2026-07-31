@@ -78,6 +78,8 @@ export default {
 import { ref, computed, watch, onMounted, nextTick } from 'vue';
 import { $u } from '../..';
 import { PopupProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
+import uMask from '../u-mask/u-mask.vue';
 
 /**
  * popup 弹窗

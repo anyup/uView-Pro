@@ -55,6 +55,7 @@ export default {
 import { computed, getCurrentInstance } from 'vue';
 import { StepsProps } from './types';
 import { $u, useParent } from '../..';
+import uStep from '../u-step/u-step.vue';
 
 /**
  * steps 步骤条

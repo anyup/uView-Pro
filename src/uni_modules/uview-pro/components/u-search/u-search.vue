@@ -79,6 +79,7 @@ export default {
 import { ref, computed, watch, nextTick } from 'vue';
 import { SearchProps } from './types';
 import { $u, useLocale } from '../..';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * search 搜索框

@@ -68,6 +68,7 @@ export default {
 import { ref, computed } from 'vue';
 import { $u } from '../..';
 import { NavbarProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * navbar 自定义导航栏

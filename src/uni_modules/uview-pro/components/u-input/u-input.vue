@@ -131,6 +131,7 @@ import { ref, computed, watch } from 'vue';
 import { $u, useChildren, useLocale } from '../..';
 import { InputProps } from './types';
 import type { SizeType } from '../../types/global';
+import uIcon from '../u-icon/u-icon.vue';
 
 const props = defineProps(InputProps);
 const emit = defineEmits(['update:modelValue', 'input', 'blur', 'focus', 'confirm', 'click', 'clear']);

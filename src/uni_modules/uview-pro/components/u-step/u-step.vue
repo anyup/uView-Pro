@@ -60,6 +60,8 @@ export default {
 import { computed } from 'vue';
 import { $u, useChildren } from '../..';
 import { StepProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
+import uLine from '../u-line/u-line.vue';
 
 const props = defineProps(StepProps);
 

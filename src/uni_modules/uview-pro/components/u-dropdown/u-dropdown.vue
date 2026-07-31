@@ -88,6 +88,7 @@ export default {
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { $u, useParent } from '../..';
 import { DropdownProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * dropdown 下拉菜单

@@ -111,6 +111,11 @@ import citysData from '../../libs/util/city';
 import areasData from '../../libs/util/area';
 import { CitySelectProps } from './types';
 import { $u } from '../..';
+import uCellGroup from '../u-cell-group/u-cell-group.vue';
+import uCellItem from '../u-cell-item/u-cell-item.vue';
+import uIcon from '../u-icon/u-icon.vue';
+import uPopup from '../u-popup/u-popup.vue';
+import uTabs from '../u-tabs/u-tabs.vue';
 
 /**
  * u-city-select 城市选择器

@@ -93,6 +93,8 @@ import {
     getEventWithCurrentPage,
     type ModalPayload
 } from './service';
+import uLoading from '../u-loading/u-loading.vue';
+import uPopup from '../u-popup/u-popup.vue';
 
 /**
  * modal 模态框

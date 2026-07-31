@@ -44,6 +44,7 @@ export default {
 import { ref, watch, onMounted, useSlots, getCurrentInstance, nextTick, computed } from 'vue';
 import { $u, useChildren } from '../..';
 import { CollapseItemProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * collapseItem 手风琴Item

@@ -43,6 +43,7 @@ export default {
 import { ref, computed, watch, useSlots } from 'vue';
 import { BackTopProps } from './types';
 import { $u } from '../../';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * back-top 返回顶部按钮

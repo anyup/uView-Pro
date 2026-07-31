@@ -67,6 +67,7 @@ export default {
 import { computed } from 'vue';
 import { SectionProps } from './types';
 import { $u, useLocale } from '../..';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * section 查看更多

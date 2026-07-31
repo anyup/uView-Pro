@@ -71,6 +71,7 @@ export default {
 import { computed } from 'vue';
 import { ColumnNoticeProps } from './types';
 import { $u } from '../../';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * u-column-notice 通告栏

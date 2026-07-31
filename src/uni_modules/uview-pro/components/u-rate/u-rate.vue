@@ -41,6 +41,7 @@ export default {
 import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { RateProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * rate 评分

@@ -87,6 +87,7 @@ import { ref, computed, watch, nextTick } from 'vue';
 import { SelectProps } from './types';
 import type { SelectListItem } from '../../types/global';
 import { $u, useLocale } from '../..';
+import uPopup from '../u-popup/u-popup.vue';
 
 /**
  * select 列选择器

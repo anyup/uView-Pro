@@ -35,6 +35,7 @@ import { computed, ref, watch } from 'vue';
 import { $u, useChildren } from '../..';
 import { CheckboxProps } from './types';
 import type { SizeType } from '../../types/global';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * checkbox 复选框

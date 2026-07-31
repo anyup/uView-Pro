@@ -32,6 +32,7 @@ export default {
 import { FullScreenProps } from './types';
 import { ref, onMounted } from 'vue';
 import { $u, useLocale } from '../../';
+import uModal from '../u-modal/u-modal.vue';
 
 /**
  * 压窗屏升级弹窗组件

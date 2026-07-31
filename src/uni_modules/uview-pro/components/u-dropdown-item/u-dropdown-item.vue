@@ -51,6 +51,9 @@ export default {
 import { ref, computed, useSlots, watch } from 'vue';
 import { $u, useChildren } from '../..';
 import { DropdownItemProps } from './types';
+import uCellGroup from '../u-cell-group/u-cell-group.vue';
+import uCellItem from '../u-cell-item/u-cell-item.vue';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * dropdown-item 下拉菜单

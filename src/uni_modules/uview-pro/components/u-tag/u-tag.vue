@@ -46,6 +46,7 @@ export default {
 import { computed } from 'vue';
 import { TagProps } from './types';
 import { $u } from '../../';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * tag 提示

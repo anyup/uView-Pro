@@ -128,6 +128,7 @@ export default {
 import { FieldProps } from './types';
 import { ref, computed } from 'vue';
 import { $u } from '../..';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * field 输入框

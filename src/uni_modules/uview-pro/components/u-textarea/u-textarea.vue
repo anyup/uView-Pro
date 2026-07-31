@@ -91,6 +91,7 @@ import { ref, computed, watch, nextTick } from 'vue';
 import { TextareaProps } from './types';
 import { $u, useChildren } from '../../';
 import type { SizeType } from '../../types/global';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * Textarea 文本域

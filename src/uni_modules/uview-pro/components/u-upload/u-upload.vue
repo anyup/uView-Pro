@@ -245,6 +245,8 @@ import { ref, watch, computed } from 'vue';
 import { $u, useLocale } from '../..';
 import { UploadProps } from './types';
 import type { UploadFileItem } from '../../types/global';
+import uIcon from '../u-icon/u-icon.vue';
+import uLineProgress from '../u-line-progress/u-line-progress.vue';
 
 /**
  * upload 文件上传

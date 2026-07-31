@@ -55,6 +55,7 @@ export default {
 import { ref, computed } from 'vue';
 import { $u } from '../..';
 import { CarKeyboardProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * u-car-keyboard 车牌号键盘

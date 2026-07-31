@@ -61,6 +61,8 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { NoticeBarProps } from './types';
+import uColumnNotice from '../u-column-notice/u-column-notice.vue';
+import uRowNotice from '../u-row-notice/u-row-notice.vue';
 
 /**
  * noticeBar 滚动通知

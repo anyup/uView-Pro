@@ -62,6 +62,7 @@ export default {
 import { computed } from 'vue';
 import { $u, useParent, useLocale } from '../..';
 import { ActionSheetProps } from './types';
+import uPopup from '../u-popup/u-popup.vue';
 
 /**
  * actionSheet 操作菜单

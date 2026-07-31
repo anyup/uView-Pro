@@ -35,6 +35,7 @@ import { computed } from 'vue';
 import { $u, useChildren } from '../..';
 import { RadioProps } from './types';
 import type { SizeType } from '../../types/global';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * radio 单选框

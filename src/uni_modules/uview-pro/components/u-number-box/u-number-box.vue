@@ -62,6 +62,7 @@ export default {
 <script setup lang="ts">
 import { ref, watch, computed, nextTick } from 'vue';
 import { NumberBoxProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * numberBox 步进器

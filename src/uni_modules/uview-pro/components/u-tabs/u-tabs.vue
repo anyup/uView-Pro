@@ -51,6 +51,7 @@ export default {
 import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 import { $u } from '../..';
 import { TabsProps } from './types';
+import uBadge from '../u-badge/u-badge.vue';
 
 /**
  * tabs 标签

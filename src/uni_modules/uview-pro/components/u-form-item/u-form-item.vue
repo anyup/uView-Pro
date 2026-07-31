@@ -121,6 +121,7 @@ import { $u, useChildren, useParent } from '../..';
 import schema from '../../libs/util/async-validator';
 import { FormItemProps } from './types';
 import type { SizeType } from '../../types/global';
+import uIcon from '../u-icon/u-icon.vue';
 // 去除警告信息
 schema.warning = function () {};
 

@@ -52,6 +52,9 @@ import { computed } from 'vue';
 import { type PaginationEmits, PaginationProps } from './types';
 import type { PaginationDirection } from '../../types/global';
 import { $u, useLocale } from '../../';
+import uButton from '../u-button/u-button.vue';
+import uIcon from '../u-icon/u-icon.vue';
+import uText from '../u-text/u-text.vue';
 
 const { t } = useLocale();
 

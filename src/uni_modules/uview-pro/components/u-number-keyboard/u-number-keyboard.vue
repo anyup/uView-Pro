@@ -50,6 +50,7 @@ export default {
 import { computed } from 'vue';
 import { $u } from '../..';
 import { NumberKeyboardProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * u-number-keyboard 数字/身份证键盘

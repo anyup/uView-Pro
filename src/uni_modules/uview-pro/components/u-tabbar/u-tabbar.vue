@@ -103,6 +103,9 @@ import { ref, computed, onMounted } from 'vue';
 import { $u } from '../..';
 import { TabbarProps } from './types';
 import type { TabbarItem } from '../../types/global';
+import uBadge from '../u-badge/u-badge.vue';
+import uGap from '../u-gap/u-gap.vue';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * u-tabbar 底部导航栏

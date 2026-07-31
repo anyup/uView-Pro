@@ -60,6 +60,9 @@ import {
     getEventWithCurrentPage,
     type ToastPayload
 } from './service';
+import uIcon from '../u-icon/u-icon.vue';
+import uLoading from '../u-loading/u-loading.vue';
+import uMask from '../u-mask/u-mask.vue';
 
 /**
  * toast 消息提示

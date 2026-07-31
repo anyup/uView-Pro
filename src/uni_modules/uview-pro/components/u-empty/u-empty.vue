@@ -39,6 +39,7 @@ export default {
 import { EmptyProps } from './types';
 import { $u, useLocale } from '../../';
 import { computed } from 'vue';
+import uIcon from '../u-icon/u-icon.vue';
 
 const { t } = useLocale();
 

@@ -79,6 +79,7 @@ export default {
 import { computed } from 'vue';
 import { $u } from '../..';
 import { AlertTipsProps } from './types';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * alertTips 警告提示

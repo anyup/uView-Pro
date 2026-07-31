@@ -170,6 +170,7 @@ import citys from '../../libs/util/city';
 import areas from '../../libs/util/area';
 import { PickerProps } from './types';
 import { $u, useLocale } from '../..';
+import uPopup from '../u-popup/u-popup.vue';
 
 /**
  * picker picker弹出选择器

@@ -44,6 +44,8 @@ export default {
 import { directionConfig, FabProps } from './types';
 import { computed, getCurrentInstance, onMounted, reactive, ref, useSlots, watch } from 'vue';
 import { $u } from '../../';
+import uButton from '../u-button/u-button.vue';
+import uIcon from '../u-icon/u-icon.vue';
 
 const props = defineProps(FabProps);
 const emit = defineEmits(['trigger']);

@@ -60,6 +60,7 @@ export default {
 import { computed, useSlots } from 'vue';
 import { CellItemProps } from './types';
 import { $u } from '../..';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * cellItem 单元格Item

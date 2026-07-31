@@ -26,6 +26,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onUnmounted, ref, watch } from 'vue';
 import { LoadingPopupProps } from './types';
+import uLoading from '../u-loading/u-loading.vue';
 
 // 组件props类型
 const props = defineProps(LoadingPopupProps);

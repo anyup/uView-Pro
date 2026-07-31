@@ -225,6 +225,9 @@ import { ref, computed, watch, onMounted, useSlots } from 'vue';
 import { $u, useLocale } from '../..';
 import { CalendarProps, type CalendarEmits } from './types';
 import Calendar from '../../libs/util/calendar';
+import uButton from '../u-button/u-button.vue';
+import uIcon from '../u-icon/u-icon.vue';
+import uPopup from '../u-popup/u-popup.vue';
 
 /**
  * calendar 日历

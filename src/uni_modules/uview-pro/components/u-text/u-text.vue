@@ -85,6 +85,8 @@ export default {
 import { computed } from 'vue';
 import { TextProps } from './types';
 import { $u } from '../../';
+import uIcon from '../u-icon/u-icon.vue';
+import uLink from '../u-link/u-link.vue';
 
 /**
  * Text 文本

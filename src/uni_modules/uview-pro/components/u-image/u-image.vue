@@ -52,6 +52,7 @@ export default {
 import { ref, computed, watch, useSlots } from 'vue';
 import { type ImageExpose, ImageProps } from './types';
 import { $u } from '../..';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * Image 图片

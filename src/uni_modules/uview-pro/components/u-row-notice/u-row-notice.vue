@@ -65,6 +65,7 @@ export default {
 import { ref, computed, watch, onMounted, nextTick, getCurrentInstance } from 'vue';
 import { RowNoticeProps } from './types';
 import { $u } from '../..';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * u-row-notice 水平滚动通告栏
