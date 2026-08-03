@@ -74,7 +74,10 @@
         "prepare": "husky",
         "format": "prettier --write . --ignore-path .prettierignore",
         "test:npm": "node scripts/test-npm-package.js",
-        "test:npm:cleanup": "node scripts/test-npm-cleanup.js"
+        "test:npm:cleanup": "node scripts/test-npm-cleanup.js",
+        "sync": "node scripts/sync-to-node.js",
+        "sync:watch": "node scripts/sync-to-node.js --watch",
+        "sync:build": "node scripts/sync-to-node.js --build"
     },
     "config": {
         "commitizen": {
