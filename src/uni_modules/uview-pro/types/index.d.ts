@@ -2,6 +2,7 @@
 /// <reference path="./uni-app.d.ts" />
 
 export * from './global';
+export * from '../libs';
 
 declare global {
     interface Uni {
@@ -10,5 +11,5 @@ declare global {
 }
 
 declare module 'uview-pro' {
-    export function install(): void;
+    export function install(app: any, options?: import('./global').UViewProOptions): void;
 }

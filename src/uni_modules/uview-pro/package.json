@@ -7,7 +7,26 @@
     "main": "index.ts",
     "module": "index.ts",
     "browser": "index.ts",
-    "types": "index.ts",
+    "types": "index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./index.d.ts",
+            "import": "./index.ts",
+            "require": "./index.ts",
+            "default": "./index.ts"
+        },
+        "./plugins": {
+            "types": "./plugins/index.ts",
+            "import": "./plugins/index.mjs",
+            "require": "./plugins/index.cjs",
+            "default": "./plugins/index.mjs"
+        },
+        "./types": "./types/index.d.ts",
+        "./types/*": "./types/*.d.ts",
+        "./components/*": "./components/*",
+        "./libs/*": "./libs/*",
+        "./*": "./*"
+    },
     "keywords": [
         "uview-pro",
         "vue3",
