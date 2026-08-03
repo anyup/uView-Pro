@@ -1,27 +1,34 @@
 #!/usr/bin/env node
 
 /**
- * 将 uView-Pro 源码同步到 uView-Pro-Starter 的 node_modules/uview-pro
+ * 将 uView-Pro 源码同步到目标项目的指定目录
  * 用于本地开发测试，无需 npm publish
  *
  * 特性:
+ *   - 通过位置参数指定目标父目录，脚本自动追加 uview-pro
  *   - 自动解析 pnpm junction/symlink，同步到真实目录
  *   - 镜像同步：先清空目标再复制，确保与源码完全一致
  *   - 支持 --watch 监听文件变化自动同步
  *   - 支持 --build 同步前先编译 Vite 插件
- *   - 支持 --target 指定自定义目标路径
+ *   - 目标不存在时自动创建
  *   - 纯 Node.js 实现，无第三方依赖
  *
  * 使用方法:
- *   node scripts/sync-to-node.js            # 单次同步
- *   node scripts/sync-to-node.js --watch    # 监听变化自动同步
- *   node scripts/sync-to-node.js --build    # 先编译插件再同步
- *   node scripts/sync-to-node.js --build --watch
- *   node scripts/sync-to-node.js --target /path/to/other-project/node_modules/uview-pro
+ *   npm run sync                                                    # 默认: ../uView-Pro-Starter/node_modules/uview-pro
+ *   npm run sync -- uView-Pro-Starter/node_modules                  # → ../uView-Pro-Starter/node_modules/uview-pro
+ *   npm run sync -- uView-Pro-Starter/src/uni_modules               # → ../uView-Pro-Starter/src/uni_modules/uview-pro
+ *   npm run sync:watch                                              # 监听模式
+ *   npm run sync:build                                              # 先编译插件再同步
+ *   npm run sync:watch -- uView-Pro-Starter/src/uni_modules
  *
- * 在 package.json 中添加:
- *   "sync": "node scripts/sync-to-node.js",
- *   "sync:watch": "node scripts/sync-to-node.js --watch"
+ *   # 直接用 node 运行
+ *   node scripts/sync-to-node.js                                    # 默认目标
+ *   node scripts/sync-to-node.js uView-Pro-Starter/node_modules
+ *   node scripts/sync-to-node.js uView-Pro-Starter/src/uni_modules --watch
+ *
+ * 说明:
+ *   位置参数指定目标父目录（相对于项目根的上级），脚本自动追加 /uview-pro。
+ *   使用 npm run 时需加 -- 分隔，避免 npm 消费自定义标志。
  */
 
 'use strict';
@@ -36,8 +43,7 @@ var childProcess = require('child_process');
 
 var projectRoot = path.resolve(__dirname, '..');
 var sourceDir = path.resolve(projectRoot, 'src', 'uni_modules', 'uview-pro');
-var starterRoot = path.resolve(projectRoot, '..', 'uView-Pro-Starter');
-var defaultDestDir = path.resolve(starterRoot, 'node_modules', 'uview-pro');
+var defaultTarget = 'uView-Pro-Starter/node_modules';
 
 // 同步时排除的文件（npm 配置文件，不需要进入 node_modules）
 var excludeNames = ['.npmignore', '.npmrc'];
@@ -51,11 +57,12 @@ var watchMode = args.indexOf('--watch') !== -1 || args.indexOf('-w') !== -1;
 var buildMode = args.indexOf('--build') !== -1 || args.indexOf('-b') !== -1;
 var quietMode = args.indexOf('--quiet') !== -1 || args.indexOf('-q') !== -1;
 
-var destDir = defaultDestDir;
-var targetIdx = args.indexOf('--target');
-if (targetIdx !== -1 && args[targetIdx + 1]) {
-    destDir = path.resolve(args[targetIdx + 1]);
-}
+// 第一个非 flag 参数作为目标父目录，脚本自动追加 uview-pro
+var positionalArgs = args.filter(function (a) {
+    return a.indexOf('-') !== 0;
+});
+var targetValue = positionalArgs.length > 0 ? positionalArgs[0] : defaultTarget;
+var destDir = path.resolve(projectRoot, '..', targetValue, 'uview-pro');
 
 // ============================================================
 // 工具函数
@@ -159,13 +166,24 @@ function sync() {
         process.exit(1);
     }
 
-    // 2. 检查目标目录
+    // 2. 检查目标目录，不存在则自动创建
     if (!fs.existsSync(destDir)) {
-        console.error('[error] Destination not found: ' + destDir);
-        console.error('');
-        console.error('Please install uview-pro in the target project first:');
-        console.error('  cd ' + path.dirname(path.dirname(destDir)) + ' && pnpm install');
-        process.exit(1);
+        // 向上查找最近存在的祖先目录，确认路径合法
+        var ancestor = destDir;
+        var projectFound = false;
+        while (ancestor !== path.dirname(ancestor)) {
+            ancestor = path.dirname(ancestor);
+            if (fs.existsSync(ancestor)) {
+                projectFound = true;
+                break;
+            }
+        }
+        if (!projectFound) {
+            console.error('[error] Target path not reachable: ' + destDir);
+            process.exit(1);
+        }
+        if (!quietMode) console.log('[mkdir] Creating destination: ' + path.relative(projectRoot, destDir));
+        fs.mkdirSync(destDir, { recursive: true });
     }
 
     // 3. 解析 pnpm junction 到真实路径

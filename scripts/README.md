@@ -4,9 +4,6 @@
 
 ## 脚本文件说明
 
-- `release.sh` - Bash 脚本 (适用于 Linux/macOS)
-- `release.ps1` - PowerShell 脚本 (适用于 Windows)
-- `release.bat` - 批处理脚本 (适用于 Windows)
 - `release.js` - Node.js 脚本 (适用于所有平台，推荐使用)
 
 ## 使用方法
@@ -70,12 +67,6 @@ npm run release:minor:bat
 npm run release:major:bat
 ```
 
-或者直接使用：
-
-```cmd
-scripts\release.bat patch
-```
-
 ### 4. Linux/macOS 方式
 
 ```bash
@@ -87,12 +78,6 @@ npm run release:minor
 
 # 发布主要版本
 npm run release:major
-```
-
-或者直接使用：
-
-```bash
-./scripts/release.sh patch
 ```
 
 ## 版本类型说明
@@ -121,24 +106,6 @@ npm run release:major
 - 确保 Git 已配置并可以推送到远程仓库
 - 确保有足够的权限执行脚本
 - 在 Windows 上使用 PowerShell 时，可能需要调整执行策略
-
-## 故障排除
-
-### Windows PowerShell 执行策略问题
-
-如果遇到执行策略错误，可以运行：
-
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
-### 权限问题
-
-确保脚本文件有执行权限：
-
-```bash
-chmod +x scripts/release.sh
-```
 
 ### Git 配置问题
 
