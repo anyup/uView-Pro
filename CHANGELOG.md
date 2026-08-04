@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.15 - 2026-08-04
+
+### ♻️ Code Refactoring | 代码重构
+
+- **components:** 统一补全各组件内部依赖的子组件导入，支持单独组件引用 ([091b5bb](https://github.com/anyup/uView-Pro/commit/091b5bb70312f43026c9847cca0709cafccaaaaa))
+- **types:** 完善类型定义与包导出配置 ([d86d5cd](https://github.com/anyup/uView-Pro/commit/d86d5cd39d4e68adfa3000103fe90504727d978b))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.14 - 2026-07-30
 
 ### 🐛 Bug Fixes | Bug 修复

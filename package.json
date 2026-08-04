@@ -1,6 +1,6 @@
 {
     "name": "uview-pro-demo",
-    "version": "0.6.14",
+    "version": "0.6.15",
     "scripts": {
         "dev": "uni",
         "dev:custom": "uni -p",
@@ -144,5 +144,5 @@
         "node": "20.13.1"
     },
     "buildDate": "2026-04-17",
-    "releaseDate": "2026-07-30"
+    "releaseDate": "2026-08-04"
 }
