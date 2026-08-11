@@ -93,6 +93,7 @@ pnpm dev
 
 - [Github](https://github.com/anyup/uview-pro)
 - [Gitee](https://gitee.com/anyup/uview-pro)
+- [AtomGit](https://atomgit.com/anyup/uView-Pro)
 - [官方文档](https://uviewpro.cn)
 - [更新日志](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
 

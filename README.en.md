@@ -93,6 +93,7 @@ For more running and building commands, please refer to the [pnpm Running Guide]
 
 - [Github](https://github.com/anyup/uview-pro)
 - [Gitee](https://gitee.com/anyup/uview-pro)
+- [AtomGit](https://atomgit.com/anyup/uView-Pro)
 - [Official Documentation](https://uviewpro.cn)
 - [Changelog](https://github.com/anyup/uView-Pro/blob/master/src/uni_modules/uview-pro/changelog.md)
 
