@@ -76,7 +76,19 @@ const props = defineProps(StepsProps);
 
 const { children } = useParent('u-steps');
 // 计算方向样式
-const directionStyle = computed(() => ({ flexDirection: props.direction as 'row' | 'column' }));
+const directionStyle = computed(() => {
+    const isRow = props.direction === 'row';
+    return {
+        flexDirection: props.direction as 'row' | 'column',
+        ...(isRow
+            ? {
+                  // 内容总宽超出一行时横向滚动，避免右侧节点被截断
+                  overflowX: 'auto',
+                  flexWrap: 'nowrap'
+              }
+            : {})
+    };
+});
 
 defineExpose({
     props,

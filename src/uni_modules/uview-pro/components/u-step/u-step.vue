@@ -42,6 +42,14 @@
         <view class="u-steps__item__line" :class="['u-steps__item__line--' + mode]" v-if="showLine">
             <u-line :direction="direction" length="100%" :hair-line="false" :color="unActiveColor"></u-line>
         </view>
+        <!-- 横排模式下补左半连接线：节点宽度不一致时避免与上一个节点之间连线断开 -->
+        <view
+            class="u-steps__item__line"
+            :class="['u-steps__item__line--left--' + mode]"
+            v-if="direction === 'row' && childIndex > 0"
+        >
+            <u-line :direction="direction" length="100%" :hair-line="false" :color="unActiveColor"></u-line>
+        </view>
     </view>
 </template>
 <script lang="ts">
@@ -156,6 +164,8 @@ $u-steps-item-dot-width: 20rpx;
     flex-direction: column;
 
     &--row {
+        // 步骤多时禁止收缩到内容宽度以下，超宽交给容器横向滚动，避免文字遮挡
+        flex: 1 0 auto;
         align-items: center;
         @include vue-flex;
         flex-direction: column;
@@ -164,16 +174,30 @@ $u-steps-item-dot-width: 20rpx;
             position: absolute;
             z-index: 0;
 
+            // 右半线：自本节点圆心向右伸至自身右边缘，与下一节点的左半线无缝衔接
             &--dot {
-                width: calc(100% - #{$u-steps-item-dot-width});
+                width: calc(50% - #{$u-steps-item-dot-width} / 2);
                 top: calc(#{$u-steps-item-dot-width} / 2);
                 left: calc(#{$u-steps-item-dot-width} / 2 + 50%);
             }
 
+            // 左半线：自自身左边缘向左半圆心（不含圆心），补偿右半线在宽度不同时够不到下一节点圆心
+            &--left--dot {
+                width: calc(50% - #{$u-steps-item-dot-width} / 2);
+                top: calc(#{$u-steps-item-dot-width} / 2);
+                right: calc(#{$u-steps-item-dot-width} / 2 + 50%);
+            }
+
             &--number {
-                width: calc(100% - $u-steps-item-number-width);
+                width: calc(50% - #{$u-steps-item-number-width} / 2);
                 top: calc(#{$u-steps-item-number-width} / 2);
                 left: calc(#{$u-steps-item-number-width} / 2 + 50%);
+            }
+
+            &--left--number {
+                width: calc(50% - #{$u-steps-item-number-width} / 2);
+                top: calc(#{$u-steps-item-number-width} / 2);
+                right: calc(#{$u-steps-item-number-width} / 2 + 50%);
             }
         }
     }
@@ -252,6 +276,8 @@ $u-steps-item-dot-width: 20rpx;
     }
 
     &__desc--row {
+        // 保持单行，超宽由容器横向滚动承载
+        white-space: nowrap;
         color: $u-type-info;
         font-size: 24rpx;
     }
