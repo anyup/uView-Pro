@@ -1,3 +1,13 @@
+## 0.6.16（2026-08-20）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **steps:** 修复横向步骤条连线断开和超宽截断问题 ([92fecdc](https://github.com/anyup/uView-Pro/commit/92fecdc75df0b20e4247397f47551e4472d32c0b))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.15（2026-08-04）
 
 ### ♻️ Code Refactoring | 代码重构
