@@ -107,7 +107,10 @@ function demoAddFrench() {
                     </text>
                 </view>
             </view>
-            <u-link href="https://uviewpro.cn/zh/guide/i18n.html">更多内容请参考国际化文档：https://uviewpro.cn</u-link>
+            <u-link
+                href="https://uviewpro.cn/zh/guide/i18n.html"
+                text="更多内容请参考国际化文档：https://uviewpro.cn/"
+            ></u-link>
         </view>
     </demo-page>
 </template>

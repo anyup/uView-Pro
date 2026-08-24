@@ -25,7 +25,7 @@
             <slot>￥{{ displayValue }}</slot>
         </text>
         <!-- link 模式 -->
-        <u-link v-else-if="props.mode === 'link'" :href="props.href" underLine>
+        <u-link v-else-if="props.mode === 'link'" :text="displayValue" :href="props.href" underLine>
             <slot>{{ displayValue }}</slot>
         </u-link>
         <template v-else-if="props.openType">
