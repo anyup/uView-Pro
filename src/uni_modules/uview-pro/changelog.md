@@ -1,3 +1,15 @@
+## 0.6.17（2026-08-24）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-link:** 修复u-link组件兼容多端渲染逻辑，头条小程序直接渲染文本，其他端保留插槽兼容 ([a918f56](https://github.com/anyup/uView-Pro/commit/a918f5608f199f0e61be0a2e98ad43560e7a6393))
+- **u-text:** 修复u-text组件在link模式下，头条小程序不显示 ([c7ea8eb](https://github.com/anyup/uView-Pro/commit/c7ea8eb8cf6dc8257f9c88a070239583b7f82566))
+- **u-text:** 简化link模式下的u-link组件写法 ([292c60e](https://github.com/anyup/uView-Pro/commit/292c60e375fbe3c580f3eae39fe25d395916bf64))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.16（2026-08-20）
 
 ### 🐛 Bug Fixes | Bug 修复
