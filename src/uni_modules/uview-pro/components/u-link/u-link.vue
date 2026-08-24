@@ -9,7 +9,12 @@
             paddingBottom: underLine ? '0rpx' : '0'
         }"
     >
-        <slot></slot>
+        <!-- #ifdef MP-TOUTIAO -->
+        {{ text }}
+        <!-- #endif -->
+        <!-- #ifndef MP-TOUTIAO -->
+        <slot>{{ text }}</slot>
+        <!-- #endif -->
     </text>
 </template>
 

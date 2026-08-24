@@ -6,6 +6,11 @@ import { getColor } from '../../';
  * @description 超链接组件，支持多端跳转/复制/提示
  */
 export const LinkProps = {
+    /** 超链接文字 */
+    text: {
+        type: [String, Number] as PropType<string | number>,
+        default: ''
+    },
     /** 文字颜色 */
     color: {
         type: String,

@@ -5,9 +5,13 @@
                 <view class="u-demo-wrap">
                     <view class="u-demo-title">演示效果</view>
                     <view class="u-demo-area">
-                        <u-link :color="color" :font-size="fontSize" :under-line="underLine" :href="href">
-                            点此链接，跳转uView官网
-                        </u-link>
+                        <u-link
+                            text="点此链接，跳转uView官网"
+                            :color="color"
+                            :font-size="fontSize"
+                            :under-line="underLine"
+                            :href="href"
+                        />
                     </view>
                 </view>
                 <view class="u-config-wrap">
