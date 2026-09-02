@@ -95,6 +95,16 @@
                     />
                 </view>
             </view>
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">前置图标</view>
+                <view class="u-demo-area">
+                    <u-input v-model="amount" type="digit" placeholder="请输入金额" :border="true">
+                        <template #prefix>
+                            <u-icon name="rmb-circle" :size="40"></u-icon>
+                        </template>
+                    </u-input>
+                </view>
+            </view>
             <view class="u-config-wrap">
                 <view class="u-config-title u-border-bottom">参数配置</view>
                 <view class="u-config-item">
@@ -171,6 +181,9 @@ const disabled = ref(false);
 const readonly = ref(false);
 
 const confirmHoldValue = ref('');
+
+// 前置图标示例
+const amount = ref('');
 
 // Select 相关
 const selectValue = ref('');

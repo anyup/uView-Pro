@@ -16,6 +16,10 @@
         }"
         @tap.stop="inputClick"
     >
+        <!-- 前置插槽，在录入区之前渲染内容，如金额输入前的货币图标 -->
+        <view v-if="$slots.prefix" class="u-input__prefix">
+            <slot name="prefix" />
+        </view>
         <textarea
             v-if="type == 'textarea'"
             class="u-input__input u-input__textarea"
@@ -365,6 +369,13 @@ defineExpose({
         bottom: 0;
         left: 0;
         z-index: 2;
+    }
+
+    &__prefix {
+        flex-shrink: 0;
+        margin-right: 10rpx;
+        @include vue-flex;
+        align-items: center;
     }
 
     &__input {
