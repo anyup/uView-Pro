@@ -45,7 +45,7 @@
                     </view>
                     <view
                         v-if="effectiveConfig.showConfirmButton || slots['confirm-button']"
-                        class="u-model__footer__button hairline-left"
+                        :class="['u-model__footer__button', effectiveConfig.showCancelButton ? 'u-border-left' : '']"
                         :hover-stay-time="100"
                         :hover-class="effectiveConfig.asyncClose ? 'none' : 'u-model__btn--hover'"
                         :style="[confirmBtnStyle]"
