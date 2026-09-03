@@ -37,4 +37,4 @@ jobs:
 
       - name: Publish (Trusted Publishing / OIDC)
         working-directory: src/uni_modules/uview-pro
-        run: npm publish --access public --provenance
+        run: npm publish --access public
