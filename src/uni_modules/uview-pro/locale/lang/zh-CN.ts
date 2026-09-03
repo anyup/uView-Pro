@@ -107,6 +107,17 @@ export default {
         holiday: '休',
         workday: '班'
     },
+    uColorPicker: {
+        title: '选择颜色',
+        confirmText: '确定',
+        cancelText: '取消'
+    },
+    uColorSelectPanel: {
+        solid: '单色',
+        gradient: '渐变色',
+        recentColors: '最近使用颜色',
+        systemPresets: '系统预设颜色'
+    },
     uEmpty: {
         car: '购物车为空',
         page: '页面不存在',
