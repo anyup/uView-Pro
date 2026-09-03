@@ -1,6 +1,6 @@
 {
     "name": "uview-pro-demo",
-    "version": "0.6.18",
+    "version": "0.6.19-rc.0",
     "scripts": {
         "dev": "uni",
         "dev:custom": "uni -p",
@@ -66,7 +66,7 @@
         "release:major": "node scripts/release.js major",
         "release:beta": "node scripts/release.js prerelease beta",
         "release:alpha": "node scripts/release.js prerelease alpha",
-        "release:rc": "node scripts/release.js prerelease rc",
+        "release:rc": "node scripts/release.js prerelease rc --no-changelog",
         "release:push": "node scripts/release.js push",
         "release:undo": "node scripts/release.js undo",
         "build:plugins": "node scripts/build-plugins.js",

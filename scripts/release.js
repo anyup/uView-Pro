@@ -148,6 +148,10 @@ if (args[0] === 'undo') {
 
 // 检查是否有 --push 参数（默认不推送）
 const shouldPush = args.includes('--push');
+// 检查 changelog 配置：默认 true，--no-changelog 跳过
+const skipChangelog = args.includes('--no-changelog');
+// 检查 git 状态：默认关闭，--strict 开启（有未提交更改则报错）
+const strictMode = args.includes('--strict');
 const versionInput = args.find(arg => !arg.startsWith('--'));
 
 // 验证版本号格式 (支持 x.y.z 格式，如 0.5.1, 1.0.0, 2.3.4-beta.1)
@@ -172,6 +176,10 @@ if (!versionInput || (!isSemverType && !isDirectVersion)) {
     console.error('');
     console.error('选项:');
     console.error('  --push                                                   # 提交并推送');
+    console.error(
+        '  --strict                                                 # 严格模式：有未提交更改则报错（默认关闭）'
+    );
+    console.error('  --no-changelog                                           # 跳过 changelog 生成（默认 true）');
     console.error('');
     console.error('其他命令:');
     console.error('  node scripts/release.js push                             # 推送上次未推送的发布');
@@ -214,13 +222,15 @@ function execCommand(command, options = {}) {
     }
 }
 
-// 检查是否有未提交的更改
-console.log('📋 检查Git状态...');
-const gitStatus = execCommand('git status --porcelain', { stdio: 'pipe' });
-if (gitStatus.trim()) {
-    console.error('❌ 有未提交的更改，请先提交或暂存');
-    console.log(gitStatus);
-    process.exit(1);
+// 检查 git 状态（仅 --strict 模式下启用）
+if (strictMode) {
+    console.log('📋 检查Git状态...');
+    const gitStatus = execCommand('git status --porcelain', { stdio: 'pipe' });
+    if (gitStatus.trim()) {
+        console.error('❌ 有未提交的更改，请先提交或暂存（或去掉 --strict）');
+        console.log(gitStatus);
+        process.exit(1);
+    }
 }
 
 // 检查当前分支
@@ -304,9 +314,13 @@ function continueRelease() {
         console.log('🔧 编译 Vite 插件...');
         execCommand('npm run build:plugins');
 
-        // 生成 changelog（按当前版本生成版本化条目，可配置是否保留 Unreleased）
-        console.log('📝 生成 changelog...');
-        execCommand('npm run changelog:release');
+        // 生成 changelog（默认启用，--changelog false 跳过）
+        if (skipChangelog) {
+            console.log('📝 跳过 changelog 生成');
+        } else {
+            console.log('📝 生成 changelog...');
+            execCommand('npm run changelog:release');
+        }
 
         // 提交更改
         console.log('💾 提交更改...');
@@ -337,6 +351,7 @@ function continueRelease() {
             console.log(`🏷️  标签 v${newVersion} 已创建（未推送）`);
             console.log('💡 如需推送，运行: npm run release:push');
             console.log(`   或: git push origin HEAD && git push origin "v${newVersion}"`);
+            console.log('💡 如需撤销，运行: npm run release:undo');
         }
         if (isPrerelease) {
             console.log('');
