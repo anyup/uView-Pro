@@ -1,3 +1,17 @@
+## 0.6.18（2026-09-03）
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-modal:** 修复弹窗确认按钮左侧边线不显示的问题 ([6713b60](https://github.com/anyup/uView-Pro/commit/6713b6096cf7e22bacfc8df9c5ef3b22bfee6176))
+
+### ✨ Features | 新功能
+
+- **u-input:** u-input组件新增prefix前置插槽，可用于在输入框前渲染图标等内容（#177） ([e679b55](https://github.com/anyup/uView-Pro/commit/e679b554e7e61dec80b71e69ea7e6d9acca21283))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.17（2026-08-24）
 
 ### 🐛 Bug Fixes | Bug 修复
