@@ -10,6 +10,10 @@ on:
         description: '分支 / 标签 / commit SHA'
         required: true
         default: 'master'
+      npm_tag:
+        description: 'npm dist-tag：正式版 latest，预发布填 next / rc'
+        required: false
+        default: 'latest'
 
 # 同一 tag 重复触发时取消旧 run
 concurrency:
@@ -21,7 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write   # Trusted Publishing (OIDC) 必需
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -35,6 +38,9 @@ jobs:
           node-version: 22
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Publish (Trusted Publishing / OIDC)
+      - name: Publish (npm token)
         working-directory: src/uni_modules/uview-pro
-        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        # push 触发时 inputs.npm_tag 为空，回退 latest（正式版）；预发布走 workflow_dispatch 填 next / rc
+        run: npm publish --access public --tag ${{ github.event.inputs.npm_tag || 'latest' }}
