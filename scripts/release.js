@@ -310,9 +310,7 @@ function continueRelease() {
 
         // 提交更改
         console.log('💾 提交更改...');
-        execCommand(
-            'git add package.json src/uni_modules/uview-pro/package.json CHANGELOG.md src/uni_modules/uview-pro/changelog.md'
-        );
+        execCommand('git add .');
         execCommand(`git commit -m "chore(release): bump version to ${newVersion}
 
 - Update package.json version

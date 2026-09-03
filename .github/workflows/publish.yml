@@ -1,46 +1,40 @@
 name: Publish npm package
 
 on:
-    push:
-        tags:
-            - 'v*'
-    workflow_dispatch:
-        inputs:
-            ref:
-                description: '分支 / 标签 / commit SHA'
-                required: true
-                default: 'master'
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: '分支 / 标签 / commit SHA'
+        required: true
+        default: 'master'
 
 # 同一 tag 重复触发时取消旧 run
 concurrency:
-    group: publish-${{ github.ref }}
-    cancel-in-progress: true
+  group: publish-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-    publish:
-        runs-on: ubuntu-latest
-        permissions:
-            contents: read
-            id-token: write # Trusted Publishing (OIDC) 必需
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                  ref: ${{ github.event.inputs.ref || github.ref }}
-                  fetch-depth: 0
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write   # Trusted Publishing (OIDC) 必需
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+          fetch-depth: 0
 
-            - name: Setup Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 22
-                  registry-url: 'https://registry.npmjs.org'
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
 
-            - name: Install dependencies
-              run: npm ci
-
-            - name: Build plugins
-              run: npm run build:plugins
-
-            - name: Publish (Trusted Publishing / OIDC)
-              working-directory: src/uni_modules/uview-pro
-              run: npm publish --access public --provenance
+      - name: Publish (Trusted Publishing / OIDC)
+        working-directory: src/uni_modules/uview-pro
+        run: npm publish --access public --provenance
