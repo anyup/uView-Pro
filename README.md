@@ -27,6 +27,8 @@
 
 </div>
 
+> 📢 📢 📢 uni-app x 版 uView Pro 重构意见征集中**：组件优先级、API 设计、破坏性变更策略等你的建议会影响新版本方向 → **[前往 Discussions 置顶帖参与讨论](https://github.com/anyup/uView-Pro/discussions)**
+
 ## 说明
 
 `uView UI`，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的 UI 框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。
