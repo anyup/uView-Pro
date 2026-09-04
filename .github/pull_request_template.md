@@ -1,11 +1,3 @@
----
-name: 'PR 提交 Pull Request'
-about: '提交优质 PR，使 uView Pro 更强大！'
-title: '【PR提交】'
-labels: ['pr', 'contribution']
-assignees: []
----
-
 ## 🔀 PR 提交 | Pull Request
 
 感谢您的贡献！为提升代码质量和协作效率，请按以下模板补充关键信息：

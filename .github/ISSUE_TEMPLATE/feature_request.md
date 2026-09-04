@@ -6,6 +6,9 @@ labels: ['enhancement', 'feature-request']
 assignees: []
 ---
 
+> 💡 **uni-app x 版 uView Pro 重构意见征集进行中**，新版本的组件优先级、API 设计等建议请前往 [Discussions 置顶帖](https://github.com/anyup/uView-Pro/discussions) 反馈。
+> 本模板用于当前 uni-app 版 uView Pro 的新功能建议。
+
 ## 🚀 新功能征集 | Feature Request
 
 ### 1. 说明

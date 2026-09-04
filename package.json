@@ -70,7 +70,6 @@
         "release:push": "node scripts/release.js push",
         "release:undo": "node scripts/release.js undo",
         "build:plugins": "node scripts/build-plugins.js",
-        "publish": "npm run build:plugins && cd src/uni_modules/uview-pro && npm publish --access public && cd ../../..",
         "prepare": "husky",
         "format": "prettier --write . --ignore-path .prettierignore",
         "test:npm": "node scripts/test-npm-package.js",
