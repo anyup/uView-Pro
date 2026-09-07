@@ -180,6 +180,55 @@
             <u-button type="primary" @click="handleSubmit" :throttle-time="0">提交</u-button>
             <u-gap></u-gap>
             <u-button @click="handleReset" :throttle-time="0">重置</u-button>
+            <u-gap></u-gap>
+            <view class="validate-title">指定字段校验（validateField）</view>
+            <view class="validate-btns">
+                <u-button
+                    custom-class="validate-btn"
+                    size="mini"
+                    type="primary"
+                    @click="validateSingleField('name')"
+                    :throttle-time="0"
+                >
+                    校验姓名
+                </u-button>
+                <u-button
+                    custom-class="validate-btn"
+                    size="mini"
+                    type="primary"
+                    @click="validateSingleField('password')"
+                    :throttle-time="0"
+                >
+                    校验密码
+                </u-button>
+                <u-button
+                    custom-class="validate-btn"
+                    size="mini"
+                    @click="validateSingleField('sex')"
+                    :throttle-time="0"
+                >
+                    校验性别
+                </u-button>
+            </view>
+            <view class="validate-btns">
+                <u-button
+                    custom-class="validate-btn"
+                    size="mini"
+                    type="primary"
+                    @click="validateMultipleFields(['name', 'password'])"
+                    :throttle-time="0"
+                >
+                    校验姓名+密码
+                </u-button>
+                <u-button
+                    custom-class="validate-btn"
+                    size="mini"
+                    @click="validateSingleField('extra.strong')"
+                    :throttle-time="0"
+                >
+                    校验嵌套(特长)
+                </u-button>
+            </view>
             <u-action-sheet
                 :list="actionSheetList"
                 v-model="actionSheetShow"
@@ -546,6 +595,18 @@ function handleReset() {
     uFormRef.value?.resetFields();
     check.value = false;
 }
+// 演示 validateField：校验单个字段
+function validateSingleField(prop: string) {
+    uFormRef.value?.validateField(prop, (valid: boolean, errors: any[]) => {
+        $u.toast(valid ? '校验通过' : `校验失败：${errors[0]?.message ?? ''}`);
+    });
+}
+// 演示 validateField：校验多个字段（传入字段名数组）
+function validateMultipleFields(props: string[]) {
+    uFormRef.value?.validateField(props, (valid: boolean, errors: any[]) => {
+        $u.toast(valid ? '校验通过' : `校验失败：${errors[0]?.message ?? ''}`);
+    });
+}
 // 点击actionSheet回调
 function actionSheetCallback(index: number) {
     uni.hideKeyboard();
@@ -649,5 +710,18 @@ function sizeChange(index: number) {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+.validate-title {
+    font-size: 28rpx;
+    color: $u-main-color;
+    margin: 24rpx 0;
+}
+
+.validate-btns :deep(.validate-btn) {
+    flex: 0 0 auto;
+    width: auto;
+    margin-right: 16rpx;
+    margin-bottom: 16rpx;
 }
 </style>

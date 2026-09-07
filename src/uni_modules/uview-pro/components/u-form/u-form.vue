@@ -113,10 +113,50 @@ function validate(callback?: (valid: boolean, errorArr: ErrorItem[]) => void): P
     });
 }
 
+/**
+ * 校验指定字段（支持单个字段名或字段名数组）
+ * @param prop 字段名（对应 u-form-item 的 prop），可传字符串或数组
+ * @param callback 校验回调，参数为 (valid: boolean, errorArr: ErrorItem[])
+ * @returns Promise<boolean>
+ */
+function validateField(
+    prop: string | string[],
+    callback?: (valid: boolean, errorArr: ErrorItem[]) => void
+): Promise<boolean> {
+    const props = Array.isArray(prop) ? prop : [prop];
+    // 从 fields 中精确匹配指定 prop
+    const targetFields = fields.value.filter((field: any) => props.indexOf(field.prop) !== -1);
+
+    return new Promise(resolve => {
+        let valid = true;
+        let count = 0;
+        let errorArr: ErrorItem[] = [];
+        if (targetFields.length === 0) {
+            resolve(true);
+            if (typeof callback === 'function') callback(true, []);
+            return;
+        }
+        targetFields.forEach((field: any) => {
+            // 复用 u-form-item 的 validation，确保其自身错误状态被更新/清除
+            field.validation('', (error: any) => {
+                if (error) {
+                    valid = false;
+                    errorArr.push({ prop: field.prop, message: error });
+                }
+                if (++count === targetFields.length) {
+                    resolve(valid);
+                    if (typeof callback === 'function') callback(valid, errorArr);
+                }
+            });
+        });
+    });
+}
+
 defineExpose({
     setRules,
     resetFields,
     validate,
+    validateField,
     addField(field: any) {
         if (!fields.value.includes(field)) fields.value.push(field);
     },
