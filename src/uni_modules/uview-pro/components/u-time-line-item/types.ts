@@ -16,7 +16,7 @@ export const TimeLineItemProps = {
         default: ''
     },
     /** 节点的背景颜色 */
-    bgColor: { type: String, default: 'var(--u-bg-white)' },
+    bgColor: { type: String, default: 'transparent' },
     /** 节点左边图标绝对定位的top值，单位rpx */
     nodeTop: { type: [String, Number] as PropType<string | number>, default: '' }
 };
