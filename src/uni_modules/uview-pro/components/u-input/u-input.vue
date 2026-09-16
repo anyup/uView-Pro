@@ -361,6 +361,7 @@ defineExpose({
     flex: 1;
     @include vue-flex;
     align-items: center;
+    border-radius: 4px;
 
     &__readonly-overlay {
         position: absolute;
@@ -410,7 +411,6 @@ defineExpose({
     }
 
     &--border {
-        border-radius: 4px;
         border: 1px solid $u-border-color;
     }
 
