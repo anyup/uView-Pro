@@ -81,7 +81,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { CountDownProps } from './types';
 import { $u, useLocale } from '../../';
 
@@ -170,6 +170,11 @@ onMounted(() => {
     }
 });
 
+// 组件销毁时清理定时器，避免定时器残留造成泄漏
+onUnmounted(() => {
+    clearTimer();
+});
+
 /**
  * 倒计时
  */
@@ -240,9 +245,17 @@ function clearTimer() {
     }
 }
 
+/**
+ * 销毁倒计时：清除定时器且不触发 end 事件，用于主动销毁/停止倒计时
+ */
+function destroy() {
+    clearTimer();
+}
+
 defineExpose({
     start,
-    end
+    end,
+    destroy
 });
 </script>
 
