@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.20 - 2026-09-20
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-time-line:** 修改节点默认背景色为透明 ([be7a591](https://github.com/anyup/uView-Pro/commit/be7a591b6357dc55739487d78334cae896d976bc))
+- **u-input:** 圆角与边框解耦，不传border时同样有圆角 ([2bfb23e](https://github.com/anyup/uView-Pro/commit/2bfb23eb048328ee218efc8e3d3b556111872b54))
+- **u-count-down:** 修复组件卸载后定时器残留泄漏问题，另新增destroy暴露方法用于主动停止倒计时并清理定时器 ([ad596c4](https://github.com/anyup/uView-Pro/commit/ad596c43db06be8853606d8ac5e6f4f66768c055))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.19 - 2026-09-07
 
 ### ✨ Features | 新功能
