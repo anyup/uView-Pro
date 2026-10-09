@@ -35,7 +35,9 @@ export const DividerProps = {
     /** 下边距 */
     marginBottom: { type: [String, Number] as PropType<string | number>, default: 0 },
     /** 是否使用slot传入内容，如果不用slot传入内容，先的中间就不会有空隙 */
-    useSlot: { type: Boolean, default: true }
+    useSlot: { type: Boolean, default: true },
+    /** 是否虚线 */
+    dashed: { type: Boolean, default: false }
 };
 
 export type DividerProps = ExtractPropTypes<typeof DividerProps>;

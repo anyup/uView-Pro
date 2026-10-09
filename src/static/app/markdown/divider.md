@@ -35,6 +35,14 @@
 <u-divider color="#fa3534" half-width="200" border-color="#6d6d6d">姑苏城外寒山寺</u-divider>
 ```
 
+### 设置虚线
+
+通过`dashed`将线条设置为虚线
+
+```html
+<u-divider dashed>大漠孤烟直</u-divider>
+```
+
 
 ### API
 
@@ -52,6 +60,7 @@
 | margin-top | 与前一个元素的距离，单位rpx | String \| Number  | 0 | - |
 | margin-bottom | 与后一个元素的距离，单位rpx | String \| Number  | 0 | - |
 | use-slot | 是否使用slot传入内容，如果不传入，中间不会有空隙 | Boolean  | true | false |
+| dashed | 是否虚线 | Boolean  | false | true |
 
 
 

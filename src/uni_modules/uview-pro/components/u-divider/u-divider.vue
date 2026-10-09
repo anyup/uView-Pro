@@ -68,6 +68,7 @@ import { $u } from '../../';
  * @property {String Number} height 整个divider的高度，单位rpx（默认40）
  * @property {String} type 将线条设置主题色（默认primary）
  * @property {Boolean} useSlot 是否使用slot传入内容，如果不传入，中间不会有空隙（默认true）
+ * @property {Boolean} dashed 是否虚线（默认false）
  * @property {String Number} margin-top 与前一个组件的距离，单位rpx（默认0）
  * @property {String Number} margin-bottom 与后一个组件的距离，单位rpx（0）
  * @event {Function} click divider组件被点击时触发
@@ -86,6 +87,8 @@ const lineStyle = computed(() => {
     else style.width = props.halfWidth + 'rpx';
     // borderColor优先级高于type值
     if (props.borderColor) style.borderColor = props.borderColor;
+    // 虚线
+    if (props.dashed) style.borderStyle = 'dashed';
     return style;
 });
 
