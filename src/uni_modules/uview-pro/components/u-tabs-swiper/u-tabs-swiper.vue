@@ -228,6 +228,11 @@ function getQuery(cb?: (data: any) => void) {
 
 // 颜色渐变tab滑动
 function setDx(dx: number) {
+    // 防止 tabsInfo 尚未初始化完成时访问未定义元素导致的报错：
+    // init() 中 getTabsInfo() 为异步（依赖 SelectorQuery 回调填充 tabsInfo），
+    // 若 swiper 的 transition 事件早于节点查询完成触发，tabsInfo 仍为空数组，
+    // 此时直接读取 tabsInfo.value[index].left 会抛出 "Cannot read property 'left' of undefined"
+    if (tabsInfo.value.length === 0) return;
     let nextTabIndex = dx > 0 ? animationFinishCurrent.value + 1 : animationFinishCurrent.value - 1;
     // 判断索引是否超出边界
     nextTabIndex = nextTabIndex <= 0 ? 0 : nextTabIndex;
@@ -235,6 +240,8 @@ function setDx(dx: number) {
     const tab = tabsInfo.value[nextTabIndex];
     // 当前tab中心点x轴坐标
     const nowTab = tabsInfo.value[animationFinishCurrent.value];
+    // 若当前或目标 tab 的节点信息尚未获取到，跳过本次渐变计算，等待下一次 transition 事件
+    if (!tab || !nowTab) return;
     const nowTabX = nowTab.left + nowTab.width / 2;
     // 下一个tab
     const nextTabX = tab.left + tab.width / 2;
