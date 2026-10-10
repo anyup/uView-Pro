@@ -1,3 +1,13 @@
+## 0.6.21（2026-10-10）
+
+### ✨ Features | 新功能
+
+- **divider:** 新增 dashed 属性支持虚线 ([240432b](https://github.com/anyup/uView-Pro/commit/240432bc774f4b4d2cd64297de1762a1ea94d2bd))
+
+### 🐛 Bug Fixes | Bug 修复
+
+- **u-tabs-swiper:** 修复 setDx 在 tabsInfo 未初始化时访问 undefined 导致报错 ([a581f97](https://github.com/anyup/uView-Pro/commit/a581f972bc6569557b765f8ed15c65d1bb254fda))
+
 ## 0.6.20（2026-09-20）
 
 ### 🐛 Bug Fixes | Bug 修复
