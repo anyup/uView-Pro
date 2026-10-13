@@ -107,6 +107,17 @@ export default {
         holiday: '休',
         workday: '班'
     },
+    uColorPicker: {
+        title: 'Select Color',
+        confirmText: 'Confirm',
+        cancelText: 'Cancel'
+    },
+    uColorSelectPanel: {
+        solid: 'Solid',
+        gradient: 'Gradient',
+        recentColors: 'Recent Colors',
+        systemPresets: 'System Presets'
+    },
     uEmpty: {
         car: 'Shopping cart is empty',
         page: 'Page not found',

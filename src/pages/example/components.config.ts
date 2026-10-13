@@ -220,6 +220,14 @@ export default [
                 desc_en: 'Switch component for binary state toggling and instant interactions.'
             },
             {
+                path: '/pages/componentsB/colorPicker/index',
+                icon: 'color',
+                title: 'ColorPicker 颜色选择器',
+                title_en: 'ColorPicker',
+                desc: '颜色选择器，支持弹窗和内联模式，可选择单色或渐变色。',
+                desc_en: 'Color picker with popup/inline modes for solid and gradient colors.'
+            },
+            {
                 path: '/pages/componentsA/slider/index',
                 icon: 'slider',
                 title: 'Slider 滑动选择器',
