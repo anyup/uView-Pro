@@ -50,7 +50,13 @@ export const SelectProps = {
     /** 取消按钮的文字 */
     cancelText: { type: String, default: '' },
     /** 确认按钮的文字 */
-    confirmText: { type: String, default: '' }
+    confirmText: { type: String, default: '' },
+    /** 是否开启筛选功能，开启后弹框顶部显示筛选框，输入关键字可筛选选项（默认false） */
+    filterable: { type: Boolean, default: false },
+    /** 筛选框的占位文字 */
+    filterPlaceholder: { type: String, default: '' },
+    /** 筛选无匹配项时显示的文字 */
+    filterEmptyText: { type: String, default: '' }
 };
 
 export type SelectProps = ExtractPropTypes<typeof SelectProps>;
