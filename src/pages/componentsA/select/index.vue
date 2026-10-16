@@ -13,6 +13,7 @@
                             @click="show = true"
                             :default-value="defaultValue"
                             :mode="mode"
+                            :filterable="filterable"
                             v-model="show"
                             :list="list"
                             @confirm="confirm"
@@ -31,6 +32,14 @@
                         <view class="u-item-title">模式</view>
                         <u-subsection :list="['单列', '多列独立', '多列联动']" @change="modeChange"></u-subsection>
                     </view>
+                    <view class="u-config-item">
+                        <view class="u-item-title">筛选</view>
+                        <u-subsection
+                            :current="filterable ? 0 : 1"
+                            :list="['开启', '关闭']"
+                            @change="filterChange"
+                        ></u-subsection>
+                    </view>
                 </view>
             </view>
         </template>
@@ -46,6 +55,7 @@ const show = ref(false);
 const result = ref('尚未选择');
 const defaultValue = ref([3]);
 const mode = ref<SelectMode>('single-column');
+const filterable = ref(false);
 const list = ref([]);
 const list1 = [
     {
@@ -200,6 +210,11 @@ function modeChange(index: number) {
     let type: SelectMode[] = ['single-column', 'mutil-column', 'mutil-column-auto'];
     mode.value = type[index];
     list.value = index == 0 ? list1 : index == 1 ? list2 : list3;
+    show.value = true;
+}
+
+function filterChange(index: number) {
+    filterable.value = !index;
     show.value = true;
 }
 

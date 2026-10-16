@@ -249,6 +249,48 @@
 
 <br>
 
+### 筛选选项
+
+设置`filterable`为`true`后，弹框顶部会显示一个筛选框，输入关键字即可对选项进行实时筛选，筛选时忽略大小写：
+
+1. 单列模式：直接筛选该列数据。
+2. 多列独立模式：每一列各自筛选出命中的选项。
+3. 多列联动模式：父级自身命中则保留其整棵子树，否则仅保留子级命中的分支(子级的子级同理)。
+
+**注意：** 每次筛选后，各列的选中项会重置为筛选结果的第一项；筛选无匹配数据时，会显示`filter-empty-text`配置的文字(默认为"暂无匹配的数据")。
+
+```html
+<template>
+	<u-select v-model="show" mode="single-column" filterable :list="list" @confirm="confirm"></u-select>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				show: true,
+				list: [
+					{
+						value: '1',
+						label: '江'
+					},
+					{
+						value: '2',
+						label: '湖'
+					}
+				],
+			}
+		},
+		methods: {
+			confirm(e) {
+				console.log(e);
+			}
+		}
+	}
+</script>
+```
+
+
 ### 回调参数
 
 **注意：** 如果您觉得回调的`value`和`label`属性还无法满足您的需求，您可以在传递给`list`的参数中多带一个`extra`属性，如果有此属性，
@@ -314,6 +356,9 @@ res = [
 | title | 顶部中间的标题 | String | - | - |
 | confirm-text  | 确认按钮的文字 | String | 确认 | - |
 | cancel-text  | 取消按钮的文字 | String | 取消 | - |
+| filterable | 是否开启筛选功能，开启后弹框顶部显示筛选框，输入关键字可筛选选项 | Boolean | false | true |
+| filter-placeholder | 筛选框的占位文字 | String | 请输入关键字 | - |
+| filter-empty-text | 筛选无匹配项时显示的文字 | String | 暂无匹配的数据 | - |
 
 
 ### Events
