@@ -2,6 +2,16 @@
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "git.autofetch": true,
+    "git.repositoryScanMaxDepth": 3,
+    "git.scanRepositories": [".agents", "uView-Pro-Doc"],
+    "search.useIgnoreFiles": false,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/unpackage": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/*.zip": true
+    },
     "emmet.includeLanguages": {
         "vue-html": "html",
         "vue": "html"
