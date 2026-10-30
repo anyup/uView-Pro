@@ -63,7 +63,8 @@
         "npmurl": "https://www.npmjs.com/package/uview-pro",
         "darkmode": "√",
         "i18n": "√",
-        "widescreen": "√"
+        "widescreen": "√",
+        "vapor": "x"
     },
     "uni_modules": {
         "dependencies": [],

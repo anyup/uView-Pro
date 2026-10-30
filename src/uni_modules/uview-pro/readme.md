@@ -25,7 +25,13 @@
 
 ### 快速启动模板：[https://starter.uviewpro.cn](https://starter.uviewpro.cn)
 
-### 支持uni-app x的组件库已上线：[插件市场](https://ext.dcloud.net.cn/plugin?name=uview-pro-x)
+## 🎉喜讯
+
+支持 uni-app x 的 uView Pro X 组件库已正式上线，全面支持蒸汽模式（Vapor），详细查看：
+
+- 插件市场：[https://ext.dcloud.net.cn/plugin?name=uview-pro-x](https://ext.dcloud.net.cn/plugin?name=uview-pro-x)
+
+- 官方文档：[https://x.uviewpro.cn](https://x.uviewpro.cn)
 
 ## 特性
 
@@ -109,7 +115,7 @@ pnpm add uview-pro
 
 通过 HBuilderX 插件市场或手动下载，将 uView Pro 放入 `uni_modules` 目录。
 
-[插件市场：https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
+[插件市场：https://ext.dcloud.net.cn/plugin?name=uview-pro](https://ext.dcloud.net.cn/plugin?name=uview-pro)
 
 ### 2. 引入 uView Pro 主库
 

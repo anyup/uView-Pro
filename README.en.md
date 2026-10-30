@@ -140,7 +140,7 @@ pnpm add uview-pro
 
 Download from HBuilderX plugin market or manually, and place uView Pro in the `uni_modules` directory.
 
-[Plugin Market: https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
+[Plugin Market: https://ext.dcloud.net.cn/plugin?name=uview-pro](https://ext.dcloud.net.cn/plugin?name=uview-pro)
 
 ### 2. Import uView Pro main library
 

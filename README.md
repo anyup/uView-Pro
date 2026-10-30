@@ -27,7 +27,13 @@
 
 </div>
 
-> 📣 **uni-app x 版 uView Pro 重构意见征集中**：组件优先级、API 设计、破坏性变更策略等你的建议会影响新版本方向 → **[前往 Discussions 置顶帖参与讨论](https://github.com/anyup/uView-Pro/discussions/182)**
+## 🎉喜讯
+
+支持 uni-app x 的 uView Pro X 组件库已正式上线，全面支持蒸汽模式（Vapor），详细查看：
+
+- 插件市场：[https://ext.dcloud.net.cn/plugin?name=uview-pro-x](https://ext.dcloud.net.cn/plugin?name=uview-pro-x)
+
+- 官方文档：[https://x.uviewpro.cn](https://x.uviewpro.cn)
 
 ## 说明
 
@@ -142,7 +148,7 @@ pnpm add uview-pro
 
 通过 HBuilderX 插件市场或手动下载，将 uView Pro 放入 `uni_modules` 目录。
 
-[插件市场：https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
+[插件市场：https://ext.dcloud.net.cn/plugin?name=uview-pro](https://ext.dcloud.net.cn/plugin?name=uview-pro)
 
 ### 2. 引入 uView Pro 主库
 

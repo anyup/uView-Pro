@@ -51,7 +51,7 @@ pnpm add uview-pro
 <br>
 <div @click="downloadPost(2)" class="download-link">
 	<!-- 下载地址：<a href="https://download.uviewui.com/uView_1.3.6.zip">uView_1.3.6.zip</a> -->
-	下载地址：<a target="_blank" href="https://ext.dcloud.net.cn/plugin?id=24633">https://ext.dcloud.net.cn/plugin?id=24633</a>
+	下载地址：<a target="_blank" href="https://ext.dcloud.net.cn/plugin?name=uview-pro">https://ext.dcloud.net.cn/plugin?name=uview-pro</a>
 </div>
 <br>
 <br>
@@ -80,7 +80,7 @@ pnpm run dev:h5
 <br>
 <div @click="downloadPost(3)" class="download-link">
 	<!-- 下载地址：<a href="https://download.uviewui.com/uView_1.3.6_demo.zip">uView_1.3.6_demo.zip</a> -->
-	uni-app插件市场地址：<a target="_blank" href="https://ext.dcloud.net.cn/plugin?id=24633">https://ext.dcloud.net.cn/plugin?id=24633</a>
+	uni-app插件市场地址：<a target="_blank" href="https://ext.dcloud.net.cn/plugin?name=uview-pro">https://ext.dcloud.net.cn/plugin?name=uview-pro</a>
 </div>
 <br>
 <br>

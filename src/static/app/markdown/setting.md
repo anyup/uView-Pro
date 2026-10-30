@@ -18,7 +18,7 @@ pnpm add uview-pro
 
 通过 HBuilderX 插件市场或手动下载，将 uView Pro 放入 `uni_modules` 目录。
 
-[插件市场：https://ext.dcloud.net.cn/plugin?id=24633](https://ext.dcloud.net.cn/plugin?id=24633)
+[插件市场：https://ext.dcloud.net.cn/plugin?name=uview-pro](https://ext.dcloud.net.cn/plugin?name=uview-pro)
 
 ### 2. 引入 uView Pro 主库
 
