@@ -1,3 +1,13 @@
+## 0.6.22（2026-10-30）
+
+### ✨ Features | 新功能
+
+- **u-input:** input 组件新增后置插槽支持图标与按钮 ([120d52d](https://github.com/anyup/uView-Pro/commit/120d52d46a496c7cf46a264dd7f90e42ba282c5e))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.21（2026-10-10）
 
 ### ✨ Features | 新功能
