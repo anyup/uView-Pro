@@ -105,6 +105,22 @@
                     </u-input>
                 </view>
             </view>
+            <view class="u-demo-wrap">
+                <view class="u-demo-title">后置图标与按钮</view>
+                <view class="u-demo-area">
+                    <u-input v-model="address" placeholder="请输入收货地址" :border="true">
+                        <template #suffix>
+                            <u-icon name="map-fill" :size="36" color="var(--u-light-color)"></u-icon>
+                        </template>
+                    </u-input>
+                    <u-gap></u-gap>
+                    <u-input v-model="code" placeholder="请输入验证码" :border="true">
+                        <template #suffix>
+                            <u-button size="mini" type="primary" :plain="true" @click="getCode">获取验证码</u-button>
+                        </template>
+                    </u-input>
+                </view>
+            </view>
             <view class="u-config-wrap">
                 <view class="u-config-title u-border-bottom">参数配置</view>
                 <view class="u-config-item">
@@ -185,6 +201,10 @@ const confirmHoldValue = ref('');
 // 前置图标示例
 const amount = ref('');
 
+// 后置图标与按钮示例
+const address = ref('');
+const code = ref('');
+
 // Select 相关
 const selectValue = ref('');
 const showSelect = ref(false);
@@ -192,6 +212,13 @@ const cityList = ref([{ text: '北京' }, { text: '上海' }, { text: '广州' }
 
 function onSelect(index: number) {
     selectValue.value = cityList.value[index].text;
+}
+
+function getCode() {
+    uni.showToast({
+        title: '验证码已发送',
+        icon: 'none'
+    });
 }
 
 // 禁用与只读示例

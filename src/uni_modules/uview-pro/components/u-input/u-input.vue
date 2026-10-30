@@ -105,6 +105,10 @@
                 <u-icon name="arrow-down-fill" :size="selectIconSize" color="var(--u-light-color)"></u-icon>
             </view>
         </view>
+        <!-- 后置插槽，在录入区之后渲染内容，如单位、图标或按钮 -->
+        <view v-if="$slots.suffix" class="u-input__suffix" @tap.stop>
+            <slot name="suffix" />
+        </view>
         <text
             class="u-input__count"
             :style="{
@@ -375,6 +379,15 @@ defineExpose({
     &__prefix {
         flex-shrink: 0;
         margin-right: 10rpx;
+        @include vue-flex;
+        align-items: center;
+    }
+
+    &__suffix {
+        flex-shrink: 0;
+        position: relative;
+        z-index: 3;
+        margin-left: 10rpx;
         @include vue-flex;
         align-items: center;
     }

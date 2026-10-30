@@ -19,13 +19,13 @@
 
 ## 说明
 
-`uView UI`，是 [uni-app](https://uniapp.dcloud.io/) 生态优秀的 UI 框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。
+`uView Pro`，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 版本，使用 TypeScript 完全重构，已覆盖 Android、iOS、鸿蒙以及微信/头条/支付宝等主流小程序平台，真正实现“一套代码，多端运行”，支持多主题系统、暗黑模式与国际化（i18n）。
 
-`uView Pro`，是全面支持 Vue3.0、TypeScript 的 uni-app 生态框架，uView Pro 的基线版本是基于 uView 1.8.8 修改，使用 TypeScript 完全重构，已覆盖 Android、iOS、鸿蒙以及微信/头条/支付宝等主流小程序平台，真正实现“一套代码，多端运行”，支持多主题系统、暗黑模式与国际化（i18n）。
+### 官方文档：[https://uviewpro.cn](https://uviewpro.cn)
 
-## [官方文档：https://uviewpro.cn](https://uviewpro.cn)
+### 快速启动模板：[https://starter.uviewpro.cn](https://starter.uviewpro.cn)
 
-## [快速启动模板：https://starter.uviewpro.cn](https://starter.uviewpro.cn)
+### 支持uni-app x的组件库已上线：[插件市场](https://ext.dcloud.net.cn/plugin?name=uview-pro-x)
 
 ## 特性
 
@@ -35,21 +35,6 @@
 - 众多的常用页面和布局，让您专注逻辑，事半功倍
 - 详尽的文档支持，现代化的演示效果
 - 按需引入，精简打包体积
-
-## 鸿蒙预览
-
-🎉🎉 uView Pro 鸿蒙端应用已正式上线华为鸿蒙应用市场，为您提供完整的业务场景演示平台，包含组件库、模板示例、场景案例等，支持一键复制下载，帮助开发者快速上手并体验组件的实际应用价值！
-
-> 系统要求：仅支持 HarmonyOS 5.0 及以上版本设备
-
-<table>
-    <tr align="center">
-        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_harmony.png" width="180" height="180" ></td>
-    </tr>
-    <tr>
-        <td align="center"><strong>鸿蒙应用</strong><br>（浏览器扫码）</td>
-    </tr>
-</table>
 
 ## 手机预览
 
@@ -61,12 +46,14 @@
         <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_alipay.png" width="150" height="150" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_h5.png" width="150" height="150" ></td>
         <td><img src="https://ik.imagekit.io/anyup/images/social/qr_uview_pro_android.png" width="150" height="150" ></td>
+        <td><img src="https://ik.imagekit.io/anyup/images/social/qr_harmony.png" width="150" height="150" ></td>
     </tr>
     <tr>
         <td align="center"><strong>微信小程序</strong><br>（微信扫码）</td>
         <td align="center"><strong>支付宝小程序</strong><br>（支付宝扫码）</td>
         <td align="center"><strong>H5</strong><br>（浏览器扫码）</td>
-        <td align="center"><strong>Android</strong><br>（浏览器扫码）</td>
+        <td align="center"><strong>安卓</strong><br>（浏览器扫码）</td>
+        <td align="center"><strong>鸿蒙</strong><br>（鸿蒙5.0+扫码）</td>
     </tr>
 </table>
 
