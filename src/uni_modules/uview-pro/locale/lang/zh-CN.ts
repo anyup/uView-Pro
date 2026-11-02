@@ -38,7 +38,9 @@ export default {
     },
     uSelect: {
         cancelText: '取消',
-        confirmText: '确认'
+        confirmText: '确认',
+        filterPlaceholder: '请输入关键字',
+        filterEmptyText: '暂无匹配的数据'
     },
     uSearch: {
         placeholder: '请输入关键字',

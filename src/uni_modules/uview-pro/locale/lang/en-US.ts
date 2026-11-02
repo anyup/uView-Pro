@@ -38,7 +38,9 @@ export default {
     },
     uSelect: {
         cancelText: 'Cancel',
-        confirmText: 'Confirm'
+        confirmText: 'Confirm',
+        filterPlaceholder: 'Please enter keywords',
+        filterEmptyText: 'No matching data'
     },
     uSearch: {
         placeholder: 'Please enter keywords',

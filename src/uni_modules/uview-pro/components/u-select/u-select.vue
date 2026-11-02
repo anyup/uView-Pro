@@ -42,9 +42,32 @@
                         {{ getConfirmText }}
                     </view>
                 </view>
+                <view v-if="filterable" class="u-select__filter">
+                    <view class="u-select__filter__wrap">
+                        <u-icon name="search" :size="16" color="var(--u-tips-color)"></u-icon>
+                        <input
+                            class="u-select__filter__input"
+                            type="text"
+                            confirm-type="search"
+                            :value="filterValue"
+                            :placeholder="getFilterPlaceholder"
+                            :placeholder-style="'color: var(--u-tips-color)'"
+                            @input="filterInput"
+                        />
+                        <view
+                            v-if="filterValue"
+                            class="u-select__filter__clear"
+                            hover-class="u-hover-class"
+                            :hover-stay-time="150"
+                            @tap="clearFilter"
+                        >
+                            <u-icon name="close-circle-fill" :size="16" color="var(--u-tips-color)"></u-icon>
+                        </view>
+                    </view>
+                </view>
                 <view class="u-select__body">
                     <picker-view
-                        v-if="modelValue && readyToRender"
+                        v-if="modelValue && readyToRender && !showFilterEmpty"
                         :value="defaultSelector"
                         class="u-select__body__picker-view"
                         mask-class="u-picker-view-mask"
@@ -63,6 +86,7 @@
                             </view>
                         </picker-view-column>
                     </picker-view>
+                    <view v-if="showFilterEmpty" class="u-select__empty">{{ getFilterEmptyText }}</view>
                 </view>
             </view>
         </u-popup>
@@ -88,6 +112,7 @@ import { SelectProps } from './types';
 import type { SelectListItem } from '../../types/global';
 import { $u, useLocale } from '../..';
 import uPopup from '../u-popup/u-popup.vue';
+import uIcon from '../u-icon/u-icon.vue';
 
 /**
  * select 列选择器
@@ -107,6 +132,9 @@ import uPopup from '../u-popup/u-popup.vue';
  * @property {String} value-name 自定义list数据的value属性名 1.3.6
  * @property {String} label-name 自定义list数据的label属性名 1.3.6
  * @property {String} child-name 自定义list数据的children属性名，只对多列联动模式有效 1.3.7
+ * @property {Boolean} filterable 是否开启筛选功能，开启后弹框顶部显示筛选框，输入关键字可筛选选项(默认false)
+ * @property {String} filter-placeholder 筛选框的占位文字
+ * @property {String} filter-empty-text 筛选无匹配项时显示的文字
  * @event {Function} confirm 点击确定按钮，返回当前选择的值
  * @example <u-select v-model="show" :list="list"></u-select>
  */
@@ -134,6 +162,8 @@ const lastSelectIndex = ref<number[]>([]);
 const columnNum = ref(0);
 // 列是否还在滑动中，微信小程序如果在滑动中就点确定，结果可能不准确
 const moving = ref(false);
+// 筛选关键字
+const filterValue = ref('');
 // 如果用户有传递z-index值，优先使用
 const uZIndex = computed(() => (props.zIndex ? props.zIndex : $u.zIndex.popup));
 
@@ -145,6 +175,21 @@ const popupValue = computed({
 // 国际化计算属性
 const getCancelText = computed(() => props.cancelText || t('uSelect.cancelText'));
 const getConfirmText = computed(() => props.confirmText || t('uSelect.confirmText'));
+const getFilterPlaceholder = computed(() => props.filterPlaceholder || t('uSelect.filterPlaceholder'));
+const getFilterEmptyText = computed(() => props.filterEmptyText || t('uSelect.filterEmptyText'));
+
+// 实际用于渲染的数据源：开启筛选且有关键字时，使用筛选后的数据
+const currentList = computed(() => {
+    const keyword = filterValue.value.trim();
+    if (!props.filterable || !keyword) return props.list;
+    return filterList(props.list, keyword);
+});
+
+// 筛选结果为空时，使用空状态替代 picker-view
+const showFilterEmpty = computed(() => {
+    if (!props.filterable || !filterValue.value.trim()) return false;
+    return columnData.value.every(column => !Array.isArray(column) || column.length === 0);
+});
 
 watch(
     () => props.modelValue,
@@ -162,6 +207,8 @@ watch(
         } else {
             // 关闭弹窗时复位，下次打开时 picker-view 会重新创建，确保数据刷新
             readyToRender.value = false;
+            // 关闭时清空筛选关键字（不重新计算列数据，下次打开时会重新初始化）
+            filterValue.value = '';
         }
     },
     { immediate: true }
@@ -208,14 +255,15 @@ function setDefaultSelector() {
 }
 // 计算列数
 function setColumnNum() {
+    const list = currentList.value;
     // 单列的列数为1
     if (props.mode == 'single-column') columnNum.value = 1;
     // 多列时，this.list数组长度就是列数
-    else if (props.mode == 'mutil-column') columnNum.value = props.list.length;
+    else if (props.mode == 'mutil-column') columnNum.value = list.length;
     // 多列联动时，通过历遍this.list的第一个元素，得出有多少列
     else if (props.mode == 'mutil-column-auto') {
         let num = 1;
-        let column: any = props.list;
+        let column: any = list;
         // 只要有元素并且第一个元素有children属性，继续遍历
         while (Array.isArray(column) && column[0] && typeof column[0] === 'object' && props.childName in column[0]) {
             column = column[0][props.childName];
@@ -227,16 +275,17 @@ function setColumnNum() {
 
 // 获取需要展示在picker中的列数据
 function setColumnData() {
+    const list = currentList.value;
     let data: SelectListItem[][] = [];
     selectValue.value = [];
     if (props.mode == 'mutil-column-auto') {
         // 获得所有数据中的第一个元素
-        let column: any = props.list[defaultSelector.value.length ? defaultSelector.value[0] : 0];
+        let column: any = list[defaultSelector.value.length ? defaultSelector.value[0] : 0];
         // 通过循环所有的列数，再根据设定列的数组，得出当前需要渲染的整个列数组
         for (let i = 0; i < columnNum.value; i++) {
             // 第一列默认为整个list数组
             if (i == 0) {
-                data[i] = is2DList(props.list) ? props.list[i] || [] : (props.list as SelectListItem[]);
+                data[i] = is2DList(list) ? list[i] || [] : (list as SelectListItem[]);
                 column = column && typeof column === 'object' ? column[props.childName] : [];
             } else {
                 // 大于第一列时，判断是否有默认选中的，如果没有就用该列的第一项
@@ -250,9 +299,9 @@ function setColumnData() {
             }
         }
     } else if (props.mode == 'single-column') {
-        data[0] = Array.isArray(props.list) && !is2DList(props.list) ? (props.list as SelectListItem[]) : [];
+        data[0] = Array.isArray(list) && !is2DList(list) ? (list as SelectListItem[]) : [];
     } else if (props.mode == 'mutil-column') {
-        data = is2DList(props.list) ? props.list : [props.list as SelectListItem[]];
+        data = is2DList(list) ? list : [list as SelectListItem[]];
     }
     columnData.value = data;
 }
@@ -270,6 +319,74 @@ function setSelectValue() {
         if (tmp && tmp.extra !== undefined) data.extra = tmp.extra;
         selectValue.value.push(data);
     }
+}
+
+// 判断某一项是否命中筛选关键字（忽略大小写）
+function isMatchKeyword(item: any, keyword: string) {
+    if (!item || typeof item !== 'object') return false;
+    const label = item[props.labelName];
+    return String(label ?? '')
+        .toLowerCase()
+        .includes(keyword);
+}
+
+// 递归筛选多列联动数据：自身命中则保留整棵子树，否则只保留命中的子节点
+function filterTreeData(list: any, keyword: string): any[] {
+    const result: any[] = [];
+    (Array.isArray(list) ? list : []).forEach((item: any) => {
+        if (!item || typeof item !== 'object') return;
+        const children = item[props.childName];
+        if (isMatchKeyword(item, keyword)) {
+            result.push(item);
+            return;
+        }
+        const filteredChildren = filterTreeData(children, keyword);
+        // 子节点有命中，则保留当前节点及筛选后的子节点
+        if (filteredChildren.length) result.push({ ...item, [props.childName]: filteredChildren });
+    });
+    return result;
+}
+
+// 根据模式筛选数据，返回筛选后的 list 结构（与传入结构保持一致）
+function filterList(list: any, keyword: string) {
+    const kw = keyword.toLowerCase();
+    if (props.mode == 'single-column') {
+        return (Array.isArray(list) ? list : []).filter((item: any) => isMatchKeyword(item, kw));
+    }
+    if (props.mode == 'mutil-column') {
+        if (!is2DList(list)) {
+            return [(Array.isArray(list) ? list : []).filter((item: any) => isMatchKeyword(item, kw))];
+        }
+        return list.map((column: any[]) =>
+            Array.isArray(column) ? column.filter((item: any) => isMatchKeyword(item, kw)) : []
+        );
+    }
+    // mutil-column-auto
+    return filterTreeData(list, kw);
+}
+
+// 筛选后列数据发生变化，重置每列选中项为第一项，并刷新渲染数据与选中值
+function refreshColumns() {
+    setColumnNum();
+    defaultSelector.value = Array(columnNum.value).fill(0);
+    lastSelectIndex.value = [...defaultSelector.value];
+    setColumnData();
+    setSelectValue();
+}
+
+// 输入筛选关键字
+function filterInput(e: any) {
+    const value = e && e.detail ? e.detail.value : '';
+    if (value === filterValue.value) return;
+    filterValue.value = value;
+    refreshColumns();
+}
+
+// 清空筛选关键字
+function clearFilter() {
+    if (!filterValue.value) return;
+    filterValue.value = '';
+    refreshColumns();
 }
 
 // 列选项
@@ -349,7 +466,8 @@ function getResult(event: 'update:modelValue' | 'confirm' | 'cancel' | 'click' |
 
     if (event) emit(event, selectValue.value);
     // 如果是用户确认，则保存已确认的索引，作为下次打开时的默认值
-    if (event === 'confirm') {
+    // 注意：存在筛选关键字时，下标是相对筛选结果的，与完整列表不对应，此时不保存，避免下次打开选中错误的选项
+    if (event === 'confirm' && !filterValue.value.trim()) {
         // deep copy
         savedSelector.value = defaultSelector.value ? defaultSelector.value.slice() : null;
     }
@@ -423,6 +541,36 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
         left: 0;
     }
 
+    &__filter {
+        padding: 16rpx 30rpx;
+        background-color: var(--u-bg-white);
+
+        &__wrap {
+            @include vue-flex;
+            align-items: center;
+            height: 68rpx;
+            padding: 0 22rpx;
+            background-color: var(--u-bg-gray-light);
+            border-radius: 100rpx;
+        }
+
+        &__input {
+            flex: 1;
+            min-width: 0;
+            height: 100%;
+            margin-left: 12rpx;
+            font-size: 28rpx;
+            color: $u-main-color;
+        }
+
+        &__clear {
+            @include vue-flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 12rpx;
+        }
+    }
+
     &__body {
         width: 100%;
         height: 500rpx;
@@ -442,6 +590,16 @@ function is2DList(list: SelectListItem[] | SelectListItem[][]): list is SelectLi
                 padding: 0 8rpx;
             }
         }
+    }
+
+    &__empty {
+        @include vue-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-size: 28rpx;
+        color: $u-tips-color;
     }
 }
 </style>
