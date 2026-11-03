@@ -24,6 +24,9 @@
         "./types": "./types/index.d.ts",
         "./types/*": "./types/*.d.ts",
         "./components/*": "./components/*",
+        "./libs/function/*.js": "./libs/function/*.ts",
+        "./libs/function/*.ts": "./libs/function/*.ts",
+        "./libs/function/*": "./libs/function/*.ts",
         "./libs/*": "./libs/*",
         "./*": "./*"
     },
