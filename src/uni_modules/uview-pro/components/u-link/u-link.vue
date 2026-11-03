@@ -46,10 +46,17 @@ import { computed } from 'vue';
  * @property {String} href 跳转的链接，要带上http(s)
  * @property {String} line-color 下划线颜色，默认同color参数颜色
  * @property {String} mp-tips 各个小程序平台把链接复制到粘贴板后的提示语（默认“链接已复制，请在浏览器打开”）
+ * @event {String} click default-click为false时点击触发，回传href
+ * @event {Object} copy-success 小程序平台链接复制成功（如用户关闭剪贴板权限则不会触发），回传setClipboardData的success结果
+ * @event {Object} copy-fail 小程序平台链接复制失败（如用户关闭剪贴板权限），回传setClipboardData的fail错误信息
  * @example <u-link href="https://uviewpro.cn">蜀道难，难于上青天</u-link>
  */
 const props = defineProps(LinkProps);
-const emit = defineEmits(['click']);
+const emit = defineEmits<{
+    (e: 'click', href: string): void;
+    (e: 'copy-success', res: { errMsg?: string }): void;
+    (e: 'copy-fail', err: { errMsg?: string }): void;
+}>();
 
 const { t } = useLocale();
 
@@ -79,11 +86,16 @@ function openLink() {
     if (typeof uni !== 'undefined' && uni.setClipboardData) {
         uni.setClipboardData({
             data: props.href,
-            success: () => {
+            success: res => {
                 uni.hideToast();
                 if (typeof $u !== 'undefined' && $u.toast) {
                     $u.toast(getMpTips.value);
                 }
+                emit('copy-success', res);
+            },
+            fail: err => {
+                // 复制失败（如微信小程序中用户关闭了剪贴板权限）时不再弹出“已复制”提示，交由外部处理
+                emit('copy-fail', err);
             }
         });
     }
