@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.23 - 2026-11-04
+
+### ✨ Features | 新功能
+
+- **u-link:** 新增小程序平台复制链接成功和失败事件的发出（#187） ([37355b6](https://github.com/anyup/uView-Pro/commit/37355b629d49b9145eabc284974efef97655cc44))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.22 - 2026-10-30
 
 ### ✨ Features | 新功能
