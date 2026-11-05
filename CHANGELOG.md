@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.24 - 2026-11-06
+
+### ✨ Features | 新功能
+
+- **theme:** 重构主题系统配置解析，新增基线主题名与配置归一化能力 ([f5b9c9a](https://github.com/anyup/uView-Pro/commit/f5b9c9a935c016d4313dbeb0ce86b89be21d3657))
+- **theme:** 新增自定义CSS变量支持及主题演示页面 ([121c27b](https://github.com/anyup/uView-Pro/commit/121c27bd004d48b5aa28dd73d9b0b3ad190f54c3))
+
+### 👥 Contributors
+
+<a href="https://github.com/anyup"><img src="https://github.com/anyup.png?size=40" width="40" height="40" alt="anyup" title="anyup"/></a> 
+
 ## 0.6.23 - 2026-11-04
 
 ### ✨ Features | 新功能
