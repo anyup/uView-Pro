@@ -8,6 +8,7 @@ const {
     currentTheme, // 当前主题（响应式）
     themes, // 所有主题列表（响应式）
     darkMode, // 当前暗黑模式设置（响应式）
+    cssVars, // CSS 变量映射（含主题里 css / darkCss 声明的自定义变量）
     setTheme, // 切换主题
     getDarkMode, // 获取暗黑模式设置
     setDarkMode, // 设置暗黑模式
@@ -20,6 +21,38 @@ const {
 // 本地状态
 const showThemePanel = ref(false);
 const showDarkModePanel = ref(false);
+
+// uview-pro.theme.ts 的 css / darkCss 中声明的自定义变量（JS 侧读取 + 可视化预览）
+const customVarItems = [
+    { key: '--u-brand-accent', label: '品牌强调色', type: 'color' },
+    { key: '--u-brand-accent-rgb', label: '强调色 RGB 通道', type: 'rgb' },
+    { key: '--u-brand-gradient', label: '品牌渐变', type: 'gradient' },
+    { key: '--u-app-card-radius', label: '卡片圆角', type: 'radius' },
+    { key: '--app-banner-height', label: 'Banner 高度', type: 'height' }
+];
+
+// 演示同一组 rgb 变量在不同透明度下的效果
+const alphaSteps = [0.15, 0.35, 0.6, 1];
+
+// 使用示例代码（逐行渲染，避免长文本被随意折行）
+const sampleCodeLines = [
+    '// 初始化主题',
+    'const { initTheme, setTheme, setDarkMode, isInDarkMode } = useTheme()',
+    "initTheme(themes, 'green')",
+    '',
+    '// 切换主题',
+    "setTheme('green')",
+    '',
+    '// 管理暗黑模式',
+    "setDarkMode('dark') // 强制暗黑",
+    "setDarkMode('light') // 强制亮色",
+    "setDarkMode('auto') // 跟随系统",
+    '',
+    '// 检查状态',
+    'if (isInDarkMode()) {',
+    "    console.log('当前处于暗黑模式')",
+    '}'
+];
 
 // 计算属性
 const darkModeLabel = computed(() => {
@@ -175,12 +208,11 @@ const handleDarkModeChange = (mode: DarkMode) => {
             <view class="example-section">
                 <text class="section-title">使用示例代码</text>
                 <view class="code-block">
-                    <text class="code-text">
-                        // 初始化主题 \nconst { initTheme, setTheme, setDarkMode, isInDarkMode, useTheme } = useTheme()
-                        \ninitTheme(themes, 'purple') \n// 切换主题 \nsetTheme('green') \n// 管理暗黑模式
-                        \nsetDarkMode('dark') // 强制暗黑 \nsetDarkMode('light') // 强制亮色 \nsetDarkMode('auto') //
-                        跟随系统 \n// 检查状态 \nif (isInDarkMode()) { \nconsole.log('当前处于暗黑模式') \n}
-                    </text>
+                    <view class="code-text">
+                        <text v-for="(line, index) in sampleCodeLines" :key="index" class="code-line">{{
+                            line || ' '
+                        }}</text>
+                    </view>
                 </view>
             </view>
 
@@ -211,6 +243,91 @@ const handleDarkModeChange = (mode: DarkMode) => {
                             {{ $u.getColor('warning') }}
                         </view>
                         <text>warning</text>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 自定义全局变量演示（css / darkCss） -->
+            <view class="css-var-demo">
+                <text class="section-title">自定义全局变量</text>
+                <text class="section-desc">
+                    在 uview-pro.theme.ts 的 css / darkCss 中声明，切换主题或暗黑模式时自动更新； 暗黑下未在 darkCss
+                    声明的变量会沿用 css 的值（此例只覆盖了圆角与高度）。官方蓝默认项的 color 留空， 色板与
+                    --u-background 等基线变量自动继承
+                </text>
+
+                <!-- 把 cssVars 绑定到子树，小程序 / App 端也能取到自定义变量 -->
+                <view class="css-var-scope" :style="cssVars">
+                    <!-- 渐变 + 圆角 -->
+                    <view class="css-var-card">
+                        <text class="css-var-card__title">品牌渐变</text>
+                        <text class="css-var-card__desc">
+                            background: var(--u-brand-gradient) · border-radius: var(--u-app-card-radius)
+                        </text>
+                    </view>
+
+                    <!-- 同一个 hex 变量 + -rgb 变量拼透明度 -->
+                    <view class="css-var-alpha">
+                        <view
+                            v-for="alpha in alphaSteps"
+                            :key="alpha"
+                            class="css-var-alpha__item"
+                            :style="{
+                                backgroundColor: `rgba(${cssVars['--u-brand-accent-rgb']}, ${alpha})`
+                            }"
+                        ></view>
+                    </view>
+                    <text class="css-var-alpha__hint"> rgba(var(--u-brand-accent-rgb), 0.15 / 0.35 / 0.6 / 1) </text>
+
+                    <!-- 高度 -->
+                    <view class="css-var-banner">height: var(--app-banner-height)</view>
+                </view>
+
+                <!-- JS 读取：useTheme().cssVars，每一行都带可视化预览 -->
+                <view class="css-var-list">
+                    <view class="css-var-row" v-for="item in customVarItems" :key="item.key">
+                        <view class="css-var-preview">
+                            <view
+                                v-if="item.type === 'color'"
+                                class="css-var-preview__fill"
+                                :style="{ backgroundColor: cssVars[item.key] }"
+                            ></view>
+                            <view v-else-if="item.type === 'rgb'" class="css-var-preview__alpha">
+                                <view
+                                    v-for="alpha in alphaSteps"
+                                    :key="alpha"
+                                    class="css-var-preview__alpha-item"
+                                    :style="{
+                                        backgroundColor: `rgba(${cssVars[item.key]}, ${alpha})`
+                                    }"
+                                ></view>
+                            </view>
+                            <view
+                                v-else-if="item.type === 'gradient'"
+                                class="css-var-preview__fill"
+                                :style="{ background: cssVars[item.key] }"
+                            ></view>
+                            <view
+                                v-else-if="item.type === 'radius'"
+                                class="css-var-preview__radius"
+                                :style="{
+                                    borderRadius: cssVars[item.key],
+                                    backgroundColor: cssVars['--u-brand-accent']
+                                }"
+                            ></view>
+                            <view
+                                v-else
+                                class="css-var-preview__height"
+                                :style="{ height: `calc(${cssVars[item.key]} / 4)` }"
+                            ></view>
+                        </view>
+                        <view class="css-var-meta">
+                            <view class="css-var-key-row">
+                                <text class="css-var-key">{{ item.key }}</text>
+                                <text class="css-var-label">{{ item.label }}</text>
+                            </view>
+                            <text class="css-var-value">{{ cssVars[item.key] || '未定义' }}</text>
+                        </view>
                     </view>
                 </view>
             </view>
@@ -445,8 +562,12 @@ const handleDarkModeChange = (mode: DarkMode) => {
     font-size: 12px;
     color: $u-main-color;
     line-height: 1.6;
+}
+
+.code-line {
+    display: block;
     white-space: pre-wrap;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .color-demo {
@@ -479,5 +600,167 @@ const handleDarkModeChange = (mode: DarkMode) => {
 .color-item text {
     font-size: 12px;
     color: $u-tips-color;
+}
+
+.css-var-demo {
+    margin-bottom: 30px;
+}
+
+.section-desc {
+    display: block;
+    font-size: 12px;
+    color: $u-tips-color;
+    margin-bottom: 12px;
+}
+
+.css-var-scope {
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(var(--u-border-color-rgb), 0.15);
+}
+
+.css-var-card {
+    padding: 16px;
+    border-radius: var(--u-app-card-radius, 8px);
+    background: var(--u-brand-gradient);
+    color: #ffffff;
+}
+
+.css-var-card__title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.css-var-card__desc {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+.css-var-alpha {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.css-var-alpha__item {
+    flex: 1;
+    height: 34px;
+    border-radius: 6px;
+    border: 1px solid rgba(var(--u-border-color-rgb), 0.4);
+}
+
+.css-var-alpha__hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    color: $u-tips-color;
+}
+
+.css-var-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--app-banner-height, 60px);
+    margin-top: 12px;
+    border: 1px dashed rgba(var(--u-brand-accent-rgb), 0.5);
+    border-radius: 6px;
+    font-size: 12px;
+    color: $u-content-color;
+}
+
+.css-var-list {
+    margin-top: 12px;
+    border: 1px solid rgba(var(--u-border-color-rgb), 0.6);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.css-var-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(var(--u-border-color-rgb), 0.4);
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.css-var-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 56px;
+    height: 34px;
+    margin-right: 12px;
+}
+
+.css-var-preview__fill {
+    width: 44px;
+    height: 26px;
+    border-radius: 6px;
+    border: 1px solid rgba(var(--u-border-color-rgb), 0.5);
+}
+
+.css-var-preview__alpha {
+    display: flex;
+    gap: 2px;
+}
+
+.css-var-preview__alpha-item {
+    box-sizing: border-box;
+    width: 10px;
+    height: 26px;
+    border-radius: 3px;
+    border: 1px solid rgba(var(--u-border-color-rgb), 0.35);
+}
+
+.css-var-preview__radius {
+    width: 44px;
+    height: 26px;
+}
+
+.css-var-preview__height {
+    width: 14px;
+    background: var(--u-brand-accent);
+    border-radius: 3px;
+}
+
+.css-var-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.css-var-key-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.css-var-key {
+    font-family: 'Courier New', monospace;
+    color: $u-main-color;
+}
+
+.css-var-label {
+    margin-left: 8px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: $u-tips-color;
+    background: rgba(var(--u-border-color-rgb), 0.25);
+}
+
+.css-var-value {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: $u-tips-color;
+    word-break: break-all;
 }
 </style>

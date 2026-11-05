@@ -1,49 +1,27 @@
 // 此自定义uView Pro主题生成于2025-11-29 13:18
 // 地址：https://uviewpro.cn/zh/guide/themeGenerate.html
 
+import { BASE_THEME_NAME } from '@/uni_modules/uview-pro';
+
 export default [
-    // {
-    //     "name": "uviewpro",
-    //     "label": "官方蓝",
-    //     "description": "",
-    //     "color": {
-    //         "primary": "#2979ff",
-    //         "primaryDark": "#2b85e4",
-    //         "primaryDisabled": "#a0cfff",
-    //         "primaryLight": "#ecf5ff",
-    //         "bgColor": "#f3f4f6",
-    //         "bgWhite": "#ffffff",
-    //         "bgGrayLight": "#f1f1f1",
-    //         "bgGrayDark": "#2f343c",
-    //         "bgBlack": "#000000",
-    //         "info": "#909399",
-    //         "infoDark": "#82848a",
-    //         "infoDisabled": "#c8c9cc",
-    //         "infoLight": "#f4f4f5",
-    //         "warning": "#ff9900",
-    //         "warningDark": "#f29100",
-    //         "warningDisabled": "#fcbd71",
-    //         "warningLight": "#fdf6ec",
-    //         "error": "#fa3534",
-    //         "errorDark": "#dd6161",
-    //         "errorDisabled": "#fab6b6",
-    //         "errorLight": "#fef0f0",
-    //         "success": "#19be6b",
-    //         "successDark": "#18b566",
-    //         "successDisabled": "#71d5a1",
-    //         "successLight": "#dbf1e1",
-    //         "mainColor": "#303133",
-    //         "contentColor": "#606266",
-    //         "tipsColor": "#909399",
-    //         "lightColor": "#c0c4cc",
-    //         "borderColor": "#dcdfe6",
-    //         "whiteColor": "#ffffff",
-    //         "blackColor": "#000000",
-    //         "dividerColor": "#ebeef5",
-    //         "maskColor": "rgba(0, 0, 0, 0.4)",
-    //         "shadowColor": "rgba(0, 0, 0, 0.1)"
-    //     }
-    // },
+    // 基线主题：显式声明后才会出现在切换列表中（不写则等于移除默认主题）
+    {
+        name: BASE_THEME_NAME,
+        label: '官方蓝',
+        description: '内置主题，color 留空即继承基线色板',
+        color: {},
+        css: {
+            '--app-banner-height': '96px',
+            '--u-app-card-radius': '16px',
+            '--u-brand-gradient': 'linear-gradient(135deg, #2979ff 0%, #5cadff 100%)',
+            '--u-brand-accent': '#2979ff'
+        },
+        darkCss: {
+            '--app-banner-height': '80px',
+            '--u-app-card-radius': '10px'
+        }
+    },
+
     // 主题 1: 紫色
     {
         name: 'purple',
@@ -69,6 +47,19 @@ export default [
             warningDisabled: '#fde68a',
             successDisabled: '#a7f3d0',
             infoDisabled: '#d1d5db'
+        },
+        // 自定义全局变量：统一写 -- 开头的标准 CSS 变量名，与色板一起被注入
+        // 页面用 var(--u-xxx) 或 useTheme().cssVars 读取
+        css: {
+            '--app-banner-height': '96px',
+            '--u-app-card-radius': '16px',
+            '--u-brand-gradient': 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
+            '--u-brand-accent': '#8b5cf6' // hex 值会额外生成 --u-brand-accent-rgb
+        },
+        // 暗黑模式下的覆盖值，未声明的键回退到 css
+        darkCss: {
+            '--app-banner-height': '80px',
+            '--u-app-card-radius': '10px'
         }
     },
 
@@ -97,6 +88,16 @@ export default [
             warningDisabled: '#facc15',
             successDisabled: '#86efac',
             infoDisabled: '#e7e5e4'
+        },
+        css: {
+            '--app-banner-height': '96px',
+            '--u-app-card-radius': '16px',
+            '--u-brand-gradient': 'linear-gradient(135deg, #059669 0%, #34d399 100%)',
+            '--u-brand-accent': '#10b981'
+        },
+        darkCss: {
+            '--app-banner-height': '80px',
+            '--u-app-card-radius': '10px'
         }
     },
 
@@ -125,6 +126,16 @@ export default [
             warningDisabled: '#fcd34d',
             successDisabled: '#6ee7b7',
             infoDisabled: '#93c5fd'
+        },
+        css: {
+            '--app-banner-height': '96px',
+            '--u-app-card-radius': '16px',
+            '--u-brand-gradient': 'linear-gradient(135deg, #ff6b35 0%, #fbbf24 100%)',
+            '--u-brand-accent': '#fb923c'
+        },
+        darkCss: {
+            '--app-banner-height': '80px',
+            '--u-app-card-radius': '10px'
         }
     },
 
@@ -153,6 +164,16 @@ export default [
             warningDisabled: '#fcd34d',
             successDisabled: '#6ee7b7',
             infoDisabled: '#93c5fd'
+        },
+        css: {
+            '--app-banner-height': '96px',
+            '--u-app-card-radius': '16px',
+            '--u-brand-gradient': 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+            '--u-brand-accent': '#60a5fa'
+        },
+        darkCss: {
+            '--app-banner-height': '80px',
+            '--u-app-card-radius': '10px'
         }
     }
 ];
