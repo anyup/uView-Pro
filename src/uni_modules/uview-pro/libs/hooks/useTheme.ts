@@ -7,7 +7,7 @@
  */
 
 import type { DarkMode, Theme } from '../../types/global';
-import configProvider, { type DefaultThemeConfig } from '../util/config-provider';
+import configProvider, { type DefaultThemeConfig, type GlobalCssOption } from '../util/config-provider';
 import { defaultThemes } from '../config/theme-tokens';
 
 const THEME_STORAGE_KEY = 'uview-pro-theme';
@@ -65,11 +65,19 @@ function getAvailableThemes() {
  * 初始化主题系统
  * @param themes 可选的主题列表，如果未提供则尝试从 uni.$u.themes 读取
  * @param defaultConfig 可选的默认主题配置，支持字符串（默认主题名）或对象（{ defaultTheme?, defaultDarkMode? }）
+ * @param isForce 是否强制使用默认主题
+ * @param globalCss 可选的顶层共享变量，会广播到全部主题
  */
-export function initTheme(themes?: Theme[], defaultConfig?: string | DefaultThemeConfig, isForce?: boolean) {
-    // 如果有传入主题列表，使用传入的
-    if (Array.isArray(themes) && themes.length > 0) {
-        configProvider.initTheme(themes, defaultConfig, isForce);
+export function initTheme(
+    themes?: Theme[],
+    defaultConfig?: string | DefaultThemeConfig,
+    isForce?: boolean,
+    globalCss?: GlobalCssOption
+) {
+    // 传入的列表（含空数组）统一交给 configProvider 归一化：
+    // 空数组会回退到内置主题，并由 configProvider 输出提示，避免上层各自判空导致行为不一致
+    if (Array.isArray(themes)) {
+        configProvider.initTheme(themes, defaultConfig, isForce, globalCss);
         return;
     }
 
@@ -100,8 +108,8 @@ export function initTheme(themes?: Theme[], defaultConfig?: string | DefaultThem
     //     // ignore
     // }
 
-    // 回退到内置默认主题
-    configProvider.initTheme(defaultThemes as Theme[], defaultConfig);
+    // 回退到内置默认主题（空数组也走这里，参数保持与正常路径一致）
+    configProvider.initTheme(defaultThemes as Theme[], defaultConfig, isForce, globalCss);
 }
 
 /**

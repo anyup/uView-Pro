@@ -1,6 +1,5 @@
-import { $u, type RequestOptions, initTheme, configProvider } from './libs';
-import type { UViewProOptions, Theme } from './types/global';
-import { defaultThemes } from './libs/config/theme-tokens';
+import { $u, type RequestOptions, initTheme, configProvider, resolveThemeOption } from './libs';
+import type { UViewProOptions } from './types/global';
 import { setConfig } from './libs/config/config';
 
 declare const uni: {
@@ -15,38 +14,20 @@ declare const uni: {
 // $u挂载到uni对象上
 const install = (app: any, options?: UViewProOptions): void => {
     try {
+        // 提前设置调试模式，保证初始化过程中的告警能按配置输出
+        setConfig({
+            debugMode: options?.debugMode ?? false
+        });
         if (options) {
-            // 配置主题：统一使用 useTheme 的 initTheme 初始化，避免重复初始化
+            // 配置主题：统一归一化后走同一个初始化入口
             if (options?.theme) {
-                const optTheme = options.theme as any;
-                // 1.如果是数组，则为多主题配置
-                if (Array.isArray(optTheme)) {
-                    initTheme(optTheme);
-                } else if (typeof optTheme === 'object' && optTheme.themes) {
-                    // 2.如果为对象且有themes，则为多主题配置+设置默认主题
-                    initTheme(
-                        optTheme.themes,
-                        {
-                            defaultTheme: optTheme.defaultTheme,
-                            defaultDarkMode: optTheme.defaultDarkMode
-                        },
-                        optTheme.isForce
-                    );
+                // 支持三种形态：Theme[]、{ themes, defaultTheme, defaultDarkMode, isForce, css?, darkCss? }、扁平单主题
+                const { themes, defaultConfig, isForce, globalCss } = resolveThemeOption(options.theme);
+                if (themes) {
+                    // 空数组也继续传递：由 configProvider 统一回退并输出提示，同时保留 defaultConfig / isForce / globalCss
+                    initTheme(themes, defaultConfig, isForce, globalCss);
                 } else {
-                    // 3.兼容之前只有一套样式的情况,需要覆盖默认主题，默认系统主题（uviewpro）
-                    const defaultTheme = defaultThemes[0];
-                    if (defaultTheme) {
-                        // 创建新主题对象，用用户的 theme 覆盖默认主题的 color
-                        const mergedTheme: Theme = {
-                            ...defaultTheme,
-                            color: {
-                                ...defaultTheme.color,
-                                ...optTheme
-                            }
-                        };
-                        // 初始化主题（只包含覆盖后的默认主题）
-                        initTheme([mergedTheme], defaultTheme.name);
-                    }
+                    initTheme();
                 }
             } else {
                 // 默认初始化系统主题
@@ -73,10 +54,6 @@ const install = (app: any, options?: UViewProOptions): void => {
             } catch (e) {
                 console.error('[install locales] Error:', e);
             }
-            // 设置调试模式
-            setConfig({
-                debugMode: options?.debugMode ?? false
-            });
         } else {
             // 默认初始化系统主题
             initTheme();

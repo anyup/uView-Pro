@@ -5,7 +5,7 @@
 import { ref } from 'vue';
 import type { DarkMode, Theme, ThemeColor } from '../../types/global';
 import config, { isDebugMode } from '../config/config';
-import { defaultThemes } from '../config/theme-tokens';
+import { BASE_DARK_CSS, BASE_LIGHT_CSS, defaultThemes } from '../config/theme-tokens';
 import { color as reactiveColor } from '../config/color';
 import { getSystemDarkMode as getNativeSystemDarkMode } from './system-theme';
 import * as localePack from '../../locale';
@@ -47,6 +47,14 @@ export type DefaultThemeConfig = {
 };
 
 /**
+ * 顶层共享变量（广播到全部主题，主题自身同名 key 优先）
+ */
+export type GlobalCssOption = {
+    css?: Record<string, string>;
+    darkCss?: Record<string, string>;
+};
+
+/**
  * ConfigProvider: 管理全局主题
  * - init(themes, defaultName): 初始化主题系统
  * - setTheme(name): 切换主题并持久化
@@ -64,6 +72,7 @@ export class ConfigProvider {
     public currentLocaleRef = ref<any | null>(null);
     private baseColorTokens: Partial<ThemeColor> = DEFAULT_LIGHT_TOKENS;
     private baseDarkColorTokens: Partial<ThemeColor> = DEFAULT_DARK_TOKENS;
+    private globalCss: GlobalCssOption = {};
     private systemDarkModeMediaQuery: MediaQueryList | null = null;
     private lastAppliedCssKeys: string[] = [];
     private interval: ReturnType<typeof setInterval> | number = 0;
@@ -157,9 +166,17 @@ export class ConfigProvider {
      * 初始化主题系统
      * @param themes 可用主题数组
      * @param defaultTheme 可选默认主题名
+     * @param isForce 是否强制使用默认主题
+     * @param globalCss 顶层共享变量，广播到全部主题
      */
-    initTheme(themes?: Theme[], defaultConfig?: string | DefaultThemeConfig, isForce?: boolean) {
-        const normalizedThemes = this.normalizeThemes(themes);
+    initTheme(
+        themes?: Theme[],
+        defaultConfig?: string | DefaultThemeConfig,
+        isForce?: boolean,
+        globalCss?: GlobalCssOption
+    ) {
+        this.globalCss = globalCss || {};
+        const normalizedThemes = this.applyGlobalCss(this.normalizeThemes(themes));
         if (!normalizedThemes.length) {
             if (isDebugMode('warn')) console.warn('[ConfigProvider] init called with empty themes');
             return;
@@ -186,6 +203,11 @@ export class ConfigProvider {
         let found = this.themesRef.value.find(t => t.name === initialName);
         if (!found) found = this.themesRef.value.find(t => t.name === config.defaultTheme);
         if (!found) found = this.themesRef.value[0];
+
+        // 默认主题名指向不存在的主题时，回写为实际生效值，避免 $u.config.defaultTheme 成为脏值
+        if (!this.themesRef.value.some(t => t.name === config.defaultTheme)) {
+            config.defaultTheme = found.name;
+        }
 
         // 设置当前主题，响应式
         this.currentThemeRef.value = found;
@@ -473,32 +495,56 @@ export class ConfigProvider {
     }
 
     /**
-     * 归一化主题配置，保证始终至少有一个默认主题
+     * 归一化主题配置，保证始终至少有一个可用主题
+     * - 配置了非空列表：列表 = 用户声明的主题，内置主题仅作为同名项的基线
+     * - 未配置 / 空数组：回退到内置主题
      */
     private normalizeThemes(themes?: Theme[]): Theme[] {
         if (Array.isArray(themes) && themes.length) {
-            return this.mergeThemes(defaultThemes, themes);
+            return this.mergeThemes(themes);
         }
-        return defaultThemes.slice();
+        if (Array.isArray(themes)) {
+            // 传了空数组：语义等同「未配置」，回退内置主题，但不静默
+            if (isDebugMode('warn')) console.warn('[ConfigProvider] 传入空主题数组，已回退到内置主题');
+        }
+        return this.mergeThemes(defaultThemes);
     }
 
-    private mergeThemes(...lists: Array<Theme[] | undefined>): Theme[] {
+    /**
+     * 合并主题列表（同名项覆盖，并按基线补齐未声明的字段）
+     * 基线查找顺序：用户列表内已出现的同名项 → 内置主题中的同名项 → 无
+     */
+    private mergeThemes(lists: Theme[]): Theme[] {
         const map = new Map<string, Theme>();
-        lists
-            .filter((list): list is Theme[] => Array.isArray(list) && list.length > 0)
-            .forEach(list => {
-                list.forEach(theme => {
-                    const normalized = this.ensureDarkVariant({
-                        ...theme,
-                        color: this.applyColorFallbacks(theme.color),
-                        darkColor: theme.darkColor ? { ...theme.darkColor } : undefined,
-                        css: theme.css ? { ...theme.css } : undefined,
-                        darkCss: theme.darkCss ? { ...theme.darkCss } : undefined
-                    });
-                    map.set(normalized.name, normalized);
-                });
+        lists.forEach(theme => {
+            const base = map.get(theme.name) || defaultThemes.find(t => t.name === theme.name);
+            const normalized = this.ensureDarkVariant({
+                ...base,
+                ...theme,
+                // 只用 ?? 回退：显式传空字符串表示「不要标签」，不应被基线补回
+                label: theme.label ?? base?.label,
+                description: theme.description ?? base?.description,
+                color: this.applyColorFallbacks({ ...(base?.color || {}), ...(theme.color || {}) }),
+                darkColor: inheritBaseDarkColor(theme.color, base?.darkColor, theme.darkColor),
+                css: { ...(base?.css || {}), ...(theme.css || {}) },
+                darkCss: { ...(base?.darkCss || {}), ...(theme.darkCss || {}) }
             });
+            map.set(normalized.name, normalized);
+        });
         return Array.from(map.values());
+    }
+
+    /**
+     * 顶层共享变量广播到全部主题，主题自身同名 key 优先
+     */
+    private applyGlobalCss(themes: Theme[]): Theme[] {
+        const { css, darkCss } = this.globalCss || {};
+        if (!css && !darkCss) return themes;
+        return themes.map(theme => ({
+            ...theme,
+            css: { ...(css || {}), ...(theme.css || {}) },
+            darkCss: { ...(darkCss || {}), ...(theme.darkCss || {}) }
+        }));
     }
 
     private ensureDarkVariant(theme: Theme): Theme {
@@ -659,10 +705,11 @@ export class ConfigProvider {
 
     /**
      * 获取当前主题的CSS变量覆盖
+     * 暗黑模式下以 darkCss 覆盖 css，未在 darkCss 中声明的键回退到 css
      */
     private getCssOverrides(theme: Theme, mode: 'light' | 'dark') {
         if (mode === 'dark') {
-            return (theme.darkCss && Object.keys(theme.darkCss).length ? theme.darkCss : theme.css) || {};
+            return { ...(theme.css || {}), ...(theme.darkCss || {}) };
         }
         return theme.css || {};
     }
@@ -737,7 +784,9 @@ export class ConfigProvider {
      * 生成格式：
      */
     private buildCssVarMap(theme: Theme, mode: 'light' | 'dark'): Record<string, string> {
+        // 基线变量作为最低优先级，任何主题（无论是否声明）都能拿到
         const map: Record<string, string> = {
+            ...(mode === 'dark' ? BASE_DARK_CSS : BASE_LIGHT_CSS),
             '--u-theme-mode': mode
         };
         const palette = this.getPaletteForMode(theme, mode);
@@ -797,6 +846,101 @@ export class ConfigProvider {
         this.flushCssVars(cssVarMap);
         this.updateDocumentMode(mode);
     }
+}
+
+// 扁平单主题允许携带的元信息字段，其余字段一律视为颜色令牌
+const THEME_META_KEYS = [
+    'themes',
+    'css',
+    'darkCss',
+    'darkColor',
+    'label',
+    'description',
+    'name',
+    'defaultTheme',
+    'defaultDarkMode',
+    'isForce'
+];
+
+/**
+ * 计算主题的暗色令牌：以基线暗色为底，用户显式声明的暗色优先
+ * 用户改过亮色的同名 key 会从基线中摘除，交给暗色推导重新生成，
+ * 避免改了 primary 但暗黑下仍显示基线色。
+ * @param colorOverrides 用户显式覆盖的亮色令牌
+ * @param baseDark 基线暗色令牌
+ * @param ownDark 用户显式声明的暗色令牌
+ */
+function inheritBaseDarkColor(
+    colorOverrides?: Partial<ThemeColor>,
+    baseDark?: Partial<ThemeColor>,
+    ownDark?: Partial<ThemeColor>
+): Partial<ThemeColor> | undefined {
+    const inherited: Partial<ThemeColor> = { ...(baseDark || {}) };
+    Object.keys(colorOverrides || {}).forEach(key => {
+        if (!ownDark || !Object.prototype.hasOwnProperty.call(ownDark, key)) {
+            delete (inherited as Record<string, unknown>)[key];
+        }
+    });
+    if (!Object.keys(inherited).length) return ownDark;
+    return { ...inherited, ...(ownDark || {}) };
+}
+
+/**
+ * 主题配置归一化结果
+ */
+export type ResolvedThemeOption = {
+    themes?: Theme[];
+    defaultConfig?: DefaultThemeConfig;
+    isForce?: boolean;
+    globalCss?: GlobalCssOption;
+};
+
+/**
+ * 把三种主题配置形态归一化为统一的 Theme[]
+ * ① Theme[]：多主题
+ * ② { themes, defaultTheme, defaultDarkMode, isForce, css?, darkCss? }：多主题 + 共享变量
+ * ③ 扁平单主题 { primary, success, ..., css?, darkCss?, darkColor?, label?, name? }
+ */
+export function resolveThemeOption(opt?: any): ResolvedThemeOption {
+    if (!opt) return {};
+
+    // ① 数组：多主题
+    if (Array.isArray(opt)) return { themes: opt };
+
+    // ② 对象且带 themes：多主题 + 共享变量（由 initTheme 广播到全部主题）
+    if (Array.isArray(opt.themes)) {
+        return {
+            themes: opt.themes,
+            defaultConfig: { defaultTheme: opt.defaultTheme, defaultDarkMode: opt.defaultDarkMode },
+            isForce: opt.isForce,
+            globalCss: { css: opt.css, darkCss: opt.darkCss }
+        };
+    }
+
+    // ③ 扁平单主题：剔除元信息字段后，其余字段视为颜色令牌
+    const colorTokens: Record<string, any> = { ...opt };
+    THEME_META_KEYS.forEach(key => delete colorTokens[key]);
+
+    const base = defaultThemes[0];
+    if (!base) return { themes: [opt] };
+
+    const merged: Theme = {
+        ...base,
+        // 沿用内置主题名，避免因 config.defaultTheme 已被改写而无法与基线对齐
+        name: opt.name || base.name,
+        label: opt.label ?? base.label,
+        description: opt.description ?? base.description,
+        color: { ...base.color, ...colorTokens },
+        darkColor: inheritBaseDarkColor(colorTokens, base.darkColor, opt.darkColor),
+        css: { ...(base.css || {}), ...(opt.css || {}) },
+        darkCss: { ...(base.darkCss || {}), ...(opt.darkCss || {}) }
+    };
+
+    return {
+        themes: [merged],
+        defaultConfig: { defaultTheme: merged.name, defaultDarkMode: opt.defaultDarkMode },
+        isForce: opt.isForce
+    };
 }
 
 // 单例导出

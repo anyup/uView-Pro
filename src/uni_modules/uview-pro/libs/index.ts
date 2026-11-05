@@ -347,3 +347,6 @@ export {
 export * from './hooks';
 
 export * from './util/config-provider';
+
+// 主题基线名：用于显式声明内置主题项，避免硬编码字符串
+export { BASE_THEME_NAME } from './config/theme-tokens';

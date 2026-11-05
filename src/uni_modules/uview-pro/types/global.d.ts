@@ -395,11 +395,17 @@ export type ThemeColor = Partial<Record<ColorType, string>>;
 export type DarkMode = 'auto' | 'light' | 'dark';
 
 export type Theme = {
+    /**
+     * 主题名
+     * - 等于 BASE_THEME_NAME（'uviewpro'）时，继承内置主题的基线色板与变量
+     * - 其余名称视为独立主题，主题列表不再自动包含内置主题
+     */
     name: string;
     label?: string;
     description?: string;
     /**
      * 亮色模式下的令牌（会同步到 $u.color 和 CSS 变量）
+     * 可写空对象 {}，未声明的键自动继承基线色板
      */
     color: Partial<ThemeColor>;
     /**
@@ -416,11 +422,34 @@ export type Theme = {
     darkCss?: Record<string, string>;
 };
 
+/**
+ * 扁平单主题配置
+ * 兼容旧用法 `theme: { primary: '#2979ff' }`，同时支持 css / darkCss 自定义全局变量
+ */
+export type SingleTheme = Partial<ThemeColor> & {
+    name?: string;
+    label?: string;
+    description?: string;
+    darkColor?: Partial<ThemeColor>;
+    css?: Record<string, string>;
+    darkCss?: Record<string, string>;
+    defaultDarkMode?: DarkMode;
+    isForce?: boolean;
+};
+
 export type Themes = {
     themes: Theme[];
     defaultTheme?: string;
     defaultDarkMode?: DarkMode;
     isForce?: boolean;
+    /**
+     * 所有主题共享的自定义变量（亮色），主题自身的同名 key 优先
+     */
+    css?: Record<string, string>;
+    /**
+     * 所有主题共享的自定义变量（暗黑），主题自身的同名 key 优先
+     */
+    darkCss?: Record<string, string>;
 };
 
 export type Locales = {
@@ -437,7 +466,7 @@ export type Locale = {
 export type DebugMode = 'log' | 'warn' | 'error' | 'info';
 
 export interface UViewProOptions {
-    theme?: ThemeColor | Theme[] | Themes;
+    theme?: SingleTheme | ThemeColor | Theme[] | Themes;
     locale?: string | Locale[] | Locales;
     debugMode?: boolean | DebugMode | DebugMode[];
     // 可扩展更多配置项

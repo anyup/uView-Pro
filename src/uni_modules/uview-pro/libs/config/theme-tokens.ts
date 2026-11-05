@@ -1,5 +1,11 @@
 import type { Theme, ThemeColor } from '../../types/global';
-import config from './config';
+
+/**
+ * 内置基线主题名
+ * - 它是色板与基线 CSS 变量的来源，默认不再注入到主题列表
+ * - 想让它出现在切换列表中，请显式声明同名主题项：{ name: BASE_THEME_NAME, color: {} }
+ */
+export const BASE_THEME_NAME = 'uviewpro';
 
 export const lightPalette: ThemeColor = {
     primary: '#2979ff',
@@ -77,26 +83,38 @@ export const darkPalette: ThemeColor = {
     bgBlack: '#ffffff'
 };
 
-const lightCss: Record<string, string> = {
+/**
+ * 基线 CSS 变量（亮色）：无条件注入到所有主题的最底层
+ */
+export const BASE_LIGHT_CSS: Record<string, string> = {
     '--u-background': '#ffffff',
     '--u-surface': '#f7f8fa',
     '--u-text': '#303133'
 };
 
-const darkCss: Record<string, string> = {
+/**
+ * 基线 CSS 变量（暗黑）：无条件注入到所有主题的最底层
+ */
+export const BASE_DARK_CSS: Record<string, string> = {
     '--u-background': '#0f1115',
     '--u-surface': '#1c2233',
     '--u-text': '#f5f6f7'
 };
 
+/**
+ * 内置主题
+ * 仅承担两个职责：
+ * 1. 用户未配置主题时的兜底列表
+ * 2. name 与 BASE_THEME_NAME 相同的主题项的基线来源（色板 / 变量 / 文案）
+ */
 export const defaultThemes: Theme[] = [
     {
-        name: config.defaultTheme,
+        name: BASE_THEME_NAME,
         label: '默认蓝',
         description: 'uView Pro 默认主题，支持亮色与暗黑模式',
         color: lightPalette,
         darkColor: darkPalette,
-        css: lightCss,
-        darkCss: darkCss
+        css: BASE_LIGHT_CSS,
+        darkCss: BASE_DARK_CSS
     }
 ];
