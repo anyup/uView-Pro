@@ -7,10 +7,10 @@
     "main": "index.ts",
     "module": "index.ts",
     "browser": "index.ts",
-    "types": "index.d.ts",
+    "types": "index.ts",
     "exports": {
         ".": {
-            "types": "./index.d.ts",
+            "types": "./index.ts",
             "import": "./index.ts",
             "require": "./index.ts",
             "default": "./index.ts"
@@ -22,10 +22,17 @@
             "default": "./plugins/index.mjs"
         },
         "./types": "./types/index.d.ts",
+        "./types/*.ts": "./types/*.ts",
         "./types/*": "./types/*.d.ts",
-        "./components/*": "./components/*",
-        "./libs/*": "./libs/*",
-        "./*": "./*"
+        "./*": {
+            "types": [
+                "./*.ts",
+                "./*.d.ts",
+                "./*/index.ts",
+                "./*"
+            ],
+            "default": "./*"
+        }
     },
     "keywords": [
         "uview-pro",
