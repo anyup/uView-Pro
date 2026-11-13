@@ -289,10 +289,12 @@ function columnChange(e: any) {
             // 默认是队列的第一个为默认选项
             const prevCol = columnData.value[i - 1];
             const prevIdx = i - 1 == index ? columnIndex[index] : 0;
-            columnData.value[i] =
+            const nextColumn =
                 Array.isArray(prevCol) && prevCol[prevIdx] && typeof prevCol[prevIdx] === 'object'
                     ? prevCol[prevIdx][props.childName]
                     : [];
+            // 叶节点可能省略 children；picker-view 的每列数据都保持为数组。
+            columnData.value[i] = Array.isArray(nextColumn) ? nextColumn : [];
             // 改变的列之后的所有列，默认选中第一个
             defaultSelector.value[i] = 0;
         }
